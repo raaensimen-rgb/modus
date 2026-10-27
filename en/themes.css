@@ -1,0 +1,62 @@
+:root{--appearance-panel:#1c2816;--appearance-ink:#eef4e6;--appearance-muted:#b6c5a8;--appearance-line:#6f8755;--appearance-accent:#d7f48c}
+.theme-picker{position:relative;color:var(--appearance-ink);flex-shrink:0;z-index:100;font:12px/1.5 'DM Sans',sans-serif}
+.theme-picker summary{position:relative;display:flex;align-items:center;gap:5px;min-height:26px;padding:4px 7px;font-size:10px;line-height:1.2;background:var(--appearance-panel);border:1px solid var(--appearance-line);border-radius:4px;list-style:none;cursor:pointer;white-space:nowrap}
+.theme-picker summary::-webkit-details-marker{display:none}.theme-picker summary>span:first-child{font-size:12px;line-height:1}.theme-picker .theme-current{display:none}.theme-picker[open] summary{outline:2px solid var(--appearance-accent);outline-offset:2px}
+.theme-options{position:absolute;top:calc(100% + 10px);right:0;width:320px;max-width:calc(100vw - 40px);margin:0;padding:18px;background:var(--appearance-panel);color:var(--appearance-ink);border:1px solid var(--appearance-line);border-radius:10px;box-shadow:0 12px 35px #0008}
+.theme-options legend{float:left;width:100%;font-size:13px;font-weight:700;margin:0 0 13px;padding:0;color:var(--appearance-ink)}
+.theme-options label{clear:both;display:flex;align-items:flex-start;gap:12px;padding:12px 9px;border:1px solid transparent;border-radius:5px;cursor:pointer;color:var(--appearance-ink);font-size:13px}.theme-options label:has(input:checked){border-color:var(--appearance-line)}.theme-options input{flex-shrink:0;margin:4px 0 0;width:17px;height:17px;accent-color:var(--appearance-accent)}.theme-options strong{display:block;font-size:13px;color:var(--appearance-ink)}.theme-options small{display:block;font-size:11px;line-height:1.7;color:var(--appearance-muted);margin-top:4px}.theme-options p{font-size:10px!important;line-height:1.8!important;color:var(--appearance-muted)!important;margin:13px 9px 0!important}.theme-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.theme-picker :is(summary,input):focus-visible{outline:3px solid var(--appearance-accent);outline-offset:4px}
+html[data-theme=readable]{color-scheme:light;--appearance-panel:#fffef8;--appearance-ink:#1b2a20;--appearance-muted:#43533b;--appearance-line:#687a57;--appearance-accent:#245b34}
+html[data-theme=readable] body{background:#f6f4ed;color:#1b2a20;font-size:16px;line-height:1.65}
+html[data-theme=readable] :is(.landscape,.theory-landscape,.articles-landscape,.membership-landscape){opacity:.14}
+html[data-theme=readable] .intro-art{opacity:.5}
+html[data-theme=readable] :is(.reading-body p,.reading-body li,.reading-body td,.reading-body th){font-size:17px;line-height:1.9}
+html[data-theme=readable] :is(.reading-intro,.hero-copy,.hero .quote-explanation){font-size:16px;line-height:1.9}
+html[data-theme=readable] :is(.lesson p,.course-lesson p,.card-copy p,.builder-help,.piano-help,.voicing-note){font-size:15px;line-height:1.85}
+html[data-theme=readable] :is(.reading-meta,.reading-body .eyebrow,.section-label,.aside-label,.card-meta){color:#43533b}
+html[data-theme=readable] :is(input,textarea,select){color-scheme:light}
+html[data-theme=readable] input::placeholder,html[data-theme=readable] textarea::placeholder{color:#526348;opacity:1}
+html[data-theme=contrast]{color-scheme:light;--appearance-panel:#fff;--appearance-ink:#000;--appearance-muted:#000;--appearance-line:#000;--appearance-accent:#000}
+html[data-theme=contrast] body{background:#fff;color:#000;font-family:Arial,sans-serif;font-size:16px;line-height:1.75}
+html[data-theme=contrast] body *{background-image:none!important;box-shadow:none!important;text-shadow:none!important;transition:none!important;animation:none!important}
+html[data-theme=contrast] :is(.landscape,.theory-landscape,.articles-landscape,.membership-landscape,.intro-art,.hero-caption){display:none!important}
+html[data-theme=contrast] :is(h1,h2,h3,h4,em){font-family:Arial,sans-serif;font-style:normal;font-weight:700;letter-spacing:normal}
+html[data-theme=contrast] :is(.reading-body p,.reading-body li,.reading-body td,.reading-body th){font-size:18px;line-height:1.9}
+html[data-theme=contrast] :is(.reading-intro,.hero-copy,.hero .quote-explanation,.lesson p,.course-lesson p){font-size:16px;line-height:1.85}
+html[data-theme=contrast] :is(.section-label,.eyebrow,.aside-label,.card-meta,.reading-meta,.draft,.hero-note,.quote-credit){color:#000}
+html[data-theme=contrast] :is(input,textarea,select){background:#fff;color:#000;border-color:#000;color-scheme:light}
+html[data-theme=contrast] :is(input,textarea)::placeholder{color:#333;opacity:1}
+html[data-theme=contrast] :is(svg,.card-art img,.reading-illustration img){filter:grayscale(1) contrast(1.15)}
+html[data-theme=contrast] :is(a,summary){text-decoration:underline;text-underline-offset:4px}
+html[data-theme=contrast] .site-header .site-nav>a[aria-current=page]{outline:2px solid #000;outline-offset:3px;font-weight:700}
+html[data-theme=contrast] :is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #000!important;outline-offset:4px}
+html[data-theme=contrast] :is(.button,.plan-action,.play,.listen-button){background:#000;color:#fff;border:2px solid #000}
+html[data-theme=contrast] :is(.button,.plan-action,.play,.listen-button) :is(span,em){color:inherit}
+html[data-theme=contrast] .theme-picker{font-family:Arial,sans-serif}
+@media(max-width:1050px){.site-header .site-nav{order:3}.site-header .theme-picker{order:2;margin-left:auto}}
+@media(max-width:700px){.theme-picker summary{font-size:10px;min-height:26px}.theme-options{width:300px}.theme-options label{padding:13px 8px}.theme-options strong{font-size:14px}.theme-options small{font-size:12px}html[data-theme=readable] .hero:has(.rameau-quote),html[data-theme=contrast] .hero:has(.rameau-quote){min-height:660px}}
+@media(forced-colors:active){.theme-picker summary,.theme-options,.theme-options label:has(input:checked){border:1px solid ButtonText}.theme-options input{forced-color-adjust:auto}}
+
+html[data-theme=contrast] :is(p,li,label,select,input,textarea,button,summary,small,output){font-size:14px}
+html[data-theme=contrast] :is(.section-label,.eyebrow,.aside-label,.card-meta,.reading-meta,.draft,.hero-note,.quote-credit){font-size:13px}
+html[data-theme=contrast] .site-header .site-nav>a{font-size:14px;min-height:44px}
+html[data-theme=contrast] :is(.fret-footer,.tiny){font-size:12px}
+html[data-theme=contrast] #bpm{font-size:28px}
+html[data-theme=readable] .chord-type-row,html[data-theme=contrast] .chord-type-row{flex-direction:column;align-items:stretch;gap:10px}
+html[data-theme=readable] .chord-type-row label,html[data-theme=contrast] .chord-type-row label{min-width:0;width:100%}
+html[data-theme=readable] .chord-type-row p,html[data-theme=contrast] .chord-type-row p{font-size:14px;line-height:1.8;margin:0}
+html[data-theme=contrast] .section-label{flex-wrap:wrap;line-height:1.7}
+html[data-theme=contrast] .theme-options :is(strong,small){font-size:14px}
+html[data-theme=contrast] .theme-options p{font-size:13px!important}
+
+.theme-picker summary::before{content:"";position:absolute;inset:-9px 0}
+html[data-theme=contrast] .theme-picker summary{font-size:12px;min-height:26px}
+
+html[data-theme=readable] .about-landscape{opacity:.12}
+html[data-theme=readable] .about-reading p{font-size:17px;line-height:1.9}
+html[data-theme=readable] .about-lead{font-size:17px}
+html[data-theme=contrast] .about-landscape{display:none}
+html[data-theme=contrast] .about-reading p{font-size:18px;line-height:1.9}
+html[data-theme=contrast] .about-lead{font-size:17px}
+
+:is(.fret-scroll,.keyboard-wrap):focus-visible{outline:3px solid var(--appearance-accent);outline-offset:4px}
