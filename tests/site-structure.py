@@ -29,7 +29,7 @@ class Page(HTMLParser):
 pages={p.resolve():Page(p.read_text()) for p in ROOT.rglob('*.html')}
 article_count=len(json.loads((ROOT.parent/'content/articles.json').read_text()))
 assert len(pages)==2*(article_count+10), f'Unexpected page count: {len(pages)}'
-nav=['laer-dorisk.html','teori.html','backingtracks.html','akkorder.html','artikler.html','om-modus.html']
+nav=['./','laer-dorisk.html','teori.html','backingtracks.html','akkorder.html','artikler.html','om-modus.html']
 for file,page in pages.items():
     assert len(page.ids)==len(set(page.ids)), ('duplicate ID',file)
     expected=[('../' if link=='./' else '../'+link) for link in nav] if file.parent.name=='artikler' else nav
