@@ -1,0 +1,311 @@
+Ionisk	Ionian
+Dorisk	Dorian
+Frygisk	Phrygian
+Lydisk	Lydian
+Miksolydisk	Mixolydian
+Eolisk	Aeolian
+Lokrisk	Locrian
+Harmonisk moll	Harmonic minor
+Frygisk dominant	Phrygian dominant
+Stor 7	Major 7
+Stor 6	Major 6
+Liten 2	Minor 2
+Hevet 4	Raised 4
+Liten 7	Minor 7
+Liten 6	Minor 6
+Senket 5	Lowered 5
+Stor 7 · ♭6	Major 7 · ♭6
+Liten 2 · stor 3	Minor 2 · major 3
+Lyst og åpent. La stor septim lede tilbake til grunntonen.	Bright and open. Let the major seventh lead back to the root.
+Moll med lys sekst. Vekslingen i–IV fremhever den doriske fargen.	Minor with a bright sixth. The i–IV movement highlights the Dorian colour.
+Mørkt og tett. Den lave andre tonen ligger rett over grunntonen.	Dark and close. The lowered second sits just above the root.
+Svevende dur. Den hevede kvarten gir klangen et åpent, filmatisk preg.	Floating major. The raised fourth brings an open, cinematic quality.
+Dur med senket septim. Et naturlig utgangspunkt for rock og fusion.	Major with a lowered seventh. A natural starting point for rock and fusion.
+Naturlig moll. Utforsk den mørke seksten og melodiske mollklangen.	Natural minor. Explore the dark sixth and the melodic character of this minor scale.
+Ustabilt og spenningsfylt. En tonikadrone holder sentrum mens du utforsker ♭2 og ♭5.	Unstable and tense. A tonic drone holds the centre as you explore ♭2 and ♭5.
+Moll med hevet septim. Dominanten V7 trekker tydelig hjem til molltonika; utforsk spranget mellom ♭6 og 7.	Minor with a raised seventh. The dominant V7 pulls clearly home to the minor tonic; explore the leap between ♭6 and 7.
+Femte modus av harmonisk moll. Stor ters mot liten sekund gir en markant, dramatisk klang over dominanttonika.	The fifth mode of harmonic minor. A major third against a minor second creates a striking, dramatic sound over the tonic dominant-seventh chord.
+ · kontrabass · swing på hi-hat.	 · double bass · swung hi-hat.
+ · elbass · akustiske trommer.	 · electric bass · acoustic drums.
+EGEN REKKE · 	CUSTOM PROGRESSION · 
+ TAKTER	 BARS
+TONIKADRONE · 4 TAKTER	TONIC DRONE · 4 BARS
+Akkordtypene følger den egne rekken. Endre dem i akkordverkstedet.	Chord types follow your custom progression. Change them in the chord workshop.
+Tre toner per akkord: dur, moll, forminsket eller forstørret, ut fra valgt skala.	Three notes per chord: major, minor, diminished or augmented, based on the selected scale.
+Fire toner per akkord: maj7, m7, 7 og andre septimakkorder, ut fra valgt skala.	Four notes per chord: maj7, m7, 7 and other seventh chords, based on the selected scale.
+Toner utenfor valgt skalakart – 	Notes outside the selected scale map – 
+. Kartet viser fortsatt 	. The map still shows 
+Akkordtonene passer i valgt skalakart: 	The chord tones fit the selected scale map: 
+Gripebrett med 	Fretboard with 
+ i standardstemming	 in standard tuning
+Utenfor valgt skala	Outside the selected scale
+Pianokart med 	Piano map with 
+, C3 til B5	, C3 to B5
+PIANOKART · TRE OKTAVER	PIANO MAP · THREE OCTAVES
+C3 → B5 · GRUNNTONER MARKERT I LYST GRØNT	C3 → B5 · ROOTS HIGHLIGHTED IN LIGHT GREEN
+Vis tonenavn ↗	Show note names ↗
+Trommer	Drums
+Demp ${name.toLowerCase()}	Mute ${name.toLowerCase()}
+Volum ${name.toLowerCase()}	Volume ${name.toLowerCase()}
+Takt ${bar+1} / ${progression.length} · Slag ${p/4+1}	Bar ${bar+1} / ${progression.length} · Beat ${p/4+1}
+Laster instrumenter…	Loading instruments…
+Stopp jam	Stop jam
+Stopp backingtrack	Stop backing track
+Start backingtrack	Start backing track
+Kunne ikke laste instrumentene. Sjekk forbindelsen og prøv igjen.	Could not load the instruments. Check your connection and try again.
+Egen akkordrekke · 	Custom progression · 
+Treklanger · 	Triads · 
+Septimakkorder · 	Seventh chords · 
+MIDI laget ✓	MIDI created ✓
+Ren prim	Perfect unison
+Liten sekund	Minor second
+Ren kvart	Perfect fourth
+Forstørret kvart	Augmented fourth
+Liten sekst	Minor sixth
+Stor sekst	Major sixth
+Liten septim	Minor seventh
+Stor septim	Major seventh
+Moll	Minor
+Dominantseptim	Dominant seventh
+Dur med stor septim	Major seventh
+Mollseptim	Minor seventh
+Moll med stor septim	Minor major seventh
+Halvforminsket	Half-diminished
+Forminsket septim	Diminished seventh
+Én grunntone. Flere klangverdener.	One root. Several sound worlds.
+En modus beskriver et bestemt intervallmønster rundt en grunntone. Tonene får sin betydning gjennom hva du oppfatter som sentrum.	A mode describes a particular interval pattern around a root. The notes gain meaning through what you hear as the centre.
+Utforsk	Explore
+Velg skala eller modus	Choose a scale or mode
+FORMEL RELATIVT TIL DUR	FORMULA RELATIVE TO MAJOR
+Lytt etter ${m.focus.toLowerCase()}.	Listen for the ${m.focus.toLowerCase()}.
+Det er det tonale sentrumet og bruken av tonene som gir klangen identitet; en ny starttone alene er ikke nok.	The tonal centre and the use of the notes give the sound its identity; a new starting note alone is not enough.
+Hva er forskjellen mellom ionisk og miksolydisk?	What is the difference between Ionian and Mixolydian?
+Ionisk har stor septim (7), mens miksolydisk har liten septim (♭7). Resten av skalatrinnene er like.	Ionian has a major seventh (7), while Mixolydian has a minor seventh (♭7). The other degrees are the same.
+Hva skiller dorisk fra naturlig moll?	What distinguishes Dorian from natural minor?
+Dorisk har stor sekst (6). Naturlig moll, eolisk, har liten sekst (♭6). Begge har liten ters og liten septim.	Dorian has a major sixth (6). Natural minor, or Aeolian, has a minor sixth (♭6). Both have a minor third and minor seventh.
+Hva skiller frygisk fra naturlig moll?	What distinguishes Phrygian from natural minor?
+Frygisk har liten sekund (♭2), mens eolisk har stor sekund (2). Prøv å bevege deg mellom grunntonen og ♭2.	Phrygian has a minor second (♭2), while Aeolian has a major second (2). Try moving between the root and ♭2.
+Hva gir lydisk sin særlige farge?	What gives Lydian its distinctive colour?
+Den hevede kvarten (♯4). Sammenlignet med ionisk er det bare dette skalatrinnet som er endret.	The raised fourth (♯4). Compared with Ionian, this is the only degree that changes.
+Hvilken tone endrer du fra ionisk til miksolydisk?	Which note changes from Ionian to Mixolydian?
+Senk septimen et halvt trinn: 7 blir ♭7. Durtersen beholdes.	Lower the seventh a semitone: 7 becomes ♭7. The major third stays.
+Hvorfor er ikke eolisk og dorisk samme mollklang?	Why do Aeolian and Dorian have different minor colours?
+Eolisk har ♭6, mens dorisk har 6. Tonene rundt seksten og akkordvalgene kan fremheve denne forskjellen.	Aeolian has ♭6, while Dorian has 6. Notes around the sixth and your chord choices can highlight this difference.
+Hvorfor oppleves lokrisk mer ustabilt?	Why does Locrian feel less stable?
+Lokrisk har senket kvint (♭5), så tonikatreklangen er forminsket. Den lille sekunden (♭2) tilfører også sterk spenning mot grunntonen.	Locrian has a lowered fifth (♭5), making the tonic triad diminished. The minor second (♭2) also creates strong tension against the root.
+Hva endrer du fra naturlig moll til harmonisk moll?	What changes from natural minor to harmonic minor?
+Hev septimen et halvt trinn: ♭7 blir 7. Da kan femtetrinnsakkorden bli en durdominant, V eller V7.	Raise the seventh a semitone: ♭7 becomes 7. The fifth-degree chord can then become a major dominant, V or V7.
+Hva skiller frygisk dominant fra vanlig frygisk?	What distinguishes Phrygian dominant from ordinary Phrygian?
+Frygisk dominant har stor ters (3), mens frygisk har liten ters (♭3). Begge har ♭2, ♭6 og ♭7. Frygisk dominant er femte modus av harmonisk moll.	Phrygian dominant has a major third (3), while Phrygian has a minor third (♭3). Both have ♭2, ♭6 and ♭7. Phrygian dominant is the fifth mode of harmonic minor.
+01 / INTERVALLER	01 / INTERVALS
+Avstand blir til uttrykk.	Distance becomes expression.
+Et intervall er avstanden mellom to toner. Antall halvtoner beskriver avstanden på instrumentet; bokstavnavnene er også med på å bestemme intervallets navn.	An interval is the distance between two notes. Semitones describe the distance on your instrument; letter names also help determine the interval name.
+Velg intervall	Choose an interval
+ halvtoner	 semitones
+Spill først etter hverandre, så sammen.	Play in succession first, then together.
+Som melodi og som samklang kan det samme intervallet gi ulike opplevelser av spenning og ro.	As melody and as harmony, the same interval can create different experiences of tension and rest.
+Hvor mange halvtoner skiller liten og stor ters?	How many semitones separate a minor and a major third?
+Liten ters er tre halvtoner. Stor ters er fire halvtoner. Forskjellen er ett halvt trinn; dette er også forskjellen mellom dur- og molltersen.	A minor third is three semitones. A major third is four. The difference is a semitone, also the difference between a major and a minor third in a chord.
+▶ Lytt til intervallet	▶ Listen to the interval
+Først to toner, deretter samklang	Two notes in succession, then together
+03 / AKKORDER	03 / CHORDS
+La tonene møte hverandre.	Let the notes meet.
+Her bygger vi akkorder i terser fra grunntonen. Tersen bestemmer dur- eller mollpreget; kvinten og septimen gir flere nyanser av stabilitet og spenning.	Here we build chords in thirds from the root. The third determines the major or minor character; the fifth and seventh add shades of stability and tension.
+Akkordtype	Chord type
+AKKORDFORMEL	CHORD FORMULA
+Akkordtoner gir melodien feste.	Chord tones anchor the melody.
+Land på en av disse tonene når akkorden skifter, og lytt til hvordan tonen møter harmonien.	Land on one of these notes when the chord changes and listen to how it meets the harmony.
+Hva skiller m7 fra m(maj7)?	What distinguishes m7 from m(maj7)?
+Begge har liten ters og ren kvint. m7 har liten septim (♭7), mens m(maj7) har stor septim (7). Navnet «maj7» beskriver her septimen, ikke en durters.	Both have a minor third and perfect fifth. m7 has a minor seventh (♭7), while m(maj7) has a major seventh (7). Here “maj7” describes the seventh, not a major third.
+▶ Lytt til akkorden	▶ Listen to the chord
+Først i et lavere, deretter et høyere leie	First in a lower, then a higher register
+04 / KADENSER	04 / CADENCES
+Et sted å dra. Et sted å lande.	Somewhere to go. Somewhere to land.
+En kadens skaper en opplevelse av bevegelse og avslutning. ii–V–I beskriver en akkordprogresjon i en toneart; det betyr ikke at hele progresjonen er dorisk.	A cadence creates a sense of movement and closure. ii–V–I describes a progression in a key; it does not mean the entire progression is Dorian.
+Velg progresjon	Choose a progression
+Dur · ii–V–I	Major · ii–V–I
+Moll · iiø–V–i	Minor · iiø–V–i
+Dorisk vamp · i–IV–i	Dorian vamp · i–IV–i
+En modal vamp, fremfor en funksjonell ii–V–I.	A modal vamp rather than a functional ii–V–I.
+Molltonika og durakkorden på fjerde trinn fremhever dorisk stor sekst. Hold den første akkorden som klanglig sentrum.	The minor tonic and major chord on the fourth degree highlight Dorian’s major sixth. Keep the first chord as the tonal centre.
+Her bruker vi harmonisk moll som referanse.	Here we use harmonic minor as a reference.
+Andre trinn er halvforminsket, femte trinn er dominantseptim, og tonika spilles med stor septim. I jazz kan molltonika også farges på andre måter.	The second degree is half-diminished, the fifth is a dominant seventh, and the tonic has a major seventh. Jazz also uses other colours for the minor tonic.
+Hør dominantens trang til å lande.	Hear the dominant’s pull towards resolution.
+I dur er ii en mollseptimakkord, V en dominantseptimakkord og I en durakkord med stor septim.	In major, ii is a minor seventh chord, V a dominant seventh and I a major seventh chord.
+Er ii–V–I en modus eller en akkordprogresjon?	Is ii–V–I a mode or a chord progression?
+Det er en akkordprogresjon. I C-dur er et vanlig eksempel Dm7–G7–Cmaj7. D-dorisk kan beskrive tonematerialet over Dm7, men hele kadensen har C som tonalt sentrum.	It is a chord progression. In C major a common example is Dm7–G7–Cmaj7. D Dorian can describe the notes over Dm7, but the whole cadence has C as its tonal centre.
+▶ Lytt til vampen	▶ Listen to the vamp
+▶ Lytt til kadensen	▶ Listen to the cadence
+Tre akkorder · lytt etter bevegelse og hjemkomst	Three chords · listen for movement and resolution
+Pianokart: 	Piano map: 
+Laster flygel…	Loading grand piano…
+Lytt gjerne en gang til – og spill eksempelet selv.	Listen again – and play the example yourself.
+Spiller på flygel…	Playing on grand piano…
+Lyden kunne ikke starte. Sjekk forbindelsen og prøv igjen.	Audio could not start. Check your connection and try again.
+Lokal lagring er ikke tilgjengelig. Bruk MIDI eller åpne rekken i backingtracks.	Local storage is unavailable. Use MIDI or open the progression in backing tracks.
+Velg en lagret akkordrekke	Choose a saved progression
+Åpent grep	Open shape
+ med barré	 with barre
+ · åpent grep	 · open shape
+TAKT ${i+1}	BAR ${i+1}
+Fjern akkord ${i+1}	Remove chord ${i+1}
+Vis grep for ${info(ch).name}, takt ${i+1}	Show shape for ${info(ch).name}, bar ${i+1}
+Grunntone for akkord ${i+1}	Root for chord ${i+1}
+Akkordtype for akkord ${i+1}	Type for chord ${i+1}
+, bånd fra 6. til 1. streng: 	, frets from 6th to 1st string: 
+dempet	muted
+grunnstilling	root position
+første omvending	first inversion
+andre omvending	second inversion
+tredje omvending	third inversion
+, MIDI-toner 	, MIDI notes 
+Spill gjerne akkordrekken selv, på gitar eller piano.	Try playing the progression yourself on guitar or piano.
+Spiller akkordrekken på flygel…	Playing the progression on grand piano…
+Spiller valgt piano-omvending…	Playing the selected piano inversion…
+MODUS · Egen akkordrekke	MODUS · Custom progression
+MODUS_akkordrekke_${tempo}bpm.mid	MODUS_progression_${tempo}bpm.mid
+MIDI-fil laget · ${chords.length} takter · ${tempo} BPM	MIDI file created · ${chords.length} bars · ${tempo} BPM
+Du har 20 lagrede rekker. Gi rekken samme navn som en eksisterende for å oppdatere den.	You have 20 saved progressions. Use an existing name to update that progression.
+Lagret: 	Saved: 
+Kunne ikke lagre i nettleseren. Du kan fortsatt laste ned MIDI.	Could not save in this browser. You can still download MIDI.
+Velg en lagret rekke først.	Choose a saved progression first.
+Åpnet: 	Loaded: 
+Start med byggesteinene. Ingen forkunnskaper nødvendig.	Start with the building blocks. No prior knowledge needed.
+Knytt skalaer, akkorder og improvisasjon sammen.	Connect scales, chords and improvisation.
+Gå videre med modalitet, stemmeføring og rytmikk.	Go further with modality, voice leading and rhythm.
+1 artikkel	1 article
+ artikler	 articles
+ kr/mnd i snitt · Spar 	 NOK/month on average · Save 
+ kr per år.	 NOK per year.
+Velg 	Choose 
+Se 	View 
+Årsbetaling: hele årsbeløpet betales samlet. Tilsvarer 10 månedsbetalinger.	Annual billing: the full annual amount is paid at once. Equivalent to 10 monthly payments.
+ kr / 	 NOK / 
+Årsabonnement · hele årsbeløpet betales samlet.	Annual subscription · the full annual amount is paid at once.
+Månedsabonnement · faktureres hver måned.	Monthly subscription · billed each month.
+Abonnementet fornyes automatisk til samme pris per periode. Du kan si opp videre fornyelse i kundeportalen. Se vilkårene før kjøp.	The subscription renews automatically at the same price per period. You can cancel future renewals in the customer portal. Read the terms before purchase.
+Dette er en forhåndsvisning. Ingen betaling eller abonnement opprettes her.	This is a preview. No payment or subscription is created here.
+år	year
+måned	month
+nb-NO	en-GB
+ visning er valgt.	 display selected.
+Hør et sentrum	Hear a centre
+Grunntonen som hjem	The root as home
+Finn den lyse seksten	Find the bright sixth
+Dorisk mot eolisk	Dorian versus Aeolian
+Gi klangen harmoni	Give the sound harmony
+Molltonika og dur-IV	Minor tonic and major IV
+Land på akkordtoner	Land on chord tones
+Velg tydelige mål	Choose clear targets
+Form en liten idé	Shape a small idea
+Motiv, rytme og pauser	Motif, rhythm and rests
+Gjør det til ditt	Make it yours
+En selvstendig improvisasjon	An improvisation of your own
+Lokal lagring er ikke tilgjengelig i denne nettleseren.	Local storage is unavailable in this browser.
+STEG ${learner.step+1} AV 6 · ${r.toUpperCase()} DORISK	STEP ${learner.step+1} OF 6 · ${r.toUpperCase()} DORIAN
+Først trenger øret et hjem.	First, your ear needs a home.
+La ${r} bli sentrum før du tenker på alle sju tonene.	Let ${r} become the centre before thinking about all seven notes.
+Hold en ${r}-tone eller en ${iName}-akkord mens du spiller ${ns[0]}, ${ns[2]} og ${ns[4]}. Dette er grunntone, liten ters og kvint. La frasene vende tilbake til ${r}.	Hold an ${r} note or an ${iName} chord while playing ${ns[0]}, ${ns[2]} and ${ns[4]}. These are the root, minor third and fifth. Let your phrases return to ${r}.
+Lydeksempelet har en lav ${r} under en kort frase. Det hjelper øret å høre hvor frasen har hjem. Grunntonen trenger ikke være den første eller siste tonen i enhver frase for at sentrum skal være tydelig.	The audio example places a low ${r} under a short phrase, helping your ear hear where the phrase feels at home. The root need not be the first or last note of every phrase for the centre to be clear.
+Spill ${r} rolig. Syng ${ns[2]}, spill tonen, og vend tilbake til ${r}. Gjenta med ${ns[4]}. Åpne øvingsloopen nedenfor; i dette steget holder den seg på ${iName}.	Play ${r} slowly. Sing ${ns[2]}, play it and return to ${r}. Repeat with ${ns[4]}. Open the practice loop below; in this step it stays on ${iName}.
+Er grunntonen bare den første tonen du spiller?	Is the root simply the first note you play?
+Nei. Grunntonen oppleves som et sentrum gjennom melodien, harmonien og det som gjentas eller får hvile. Første tone alene bestemmer ikke sentrum.	No. The root feels like a centre through melody, harmony and what is repeated or allowed to rest. The first note alone does not determine the centre.
+Én tone slipper inn mer lys.	One note lets in more light.
+Forskjellen mellom ${r} dorisk og ${r} naturlig moll ligger i seksten.	The difference between ${r} Dorian and ${r} natural minor lies in the sixth.
+I dorisk er sjette trinn	In Dorian, the sixth degree is
+. I eolisk, naturlig moll, er det	. In Aeolian, or natural minor, it is
+. Begge har liten ters og liten septim, så mollpreget beholdes.	. Both have a minor third and minor seventh, so the minor character remains.
+Lytt til de to skalaene over samme lave grunntone. Da sammenligner du klangfargen uten samtidig å bytte hjem.	Listen to both scales over the same low root. You can compare the colour without changing the tonal home at the same time.
+Spill ${ns[4]}–${six}–${ns[4]} over grunntonen ${r}. Bytt så ${six} til ${flatSix}. La resten av frasen være lik, og beskriv forskjellen med dine egne ord.	Play ${ns[4]}–${six}–${ns[4]} over the root ${r}. Then change ${six} to ${flatSix}. Keep the rest of the phrase the same and describe the difference in your own words.
+Hva endrer du når du går fra eolisk til dorisk med samme grunntone?	What changes when you move from Aeolian to Dorian with the same root?
+Hev seksten et halvt trinn: ${flatSix} blir ${six}. De øvrige skalatrinnene er de samme.	Raise the sixth a semitone: ${flatSix} becomes ${six}. The other scale degrees stay the same.
+La akkordene vise fargen.	Let the chords reveal the colour.
+Vekslingen ${iName}–${ivName} gjør den doriske seksten hørbar i harmonien.	The ${iName}–${ivName} movement makes the Dorian sixth audible in the harmony.
+${ivName} inneholder	${ivName} contains
+, som er stor sekst i forhold til ${r}. Den er samtidig tersen i ${ivName}. Slik blir karaktertonen en del av akkordens identitet.	, the major sixth above ${r}. It is also the third of ${ivName}. The characteristic note becomes part of the chord’s identity.
+Dette er en modal vamp, i7–IV7, der du kan la ${iName} være hjem. Det er ikke en ii–V–I-kadens bare fordi akkordtypene også forekommer i jazz.	This is a modal vamp, i7–IV7, where ${iName} can feel like home. It is not a ii–V–I cadence simply because these chord types also occur in jazz.
+Spill én takt ${iName}, én takt ${ivName}, og gjenta. Bruk samme skalakart gjennom skiftene. Lytt etter ${six} i durakkorden, og la ${r} være sentrum.	Play one bar of ${iName}, one of ${ivName}, and repeat. Use the same scale map through the changes. Listen for ${six} in the major chord and keep ${r} as the centre.
+Hvorfor er ${ivName} spesielt nyttig for å fremheve ${r} dorisk?	Why is ${ivName} especially useful for highlighting ${r} Dorian?
+Tersen i ${ivName} er ${six}, altså stor sekst over ${r}. Den viser forskjellen fra naturlig moll, der fjerde trinn normalt gir en mollakkord.	The third of ${ivName} is ${six}, a major sixth above ${r}. It reveals the difference from natural minor, where the fourth degree normally gives a minor chord.
+Gi hver frase et mål.	Give each phrase a target.
+Akkordtonene hjelper melodien å møte det som skjer under den.	Chord tones help the melody connect with what is happening beneath it.
+Over ${iName} kan du lande på ${ns[0]}, ${ns[2]}, ${ns[4]} eller ${ns[6]}. Over ${ivName} er ${ns[3]}, ${ns[5]}, ${ns[0]} og ${ns[2]} akkordtoner.	Over ${iName}, you can land on ${ns[0]}, ${ns[2]}, ${ns[4]} or ${ns[6]}. Over ${ivName}, the chord tones are ${ns[3]}, ${ns[5]}, ${ns[0]} and ${ns[2]}.
+Du behøver ikke skifte hele kartet. Velg et nytt mål innenfor den samme doriske tonesamlingen. ${ns[0]} og ${ns[2]} er felles akkordtoner, mens ${six} fremhever durtersen i ${ivName}.	You do not need to change the whole map. Choose a new target within the same Dorian notes. ${ns[0]} and ${ns[2]} are shared chord tones, while ${six} highlights the major third of ${ivName}.
+Bruk få toner. Land på ${ns[2]} over ${iName}, og prøv ${six} over ${ivName}. Gjenta samme rytme gjennom begge akkordene. Lytt til forskjellen mellom en måltone og en tone du passerer.	Use just a few notes. Land on ${ns[2]} over ${iName} and try ${six} over ${ivName}. Repeat the same rhythm through both chords. Listen to the difference between a target and a passing note.
+Må alle tonene i en frase være akkordtoner?	Must every note in a phrase be a chord tone?
+Nei. Andre skalatoner kan skape bevegelse og spenning. Akkordtoner er nyttige mål, særlig på tydelige slag eller ved akkordskifter, men gir ingen regel om at alle toner må høre til akkorden.	No. Other scale notes can create movement and tension. Chord tones are useful targets, especially on strong beats or at chord changes, but there is no rule that every note must belong to the chord.
+La en liten idé vokse.	Let a small idea grow.
+Sammenheng kommer ofte fra gjentakelse med én bevisst forandring.	Connection often comes from repetition with one deliberate change.
+Bruk disse tonene til en kort frase. Gjenta den, men endre bare slutten. Prøv så å beholde tonene og endre rytmen. Lytt til hva hver forandring gjør.	Use these notes for a short phrase. Repeat it, changing only the ending. Then keep the notes and change the rhythm. Listen to what each change does.
+Avslutt gjerne et svar med ${six} når ${ivName} kommer, eller la ${r} gi ro. La det være nok plass mellom frasene til at du kan høre hva du nettopp spilte.	Try ending an answer on ${six} when ${ivName} arrives, or let ${r} bring rest. Leave enough space between phrases to hear what you just played.
+Lag en frase på to til fem toner. Gjenta den tre ganger: først likt, deretter med en ny slutt, og til slutt med en annen rytme. Bruk pauser som en del av ideen.	Create a phrase of two to five notes. Repeat it three times: first unchanged, then with a new ending, and finally with a different rhythm. Make rests part of the idea.
+Hva er fordelen med å endre bare én ting av gangen?	What is the benefit of changing only one thing at a time?
+Du kan høre hva den enkelte forandringen gjør med frasen. Det blir lettere å bygge en musikalsk sammenheng fremfor å erstatte hele ideen hver gang.	You can hear what each individual change does to the phrase. This makes it easier to build a musical connection rather than replacing the whole idea every time.
+Spill noe du har valgt selv.	Play something you chose yourself.
+Nå samler du sentrum, karaktertone, måltoner og motiv i en egen improvisasjon.	Now bring together the centre, characteristic note, targets and motif in your own improvisation.
+Spill over ${iName}–${ivName}. Bestem deg for én ting du vil høre i hver runde: et tydelig ${r}-sentrum, seksten ${six}, en måltone ved akkordskiftet eller en gjenkjennelig frase.	Play over ${iName}–${ivName}. Choose one thing to listen for each round: a clear ${r} centre, the sixth ${six}, a target at the chord change or a recognisable phrase.
+Du trenger ikke få alt til samtidig. Bruk øvingsnotatet til å beskrive én ting som fungerer, og én ting du vil utforske neste gang.	You do not need to do everything at once. Use your practice note to describe one thing that works and one thing to explore next time.
+Vil du endre harmonien, åpner du rekken i akkordverkstedet. Derfra kan du ta akkurat din versjon tilbake til backingtracks med trommer og bass.	To change the harmony, open the progression in the chord workshop. From there, take your own version back to backing tracks with drums and bass.
+Spill to minutter over loopen. Bruk et lite område på instrumentet og en frase du liker. Gjør et kort opptak hvis du vil lytte etterpå. Vurder hva du hører, fremfor hvor mange toner du rakk.	Play over the loop for two minutes. Use a small area of your instrument and a phrase you like. Make a short recording if you want to listen back. Assess what you hear rather than how many notes you played.
+Hvordan kan du merke at teorien er blitt en del av spillet?	How can you tell when theory has become part of your playing?
+Du begynner å velge ${six} fordi du vil høre den doriske fargen, ikke bare fordi den står i skalaen. Du kan også høre forskjellen når den erstattes av ${flatSix}, og velge måltoner som møter akkordene.	You start choosing ${six} because you want to hear the Dorian colour, not just because it is in the scale. You can hear the difference when it is replaced by ${flatSix}, and choose targets that connect with the chords.
+▶ Lytt til dorisk	▶ Listen to Dorian
+▶ Lytt til akkordene	▶ Listen to the chords
+Øvd ✓ · fjern markering	Practised ✓ · unmark
+${count} av 6 steg markert som øvd	${count} of 6 steps marked as practised
+Du har øvd gjennom alle seks steg. Gå gjerne tilbake med en ny grunntone.	You have practised all six steps. Try going through them again with a new root.
+Markeringen er din egen øvingslogg, ikke en faglig prøve.	These marks are your practice log, not an assessment.
+Lytt igjen, eller spill eksempelet selv.	Listen again or play the example yourself.
+Spiller eolisk over samme grunntone…	Playing Aeolian over the same root…
+Spiller eksempelet på flygel…	Playing the example on grand piano…
+Kunne ikke spille lyden. Sjekk forbindelsen og prøv igjen.	Could not play the audio. Check your connection and try again.
+ dorisk · øvingsloop	 Dorian · practice loop
+MODUS_dorisk_ovingsloop.mid	MODUS_Dorian_practice_loop.mid
+Øvingsloopen er laget som MIDI · 	Practice loop created as MIDI · 
+ takter · 80 BPM.	 bars · 80 BPM.
+KVINTSIRKELEN	CIRCLE OF FIFTHS
+Kvintsirkelen	Circle of fifths
+Dur ytterst, relativ moll innenfor. Stigende kvinter med klokken, fallende kvinter mot klokken.	Major keys outside, relative minors inside. Ascending fifths clockwise, descending fifths anticlockwise.
+DUR · YTRE RING	MAJOR · OUTER RING
+MOLL · INDRE RING	MINOR · INNER RING
+Med klokken: kvinter opp · Mot klokken: kvinter ned	Clockwise: fifths up · Anticlockwise: fifths down
+AVSTAND BLIR TIL KLANG	DISTANCE BECOMES SOUND
+7 halvtoner	7 semitones
+REN KVINT	PERFECT FIFTH
+DUR	MAJOR
+MOLL	MINOR
+ÉN TONE · EN NY FARGE	ONE NOTE · A NEW COLOUR
+GI EN LITEN IDÉ ROM	GIVE A SMALL IDEA ROOM
+Utforsk intervaller, moduser, akkorder og kadenser. Se sammenhengen, lytt på flygel og ta teorien med inn i improvisasjonen.	Explore intervals, modes, chords and cadences. See the connections, listen on grand piano and bring theory into your improvisation.
+Lag modale backingtracks med trommer, bass og akkorder. Velg toneart, modus og groove, og utforsk skalaer på gitar og piano.	Create modal backing tracks with drums, bass and chords. Choose a key, mode and groove, and explore scales on guitar and piano.
+En sammenhengende læringsserie i seks steg: hør dorisk, forstå intervallene og bruk klangen i din egen improvisasjon. Med flygel, øvingsloop og lokal progresjon.	A connected six-step learning path: hear Dorian, understand the intervals and use the sound in your improvisation. With grand piano, practice loops and saved progress.
+Bygg en akkordrekke, finn praktiske gitargrep og se akkordtonene på piano. Lytt på flygel og last ned MIDI.	Build a progression, find practical guitar shapes and see chord tones on piano. Listen on grand piano and download MIDI.
+Utforsk samspillet mellom harmoni og melodi. Lag backingtracks, lær musikkteori og improviser på gitar og piano.	Explore the relationship between harmony and melody. Create backing tracks, learn music theory and improvise on guitar or piano.
+Finn ditt rom i MODUS. Gratis musikkverktøy, og planlagte Modus+- og Studio-medlemskap med måneds- og årspris.	Find your space in MODUS. Free music tools and planned Modus+ and Studio memberships with monthly and annual pricing.
+MODUS er laget av Simen Raaen og vokste fram gjennom hans eget musikkstudium. Et sted å koble teori, lytting og praktisk spilling.	MODUS was created by Simen Raaen and grew out of his own music studies. A place to connect theory, listening and practical playing.
+åpen	open
+. bånd	. fret
+${openNames[str]}-streng, 	${openNames[str]} string, 
+TRE TONER BLIR · ÉN FLYTTER SEG	THREE NOTES STAY · ONE MOVES
+SPILL · VENT · LYTT · SVAR	PLAY · WAIT · LISTEN · ANSWER
+BEVEGELSE OG HJEMKOMST	MOVEMENT AND RESOLUTION
+C-DUR · ii–V–I	C MAJOR · ii–V–I
+EN NY FARGE	A NEW COLOUR
+ETT TONEMATERIALE · TO SENTRE	ONE NOTE COLLECTION · TWO CENTRES
+A HARMONISK MOLL	A HARMONIC MINOR
+E FRYGISK DOMINANT	E PHRYGIAN DOMINANT
+E DORISK	E DORIAN
+STOR SEKST · MOLL MED LYS	MAJOR SIXTH · BRIGHTER MINOR
+ faste fortegn	 key signature accidentals
+C-dur, Am, 0 faste fortegn	C major, Am, 0 key signature accidentals
+G-dur, Em, 1 ♯ faste fortegn	G major, Em, 1 ♯ key signature accidentals
+D-dur, Bm, 2 ♯ faste fortegn	D major, Bm, 2 ♯ key signature accidentals
+A-dur, F♯m, 3 ♯ faste fortegn	A major, F♯m, 3 ♯ key signature accidentals
+E-dur, C♯m, 4 ♯ faste fortegn	E major, C♯m, 4 ♯ key signature accidentals
+B-dur, G♯m, 5 ♯ faste fortegn	B major, G♯m, 5 ♯ key signature accidentals
+F♯ / G♭-dur, D♯m / E♭m, 6 ♯ / 6 ♭ faste fortegn	F♯ / G♭ major, D♯m / E♭m, 6 ♯ / 6 ♭ key signature accidentals
+D♭-dur, B♭m, 5 ♭ faste fortegn	D♭ major, B♭m, 5 ♭ key signature accidentals
+A♭-dur, Fm, 4 ♭ faste fortegn	A♭ major, Fm, 4 ♭ key signature accidentals
+E♭-dur, Cm, 3 ♭ faste fortegn	E♭ major, Cm, 3 ♭ key signature accidentals
+B♭-dur, Gm, 2 ♭ faste fortegn	B♭ major, Gm, 2 ♭ key signature accidentals
+F-dur, Dm, 1 ♭ faste fortegn	F major, Dm, 1 ♭ key signature accidentals

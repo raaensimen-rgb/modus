@@ -1,0 +1,16 @@
+{
+  "name": "modus-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:account": "esbuild client/account.js --bundle --minify --format=iife --target=es2020 --outfile=dist/account.js",
+    "build": "npm run build:account && python3 scripts/build-account.py && python3 scripts/sync-navigation.py && python3 scripts/build-articles.py && python3 scripts/build-languages.py",
+    "test": "python3 tests/site-structure.py && node tests/languages.cjs && node tests/navigation.cjs && node tests/article-quizzes.cjs && node tests/article-library.cjs && node tests/account-state.cjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.118.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
+  }
+}

@@ -1,0 +1,808 @@
+{
+  "toner-og-intervaller": [
+    {
+      "question": "Hvor mange halvtoner er det fra C til E?",
+      "options": [
+        "3",
+        "4",
+        "7"
+      ],
+      "answer": 1,
+      "explanation": "C–E er en stor ters: fire halvtoner.",
+      "section": 2,
+      "en": {
+        "question": "How many semitones are there from C to E?",
+        "options": [
+          "3",
+          "4",
+          "7"
+        ],
+        "explanation": "C–E is a major third: four semitones."
+      }
+    },
+    {
+      "question": "Hvilket intervall er C–G?",
+      "options": [
+        "Ren kvint",
+        "Ren kvart",
+        "Liten ters"
+      ],
+      "answer": 0,
+      "explanation": "C–G er en ren kvint med sju halvtoners avstand.",
+      "section": 2,
+      "en": {
+        "question": "What interval is C–G?",
+        "options": [
+          "Perfect fifth",
+          "Perfect fourth",
+          "Minor third"
+        ],
+        "explanation": "C–G is a perfect fifth spanning seven semitones."
+      }
+    },
+    {
+      "question": "Hva er avstanden mellom E og F?",
+      "options": [
+        "Et helt trinn",
+        "En liten ters",
+        "Et halvt trinn"
+      ],
+      "answer": 2,
+      "explanation": "E og F ligger et halvt trinn fra hverandre, selv om begge er hvite tangenter.",
+      "section": 1,
+      "en": {
+        "question": "What is the distance between E and F?",
+        "options": [
+          "A whole step",
+          "A minor third",
+          "A half step"
+        ],
+        "explanation": "E and F are a half step apart, even though both are white keys."
+      }
+    }
+  ],
+  "dur-og-moll": [
+    {
+      "question": "Hvilken tone endres når C-dur blir C-moll?",
+      "options": [
+        "G blir G♭",
+        "E blir E♭",
+        "C blir C♯"
+      ],
+      "answer": 1,
+      "explanation": "Tersen senkes et halvt trinn. C og G beholdes.",
+      "section": 1,
+      "en": {
+        "question": "Which note changes when C major becomes C minor?",
+        "options": [
+          "G becomes G♭",
+          "E becomes E♭",
+          "C becomes C♯"
+        ],
+        "explanation": "The third is lowered a half step. C and G remain."
+      }
+    },
+    {
+      "question": "Hva beskriver dur og moll først og fremst?",
+      "options": [
+        "En bestemt følelse",
+        "Tempoet",
+        "Intervallstrukturen"
+      ],
+      "answer": 2,
+      "explanation": "Dur og moll beskriver strukturen. Følelsen påvirkes også av tempo, klang og sammenheng.",
+      "section": 2,
+      "en": {
+        "question": "What do major and minor primarily describe?",
+        "options": [
+          "A fixed emotion",
+          "The tempo",
+          "The interval structure"
+        ],
+        "explanation": "Major and minor describe structure. Feeling also depends on tempo, timbre and context."
+      }
+    },
+    {
+      "question": "Hva er E–G–C, med E nederst?",
+      "options": [
+        "En omvending av C-dur",
+        "En E-mollakkord",
+        "En ny akkord fordi rekkefølgen endres"
+      ],
+      "answer": 0,
+      "explanation": "Tonene er fortsatt C, E og G. Med tersen i bassen får vi første omvending.",
+      "section": 3,
+      "en": {
+        "question": "What is E–G–C, with E as the lowest note?",
+        "options": [
+          "An inversion of C major",
+          "An E minor chord",
+          "A new chord because the order changes"
+        ],
+        "explanation": "The notes are still C, E and G. With the third in the bass, this is first inversion."
+      }
+    }
+  ],
+  "kvintsirkelen": [
+    {
+      "question": "Hvilken durtoneart kommer ett steg med klokken fra C?",
+      "options": [
+        "F-dur",
+        "D-dur",
+        "G-dur"
+      ],
+      "answer": 2,
+      "explanation": "Med klokken følger vi stigende kvinter: C–G–D.",
+      "section": 1,
+      "en": {
+        "question": "Which major key is one clockwise step from C?",
+        "options": [
+          "F major",
+          "D major",
+          "G major"
+        ],
+        "explanation": "Clockwise, we follow ascending fifths: C–G–D."
+      }
+    },
+    {
+      "question": "Hvilken molltoneart deler faste fortegn med G-dur?",
+      "options": [
+        "G-moll",
+        "E-moll",
+        "D-moll"
+      ],
+      "answer": 1,
+      "explanation": "E-moll er relativ moll til G-dur. Begge har F♯ som fast fortegn.",
+      "section": 3,
+      "en": {
+        "question": "Which minor key shares the key signature of G major?",
+        "options": [
+          "G minor",
+          "E minor",
+          "D minor"
+        ],
+        "explanation": "E minor is the relative minor of G major. Both have F♯ in the key signature."
+      }
+    },
+    {
+      "question": "Hva blir I–IV–V–I i D-dur?",
+      "options": [
+        "D–G–A–D",
+        "D–F–G–D",
+        "D–A–G–D"
+      ],
+      "answer": 0,
+      "explanation": "G ligger mot klokken fra D og er IV. A ligger med klokken og er V.",
+      "section": 4,
+      "en": {
+        "question": "What is I–IV–V–I in D major?",
+        "options": [
+          "D–G–A–D",
+          "D–F–G–D",
+          "D–A–G–D"
+        ],
+        "explanation": "G is counterclockwise from D and is IV. A is clockwise and is V."
+      }
+    }
+  ],
+  "din-forste-improvisasjon": [
+    {
+      "question": "Hvilke tre toner foreslås som start over E-moll?",
+      "options": [
+        "E–G♯–B",
+        "E–F♯–A",
+        "E–G–B"
+      ],
+      "answer": 2,
+      "explanation": "E, G og B er treklangstonene i E-moll.",
+      "section": 1,
+      "en": {
+        "question": "Which three notes are suggested as a starting point over E minor?",
+        "options": [
+          "E–G♯–B",
+          "E–F♯–A",
+          "E–G–B"
+        ],
+        "explanation": "E, G and B are the triad notes of E minor."
+      }
+    },
+    {
+      "question": "Hvordan kan du utvikle en liten frase?",
+      "options": [
+        "Spille alle tonene raskest mulig",
+        "Gjenta rytmen og endre siste tone",
+        "Unngå pauser helt"
+      ],
+      "answer": 1,
+      "explanation": "En liten endring i en gjentatt idé gir både sammenheng og variasjon.",
+      "section": 2,
+      "en": {
+        "question": "How can you develop a short phrase?",
+        "options": [
+          "Play all notes as fast as possible",
+          "Repeat the rhythm and change the last note",
+          "Avoid pauses entirely"
+        ],
+        "explanation": "A small change to a repeated idea creates both connection and variety."
+      }
+    },
+    {
+      "question": "Må du bytte hele skalakartet ved hvert akkordskifte?",
+      "options": [
+        "Nei, du kan følge måltoner innenfor samme kart",
+        "Ja, alltid",
+        "Nei, fordi alle toner gir samme klang"
+      ],
+      "answer": 0,
+      "explanation": "Du kan beholde kartet og lande på akkordtoner. Tonenes betydning endres med harmonien.",
+      "section": 3,
+      "en": {
+        "question": "Must you change the entire scale pattern at every chord change?",
+        "options": [
+          "No, you can follow target notes within one pattern",
+          "Yes, always",
+          "No, because all notes sound the same"
+        ],
+        "explanation": "You can keep the pattern and target chord tones. The role of each note changes with the harmony."
+      }
+    }
+  ],
+  "moduser-og-tonalt-sentrum": [
+    {
+      "question": "Hva skiller E dorisk fra E eolisk?",
+      "options": [
+        "G♯ i stedet for G",
+        "C♯ i stedet for C",
+        "D♯ i stedet for D"
+      ],
+      "answer": 1,
+      "explanation": "Dorisk har stor sekst, C♯ fra E. Eolisk har liten sekst, C.",
+      "section": 2,
+      "en": {
+        "question": "What distinguishes E Dorian from E Aeolian?",
+        "options": [
+          "G♯ instead of G",
+          "C♯ instead of C",
+          "D♯ instead of D"
+        ],
+        "explanation": "Dorian has a major sixth, C♯ above E. Aeolian has a minor sixth, C."
+      }
+    },
+    {
+      "question": "Hva gjør at tonematerialet kan oppleves som E dorisk?",
+      "options": [
+        "At første tone alltid er E",
+        "At du spiller fort",
+        "At harmonien og øret etablerer E som sentrum"
+      ],
+      "answer": 2,
+      "explanation": "Starttonen alene avgjør ikke modus. E må oppleves som hjem.",
+      "section": 1,
+      "en": {
+        "question": "What can make this note collection sound like E Dorian?",
+        "options": [
+          "Always starting on E",
+          "Playing fast",
+          "Harmony and listening establish E as the centre"
+        ],
+        "explanation": "The starting note alone does not determine the mode. E must feel like home."
+      }
+    },
+    {
+      "question": "Hvilken vamp kan fremheve E dorisk?",
+      "options": [
+        "Em7–A7",
+        "Em7–Am7",
+        "Emaj7–Amaj7"
+      ],
+      "answer": 0,
+      "explanation": "A7 inneholder C♯, den store seksten fra E, mens Em7 kan oppleves som hjem.",
+      "section": 3,
+      "en": {
+        "question": "Which vamp can highlight E Dorian?",
+        "options": [
+          "Em7–A7",
+          "Em7–Am7",
+          "Emaj7–Amaj7"
+        ],
+        "explanation": "A7 contains C♯, the major sixth above E, while Em7 can feel like home."
+      }
+    }
+  ],
+  "ii-v-i-kadensen": [
+    {
+      "question": "Hva er ii–V–I i C-dur?",
+      "options": [
+        "D7–Gm7–Cmaj7",
+        "Dm7–G7–Cmaj7",
+        "Em7–A7–Dm7"
+      ],
+      "answer": 1,
+      "explanation": "Dm7 ligger på andre trinn, G7 på femte og Cmaj7 på første.",
+      "section": 1,
+      "en": {
+        "question": "What is ii–V–I in C major?",
+        "options": [
+          "D7–Gm7–Cmaj7",
+          "Dm7–G7–Cmaj7",
+          "Em7–A7–Dm7"
+        ],
+        "explanation": "Dm7 is on the second degree, G7 on the fifth and Cmaj7 on the first."
+      }
+    },
+    {
+      "question": "Hvordan kan B og F i G7 løses til C-dur?",
+      "options": [
+        "B til A og F til G",
+        "Begge beholdes alltid",
+        "B til C og F til E"
+      ],
+      "answer": 2,
+      "explanation": "B går et halvt trinn opp til C, og F et halvt trinn ned til E.",
+      "section": 2,
+      "en": {
+        "question": "How can B and F in G7 resolve to C major?",
+        "options": [
+          "B to A and F to G",
+          "Both always remain",
+          "B to C and F to E"
+        ],
+        "explanation": "B moves a half step up to C, and F a half step down to E."
+      }
+    },
+    {
+      "question": "Hva beskriver ii–V–I?",
+      "options": [
+        "En akkordprogresjon i en toneart",
+        "Alltid dorisk modus",
+        "Et bestemt gitargrep"
+      ],
+      "answer": 0,
+      "explanation": "ii–V–I beskriver trinn og harmonisk bevegelse, ikke én bestemt modus.",
+      "section": 1,
+      "en": {
+        "question": "What does ii–V–I describe?",
+        "options": [
+          "A chord progression within a key",
+          "Always the Dorian mode",
+          "A particular guitar shape"
+        ],
+        "explanation": "ii–V–I describes degrees and harmonic movement, not one particular mode."
+      }
+    }
+  ],
+  "septimakkorder": [
+    {
+      "question": "Hvilke toner danner Cmaj7?",
+      "options": [
+        "C–E–G–B♭",
+        "C–E♭–G–B",
+        "C–E–G–B"
+      ],
+      "answer": 2,
+      "explanation": "Cmaj7 har stor ters og stor septim: C, E, G og B.",
+      "section": 1,
+      "en": {
+        "question": "Which notes form Cmaj7?",
+        "options": [
+          "C–E–G–B♭",
+          "C–E♭–G–B",
+          "C–E–G–B"
+        ],
+        "explanation": "Cmaj7 has a major third and major seventh: C, E, G and B."
+      }
+    },
+    {
+      "question": "Hva betyr «maj7» i Cm(maj7)?",
+      "options": [
+        "At treklangen er dur",
+        "At septimen er stor",
+        "At bassen må være B"
+      ],
+      "answer": 1,
+      "explanation": "Akkorden har mollters E♭ og stor septim B.",
+      "section": 2,
+      "en": {
+        "question": "What does “maj7” mean in Cm(maj7)?",
+        "options": [
+          "The triad is major",
+          "The seventh is major",
+          "The bass must be B"
+        ],
+        "explanation": "The chord has a minor third, E♭, and a major seventh, B."
+      }
+    },
+    {
+      "question": "Må en dominantseptimakkord alltid fungere som dominant?",
+      "options": [
+        "Nei, funksjonen avhenger av sammenhengen",
+        "Ja, akkordtypen bestemmer alltid funksjonen",
+        "Bare når den har fire toner"
+      ],
+      "answer": 0,
+      "explanation": "Akkordtypen har durters og liten septim, men kan ha andre roller i blues og modal musikk.",
+      "section": 3,
+      "en": {
+        "question": "Must a dominant seventh chord always function as a dominant?",
+        "options": [
+          "No, its function depends on context",
+          "Yes, chord type always determines function",
+          "Only when it has four notes"
+        ],
+        "explanation": "The chord type has a major third and minor seventh, but can have other roles in blues and modal music."
+      }
+    }
+  ],
+  "harmonisk-moll-og-frygisk-dominant": [
+    {
+      "question": "Hva endres fra A naturlig moll til A harmonisk moll?",
+      "options": [
+        "C heves til C♯",
+        "G heves til G♯",
+        "F heves til F♯"
+      ],
+      "answer": 1,
+      "explanation": "Den hevede septimen G♯ kan fungere som ledetone til A.",
+      "section": 1,
+      "en": {
+        "question": "What changes from A natural minor to A harmonic minor?",
+        "options": [
+          "C is raised to C♯",
+          "G is raised to G♯",
+          "F is raised to F♯"
+        ],
+        "explanation": "The raised seventh, G♯, can act as a leading tone to A."
+      }
+    },
+    {
+      "question": "Hvilke trinn kjennetegner frygisk dominant fremfor vanlig frygisk?",
+      "options": [
+        "Stor sekund og liten ters",
+        "Stor sekst og liten septim",
+        "Liten sekund og stor ters"
+      ],
+      "answer": 2,
+      "explanation": "E frygisk dominant har F som liten sekund og G♯ som stor ters.",
+      "section": 2,
+      "en": {
+        "question": "Which degrees distinguish Phrygian dominant from ordinary Phrygian?",
+        "options": [
+          "Major second and minor third",
+          "Major sixth and minor seventh",
+          "Minor second and major third"
+        ],
+        "explanation": "E Phrygian dominant has F as its minor second and G♯ as its major third."
+      }
+    },
+    {
+      "question": "Har A harmonisk moll og E frygisk dominant samme toner?",
+      "options": [
+        "Ja, men de kan ha ulikt musikalsk sentrum",
+        "Nei, de deler bare grunntonen",
+        "Ja, så de oppleves alltid identisk"
+      ],
+      "answer": 0,
+      "explanation": "Tonene er like, men A eller E som sentrum gir tonene ulike roller.",
+      "section": 3,
+      "en": {
+        "question": "Do A harmonic minor and E Phrygian dominant share the same notes?",
+        "options": [
+          "Yes, but they can have different musical centres",
+          "No, they only share the root",
+          "Yes, so they always sound identical"
+        ],
+        "explanation": "The notes are the same, but A or E as the centre gives them different roles."
+      }
+    }
+  ],
+  "stemmeforing": [
+    {
+      "question": "Hvilke toner er felles for Cmaj7 og Am7?",
+      "options": [
+        "C–E–G",
+        "C–E–B",
+        "A–C–G"
+      ],
+      "answer": 0,
+      "explanation": "Cmaj7 har C–E–G–B, og Am7 har A–C–E–G. C, E og G er felles.",
+      "section": 2,
+      "en": {
+        "question": "Which notes are shared by Cmaj7 and Am7?",
+        "options": [
+          "C–E–G",
+          "C–E–B",
+          "A–C–G"
+        ],
+        "explanation": "Cmaj7 contains C–E–G–B, and Am7 contains A–C–E–G. C, E and G are shared."
+      }
+    },
+    {
+      "question": "Hva skjer i overgangen C–E–G–B til C–E–G–A?",
+      "options": [
+        "Alle stemmer flytter seg",
+        "B går ned et helt trinn; tre toner beholdes",
+        "B går opp et halvt trinn"
+      ],
+      "answer": 1,
+      "explanation": "Bare B flyttes til A. Resultatet er Am7 med C i bassen.",
+      "section": 2,
+      "en": {
+        "question": "What happens when C–E–G–B moves to C–E–G–A?",
+        "options": [
+          "Every voice moves",
+          "B moves down a whole step; three notes remain",
+          "B moves up a half step"
+        ],
+        "explanation": "Only B moves to A. The result is Am7 with C in the bass."
+      }
+    },
+    {
+      "question": "Betyr god stemmeføring alltid minst mulig bevegelse?",
+      "options": [
+        "Ja, større sprang er alltid feil",
+        "Ja, bassen må aldri skifte",
+        "Nei, større sprang kan gi ønsket kontrast"
+      ],
+      "answer": 2,
+      "explanation": "Små bevegelser gir sammenheng. Større sprang kan brukes for kontrast og retning.",
+      "section": 3,
+      "en": {
+        "question": "Does good voice leading always mean the smallest possible movement?",
+        "options": [
+          "Yes, larger leaps are always wrong",
+          "Yes, the bass must never change",
+          "No, larger leaps can create a desired contrast"
+        ],
+        "explanation": "Small movements create connection. Larger leaps can be used for contrast and direction."
+      }
+    }
+  ],
+  "rytme-i-sju-aatte": [
+    {
+      "question": "Hvor mange åttendedeler rommer én takt i 7/8?",
+      "options": [
+        "4",
+        "7",
+        "8"
+      ],
+      "answer": 1,
+      "explanation": "Telleren 7 angir antallet, og nevneren 8 viser noteverdien åttendedel.",
+      "section": 1,
+      "en": {
+        "question": "How many eighth notes fit in one bar of 7/8?",
+        "options": [
+          "4",
+          "7",
+          "8"
+        ],
+        "explanation": "The numerator 7 gives the count, and the denominator 8 indicates eighth notes."
+      }
+    },
+    {
+      "question": "Hva endres når 2 + 2 + 3 blir 3 + 2 + 2?",
+      "options": [
+        "Antall åttendedeler",
+        "Taktarten blir 8/8",
+        "Aksentenes plassering"
+      ],
+      "answer": 2,
+      "explanation": "Begge grupperingene summerer til sju, men tyngdepunktene flyttes.",
+      "section": 2,
+      "en": {
+        "question": "What changes when 2 + 2 + 3 becomes 3 + 2 + 2?",
+        "options": [
+          "The number of eighth notes",
+          "The meter becomes 8/8",
+          "The placement of accents"
+        ],
+        "explanation": "Both groupings add up to seven, but the accents move."
+      }
+    },
+    {
+      "question": "Hvordan foreslår artikkelen at du begynner å øve 7/8?",
+      "options": [
+        "Klapp gruppestartene med jevn åttendedelspuls",
+        "La pulsen stoppe mellom gruppene",
+        "Spill flest mulig toner med én gang"
+      ],
+      "answer": 0,
+      "explanation": "Begynn enkelt og behold den indre pulsen jevn før du legger til flere toner.",
+      "section": 3,
+      "en": {
+        "question": "How does the article suggest starting to practise 7/8?",
+        "options": [
+          "Clap the group starts with a steady eighth-note pulse",
+          "Stop the pulse between groups",
+          "Play as many notes as possible immediately"
+        ],
+        "explanation": "Start simply and maintain a steady inner pulse before adding more notes."
+      }
+    }
+  ],
+  "bygg-akkorder-i-en-toneart": [
+    {
+      "question": "Hvilke toner danner akkorden på andre trinn i G-dur?",
+      "options": [
+        "A–C♯–E",
+        "A–C–E",
+        "G–B–D"
+      ],
+      "answer": 1,
+      "explanation": "Annenhver skalatone fra A gir A–C–E: A-moll, eller ii i G-dur.",
+      "section": 1,
+      "en": {
+        "question": "Which notes form the chord on the second degree of G major?",
+        "options": [
+          "A–C♯–E",
+          "A–C–E",
+          "G–B–D"
+        ],
+        "explanation": "Alternate scale notes from A give A–C–E: A minor, or ii in G major."
+      }
+    },
+    {
+      "question": "Hvilken treklang ligger på sjuende trinn i G-dur?",
+      "options": [
+        "F♯-dur",
+        "F♯-moll",
+        "F♯dim"
+      ],
+      "answer": 2,
+      "explanation": "F♯–A–C har liten ters og forminsket kvint. Derfor er akkorden forminsket.",
+      "section": 2,
+      "en": {
+        "question": "Which triad is on the seventh degree of G major?",
+        "options": [
+          "F♯ major",
+          "F♯ minor",
+          "F♯dim"
+        ],
+        "explanation": "F♯–A–C has a minor third and diminished fifth, so the chord is diminished."
+      }
+    },
+    {
+      "question": "Hvilket trinn er Em når referansetonearten er G-dur?",
+      "options": [
+        "vi",
+        "i",
+        "IV"
+      ],
+      "answer": 0,
+      "explanation": "E er sjette trinn fra G, og Em er moll. Med E som sentrum får vi en annen analyse.",
+      "section": 4,
+      "en": {
+        "question": "Which degree is Em when the reference key is G major?",
+        "options": [
+          "vi",
+          "i",
+          "IV"
+        ],
+        "explanation": "E is the sixth degree above G and Em is minor. With E as the centre, the analysis changes."
+      }
+    }
+  ],
+  "ett-skalakart-nye-maltoner": [
+    {
+      "question": "Hvorfor kan ett toneutvalg brukes over Em–C–G–D i eksempelet?",
+      "options": [
+        "Alle akkorder har de samme tre tonene",
+        "Akkordene kan bygges fra samme diatoniske toneutvalg",
+        "Alle skalatoner er akkordtoner over hver akkord"
+      ],
+      "answer": 1,
+      "explanation": "Akkordene deler skalaens toneutvalg, men hver akkord har sine egne grunntoner, terser og kvinter.",
+      "section": 1,
+      "en": {
+        "question": "Why can one note collection be used over Em–C–G–D in this example?",
+        "options": [
+          "All the chords have the same three notes",
+          "The chords can be built from the same diatonic note collection",
+          "Every scale note is a chord tone over every chord"
+        ],
+        "explanation": "The chords share a scale collection, but each chord has its own root, third and fifth."
+      }
+    },
+    {
+      "question": "Hvilken linje følger tersene i Em–C–G–D?",
+      "options": [
+        "E–C–G–D",
+        "B–G–D–A",
+        "G–E–B–F♯"
+      ],
+      "answer": 2,
+      "explanation": "Tersene er G i Em, E i C, B i G og F♯ i D.",
+      "section": 3,
+      "en": {
+        "question": "Which line follows the thirds of Em–C–G–D?",
+        "options": [
+          "E–C–G–D",
+          "B–G–D–A",
+          "G–E–B–F♯"
+        ],
+        "explanation": "The thirds are G in Em, E in C, B in G and F♯ in D."
+      }
+    },
+    {
+      "question": "Hva bør du undersøke hvis en ny akkord inneholder en tone utenfor kartet?",
+      "options": [
+        "Den nye harmoniske sammenhengen og tonevalget",
+        "Bare hvilket bånd du begynner på",
+        "Ingenting, fordi ett kart alltid passer"
+      ],
+      "answer": 0,
+      "explanation": "Et felles kart er nyttig for dette diatoniske eksempelet. Andre akkorder kan kreve andre tonevalg.",
+      "section": 4,
+      "en": {
+        "question": "What should you examine if a new chord contains a note outside the pattern?",
+        "options": [
+          "The new harmonic relationship and choice of notes",
+          "Only the fret you start on",
+          "Nothing, because one pattern always fits"
+        ],
+        "explanation": "A shared pattern is useful for this diatonic example. Other chords may call for different note choices."
+      }
+    }
+  ],
+  "dorisk-og-eolisk": [
+    {
+      "question": "Hvilken tone endres fra E eolisk til E dorisk?",
+      "options": [
+        "G til G♯",
+        "C til C♯",
+        "D til D♯"
+      ],
+      "answer": 1,
+      "explanation": "Den lille seksten C blir den store seksten C♯. E beholdes som grunntone.",
+      "section": 1,
+      "en": {
+        "question": "Which note changes from E Aeolian to E Dorian?",
+        "options": [
+          "G to G♯",
+          "C to C♯",
+          "D to D♯"
+        ],
+        "explanation": "The minor sixth, C, becomes the major sixth, C♯. E remains the tonic."
+      }
+    },
+    {
+      "question": "Hva skiller Am fra A-dur i de to vampene?",
+      "options": [
+        "A blir A♯",
+        "E blir E♭",
+        "C blir C♯"
+      ],
+      "answer": 2,
+      "explanation": "Am har A–C–E. A-dur har A–C♯–E. Den samme C/C♯-forskjellen støtter sammenligningen fra E.",
+      "section": 3,
+      "en": {
+        "question": "What distinguishes Am from A major in the two vamps?",
+        "options": [
+          "A becomes A♯",
+          "E becomes E♭",
+          "C becomes C♯"
+        ],
+        "explanation": "Am has A–C–E. A major has A–C♯–E. The same C/C♯ difference supports the comparison from E."
+      }
+    },
+    {
+      "question": "Hva er en parallell sammenligning her?",
+      "options": [
+        "E eolisk og E dorisk",
+        "G-dur og E eolisk",
+        "G-dur og A dorisk"
+      ],
+      "answer": 0,
+      "explanation": "En parallell sammenligning beholder grunntonen. Her er E felles, mens sjette skalatrinn endres.",
+      "section": 4,
+      "en": {
+        "question": "What is a parallel comparison here?",
+        "options": [
+          "E Aeolian and E Dorian",
+          "G major and E Aeolian",
+          "G major and A Dorian"
+        ],
+        "explanation": "A parallel comparison keeps the tonic. Here E is shared while the sixth degree changes."
+      }
+    }
+  ]
+}

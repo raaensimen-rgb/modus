@@ -1,0 +1,408 @@
+[
+  {
+    "slug": "toner-og-intervaller",
+    "level": "beginner",
+    "topic": "Grunnleggende",
+    "title": "Toner og intervaller: musikkens byggesteiner",
+    "intro": "Du trenger ikke kunne alle navnene før du begynner å spille. Start med avstanden mellom to toner – og lytt til hva den gjør med musikken.",
+    "art": "intervals",
+    "practice": "teori.html#intervaller",
+    "practice_label": "Utforsk intervaller med flygel",
+    "sections": [
+      [
+        "En tone er et utgangspunkt",
+        "<p>Spill en E. Spill deretter en annen tone. Det du hører mellom dem, er et intervall. Intervallet kan oppleves som nært eller vidt, rolig eller spent. Opplevelsen påvirkes av klang, register og musikalsk sammenheng.</p><p>På gitaren er ett bånd et halvt trinn. På pianoet er et halvt trinn avstanden til nærmeste tangent, enten den er hvit eller svart. Mellom E og F, og mellom B og C, er det et halvt trinn selv om begge tangentene er hvite.</p><aside class=\"reading-note\">MODUS bruker internasjonale tonenavn: B tilsvarer det som ofte heter H i norsk notelære. B♭ tilsvarer da norsk B.</aside>"
+      ],
+      [
+        "Fra halve trinn til intervaller",
+        "<p>To halve trinn gir ett helt trinn. Fra C til D er avstanden to halvtoner. Fra C til E er den fire halvtoner: en stor ters. Fra C til E♭ er den tre halvtoner: en liten ters.</p><table><thead><tr><th>Fra C til</th><th>Intervall</th><th>Halvtoner</th></tr></thead><tbody><tr><td>D</td><td>Stor sekund</td><td>2</td></tr><tr><td>E♭</td><td>Liten ters</td><td>3</td></tr><tr><td>E</td><td>Stor ters</td><td>4</td></tr><tr><td>G</td><td>Ren kvint</td><td>7</td></tr><tr><td>C, en oktav opp</td><td>Ren oktav</td><td>12</td></tr></tbody></table><p>Antall halvtoner er et nyttig kart. Bokstavnavnene er også med på å bestemme intervallets navn: C–F♯ er en forstørret kvart, mens C–G♭ er en forminsket kvint. De kan klinge likt på et vanlig piano, men skrives og forstås forskjellig.</p>"
+      ],
+      [
+        "Lytt før du pugger",
+        "<p>Spill først tonene etter hverandre. Da hører du intervallet som en melodisk bevegelse. Spill dem så samtidig. Da møter du intervallet som samklang.</p><p>Begynn med bare to intervaller, for eksempel liten og stor ters. Sammenlign dem fra samme grunntone. Målet er å kjenne igjen en forskjell du kan bruke, fremfor å samle flest mulig betegnelser på én gang.</p>"
+      ],
+      [
+        "Beskriv det du spiller",
+        "<p>Velg én streng på gitaren og spill E–G–B. Fra E til G er det tre halvtoner, en liten ters. Fra G til B er det fire halvtoner, en stor ters. Fra E til B er det sju halvtoner, en ren kvint. Du undersøker samme tre toner fra forskjellige utgangspunkt.</p><p>Spill så tonene på piano eller over flere strenger. Intervallene bestemmes av tonehøydene, ikke av hvordan grepet ser ut. Forklar først hvilket intervall du forventer, og kontroller deretter med instrumentet.</p>"
+      ]
+    ],
+    "exercise": "Spill C–E og C–E♭ rolig, først etter hverandre og deretter samtidig. Syng den øverste tonen før du spiller den. Gjenta fra D og E.",
+    "category": "basics"
+  },
+  {
+    "slug": "dur-og-moll",
+    "level": "beginner",
+    "topic": "Akkorder",
+    "title": "Dur og moll: en tone gjør forskjellen",
+    "intro": "En treklang kan endre karakter når bare én tone flyttes et halvt trinn. Tersen er et godt sted å begynne å forstå akkorder.",
+    "art": "triads",
+    "practice": "teori.html#akkorder",
+    "practice_label": "Bygg og lytt til akkorder",
+    "sections": [
+      [
+        "Tre toner rundt en grunntone",
+        "<p>En vanlig durtreklang består av grunntone, stor ters og ren kvint. Formelen er <strong>1–3–5</strong>. C-dur inneholder derfor C, E og G.</p><p>En molltreklang beholder grunntonen og kvinten, men senker tersen et halvt trinn. Formelen blir <strong>1–♭3–5</strong>. C-moll inneholder C, E♭ og G.</p><div class=\"reading-example\"><span>C-dur</span><strong>C · E · G</strong><span>C-moll</span><strong>C · E♭ · G</strong></div>"
+      ],
+      [
+        "Dur betyr ikke alltid glad",
+        "<p>Dur og moll beskriver intervallstrukturen i akkorden. De setter ikke en fast følelse på musikken. Tempo, rytme, register, dynamikk og akkordene rundt påvirker uttrykket.</p><p>En langsom durakkord kan oppleves sår, og en rytmisk mollakkord kan oppleves energisk. Bruk øret til å utforske forskjellen uten å tvinge den inn i én stemning.</p>"
+      ],
+      [
+        "Samme akkord i forskjellige leier",
+        "<p>C–E–G, E–G–C og G–C–E inneholder de samme tre akkordtonene. Når en annen akkordtone enn grunntonen ligger nederst, får du en omvending.</p><p>På gitaren kan noen toner være doblet. Et åpent C-grep kan inneholde flere C-er eller E-er og fortsatt være en C-durakkord. Akkordens identitet bestemmes av tonene og sammenhengen, ikke bare antall strenger du slår an.</p>"
+      ],
+      [
+        "Finn tersen i ditt eget grep",
+        "<p>Spill E-moll og finn minst én G i grepet. G er den lille tersen fra E. Hever du den til G♯ og beholder E og B, får du tonene i E-dur. På piano kan du holde E og B og veksle rolig mellom G og G♯.</p><p>Hvis G finnes flere steder i gitargrepet, må du ta hensyn til alle forekomstene når du endrer akkorden. Å heve bare én av to G-er gir en blanding av mollters og durters, ikke en vanlig E-durtreklang.</p><p><a href=\"bygg-akkorder-i-en-toneart.html\">Les videre: bygg akkordene i en toneart ↗</a></p>"
+      ]
+    ],
+    "exercise": "Velg C-dur og C-moll i teorirommet. Behold C og G, og flytt bare E til E♭. Lytt deretter til den samme forskjellen i E-dur og E-moll.",
+    "category": "chords"
+  },
+  {
+    "slug": "kvintsirkelen",
+    "level": "beginner",
+    "topic": "Harmonikk",
+    "title": "Kvintsirkelen: et kart over toneartenes slektskap",
+    "intro": "Kvintsirkelen samler tonearter, fortegn og relative molltonearter i ett kart. Bruk den til å forstå akkordforbindelser, flytte musikken til en ny toneart og finne et sted å begynne.",
+    "art": "circle",
+    "practice": "akkorder.html?seq=%5B%5B2%2C4%5D%2C%5B7%2C2%5D%2C%5B0%2C3%5D%5D&key=0&mode=0&tempo=75&style=jazz",
+    "practice_label": "Spill Dm7–G7–Cmaj7 i akkordverkstedet",
+    "sections": [
+      [
+        "Hva viser kvintsirkelen?",
+        "<p>Sett C øverst. Gå én ren kvint opp, så får du G. En ny kvint gir D, deretter A, E og B. Fortsetter du rundt hele sirkelen, kommer du tilbake til samme toneklasse som C.</p><p>En ren kvint er sju halvtoner, for eksempel C–G. I motsatt retning følger du fallende kvinter, eller stigende kvarter: C–F–B♭–E♭. Oktaven du spiller tonene i, kan skifte; det er forholdet mellom toneklassene vi kartlegger.</p><aside class=\"reading-note\">MODUS bruker internasjonale tonenavn: B tilsvarer norsk H, mens B♭ tilsvarer norsk B. I illustrasjonen står durtoneartene ytterst og de relative molltoneartene innenfor.</aside>"
+      ],
+      [
+        "Fortegn: ett nytt tegn for hvert steg",
+        "<p>Fra C-dur, som ikke har faste fortegn, gir hvert steg med klokken ett ekstra kryss. G-dur har F♯. D-dur har F♯ og C♯. Mot klokken får du ett ekstra b: F-dur har B♭, og B♭-dur har B♭ og E♭.</p><div class=\"reading-example\"><span>Kryssenes rekkefølge</span><strong>F♯ · C♯ · G♯ · D♯ · A♯ · E♯ · B♯</strong><span>B-enes rekkefølge</span><strong>B♭ · E♭ · A♭ · D♭ · G♭ · C♭ · F♭</strong></div><p>Nabotonearter på sirkelen har seks av sju skalatoner felles. C-dur og G-dur skiller seg for eksempel bare ved F og F♯. De står nær hverandre på kartet selv om grunntonene er en kvint fra hverandre.</p><p>Nederst møter du F♯-dur og G♭-dur. På et vanlig likestemt piano klinger de samme tangentene, men tonene staves forskjellig: F♯-dur har seks kryss, G♭-dur seks b. Sirkelen viser vanlige skrivemåter; tonearter som C♯-dur med sju kryss finnes også.</p>"
+      ],
+      [
+        "Dur og relativ moll deler fortegn",
+        "<p>Den indre ringen viser relativ moll. C-dur og A-moll har ingen faste fortegn. G-dur og E-moll har ett kryss. D-dur og B-moll har to.</p><p>Relativ moll ligger en liten ters under durtonika, eller på sjette trinn i durskalaen. C-dur og A naturlig moll har dermed de samme tonene, men ulik grunntone og ulike roller for tonene.</p><table><thead><tr><th>Dur</th><th>Relativ moll</th><th>Faste fortegn</th></tr></thead><tbody><tr><td>C-dur</td><td>A-moll</td><td>Ingen</td></tr><tr><td>G-dur</td><td>E-moll</td><td>F♯</td></tr><tr><td>D-dur</td><td>B-moll</td><td>F♯, C♯</td></tr><tr><td>F-dur</td><td>D-moll</td><td>B♭</td></tr><tr><td>B♭-dur</td><td>G-moll</td><td>B♭, E♭</td></tr></tbody></table><p>I tonal moll brukes ofte en hevet septim som ledetone. E-moll kan derfor bruke D♯ i en B7-akkord, selv om toneartens faste fortegn bare er F♯. Sirkelen viser fortegnene, ikke alle mulige toner i et musikkstykke.</p>"
+      ],
+      [
+        "Finn I, IV og V ved siden av hverandre",
+        "<p>Velg en durtoneart i den ytre ringen. Naboen mot klokken viser grunntonen til IV, subdominanten. Naboen med klokken viser grunntonen til V, dominanten. Tonika I står i midten av disse tre på sirkelbuen.</p><div class=\"reading-example\"><span>C-dur</span><strong>F ← C → G</strong><span>Funksjoner i C-dur</span><strong>IV ← I → V</strong></div><p>Du kan derfor bygge C–F–G–C, altså I–IV–V–I. Flytt samme idé til D-dur: D–G–A–D. Akkordnavnene endres, mens trinnforholdet beholdes.</p><p>Dette eksempelet bruker durtonearter. I moll kan du ikke uten videre lese alle akkordtypene fra den ytre ringen. I A-moll er for eksempel Dm vanlig på iv, mens E eller E7 kan brukes som dominant V eller V7.</p>"
+      ],
+      [
+        "Hør kvintbevegelsen i ii–V–I",
+        "<p>I C-dur kan du spille Dm7–G7–Cmaj7. Akkordenes grunntoner følger D–G–C: to steg mot klokken i sirkelen. Dette er fallende kvinter, eller stigende kvarter når du velger et annet register.</p><div class=\"reading-example\"><span>Akkorder</span><strong>Dm7 → G7 → Cmaj7</strong><span>Trinn i C-dur</span><strong>ii7 → V7 → Imaj7</strong></div><p>Legg merke til at D står som durtoneart i den ytre ringen, mens akkorden her er Dm7. Sirkelen viser grunntonenes forhold. Akkordtypen bestemmes av tonearten og den musikalske sammenhengen.</p><p>Lytt også til B og F i G7. De kan føres til C og E i tonikaakkorden. Kvintsirkelen viser rotbevegelsen; stemmeføringen forklarer hvordan tonene inni akkordene kan binde skiftet sammen.</p><p><a href=\"ii-v-i-kadensen.html\">Les mer om ii–V–I og dominantens oppløsning ↗</a></p>"
+      ],
+      [
+        "Hvor passer modusene inn?",
+        "<p>Kvintsirkelen er først og fremst et kart over tonearter og fortegn. Den forteller ikke alene hvilken modus musikken har som sentrum.</p><p>C ionisk, D dorisk og E frygisk bruker alle tonene C, D, E, F, G, A og B. De har samme tonemateriale, men ulike grunntoner og intervallforhold. D-dur på sirkelens ytterside er noe annet enn D dorisk.</p><p>Bruk derfor sirkelen til å finne slektskap, og bruk harmonien og øret til å avgjøre hvor musikken har hjem. Du kan beholde ett skalakart gjennom en akkordrekke og samtidig følge hvilke akkordtoner som blir viktige i hvert skifte.</p><p><a href=\"moduser-og-tonalt-sentrum.html\">Les om moduser og tonalt sentrum ↗</a></p>"
+      ],
+      [
+        "En liten øverutine",
+        "<p>Velg først C-dur og spill C–F–G–C. Si I–IV–V–I mens du spiller. Flytt så samme mønster til G-dur: G–C–D–G. Prøv deretter D-dur: D–G–A–D.</p><p>Spill til slutt Dm7–G7–Cmaj7 i et rolig tempo. Syng grunntonene D–G–C, og legg merke til retningen. Du trenger ikke pugge hele sirkelen på én gang; lær noen få forbindelser ved å høre og bruke dem.</p>"
+      ],
+      [
+        "Bruk kartet uten å bytte hele skalakartet",
+        "<p>G-dur og E naturlig moll deler tonene G, A, B, C, D, E og F♯. Du kan derfor bruke samme toneutvalg over mange diatoniske akkorder fra denne familien. Kvintsirkelen hjelper deg å finne fortegnene; den sier ikke at alle akkorder skal være dur.</p><p>Spill Em–C–G–D og finn akkordtonene innenfor et område du allerede kjenner. Legg merke til at C-dur bruker C–E–G, mens D-dur bruker D–F♯–A. Kartet kan beholdes selv om måltonene endres.</p>"
+      ]
+    ],
+    "exercise": "Åpne Dm7–G7–Cmaj7 i akkordverkstedet. Spill og syng D–G–C, og finn bevegelsen mot klokken i sirkelen. Flytt deretter kadensen til G-dur: Am7–D7–Gmaj7. Behold ii–V–I, og lytt etter hvor musikken lander.",
+    "category": "harmony"
+  },
+  {
+    "slug": "din-forste-improvisasjon",
+    "level": "beginner",
+    "topic": "Improvisasjon",
+    "title": "Fra skala til din første improvisasjon",
+    "intro": "Du trenger ikke bruke alle tonene i skalaen. Noen få toner, en tydelig rytme og rom mellom frasene er nok til å komme i gang.",
+    "art": "melody",
+    "practice": "backingtracks.html?key=4&mode=5",
+    "practice_label": "Spill over E naturlig moll",
+    "sections": [
+      [
+        "Begynn med et lite område",
+        "<p>Velg E eolisk, også kalt E naturlig moll, i backingtracks. Tonene er E, F♯, G, A, B, C og D. Velg treklanger for Em–C–G–D, eller septimakkorder for Em7–Cmaj7–Gmaj7–D7.</p><p>Start med E, G og B. Dette er treklangstonene i E-moll. Spill én eller to toner om gangen, og la backingtracket svare i pausene. Du trener på å lage en frase, ikke på å vise at du kan en skala.</p>"
+      ],
+      [
+        "Gi en liten idé flere liv",
+        "<p>Finn en rytme du liker på én tone. Gjenta rytmen og bytt bare den siste tonen. Prøv så samme toner med en annen rytme. Dette gir en tydelig sammenheng mellom frasene.</p><p>Du kan også svare på en kort frase med en nesten lik frase. Lytt til om svaret føles som en fortsettelse, et spørsmål eller en avslutning. Pausen mellom dem er en del av musikken.</p><div class=\"reading-example\"><span>En enkel ramme</span><strong>Spill · vent · lytt · svar</strong></div>"
+      ],
+      [
+        "Skalaen er et toneutvalg",
+        "<p>Alle sju tonene kan høre til tonearten, men de får ulik betydning mot akkordene som spilles. En tone som gir ro over Em7, kan gi mer spenning over en annen akkord.</p><p>Etter hvert kan du undersøke akkordtonene i hver akkord og lande på en av dem når harmonien skifter. Du behøver ikke flytte hele skalakartet for hvert skifte: lytt etter nye måltoner innenfor det samme kartet.</p>"
+      ],
+      [
+        "Endre én ting og lytt til resultatet",
+        "<p>Lag en kort frase med E, G og B over Em. Gjenta den med samme rytme, men avslutt på G i stedet for E. Tersen G kan gjøre mollklangen tydelig uten at du trenger flere toner.</p><p>Ta deretter en pause før svaret ditt. Sammenlign hva som endres når pausen blir lengre, siste tone holdes, eller en tone gjentas. Beskriv ditt eget valg med en enkel setning. Oppgaven har flere musikalske løsninger.</p><p><a href=\"ett-skalakart-nye-maltoner.html\">Les videre: ett skalakart, nye måltoner ↗</a></p>"
+      ]
+    ],
+    "exercise": "Sett tempoet rolig. Bruk E, G og B i én runde. Legg deretter til D, og så F♯. Spill færre toner hvis du slutter å høre hva frasen skal si.",
+    "category": "improvisation"
+  },
+  {
+    "slug": "moduser-og-tonalt-sentrum",
+    "level": "intermediate",
+    "topic": "Modalitet",
+    "title": "Moduser: sentrum er viktigere enn starttonen",
+    "intro": "Å begynne en durskala på en ny tone viser slektskapet mellom modusene. For å høre en modal klang trenger den nye tonen også å oppleves som sentrum.",
+    "art": "modes",
+    "practice": "laer-dorisk.html",
+    "practice_label": "Start læringsstien om dorisk",
+    "sections": [
+      [
+        "Et sentrum gir tonene roller",
+        "<p>E dorisk bruker tonene E, F♯, G, A, B, C♯ og D. Det er det samme tonematerialet som D-dur. Likevel kan musikken oppleves annerledes når E er grunntone og harmonien støtter E som sentrum.</p><p>Hvis du bare spiller disse tonene fra E til E over en tydelig D-durkadens, kan øret fortsatt høre D som hjem. Starttonen i løpeøvelsen overstyrer ikke nødvendigvis harmonien.</p>"
+      ],
+      [
+        "Sammenlign fra samme grunntone",
+        "<p>Parallell sammenligning gjør fargene lettere å høre. Sammenlign derfor E dorisk med E eolisk, fremfor å flytte grunntonen samtidig som du bytter modus.</p><table><thead><tr><th>Klang</th><th>Formel</th><th>Sjette trinn fra E</th></tr></thead><tbody><tr><td>E dorisk</td><td>1–2–♭3–4–5–6–♭7</td><td>C♯</td></tr><tr><td>E eolisk</td><td>1–2–♭3–4–5–♭6–♭7</td><td>C</td></tr></tbody></table><p>Begge er mollpregede fordi de har liten ters. Dorisk har stor sekst; eolisk har liten sekst. Det ene trinnet kan påvirke både melodien og akkordvalget.</p>"
+      ],
+      [
+        "La harmonien vise fargen",
+        "<p>En vamp mellom Em7 og A7 kan fremheve E dorisk. A7 inneholder C♯, som er den store seksten i forhold til E. La Em7 oppleves som hjem, og bruk A7 som kontrast.</p><p>Du trenger ikke understreke karaktertonen hele tiden. Prøv å bruke den som en bevisst farge i en ellers enkel frase. Modalitet handler om hvordan musikken organiseres, ikke om å treffe et bestemt trinn flest ganger.</p>"
+      ],
+      [
+        "Ett halskart kan romme flere sentre",
+        "<p>Tonene i G-dur finnes også i E eolisk, A dorisk og B frygisk. Det er en relativ sammenheng: tonematerialet beholdes, mens sentrum og intervallforhold endres. Det betyr ikke at en frase automatisk skifter modus hver gang den starter på en ny tone.</p><p>Spill de kjente tonene over en E-drone og deretter over en A-drone. Prøv å avslutte på henholdsvis E og A, og hør hvordan de andre tonene får nye roller. Et kart på gitarhalsen beskriver plasseringer; musikken avgjør hvilket sentrum som etableres.</p><p><a href=\"dorisk-og-eolisk.html\">Les videre: sammenlign dorisk og eolisk ↗</a></p>"
+      ]
+    ],
+    "exercise": "Hold E som sentrum. Spill en kort frase med C♯, og spill deretter samme frase med C. Sammenlign både uten akkompagnement og over en E-drone.",
+    "category": "modes"
+  },
+  {
+    "slug": "ii-v-i-kadensen",
+    "level": "intermediate",
+    "topic": "Harmonikk",
+    "title": "ii–V–I: hvorfor akkorder vil hjem",
+    "intro": "Tre akkorder kan skape en tydelig retning. Romertallene viser rollen deres i tonearten, slik at den samme ideen kan flyttes til et nytt sted.",
+    "art": "cadence",
+    "practice": "teori.html#kadenser",
+    "practice_label": "Lytt til kadenser i teorirommet",
+    "sections": [
+      [
+        "Les trinnene i én toneart",
+        "<p>I C-dur er en vanlig ii–V–I <strong>Dm7–G7–Cmaj7</strong>. D er andre skalatrinn, G er femte, og C er første. Små romertall viser her en mollakkord; store viser dur.</p><p>Progresjonen starter på en mollseptimakkord, går videre til dominantseptim og lander på tonika med stor septim. ii–V–I er navnet på en akkordprogresjon, ikke på en modus.</p><div class=\"reading-example\"><span>C-dur</span><strong>Dm7 → G7 → Cmaj7</strong><span>Trinn</span><strong>ii7 → V7 → Imaj7</strong></div>"
+      ],
+      [
+        "Hør på tonene inni akkordene",
+        "<p>G7 inneholder G, B, D og F. Tonene B og F danner en tritonus. I en vanlig oppløsning kan B gå opp til C, mens F går ned til E.</p><p>Disse små bevegelsene bidrar til følelsen av at dominanten leder mot C. Det finnes andre stemmeføringer og andre måter å bruke dominantakkorden på, men denne gir et tydelig sted å starte lyttingen.</p>"
+      ],
+      [
+        "Flytt ideen uten å miste sammenhengen",
+        "<p>I G-dur blir samme type kadens Am7–D7–Gmaj7. Akkordnavnene endres, mens trinnforholdet ii–V–I beholdes. Romertall gjør derfor sammenligning og transponering enklere.</p><p>D-dorisk kan beskrive tonematerialet over Dm7 i C-dur, men det gjør ikke hele kadensen D-dorisk. En tonesamling og en harmonisk funksjon beskriver forskjellige sider av musikken.</p>"
+      ],
+      [
+        "Følg akkordtoner innenfor ett toneutvalg",
+        "<p>Over Dm7–G7–Cmaj7 kan du begynne med tonene fra C-dur. Finn så F–B–E: F er tersen i Dm7, B er tersen i G7, og E er tersen i Cmaj7. Dette er måltoner, ikke et krav om å spille en ny skala over hver akkord.</p><p>En enklere melodisk linje er F–F–E. Da beholdes F fra Dm7 til G7, før den går ned til E over Cmaj7. Sammenlign de to ideene langsomt og velg ut fra klangen, ikke antall noter.</p>"
+      ]
+    ],
+    "exercise": "Spill Dm7–G7–Cmaj7 langsomt. Finn F i G7 og la den gå til E i Cmaj7. Finn deretter B og prøv å føre den til C. Syng bevegelsene før du spiller dem.",
+    "category": "harmony"
+  },
+  {
+    "slug": "septimakkorder",
+    "level": "intermediate",
+    "topic": "Akkorder",
+    "title": "Septimakkorder: mer farge, samme grunnmur",
+    "intro": "Når en septim legges til en treklang, får akkorden en ny nyanse. Betegnelsene blir enklere når du skiller mellom kvaliteten på tersen og på septimen.",
+    "art": "sevenths",
+    "practice": "akkorder.html",
+    "practice_label": "Sammenlign septimakkorder i verkstedet",
+    "sections": [
+      [
+        "Bygg videre på treklangen",
+        "<p>En septimakkord har i grunnformen fire forskjellige toner: grunntone, ters, kvint og septim. Den kan spilles med toner doblet eller flyttet til andre oktaver uten å slutte å være den samme akkordtypen.</p><table><thead><tr><th>Akkord</th><th>Formel</th><th>Toner</th></tr></thead><tbody><tr><td>Cmaj7</td><td>1–3–5–7</td><td>C–E–G–B</td></tr><tr><td>C7</td><td>1–3–5–♭7</td><td>C–E–G–B♭</td></tr><tr><td>Cm7</td><td>1–♭3–5–♭7</td><td>C–E♭–G–B♭</td></tr><tr><td>Cm(maj7)</td><td>1–♭3–5–7</td><td>C–E♭–G–B</td></tr></tbody></table>"
+      ],
+      [
+        "To spørsmål gjør navnet tydelig",
+        "<p>Spør først: Er tersen stor eller liten? Spør deretter: Er septimen stor eller liten? Cmaj7 og C7 har begge durters, men ulik septim. Cm7 og Cm(maj7) har begge mollters, men ulik septim.</p><p>I Cm(maj7) betyr «maj7» at septimen er stor. Det betyr ikke at treklangen er dur. Parentesen gjør denne kombinasjonen lettere å lese.</p>"
+      ],
+      [
+        "La én stemme vise forskjellen",
+        "<p>Behold C, E og G, og bytt mellom B og B♭. Du beveger deg mellom Cmaj7 og C7 med bare én tone. Behold deretter C, E♭ og G, og gjør det samme: nå sammenligner du Cm(maj7) og Cm7.</p><p>Navnet dominantseptim beskriver akkordtypen med durters og liten septim. Om den faktisk fungerer som dominant i musikken, avhenger av sammenhengen. I blues og modal musikk kan den også ha andre roller.</p>"
+      ],
+      [
+        "Se treklangen inni firklangen",
+        "<p>Em7 består av E–G–B–D. De tre første tonene danner E-moll; D er den lille septimen. Emaj7 består av E–G♯–B–D♯. Her er både tersen og septimen store. Hold derfor spørsmålene om ters og septim adskilt når du forklarer akkorden.</p><p>Finn først treklangen på instrumentet. Legg så til septimen og lytt til forskjellen. Du trenger ikke lære et helt nytt kart for å forstå den ekstra tonen.</p>"
+      ]
+    ],
+    "exercise": "Velg Cmaj7 og C7 i akkordverkstedet. Se hvilken tangent som flyttes. Gjenta med Cm7 og Cm(maj7), og prøv deretter en piano-omvending som lar de øvrige tonene ligge nær hverandre.",
+    "category": "chords"
+  },
+  {
+    "slug": "harmonisk-moll-og-frygisk-dominant",
+    "level": "advanced",
+    "topic": "Modalitet",
+    "title": "Harmonisk moll og frygisk dominant",
+    "intro": "En hevet septim gir molltonaliteten en tydelig ledetone. Det samme tonematerialet kan få en helt annen karakter med femte trinn som sentrum.",
+    "art": "harmonic",
+    "practice": "backingtracks.html?key=4&mode=8",
+    "practice_label": "Spill over E frygisk dominant",
+    "sections": [
+      [
+        "Den hevede septimen i moll",
+        "<p>A naturlig moll består av A, B, C, D, E, F og G. Hever du G til G♯, får du A harmonisk moll: <strong>A–B–C–D–E–F–G♯</strong>.</p><p>Formelen er 1–2–♭3–4–5–♭6–7. G♯ ligger et halvt trinn under A og kan fungere som ledetone. Tonen gjør også at akkorden på femte trinn kan ha durters: E–G♯–B, eller E7 når D legges til.</p>"
+      ],
+      [
+        "Femte modus får et nytt sentrum",
+        "<p>Med E som sentrum gir det samme tonematerialet E frygisk dominant: <strong>E–F–G♯–A–B–C–D</strong>. Formelen blir 1–♭2–3–4–5–♭6–♭7.</p><p>Den lille sekunden F ligger tett på E, samtidig som G♯ gir en stor ters. Nettopp kombinasjonen av ♭2 og 3 skiller denne klangen fra vanlig frygisk, som har mollters.</p><div class=\"reading-example\"><span>A harmonisk moll</span><strong>A B C D E F G♯</strong><span>E frygisk dominant</span><strong>E F G♯ A B C D</strong></div>"
+      ],
+      [
+        "Skill funksjon fra modal klang",
+        "<p>E7 kan fungere som dominant til A-moll. Da kan E frygisk dominant være en mulig skalafarge over dominanten, før musikken vender hjem til A.</p><p>Hvis E i stedet holdes som musikalsk sentrum over tid, kan du utforske den samme tonesamlingen modalt. Det er ikke automatisk samme harmoniske opplevelse, selv om tonene er like.</p><p>Mellom F og G♯ ligger en forstørret sekund: tre halvtoner. Bruk spranget bevisst, og prøv også fraser som binder det sammen med grunntonen E eller kvarten A.</p>"
+      ],
+      [
+        "Avgrens utforskingen til to forskjeller",
+        "<p>Begynn med A naturlig moll mot A harmonisk moll, slik at bare G endres til G♯. Sammenlign deretter E frygisk mot E frygisk dominant, slik at G endres til G♯ mens E beholdes som sentrum. I den siste sammenligningen endrer du tersen fra liten til stor.</p><p>Bruk én kort frase om gangen og forklar hvilken tone som skiftes. Et slikt avgrenset forsøk viser sammenhengen uten at du må lære alle modusene av harmonisk moll på én gang.</p>"
+      ]
+    ],
+    "exercise": "Spill E–F–E og deretter E–G♯–E over en E-drone. Kombiner så de to ideene. Sammenlign med E vanlig frygisk ved å erstatte G♯ med G.",
+    "category": "modes"
+  },
+  {
+    "slug": "stemmeforing",
+    "level": "advanced",
+    "topic": "Harmonikk",
+    "title": "Stemmeføring: den korteste veien mellom akkorder",
+    "intro": "Du kan få en akkordrekke til å henge sammen ved å følge bevegelsen til hver enkelt tone. Noen stemmer kan bli liggende, mens andre flytter seg et lite stykke.",
+    "art": "voices",
+    "practice": "akkorder.html",
+    "practice_label": "Utforsk omvendinger i akkordverkstedet",
+    "sections": [
+      [
+        "Se akkorden som flere melodier",
+        "<p>Når du spiller fire toner samtidig, kan du tenke på dem som fire stemmer. Hver stemme kan fortsette til en ny tone i neste akkord. Dermed kan en akkordrekke også høres som flere små melodiske linjer.</p><p>Stemmeføring handler om denne videreføringen. Det er ikke bare et spørsmål om hvilket akkordnavn som kommer neste, men om hvordan de konkrete tonene kommer dit.</p>"
+      ],
+      [
+        "Behold det som allerede passer",
+        "<p>Cmaj7 inneholder C, E, G og B. Am7 inneholder A, C, E og G. Tre toner er felles: C, E og G.</p><p>En mulig overgang på piano er C–E–G–B til C–E–G–A. De tre nederste stemmene beholdes, mens B flyttes ned et helt trinn til A. Den siste akkorden er Am7 med C i bassen, altså første omvending.</p><div class=\"reading-example\"><span>Cmaj7</span><strong>C · E · G · B</strong><span>Am7/C</span><strong>C · E · G · A</strong></div>"
+      ],
+      [
+        "Nærmeste vei er et valg",
+        "<p>Små bevegelser kan gi ro og sammenheng. Større sprang, skifte i register eller en ny basstone kan være riktig når du vil ha kontrast og tydelig retning. God stemmeføring betyr ikke at alle stemmer alltid skal bevege seg minst mulig.</p><p>På gitaren påvirker grepenes oppbygning hva som er praktisk. Et grep kan doble toner eller utelate en ren kvint. Se derfor både på hvilke stemmer du faktisk spiller, og på hvilken klanglig rolle du vil fremheve.</p><p>Prøv å holde øverste tone som en tydelig melodisk linje. Det kan gi akkordspillet en egen fortelling selv om resten av harmonien er enkel.</p>"
+      ],
+      [
+        "Følg den stemmen du faktisk hører",
+        "<p>Spill C–E–G–B til C–E–G–A og lytt bare til B–A i toppen. Spill så denne linjen alene. Sett de andre tonene tilbake og undersøk om du fortsatt kan høre bevegelsen som en egen melodi.</p><p>På gitar kan du velge et mindre grep som lar denne stemmen være tydelig. Det pedagogiske målet her er å se fellestoner og bevegelse i et konkret eksempel, ikke å dekke alle reglene for flerstemt sats.</p>"
+      ]
+    ],
+    "exercise": "Bygg Cmaj7–Am7 i akkordverkstedet. Sammenlign grunnstillingene med Am7 i første omvending. Spill deretter bare den øverste stemmen og lytt til linjen.",
+    "category": "harmony"
+  },
+  {
+    "slug": "rytme-i-sju-aatte",
+    "level": "advanced",
+    "topic": "Rytmikk",
+    "title": "Rytme i 7/8: grupper som føles naturlige",
+    "intro": "Sju åttendedeler trenger ikke oppleves som en lang telling til sju. Små grupper gjør det lettere å finne et groove og beholde retningen.",
+    "art": "rhythm",
+    "practice": "teori.html",
+    "practice_label": "Tilbake til teorirommet",
+    "sections": [
+      [
+        "Hva forteller 7/8?",
+        "<p>En takt i 7/8 rommer sju åttendedeler. Den øverste delen av taktarten forteller hvor mange noteverdier takten inneholder; den nederste viser at noteverdien er en åttendedel.</p><p>Dette sier ikke at alle sju slag skal ha samme tyngde. Ved å samle åttendedelene i grupper kan du kjenne en større bevegelse gjennom takten.</p>"
+      ],
+      [
+        "Prøv 2 + 2 + 3",
+        "<p>En vanlig gruppering er to, to og tre åttendedeler. Tell <strong>én-to | én-to | én-to-tre</strong>, og legg en tydeligere aksent på starten av hver gruppe.</p><div class=\"rhythm-example\"><span>1 · 2</span><span>1 · 2</span><span>1 · 2 · 3</span></div><p>En annen mulighet er 3 + 2 + 2. Antall åttendedeler er fortsatt sju, men plasseringen av aksentene endrer hvordan takten føles. Det er grupperingene du hører, ikke et nytt antall toner i takten.</p>"
+      ],
+      [
+        "La en enkel frase lande",
+        "<p>Begynn på én tone. Spill eller klapp starten av hver gruppe, og hold den indre åttendedelspulsen jevn. Når dette sitter, kan du legge inn korte toner eller pauser mellom aksentene.</p><p>La melodien gå over flere takter etter hvert. En frase trenger ikke avsluttes ved hver taktstrek. Du kan beholde gruppefølelsen i akkompagnementet samtidig som melodien får en lengre bue.</p><aside class=\"reading-note\">Backingtrack-verktøyet i MODUS bruker foreløpig 4/4. Øv dette 7/8-eksempelet med egen telling eller en metronom som støtter gruppering i sju.</aside>"
+      ],
+      [
+        "Behold pulsen når aksentene flytter seg",
+        "<p>Tell sju jevne åttendedeler. I 2+2+3 legger du gruppestartene på posisjon 1, 3 og 5. I 3+2+2 ligger de på 1, 4 og 6. Klapp bare disse posisjonene mens du fortsetter å kjenne alle sju åttendedelene.</p><p>Bytt gruppering etter fire takter og behold samme tempo. Hvis du øker farten i tregruppen, gå tilbake til telling uten instrument før du legger til toner igjen.</p>"
+      ]
+    ],
+    "exercise": "Klapp 2 + 2 + 3 i fire takter uten å øke tempoet i den siste gruppen. Spill deretter E på første åttendedel i hver gruppe. Bytt til 3 + 2 + 2 og legg merke til forskjellen.",
+    "category": "rhythm"
+  },
+  {
+    "slug": "bygg-akkorder-i-en-toneart",
+    "level": "beginner",
+    "topic": "Akkorder",
+    "category": "chords",
+    "title": "Bygg akkordene i en toneart",
+    "intro": "Når du bygger treklanger av skalatonene, får du en familie av akkorder. G-dur viser hvordan tonene, akkordnavnene og romertallene henger sammen.",
+    "art": "diatonic",
+    "sections": [
+      [
+        "Begynn med tonene, ikke med grepene",
+        "<p>G-dur består av G, A, B, C, D, E og F♯. Velg G som grunntone og ta annenhver skalatone: G–B–D. Det gir en G-durtreklang. Start så på A og gjør det samme: A–C–E. Nå får du A-moll.</p><p>Avstanden mellom tonene avgjør akkordtypen. G–B er en stor ters, mens A–C er en liten ters. Derfor blir ikke alle akkordene dur selv om du bruker en durskala.</p>"
+      ],
+      [
+        "De sju treklangene i G-dur",
+        "<p>Fortsett fra hvert skalatrinn og bruk bare toner fra G-dur. Etter F♯ fortsetter du med G i neste oktav. Akkordene blir G, Am, Bm, C, D, Em og F♯dim.</p><p>Tonene er G–B–D, A–C–E, B–D–F♯, C–E–G, D–F♯–A, E–G–B og F♯–A–C. Den siste treklangen er forminsket: fra F♯ har den liten ters A og forminsket kvint C.</p>"
+      ],
+      [
+        "Romertall viser mønsteret",
+        "<p>I G-dur blir akkordrekken I–ii–iii–IV–V–vi–vii°. Store romertall viser dur, små viser moll, og den lille sirkelen viser forminsket treklang. Mønsteret gjelder for diatoniske treklanger i alle durtonearter.</p><p>Prøv I–V–vi–IV: G–D–Em–C. Flytter du samme trinnmønster til C-dur, blir det C–G–Am–F. Tonene og grepene endres, mens forholdet mellom trinnene beholdes.</p>"
+      ],
+      [
+        "Samme toner kan få et annet hjem",
+        "<p>E naturlig moll bruker de samme tonene som G-dur. Likevel er Em første trinn når E er sentrum, mens den er sjette trinn i G-dur. Du må derfor velge referansetoneart før du setter romertall på en akkordrekke.</p><p>Diatonisk betyr her at akkordtonene kommer fra den valgte skalaen. Musikk kan også bruke akkorder utenfor denne familien. Lær først å kjenne igjen mønsteret, så blir senere avvik lettere å forstå.</p>"
+      ]
+    ],
+    "exercise": "Skriv tonene i G, Am og D før du spiller dem. Spill deretter G–D–Em–C og si I–V–vi–IV. Flytt samme mønster til C-dur, og kontroller hvilke toner som endres.",
+    "practice": "akkorder.html",
+    "practice_label": "Bygg en akkordrekke i verkstedet"
+  },
+  {
+    "slug": "ett-skalakart-nye-maltoner",
+    "level": "intermediate",
+    "topic": "Improvisasjon",
+    "category": "improvisation",
+    "title": "Ett skalakart, nye måltoner",
+    "intro": "Du kan beholde ett kjent skalakart gjennom en akkordrekke og likevel følge harmonien. Nøkkelen er å se hvilke toner i kartet som tilhører akkorden akkurat nå.",
+    "art": "targets",
+    "sections": [
+      [
+        "Et felles toneutvalg",
+        "<p>Bruk Em–C–G–D som eksempel. Alle fire treklangene kan bygges av tonene E, F♯, G, A, B, C og D. Dette er tonematerialet i E naturlig moll og G-dur.</p><p>Finn tonene i et område på gitarhalsen du allerede kjenner, eller på piano. Behold området gjennom hele akkordrekken. Du trenger ikke bytte til et nytt fysisk skalakart for hver akkord.</p>"
+      ],
+      [
+        "Akkorden fremhever andre toner",
+        "<p>Akkordtonene er E–G–B i Em, C–E–G i C, G–B–D i G og D–F♯–A i D. De ligger alle inne i det samme kartet. Det som endres, er hvilke av tonene som er grunntone, ters og kvint i den gjeldende akkorden.</p><p>G er liten ters i Em, ren kvint i C og grunntone i G. Over D er G en kvart over grunntonen og ikke en del av D-durtreklangen. Samme tone kan derfor få en annen virkning når akkorden skifter.</p>"
+      ],
+      [
+        "Velg én måltone per akkord",
+        "<p>Begynn med grunntonene E–C–G–D. Spill én tone ved hvert akkordskifte. Prøv deretter tersene G–E–B–F♯. Begge linjene følger harmonien uten at du trenger en ny skala for hvert skifte.</p><p>Når måltonene sitter, legg til en eller to skalatoner på vei mot dem. Toner utenfor akkorden kan fungere som gjennomgang, farge eller spenning. Hvor lenge du holder dem, rytmen og bevegelsen videre påvirker hvordan de høres.</p>"
+      ],
+      [
+        "Ett kart er et utgangspunkt, ikke en regel",
+        "<p>Metoden fungerer her fordi akkordene deler et diatonisk toneutvalg. Hvis akkordrekken får en tone utenfor skalaen, må du høre og undersøke den nye sammenhengen. Ett fast kart passer ikke nødvendigvis hele veien i all musikk.</p><p>Poenget er å knytte et kjent kart til harmonien. Du kan senere utvide registeret eller undersøke andre farger. La det være et musikalsk valg, fremfor et automatisk krav om fire forskjellige kart over fire akkorder.</p>"
+      ]
+    ],
+    "exercise": "Spill Em–C–G–D langsomt. Bruk først bare E–C–G–D som måltoner, deretter G–E–B–F♯. Lag til slutt en kort frase som lander på en valgt akkordtone ved hvert skifte.",
+    "practice": "backingtracks.html?key=4&mode=5",
+    "practice_label": "Øv med E naturlig moll"
+  },
+  {
+    "slug": "dorisk-og-eolisk",
+    "level": "intermediate",
+    "topic": "Modalitet",
+    "category": "modes",
+    "title": "Dorisk og eolisk: samme grunntone, ny farge",
+    "intro": "Behold E som hjem og sammenlign C med C♯. Når bare ett skalatrinn endres, blir forskjellen mellom eolisk og dorisk lettere å undersøke med både øret og instrumentet.",
+    "art": "parallel",
+    "sections": [
+      [
+        "Hold grunntonen fast",
+        "<p>E eolisk, eller E naturlig moll, har E–F♯–G–A–B–C–D. E dorisk har E–F♯–G–A–B–C♯–D. Seks av sju toner er felles. Forskjellen er liten sekst C mot stor sekst C♯, målt fra E.</p><p>Begge har liten ters G og liten septim D. Dorisk er derfor fortsatt mollpreget selv om seksten er stor. Sammenligningen gjelder skalaenes intervallstruktur, ikke en fast oppskrift på hvilken følelse musikken må gi.</p>"
+      ],
+      [
+        "Endre én tone i en kort frase",
+        "<p>Spill E–G–B–C–B–G–E rolig over en E-drone. Bytt så bare C til C♯. Behold rytme, register og varighet så like som mulig, slik at du undersøker toneendringen og ikke flere endringer samtidig.</p><p>Prøv deretter å holde C eller C♯ litt lenger før du går til B. Legg merke til at C ligger et halvt trinn over B, mens C♯ ligger et helt trinn over B. Beskriv forskjellen du selv hører uten å lete etter ett obligatorisk følelsesord.</p>"
+      ],
+      [
+        "La akkordene støtte sammenligningen",
+        "<p>Em–Am kan støtte E eolisk når Em oppleves som hjem. Am inneholder A–C–E. Bytter du Am til A-dur, blir C til C♯: A–C♯–E. Em–A kan dermed støtte E dorisk.</p><p>Dette er i–iv mot i–IV med E som referanse. Den lille eller store bokstaven beskriver akkordtypen. En akkordrekke alene garanterer ikke hvordan sentrum oppleves; la bass, frasering og tilbakevendingen til Em gjøre E tydelig.</p>"
+      ],
+      [
+        "Skill parallell og relativ sammenligning",
+        "<p>E eolisk og E dorisk sammenlignes parallelt: samme grunntone, ett endret skalatrinn. G-dur og E eolisk er derimot relative: samme toner, forskjellig sentrum. De to sammenligningene svarer på ulike spørsmål.</p><p>Flytt til slutt forsøket til A. A eolisk har F, mens A dorisk har F♯. Behold de andre tonene A, B, C, D, E og G. Da bruker du samme intervallidé fra en ny grunntone.</p>"
+      ]
+    ],
+    "exercise": "Spill den samme korte frasen i E eolisk og E dorisk. Forklar forskjellen som ♭6 mot 6. Sammenlign deretter Em–Am med Em–A, og gjenta fra A som grunntone.",
+    "practice": "laer-dorisk.html",
+    "practice_label": "Utforsk dorisk med lytting og spilling"
+  }
+]

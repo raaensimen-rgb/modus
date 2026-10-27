@@ -1,0 +1,30 @@
+"""Article taxonomy and an optional suggested reading route."""
+TOPICS = {
+ 'basics': ('Toner og intervaller', 'Forstå avstanden mellom tonene.'),
+ 'chords': ('Akkorder', 'Fra treklanger til septimakkorder.'),
+ 'harmony': ('Harmonikk og stemmeføring', 'Forstå forbindelsene mellom akkordene.'),
+ 'modes': ('Skalaer og moduser', 'Utforsk toneutvalg, sentrum og karaktertoner.'),
+ 'improvisation': ('Improvisasjon', 'Gjør tonematerialet til egne fraser.'),
+ 'rhythm': ('Rytmikk', 'Finn puls, grupperinger og flyt.'),
+}
+LEVEL_DESCRIPTIONS = {
+ 'beginner': 'Bygg et fundament med toner, treklanger og en første improvisasjon.',
+ 'intermediate': 'Knytt akkordfarger, harmoniske funksjoner og moduser sammen.',
+ 'advanced': 'Gå dypere i harmonisk moll, stemmeføring og ujevne taktarter.',
+}
+ORDER = ['toner-og-intervaller', 'dur-og-moll', 'bygg-akkorder-i-en-toneart', 'kvintsirkelen', 'din-forste-improvisasjon', 'septimakkorder', 'ett-skalakart-nye-maltoner', 'ii-v-i-kadensen', 'moduser-og-tonalt-sentrum', 'dorisk-og-eolisk', 'harmonisk-moll-og-frygisk-dominant', 'stemmeforing', 'rytme-i-sju-aatte']
+
+def group_section(key, label, description, cards='', kind='level'):
+ return f'<section class="article-category" data-category="{key}"><header class="category-header"><div><p class="eyebrow">{"NIVÅ" if kind=="level" else "TEMA"}</p><h3>{label}</h3><p>{description}</p></div><span class="category-count" data-category-count></span></header><div class="article-grid">{cards}</div></section>'
+
+def render_library(articles, levels, card):
+ ordered=sorted(articles,key=lambda a:ORDER.index(a['slug']))
+ groups=''.join(group_section(k,v[0],LEVEL_DESCRIPTIONS[k],''.join(card(a) for a in ordered if a['level']==k)) for k,v in levels.items())
+ level_templates=''.join(group_section(k,v[0],LEVEL_DESCRIPTIONS[k]) for k,v in levels.items())
+ topic_templates=''.join(group_section(k,v[0],v[1],kind='topic') for k,v in TOPICS.items())
+ level_buttons=''.join(f'<button type="button" data-filter="{k}" aria-pressed="false">{v[0]} <span>{sum(a["level"]==k for a in articles)}</span></button>' for k,v in levels.items())
+ topic_buttons=''.join(f'<button type="button" data-topic-filter="{k}" aria-pressed="false">{v[0]} <span>{sum(a["category"]==k for a in articles)}</span></button>' for k,v in TOPICS.items())
+ stages=''.join(f'<a class="journey-stage" href="#library" data-start-level="{k}"><span class="journey-step">0{i}</span><h3>{v[0]}</h3><p>{LEVEL_DESCRIPTIONS[k]}</p><span class="journey-stage-progress" data-stage-progress="{k}">0 / {sum(a["level"]==k for a in articles)} quizer fullført</span><span class="journey-stage-action">Se artiklene ↗</span></a>' for i,(k,v) in enumerate(levels.items(),1))
+ journey=f'''<section class="learning-overview" aria-labelledby="learningOverviewTitle"><div class="overview-heading"><div><p class="eyebrow">EN RETNING Å FØLGE</p><h2 id="learningOverviewTitle">Fra byggesteiner til eget uttrykk.</h2></div><p>En anbefalt rekkefølge gjennom artiklene. Begynn der det passer deg – alle temaene er åpne.</p></div><div class="journey-stages">{stages}</div><a class="next-article" id="nextArticle" href="artikler/toner-og-intervaller.html"><div><span class="eyebrow" data-next-label>DITT NESTE STEG</span><h3 data-next-title>Toner og intervaller: musikkens byggesteiner</h3><p data-next-note>Første artikkel uten fullført quiz. Rekkefølgen er et forslag, ikke et krav.</p></div><span aria-hidden="true">↗</span></a></section>'''
+ library=f'''<section class="library" id="library" aria-label="Finn en artikkel"><div class="library-title"><div><p class="eyebrow">ARTIKLER ETTER NIVÅ OG TEMA</p><h2 tabindex="-1" id="libraryTitle">Finn det du vil utforske.</h2></div><label class="article-search" for="articleSearch"><span>Søk i artiklene</span><input id="articleSearch" type="search" placeholder="Moduser, akkorder, rytme …" autocomplete="off"></label></div><div class="library-controls"><div class="library-view"><span>Del inn etter</span><div role="group" aria-label="Grupper artiklene"><button type="button" data-group-by="level" aria-pressed="true">Nivå</button><button type="button" data-group-by="topic" aria-pressed="false">Tema</button></div></div><div class="library-filter"><span class="filter-label">Nivå</span><div class="filter-row" role="group" aria-label="Velg nivå"><button type="button" data-filter="all" aria-pressed="true">Alle nivåer <span>{len(articles)}</span></button>{level_buttons}</div></div><div class="library-filter"><span class="filter-label">Tema</span><div class="filter-row topic-filters" role="group" aria-label="Velg tema"><button type="button" data-topic-filter="all" aria-pressed="true">Alle temaer</button>{topic_buttons}</div></div></div><div class="library-status"><span id="levelHint">Fra de første tonene til nye harmoniske muligheter.</span><span id="resultCount" role="status" aria-live="polite">{len(articles)} artikler</span></div><div class="library-progress"><strong id="articleProgress" role="status" aria-live="polite">0 av {len(articles)} quizer fullført</strong><span>Ta quizen etter lesing. Haken viser hva du har fullført i denne nettleseren.</span></div><div id="articleGroups">{groups}</div><template id="levelGroupTemplate">{level_templates}</template><template id="topicGroupTemplate">{topic_templates}</template><div id="noResults" class="no-results" hidden><h2>Ingen artikler traff dette søket.</h2><p>Prøv et annet tema, nivå eller søkeord.</p><button id="resetArticles" type="button" class="button">Nullstill filtrene ↗</button></div></section>'''
+ return journey,library
