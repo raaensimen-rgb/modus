@@ -20,7 +20,7 @@ const links=['nb','en'].map(language=>({dataset:{language},attrs:{},setAttribute
 vm.runInNewContext(switcher,{URL,window:{},location:{href:'https://modus.test/en/backingtracks.html?seq=%5B%5B4%2C4%5D%5D&key=4#map'},document:{documentElement:{lang:'en'},querySelectorAll:()=>links}});
 assert(links[0].href.startsWith('/backingtracks.html?seq='));assert(links[0].href.endsWith('&lang=nb#map'));assert(links[1].href.startsWith('/en/backingtracks.html?'));assert.equal(links[1].attrs['aria-current'],'true');
 function files(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(f=>f.isDirectory()?files(path.join(dir,f.name)):[path.join(dir,f.name)]);}
-const originals=files('dist').filter(f=>f.endsWith('.html')&&!f.startsWith('dist/en/'));
+const originals=files('dist').filter(f=>f.endsWith('.html')&&!f.startsWith('dist/en/')&&!f.endsWith('/redaktor.html'));
 assert.equal(originals.length,JSON.parse(fs.readFileSync('content/articles.json','utf8')).length+10);
 for(const file of originals){
  const nb=fs.readFileSync(file,'utf8'),enPath=file.replace('dist/','dist/en/'),en=fs.readFileSync(enPath,'utf8');

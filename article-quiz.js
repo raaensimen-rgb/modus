@@ -1,6 +1,7 @@
 (async function () {
   'use strict';
   const IDS = ["toner-og-intervaller", "dur-og-moll", "kvintsirkelen", "din-forste-improvisasjon", "moduser-og-tonalt-sentrum", "ii-v-i-kadensen", "septimakkorder", "harmonisk-moll-og-frygisk-dominant", "stemmeforing", "rytme-i-sju-aatte", "bygg-akkorder-i-en-toneart", "ett-skalakart-nye-maltoner", "dorisk-og-eolisk"];
+  if(typeof window!=='undefined') IDS.push(...(window.MODUS_CMS_IDS||[]).filter(id=>!IDS.includes(id)));
   const prefix = 'modus.article-quiz.v1.';
   function grade(answers, expected) {
     const correct = expected.map((answer, i) => Number.isInteger(answers[i]) && answers[i] === answer);

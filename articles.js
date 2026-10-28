@@ -11,7 +11,7 @@
  const en=document.documentElement.lang==='en',t=(nb,english)=>en?english:nb;
  const cards=[...document.querySelectorAll('.article-card')];
  const orderedIds=["toner-og-intervaller", "dur-og-moll", "bygg-akkorder-i-en-toneart", "kvintsirkelen", "din-forste-improvisasjon", "septimakkorder", "ett-skalakart-nye-maltoner", "ii-v-i-kadensen", "moduser-og-tonalt-sentrum", "dorisk-og-eolisk", "harmonisk-moll-og-frygisk-dominant", "stemmeforing", "rytme-i-sju-aatte"];
- cards.sort((a,b)=>orderedIds.indexOf(a.dataset.articleId)-orderedIds.indexOf(b.dataset.articleId));
+ cards.sort((a,b)=>(orderedIds.includes(a.dataset.articleId)?orderedIds.indexOf(a.dataset.articleId):999)-(orderedIds.includes(b.dataset.articleId)?orderedIds.indexOf(b.dataset.articleId):999));
  const items=cards.map(card=>({id:card.dataset.articleId,level:card.dataset.level,topic:card.dataset.topic,search:card.dataset.search+' '+card.querySelector('h2').textContent,card}));
  const search=document.getElementById('articleSearch'),container=document.getElementById('articleGroups');
  const levelButtons=[...document.querySelectorAll('[data-filter]')],topicButtons=[...document.querySelectorAll('[data-topic-filter]')],views=[...document.querySelectorAll('[data-group-by]')];
@@ -54,8 +54,8 @@
  }
  function apply(write=true){
   let count=0;items.forEach(item=>{item.card.hidden=!matches(item,state);if(!item.card.hidden)count++;});
-  levelButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===state.level)));
-  topicButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.topicFilter===state.topic)));
+  levelButtons.forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.filter===state.level));const count=b.querySelector('span');if(count)count.textContent=b.dataset.filter==='all'?items.length:items.filter(a=>a.level===b.dataset.filter).length;});
+  topicButtons.forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.topicFilter===state.topic));const count=b.querySelector('span');if(count)count.textContent=items.filter(a=>a.topic===b.dataset.topicFilter).length;});
   views.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.groupBy===state.view)));
   document.getElementById('resultCount').textContent=en?`${count} ${count===1?'article':'articles'}`:`${count} ${count===1?'artikkel':'artikler'}`;
   document.getElementById('levelHint').textContent=hints[state.level];

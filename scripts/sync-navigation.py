@@ -16,7 +16,7 @@ active_pages = {
 }
 for page in root.rglob('*.html'):
     path = page.relative_to(root)
-    if path.parts[0] == 'en':
+    if path.parts[0] == 'en' or str(path) == 'redaktor.html':
         continue
     if path.parts[0] == 'artikler':
         active, prefix = 'articles', '../'
