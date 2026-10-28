@@ -40,7 +40,6 @@ def render_header(prefix='', active='home'):
     ))
     learn = group('learn', 'Lær', (
         ('path', 'laeringssti.html', 'Læringssti', 'Oversikt over nivåer, leksjoner og neste steg.'),
-        ('mindmap', 'musikkart.html', 'Musikkart', 'Se sammenhenger og marker det du har lært.'),
         ('course', 'laer-dorisk.html', 'Dorisk leksjon', 'Forstå og bruk dorisk i seks trinn.'),
         ('curriculum', 'laereplan.html', 'Læreplan', 'Se nivåene og fagområdene vi bygger.'),
         ('lesson', 'undervisning.html', 'Undervisningsrom', 'Prøv hvordan en undervisningsmodul fungerer.'),
@@ -49,7 +48,7 @@ def render_header(prefix='', active='home'):
     return (
         f'<header class="site-header"><a class="brand" href="{home}" aria-label="MODUS – forsiden">'
         '<span class="brandmark" aria-hidden="true">m</span>MODUS<span class="branddot">.</span></a>'
-        '<nav class="site-nav" aria-label="Hovedmeny">' + link('home', './', 'Forside') + learn + play + link('articles', 'artikler.html', 'Artikler')
+        '<nav class="site-nav" aria-label="Hovedmeny">' + link('home', './', 'Forside') + learn + play + link('mindmap', 'musikkart.html', 'Musikkart') + link('articles', 'artikler.html', 'Artikler')
         + link('about', 'om-modus.html', 'Om MODUS') + '</nav><div class="header-tools">'
         + link('membership', 'modus-plus.html', 'Medlemskap', css='nav-membership')
         + link('account', 'konto.html', 'Logg inn', css='nav-account')
