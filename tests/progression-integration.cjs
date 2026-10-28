@@ -1,6 +1,6 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
 const dist=process.env.MODUS_DIST||'dist';
-function sandbox(search='',seed={}){const elements={},data={...seed};function element(id){return elements[id]??={value:'',textContent:'',innerHTML:'',hidden:false,disabled:false,style:{},dataset:{},parentElement:{setAttribute(){}},setAttribute(){},addEventListener(){},appendChild(){},replaceChildren(){},querySelector(){return {disabled:false,prepend(){}}},classList:{add(){},remove(){},toggle(){}}};}const s={URLSearchParams,TextEncoder,console,document:{getElementById:element,querySelectorAll:()=>[],addEventListener(){},createElement:()=>element('created'+Math.random())},window:{},location:{search,hash:'',reload(){}},localStorage:{getItem:k=>data[k]??null,setItem:(k,v)=>{data[k]=v;},removeItem:k=>delete data[k]},performance:{now:()=>0},setTimeout:()=>1,clearTimeout(){},setInterval:()=>1,clearInterval(){},_elements:elements,_storage:data};vm.createContext(s);for(const file of ['theory-data.js','progressions.js','midi.js'])vm.runInContext(fs.readFileSync(dist+'/'+file,'utf8'),s);return s;}
+function sandbox(search='',seed={}){const elements={},data={...seed};function element(id){return elements[id]??={value:'',textContent:'',innerHTML:'',hidden:false,disabled:false,style:{},dataset:{},parentElement:{setAttribute(){}},setAttribute(){},addEventListener(){},appendChild(){},replaceChildren(){},querySelectorAll(){return [];},querySelector(){return {disabled:false,prepend(){}}},classList:{add(){},remove(){},toggle(){}}};}const s={URLSearchParams,TextEncoder,console,document:{getElementById:element,querySelectorAll:()=>[],addEventListener(){},createElement:()=>element('created'+Math.random())},window:{},location:{search,hash:'',reload(){}},localStorage:{getItem:k=>data[k]??null,setItem:(k,v)=>{data[k]=v;},removeItem:k=>delete data[k]},performance:{now:()=>0},setTimeout:()=>1,clearTimeout(){},cancelAnimationFrame(){},setInterval:()=>1,clearInterval(){},_elements:elements,_storage:data};vm.createContext(s);for(const file of ['theory-data.js','progressions.js','midi.js'])vm.runInContext(fs.readFileSync(dist+'/'+file,'utf8'),s);return s;}
 const s=sandbox();vm.runInContext(`for(const bad of [null,[],[[99,0]],[[0,99]],[[0,0,'<script>']],[[0,0,'D']]]){if(window.ModusProgressions.validSequence(bad))throw Error('accepted invalid input');}`,s);
 for(let length=1;length<=8;length++){
  const rows=Array.from({length},(_,i)=>({key:i%12,q:i%8}));const link=s.window.ModusProgressions.link('backingtracks.html',{chords:rows,key:4,mode:1,tempo:83,style:'jazz'});const scene=sandbox(link.slice(link.indexOf('?')));vm.runInContext(fs.readFileSync(dist+'/app.js','utf8'),scene);assert.equal(vm.runInContext('progression.length',scene),length);assert.equal(vm.runInContext('state.harmony',scene),'custom');assert.equal(vm.runInContext('state.tempo',scene),83);
@@ -11,7 +11,7 @@ const course=sandbox();vm.runInContext(fs.readFileSync(dist+'/course.js','utf8')
 const workshop=sandbox('',{'modus-chord-draft-v1':JSON.stringify({chords:[{key:4,q:4},{key:9,q:2}],key:4,mode:1,tempo:82})});vm.runInContext(fs.readFileSync(dist+'/chord-tool.js','utf8'),workshop);assert.equal(vm.runInContext('chords.length',workshop),2);assert.equal(vm.runInContext('tempo',workshop),82);vm.runInContext(`const launch=window.ModusProgressions.readLaunch(C('openBackingTrack').href.split('?')[1]);if(launch.chords.length!==2||launch.mode!==1)throw Error('workshop launch');C('sequenceName').value='Min testrekke';C('saveSequence').onclick();`,workshop);assert.equal(JSON.parse(workshop._storage['modus-chord-library-v1'])[0].name,'Min testrekke');
 console.log('Passed: input validation; 1–8-bar loops in five grooves; triad/seventh voicings; 216 native scale/chord combinations; six lessons in 12 keys; local progress and chord saving.');
 // Verify chord spellings, played guitar tones and piano inversions independently.
-vm.runInContext(`for(let key=0;key<12;key++)for(let q=0;q<8;q++){
+vm.runInContext(`for(let key=0;key<12;key++)for(let q=0;q<qualities.length;q++){
  const chord={key,q},c=info(chord),options=grips(chord);if(!options.length)throw Error('missing guitar grip');
  for(const g of options){const pcs=g.frets.flatMap((f,i)=>f<0?[]:[(tuning[i]+f)%12]);
   if(pcs.some(p=>!c.pcs.includes(p)))throw Error('non-chord tone in guitar grip');
@@ -62,3 +62,39 @@ console.log('Passed: guitar/piano voicings in 12 roots; exact cadence/chord tran
  assert.equal(vm.runInContext('playing',a),false);assert.equal(vm.runInContext('scheduled',a),0);assert.equal(a._elements.play.disabled,false);
  console.log('Passed: cancelling an instrument load cannot start audio afterwards.');
 })().catch(error=>{console.error(error);process.exitCode=1;});
+
+// Exercise the actual key/mode change handlers, including persistence and transfer.
+const contextWorkshop=sandbox();
+vm.runInContext(fs.readFileSync(dist+'/chord-tool.js','utf8'),contextWorkshop);
+vm.runInContext(`
+ C('jamKey').onchange({target:{value:'2'}});
+ if(chords.map(ch=>info(ch).name).join(',')!=='Dmaj7,Bm7,Em7,A7')throw Error('key did not transpose chords');
+ C('jamMode').onchange({target:{value:'1'}});
+ if(chords.map(ch=>info(ch).name).join(',')!=='Dm7,Bm7♭5,Em7,Am7')throw Error('mode did not harmonize chords');
+ const stored=JSON.parse(localStorage.getItem(draftStorage));
+ const transfer=window.ModusProgressions.readLaunch(C('openBackingTrack').href.split('?')[1]);
+ if(stored.key!==2||stored.mode!==1||stored.chords[1].q!==6||transfer.chords[1].q!==6)throw Error('changed harmony not saved/transferred');
+ if(!C('chordSlots').innerHTML.includes('Bm7♭5'))throw Error('cards not updated');
+ let stops=0;stop=()=>{stops++;};render=()=>{};
+ for(let key=0;key<12;key++)for(let oldMode=0;oldMode<9;oldMode++)for(let nextMode=0;nextMode<9;nextMode++)for(let degree=0;degree<7;degree++)for(const count of [3,4]){
+  centerKey=key;scaleMode=oldMode;
+  const oldSteps=window.ModusTheoryData.modes[oldMode].steps,newSteps=window.ModusTheoryData.modes[nextMode].steps;
+  const ints=Array.from({length:count},(_,i)=>(oldSteps[(degree+2*i)%7]-oldSteps[degree]+12)%12);
+  const q=qualities.findIndex(q=>q.ints.join()===ints.join());if(q<0)throw Error('unsupported scale chord');
+  chords=[{key:(CK[key][1]+oldSteps[degree])%12,q}];
+  changeContext(key,nextMode);
+  const result=info(chords[0]);
+  const expected=Array.from({length:count},(_,i)=>(newSteps[(degree+2*i)%7]-newSteps[degree]+12)%12);
+  if(result.pc!==(CK[key][1]+newSteps[degree])%12||result.q.ints.join()!==expected.join())throw Error('wrong adapted harmony');
+  const roundTrip=window.ModusProgressions.readLaunch(window.ModusProgressions.link('backingtracks.html',currentSetup()).split('?')[1]);
+  if(!roundTrip)throw Error('adapted sequence invalid');
+  changeContext(key,oldMode);
+  if(info(chords[0]).q.ints.join()!==ints.join())throw Error('mode round trip failed');
+ }
+ centerKey=0;scaleMode=0;chords=[{key:8,q:2,rootName:'A♭'}];changeContext(2,0);
+ if(info(chords[0]).name!=='B♭7')throw Error('chromatic transposition');
+ centerKey=0;scaleMode=0;chords=[{key:1,q:2,rootName:'D♭'}];changeContext(0,1);
+ if(info(chords[0]).name!=='D♭7')throw Error('chromatic chord lost');
+ if(!stops)throw Error('context change did not stop playback');
+`,contextWorkshop);
+console.log('Passed: actual context controls update cards, draft and backingtrack; all mode pairs in 12 keys; triads/sevenths; round trips and chromatic chords.');
