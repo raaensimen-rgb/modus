@@ -28,8 +28,8 @@ class Page(HTMLParser):
 
 pages={p.resolve():Page(p.read_text()) for p in ROOT.rglob('*.html') if p.name!='redaktor.html'}
 article_count=len(json.loads((ROOT.parent/'content/articles.json').read_text()))
-assert len(pages)==2*(article_count+10), f'Unexpected page count: {len(pages)}'
-nav=['./','laer-dorisk.html','teori.html','backingtracks.html','akkorder.html','artikler.html','om-modus.html']
+assert len(pages)==2*(article_count+11), f'Unexpected page count: {len(pages)}'
+nav=['./','laer-dorisk.html','laereplan.html','teori.html','backingtracks.html','akkorder.html','artikler.html','om-modus.html']
 for file,page in pages.items():
     assert page.links.count('/redaktor.html')==1, ('editor footer link',file)
     assert len(page.ids)==len(set(page.ids)), ('duplicate ID',file)

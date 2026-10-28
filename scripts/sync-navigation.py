@@ -7,6 +7,7 @@ active_pages = {
     'konto.html': 'account',
     'backingtracks.html': 'jam',
     'teori.html': 'theory',
+    'laereplan.html': 'curriculum',
     'akkorder.html': 'chords',
     'artikler.html': 'articles',
     'laer-dorisk.html': 'course',
