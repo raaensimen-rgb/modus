@@ -83,3 +83,42 @@ $('cancelPublish').onclick=()=>$('publishDialog').close();$('confirmPublish').on
 window.addEventListener('beforeunload',e=>{if(dirty){persistLocal();e.preventDefault();e.returnValue='';}});
 client.auth.onAuthStateChange(()=>{setTimeout(()=>refresh(),0);});
 try{const r=await fetch('/cms-seed.json');if(!r.ok)throw Error();seeds=(await r.json()).map(normalizeArticle);await refresh();}catch{status('Redaktøren kunne ikke lastes. Prøv å laste siden på nytt.',true);}
+
+ 
+// Analytics is visible only inside the editor workspace. Server verifies auth again.
+(function setupEditorAnalytics(){
+ const workspace=document.getElementById('editorWorkspace'), layout=workspace?.querySelector('.editor-layout');
+ if(!workspace||!layout)return;
+ const nav=document.createElement('div');nav.className='editor-analytics-navigation';
+ const articles=document.createElement('button');articles.type='button';articles.textContent='Artikler';articles.setAttribute('aria-pressed','true');
+ const stats=document.createElement('button');stats.type='button';stats.textContent='Statistikk';stats.setAttribute('aria-pressed','false');
+ nav.append(articles,stats);layout.before(nav);
+ const panel=document.createElement('section');panel.hidden=true;panel.className='editor-analytics-panel';
+ panel.innerHTML='<h2>Besøksstatistikk</h2><p>Besøk og sidevisninger fra Cloudflare Web Analytics. Forhåndsvisninger kan inngå dersom de bruker samme måle-ID.</p><button type="button" id="analyticsReload">Oppdater tall</button><p id="analyticsMessage" role="status"></p><div id="analyticsCards" class="editor-analytics-cards"></div><div id="analyticsMonths"></div><p class="analytics-footnote">Historikken omfatter kun måleperioden som Cloudflare API gir tilgang til. «Totalt» fra nettstedets oppstart krever separat historisk lagring.</p>';
+ layout.after(panel);
+ const style=document.createElement('style');style.textContent='.editor-analytics-navigation{display:flex;gap:.8rem;margin:1rem 0 1.5rem}.editor-analytics-navigation button,.editor-analytics-panel button{border:1px solid #506744;border-radius:8px;color:#dfeccc;background:#22321e;padding:.65rem 1rem;cursor:pointer}.editor-analytics-navigation button[aria-pressed=true]{color:#d2ef96;border-color:#b3db78}.editor-analytics-panel{border:1px solid #34492e;background:#182315;border-radius:12px;padding:clamp(1rem,3vw,2rem);color:#dfe9d8}.editor-analytics-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;margin:1.2rem 0}.editor-analytics-card{border:1px solid #3c5135;background:#20301c;padding:1.2rem;border-radius:10px}.editor-analytics-card small{display:block;color:#a6bb96}.editor-analytics-card strong{font-size:1.8rem}.editor-analytics-panel table{width:100%;border-collapse:collapse}.editor-analytics-panel td,.editor-analytics-panel th{text-align:left;padding:.6rem;border-bottom:1px solid #34492e}.analytics-footnote{font-size:.9rem;color:#a9bca2}';document.head.append(style);
+ const msg=panel.querySelector('#analyticsMessage'),cards=panel.querySelector('#analyticsCards'),months=panel.querySelector('#analyticsMonths');
+ const num=n=>Number(n||0).toLocaleString('nb-NO');
+ const card=(title,value)=>{const d=document.createElement('div');d.className='editor-analytics-card';const label=document.createElement('small'),strong=document.createElement('strong');label.textContent=title;strong.textContent=num(value);d.append(label,strong);return d;};
+ async function load(){
+   msg.textContent='Henter statistikk …';cards.replaceChildren();months.replaceChildren();
+   if(previewMode||!isEditor){msg.textContent='Statistikk krever innlogget redaktør. Lokal prøvevisning har ikke tilgang.';return;}
+   try{
+     const session=await client.auth.getSession(),token=session.data.session?.access_token;
+     if(!token){msg.textContent='Logg inn på nytt for å se statistikk.';return;}
+     const response=await fetch('/api/editor/analytics',{headers:{authorization:'Bearer '+token},cache:'no-store'});
+     const data=await response.json();
+     if(!response.ok)throw Error(data.error||'Ukjent feil');
+     const days=data.days||[],now=new Date(),today=now.toISOString().slice(0,10),current=today.slice(0,7);
+     const sum=(xs,key)=>xs.reduce((n,x)=>n+Number(x[key]||0),0);
+     cards.append(card('Besøk i dag',sum(days.filter(x=>x.date===today),'visits')),card('Besøk denne måneden',sum(days.filter(x=>x.date?.startsWith(current)),'visits')),card('Besøk i måleperioden',sum(days,'visits')),card('Sidevisninger denne måneden',sum(days.filter(x=>x.date?.startsWith(current)),'views')));
+     const grouped=new Map();for(const d of days){const m=(d.date||'').slice(0,7);if(!m)continue;const row=grouped.get(m)||{visits:0,views:0};row.visits+=d.visits;row.views+=d.views;grouped.set(m,row);}
+     const table=document.createElement('table');const head=document.createElement('tr');for(const v of ['Måned','Besøk','Sidevisninger']){const th=document.createElement('th');th.textContent=v;head.append(th);}table.append(head);
+     for(const [m,v] of [...grouped].sort((a,b)=>b[0].localeCompare(a[0]))){const tr=document.createElement('tr');for(const s of [m,num(v.visits),num(v.views)]){const td=document.createElement('td');td.textContent=s;tr.append(td);}table.append(tr);}months.append(table);
+     msg.textContent='Sist hentet: '+new Date(data.updatedAt).toLocaleString('nb-NO')+'.';
+   }catch(error){msg.textContent=error.message||'Kunne ikke hente statistikk.';}
+ }
+ articles.onclick=()=>{panel.hidden=true;layout.hidden=false;articles.setAttribute('aria-pressed','true');stats.setAttribute('aria-pressed','false');};
+ stats.onclick=()=>{panel.hidden=false;layout.hidden=true;articles.setAttribute('aria-pressed','false');stats.setAttribute('aria-pressed','true');load();};
+ panel.querySelector('#analyticsReload').onclick=load;
+})();
