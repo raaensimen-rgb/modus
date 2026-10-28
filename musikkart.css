@@ -29,3 +29,17 @@
  .map-scroll svg{min-width:1000px}
  .map-status-options{grid-template-columns:1fr}
 }
+
+
+/* v1.2: balanced free-form map, midway between cramped labels and oversized menu tiles. */
+.map-scroll{max-height:710px}
+.map-scroll svg{min-width:990px}
+.map-node.branch-node text{font-size:19px;font-weight:650}
+.map-node.module-node text{font-size:17px;font-weight:550}
+.map-node.root-node text{font-size:22px}
+.map-node.off rect{opacity:.67}
+.map-node.off text{opacity:.88}
+.map-branch.off{opacity:.36}
+.map-branch.mid{opacity:.68}
+.map-branch.on{opacity:.95}
+@media(max-width:650px){.map-scroll svg{min-width:990px}}
