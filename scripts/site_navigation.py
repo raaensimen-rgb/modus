@@ -27,6 +27,18 @@ def render_header(prefix='', active='home'):
         current = ' aria-current="page"' if key == active else ''
         body = f'<strong>{label}</strong><small id="nav-hint-{key}">{description}</small><span aria-hidden="true">↗</span>' if description else label
         accessible = f' aria-label="{label}" aria-describedby="nav-hint-{key}"' if description else ''
+        hints = {
+            'home': 'Tilbake til MODUS-forsiden og oversikten over mulighetene.',
+            'mindmap': 'Se hele musikklandskapet og hva du har lært.',
+            'articles': 'Les fagartikler om musikk, teori og praksis.',
+            'about': 'Les om tanken bak MODUS og hvem som står bak.',
+            'membership': 'Se medlemskap og hva de ulike nivåene innebærer.',
+            'account': 'Logg inn for å administrere kontoen din.',
+        }
+        hint = hints.get(key) if description is None else None
+        if hint:
+            accessible += f' aria-description="{escape(hint, quote=True)}"'
+            body += f'<span class="nav-tooltip" aria-hidden="true">{escape(hint)}</span>'
         return f'<a href="{escape(target, quote=True)}" class="{css}"{current}{accessible}>{body}</a>'
     def group(key, label, destinations):
         selected = any(item[0] == active for item in destinations)
