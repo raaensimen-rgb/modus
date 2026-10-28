@@ -22,6 +22,10 @@ assert 'noindex,nofollow' in lesson
 assert "data-note" in lesson and "play-sequence" in lesson
 assert "new AudioContextClass()" in lesson_js
 assert "ikke godkjent undervisning" in lesson
+assert 'id="f03-draft" hidden' in lesson, "F03 must not default to public course content"
+assert "interval-answer" in lesson and "interval-melodic" in lesson
+assert 'code==="F03"' in lesson_js
+assert "Dette er en øvelsessjekk, ikke dokumentert mestring." in lesson_js
 assert (ROOT / "docs/curriculum-editor.html").is_file(), "Expected six accessible details panels"
 assert page.count('<details class="level-card"') == 6
 assert "<summary class=\"level-summary\">" in page
