@@ -40,45 +40,61 @@ function node(x,y,w,h,label,color,state,type,id){
 }
 function render(){
  svg.replaceChildren();
- const bg=svgEl("g",{});
+ const layer=svgEl("g",{});
+ const selectedGroup=groups.find(g=>g.id===category);
+ const opened=!!selectedGroup;
+ const height=opened?Math.max(680,selectedGroup.ids.length*85+180):1210;
+ svg.setAttribute("viewBox","0 0 1380 "+height);
+ const center=height/2;
  const root=svgEl("g",{class:"map-node root-node",role:"img","aria-label":"MODUS – musikalsk landskap"});
- root.append(svgEl("rect",{x:30,y:571,width:270,height:92,rx:17,fill:"#d7f48c",stroke:"#d7f48c"}));
- root.append(svgEl("text",{x:55,y:624},"MUSIKKENS LANDSKAP"));bg.append(root);
- const ys=groups.map((g,i)=>98+i*115);
- groups.forEach((g,i)=>{
-  const y=ys[i],state=groupState(g);
-  bg.append(curve(300,616,496,y,g.color,state,7));
-  const relevant=groupModules(g);
-  const cat=node(496,y,390,49,g.name,g.color,state,"branch-node",g.id);
-  if(search && (g.name+" "+relevant.map(m=>m.title).join(" ")).toLowerCase().includes(search))cat.classList.add("match");
-  bg.append(cat);
-  if(!relevant.length){
-   bg.append(curve(886,y,1122,y,g.color,"not-started",2));
-   const t=svgEl("text",{x:1148,y:y+5,fill:"#788a78","font-size":14,"font-family":"Manrope,Arial,sans-serif"},"Moduler kartlegges");bg.append(t);
-   return;
-  }
-  const spacing=Math.min(25,90/Math.max(relevant.length-1,1)),first=y-spacing*(relevant.length-1)/2;
-  relevant.forEach((m,j)=>{
-   const my=first+spacing*j;
-   bg.append(curve(886,y,1110,my,g.color,activityState(m.id),2.5));
-   const item=node(1110,my,405,23,m.id+" · "+m.title,g.color,activityState(m.id),"module-node",m.id);
-   if(search && (m.id+" "+m.title).toLowerCase().includes(search))item.classList.add("match");
-   bg.append(item);
-  });
- });
- svg.append(bg);
- $("map-count").textContent=groups.length+" fagområder · "+catalog.length+" moduler";
+ root.append(svgEl("rect",{x:30,y:center-45,width:315,height:90,rx:16,fill:"#d7f48c",stroke:"#d7f48c"}));
+ root.append(svgEl("text",{x:53,y:center+7},"MODUS · MUSIKKART"));layer.append(root);
+ if(!opened){
+   // Overview: only broad subject areas. No crowded microtext or overlapping modules.
+   const step=107,first=(height-step*(groups.length-1))/2;
+   groups.forEach((g,i)=>{
+     const y=first+i*step,state=groupState(g);
+     layer.append(curve(345,center,550,y,g.color,state,5));
+     const cat=node(550,y,725,70,g.name,g.color,state,"branch-node",g.id);
+     cat.append(svgEl("text",{x:1187,y:y+6,fill:"#b9c6b2","font-size":16,"font-family":"Manrope,Arial,sans-serif","text-anchor":"end"},g.ids.length?g.ids.length+" emner  ›":"Utforsk  ›"));
+     if(search && (g.name+" "+groupModules(g).map(m=>m.title).join(" ")).toLowerCase().includes(search))cat.classList.add("match");
+     layer.append(cat);
+   });
+ }else{
+   const g=selectedGroup,state=groupState(g),items=groupModules(g);
+   const y=center;
+   layer.append(curve(345,center,455,y,g.color,state,6));
+   const branch=node(455,y,395,72,g.name,g.color,state,"branch-node",g.id);
+   layer.append(branch);
+   if(items.length){
+     const spacing=85,first=(height-spacing*(items.length-1))/2;
+     items.forEach((m,i)=>{
+       const cy=first+i*spacing;
+       layer.append(curve(850,y,933,cy,g.color,activityState(m.id),3));
+       const item=node(933,cy,414,62,m.id+" · "+m.title,g.color,activityState(m.id),"module-node",m.id);
+       if(search&&(m.id+" "+m.title).toLowerCase().includes(search))item.classList.add("match");
+       layer.append(item);
+     });
+   }else{
+     layer.append(svgEl("text",{x:920,y:center+5,fill:"#c4d0be","font-size":20,"font-family":"Manrope,Arial,sans-serif"},"Dette fagområdet kartlegges videre."));
+   }
+ }
+ svg.append(layer);
+ $("map-count").textContent=opened?selectedGroup.name+" · "+selectedGroup.ids.length+" emner":groups.length+" fagområder · "+catalog.length+" moduler";
  $("map-learned").textContent=catalog.filter(m=>records[m.id].state==="learned").length;
  $("map-exploring").textContent=catalog.filter(m=>records[m.id].state==="exploring").length;
  $("map-planned").textContent=catalog.filter(m=>records[m.id].idea).length;
- const buttons=$("inspector-module").querySelectorAll("[data-state]");
- for(const b of buttons){let state=chosen?records[chosen].state:category?groupState(groups.find(g=>g.id===category)):"not-started";b.setAttribute("aria-pressed",String(b.dataset.state===state));}
+ for(const button of $("inspector-module").querySelectorAll("[data-state]")){
+   const state=chosen?records[chosen].state:category?groupState(selectedGroup):"not-started";
+   button.setAttribute("aria-pressed",String(button.dataset.state===state));
+ }
 }
+
 function choose(type,id){
  const g=type==="category"?groups.find(x=>x.id===id):null;
  const m=type==="module"?byId.get(id):null;
  if(!m&&!g)return;
- chosen=m?.id||null;category=g?.id||null;
+ chosen=m?.id||null;category=g?.id||(m?groups.find(group=>group.ids.includes(m.id))?.id:null)||null;
  $("inspector-module").hidden=false;
  $("inspector-heading").textContent=m?m.title:g.name;
  $("inspector-description").textContent=m?"Velg hvordan du selv vurderer din kjennskap til dette emnet. Du kan også registrere det som en mulig kursidé.":"Dette fagområdet samler "+g.ids.length+" planlagte moduler. Endrer du status her, får alle modulene i grenen samme egenvurderte status.";
@@ -100,8 +116,20 @@ $("inspector-module").querySelectorAll("[data-state]").forEach(b=>b.addEventList
 }));
 $("map-personal-note").addEventListener("input",e=>{if(chosen){records[chosen].note=e.target.value.slice(0,2000);save();}});
 $("course-idea").addEventListener("change",e=>{if(chosen){records[chosen].idea=e.target.checked;save();render();}});
-$("map-search").addEventListener("input",e=>{search=e.target.value.trim().toLowerCase();render();});
-$("map-reset").addEventListener("click",()=>{$("map-search").value="";search="";render();});
+$("map-search").addEventListener("input",e=>{
+ search=e.target.value.trim().toLowerCase();
+ const match=search.length>1?groups.find(g=>(g.name+" "+groupModules(g).map(m=>m.id+" "+m.title).join(" ")).toLowerCase().includes(search)):null;
+ if(match){category=match.id;chosen=null;$("inspector-module").hidden=true;}
+ else if(!search){category=null;chosen=null;$("inspector-module").hidden=true;}
+ render();
+});
+$("map-reset").addEventListener("click",()=>{
+ $("map-search").value="";search="";category=null;chosen=null;
+ $("inspector-module").hidden=true;
+ $("inspector-heading").textContent="Velg et område";
+ $("inspector-description").textContent="Velg en hovedgren. Da åpner de tilhørende modulene seg med større, lesbar tekst.";
+ render();
+});
 $("map-export").addEventListener("click",()=>{
  const payload={type:"modus-music-map-self-assessment",version:1,exportedAt:new Date().toISOString(),meaning:"Private self-assessment; not accredited or verified learning",records,categories:categoryRecords};
  const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}));
