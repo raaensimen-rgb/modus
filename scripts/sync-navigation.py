@@ -13,6 +13,7 @@ active_pages = {
     'artikler.html': 'articles',
     'laer-dorisk.html': 'course',
     'laeringssti.html': 'path',
+    'musikkart.html': 'mindmap',
     'modus-plus.html': 'membership',
     'betaling-test.html': 'membership',
     'om-modus.html': 'about',
