@@ -8,10 +8,12 @@ export async function onRequestGet({request,env}) {
   const bearer=request.headers.get('authorization')||'';
   if(!/^Bearer [a-zA-Z0-9._~-]+$/.test(bearer)) return json({error:'Innlogging kreves.'},401);
   const authHeaders={apikey:env.MODUS_SUPABASE_ANON_KEY,authorization:bearer};
+  let phase='Supabase-innlogging';
   try {
     const u=await fetch(env.MODUS_SUPABASE_URL+'/auth/v1/user',{headers:authHeaders,signal:AbortSignal.timeout(5000)});
     if(!u.ok)return json({error:'Ugyldig innlogging.'},401);
     const user=await u.json();if(!user.id)return json({error:'Ugyldig bruker.'},401);
+    phase='redaktørkontroll';
     const role=await fetch(env.MODUS_SUPABASE_URL+'/rest/v1/cms_editors?select=user_id&user_id=eq.'+encodeURIComponent(user.id)+'&limit=1',{headers:authHeaders,signal:AbortSignal.timeout(5000)});
     if(!role.ok)return json({error:'Kunne ikke kontrollere redaktørtilgang.'},502);
     const rows=await role.json();if(!Array.isArray(rows)||!rows.some(r=>r.user_id===user.id))return json({error:'Ingen redaktørtilgang.'},403);
@@ -24,6 +26,7 @@ export async function onRequestGet({request,env}) {
         }
       }}
     }`;
+    phase='Cloudflare Analytics';
     const cf=await fetch('https://api.cloudflare.com/client/v4/graphql',{method:'POST',headers:{authorization:'Bearer '+analyticsToken,'content-type':'application/json'},body:JSON.stringify({query,variables:{account:env.CF_ANALYTICS_ACCOUNT_ID,start,end:now.toISOString(),site:env.CF_ANALYTICS_SITE_TAG}}),signal:AbortSignal.timeout(10000)});
     if(!cf.ok)return json({error:'Cloudflare Analytics svarte med HTTP '+cf.status},502);
     const result=await cf.json();
@@ -31,5 +34,8 @@ export async function onRequestGet({request,env}) {
     const days=result.data?.viewer?.accounts?.[0]?.rumPageloadEventsAdaptiveGroups;
     if(!Array.isArray(days))return json({error:'Uventet svar fra Cloudflare.'},502);
     return json({days:days.map(d=>({date:d.dimensions?.date,views:Number(d.count||0),visits:Number(d.sum?.visits||0)})),updatedAt:now.toISOString(),note:'Visninger og besøk de siste seks kalendermånedene. Ingen historikk utover API-vinduet.'});
-  } catch{return json({error:'Statistikk kunne ikke hentes akkurat nå.'},502);}
+  } catch(error){
+    const timeout=error?.name==='TimeoutError'||error?.name==='AbortError';
+    return json({error:'Kunne ikke hente statistikk fra '+phase+(timeout?' (tidsavbrudd).':'.')},502);
+  }
 }
