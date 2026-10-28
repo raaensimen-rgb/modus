@@ -15,6 +15,14 @@ assert 'noindex,nofollow' in html
 assert 'musikkart.html' in page and "('mindmap', 'musikkart.html', 'Musikkart')" in nav
 assert 'localStorage.setItem(STORE' in js and 'localStorage.removeItem(STORE)' in js
 assert 'categoryRecords' in js and 'groupState' in js and 'filter' in js
+assert 'const opened=!!selectedGroup;' in js, "Map must use progressive disclosure"
+assert 'const step=107' in js, "Overview branches need spacious separation"
+assert 'const spacing=85' in js, "Expanded modules need readable spacing"
+assert 'viewBox' in js and 'chosen=m?.id||null;category=g?.id||' in js
+assert 'category=null;chosen=null;' in js, "Return-to-overview action missing"
+css=(root/"dist/musikkart.css").read_text()
+assert '.map-layout{grid-template-columns:minmax(0,1fr)' in css
+assert '.map-node.module-node text{font-size:18px' in css
 assert 'class:"map-branch "+variant(state)' in js
 assert 'records[m.id].state==="learned"' in js
 assert 'window.confirm(' in js and 'JSON.stringify(payload' in js
