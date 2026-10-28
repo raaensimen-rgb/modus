@@ -39,8 +39,8 @@ def render_header(prefix='', active='home'):
         ('theory', 'teori.html', 'Teorirommet', 'Utforsk intervaller, akkorder og moduser.'),
     ))
     return (
-        f'<header class="site-header"><a class="brand" href="{home}" aria-label="MODUS – forsiden">'
-        '<span class="brandmark" aria-hidden="true">m</span>MODUS<span class="branddot">.</span></a>'
+        f'<header class="site-header"><a class="brand" href="{home}" aria-label="MODUS-MUSIC – forsiden">'
+        '<span class="brandmark" aria-hidden="true">m</span>MODUS-MUSIC<span class="branddot">.NO</span></a>'
         '<nav class="site-nav" aria-label="Hovedmeny">' + link('home', './', 'Forside') + learn + play + link('articles', 'artikler.html', 'Artikler')
         + link('about', 'om-modus.html', 'Om MODUS') + '</nav><div class="header-tools">'
         + link('membership', 'modus-plus.html', 'Medlemskap', css='nav-membership')
