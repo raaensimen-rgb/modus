@@ -6,7 +6,11 @@
 .site-header .nav-group{position:relative}
 .site-header .site-nav>a:hover,.site-header .nav-trigger:hover{color:var(--modus-c-e5f4d1,#e5f4d1);border-bottom-color:var(--modus-b-718b52,#718b52)}
 .site-header .site-nav>a[aria-current=page],.site-header .nav-group.is-active>.nav-trigger,.site-header .nav-group.is-open>.nav-trigger{color:var(--modus-c-d7f48c,#d7f48c);font-weight:700;border-bottom-color:var(--modus-b-d7f48c,#d7f48c)}
-.nav-chevron{font-size:14px;line-height:1}.nav-group.is-open .nav-chevron{transform:rotate(180deg)}
+/* Crisp, optical chevrons shared by Lær and Spill. */
+.site-header .nav-trigger{gap:6px}
+.nav-chevron{display:inline-block;flex:0 0 auto;width:7px;height:7px;box-sizing:border-box;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);transform-origin:50% 50%;opacity:.8;transition:transform .18s ease,opacity .18s ease;margin-left:1px}
+.nav-group.is-open .nav-chevron{transform:translateY(2px) rotate(225deg);opacity:1}
+@media(prefers-reduced-motion:reduce){.nav-chevron{transition:none}}
 .site-header :is(a,summary,.nav-trigger):focus-visible{outline:2px solid var(--modus-b-d7f48c,#d7f48c);outline-offset:4px}
 .site-header .nav-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:220;box-sizing:border-box;width:max-content;min-width:160px;max-width:calc(100vw - 40px);padding:6px;border:1px solid #cad5ba;border-radius:9px;background:#f1f5e9;color:#21321d;box-shadow:0 10px 28px #0003}
 .site-header .nav-panel>a{display:block;padding:12px 14px;border:1px solid transparent;border-radius:5px;text-decoration:none;color:#21321d;font:500 13px/1.45 'DM Sans',sans-serif;white-space:nowrap}
