@@ -62,7 +62,7 @@ function render(){
    const modules=groupModules(g),y=top+bands[i]/2;
    const state=groupState(g);
    const catX=left?420:940,catW=240,catH=43;
-   const rootEdge=left?midX-130:midX+130;
+   const rootEdge=left?midX-68:midX+68;
    const catEdge=left?catX+catW:catX;
    layer.append(curved(rootEdge,midY,catEdge,y,g.color,state,4.2));
    const categoryNode=node(catX,y,catW,catH,g.name,g.color,state,"branch-node",g.id);
@@ -86,14 +86,41 @@ function render(){
  }
  branchLayout(leftIds,true);
  branchLayout(rightIds,false);
- const hub=svgEl("g",{class:"map-node root-node map-emblem",role:"img","aria-label":"MODUS – Mitt musikkatlas"});
- hub.append(svgEl("rect",{x:midX-130,y:midY-43,width:260,height:86,rx:17,fill:"#17231b",stroke:"#a8c77d","stroke-width":1.5}));
- hub.append(svgEl("rect",{x:midX-123,y:midY-36,width:246,height:72,rx:12,fill:"none",stroke:"#71895c","stroke-width":.6,opacity:.45}));
- const emblem=svgEl("text",{x:midX-107,y:midY+18,class:"map-emblem-letter",transform:"rotate(-12 "+(midX-84)+" "+midY+")"},"m");
- hub.append(emblem);
- hub.append(svgEl("path",{d:"M "+(midX-30)+" "+(midY-24)+" V "+(midY+24),stroke:"#53684d","stroke-width":1}));
- hub.append(svgEl("text",{x:midX-14,y:midY-11,class:"map-emblem-kicker"},"MODUS / LÆRING"));
- hub.append(svgEl("text",{x:midX-14,y:midY+14,class:"map-emblem-title"},"MITT MUSIKKATLAS"));
+ const hub=svgEl("g",{class:"atlas-globe",role:"img","aria-label":"Tredimensjonal trådglobus – Mitt musikkatlas"});
+ // A restrained vector wireframe: faint reverse hemisphere, luminous front hemisphere,
+ // and narrow meridians suggest depth without a heavy solid container.
+ const definitions=svgEl("defs");
+ const glow=svgEl("radialGradient",{id:"atlas-globe-halo",cx:"50%",cy:"42%",r:"65%"});
+ glow.append(svgEl("stop",{offset:"0%","stop-color":"#aac88b","stop-opacity":".13"}));
+ glow.append(svgEl("stop",{offset:"78%","stop-color":"#87a67a","stop-opacity":".035"}));
+ glow.append(svgEl("stop",{offset:"100%","stop-color":"#87a67a","stop-opacity":"0"}));
+ definitions.append(glow);
+ hub.append(definitions);
+ const radius=69;
+ hub.append(svgEl("circle",{cx:midX,cy:midY,r:88,fill:"url(#atlas-globe-halo)"}));
+ hub.append(svgEl("circle",{cx:midX,cy:midY,r:radius,fill:"#15241b","fill-opacity":".84",stroke:"#6f8d70","stroke-width":"1.1"}));
+ const back=svgEl("g",{class:"atlas-globe-back"});
+ // Rear-facing latitude arcs, glimpsed as a transparent technical illustration.
+ for(const offset of [-42,-23,0,23,42]){
+   const scale=Math.sqrt(1-(offset/radius)**2);
+   back.append(svgEl("path",{d:"M "+(midX-radius*scale)+" "+(midY+offset)+" Q "+midX+" "+(midY+offset+scale*17)+" "+(midX+radius*scale)+" "+(midY+offset),fill:"none",stroke:"#64836f","stroke-width":".7"}));
+ }
+ back.append(svgEl("ellipse",{cx:midX,cy:midY,rx:26,ry:radius,fill:"none",stroke:"#62826b","stroke-width":".8"}));
+ hub.append(back);
+ const front=svgEl("g",{class:"atlas-globe-front",transform:"rotate(-19 "+midX+" "+midY+")"});
+ // Meridians and parallels intersect on the spherical face, creating subtle 3D perspective.
+ for(const rx of [25,47]){
+   front.append(svgEl("ellipse",{cx:midX,cy:midY,rx,ry:radius,fill:"none",stroke:"#a2c28d","stroke-width":"1.15"}));
+ }
+ for(const offset of [-43,-23,0,23,43]){
+   const half=Math.sqrt(radius*radius-offset*offset);
+   const bow=(offset===0?15:Math.max(4,15-Math.abs(offset)*.16));
+   front.append(svgEl("path",{d:"M "+(midX-half)+" "+(midY+offset)+" Q "+midX+" "+(midY+offset-bow)+" "+(midX+half)+" "+(midY+offset),fill:"none",stroke:"#a1bf8c","stroke-width":offset===0?1.3:1.05}));
+ }
+ hub.append(front);
+ hub.append(svgEl("circle",{cx:midX,cy:midY,r:radius,fill:"none",stroke:"#bddb9f","stroke-width":"1.5"}));
+ hub.append(svgEl("path",{d:"M "+(midX-36)+" "+(midY-53)+" Q "+(midX-9)+" "+(midY-70)+" "+(midX+13)+" "+(midY-60),fill:"none",stroke:"#e0f1c8","stroke-width":"1.25",opacity:".8"}));
+ hub.append(svgEl("text",{x:midX,y:midY+95,class:"atlas-globe-caption","text-anchor":"middle"},"MITT MUSIKKATLAS"));
  layer.append(hub);
  svg.append(layer);
  $("map-count").textContent=groups.length+" fagområder · "+catalog.length+" synlige moduler";
