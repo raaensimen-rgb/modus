@@ -107,14 +107,14 @@
  async function hearQuestion(){
   if(!stage.quiz)newQuestion();
   const q=stage.quiz;
-  await sound([q.root,q.root+q.s],"f03-ear-feedback");
-  if(!stage.attempted)$("f03-ear-feedback").textContent="Lytt til avstanden og velg et svar. Tonene er fortsatt skjult.";
+  try{await window.MODUSGrand.playMidi([q.root,q.root+q.s]);
+   if(!stage.attempted)$("f03-ear-feedback").textContent="Lytt til avstanden og velg et svar. Tonene er fortsatt skjult.";
+  }catch{$("f03-ear-feedback").textContent="Kunne ikke laste flygelsamplene. Prøv igjen."; }
  }
  $("f03-difficulty").addEventListener("change",newQuestion);
  $("f03-new-question").addEventListener("click",newQuestion);
  $("f03-listen").addEventListener("click",hearQuestion);
  $("f03-again").addEventListener("click",hearQuestion);
  newQuestion();
- // Start with the lesson example visible; a new ear question masks it only when opened.
- render(stage.manual);
+ // Do not disclose the generated hearing task through the visualization.
 })();
