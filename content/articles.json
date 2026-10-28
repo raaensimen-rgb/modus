@@ -339,11 +339,43 @@
       [
         "Samme toner kan få et annet hjem",
         "<p>E naturlig moll bruker de samme tonene som G-dur. Likevel er Em første trinn når E er sentrum, mens den er sjette trinn i G-dur. Du må derfor velge referansetoneart før du setter romertall på en akkordrekke.</p><p>Diatonisk betyr her at akkordtonene kommer fra den valgte skalaen. Musikk kan også bruke akkorder utenfor denne familien. Lær først å kjenne igjen mønsteret, så blir senere avvik lettere å forstå.</p>"
+      ],
+      [
+        "Et lite steg videre: ii–V–I med septimer",
+        "<p>Når treklangene sitter, kan du legge til enda en tone ved å fortsette med annenhver skalatone. I C-dur gir D–F–A–C akkorden Dm7, G–B–D–F gir G7, og C–E–G–B gir Cmaj7. Det er andre, femte og første trinn: ii7–V7–Imaj7.</p><p>Dette er en frivillig utvidelse av treklangøvelsen. Du bruker fortsatt bare tonene C, D, E, F, G, A og B. Lytt etter hvordan rekken lander på Cmaj7; du trenger ikke mestre nye grep i fullt tempo.</p>"
       ]
     ],
     "exercise": "Skriv tonene i G, Am og D før du spiller dem. Spill deretter G–D–Em–C og si I–V–vi–IV. Flytt samme mønster til C-dur, og kontroller hvilke toner som endres.",
-    "practice": "akkorder.html",
-    "practice_label": "Bygg en akkordrekke i verkstedet"
+    "practice": "akkorder.html?seq=%5B%5B2%2C4%5D%2C%5B7%2C2%5D%2C%5B0%2C3%5D%5D&key=0&mode=0&tempo=60",
+    "practice_label": "Prøv ii–V–I i akkordverkstedet",
+    "learning": {
+      "goals": [
+        "Bygge treklanger av annenhver skalatone.",
+        "Koble akkordnavn til romertall i en durtoneart.",
+        "Flytte samme trinnmønster fra G-dur til C-dur."
+      ],
+      "prerequisites": "Du bør kjenne tonenavnene og forskjellen på dur og moll. Du trenger ikke kunne alle gitargrepene.",
+      "links": [
+        {
+          "slug": "toner-og-intervaller",
+          "label": "Repeter toner og intervaller"
+        },
+        {
+          "slug": "dur-og-moll",
+          "label": "Repeter dur og moll"
+        }
+      ]
+    },
+    "practice_steps": [
+      "Start med treklangene i oppgaven over. Skriv og kontroller tonene før du spiller.",
+      "Hvis du vil prøve septimklangen: åpne Dm7–G7–Cmaj7 med knappen under. Lytt først, og spill så én akkord per takt i 60 BPM. På gitar velger du et grep du kommer rolig til; på piano kan du spille grunntonen først og deretter resten av akkorden.",
+      "Si ii7–V7–Imaj7 mens du spiller. Se hvilke toner som endres, og lytt etter hjemkomsten på Cmaj7.",
+      "Bytt grunntone til D og behold ionisk. Forvent Em7–A7–Dmaj7. Kontroller dette før du lytter. Du er klar til quizen når du kan forklare hvorfor akkordnavnene endres, mens trinnmønsteret beholdes."
+    ],
+    "next_step": {
+      "slug": "septimakkorder",
+      "reason": "Du har bygget treklangene fra skalaen. Nå kan du se hva den fjerde tonen tilfører, og forstå Dm7, G7 og Cmaj7 litt grundigere."
+    }
   },
   {
     "slug": "ett-skalakart-nye-maltoner",
