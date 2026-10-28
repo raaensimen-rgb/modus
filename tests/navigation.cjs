@@ -11,4 +11,11 @@ groups[1].events.click();assert.equal(g.panel.hidden,true);assert.equal(groups[1
 handlers.keydown({key:'Escape',preventDefault(){}});assert.equal(groups[1].panel.hidden,true);
 g.events.click();handlers.focusin({target:outside});assert.equal(g.panel.hidden,true);
 g.events.click();handlers.click({target:outside});assert.equal(g.panel.hidden,true);
+const dropdownMarkup=fs.readFileSync('dist/index.html','utf8');
+for(const label of ['Start å lære','Hele utdanningsløpet','Leksjoner og øvelser','Utforsk musikkteori']) {
+ assert(dropdownMarkup.includes(label),'missing descriptive label: '+label);
+}
+const navStyles=fs.readFileSync('dist/navigation.css','utf8');
+assert(navStyles.includes('.site-header .nav-panel small{display:block'),'submenu descriptions must be visible');
+assert(navStyles.includes('#nav-panel-learn'),'learning submenu should have a distinct readable layout');
 console.log('Passed: button disclosure, native link clicks, exclusive panels, outside focus/click and Escape.');
