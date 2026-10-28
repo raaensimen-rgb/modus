@@ -34,7 +34,7 @@ html[data-theme=contrast] .hero-actions .button-secondary{background:#fff;color:
 main > .closing{display:flex;flex-direction:column;align-items:center;justify-content:center;clear:both;width:100%;max-width:none;margin:0 auto;text-align:center;grid-column:1 / -1}
 main > .closing p{width:100%;text-align:center}
 
-/* Musical shapes lie flat on the lake's surface in perspective. */
-.landscape .water-music{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.83;mix-blend-mode:screen;z-index:1;filter:none}
-@media(max-width:700px){.landscape .water-music{opacity:.6}}
+/* Thin harmonic light trails that blend with the lake's existing reflections. */
+.landscape .water-music{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.75;mix-blend-mode:screen;z-index:1}
+@media(max-width:700px){.landscape .water-music{opacity:.48}}
 @media(prefers-contrast:more){.landscape .water-music{display:none}}
