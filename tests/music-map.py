@@ -31,13 +31,13 @@ assert 'window.confirm(' in js and 'JSON.stringify(payload' in js
 assert 'publication_approval' in (root/"content/curriculum/quality-register.json").read_text()
 # Every planned curriculum module must appear exactly once, and every category
 # must remain represented in the diagram. Silent omissions would distort the map.
-catalog_match=re.search(r"const catalog=(\\[.*?\\]);\\s*const groups=",js,re.S)
+catalog_match=re.search(r"const catalog=(\[.*?\]);\s*const groups=",js,re.S)
 assert catalog_match, "Missing machine-readable catalogue"
 catalog=json.loads(catalog_match.group(1))
 source_ids={m["id"] for m in data["modules"]}
 assert len(catalog)==len(source_ids)==24
 assert {m["id"] for m in catalog}==source_ids, "Musikkart and curriculum are out of sync"
-category_ids=re.findall(r'\\{id:"([a-z]+)",name:".*?",color:".*?",ids:\\[(.*?)\\]\\}',js,re.S)
+category_ids=re.findall(r'\{id:"([a-z]+)",name:".*?",color:".*?",ids:\[(.*?)\]\}',js,re.S)
 assert len(category_ids)==10, "Music map must retain ten subject branches"
 mapped=[]
 for _name,raw in category_ids:
