@@ -17,6 +17,10 @@
  groups.forEach(group=>{
   const trigger=group.querySelector('.nav-trigger');
   function open(){close(group);setOpen(group,true);if(theme)theme.open=false;}
+  // Desktop pointer hover previews the menu; tap/click and keyboard remain supported.
+  const canHover=()=>!window.matchMedia||window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  group.addEventListener('mouseenter',()=>{if(canHover())open();});
+  group.addEventListener('mouseleave',()=>{if(canHover())setOpen(group,false);});
   trigger.addEventListener('click',()=>{if(trigger.getAttribute('aria-expanded')==='true')setOpen(group,false);else open();});
   trigger.addEventListener('keydown',event=>{
    if(event.key==='ArrowDown'){event.preventDefault();open();group.querySelector('.nav-panel a').focus();}
