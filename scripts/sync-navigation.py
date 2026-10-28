@@ -8,6 +8,7 @@ active_pages = {
     'backingtracks.html': 'jam',
     'teori.html': 'theory',
     'laereplan.html': 'curriculum',
+    'undervisning.html': 'lesson',
     'akkorder.html': 'chords',
     'artikler.html': 'articles',
     'laer-dorisk.html': 'course',
