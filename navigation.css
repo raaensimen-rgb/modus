@@ -39,6 +39,6 @@ html[data-theme=contrast] .site-header .nav-group.is-active>.nav-trigger{border-
 /* Preview: retain the existing green m but stack it above the wordmark. */
 .site-header a.brand.brand--stacked{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;flex-shrink:0;line-height:1;text-align:center}
 .site-header .brand--stacked .brandmark{display:block;align-self:center;font:italic 44px Manrope,sans-serif;letter-spacing:-8px;transform:rotate(-12deg);color:var(--accent);margin:0 8px 0 0;line-height:1}
-.site-header .brand--stacked .brand-name{display:block;font:800 17px Manrope,sans-serif;letter-spacing:.8px;line-height:1.12;white-space:nowrap}
+.site-header .brand--stacked .brand-name{display:block;font:800 19px Manrope,sans-serif;letter-spacing:.8px;line-height:1.12;white-space:nowrap}
 .site-header .brand--stacked .branddot{color:var(--accent);margin-left:0}
-@media(max-width:780px){.site-header .brand--stacked .brandmark{font-size:35px}.site-header .brand--stacked .brand-name{font-size:14px;letter-spacing:.25px}}
+@media(max-width:780px){.site-header .brand--stacked .brandmark{font-size:35px}.site-header .brand--stacked .brand-name{font-size:15.5px;letter-spacing:.25px}}
