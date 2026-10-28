@@ -3,42 +3,28 @@
 <header class="site-header"><a class="brand" href="./" aria-label="MODUS-MUSIC.NO – forsiden" aria-current="page"><span class="brandmark" aria-hidden="true">m</span>MODUS-MUSIC<span class="branddot">.NO</span></a><nav class="site-nav" aria-label="Hovedmeny"><div class="nav-group"><button type="button" class="nav-trigger" id="nav-learn" aria-expanded="false" aria-controls="nav-panel-learn">Lær<span class="nav-chevron" aria-hidden="true">⌄</span></button><div class="nav-panel" id="nav-panel-learn" aria-labelledby="nav-learn" hidden><a href="laer-dorisk.html" class="" aria-label="Læringssti" aria-describedby="nav-hint-course"><strong>Læringssti</strong><small id="nav-hint-course">Lær steg for steg, fra lytting til spilling.</small><span aria-hidden="true">↗</span></a><a href="teori.html" class="" aria-label="Teorirommet" aria-describedby="nav-hint-theory"><strong>Teorirommet</strong><small id="nav-hint-theory">Utforsk intervaller, akkorder og moduser.</small><span aria-hidden="true">↗</span></a></div></div><div class="nav-group"><button type="button" class="nav-trigger" id="nav-play" aria-expanded="false" aria-controls="nav-panel-play">Spill<span class="nav-chevron" aria-hidden="true">⌄</span></button><div class="nav-panel" id="nav-panel-play" aria-labelledby="nav-play" hidden><a href="backingtracks.html" class="" aria-label="Backingtracks" aria-describedby="nav-hint-jam"><strong>Backingtracks</strong><small id="nav-hint-jam">Spill med trommer, bass og piano.</small><span aria-hidden="true">↗</span></a><a href="akkorder.html" class="" aria-label="Akkordverksted" aria-describedby="nav-hint-chords"><strong>Akkordverksted</strong><small id="nav-hint-chords">Bygg akkordrekker og utforsk grep.</small><span aria-hidden="true">↗</span></a></div></div><a href="artikler.html" class="">Artikler</a><a href="om-modus.html" class="">Om MODUS</a></nav><div class="header-tools"><a href="modus-plus.html" class="nav-membership">Medlemskap</a><a href="konto.html" class="nav-account" data-account-link>Logg inn</a><nav class="language-picker" aria-label="Språk / Language"><a href="?lang=nb" data-language="nb" lang="nb" hreflang="nb" aria-label="Norsk" title="Norsk" aria-current="true"><span aria-hidden="true">🇳🇴</span> NO</a><a href="?lang=en" data-language="en" lang="en" hreflang="en" aria-label="English" title="English"><span aria-hidden="true">🇬🇧</span> EN</a></nav><details class="theme-picker"><summary><span aria-hidden="true">◐</span> Visning<span class="theme-current" data-theme-name>Original</span></summary><fieldset class="theme-options"><legend>Velg visning</legend><label><input type="radio" name="modus-theme" value="original" checked><span><strong>Original</strong><small>Mørke naturfarger, slik siden er nå.</small></span></label><label><input type="radio" name="modus-theme" value="readable"><span><strong>Lesevennlig</strong><small>Lys bakgrunn, mørk tekst og større leseskrift.</small></span></label><label><input type="radio" name="modus-theme" value="contrast"><span><strong>Høy kontrast</strong><small>Svart-hvitt, tydelige rammer og mindre dekor.</small></span></label><p>Valget huskes i denne nettleseren.</p></fieldset></details><span id="theme-status" class="theme-sr-only" role="status" aria-live="polite"></span></div></header>
 <main><section class="hero" aria-labelledby="welcome"><div class="landscape"><img src="images/mountain-lake.webp" width="1536" height="1024" alt="Snødekte fjell og deres speilbilde i en stille innsjø" fetchpriority="high"><svg class="water-music" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
 <defs>
- <filter id="lake-symbol-soft" x="-40%" y="-100%" width="180%" height="300%"><feGaussianBlur stdDeviation=".48"/></filter>
+  <linearGradient id="water-harmony-shimmer" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#c9dfa6" stop-opacity="0"/>
+    <stop offset=".18" stop-color="#d5e9b9" stop-opacity=".24"/>
+    <stop offset=".52" stop-color="#d5e9b9" stop-opacity=".38"/>
+    <stop offset=".85" stop-color="#c9dfa6" stop-opacity=".19"/>
+    <stop offset="1" stop-color="#c9dfa6" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="harmony-soft-glow" x="-10%" y="-100%" width="120%" height="300%">
+    <feGaussianBlur stdDeviation="1.35"/>
+  </filter>
 </defs>
-<g fill="none" stroke="#c7d4bd" stroke-linecap="round" stroke-linejoin="round" filter="url(#lake-symbol-soft)">
- <!-- Horizontal ellipses and flattened notation follow the lake's perspective. -->
- <g opacity=".52" transform="translate(360 426) rotate(-8)">
-  <ellipse cx="0" cy="5" rx="39" ry="4.4" stroke-width="1" opacity=".27"/>
-  <ellipse cx="0" cy="5" rx="24" ry="2.5" stroke-width=".7" opacity=".38"/>
-  <g transform="scale(.82 .29)" stroke-width="2.5">
-   <ellipse cx="-7" cy="0" rx="10" ry="7" transform="rotate(-23 -7 0)" fill="#b6cbb2" fill-opacity=".26"/>
-   <path d="M2 -3V-62Q18 -54 24 -35"/>
-  </g>
- </g>
- <g opacity=".56" transform="translate(605 490) rotate(6)">
-  <ellipse cx="0" cy="6" rx="55" ry="5.8" stroke-width="1.2" opacity=".23"/>
-  <ellipse cx="0" cy="6" rx="34" ry="3.7" stroke-width=".8" opacity=".36"/>
-  <g transform="scale(1 .34)" stroke-width="2.5">
-   <ellipse cx="-20" cy="0" rx="10" ry="7" transform="rotate(-19 -20 0)" fill="#c2d4bb" fill-opacity=".29"/>
-   <ellipse cx="23" cy="-6" rx="10" ry="7" transform="rotate(-19 23 -6)" fill="#c2d4bb" fill-opacity=".29"/>
-   <path d="M-10 -4V-52H33V-10"/>
-  </g>
- </g>
- <g opacity=".44" transform="translate(752 394) rotate(-11)">
-  <ellipse cx="0" cy="5" rx="39" ry="4" stroke-width=".85" opacity=".25"/>
-  <g transform="scale(.68 .23)" stroke-width="3">
-   <path d="M0 34C-13 25 -12 9 -3 -3C9 -19 18 -5 11 9C3 22 -12 15 -13 1C-14 -18 1 -43 11 -63C21 -79 27 -62 20 -43C14 -26 -5 -5 -8 11C-13 31 0 47 13 37C22 28 15 15 5 19"/>
-   <path d="M10 -60L14 43" opacity=".6"/>
-  </g>
- </g>
- <g opacity=".42" transform="translate(848 532) rotate(14)">
-  <ellipse cx="0" cy="3" rx="31" ry="3.5" stroke-width=".8" opacity=".34"/>
-  <g transform="scale(.76 .27)" stroke-width="2.5">
-   <ellipse cx="-6" cy="0" rx="10" ry="7" transform="rotate(-20 -6 0)" fill="#c4d7bf" fill-opacity=".28"/>
-   <path d="M3 -3V-55"/>
-  </g>
- </g>
-</g></svg></div><div class="hero-content"><p class="eyebrow">VELKOMMEN TIL MODUS</p><h1 id="welcome" class="rameau-quote" lang="fr">La mélodie naît <em>de l’harmonie.</em></h1><p class="quote-translation">«Melodien fødes av harmonien.»</p><p class="quote-credit"><a href="https://s9.imslp.org/files/imglnks/usimg/d/d3/IMSLP383954-PMLP168592--1726-_Nouveau_syst%C3%A8me_de_musique_th%C3%A9orique_-BNF-.pdf" title="Les originalverket Nouveau système de musique théorique (1726)">Jean-Philippe Rameau <span aria-hidden="true">·</span> 1726 <span aria-hidden="true">↗</span></a></p><p class="hero-copy quote-explanation">MODUS kobler musikkteori med praktisk spilling. Utforsk akkorder og moduser, lag backingtracks og bruk det du lærer på gitar eller piano.</p><div class="hero-actions"><a href="laer-dorisk.html" class="button">Start læringsstien <span aria-hidden="true">↗</span></a><a href="backingtracks.html" class="button button-secondary">Åpne backingtracks <span aria-hidden="true">↗</span></a></div><p class="hero-route-note">Ny her? «Forstå og bruk dorisk» tar deg gjennom seks steg med lytting og øvelser.</p><p class="hero-note"><span></span> Gitar eller piano. Ditt tempo. Din musikk.</p></div><div class="hero-caption" aria-hidden="true">PLAY<br>EXPLORE<br>REPEAT ↗</div><a class="scroll-link" href="#backingtracks">UTFORSK MODUS <span aria-hidden="true">↓</span></a></section>
+<!-- Thin, restrained contours lie horizontally within the water, never over the mountains. -->
+<g fill="none" stroke="url(#water-harmony-shimmer)" stroke-linecap="round">
+  <path d="M322 361 C385 350 415 369 474 358 S573 354 630 365 S737 376 816 362" stroke-width="1.35" opacity=".47"/>
+  <path d="M400 430 C466 416 513 438 582 423 S688 429 750 437 S816 429 869 426" stroke-width="1.15" opacity=".37"/>
+  <path d="M518 502 C570 493 614 508 678 499 S779 503 846 493" stroke-width="1.1" opacity=".30"/>
+</g>
+<g fill="none" stroke="#c6e0a8" stroke-linecap="round" filter="url(#harmony-soft-glow)" opacity=".09">
+  <path d="M322 361 C385 350 415 369 474 358 S573 354 630 365 S737 376 816 362" stroke-width="3"/>
+  <path d="M400 430 C466 416 513 438 582 423 S688 429 750 437 S816 429 869 426" stroke-width="2.5"/>
+</g>
+</svg></div><div class="hero-content"><p class="eyebrow">VELKOMMEN TIL MODUS</p><h1 id="welcome" class="rameau-quote" lang="fr">La mélodie naît <em>de l’harmonie.</em></h1><p class="quote-translation">«Melodien fødes av harmonien.»</p><p class="quote-credit"><a href="https://s9.imslp.org/files/imglnks/usimg/d/d3/IMSLP383954-PMLP168592--1726-_Nouveau_syst%C3%A8me_de_musique_th%C3%A9orique_-BNF-.pdf" title="Les originalverket Nouveau système de musique théorique (1726)">Jean-Philippe Rameau <span aria-hidden="true">·</span> 1726 <span aria-hidden="true">↗</span></a></p><p class="hero-copy quote-explanation">MODUS kobler musikkteori med praktisk spilling. Utforsk akkorder og moduser, lag backingtracks og bruk det du lærer på gitar eller piano.</p><div class="hero-actions"><a href="laer-dorisk.html" class="button">Start læringsstien <span aria-hidden="true">↗</span></a><a href="backingtracks.html" class="button button-secondary">Åpne backingtracks <span aria-hidden="true">↗</span></a></div><p class="hero-route-note">Ny her? «Forstå og bruk dorisk» tar deg gjennom seks steg med lytting og øvelser.</p><p class="hero-note"><span></span> Gitar eller piano. Ditt tempo. Din musikk.</p></div><div class="hero-caption" aria-hidden="true">PLAY<br>EXPLORE<br>REPEAT ↗</div><a class="scroll-link" href="#backingtracks">UTFORSK MODUS <span aria-hidden="true">↓</span></a></section>
 <section class="tool-section" id="backingtracks" aria-labelledby="tool-title"><div class="section-intro"><p class="eyebrow">01 / SPILLEROMMET DITT</p><p>Fra stillhet til første tone.</p></div><article class="tool"><div class="tool-copy"><span class="tool-label"><span></span> KLAR TIL Å SPILLE</span><h2 id="tool-title">Backingtracks.<br><em>Plass til dine ideer.</em></h2><p>Velg toneart, modus og groove. La trommer, bass og piano holde deg med selskap mens du improviserer.</p><ul class="capabilities"><li>Tonearter og moduser</li><li>Skalakart for gitar og piano</li><li>Akkorder, romertall og MIDI</li></ul><a class="button" href="backingtracks.html">Åpne backingtracks <span aria-hidden="true">↗</span></a></div><figure class="jam-preview" aria-label="Eksempel: en firetakters akkordloop i E eolisk"><figcaption><span>ET LITE GLIMT</span><span>E EOLISK · FUSION</span></figcaption><div class="preview-chords"><div class="active"><small>01</small><strong>Em7</strong><span>i7</span></div><div><small>02</small><strong>Cmaj7</strong><span>♭VImaj7</span></div><div><small>03</small><strong>Gmaj7</strong><span>♭IIImaj7</span></div><div><small>04</small><strong>D7</strong><span>♭VII7</span></div></div><div class="preview-scale"><span>1</span><span>2</span><span>♭3</span><span>4</span><span>5</span><span>♭6</span><span>♭7</span></div><div class="preview-bottom"><span class="beat-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>ETT KART. ALLE TONENE.</span><span>90 BPM</span></div></figure></article></section>
 <div class="home-feature-grid"><section class="theory-entry" aria-labelledby="theory-entry-title"><div><p class="eyebrow">02 / TEORIROMMET</p><h2 id="theory-entry-title">Forstå det du spiller.<br><em>Hør det du lærer.</em></h2><p>Utforsk intervaller, moduser, akkorder og kadenser med pianokart og lydeksempler. Ett fokus av gangen.</p></div><a class="button" href="teori.html">Åpne teorirommet <span aria-hidden="true">↗</span></a></section>
 <section class="theory-entry chord-entry" aria-labelledby="chord-entry-title"><div><p class="eyebrow">03 / AKKORDVERKSTEDET</p><h2 id="chord-entry-title">Fra klang til grep.<br><em>Gitar og piano, side om side.</em></h2><p>Bygg din egen akkordrekke. Finn praktiske gitargrep, utforsk omvendinger på piano og ta med MIDI-filen til din egen musikk.</p></div><a class="button" href="akkorder.html">Åpne akkordverkstedet <span aria-hidden="true">↗</span></a></section>
