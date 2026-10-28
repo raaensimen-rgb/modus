@@ -41,69 +41,63 @@ function node(x,y,w,h,label,color,state,type,id){
 function render(){
  svg.replaceChildren();
  const layer=svgEl("g",{});
- const selectedGroup=groups.find(g=>g.id===category);
- const opened=!!selectedGroup;
- const height=opened?Math.max(660,selectedGroup.ids.length*67+145):800;
- const width=1410;
- svg.setAttribute("viewBox","0 0 "+width+" "+height);
- const center=height/2;
- function branch(x1,y1,x2,y2,color,state,weight){
-   const side=x2>x1?1:-1,span=Math.abs(x2-x1);
-   return svgEl("path",{d:"M "+x1+" "+y1+" C "+(x1+side*span*.53)+" "+y1+", "+(x2-side*span*.53)+" "+y2+", "+x2+" "+y2,
-     stroke:color,"stroke-width":weight,class:"map-branch "+variant(state),style:"color:"+color});
+ // The entire musical landscape is always visible. Selection changes only emphasis and details.
+ const W=1600,H=940,midX=800,midY=H/2;
+ svg.setAttribute("viewBox","0 0 "+W+" "+H);
+ svg.setAttribute("preserveAspectRatio","xMidYMid meet");
+ const leftIds=["harmoni","rytme","gehor","impro","produksjon"];
+ const rightIds=["grunnlag","skala","gitar","komposisjon","praksis"];
+ function curved(x1,y1,x2,y2,color,state,weight){
+  const reach=Math.abs(x2-x1),sign=Math.sign(x2-x1);
+  return svgEl("path",{
+   d:"M "+x1+" "+y1+" C "+(x1+sign*reach*.48)+" "+y1+", "+(x2-sign*reach*.48)+" "+y2+", "+x2+" "+y2,
+   stroke:color,"stroke-width":weight,class:"map-branch "+variant(state),style:"color:"+color});
  }
- function root(x,y,w=232,h=70){
-   const n=svgEl("g",{class:"map-node root-node",role:"img","aria-label":"MODUS – musikalsk landskap"});
-   n.append(svgEl("rect",{x,y:y-h/2,width:w,height:h,rx:18,fill:"#d7f48c",stroke:"#d7f48c"}));
-   n.append(svgEl("text",{x:x+23,y:y+6},"MUSIKKARTET"));
-   return n;
- }
- if(!opened){
-   // A true two-sided mind map: varied branch positions, spacious labels and no module clutter.
-   layer.append(root(589,center));
-   const offsets=[-260,-140,-15,117,244];
-   groups.forEach((g,i)=>{
-     const left=i<5,j=i%5;
-     const y=center+offsets[j]+(left?0:16)+(j===2?-9:0);
-     const w=360,x=left?70:985,anchor=left?x+w:x;
-     const state=groupState(g);
-     layer.append(branch(left?589:821,center,anchor,y,g.color,state,4.2));
-     const n=node(x,y,w,54,g.name,g.color,state,"branch-node",g.id);
-     const count=groupModules(g).length;
-     n.append(svgEl("text",{x:x+w-17,y:y+5,fill:"#b8c6b4","font-size":13,
-       "font-family":"Manrope,Arial,sans-serif","text-anchor":"end"},count?count+" ›":"↗"));
-     if(search&&(g.name+" "+groupModules(g).map(m=>m.id+" "+m.title).join(" ")).toLowerCase().includes(search))n.classList.add("match");
-     layer.append(n);
+ function branchLayout(ids,left){
+  const list=ids.map(id=>groups.find(g=>g.id===id));
+  const bands=list.map(g=>Math.max(105,groupModules(g).length*34+42));
+  const total=bands.reduce((a,b)=>a+b,0),gap=Math.max(9,(H-64-total)/(list.length-1));
+  let top=32;
+  list.forEach((g,i)=>{
+   const modules=groupModules(g),y=top+bands[i]/2;
+   const state=groupState(g);
+   const catX=left?420:940,catW=240,catH=43;
+   const rootEdge=left?midX-106:midX+106;
+   const catEdge=left?catX+catW:catX;
+   layer.append(curved(rootEdge,midY,catEdge,y,g.color,state,4.2));
+   const categoryNode=node(catX,y,catW,catH,g.name,g.color,state,"branch-node",g.id);
+   categoryNode.setAttribute("aria-expanded","true");
+   if(search && (g.name+" "+modules.map(m=>m.title).join(" ")).toLowerCase().includes(search))categoryNode.classList.add("match");
+   layer.append(categoryNode);
+   const leafGap=34,leafStart=y-(modules.length-1)*leafGap/2;
+   modules.forEach((m,j)=>{
+    const ly=leafStart+j*leafGap,leafX=left?33:1227;
+    layer.append(curved(left?catX:catX+catW,y,left?leafX+337:leafX,ly,g.color,activityState(m.id),2.3));
+    const leaf=node(leafX,ly,337,29,m.id+" · "+m.title,g.color,activityState(m.id),"module-node",m.id);
+    if(search && (m.id+" "+m.title).toLowerCase().includes(search))leaf.classList.add("match");
+    layer.append(leaf);
    });
- }else{
-   // Focus view preserves the branch metaphor without squeezing many small module labels.
-   const g=selectedGroup,state=groupState(g),items=groupModules(g);
-   const y=center;
-   layer.append(root(40,y,224,68));
-   layer.append(branch(264,y,420,y,g.color,state,5));
-   const parent=node(420,y,400,66,g.name,g.color,state,"branch-node",g.id);
-   layer.append(parent);
-   if(items.length){
-     const spacing=67,first=(height-spacing*(items.length-1))/2;
-     items.forEach((m,i)=>{
-       const cy=first+i*spacing;
-       layer.append(branch(820,y,950,cy,g.color,activityState(m.id),2.8));
-       const item=node(950,cy,425,49,m.id+" · "+m.title,g.color,activityState(m.id),"module-node",m.id);
-       if(search&&(m.id+" "+m.title).toLowerCase().includes(search))item.classList.add("match");
-       layer.append(item);
-     });
-   }else{
-     layer.append(svgEl("text",{x:948,y:center+5,fill:"#c4d0be","font-size":18,
-       "font-family":"Manrope,Arial,sans-serif"},"Dette fagområdet kartlegges videre."));
+   if(!modules.length){
+    const label=svgEl("text",{x:left?145:1230,y:y+29,fill:g.color,"font-size":13,"font-family":"Manrope,Arial,sans-serif","opacity":.65},"Nye emner kommer");
+    layer.append(label);
    }
+   top+=bands[i]+gap;
+  });
  }
+ branchLayout(leftIds,true);
+ branchLayout(rightIds,false);
+ const hub=svgEl("g",{class:"map-node root-node",role:"img","aria-label":"MODUS – hele musikkens landskap"});
+ hub.append(svgEl("rect",{x:midX-106,y:midY-38,width:212,height:76,rx:20,fill:"#d7f48c",stroke:"#d7f48c"}));
+ hub.append(svgEl("text",{x:midX-85,y:midY+6},"MUSIKKARTET"));
+ layer.append(hub);
  svg.append(layer);
- $("map-count").textContent=opened?selectedGroup.name+" · "+selectedGroup.ids.length+" emner":groups.length+" fagområder · "+catalog.length+" moduler";
+ $("map-count").textContent=groups.length+" fagområder · "+catalog.length+" synlige moduler";
  $("map-learned").textContent=catalog.filter(m=>records[m.id].state==="learned").length;
  $("map-exploring").textContent=catalog.filter(m=>records[m.id].state==="exploring").length;
  $("map-planned").textContent=catalog.filter(m=>records[m.id].idea).length;
  for(const b of $("inspector-module").querySelectorAll("[data-state]")){
-   const state=chosen?records[chosen].state:category?groupState(selectedGroup):"not-started";
+   const g=groups.find(g=>g.id===category);
+   const state=chosen?records[chosen].state:g?groupState(g):"not-started";
    b.setAttribute("aria-pressed",String(b.dataset.state===state));
  }
 }
@@ -136,16 +130,14 @@ $("map-personal-note").addEventListener("input",e=>{if(chosen){records[chosen].n
 $("course-idea").addEventListener("change",e=>{if(chosen){records[chosen].idea=e.target.checked;save();render();}});
 $("map-search").addEventListener("input",e=>{
  search=e.target.value.trim().toLowerCase();
- const match=search.length>1?groups.find(g=>(g.name+" "+groupModules(g).map(m=>m.id+" "+m.title).join(" ")).toLowerCase().includes(search)):null;
- if(match){category=match.id;chosen=null;$("inspector-module").hidden=true;}
- else if(!search){category=null;chosen=null;$("inspector-module").hidden=true;}
+ // Search highlights matching leaves; the illustrated map stays complete.
  render();
 });
 $("map-reset").addEventListener("click",()=>{
  $("map-search").value="";search="";category=null;chosen=null;
  $("inspector-module").hidden=true;
  $("inspector-heading").textContent="Velg et område";
- $("inspector-description").textContent="Velg en hovedgren. Da åpner de tilhørende modulene seg med større, lesbar tekst.";
+ $("inspector-description").textContent="Hele kartet vises samtidig. Velg et emne for å markere din egen læringsstatus.";
  render();
 });
 $("map-export").addEventListener("click",()=>{
