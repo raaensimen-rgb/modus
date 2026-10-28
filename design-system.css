@@ -34,3 +34,60 @@ body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; 
 @media (prefers-reduced-motion: reduce) {
   :where(a.button,button.button,.plan-action,.nav-cta) { transition: none; }
 }
+
+/* Shared editorial rhythm across the main MODUS rooms. */
+:where(.theory-hero,.articles-hero,.membership-hero,.intro) h1 {
+  line-height: 1.13;
+  text-wrap: balance;
+}
+:where(.theory-hero,.articles-hero,.membership-hero,.intro) :where(p:not(.eyebrow)) {
+  max-width: 58ch;
+  line-height: 1.85;
+}
+:where(.theory-main,.chord-main,.articles-page,.membership-main) .eyebrow {
+  letter-spacing: .13em;
+  font-weight: 600;
+}
+:where(.theory-main,.chord-main,.articles-page,.membership-main) :where(h2,h3) {
+  line-height: 1.28;
+}
+
+/* One card silhouette; retain each room's existing background and border colors. */
+:where(.lesson,.builder-panel,.selected-panel,.panel,.article-card,.journey-stage,.price-card,.launch-notice) {
+  border-radius: var(--modus-ui-radius-card);
+}
+:where(.article-card,.journey-stage,.topic-tabs button) {
+  transition: border-color var(--modus-ui-motion) ease,
+              background-color var(--modus-ui-motion) ease,
+              transform var(--modus-ui-motion) ease;
+}
+:where(.article-card,.journey-stage):focus-within {
+  border-color: var(--modus-ui-focus);
+}
+:where(.lesson,.builder-panel,.selected-panel,.panel,.price-card) {
+  min-width: 0;
+}
+
+/* Avoid horizontal overflow in flex and grid layouts, particularly at laptop widths. */
+:where(.theory-body,.workspace,.pricing-grid,.article-grid,.journey-stages) > * {
+  min-width: 0;
+}
+:where(.theory-main,.chord-main,.articles-page,.membership-main) :where(button,input,select) {
+  max-width: 100%;
+}
+@media (max-width: 700px) {
+  :where(.theory-hero,.articles-hero,.membership-hero,.intro) h1 {
+    letter-spacing: -.045em;
+  }
+  :where(.theory-main,.chord-main,.articles-page,.membership-main) .eyebrow {
+    line-height: 1.5;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(.article-card,.journey-stage,.topic-tabs button) {
+    transition: none;
+  }
+  :where(.article-card,.journey-stage):hover {
+    transform: none;
+  }
+}
