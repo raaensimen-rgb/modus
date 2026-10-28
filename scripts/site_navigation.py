@@ -40,7 +40,6 @@ def render_header(prefix='', active='home'):
     ))
     learn = group('learn', 'Lær', (
         ('path', 'laeringssti.html', 'Læringssti', 'Oversikt over nivåer, leksjoner og neste steg.'),
-        ('course', 'laer-dorisk.html', 'Dorisk leksjon', 'Forstå og bruk dorisk i seks trinn.'),
         ('curriculum', 'laereplan.html', 'Læreplan', 'Se nivåene og fagområdene vi bygger.'),
         ('lesson', 'undervisning.html', 'Undervisningsrom', 'Prøv hvordan en undervisningsmodul fungerer.'),
         ('theory', 'teori.html', 'Teorirommet', 'Utforsk intervaller, akkorder og moduser.'),
