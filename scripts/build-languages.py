@@ -40,7 +40,7 @@ class EnglishHTML(HTMLParser):
         for key,value in attrs:
             if value is None:continue
             target=value
-            if key in ('title','aria-label','placeholder','alt','content','data-search'):
+            if key in ('title','aria-label','aria-description','placeholder','alt','content','data-search'):
                 target=translate(value)
             if tag=='html' and key=='lang':target='en'
             if target!=value:
