@@ -12,3 +12,42 @@ buttons.forEach(b=>b.addEventListener("click",()=>select(b.dataset.note)));
 let context;const status=document.getElementById("audio-status");
 async function play(values){const AudioContextClass=window.AudioContext||window.webkitAudioContext;if(!AudioContextClass){status.textContent="Lydavspilling støttes ikke i denne nettleseren.";return;}try{context ||=new AudioContextClass();await context.resume();const start=context.currentTime+0.04;values.forEach((v,i)=>{const begin=start+i*0.4;const oscillator=context.createOscillator(),gain=context.createGain();oscillator.type="sine";oscillator.frequency.setValueAtTime(frequencies[v],begin);gain.gain.setValueAtTime(0,begin);gain.gain.linearRampToValueAtTime(0.14,begin+0.025);gain.gain.exponentialRampToValueAtTime(0.001,begin+0.32);oscillator.connect(gain).connect(context.destination);oscillator.start(begin);oscillator.stop(begin+0.34);});status.textContent="Spiller demonstrasjonslyd – ikke et undervisningseksempel."; }catch{status.textContent="Kunne ikke starte lyd. Kontroller lydinnstillingene.";}}
 document.getElementById("play-note").addEventListener("click",()=>play([note]));document.getElementById("play-sequence").addEventListener("click",()=>play(["C4","D4","E4"]));
+
+/* F03 is an editorial draft, never a released course or mastery assessment. */
+const f03Draft=document.getElementById("f03-draft");
+if(code==="F03"&&f03Draft){
+ f03Draft.hidden=false;
+ document.getElementById("generic-demo").hidden=true;
+ const choiceButtons=[...document.querySelectorAll("[data-interval]")];
+ const pitch={0:261.625565,2:293.664768,4:329.627557,7:391.995436};
+ const names={2:"C → D · 2 halvtonetrinn",4:"C → E · 4 halvtonetrinn",7:"C → G · 7 halvtonetrinn"};
+ let interval=2;
+ choiceButtons.forEach(b=>b.addEventListener("click",()=>{
+   interval=Number(b.dataset.interval);
+   choiceButtons.forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
+   document.getElementById("interval-display").textContent=names[interval];
+ }));
+ async function intervalAudio(simultaneous){
+   const AC=window.AudioContext||window.webkitAudioContext;
+   const message=document.getElementById("interval-audio-status");
+   if(!AC){message.textContent="Nettleseren støtter ikke lydfunksjonen.";return;}
+   try{
+     context ||=new AC();await context.resume();
+     const start=context.currentTime+0.04;
+     [[pitch[0],start],[pitch[interval],start+(simultaneous?0:0.42)]].forEach(([frequency,begin])=>{
+       const o=context.createOscillator(),g=context.createGain();
+       o.type="sine";o.frequency.setValueAtTime(frequency,begin);
+       g.gain.setValueAtTime(0,begin);g.gain.linearRampToValueAtTime(.12,begin+.02);
+       g.gain.exponentialRampToValueAtTime(.001,begin+.38);
+       o.connect(g).connect(context.destination);o.start(begin);o.stop(begin+.4);
+     });
+     message.textContent=simultaneous?"To toner samtidig.":"To toner etter hverandre.";
+   }catch{message.textContent="Kunne ikke starte lyden.";}
+ }
+ document.getElementById("interval-melodic").addEventListener("click",()=>intervalAudio(false));
+ document.getElementById("interval-harmonic").addEventListener("click",()=>intervalAudio(true));
+ document.getElementById("check-interval").addEventListener("click",()=>{
+   const ans=document.querySelector('input[name="interval-answer"]:checked');
+   document.getElementById("interval-feedback").textContent=!ans?"Velg et svar først.":ans.value==="4"?"Riktig – C til E er fire halvtonetrinn, en stor ters. Dette er en øvelsessjekk, ikke dokumentert mestring.":"Prøv igjen: tell C–C♯–D–D♯–E. Hva får du?";
+ });
+}
