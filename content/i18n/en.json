@@ -1128,5 +1128,11 @@
   "ETT TONEUTVALG": "ONE NOTE COLLECTION",
   "MÅLTONER: TERSEN I HVER AKKORD": "TARGET NOTES: THE THIRD OF EACH CHORD",
   "E EOLISK": "E AEOLIAN",
-  "E DORISK": "E DORIAN"
+  "E DORISK": "E DORIAN",
+  "TONALT SENTRUM OG SKALAKART": "TONAL CENTRE AND SCALE MAP",
+  "Grunntone / sentrum": "Tonic / tonal centre",
+  "Romertall": "Roman numeral",
+  "Romertall viser trinn fra grunntonen, med durtrinnene som referanse. Små bokstaver betyr moll. ♭ og ♯ viser senkede og hevede trinn.": "Roman numerals show degrees from the tonic, using major-scale degrees as the reference. Lowercase means minor. ♭ and ♯ indicate lowered and raised degrees.",
+  "Ta med det valgte skalakartet og akkordrekken videre til trommer, bass og piano.": "Take the selected scale map and chord progression to drums, bass and piano.",
+  "Vis grep for ${info(ch).name}, ${analysis(ch).roman}, takt ${i+1}": "Show voicing for ${info(ch).name}, ${analysis(ch).roman}, bar ${i+1}"
 }
