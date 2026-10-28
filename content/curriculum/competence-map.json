@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "review_date": "2026-10-28",
+  "basis": [
+    "Musikkutdannelse 3.0 – Hovedstudieplan 19.10.2026",
+    "Musikkutdannelse 3.0 – Læringsmål og kompetansestatus v0.5, 14.10.2026 / presiseringer 19.10.2026"
+  ],
+  "principle": "Ingen formell mestring utledes av temafortrolighet, interne karakteranslag eller administrativ samsvarsmapping.",
+  "candidates": [
+    {
+      "modus_id": "F03",
+      "study_goal_ids": [],
+      "status": "evidence_not_located",
+      "note": "Intervallgrunnlag faglig kildekontrollert; ingen eksakt dokumentert mestringskobling lokalisert."
+    },
+    {
+      "modus_id": "I01",
+      "study_goal_ids": [
+        "H01"
+      ],
+      "status": "unmapped",
+      "note": "H01 ikke kartlagt i register v0.5."
+    },
+    {
+      "modus_id": "I02",
+      "study_goal_ids": [
+        "H01",
+        "I03"
+      ],
+      "status": "unmapped",
+      "note": "Krever konkrete prestasjoner og vurderingsspor."
+    },
+    {
+      "modus_id": "I03",
+      "study_goal_ids": [
+        "H04"
+      ],
+      "status": "unmapped",
+      "note": "H04 ikke kartlagt i register v0.5."
+    },
+    {
+      "modus_id": "A02",
+      "study_goal_ids": [
+        "H02",
+        "H04"
+      ],
+      "status": "unmapped",
+      "note": "Modal kompetanse ikke verifisert som formelt mestret."
+    },
+    {
+      "modus_id": "A03",
+      "study_goal_ids": [
+        "S01",
+        "H03"
+      ],
+      "status": "administrative_link_only",
+      "note": "S01 er omtalt som en direkte administrativ kobling, ikke godkjenning av hele MODUS-modulen."
+    },
+    {
+      "modus_id": "P02",
+      "study_goal_ids": [
+        "I03",
+        "H05"
+      ],
+      "status": "unmapped",
+      "note": "Jazzharmonisk evidens må kartlegges."
+    }
+  ]
+}
