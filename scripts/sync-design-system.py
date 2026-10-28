@@ -10,7 +10,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
-PAGES = ("index.html", "teori.html", "akkorder.html", "backingtracks.html", "modus-plus.html")
+PAGES = ("index.html", "teori.html", "akkorder.html", "backingtracks.html", "modus-plus.html", "laer-dorisk.html", "om-modus.html")
 STYLES = ("home.css", "style.css", "design-system.css")
 
 def add_design_link(path):
