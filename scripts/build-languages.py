@@ -67,7 +67,7 @@ def language_assets(page,prefix=''):
 if EN.exists():shutil.rmtree(EN)
 EN.mkdir()
 for source in list(DIST.rglob('*')):
-    if not source.is_file() or EN in source.parents or source.name in ('redaktor.html','editor.js','editor.css','cms-seed.json','_routes.json','_headers'):continue
+    if not source.is_file() or EN in source.parents or source.name in ('redaktor.html','editor.js','editor.css','cms-seed.json','_routes.json','_headers','_worker.js'):continue
     rel=source.relative_to(DIST);target=EN/rel;target.parent.mkdir(parents=True,exist_ok=True)
     if source.suffix=='.html':
         page=language_assets(source.read_text(),'../' if rel.parts[0]=='artikler' else '')

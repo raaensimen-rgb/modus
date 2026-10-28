@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import {parseFragment} from 'parse5';
 import {cleanHTML,normalizeArticle,validateArticle,renderArticle,renderCard,safeURL} from '../cms/model.mjs';
-import {onRequest} from '../functions/_middleware.js';
+import {onRequest} from '../cms/middleware.mjs';
 const seed=JSON.parse(fs.readFileSync('dist/cms-seed.json','utf8'));
 assert.equal(seed.length,26);
 for(const raw of seed){const a=normalizeArticle(raw);assert.deepEqual(validateArticle(a),[],raw.slug+' '+raw.locale);const page=renderArticle(a);assert.equal((page.match(/<fieldset data-answer=/g)||[]).length,3);assert.equal((page.match(/type="radio"/g)||[]).length,9);for(let i=1;i<=a.sections.length;i++)assert(page.includes(`id="del-${i}"`));assert(renderCard(a).includes(`/artikler/${a.slug}.html`));}

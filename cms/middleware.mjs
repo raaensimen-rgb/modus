@@ -1,5 +1,5 @@
-import config from '../client/supabase-config.json';
-import originalIds from './static-ids.json';
+import config from '../client/supabase-config.json' with {type:'json'};
+import originalIds from './static-ids.json' with {type:'json'};
 import {normalizeArticle,validateArticle,renderArticle,renderCard} from './model.mjs';
 export async function onRequest(context){
  const url=new URL(context.request.url),match=url.pathname.match(/^\/(en\/)?artikler(?:\.html|\/([a-z0-9-]+)(?:\.html)?|\/)?$/);
