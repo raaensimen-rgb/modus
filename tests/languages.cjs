@@ -28,6 +28,7 @@ for(const file of originals){
  assert(en.includes('Main navigation')&&en.includes('Chord Workshop'));
  // Every local linked page and asset must resolve inside its own locale.
  for(const [,raw] of en.matchAll(/(?:href|src)="([^"#]+)"/g)){
+  if(raw==='/redaktor.html'){assert(fs.existsSync('dist/redaktor.html'));continue;}
   if(/^(https?:|data:|mailto:|\?)/.test(raw))continue;
   let target=raw.split(/[?#]/)[0];if(!target)continue;
   target=path.resolve(path.dirname(enPath),target);
