@@ -13,7 +13,7 @@ assert 'id="map-search"' in html and 'id="map-export"' in html
 assert 'data-state="not-started"' in html and 'data-state="exploring"' in html and 'data-state="learned"' in html
 assert 'Jeg har lært dette' in html and 'ikke en attestert' in html
 assert 'noindex,nofollow' in html
-assert 'musikkart.html' in page and "('mindmap', 'musikkart.html', 'Musikkatlas')" in nav
+assert 'musikkart.html' in page and "('mindmap', 'musikkart.html', 'Mitt musikkatlas')" in nav
 assert 'localStorage.setItem(STORE' in js and 'localStorage.removeItem(STORE)' in js
 assert 'categoryRecords' in js and 'groupState' in js and 'filter' in js
 assert 'branchLayout(leftIds,true)' in js and 'branchLayout(rightIds,false)' in js, 'Whole mind map must be visible'
