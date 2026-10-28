@@ -10,7 +10,49 @@ let note="C4";const frequencies={C4:261.625565,D4:293.664768,E4:329.627557};cons
 function select(value){if(!Object.hasOwn(frequencies,value))return;note=value;buttons.forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.note===note)));keys.forEach(k=>k.classList.toggle("chosen",k.dataset.key===note));}
 buttons.forEach(b=>b.addEventListener("click",()=>select(b.dataset.note)));
 let context;const status=document.getElementById("audio-status");
-async function play(values){const AudioContextClass=window.AudioContext||window.webkitAudioContext;if(!AudioContextClass){status.textContent="Lydavspilling støttes ikke i denne nettleseren.";return;}try{context ||=new AudioContextClass();await context.resume();const start=context.currentTime+0.04;values.forEach((v,i)=>{const begin=start+i*0.4;const oscillator=context.createOscillator(),gain=context.createGain();oscillator.type="sine";oscillator.frequency.setValueAtTime(frequencies[v],begin);gain.gain.setValueAtTime(0,begin);gain.gain.linearRampToValueAtTime(0.14,begin+0.025);gain.gain.exponentialRampToValueAtTime(0.001,begin+0.32);oscillator.connect(gain).connect(context.destination);oscillator.start(begin);oscillator.stop(begin+0.34);});status.textContent="Spiller demonstrasjonslyd – ikke et undervisningseksempel."; }catch{status.textContent="Kunne ikke starte lyd. Kontroller lydinnstillingene.";}}
+// Use the existing sampled MODUS piano, not sine-wave oscillators.
+// Audio samples are recorded every three semitones; pitch-shift only to the nearest sample.
+const pianoBuffers=new Map();
+const pianoSamples=[48,51,54,57,60,63,66,69,72,75,78,81,84];
+const midiByNote={C4:60,D4:62,E4:64,G4:67};
+function nearestSample(midi){return pianoSamples.reduce((best,n)=>Math.abs(n-midi)<Math.abs(best-midi)?n:best,pianoSamples[0]);}
+async function pianoContext(){
+ const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+ if(!AudioContextClass)throw Error("AudioContext unavailable");
+ context ||=new AudioContextClass();
+ await context.resume();
+ return context;
+}
+async function pianoBuffer(midi){
+ const sample=nearestSample(midi);
+ if(!pianoBuffers.has(sample)){
+   const promise=fetch("audio/piano-"+sample+".mp3")
+     .then(response=>{if(!response.ok)throw Error("Piano sample unavailable");return response.arrayBuffer();})
+     .then(array=>context.decodeAudioData(array));
+   pianoBuffers.set(sample,promise);
+ }
+ return {buffer:await pianoBuffers.get(sample),sample};
+}
+async function playPiano(notes,simultaneous=false){
+ const ctx=await pianoContext();
+ const loaded=await Promise.all(notes.map(async n=>({midi:midiByNote[n],...(await pianoBuffer(midiByNote[n]))})));
+ const start=ctx.currentTime+0.035;
+ loaded.forEach(({midi,buffer,sample},i)=>{
+   const at=start+(simultaneous?0:i*.58);
+   const source=ctx.createBufferSource(),gain=ctx.createGain();
+   source.buffer=buffer;
+   source.playbackRate.value=Math.pow(2,(midi-sample)/12);
+   gain.gain.setValueAtTime(0,at);
+   gain.gain.linearRampToValueAtTime(simultaneous?.27:.38,at+.018);
+   gain.gain.setTargetAtTime(0,at+.38,.35);
+   source.connect(gain).connect(ctx.destination);
+   source.start(at);
+   source.stop(Math.min(at+1.8,at+buffer.duration/source.playbackRate.value));
+ });
+}
+async function play(values){
+ try{await playPiano(values);status.textContent="Spiller pianolyd · demonstrasjon.";}
+ catch{status.textContent="Kunne ikke laste pianolyden. Prøv igjen.";}}
 document.getElementById("play-note").addEventListener("click",()=>play([note]));document.getElementById("play-sequence").addEventListener("click",()=>play(["C4","D4","E4"]));
 
 /* F03 is an editorial draft, never a released course or mastery assessment. */
@@ -19,7 +61,6 @@ if(code==="F03"&&f03Draft){
  f03Draft.hidden=false;
  document.getElementById("generic-demo").hidden=true;
  const choiceButtons=[...document.querySelectorAll("[data-interval]")];
- const pitch={0:261.625565,2:293.664768,4:329.627557,7:391.995436};
  const names={2:"C → D · 2 halvtonetrinn",4:"C → E · 4 halvtonetrinn",7:"C → G · 7 halvtonetrinn"};
  let interval=2;
  choiceButtons.forEach(b=>b.addEventListener("click",()=>{
@@ -28,21 +69,11 @@ if(code==="F03"&&f03Draft){
    document.getElementById("interval-display").textContent=names[interval];
  }));
  async function intervalAudio(simultaneous){
-   const AC=window.AudioContext||window.webkitAudioContext;
    const message=document.getElementById("interval-audio-status");
-   if(!AC){message.textContent="Nettleseren støtter ikke lydfunksjonen.";return;}
-   try{
-     context ||=new AC();await context.resume();
-     const start=context.currentTime+0.04;
-     [[pitch[0],start],[pitch[interval],start+(simultaneous?0:0.42)]].forEach(([frequency,begin])=>{
-       const o=context.createOscillator(),g=context.createGain();
-       o.type="sine";o.frequency.setValueAtTime(frequency,begin);
-       g.gain.setValueAtTime(0,begin);g.gain.linearRampToValueAtTime(.12,begin+.02);
-       g.gain.exponentialRampToValueAtTime(.001,begin+.38);
-       o.connect(g).connect(context.destination);o.start(begin);o.stop(begin+.4);
-     });
-     message.textContent=simultaneous?"To toner samtidig.":"To toner etter hverandre.";
-   }catch{message.textContent="Kunne ikke starte lyden.";}
+   const notes={2:"D4",4:"E4",7:"G4"};
+   try{await playPiano(["C4",notes[interval]],simultaneous);
+     message.textContent=simultaneous?"To pianotoner samtidig.":"To pianotoner etter hverandre.";
+   }catch{message.textContent="Kunne ikke laste pianolyden. Prøv igjen.";}
  }
  document.getElementById("interval-melodic").addEventListener("click",()=>intervalAudio(false));
  document.getElementById("interval-harmonic").addEventListener("click",()=>intervalAudio(true));
