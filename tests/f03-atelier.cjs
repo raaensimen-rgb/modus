@@ -20,7 +20,7 @@ const document={getElementById:id=>nodes.get(id)||null,createElement:tag=>{const
 const window={MODUSGrand:{playMidi:async (...args)=>{calls.push(args);}}};
 vm.runInNewContext(code,{document,window,URLSearchParams,location:{search:"?modul=F03"},Math,Number,Set,Object,Array});
 assert.equal(nodes.get("f03-piano").children.length,25,"Two-octave keyboard");
-assert.equal(nodes.get("f03-fretboard").children.length,6*13+14,"Six strings, 13 fret positions and labels");
+assert.equal(nodes.get("f03-fretboard").children.length,6*14+14,"Six strings, 13 fret positions and labels");
 assert.equal(nodes.get("f03-ear-answers").children.length,2,"Easy has two interval choices");
 assert.match(nodes.get("f03-visual-status").textContent,/skjult/,"Ear notes must be hidden");
 nodes.get("f03-ear-answers").children[0].click();
