@@ -2,8 +2,9 @@
 // Configure MODUS_SUPABASE_URL, MODUS_SUPABASE_ANON_KEY, CF_ANALYTICS_TOKEN,
 // CF_ANALYTICS_ACCOUNT_ID and CF_ANALYTICS_SITE_TAG in Pages environment variables.
 export async function onRequestGet({request,env}) {
+  const analyticsToken = env.CF_ANALYTICS_TOKEN || env['CF_ANALYTICS-TOKEN'];
   const json=(value,status=200)=>new Response(JSON.stringify(value),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'}});
-  if (!env.MODUS_SUPABASE_URL || !env.MODUS_SUPABASE_ANON_KEY || !env.CF_ANALYTICS_TOKEN || !env.CF_ANALYTICS_ACCOUNT_ID || !env.CF_ANALYTICS_SITE_TAG) return json({error:'Statistikk er ikke konfigurert på serveren.'},503);
+  if (!env.MODUS_SUPABASE_URL || !env.MODUS_SUPABASE_ANON_KEY || !analyticsToken || !env.CF_ANALYTICS_ACCOUNT_ID || !env.CF_ANALYTICS_SITE_TAG) return json({error:'Statistikk er ikke konfigurert på serveren.'},503);
   const bearer=request.headers.get('authorization')||'';
   if(!/^Bearer [a-zA-Z0-9._~-]+$/.test(bearer)) return json({error:'Innlogging kreves.'},401);
   const authHeaders={apikey:env.MODUS_SUPABASE_ANON_KEY,authorization:bearer};
@@ -23,7 +24,7 @@ export async function onRequestGet({request,env}) {
         }
       }}
     }`;
-    const cf=await fetch('https://api.cloudflare.com/client/v4/graphql',{method:'POST',headers:{authorization:'Bearer '+env.CF_ANALYTICS_TOKEN,'content-type':'application/json'},body:JSON.stringify({query,variables:{account:env.CF_ANALYTICS_ACCOUNT_ID,start,end:now.toISOString(),site:env.CF_ANALYTICS_SITE_TAG}}),signal:AbortSignal.timeout(10000)});
+    const cf=await fetch('https://api.cloudflare.com/client/v4/graphql',{method:'POST',headers:{authorization:'Bearer '+analyticsToken,'content-type':'application/json'},body:JSON.stringify({query,variables:{account:env.CF_ANALYTICS_ACCOUNT_ID,start,end:now.toISOString(),site:env.CF_ANALYTICS_SITE_TAG}}),signal:AbortSignal.timeout(10000)});
     if(!cf.ok)return json({error:'Cloudflare Analytics svarte med HTTP '+cf.status},502);
     const result=await cf.json();
     if(result.errors?.length)return json({error:'Cloudflare API-feil: '+result.errors.map(e=>e.message).join('; ').slice(0,300)},502);
