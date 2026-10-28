@@ -28,9 +28,9 @@ assert 'leafX=left?33:1227' in js, 'All 24 module labels need visible positions'
 assert 'class:"map-branch "+variant(state)' in js
 assert 'records[m.id].state==="learned"' in js
 assert 'window.confirm(' in js and 'JSON.stringify(payload' in js
-assert 'map-emblem-letter' in js and 'MITT MUSIKKATLAS' in js
-assert 'fill:"#17231b"' in js and 'fill:"#d7f48c"' not in js, "Hub must use a dark panel, not a lime tile"
-assert '.map-emblem .map-emblem-title' in css
+assert 'atlas-globe' in js and 'MITT MUSIKKATLAS' in js
+assert 'id:"atlas-globe-halo"' in js and 'fill:"#d7f48c"' not in js, "Globe should replace former filled tile"
+assert '.atlas-globe-caption' in css
 assert 'publication_approval' in (root/"content/curriculum/quality-register.json").read_text()
 # Every planned curriculum module must appear exactly once, and every category
 # must remain represented in the diagram. Silent omissions would distort the map.
