@@ -21,7 +21,8 @@ for a in articles:
   seed.append(b)
 (DIST/'cms-seed.json').write_text(json.dumps(seed,ensure_ascii=False))
 (ROOT/'cms/static-ids.json').write_text(json.dumps([a['slug'] for a in articles]))
-(DIST/'_routes.json').write_text(json.dumps({'version':1,'include':['/artikler','/artikler.html','/artikler/','/artikler/*','/en/artikler','/en/artikler.html','/en/artikler/','/en/artikler/*'],'exclude':[]}))
+# Cloud rendering is staged until its deployment has been verified.
+for name in ['_routes.json','_worker.js']:(DIST/name).unlink(missing_ok=True)
 (DIST/'_headers').write_text('/redaktor*\n  X-Robots-Tag: noindex, nofollow\n  Cache-Control: no-store\n')
 (DIST/'redaktor.html').write_text((ROOT/'cms/editor.html').read_text())
 print('Built article editor, 26 source articles and CMS routes.')
