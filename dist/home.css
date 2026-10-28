@@ -42,3 +42,22 @@ main > .closing p{width:100%;text-align:center}
 @keyframes modus-reflection-shimmer{0%,100%{opacity:.68;transform:scaleX(.985)}50%{opacity:1;transform:scaleX(1.016)}}
 @media(prefers-reduced-motion:reduce){.landscape .modus-lake-reflection{animation:none;opacity:.85}}
 @media(prefers-contrast:more){.landscape .ambient-valley-light{display:none}}
+
+/* Readability refinement: small homepage labels and supporting text. */
+.hero .eyebrow{font-size:12px;letter-spacing:2px}
+.hero .quote-translation{font-size:15px;line-height:1.65}
+.hero .quote-credit{font-size:12px;letter-spacing:.45px;line-height:1.6}
+.hero .quote-explanation{font-size:15px;line-height:1.75;max-width:455px}
+.hero .hero-route-note{font-size:13px;line-height:1.65;max-width:455px;color:var(--modus-c-c4cbb9,#c4cbb9)}
+.hero .hero-note{font-size:12px;line-height:1.6}
+.hero .scroll-link{font-size:11px}
+.hero .hero-caption{font-size:11px}
+@media(max-width:700px){
+ .hero .eyebrow{font-size:11px}
+ .hero .quote-translation{font-size:14px}
+ .hero .quote-credit{font-size:12px}
+ .hero .quote-explanation{font-size:14px;line-height:1.75;max-width:330px}
+ .hero .hero-route-note{font-size:13px;max-width:330px}
+ .hero .hero-note{font-size:11px;max-width:300px}
+ .hero .hero-caption{font-size:10px}
+}
