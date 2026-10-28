@@ -32,7 +32,7 @@ def render_header(prefix='', active='home'):
         selected = any(item[0] == active for item in destinations)
         links = ''.join(link(*item) for item in destinations)
         return (f'<div class="nav-group{ " is-active" if selected else ""}">'
-                f'<button type="button" class="nav-trigger" id="nav-{key}" aria-expanded="false" aria-controls="nav-panel-{key}">{label}<span class="nav-chevron" aria-hidden="true">⌄</span></button>'
+                f'<button type="button" class="nav-trigger" id="nav-{key}" aria-expanded="false" aria-controls="nav-panel-{key}">{label}<span class="nav-chevron" aria-hidden="true"></span></button>'
                 f'<div class="nav-panel" id="nav-panel-{key}" aria-labelledby="nav-{key}" hidden>{links}</div></div>')
     play = group('play', 'Spill', (
         ('jam', 'backingtracks.html', 'Backingtracks', 'Spill med trommer, bass og piano.'),
