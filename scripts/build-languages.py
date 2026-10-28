@@ -72,6 +72,9 @@ for source in list(DIST.rglob('*')):
     if source.suffix=='.html':
         page=language_assets(source.read_text(),'../' if rel.parts[0]=='artikler' else '')
         source.write_text(page)
+        if rel.as_posix() == 'laereplan.html':
+            # No unreviewed auto-translation of a planned curriculum: display a short English notice.
+            page = re.sub(r'<main\\b[^>]*>[\\s\\S]*?</main>', '<main class="curriculum"><section class="curriculum-hero"><p class="eyebrow">MODUS / CURRICULUM / PREVIEW</p><h1>Curriculum <em>in development.</em></h1><p class="lead">The detailed curriculum preview is currently available in Norwegian. The English version is awaiting editorial review and has not been approved for publication.</p><p><a class="button" href="../laereplan.html">View the Norwegian outline <span>↗</span></a></p></section></main>', page, count=1)
         p=EnglishHTML();p.feed(page);result=''.join(p.out)
         result=result.replace('<html lang="en">','<html lang="en">',1)
         target.write_text(result)
