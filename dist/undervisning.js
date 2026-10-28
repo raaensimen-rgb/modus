@@ -26,7 +26,7 @@ async function pianoContext(){
 async function pianoBuffer(midi){
  const sample=nearestSample(midi);
  if(!pianoBuffers.has(sample)){
-   const promise=fetch("audio/piano-"+sample+".mp3")
+   const promise=fetch("audio/grand-"+sample+".mp3")
      .then(response=>{if(!response.ok)throw Error("Piano sample unavailable");return response.arrayBuffer();})
      .then(array=>context.decodeAudioData(array));
    pianoBuffers.set(sample,promise);
@@ -51,7 +51,7 @@ async function playPiano(notes,simultaneous=false){
  });
 }
 async function play(values){
- try{await playPiano(values);status.textContent="Spiller pianolyd · demonstrasjon.";}
+ try{await playPiano(values);status.textContent="Spiller flygellyd · demonstrasjon.";}
  catch{status.textContent="Kunne ikke laste pianolyden. Prøv igjen.";}}
 document.getElementById("play-note").addEventListener("click",()=>play([note]));document.getElementById("play-sequence").addEventListener("click",()=>play(["C4","D4","E4"]));
 
