@@ -7,6 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 register = json.loads((ROOT / "content/curriculum/quality-register.json").read_text(encoding="utf-8"))
 page = (ROOT / "dist/laereplan.html").read_text(encoding="utf-8")
 navigation = (ROOT / "scripts/site_navigation.py").read_text(encoding="utf-8")
+learning_path = (ROOT / "dist/laeringssti.html").read_text(encoding="utf-8")
+frontpage = (ROOT / "dist/index.html").read_text(encoding="utf-8")
 lesson = (ROOT / "dist/undervisning.html").read_text(encoding="utf-8")
 lesson_js = (ROOT / "dist/undervisning.js").read_text(encoding="utf-8")
 atelier_js = (ROOT / "dist/f03-atelier.js").read_text(encoding="utf-8")
@@ -16,6 +18,12 @@ assert len(modules) == 24, "Expected 24 initial planned modules"
 assert len({m["id"] for m in modules}) == len(modules), "Duplicate curriculum IDs"
 assert re.search(r'<meta name="robots" content="noindex,nofollow">', page), "Preview must not be indexed"
 assert "laereplan.html" in navigation, "Curriculum must appear in shared navigation"
+assert "('path', 'laeringssti.html', 'Læringssti')" in navigation
+assert "('course', 'laer-dorisk.html', 'Dorisk leksjon')" in navigation
+assert 'href="laeringssti.html" class="button">Start læringsstien' in frontpage
+assert 'href="laer-dorisk.html"' in learning_path
+assert 'href="undervisning.html?modul=F03"' in learning_path
+assert 'href="laereplan.html"' in learning_path
 assert page.count('class="level-detail"') == 6
 assert page.count("undervisning.html?modul=") == 24, "Module links missing"
 assert "undervisning.html" in navigation
