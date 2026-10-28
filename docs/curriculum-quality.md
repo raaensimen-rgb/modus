@@ -31,3 +31,11 @@ En modul kan bare merkes `approved` når alle fire kontrollene er oppfylt. Innti
 - `tests/curriculum.py`: struktur og intern publiseringsport.
 
 Læreplansiden er merket `noindex,nofollow` så lenge dette er en forhåndsvisning. Det er **ikke** en sikkerhetsmekanisme: Utkast bør holdes i egen gren og ikke merges før godkjenning.
+
+## Redaksjonelt registreringsverktøy
+
+Åpne `docs/curriculum-editor.html` lokalt i en nettleser, og velg `content/curriculum/quality-register.json` med filvelgeren. Registrer faglige kilder (med presise referanser), kobling til godkjent mål-ID og dokumentert arbeid i Musikkutdannelse 3.0, redaksjonell gjennomgang og eksplisitt publiseringsbeslutning. Trykk **Lagre modul i arbeidsjournal**, deretter **Last ned oppdatert JSON**. Erstatt den opprinnelige journalfilen i prosjektet og kjør testene.
+
+Verktøyet lagrer kun midlertidig i nettleserens minne til JSON eksporteres. Det krever ingen innlogging, men er med hensikt **ikke** lagt i publiseringsmappen `dist`. Registrering er ikke i seg selv faglig verifikasjon; kildene og kompetansedokumentasjonen skal kontrolleres manuelt.
+
+Undervisningsrommet `dist/undervisning.html` er bare en funksjonell demonstrasjon. Dets tre syntetiske toner og progresjonstrinn dokumenterer ingen musikalitet eller elevmestring. Alle modulene forblir planlagte inntil hele godkjenningskjeden er oppfylt.
