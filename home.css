@@ -12,6 +12,8 @@
 
 .theory-entry .button{max-width:100%;white-space:normal}
 
+/* Consistent, medium-weight CTA arrows, independent of the text font. */
+.hero-actions .hero-action-arrow{width:24px;height:24px;flex:none;display:block}
 /* Two clear starting points, with the guided path first. */
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch;max-width:520px}
 .hero-actions .button{min-height:44px;justify-content:space-between;gap:18px;padding:11px 17px;font-size:13px}
