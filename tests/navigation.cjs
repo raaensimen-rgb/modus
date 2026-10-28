@@ -16,6 +16,8 @@ for(const label of ['Start å lære','Hele utdanningsløpet','Leksjoner og øvel
  assert(dropdownMarkup.includes(label),'missing descriptive label: '+label);
 }
 const navStyles=fs.readFileSync('dist/navigation.css','utf8');
+assert(dropdownMarkup.includes('class="nav-chevron" aria-hidden="true"></span>'),'chevrons must be pure decorative CSS shapes');
+
 assert(navStyles.includes('.site-header .nav-panel small{display:block'),'submenu descriptions must be visible');
 assert(navStyles.includes('#nav-panel-learn'),'learning submenu should have a distinct readable layout');
 console.log('Passed: button disclosure, native link clicks, exclusive panels, outside focus/click and Escape.');
