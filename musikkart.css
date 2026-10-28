@@ -63,3 +63,10 @@
 .map-inspector{margin-top:4px}
 .map-head{margin-bottom:17px}
 @media(max-width:650px){.map-scroll svg{min-width:950px}}
+
+
+/* MODUS atlas signature — understated emblem replacing the generic lime tile. */
+.map-node.root-node.map-emblem rect{opacity:1;filter:none}
+.map-emblem .map-emblem-letter{font-family:Manrope,Arial,sans-serif;font-size:72px;font-weight:500;font-style:italic;letter-spacing:-9px;fill:#d7f48c;opacity:1}
+.map-emblem .map-emblem-kicker{font-family:Manrope,Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2.0px;fill:#abc68f;opacity:1}
+.map-emblem .map-emblem-title{font-family:Manrope,Arial,sans-serif;font-size:17px;font-weight:650;letter-spacing:.25px;fill:#eef6e8;opacity:1}
