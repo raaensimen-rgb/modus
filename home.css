@@ -21,3 +21,12 @@
 .hero-route-note{max-width:440px;font-size:12px;line-height:1.8;color:var(--muted);margin:16px 0 0}
 html[data-theme=contrast] .hero-actions .button-secondary{background:#fff;color:#000;border:2px solid #000}
 @media(max-width:520px){.hero-actions{flex-direction:column;align-items:stretch;max-width:320px}.hero-actions .button{width:100%}.hero-route-note{max-width:320px}}
+
+/* MODUS home: restrained, subject-specific visual signatures. */
+.theory-entry{position:relative;isolation:isolate;overflow:hidden;min-height:190px}
+.theory-entry>div,.theory-entry>.button{position:relative;z-index:1}
+.theory-entry>div{max-width:57%}
+.theory-entry>.entry-art{position:absolute;right:clamp(200px,23%,300px);top:50%;transform:translateY(-50%);width:clamp(125px,15vw,180px);height:auto;color:var(--accent);opacity:.66;pointer-events:none;z-index:0}
+.theory-entry>.entry-art-plus{opacity:.55;filter:drop-shadow(0 0 13px rgba(196,238,112,.12))}
+@media(max-width:950px){.theory-entry>div{max-width:60%}.theory-entry>.entry-art{right:170px;width:125px;opacity:.36}}
+@media(max-width:700px){.theory-entry{min-height:0}.theory-entry>div{max-width:100%}.theory-entry>.entry-art{top:30px;right:15px;transform:none;width:85px;opacity:.17}.theory-entry>.entry-art-plus{opacity:.18}}
