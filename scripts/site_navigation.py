@@ -10,7 +10,8 @@ NAV_ITEMS = (
     ('theory', 'teori.html', 'Teorirommet'),
     ('chords', 'akkorder.html', 'Akkordverksted'),
     ('articles', 'artikler.html', 'Artikler'),
-    ('course', 'laer-dorisk.html', 'Læringssti'),
+    ('path', 'laeringssti.html', 'Læringssti'),
+    ('course', 'laer-dorisk.html', 'Dorisk leksjon'),
     ('curriculum', 'laereplan.html', 'Læreplan'),
     ('lesson', 'undervisning.html', 'Undervisningsrom'),
     ('membership', 'modus-plus.html', 'Medlemskap'),
@@ -37,7 +38,8 @@ def render_header(prefix='', active='home'):
         ('chords', 'akkorder.html', 'Akkordverksted', 'Bygg akkordrekker og utforsk grep.'),
     ))
     learn = group('learn', 'Lær', (
-        ('course', 'laer-dorisk.html', 'Læringssti', 'Lær steg for steg, fra lytting til spilling.'),
+        ('path', 'laeringssti.html', 'Læringssti', 'Oversikt over nivåer, leksjoner og neste steg.'),
+        ('course', 'laer-dorisk.html', 'Dorisk leksjon', 'Forstå og bruk dorisk i seks trinn.'),
         ('curriculum', 'laereplan.html', 'Læreplan', 'Se nivåene og fagområdene vi bygger.'),
         ('lesson', 'undervisning.html', 'Undervisningsrom', 'Prøv hvordan en undervisningsmodul fungerer.'),
         ('theory', 'teori.html', 'Teorirommet', 'Utforsk intervaller, akkorder og moduser.'),
