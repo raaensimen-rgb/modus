@@ -62,7 +62,7 @@ function render(){
    const modules=groupModules(g),y=top+bands[i]/2;
    const state=groupState(g);
    const catX=left?420:940,catW=240,catH=43;
-   const rootEdge=left?midX-106:midX+106;
+   const rootEdge=left?midX-130:midX+130;
    const catEdge=left?catX+catW:catX;
    layer.append(curved(rootEdge,midY,catEdge,y,g.color,state,4.2));
    const categoryNode=node(catX,y,catW,catH,g.name,g.color,state,"branch-node",g.id);
@@ -86,9 +86,14 @@ function render(){
  }
  branchLayout(leftIds,true);
  branchLayout(rightIds,false);
- const hub=svgEl("g",{class:"map-node root-node",role:"img","aria-label":"MODUS – hele musikkens landskap"});
- hub.append(svgEl("rect",{x:midX-106,y:midY-38,width:212,height:76,rx:20,fill:"#d7f48c",stroke:"#d7f48c"}));
- hub.append(svgEl("text",{x:midX-85,y:midY+6},"MUSIKKARTET"));
+ const hub=svgEl("g",{class:"map-node root-node map-emblem",role:"img","aria-label":"MODUS – Mitt musikkatlas"});
+ hub.append(svgEl("rect",{x:midX-130,y:midY-43,width:260,height:86,rx:17,fill:"#17231b",stroke:"#a8c77d","stroke-width":1.5}));
+ hub.append(svgEl("rect",{x:midX-123,y:midY-36,width:246,height:72,rx:12,fill:"none",stroke:"#71895c","stroke-width":.6,opacity:.45}));
+ const emblem=svgEl("text",{x:midX-107,y:midY+18,class:"map-emblem-letter",transform:"rotate(-12 "+(midX-84)+" "+midY+")"},"m");
+ hub.append(emblem);
+ hub.append(svgEl("path",{d:"M "+(midX-30)+" "+(midY-24)+" V "+(midY+24),stroke:"#53684d","stroke-width":1}));
+ hub.append(svgEl("text",{x:midX-14,y:midY-11,class:"map-emblem-kicker"},"MODUS / LÆRING"));
+ hub.append(svgEl("text",{x:midX-14,y:midY+14,class:"map-emblem-title"},"MITT MUSIKKATLAS"));
  layer.append(hub);
  svg.append(layer);
  $("map-count").textContent=groups.length+" fagområder · "+catalog.length+" synlige moduler";
