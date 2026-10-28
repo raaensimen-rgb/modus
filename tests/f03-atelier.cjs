@@ -2,7 +2,7 @@
 const assert=require("node:assert/strict"),fs=require("node:fs"),vm=require("node:vm");
 const code=fs.readFileSync("dist/f03-atelier.js","utf8");
 class Node{
- constructor(id=""){this.id=id;this.children=[];this.listeners={};this.dataset={};this.attrs={};this.style={};this.className="";this.textContent="";this.value="easy";this.disabled=false;this.classList={toggle:(name,enabled)=>{const classes=new Set(this.className.split(" ").filter(Boolean));if(enabled)classes.add(name);else classes.delete(name);this.className=[...classes].join(" ");}};}
+ constructor(id=""){this.id=id;this.children=[];this.listeners={};this.dataset={};this.attrs={};this.style={};this.className="";this.textContent="";this.value="easy";this.disabled=false;this.classList={contains:name=>this.className.split(" ").includes(name),toggle:(name,enabled)=>{const classes=new Set(this.className.split(" ").filter(Boolean));if(enabled)classes.add(name);else classes.delete(name);this.className=[...classes].join(" ");}};}
  append(node){this.children.push(node);}
  replaceChildren(){this.children=[];}
  setAttribute(name,value){this.attrs[name]=value;}
