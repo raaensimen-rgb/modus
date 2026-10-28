@@ -21,7 +21,7 @@ assert "undervisning.html" in navigation
 assert 'noindex,nofollow' in lesson
 assert "data-note" in lesson and "play-sequence" in lesson
 assert "new AudioContextClass()" in lesson_js
-assert "audio/piano-" in lesson_js and "createBufferSource()" in lesson_js
+assert "audio/grand-" in lesson_js and "createBufferSource()" in lesson_js
 assert "createOscillator()" not in lesson_js, "Sine-wave audio is not the default"
 assert "ikke godkjent undervisning" in lesson
 assert 'id="f03-draft" hidden' in lesson, "F03 must not default to public course content"
