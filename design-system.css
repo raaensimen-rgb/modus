@@ -91,3 +91,22 @@ body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; 
     transform: none;
   }
 }
+
+/* Extend the same rhythm to the guided course and the MODUS story. */
+:where(.course-main,.about-main) :where(h1,h2,h3) {
+  text-wrap: balance;
+}
+:where(.course-main,.about-main) :where(p,li) {
+  overflow-wrap: break-word;
+}
+:where(.course-main,.about-main) .eyebrow {
+  letter-spacing: .13em;
+  font-weight: 600;
+  line-height: 1.5;
+}
+:where(.course-main,.about-main) :where(.course-toolbar,.about-story) {
+  min-width: 0;
+}
+:where(.course-main,.about-main) :where(a,button,input,select) {
+  max-width: 100%;
+}
