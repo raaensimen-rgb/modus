@@ -1,0 +1,36 @@
+/*
+ * MODUS design system v1 — shared presentation and interaction details.
+ * Intentionally conservative: existing page layouts, themes and tool controls
+ * remain owned by their page-specific stylesheets.
+ */
+:root {
+  --modus-ui-radius-sm: 7px;
+  --modus-ui-radius-card: 13px;
+  --modus-ui-focus: var(--accent, #d7f48c);
+  --modus-ui-motion: 160ms;
+}
+html { -webkit-text-size-adjust: 100%; }
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 2px solid var(--modus-ui-focus);
+  outline-offset: 3px;
+}
+:where(a,button,input,select,textarea,summary,[tabindex]):focus:not(:focus-visible) {
+  outline: none;
+}
+/* Keep visual feedback consistent for navigational actions, not playback controls. */
+:where(a.button,button.button,.plan-action,.nav-cta) {
+  transition: background-color var(--modus-ui-motion) ease,
+              border-color var(--modus-ui-motion) ease,
+              color var(--modus-ui-motion) ease,
+              transform var(--modus-ui-motion) ease;
+}
+:where(.theory-main,.chord-main,.articles-page,.membership-main) :where(h1,h2,h3) {
+  text-wrap: balance;
+}
+:where(.theory-main,.chord-main,.articles-page,.membership-main) :where(p,li) {
+  overflow-wrap: break-word;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(a.button,button.button,.plan-action,.nav-cta) { transition: none; }
+}
