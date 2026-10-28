@@ -43,3 +43,23 @@
 .map-branch.mid{opacity:.68}
 .map-branch.on{opacity:.95}
 @media(max-width:650px){.map-scroll svg{min-width:990px}}
+
+
+/* Illustrated overview: a single compact artwork, not a navigational accordion. */
+.map-scroll{max-height:none;overflow-x:auto;overflow-y:hidden;background:radial-gradient(ellipse at center,rgba(55,85,62,.2),transparent 65%),#111914}
+.map-scroll svg{width:100%;min-width:950px;height:auto;display:block}
+.map-node.branch-node text{font-size:16px;font-weight:600}
+.map-node.module-node text{font-size:14px;font-weight:500}
+.map-node.root-node text{font-size:21px;font-weight:750}
+.map-node rect{stroke-width:1.1}
+.map-node.off rect{opacity:.46}
+.map-node.off text{opacity:.86}
+.map-node.mid rect{opacity:.73}
+.map-node.mid text{opacity:.97}
+.map-node.on rect{opacity:1;filter:drop-shadow(0 0 7px currentColor)}
+.map-branch.off{opacity:.34}
+.map-branch.mid{opacity:.60}
+.map-branch.on{opacity:.92}
+.map-inspector{margin-top:4px}
+.map-head{margin-bottom:17px}
+@media(max-width:650px){.map-scroll svg{min-width:950px}}
