@@ -11,7 +11,7 @@ NAV_ITEMS = (
     ('chords', 'akkorder.html', 'Akkordverksted'),
     ('articles', 'artikler.html', 'Artikler'),
     ('path', 'laeringssti.html', 'Læringssti'),
-    ('mindmap', 'musikkart.html', 'Musikkatlas'),
+    ('mindmap', 'musikkart.html', 'Mitt musikkatlas'),
     ('course', 'laer-dorisk.html', 'Dorisk leksjon'),
     ('curriculum', 'laereplan.html', 'Læreplan'),
     ('lesson', 'undervisning.html', 'Undervisningsrom'),
@@ -48,7 +48,7 @@ def render_header(prefix='', active='home'):
     return (
         f'<header class="site-header"><a class="brand" href="{home}" aria-label="MODUS – forsiden">'
         '<span class="brandmark" aria-hidden="true">m</span>MODUS<span class="branddot">.</span></a>'
-        '<nav class="site-nav" aria-label="Hovedmeny">' + link('home', './', 'Forside') + learn + play + link('mindmap', 'musikkart.html', 'Musikkatlas') + link('articles', 'artikler.html', 'Artikler')
+        '<nav class="site-nav" aria-label="Hovedmeny">' + link('home', './', 'Forside') + learn + play + link('mindmap', 'musikkart.html', 'Mitt musikkatlas') + link('articles', 'artikler.html', 'Artikler')
         + link('about', 'om-modus.html', 'Om MODUS') + '</nav><div class="header-tools">'
         + link('membership', 'modus-plus.html', 'Medlemskap', css='nav-membership')
         + link('account', 'konto.html', 'Logg inn', css='nav-account')
