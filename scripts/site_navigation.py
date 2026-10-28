@@ -40,9 +40,9 @@ def render_header(prefix='', active='home'):
     ))
     learn = group('learn', 'Lær', (
         ('path', 'laeringssti.html', 'Start å lære', 'Finn ditt utgangspunkt og neste steg.'),
-        ('curriculum', 'laereplan.html', 'Læreplan', 'Se nivåene og fagområdene vi bygger.'),
-        ('lesson', 'undervisning.html', 'Undervisningsrom', 'Prøv hvordan en undervisningsmodul fungerer.'),
-        ('theory', 'teori.html', 'Teorirommet', 'Utforsk intervaller, akkorder og moduser.'),
+        ('curriculum', 'laereplan.html', 'Hele utdanningsløpet', 'Se nivåene, fagområdene og progresjonen.'),
+        ('lesson', 'undervisning.html', 'Leksjoner og øvelser', 'Prøv undervisningsmoduler under utvikling.'),
+        ('theory', 'teori.html', 'Utforsk musikkteori', 'Interaktive verktøy for harmoni og teori.'),
     ))
     return (
         f'<header class="site-header"><a class="brand" href="{home}" aria-label="MODUS – forsiden">'
