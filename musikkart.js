@@ -43,40 +43,58 @@ function render(){
  const layer=svgEl("g",{});
  const selectedGroup=groups.find(g=>g.id===category);
  const opened=!!selectedGroup;
- const height=opened?Math.max(680,selectedGroup.ids.length*85+180):1210;
- svg.setAttribute("viewBox","0 0 1380 "+height);
+ const height=opened?Math.max(660,selectedGroup.ids.length*67+145):800;
+ const width=1410;
+ svg.setAttribute("viewBox","0 0 "+width+" "+height);
  const center=height/2;
- const root=svgEl("g",{class:"map-node root-node",role:"img","aria-label":"MODUS – musikalsk landskap"});
- root.append(svgEl("rect",{x:30,y:center-45,width:315,height:90,rx:16,fill:"#d7f48c",stroke:"#d7f48c"}));
- root.append(svgEl("text",{x:53,y:center+7},"MODUS · MUSIKKART"));layer.append(root);
+ function branch(x1,y1,x2,y2,color,state,weight){
+   const side=x2>x1?1:-1,span=Math.abs(x2-x1);
+   return svgEl("path",{d:"M "+x1+" "+y1+" C "+(x1+side*span*.53)+" "+y1+", "+(x2-side*span*.53)+" "+y2+", "+x2+" "+y2,
+     stroke:color,"stroke-width":weight,class:"map-branch "+variant(state),style:"color:"+color});
+ }
+ function root(x,y,w=232,h=70){
+   const n=svgEl("g",{class:"map-node root-node",role:"img","aria-label":"MODUS – musikalsk landskap"});
+   n.append(svgEl("rect",{x,y:y-h/2,width:w,height:h,rx:18,fill:"#d7f48c",stroke:"#d7f48c"}));
+   n.append(svgEl("text",{x:x+23,y:y+6},"MUSIKKARTET"));
+   return n;
+ }
  if(!opened){
-   // Overview: only broad subject areas. No crowded microtext or overlapping modules.
-   const step=107,first=(height-step*(groups.length-1))/2;
+   // A true two-sided mind map: varied branch positions, spacious labels and no module clutter.
+   layer.append(root(589,center));
+   const offsets=[-260,-140,-15,117,244];
    groups.forEach((g,i)=>{
-     const y=first+i*step,state=groupState(g);
-     layer.append(curve(345,center,550,y,g.color,state,5));
-     const cat=node(550,y,725,70,g.name,g.color,state,"branch-node",g.id);
-     cat.append(svgEl("text",{x:1187,y:y+6,fill:"#b9c6b2","font-size":16,"font-family":"Manrope,Arial,sans-serif","text-anchor":"end"},g.ids.length?g.ids.length+" emner  ›":"Utforsk  ›"));
-     if(search && (g.name+" "+groupModules(g).map(m=>m.title).join(" ")).toLowerCase().includes(search))cat.classList.add("match");
-     layer.append(cat);
+     const left=i<5,j=i%5;
+     const y=center+offsets[j]+(left?0:16)+(j===2?-9:0);
+     const w=360,x=left?70:985,anchor=left?x+w:x;
+     const state=groupState(g);
+     layer.append(branch(left?589:821,center,anchor,y,g.color,state,4.2));
+     const n=node(x,y,w,54,g.name,g.color,state,"branch-node",g.id);
+     const count=groupModules(g).length;
+     n.append(svgEl("text",{x:x+w-17,y:y+5,fill:"#b8c6b4","font-size":13,
+       "font-family":"Manrope,Arial,sans-serif","text-anchor":"end"},count?count+" ›":"↗"));
+     if(search&&(g.name+" "+groupModules(g).map(m=>m.id+" "+m.title).join(" ")).toLowerCase().includes(search))n.classList.add("match");
+     layer.append(n);
    });
  }else{
+   // Focus view preserves the branch metaphor without squeezing many small module labels.
    const g=selectedGroup,state=groupState(g),items=groupModules(g);
    const y=center;
-   layer.append(curve(345,center,455,y,g.color,state,6));
-   const branch=node(455,y,395,72,g.name,g.color,state,"branch-node",g.id);
-   layer.append(branch);
+   layer.append(root(40,y,224,68));
+   layer.append(branch(264,y,420,y,g.color,state,5));
+   const parent=node(420,y,400,66,g.name,g.color,state,"branch-node",g.id);
+   layer.append(parent);
    if(items.length){
-     const spacing=85,first=(height-spacing*(items.length-1))/2;
+     const spacing=67,first=(height-spacing*(items.length-1))/2;
      items.forEach((m,i)=>{
        const cy=first+i*spacing;
-       layer.append(curve(850,y,933,cy,g.color,activityState(m.id),3));
-       const item=node(933,cy,414,62,m.id+" · "+m.title,g.color,activityState(m.id),"module-node",m.id);
+       layer.append(branch(820,y,950,cy,g.color,activityState(m.id),2.8));
+       const item=node(950,cy,425,49,m.id+" · "+m.title,g.color,activityState(m.id),"module-node",m.id);
        if(search&&(m.id+" "+m.title).toLowerCase().includes(search))item.classList.add("match");
        layer.append(item);
      });
    }else{
-     layer.append(svgEl("text",{x:920,y:center+5,fill:"#c4d0be","font-size":20,"font-family":"Manrope,Arial,sans-serif"},"Dette fagområdet kartlegges videre."));
+     layer.append(svgEl("text",{x:948,y:center+5,fill:"#c4d0be","font-size":18,
+       "font-family":"Manrope,Arial,sans-serif"},"Dette fagområdet kartlegges videre."));
    }
  }
  svg.append(layer);
@@ -84,9 +102,9 @@ function render(){
  $("map-learned").textContent=catalog.filter(m=>records[m.id].state==="learned").length;
  $("map-exploring").textContent=catalog.filter(m=>records[m.id].state==="exploring").length;
  $("map-planned").textContent=catalog.filter(m=>records[m.id].idea).length;
- for(const button of $("inspector-module").querySelectorAll("[data-state]")){
+ for(const b of $("inspector-module").querySelectorAll("[data-state]")){
    const state=chosen?records[chosen].state:category?groupState(selectedGroup):"not-started";
-   button.setAttribute("aria-pressed",String(button.dataset.state===state));
+   b.setAttribute("aria-pressed",String(b.dataset.state===state));
  }
 }
 
