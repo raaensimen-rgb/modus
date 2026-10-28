@@ -74,7 +74,7 @@ for source in list(DIST.rglob('*')):
         source.write_text(page)
         if rel.as_posix() == 'musikkart.html':
             # Reviewed English holding page: do not machine-translate unreviewed personal learning-state UI.
-            page = re.sub(r'<main\\b[^>]*>[\\s\\S]*?</main>', '<main class="map-shell"><section class="map-hero"><p class="map-eyebrow">MODUS / MUSIC MAP</p><h1>See how it all <em>connects.</em></h1><p>This music-theory mind map is currently available in Norwegian. The map lets you explore topics and privately mark what you are working on or believe you have learned. These marks are not verified qualifications.</p><div class="map-hero-links"><a href="../musikkart.html">Open the Norwegian music map</a><a href="laeringssti.html">Explore the learning path</a></div></section></main>', page, count=1)
+            page = re.sub(r'<main\b[^>]*>[\s\S]*?</main>', '<main class="map-shell"><section class="map-hero"><p class="map-eyebrow">MODUS / MUSIC MAP</p><h1>See how it all <em>connects.</em></h1><p>This music-theory mind map is currently available in Norwegian. The map lets you explore topics and privately mark what you are working on or believe you have learned. These marks are not verified qualifications.</p><div class="map-hero-links"><a href="../musikkart.html">Open the Norwegian music map</a><a href="laeringssti.html">Explore the learning path</a></div></section></main>', page, count=1)
             page = page.replace('<script src="musikkart.js" defer></script>', '')
         if rel.as_posix() == 'laeringssti.html':
             # Separate reviewed English summary: no automatic translation of unapproved lessons.
