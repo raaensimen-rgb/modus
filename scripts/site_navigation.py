@@ -12,6 +12,7 @@ NAV_ITEMS = (
     ('articles', 'artikler.html', 'Artikler'),
     ('course', 'laer-dorisk.html', 'Læringssti'),
     ('curriculum', 'laereplan.html', 'Læreplan'),
+    ('lesson', 'undervisning.html', 'Undervisningsrom'),
     ('membership', 'modus-plus.html', 'Medlemskap'),
     ('about', 'om-modus.html', 'Om MODUS'),
 )
@@ -38,6 +39,7 @@ def render_header(prefix='', active='home'):
     learn = group('learn', 'Lær', (
         ('course', 'laer-dorisk.html', 'Læringssti', 'Lær steg for steg, fra lytting til spilling.'),
         ('curriculum', 'laereplan.html', 'Læreplan', 'Se nivåene og fagområdene vi bygger.'),
+        ('lesson', 'undervisning.html', 'Undervisningsrom', 'Prøv hvordan en undervisningsmodul fungerer.'),
         ('theory', 'teori.html', 'Teorirommet', 'Utforsk intervaller, akkorder og moduser.'),
     ))
     return (
