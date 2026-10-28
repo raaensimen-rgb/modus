@@ -39,7 +39,7 @@ def render_header(prefix='', active='home'):
         ('chords', 'akkorder.html', 'Akkordverksted', 'Bygg akkordrekker og utforsk grep.'),
     ))
     learn = group('learn', 'Lær', (
-        ('path', 'laeringssti.html', 'Læringssti', 'Oversikt over nivåer, leksjoner og neste steg.'),
+        ('path', 'laeringssti.html', 'Start å lære', 'Finn ditt utgangspunkt og neste steg.'),
         ('curriculum', 'laereplan.html', 'Læreplan', 'Se nivåene og fagområdene vi bygger.'),
         ('lesson', 'undervisning.html', 'Undervisningsrom', 'Prøv hvordan en undervisningsmodul fungerer.'),
         ('theory', 'teori.html', 'Teorirommet', 'Utforsk intervaller, akkorder og moduser.'),
