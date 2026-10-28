@@ -40,7 +40,7 @@ def render_header(prefix='', active='home'):
     ))
     return (
         f'<header class="site-header"><a class="brand" href="{home}" aria-label="MODUS-MUSIC – forsiden">'
-        '<span class="brandmark" aria-hidden="true">m</span>MODUS-MUSIC<span class="branddot">.</span></a>'
+        '<span class="brandmark" aria-hidden="true">m</span>MODUS-MUSIC<span class="branddot">.NO</span></a>'
         '<nav class="site-nav" aria-label="Hovedmeny">' + link('home', './', 'Forside') + learn + play + link('articles', 'artikler.html', 'Artikler')
         + link('about', 'om-modus.html', 'Om MODUS') + '</nav><div class="header-tools">'
         + link('membership', 'modus-plus.html', 'Medlemskap', css='nav-membership')
