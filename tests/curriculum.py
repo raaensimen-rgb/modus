@@ -9,6 +9,7 @@ page = (ROOT / "dist/laereplan.html").read_text(encoding="utf-8")
 navigation = (ROOT / "scripts/site_navigation.py").read_text(encoding="utf-8")
 lesson = (ROOT / "dist/undervisning.html").read_text(encoding="utf-8")
 lesson_js = (ROOT / "dist/undervisning.js").read_text(encoding="utf-8")
+atelier_js = (ROOT / "dist/f03-atelier.js").read_text(encoding="utf-8")
 modules = register["modules"]
 allowed = set(register["policy"]["status_values"])
 assert len(modules) == 24, "Expected 24 initial planned modules"
@@ -26,6 +27,13 @@ assert "createOscillator()" not in lesson_js, "Sine-wave audio is not the defaul
 assert "ikke godkjent undervisning" in lesson
 assert 'id="f03-draft" hidden' in lesson, "F03 must not default to public course content"
 assert "interval-answer" in lesson and "interval-melodic" in lesson
+assert all('id="' + stage + '"' in lesson for stage in ("f03-understand","f03-hear","f03-play","f03-explain","f03-apply"))
+assert all('id="' + control + '"' in lesson for control in ("f03-difficulty","f03-new-question","f03-listen","f03-ear-answers","f03-piano","f03-fretboard"))
+assert "f03-atelier.js" in lesson and "playGrandMidi" in lesson_js
+assert "MODUSGrand.playMidi" in atelier_js and "audio/grand-" in lesson_js
+assert "stage.revealed=false" in atelier_js and "render(null" in atelier_js
+assert "Ingen resultat lagres" in lesson
+assert (ROOT / "docs/curriculum-f03-evidence.md").is_file()
 assert 'code==="F03"' in lesson_js
 assert "Dette er en øvelsessjekk, ikke dokumentert mestring." in lesson_js
 assert (ROOT / "docs/curriculum-editor.html").is_file(), "Expected six accessible details panels"
