@@ -39,7 +39,17 @@
     if (deck.length > 1 && deck[0] === last) [deck[0], deck[1]] = [deck[1], deck[0]];
   }
   const chosen = quotes.find(q => q.id === deck.shift()) || quotes[0];
-  try { localStorage.setItem(key, JSON.stringify({deck, last:chosen.id})); } catch (_) {}
+  // Draw a different quotation for the closing block, using the same non-repeating deck.
+  if (!deck.length) {
+    deck = quotes.filter(q => q.id !== chosen.id).map(q => q.id);
+    for (let i = deck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+  }
+  let closingQuote = quotes.find(q => q.id === deck.shift()) || quotes.find(q => q.id !== chosen.id);
+  if (closingQuote.id === chosen.id) closingQuote = quotes.find(q => q.id !== chosen.id);
+  try { localStorage.setItem(key, JSON.stringify({deck, last:closingQuote.id})); } catch (_) {}
   const isEnglish = document.documentElement.lang.toLowerCase().startsWith('en');
   const heading = chosen.original + ' ';
   headline.replaceChildren(document.createTextNode(heading), Object.assign(document.createElement('em'), {textContent:chosen.emphasis}));
@@ -58,4 +68,18 @@
   a.textContent = chosen.author + (chosen.date ? ' · ' + chosen.date : '') + ' ↗';
   a.title = isEnglish ? 'Read the source' : 'Les kilden til sitatet';
   credit.replaceChildren(a);
+  const closing = document.querySelector('main > .closing');
+  if (closing) {
+    const lines = closing.querySelectorAll('p');
+    if (lines.length >= 2) {
+      lines[0].textContent = isEnglish ? closingQuote.original + ' ' + closingQuote.emphasis : closingQuote.translation;
+      const attribution = document.createElement('a');
+      attribution.href = closingQuote.url;
+      attribution.target = '_blank';
+      attribution.rel = 'noopener noreferrer';
+      attribution.textContent = '— ' + closingQuote.author + ' ↗';
+      attribution.title = isEnglish ? 'Source of quotation' : 'Kilde til sitatet';
+      lines[1].replaceChildren(attribution);
+    }
+  }
 })();
