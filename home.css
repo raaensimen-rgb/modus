@@ -34,7 +34,7 @@ html[data-theme=contrast] .hero-actions .button-secondary{background:#fff;color:
 main > .closing{display:flex;flex-direction:column;align-items:center;justify-content:center;clear:both;width:100%;max-width:none;margin:0 auto;text-align:center;grid-column:1 / -1}
 main > .closing p{width:100%;text-align:center}
 
-/* A single luminous line follows the valley; the original photograph remains intact. */
-.landscape .water-music{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.82;mix-blend-mode:screen;z-index:1}
-@media(max-width:700px){.landscape .water-music{opacity:.64}}
-@media(prefers-contrast:more){.landscape .water-music{display:none}}
+/* Ambient reflected light, restrained to the far valley; photograph remains unchanged. */
+.landscape .ambient-valley-light{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen;opacity:.78;z-index:1}
+@media(max-width:700px){.landscape .ambient-valley-light{opacity:.58}}
+@media(prefers-contrast:more){.landscape .ambient-valley-light{display:none}}
