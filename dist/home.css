@@ -35,6 +35,6 @@ main > .closing{display:flex;flex-direction:column;align-items:center;justify-co
 main > .closing p{width:100%;text-align:center}
 
 /* Barely-there musical reflections on the lake, not over the reading area. */
-.landscape .water-music{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.58;mix-blend-mode:screen;z-index:1;transform:translateY(6px);filter:blur(.45px)}
-@media(max-width:700px){.landscape .water-music{opacity:.36;transform:translateY(14px)}}
+.landscape .water-music{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.92;mix-blend-mode:screen;z-index:1;transform:translateY(6px);filter:drop-shadow(0 0 3px rgba(199,233,185,.27))}
+@media(max-width:700px){.landscape .water-music{opacity:.7;transform:translateY(14px)}}
 @media(prefers-contrast:more){.landscape .water-music{display:none}}
