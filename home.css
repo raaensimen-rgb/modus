@@ -37,4 +37,8 @@ main > .closing p{width:100%;text-align:center}
 /* Ambient reflected light, restrained to the far valley; photograph remains unchanged. */
 .landscape .ambient-valley-light{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen;opacity:1;z-index:1}
 @media(max-width:700px){.landscape .ambient-valley-light{opacity:.76}}
+/* A very slow natural-looking variation, not a flashing animation. */
+.landscape .modus-lake-reflection{transform-origin:64% 72%;animation:modus-reflection-shimmer 17s ease-in-out infinite}
+@keyframes modus-reflection-shimmer{0%,100%{opacity:.68;transform:scaleX(.985)}50%{opacity:1;transform:scaleX(1.016)}}
+@media(prefers-reduced-motion:reduce){.landscape .modus-lake-reflection{animation:none;opacity:.85}}
 @media(prefers-contrast:more){.landscape .ambient-valley-light{display:none}}
