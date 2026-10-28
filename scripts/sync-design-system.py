@@ -10,8 +10,9 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
-PAGES = ("index.html", "teori.html", "akkorder.html", "backingtracks.html", "modus-plus.html", "laer-dorisk.html", "om-modus.html")
-STYLES = ("home.css", "style.css", "design-system.css")
+# Public frontend assets only. Never copy configuration, source code or secrets.
+PUBLIC_EXTENSIONS = {".html", ".css", ".js", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".ico", ".woff", ".woff2"}
+PUBLIC_ASSET_DIRS = ("images", "audio")
 
 def add_design_link(path):
     if not path.is_file():
@@ -29,6 +30,11 @@ if "--finish" in sys.argv:
     add_design_link(DIST / "artikler.html")
     print("MODUS shared design system applied to generated article index.")
 else:
-    for name in (*PAGES, *STYLES):
-        shutil.copy2(ROOT / name, DIST / name)
-    print("MODUS source pages and shared styles synced to dist.")
+    for source in ROOT.iterdir():
+        if source.is_file() and source.suffix.lower() in PUBLIC_EXTENSIONS:
+            shutil.copy2(source, DIST / source.name)
+    for name in PUBLIC_ASSET_DIRS:
+        source = ROOT / name
+        if source.is_dir():
+            shutil.copytree(source, DIST / name, dirs_exist_ok=True)
+    print("MODUS public frontend pages, styles, scripts, images and audio synced to dist.")
