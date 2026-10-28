@@ -19,12 +19,13 @@ const $=id=>document.getElementById(id);const ns="http://www.w3.org/2000/svg";
 const STORE="modus-musikkart-v1";const valid=new Set(["not-started","exploring","learned"]);
 let stored={};try{stored=JSON.parse(localStorage.getItem(STORE)||"{}")||{}}catch{}
 const records={};for(const m of catalog){const r=stored[m.id]||{};records[m.id]={state:valid.has(r.state)?r.state:"not-started",idea:r.idea===true,note:typeof r.note==="string"?r.note.slice(0,2000):""};}
+const categoryRecords={};for(const g of groups){categoryRecords[g.id]=valid.has(stored._categories?.[g.id])?stored._categories[g.id]:"not-started";}
 let chosen=null,category=null,search="";
 const svg=$("music-map");
 function svgEl(tag,attr={},content){const e=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attr))e.setAttribute(k,String(v));if(content!==undefined)e.textContent=content;return e;}
-function save(){try{localStorage.setItem(STORE,JSON.stringify(records));$("map-save-status").textContent="Lagret i denne nettleseren.";}catch{$("map-save-status").textContent="Nettleseren tillot ikke lagring. Bruk eksport for å ta vare på kartleggingen.";}}
+function save(){try{localStorage.setItem(STORE,JSON.stringify({...records,_categories:categoryRecords}));$("map-save-status").textContent="Lagret i denne nettleseren.";}catch{$("map-save-status").textContent="Nettleseren tillot ikke lagring. Bruk eksport for å ta vare på kartleggingen.";}}
 function groupModules(g){return g.ids.map(id=>byId.get(id)).filter(Boolean);}
-function groupState(g){const a=groupModules(g);if(!a.length)return "not-started";const num=a.filter(m=>records[m.id].state==="learned").length;const active=a.some(m=>records[m.id].state!=="not-started");return num===a.length?"learned":active?"exploring":"not-started";}
+function groupState(g){const a=groupModules(g);if(!a.length)return categoryRecords[g.id];const num=a.filter(m=>records[m.id].state==="learned").length;const active=a.some(m=>records[m.id].state!=="not-started");return num===a.length?"learned":active?"exploring":"not-started";}
 function variant(state){return state==="learned"?"on":state==="exploring"?"mid":"off";}
 function activityState(id){return records[id]?.state||"not-started";}
 function curve(x1,y1,x2,y2,color,state,width){return svgEl("path",{d:"M "+x1+" "+y1+" C "+(x1+135)+" "+y1+", "+(x2-140)+" "+y2+", "+x2+" "+y2,stroke:color,"stroke-width":width,class:"map-branch "+variant(state),style:"color:"+color});}
@@ -94,7 +95,7 @@ function choose(type,id){
 $("inspector-module").querySelectorAll("[data-state]").forEach(b=>b.addEventListener("click",()=>{
  const state=b.dataset.state;if(!valid.has(state))return;
  if(chosen)records[chosen].state=state;
- else if(category){const g=groups.find(g=>g.id===category);for(const id of g.ids)records[id].state=state;}
+ else if(category){const g=groups.find(g=>g.id===category);if(g.ids.length){for(const id of g.ids)records[id].state=state;}else categoryRecords[g.id]=state;}
  save();render();
 }));
 $("map-personal-note").addEventListener("input",e=>{if(chosen){records[chosen].note=e.target.value.slice(0,2000);save();}});
@@ -102,13 +103,14 @@ $("course-idea").addEventListener("change",e=>{if(chosen){records[chosen].idea=e
 $("map-search").addEventListener("input",e=>{search=e.target.value.trim().toLowerCase();render();});
 $("map-reset").addEventListener("click",()=>{$("map-search").value="";search="";render();});
 $("map-export").addEventListener("click",()=>{
- const payload={type:"modus-music-map-self-assessment",version:1,exportedAt:new Date().toISOString(),meaning:"Private self-assessment; not accredited or verified learning",records};
+ const payload={type:"modus-music-map-self-assessment",version:1,exportedAt:new Date().toISOString(),meaning:"Private self-assessment; not accredited or verified learning",records,categories:categoryRecords};
  const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}));
  const a=document.createElement("a");a.href=url;a.download="modus-musikkart.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 $("map-clear").addEventListener("click",()=>{
  if(!window.confirm("Nullstille alle dine lokale læringsmarkeringer og notater?"))return;
  for(const m of catalog)records[m.id]={state:"not-started",idea:false,note:""};
+ for(const g of groups)categoryRecords[g.id]="not-started";
  try{localStorage.removeItem(STORE)}catch{}
  chosen=null;category=null;$("inspector-module").hidden=true;$("inspector-heading").textContent="Velg et område";$("inspector-description").textContent="Kartet er nullstilt.";render();
 });
