@@ -41,6 +41,8 @@ assert ".reading-body td,.reading-body th{font-size:15px" in article_css
 
 # Brand consistency: public navigation uses the wordmark; editor gets the monogram.
 assert (dist / "modus-identity-icon.svg").is_file(), "Missing MODUS Safari icon"
+assert (dist / "apple-touch-icon.png").is_file(), "Missing Safari favorites touch icon"
+assert (dist / "apple-touch-icon.png").stat().st_size > 1000, "Safari favorites touch icon is unexpectedly small"
 assert (dist / "modus-arch.svg").is_file(), "Missing primary MODUS Arch asset"
 assert 'gradientUnits="userSpaceOnUse"' in (dist / "index.html").read_text(), "Explicit Arch gradient missing on homepage"
 for name in pages:
