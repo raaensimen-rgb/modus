@@ -18,7 +18,7 @@ for (const article of articles) {
   assert.equal(grade(key,key).passed,true);
   assert.equal(grade(key.map(a=>(a+1)%3),key).score,0);
   assert.equal(grade([null,...key.slice(1)],key).passed,false);
-  for (const lang of (article.slug==='kirketonearter-ett-system-sju-uttrykk' ? [''] : ['', 'en/'])) {
+  for (const lang of (['kirketonearter-ett-system-sju-uttrykk','romertall-i-musikk'].includes(article.slug) ? [''] : ['', 'en/'])) {
     const page=fs.readFileSync(`dist/${lang}artikler/${article.slug}.html`,'utf8');
     assert.equal((page.match(/<fieldset data-answer=/g)||[]).length,3);
     assert.equal((page.match(/type="radio" name="q[0-2]"/g)||[]).length,9);
@@ -28,6 +28,9 @@ for (const article of articles) {
 const englishPreview=fs.readFileSync('dist/en/artikler/kirketonearter-ett-system-sju-uttrykk.html','utf8');
 assert(englishPreview.includes('Full lesson available in Norwegian'));
 assert(englishPreview.includes('../../artikler/kirketonearter-ett-system-sju-uttrykk.html'));
+const romanPreview=fs.readFileSync('dist/en/artikler/romertall-i-musikk.html','utf8');
+assert(romanPreview.includes('Full lesson available in Norwegian'));
+assert(romanPreview.includes('../../artikler/romertall-i-musikk.html'));
 const data=new Map(), storage={getItem:k=>data.get(k),setItem:(k,v)=>data.set(k,v)};
 const a=progress(storage), b=progress(storage);
 assert.equal(a.has(IDS[0]),false); assert.equal(a.pass(IDS[0]),true);
