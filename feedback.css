@@ -1,5 +1,5 @@
 /* MODUS floating visitor feedback — deliberately separate from site navigation. */
-.modus-feedback{position:fixed;left:clamp(12px,2.5vw,32px);bottom:clamp(12px,2.5vw,28px);z-index:7000;font-family:inherit;color:#ebf2e8}
+.modus-feedback{position:fixed;right:clamp(12px,2.5vw,32px);bottom:clamp(12px,2.5vw,28px);z-index:7000;font-family:inherit;color:#ebf2e8}
 .modus-feedback *{box-sizing:border-box}
 .modus-feedback-toggle{display:flex;align-items:center;gap:10px;max-width:calc(100vw - 24px);border:1px solid rgba(171,222,124,.35);border-radius:999px;background:#17251e;color:#e9f2e5;padding:12px 17px;box-shadow:0 10px 38px rgba(0,0,0,.35);cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;line-height:1.2}
 .modus-feedback-toggle:hover,.modus-feedback-toggle:focus-visible{background:#26372a;border-color:#b6ed80}
@@ -19,5 +19,5 @@
 .modus-feedback-send:hover{background:#d8f5b5}.modus-feedback-send:disabled{opacity:.55;cursor:wait}
 .modus-feedback-status{font-size:12px;line-height:1.5;margin:12px 0 0;color:#d2ead0}
 .modus-feedback-status[data-error="true"]{color:#ffc4b9}
-@media(max-width:620px){.modus-feedback{left:12px;bottom:12px}.modus-feedback-toggle{padding:12px}.modus-feedback-toggle span{font-size:12px}.modus-feedback-panel{padding:18px}}
+@media(max-width:620px){.modus-feedback{right:12px;bottom:12px}.modus-feedback-toggle{padding:12px}.modus-feedback-toggle span{font-size:12px}.modus-feedback-panel{padding:18px}}
 @media(prefers-reduced-motion:no-preference){.modus-feedback-panel{animation:modus-feedback-in .18s ease-out}@keyframes modus-feedback-in{from{opacity:.6;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}}
