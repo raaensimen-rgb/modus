@@ -200,7 +200,10 @@ if(demoTrigger){
  document.body.appendChild(toast);
  const close=()=>{toast.hidden=true;demoTrigger.setAttribute('aria-expanded','false');};
  demoTrigger.setAttribute('aria-expanded','false');
- demoTrigger.addEventListener('click',()=>{toast.hidden=false;demoTrigger.setAttribute('aria-expanded','true');});
+ const openDemo=()=>{toast.hidden=false;demoTrigger.setAttribute('aria-expanded','true');};
+ demoTrigger.addEventListener('click',openDemo);
+ // Show the preview automatically on the atlas so visitors can inspect the design.
+ window.addEventListener('load',()=>window.setTimeout(openDemo,900),{once:true});
  toast.querySelector('.atlas-billing-toast-close').addEventListener('click',close);
  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!toast.hidden)close();});
 }
