@@ -43,3 +43,21 @@ html[data-theme=contrast] .hero-actions .button-secondary{background:#fff;color:
 .home-feature-grid>.theory-entry>.entry-art-plus{opacity:.16}
 @media(max-width:1199px){.home-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.home-feature-grid>.theory-entry{min-height:265px;padding:26px}.home-feature-grid>.theory-entry h2,.home-feature-grid>.theory-entry h2 em{font-size:clamp(23px,2.7vw,29px)}.home-feature-grid>.theory-entry>.entry-art{width:100px;opacity:.18}}
 @media(max-width:700px){.home-feature-grid{grid-template-columns:1fr;margin:20px 20px 0;gap:16px}.home-feature-grid>.theory-entry{min-height:0;padding:25px 22px;gap:22px}.home-feature-grid>.theory-entry h2,.home-feature-grid>.theory-entry h2 em{font-size:28px}.home-feature-grid>.theory-entry>.entry-art{width:85px;opacity:.17}}
+
+/* A quiet, first-person welcome after the tools; part of the story, not an ad. */
+.founder-welcome{display:grid;grid-template-columns:minmax(185px,.48fr) minmax(0,1fr);gap:clamp(24px,5vw,85px);margin:76px 5% 15px;padding:clamp(32px,4.5vw,66px);border:1px solid var(--modus-b-465638,#465638);border-radius:14px;background:linear-gradient(135deg,var(--modus-c-1a2315,#1a2315),var(--modus-c-111310,#111310));position:relative;overflow:hidden}
+.founder-welcome:after{content:'';position:absolute;right:0;bottom:0;width:180px;height:180px;background:radial-gradient(circle at 100% 100%,rgba(194,228,115,.07),transparent 75%);pointer-events:none}
+.founder-welcome-side{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.founder-welcome-side .eyebrow{margin:0;color:var(--modus-c-d7f48c,#d7f48c);font-size:11px;line-height:1.6;letter-spacing:.11em}
+.founder-welcome-mark{font:500 clamp(68px,9vw,120px)/1 Manrope,sans-serif;letter-spacing:-.09em;color:var(--modus-c-d7f48c,#d7f48c);opacity:.84;margin:12px 0 0}
+.founder-welcome-mark span{color:var(--modus-c-eef5e4,#eef5e4)}
+.founder-welcome-signature{margin:0;color:var(--modus-c-b5c5a5,#b5c5a5);font-size:13px;line-height:1.6}
+.founder-welcome-content{max-width:760px}
+.founder-welcome h2{font:500 clamp(29px,3vw,42px)/1.25 Manrope,sans-serif;letter-spacing:-.04em;margin:0 0 24px;color:var(--modus-c-eef5e4,#eef5e4)}
+.founder-welcome h2 em{font-weight:500;color:var(--modus-c-d7f48c,#d7f48c)}
+.founder-welcome-content p{font-size:17px;line-height:1.85;color:var(--modus-c-b9c8ab,#b9c8ab);margin:0 0 17px}
+.founder-welcome-content .founder-welcome-lead{font-size:clamp(18px,1.65vw,21px);line-height:1.65;color:var(--modus-c-e4eed7,#e4eed7);margin-bottom:25px}
+.founder-welcome-link{display:inline-flex;gap:12px;align-items:center;color:var(--modus-c-d7f48c,#d7f48c);font-size:14px;line-height:1.5;text-decoration:none;border-bottom:1px solid var(--modus-b-6b874c,#6b874c);padding:5px 0;margin-top:8px}
+.founder-welcome-link:hover{border-color:currentColor}
+.founder-welcome-link:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+@media(max-width:760px){.founder-welcome{grid-template-columns:1fr;gap:22px;margin:46px 20px 16px;padding:29px 24px}.founder-welcome-side{gap:5px}.founder-welcome-mark{display:none}.founder-welcome h2{margin-bottom:18px}.founder-welcome-content p{font-size:16px;line-height:1.75}.founder-welcome-content .founder-welcome-lead{font-size:18px;margin-bottom:21px}}
