@@ -50,6 +50,12 @@
 
 
 /* Editorial reading path: numbered articles in curriculum order. */
-.article-category[data-category="all"] .article-grid{counter-reset:modus-reading-step}
-.article-category[data-category="all"] .article-card{counter-increment:modus-reading-step}
-.article-category[data-category="all"] .article-card .card-art::after{content:"STEG " counter(modus-reading-step,decimal-leading-zero);position:absolute;right:13px;top:14px;padding:5px 8px;background:#14200fe8;border:1px solid #6f8855;border-radius:4px;color:#e0efcd;font:600 10px/1.2 'DM Sans',sans-serif;letter-spacing:.075em;pointer-events:none}
+#articleGroups:has(.article-category[data-category^="reading-"]){counter-reset:modus-reading-step}
+.article-category[data-category^="reading-"] .article-card{counter-increment:modus-reading-step}
+.article-category[data-category^="reading-"] .article-card .card-art::after{content:"STEG " counter(modus-reading-step,decimal-leading-zero);position:absolute;right:13px;top:14px;padding:5px 8px;background:#14200fe8;border:1px solid #6f8855;border-radius:4px;color:#e0efcd;font:600 10px/1.2 'DM Sans',sans-serif;letter-spacing:.075em;pointer-events:none}
+
+/* The three reading stages are modest editorial dividers, not separate pages. */
+.article-category[data-category^="reading-"]{margin-top:27px}
+.article-category[data-category^="reading-"] .category-header{padding-bottom:13px;border-bottom:1px solid var(--modus-b-425733,#425733)}
+.article-category[data-category^="reading-"] .category-header h3{font-size:clamp(21px,2.4vw,28px);letter-spacing:-.035em}
+.article-category[data-category^="reading-"] .category-header p{font-size:12px}
