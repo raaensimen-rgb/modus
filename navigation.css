@@ -69,3 +69,7 @@ html[data-theme=contrast] .site-header .nav-tooltip{background:#fff;color:#000;b
 @media(max-width:700px){.site-header .brand-arch{width:31px;height:29px}}
 
 .site-header .brand-arch{color:var(--accent,#d7f48c);overflow:visible}
+
+/* A separate musical signature, not an extra letter of the wordmark. */
+.site-header .brand-arch{width:30px;height:28px;flex:none;margin-right:13px;color:#d7f48c;overflow:visible}
+@media(max-width:700px){.site-header .brand-arch{width:27px;height:25px;margin-right:11px}}
