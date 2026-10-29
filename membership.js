@@ -50,6 +50,18 @@
   $('closeMembership').onclick=()=>dialog.close();
   dialog.addEventListener('close',()=>{selected=null;const school=$('studentSchool');if(school)school.value='';const info=$('studentSchoolInfo');if(info)info.textContent='Eksempellisten er ikke komplett. Andre norske skoler skal kunne vurderes når ordningen åpner.';previousFocus?.focus();});
   dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
+  const studentInfo=$('studentInfoDialog'),studentInfoTrigger=$('studentInfoTrigger');
+  $('closeStudentInfo').addEventListener('click',()=>studentInfo.close());
+  studentInfoTrigger.addEventListener('click',()=>{
+    studentInfo.showModal();
+    $('closeStudentInfo').focus();
+  });
+  studentInfo.addEventListener('close',()=>studentInfoTrigger.focus());
+  studentInfo.addEventListener('click',event=>{
+    if(event.target!==studentInfo)return;
+    const bounds=studentInfo.getBoundingClientRect();
+    if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)studentInfo.close();
+  });
   const school=$('studentSchool'),schoolInfo=$('studentSchoolInfo');
   if(school&&schoolInfo){
     school.addEventListener('change',()=>{
