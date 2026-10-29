@@ -340,6 +340,76 @@
     "category": "harmony"
   },
   {
+    "slug": "treklanger-fra-grunnform-til-omvending",
+    "level": "beginner",
+    "topic": "Akkorder",
+    "category": "chords",
+    "title": "Treklanger: fra grunntone til akkordens tre toner",
+    "intro": "Før vi legger til septimen, må vi forstå treklangen. Lær å bygge dur, moll, forminsket og forstørret, finne tersen og kvinten og spille de samme tonene i ulike omvendinger.",
+    "art": "triadfamily",
+    "practice": "teori.html#akkorder",
+    "practice_label": "Bygg og lytt til treklanger i teorirommet",
+    "learning": {
+      "goals": [
+        "Bygge de fire grunnleggende treklangstypene ut fra intervaller.",
+        "Skille grunntone, ters og kvint fra den nederste tonen i et grep.",
+        "Forstå grunnstilling, første og andre omvending og hvordan de påvirker bass og stemmeføring.",
+        "Forklare hvorfor septimakkorder bygger videre på en treklang."
+      ],
+      "prerequisites": "Du bør ha lest om toner og intervaller og prøvd å bygge akkordene i C-dur. Romertall er nyttig, men ikke et krav.",
+      "links": [
+        {
+          "slug": "toner-og-intervaller",
+          "label": "Repeter intervallene"
+        },
+        {
+          "slug": "bygg-akkorder-i-en-toneart",
+          "label": "Bygg akkorder i C-dur"
+        }
+      ]
+    },
+    "sections": [
+      [
+        "Hva er egentlig en treklang?",
+        "<p>En <strong>treklang</strong> er en akkordklasse bygget av tre forskjellige toneklasser som kan ordnes som terser over hverandre. I den vanlige dur-/mollharmonikken kaller vi dem <strong>grunntone (1), ters (3) og kvint (5)</strong>. Treklangen har tre ulike akkordtoner, selv om gitaren spiller seks strenger eller pianoet dobler toner i flere oktaver.</p><p>Ta <strong>C–E–G</strong>. C er grunntonen, E er tersen og G er kvinten. Fra C til E er det fire halvtoner (stor ters); fra E til G er det tre (liten ters). Fra C til G er det sju halvtoner, en ren kvint.</p><p>Vi sier gjerne at vi bygger treklanger ved å ta «annenhver tone» i en skala. Det er en fin måte å finne akkorder <em>innenfor</em> en toneart. Men husk: skalatrinnene beskriver hvilke bokstaver vi velger; intervallene avgjør hvilken akkordtype vi faktisk får.</p>"
+      ],
+      [
+        "Fire treklangstyper – hva endrer seg?",
+        "<p>La oss holde C som grunntone og endre bare tersen eller kvinten. Da blir det lettere å høre hva hver tone bidrar med.</p><table><thead><tr><th>Type</th><th>Formel</th><th>Toner fra C</th><th>Terser oppå hverandre</th></tr></thead><tbody><tr><td><strong>Dur</strong></td><td>1–3–5</td><td>C–E–G</td><td>Stor + liten</td></tr><tr><td><strong>Moll</strong></td><td>1–♭3–5</td><td>C–E♭–G</td><td>Liten + stor</td></tr><tr><td><strong>Forminsket</strong></td><td>1–♭3–♭5</td><td>C–E♭–G♭</td><td>Liten + liten</td></tr><tr><td><strong>Forstørret</strong></td><td>1–3–♯5</td><td>C–E–G♯</td><td>Stor + stor</td></tr></tbody></table><p><strong>Dur og moll</strong> har ren kvint og skiller seg på tersen. En <strong>forminsket</strong> treklang har liten ters og forminsket kvint (seks halvtoner fra roten). En <strong>forstørret</strong> treklang har stor ters og forstørret kvint (åtte halvtoner fra roten).</p><aside class=\"reading-note\">Vi skriver <strong>Cdim</strong> eller <strong>C°</strong> for forminsket, og <strong>Caug</strong> eller <strong>C+</strong> for forstørret. Intervallformlene forutsetter at C er grunntonen; ♭ og ♯ beskriver en endring sammenlignet med durskalaens trinn.</aside>"
+      ],
+      [
+        "Finn treklangene i C-dur",
+        "<p>Nå bruker vi det du allerede kjenner fra artikkelen om akkorder i en toneart. Start med <strong>C–D–E–F–G–A–B</strong>, og ta annenhver tone. Da får vi sju <em>diatoniske</em> treklanger: tre dur, tre moll og én forminsket.</p><table><thead><tr><th>Trinn</th><th>Toner</th><th>Akkord</th><th>Romertall</th></tr></thead><tbody><tr><td>1</td><td>C–E–G</td><td>C</td><td>I</td></tr><tr><td>2</td><td>D–F–A</td><td>Dm</td><td>ii</td></tr><tr><td>3</td><td>E–G–B</td><td>Em</td><td>iii</td></tr><tr><td>4</td><td>F–A–C</td><td>F</td><td>IV</td></tr><tr><td>5</td><td>G–B–D</td><td>G</td><td>V</td></tr><tr><td>6</td><td>A–C–E</td><td>Am</td><td>vi</td></tr><tr><td>7</td><td>B–D–F</td><td>Bdim</td><td>vii°</td></tr></tbody></table><p>Her ligger poenget: <strong>ikke alle akkordene i C-dur er C-durakkorder</strong>. De hører til samme toneart, men intervallene inni hver treklang er forskjellige. Når du flytter hele systemet til G-dur, beholder du mønsteret I–ii–iii–IV–V–vi–vii°, mens akkordnavnene endres.</p>"
+      ],
+      [
+        "Grunnstilling og omvendinger: samme akkord, ny bass",
+        "<p>Se på C-dur igjen. De tre tonene er C, E og G. Spiller du <strong>C–E–G</strong> med C nederst, er akkorden i <strong>grunnstilling</strong>. Med E nederst kan den ordnes som <strong>E–G–C</strong>: <strong>første omvending</strong>, ofte skrevet <strong>C/E</strong>. Med G nederst som <strong>G–C–E</strong> får du <strong>andre omvending</strong>, ofte skrevet <strong>C/G</strong>.</p><div class=\"reading-example\"><span>Grunnstilling</span><strong>C–E–G → C</strong><span>Første omvending</span><strong>E–G–C → C/E</strong><span>Andre omvending</span><strong>G–C–E → C/G</strong></div><p>Merk at <em>akkordens grunntone</em> fortsatt er C i alle tre tilfeller. Grunntonen er ikke nødvendigvis den samme tonen som ligger nederst. Omvendinger kan derfor gi glattere basslinjer og kortere avstander mellom stemmene uten at akkordidentiteten endres.</p><p>Her møter vi også et viktig tegn fra romertallsanalysen: <strong>I6</strong> viser vanligvis første omvending av tonikatreklangen, mens <strong>I6/4</strong> viser andre omvending. Det betyr ikke automatisk en C6-akkord med A lagt til. Figuren 6/4 handler om intervallene over bastonen i generalbass-tradisjonen.</p>"
+      ],
+      [
+        "Klangen endres når vi flytter én tone",
+        "<p>Dette er øvelsen jeg vil du skal bruke tid på. Spill <strong>C–E–G</strong> sakte. Hold C og G mens du senker E til E♭. Du hører overgangen <strong>C-dur → C-moll</strong>. Hold så C og E♭ og senk G til G♭; du får <strong>Cdim</strong>. Gå tilbake til C-dur, og hev G til G♯; du får <strong>Caug</strong>.</p><p>På piano kan du holde to fingre nede og flytte den tredje. På gitar kan du først spille tonene enkeltvis på én eller flere strenger, og deretter finne et grep med samme tre toneklasser. Ikke la fingermønsteret bli forklaringen; det er <em>intervallene</em> du undersøker.</p><p>Beskriv det du faktisk hører. Dur er ikke alltid «glad» og moll ikke alltid «trist». Klang, register, tempo og sammenheng påvirker opplevelsen. Målet er at du kjenner igjen hvilken tone som ble endret, ikke at du pugger en bestemt følelsesbeskrivelse.</p>"
+      ],
+      [
+        "Fra treklanger til septimakkorder",
+        "<p>Når treklangene sitter, er neste steg naturlig: Vi legger til <strong>én ny akkordtone</strong> ved å fortsette å stable terser. Fra C-durtreklangen <strong>C–E–G</strong> kan vi legge til B og få <strong>Cmaj7</strong>: C–E–G–B. B er en stor septim fra C.</p><p>Legger vi i stedet B♭ til C–E–G, får vi <strong>C7</strong>: C–E–G–B♭. Det er en dominantseptimakkordtype. C7 trenger ikke å være den faktiske dominanten i tonearten du spiller i; navnet beskriver først og fremst akkordens oppbygning.</p><p>Og legger vi B♭ til C-molltreklangen C–E♭–G, får vi <strong>Cm7</strong>: C–E♭–G–B♭. Legg merke til at vi beholder grunntone, ters og kvint som grunnmur. Det er derfor vi lærer treklangene først.</p><div class=\"reading-example\"><span>Treklang</span><strong>C–E–G</strong><span>Legg til stor septim</span><strong>C–E–G–B → Cmaj7</strong><span>Legg til liten septim</span><strong>C–E–G–B♭ → C7</strong></div><p><a href=\"septimakkorder.html\">Neste naturlige steg: Septimakkorder – mer farge, samme grunnmur ↗</a></p>"
+      ],
+      [
+        "Arbeidsmetoden: hør, forutsi, spill, forklar, endre",
+        "<p><strong>Hør:</strong> Spill C-dur, C-moll og Cdim som arpeggio. <strong>Forutsi:</strong> Syng hvilken tone som må flyttes for at C-dur skal bli moll. <strong>Spill:</strong> Kontroller ved instrumentet og prøv alle tre omvendingene av C-dur. <strong>Forklar:</strong> Si hva som er grunntone, ters, kvint og bastone i C/E. <strong>Endre:</strong> Lag en liten akkordrekke der du bruker en omvending for å få bassen til å bevege seg trinnvis.</p><p>Et enkelt eksempel: <strong>C → G/B → Am</strong>. Basslinjen blir <strong>C–B–A</strong>. G/B har G-durtonene G–B–D, men B i bassen. Du har nå brukt en omvending for å skape en musikalsk bevegelse – ikke bare lært et grep.</p><p>Dette er overgangen jeg ønsker at du skal kjenne: Fra <em>hvilke toner</em> en akkord består av, til <em>hvordan</em> tonene kan bevege seg mot neste akkord. Med den forståelsen blir maj7, m7 og dominantseptim mye lettere å lære.</p>"
+      ]
+    ],
+    "exercise": "Spill C–E–G. Finn tersen og flytt E til E♭ uten å endre de andre tonene. Spill C/E og C/G og si hvilken tone som er bass i hvert grep. Legg til B i C–E–G, og forklar hvorfor den nye akkorden heter Cmaj7.",
+    "practice_steps": [
+      "Bygg C, Cm, Cdim og Caug fra samme grunntone. Syng tersen og kvinten før du spiller dem.",
+      "Spill C, C/E og C/G. Skriv ned bastonen og identifiser hvilken omvending du spiller.",
+      "Spill C–G/B–Am. Lytt etter bassbevegelsen C–B–A. Legg deretter til B i C-durtreklangen og sammenlign C med Cmaj7."
+    ],
+    "next_step": {
+      "slug": "septimakkorder",
+      "reason": "Når du kan høre og bygge treklangene, er septimen den neste tonen som utvider harmonikken."
+    }
+  },
+  {
     "slug": "septimakkorder",
     "level": "intermediate",
     "topic": "Akkorder",
