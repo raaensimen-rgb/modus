@@ -179,3 +179,6 @@ html,body{max-width:100%;overflow-x:clip}
   main,footer{min-width:0}
   img,video{max-width:100%;height:auto}
 }
+
+/* Paired Arch logos frame MODUS without a trailing dot, including generated footers. */
+.brand > .branddot{display:none}
