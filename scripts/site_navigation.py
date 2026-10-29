@@ -107,7 +107,7 @@ def with_navigation_css(page, prefix=''):
     page = page.replace('</head>', f'<link rel="stylesheet" href="{paths["css"]}"><script src="{paths["js"]}" defer></script></head>', 1)
     # Single branded icon for Safari tabs, mobile bookmarks and app shortcuts.
     if 'rel="icon"' not in page:
-        page = page.replace('</head>', f'<link rel="icon" type="image/svg+xml" href="{prefix}modus-mark.svg"></head>', 1)
+        page = page.replace('</head>', f'<link rel="icon" type="image/svg+xml" href="{prefix}modus-identity-icon.svg"></head>', 1)
     if 'language-init.js' not in page:
         page = page.replace('<head>', f'<head><script src="{prefix}language-init.js"></script>', 1)
     if 'language.js"' not in page:
