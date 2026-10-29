@@ -8,7 +8,7 @@ async function check(file){
  const nodes={chordSlots:{classList:classList(),querySelectorAll:()=>slots},playProgression:{},playSelected:{},chordStatus:{}};
  const context={C:id=>nodes[id],requestAnimationFrame:fn=>{frames.set(++nextFrame,fn);return nextFrame;},cancelAnimationFrame:id=>frames.delete(id)};
  vm.createContext(context);
- vm.runInContext(`let ctx={currentTime:0,state:'running',resume:async()=>{},createGain:()=>({connect(){},gain:{setValueAtTime(){},exponentialRampToValueAtTime(){}}}),createBufferSource:()=>makeSource()},bus={},run=0,busy=false,selected=2,tempo=120;const live=new Set(),chords=[0,1,2,3];function pianoNotes(ch){return [48+ch];}`,context);
+ vm.runInContext(`let ctx={currentTime:0,state:'running',resume:async()=>{},createGain:()=>({connect(){},gain:{setValueAtTime(){},exponentialRampToValueAtTime(){}}}),createBufferSource:()=>makeSource()},bus={},run=0,busy=false,selected=2,tempo=120;const live=new Set(),chords=[0,1,2,3];function pianoNotes(ch){return [48+ch];}function renderSelection(){}`,context);
  context.makeSource=()=>{const s={playbackRate:{},connect(){},start(t){this.time=t;},stop(){}};sources.push(s);return s;};
  vm.runInContext(source.slice(source.indexOf('let playback=null'),source.indexOf('async function bufferFor')),context);
  vm.runInContext(source.slice(source.indexOf('async function play(all)'),source.indexOf("C('playProgression').onclick")),context);
@@ -23,10 +23,10 @@ async function check(file){
  advance(2.071);assert.deepEqual(active(),[1]);
  advance(6.08);assert.deepEqual(active(),[3],'Catch up to audio clock after delayed frame');
  assert.equal(slots[3].attrs['aria-current'],'step');
- assert.equal(vm.runInContext('selected',context),2,'Playback preserves editing selection');
+ assert.equal(vm.runInContext('selected',context),3,'Playback synchronizes the selected voicing with the sounding chord');
  vm.runInContext('stop()',context);assert.deepEqual(active(),[]);assert.equal(frames.size,0);
  assert.equal(nodes.chordSlots.classList.values.has('is-playing'),false);
- await vm.runInContext('play(false)',context);advance(6.16);assert.deepEqual(active(),[2],'Single-chord playback follows chosen chord');
+ await vm.runInContext('play(false)',context);advance(6.16);assert.deepEqual(active(),[3],'Single-chord playback follows the currently selected chord');
  for(const s of sources)s.onended();
  assert.deepEqual(active(),[],'Completion restores normal selection');assert.equal(frames.size,0);
  await vm.runInContext('play(true)',context);vm.runInContext('stop()',context);advance(20);assert.deepEqual(active(),[],'Stopped playback cannot revive marker');
