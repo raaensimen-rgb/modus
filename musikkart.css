@@ -84,3 +84,11 @@
 .atlas-intro-step p{margin:0;font-size:13px;line-height:1.75;color:var(--muted)}
 .atlas-intro-note{margin:21px 0 0;font-size:12px;line-height:1.75;color:var(--muted);max-width:860px}
 @media(max-width:760px){.atlas-intro{padding:39px 0}.atlas-intro-steps{grid-template-columns:1fr;gap:12px}.atlas-intro-step{padding:20px}}
+
+/* Cinematic globe header. Earth imagery stays on the right; text stays over
+   the dark side of the composition, following the homepage's landscape hero. */
+.map-hero{position:relative;isolation:isolate;overflow:hidden;min-height:360px;padding:80px 0 64px;background:none}
+.map-hero::before{content:"";position:absolute;inset:0 -6vw 0 27%;z-index:-2;background-image:linear-gradient(90deg,var(--modus-c-111310,#111310) 0%,rgba(17,19,16,.67) 20%,rgba(17,19,16,.06) 65%),linear-gradient(0deg,var(--modus-c-111310,#111310) 0%,transparent 40%),url("images/earth-atlas.webp");background-size:cover;background-position:center 40%;background-repeat:no-repeat;opacity:.88;pointer-events:none}
+.map-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,var(--modus-c-111310,#111310) 0%,rgba(17,19,16,.92) 14%,rgba(17,19,16,.48) 50%,transparent 94%);pointer-events:none}
+.map-hero>p,.map-hero h1,.map-hero-links{position:relative;z-index:1}
+@media(max-width:720px){.map-hero{min-height:0;padding:61px 0 53px}.map-hero::before{inset:0 -18vw 0 8%;background-position:54% center;opacity:.48}.map-hero::after{background:linear-gradient(90deg,rgba(17,19,16,.95) 0%,rgba(17,19,16,.77) 70%,rgba(17,19,16,.4) 100%)}}
