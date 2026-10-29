@@ -7,7 +7,7 @@
 .modus-premises-inner p{font-size:15px;line-height:1.75;color:var(--muted,#b5bcb1)}
 .modus-premises-check{display:flex;align-items:flex-start;gap:12px;margin:22px 0 16px;cursor:pointer;font-size:14px;line-height:1.55}
 .modus-premises-check input{margin-top:4px;accent-color:var(--accent,#a3b977);width:18px;height:18px;flex-shrink:0}
-.modus-premises-confirm{width:100%;padding:15px 20px;border:0;border-radius:9px;background:var(--accent,#a3b977);color:#101b0c;font:700 14px inherit;cursor:pointer}
+.modus-premises-confirm{width:100%;padding:15px 20px;border:0;border-radius:9px;background:var(--accent,#a3b977);color:#101b0c;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer}
 .modus-premises-confirm:disabled{cursor:not-allowed;opacity:.35}
 .modus-premises-inner .modus-premises-fine{font-size:12px;margin-top:15px}
 .modus-premises-note{box-sizing:border-box;max-width:1200px;margin:28px auto;padding:20px 25px;border:1px solid var(--line,#4c514d);border-left:3px solid var(--accent,#a3b977);border-radius:10px;background:var(--surface,#1a1c19);color:var(--ink,#f2f2ee)}
