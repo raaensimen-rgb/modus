@@ -125,6 +125,9 @@ def with_navigation_css(page, prefix=''):
     page = page.replace('class="nav-account"', 'class="nav-account" data-account-link')
     if 'class="footer-editor"' not in page:
         page = page.replace('</footer>', '<a class="footer-editor" href="/redaktor.html">Redaktør <span aria-hidden="true">↗</span></a></footer>', 1)
+    # Explicitly request text glyphs on iOS Safari; otherwise ↗ may become a colored emoji.
+    # Apply during the shared build so arrows stay typographic across all public pages.
+    page = page.replace('↗', '↗\ufe0e').replace('↗\ufe0e\ufe0e', '↗\ufe0e')
     return page
 
 
