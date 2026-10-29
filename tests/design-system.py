@@ -51,7 +51,7 @@ for name in pages:
 editor = (dist / "redaktor.html").read_text(encoding="utf-8")
 assert 'class="brand editor-brand"' in editor, "Editor is missing branded header"
 assert 'class="editor-brandmark"' in editor, "Editor monogram missing"
-assert 'src="modus-arch.svg"' in editor, "Editor must use the Arch mark"
+assert '<svg class="editor-brandmark"' in editor, "Editor must use an inline Arch mark"
 assert 'href="modus-mark.svg"' in editor, "Editor favicon missing"
 print("MODUS public wordmark, editor monogram and branded icon verified.")
 
