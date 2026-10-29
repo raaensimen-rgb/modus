@@ -2,3 +2,10 @@
 @media(prefers-reduced-motion:reduce){.plan-action{transition:none}}
 
 @media(max-width:760px){.plan-action{min-height:44px}}
+
+/* Planned paid memberships remain explorable but clearly not yet available. */
+.price-card[data-plan] .plan-coming-badge{position:absolute;top:18px;right:18px;display:inline-flex;align-items:center;justify-content:center;padding:5px 8px;border:1px solid var(--modus-b-6b874c,#6b874c);border-radius:5px;background:var(--modus-c-27371d,#27371d);color:var(--modus-c-d7f48c,#d7f48c);font:700 9px/1.1 'DM Sans',sans-serif;letter-spacing:.055em;text-transform:uppercase;white-space:nowrap}
+.price-card[data-plan] .card-kicker{padding-right:87px}
+@media(max-width:700px){.price-card[data-plan] .plan-coming-badge{top:17px;right:16px}}
+html[data-theme=readable] .price-card[data-plan] .plan-coming-badge{background:#e7efd9;color:#304c24;border-color:#879e74}
+html[data-theme=contrast] .price-card[data-plan] .plan-coming-badge{background:#fff;color:#000;border-color:#000}
