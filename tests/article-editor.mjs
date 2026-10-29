@@ -5,7 +5,7 @@ import {parseFragment} from 'parse5';
 import {cleanHTML,normalizeArticle,validateArticle,renderArticle,renderCard,safeURL} from '../cms/model.mjs';
 import {onRequest} from '../cms/middleware.mjs';
 const seed=JSON.parse(fs.readFileSync('dist/cms-seed.json','utf8'));
-assert.equal(seed.length,26);
+assert.equal(seed.length,2*JSON.parse(fs.readFileSync('content/articles.json','utf8')).length);
 for(const raw of seed){const a=normalizeArticle(raw);assert.deepEqual(validateArticle(a),[],raw.slug+' '+raw.locale);const page=renderArticle(a);assert.equal((page.match(/<fieldset data-answer=/g)||[]).length,3);assert.equal((page.match(/type="radio"/g)||[]).length,9);for(let i=1;i<=a.sections.length;i++)assert(page.includes(`id="del-${i}"`));assert(renderCard(a).includes(`/artikler/${a.slug}.html`));}
 const dirty='<script>alert(1)</script><svg><foreignObject><p onclick="evil()">X</p></foreignObject></svg><p onclick="evil()"><strong>Safe</strong><a href="java&#x73;cript:alert(1)">bad</a><img src=x onerror=evil()></p><iframe srcdoc="evil"></iframe>';
 const safe=cleanHTML(dirty);assert(safe.includes('<strong>Safe</strong>'));assert(!/script|onclick|onerror|<svg|<iframe|<img|foreignObject/i.test(safe));assert.equal(cleanHTML(safe),safe);
