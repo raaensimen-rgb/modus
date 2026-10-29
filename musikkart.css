@@ -92,3 +92,16 @@
 .map-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,var(--modus-c-111310,#111310) 0%,rgba(17,19,16,.92) 14%,rgba(17,19,16,.48) 50%,transparent 94%);pointer-events:none}
 .map-hero>p,.map-hero h1,.map-hero-links{position:relative;z-index:1}
 @media(max-width:720px){.map-hero{min-height:0;padding:61px 0 53px}.map-hero::before{inset:0 -18vw 0 8%;background-position:54% center;opacity:.48}.map-hero::after{background:linear-gradient(90deg,rgba(17,19,16,.95) 0%,rgba(17,19,16,.77) 70%,rgba(17,19,16,.4) 100%)}}
+
+/* Atlas hero and overview polish: preserve legibility and the established dark palette. */
+@media(min-width:721px){
+  .map-hero::before{background-position:center 31%}
+}
+.map-hero h1{margin-bottom:14px}
+.atlas-intro-step{
+  background:linear-gradient(rgba(201,225,172,.035),rgba(201,225,172,.035)),var(--panel);
+  border-color:color-mix(in srgb,var(--line) 77%,var(--accent) 23%);
+}
+@media(max-width:720px){
+  .map-hero h1{margin-bottom:14px}
+}
