@@ -42,3 +42,8 @@
 /* Keep the secondary Arch framing consistent in the editor. */
 .editor-top .editor-brandmark-end{display:block;width:30px;height:28px;flex:none;margin-left:15px;opacity:.68;overflow:visible}
 @media(max-width:650px){.editor-top .editor-brandmark-end{width:27px;height:25px;margin-left:11px}}
+
+/* Subtly closer Arch framing, keeping the wordmark legible. */
+.editor-top .editor-brandmark{margin-right:9px}
+.editor-top .editor-brandmark-end{margin-left:11px}
+@media(max-width:650px){.editor-top .editor-brandmark{margin-right:8px}.editor-top .editor-brandmark-end{margin-left:9px}}
