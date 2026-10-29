@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {calculatePeriodDecision} from '../cms/usage-billing.mjs';
+const d=n=>calculatePeriodDecision({eligibleUnits:n,periodTargetUnits:100,planAmountOre:9900,periodId:'2026-11'});
+assert.equal(d(0).chargeOre,0);
+assert.equal(d(59).chargeOre,0);
+assert.equal(d(60).chargeOre,9900);
+assert.equal(d(100).chargeOre,9900);
+assert.equal(d(130).chargeOre,9900);
+assert.equal(d(60).chargeAuthorization,false);
+assert.equal(calculatePeriodDecision({eligibleUnits:2,periodTargetUnits:3,planAmountOre:9900,periodId:'2026-11'}).minimumUnits,2);
+assert.equal(calculatePeriodDecision({eligibleUnits:1,periodTargetUnits:3,planAmountOre:9900,periodId:'2026-11'}).chargeOre,0);
+assert.throws(()=>calculatePeriodDecision({eligibleUnits:-1,periodTargetUnits:100,planAmountOre:1,periodId:'2026-11'}));
+assert.throws(()=>calculatePeriodDecision({eligibleUnits:60,periodTargetUnits:0,planAmountOre:1,periodId:'2026-11'}));
+console.log('PL-056 60% usage threshold decision tests passed');

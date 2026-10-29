@@ -88,6 +88,14 @@ const tests = [
   [
     "node",
     "tests/feedback.cjs"
+  ],
+  [
+    "node",
+    "tests/stripe-test.mjs"
+  ],
+  [
+    "node",
+    "tests/usage-billing.mjs"
   ]
 ];
 const outputDir = path.join(process.cwd(), 'test-results');
