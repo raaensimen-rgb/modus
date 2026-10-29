@@ -18,6 +18,7 @@
   }
   function show(id){
     selected=id;previousFocus=document.activeElement;const q=M.quote(config,id,period);if(!q)return;
+    $('studentVerification').hidden=id!=='elev';
     $('chosenName').textContent=q.name;
     $('chosenPrice').textContent=M.money(q.amount)+' kr / '+q.unit;
     $('chosenPeriod').textContent=period==='year'?'Årsabonnement · hele årsbeløpet betales samlet.':'Månedsabonnement · faktureres hver måned.';
@@ -32,7 +33,7 @@
   document.querySelectorAll('[data-period]').forEach(b=>b.onclick=()=>{period=b.dataset.period;render();});
   document.querySelectorAll('[data-choose]').forEach(b=>b.onclick=()=>show(b.closest('[data-plan]').dataset.plan));
   $('closeMembership').onclick=()=>dialog.close();
-  dialog.addEventListener('close',()=>{selected=null;previousFocus?.focus();});
+  dialog.addEventListener('close',()=>{selected=null;const school=$('studentSchool');if(school)school.value='';const info=$('studentSchoolInfo');if(info)info.textContent='Eksempellisten er ikke komplett. Andre norske skoler skal kunne vurderes når ordningen åpner.';previousFocus?.focus();});
   dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
   const school=$('studentSchool'),schoolInfo=$('studentSchoolInfo');
   if(school&&schoolInfo){
