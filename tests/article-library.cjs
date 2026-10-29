@@ -32,7 +32,7 @@ assert(html.includes('data-category="reading-beginner"'),'Beginner heading must 
 assert(html.includes('data-category="reading-intermediate"'),'Intermediate heading must exist');
 assert(html.includes('data-category="reading-advanced"'),'Advanced heading must exist');
 const readingHeadings=[...html.matchAll(/<section class="article-category" data-category="reading-[^"]+">[\s\S]*?<h3>([^<]+)<\/h3>/g)].map(m=>m[1]);
-assert.deepEqual(readingHeadings.slice(0,3),['Nybegynner','Videre','Fordypning']);
+assert.deepEqual(readingHeadings.slice(0,3),['Grunnleggende musikkteori','Videregående musikkteori','Faglig fordypning']);
 assert(progression.indexOf('din-forste-improvisasjon')<progression.indexOf('septimakkorder'),'Beginner block must precede intermediate block');
 
 assert(html.includes('data-group-by="topic"'),'Topic grouping must remain available');
