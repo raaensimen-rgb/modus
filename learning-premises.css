@@ -1,5 +1,5 @@
 /* Learning premise confirmation */
-.modus-premises-dialog{box-sizing:border-box;width:min(94vw,570px);max-height:min(85vh,740px);overflow-y:auto;border:1px solid var(--line,#4c514d);border-radius:18px;padding:0;color:var(--ink,#f1f1e9);background:var(--surface,#1a1c19);box-shadow:0 25px 100px #0008}
+.modus-premises-dialog{position:relative;box-sizing:border-box;width:min(94vw,570px);max-height:min(85vh,740px);overflow-y:auto;border:1px solid var(--line,#4c514d);border-radius:18px;padding:0;color:var(--ink,#f1f1e9);background:var(--surface,#1a1c19);box-shadow:0 25px 100px #0008}
 .modus-premises-dialog::backdrop{background:rgba(4,8,5,.76);backdrop-filter:blur(5px)}
 .modus-premises-inner{padding:clamp(24px,5vw,40px);font-family:inherit}
 .modus-premises-eyebrow{font-size:11px;letter-spacing:.19em;color:var(--accent,#a3b977);font-weight:700}
@@ -13,3 +13,9 @@
 .modus-premises-note{box-sizing:border-box;max-width:1200px;margin:28px auto;padding:20px 25px;border:1px solid var(--line,#4c514d);border-left:3px solid var(--accent,#a3b977);border-radius:10px;background:var(--surface,#1a1c19);color:var(--ink,#f2f2ee)}
 .modus-premises-note strong{font-size:15px}
 .modus-premises-note p{font-size:14px;line-height:1.7;color:var(--muted,#b5bcb1);margin:10px 0 0}
+
+/* Temporary development shortcut: upper-left close button. Does not count as acceptance. */
+.modus-premises-close{position:absolute;top:12px;left:12px;display:grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid var(--line,#4c514d);border-radius:9px;background:transparent;color:var(--ink,#f1f1e9);font:400 26px/1 sans-serif;cursor:pointer;z-index:1}
+.modus-premises-close:hover{background:rgba(128,128,128,.14)}
+.modus-premises-close:focus-visible{outline:2px solid var(--accent,#a3b977);outline-offset:3px}
+.modus-premises-inner{padding-top:clamp(52px,7vw,64px)}
