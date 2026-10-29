@@ -19,3 +19,5 @@
 .editor-inbox-controls label{font-size:12px;color:#cbdcc9}
 .editor-inbox-controls select{margin-left:8px;padding:7px 10px;border-radius:7px;background:#223629;color:#eff6e9;border:1px solid #638265}
 @media(max-width:700px){.editor-inbox{padding:16px}.editor-inbox-head{align-items:flex-start;flex-direction:column}}
+
+.editor-inbox-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.editor-inbox-actions label{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#cbdcc9;white-space:nowrap;cursor:pointer}.editor-inbox-actions input{accent-color:#b8e888}
