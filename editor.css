@@ -38,3 +38,7 @@
 .editor-top .editor-brand{gap:0}
 .editor-top .editor-brandmark{width:30px;height:28px;flex:none;margin-right:13px;color:#d7f48c}
 @media(max-width:650px){.editor-top .editor-brandmark{width:27px;height:25px;margin-right:11px}}
+
+/* Keep the secondary Arch framing consistent in the editor. */
+.editor-top .editor-brandmark-end{display:block;width:30px;height:28px;flex:none;margin-left:15px;opacity:.68;overflow:visible}
+@media(max-width:650px){.editor-top .editor-brandmark-end{width:27px;height:25px;margin-left:11px}}
