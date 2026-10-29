@@ -31,4 +31,11 @@ assert "body{font-size:" not in type_rules, "Do not override the site's global f
 assert ".atlas-intro-heading>p:not(.map-eyebrow)" in type_css, "Atlas explanatory introduction must be covered"
 assert "font-size:18px;line-height:1.75" in type_css, "Explanatory prose must meet desktop reading size"
 assert ".atlas-intro-step p" in type_css and ".path-card p" in type_css, "Feature descriptions must be covered"
+# Article paragraphs, exercises and tables must stay legible at desktop distance.
+article_css = (dist / "articles.css").read_text(encoding="utf-8")
+assert "Comfortable article reading size" in article_css
+assert ".reading-body p," in article_css and ".reading-body li," in article_css
+assert "font-size:18px;" in article_css
+assert ".reading-body table{font-size:16px" in article_css
+assert ".reading-body td,.reading-body th{font-size:15px" in article_css
 print("MODUS design-system integration and page styles verified.")
