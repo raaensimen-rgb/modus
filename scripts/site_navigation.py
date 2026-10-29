@@ -32,9 +32,11 @@ def render_header(prefix='', active='home'):
             'mindmap': 'Se hele musikklandskapet og hva du har lært.',
             'articles': 'Les fagartikler om musikk, teori og praksis.',
             'about': 'Les om tanken bak MODUS og hvem som står bak.',
-            'membership': 'Se medlemskap og hva de ulike nivåene innebærer.',
+            'membership': 'Forhåndsvis planlagte medlemskap og funksjoner. Kjøp er ikke åpnet.',
             'account': 'Logg inn for å administrere kontoen din.',
         }
+        if key == 'membership':
+            body += '<span class="nav-coming" aria-hidden="true">Kommer</span>'
         hint = hints.get(key) if description is None else None
         if hint:
             accessible += f' aria-description="{escape(hint, quote=True)}"'
