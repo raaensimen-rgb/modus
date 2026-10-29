@@ -69,7 +69,7 @@ function explainTarget(el){
  const control=el.closest('button, a[href], select, input:not([type="hidden"]), summary, textarea, [role="button"]');
  if(!control||control.disabled||root.contains(control))return null;
  const label=control.getAttribute('aria-label')||control.labels?.[0]?.textContent||control.closest('label')?.textContent||control.textContent||control.title||control.getAttribute('placeholder')||'Dette valget';
- const name=label.replace(/\\s+/g,' ').trim().slice(0,100);
+ const name=label.replace(/\s+/g,' ').trim().slice(0,100);
  const action=control.matches('a[href]')?'Åpner siden eller innholdet':control.matches('select')?'Velg et alternativ for':control.matches('input, textarea')?'Skriv inn eller endre':'Aktiverer';
  return {target:control,message:action+' «'+(name||'dette valget')+'».'};
 }
