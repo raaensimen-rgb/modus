@@ -132,3 +132,11 @@
 .chord-main .progression-preset-preview{font-size:12px;line-height:1.7;color:var(--modus-c-a5ad9a,#a5ad9a);margin:12px 0 0}
 @media(max-width:1250px){.chord-main .progression-presets-controls{grid-template-columns:minmax(0,1fr)}.chord-main .progression-presets-controls button{justify-self:start}}
 @media(max-width:700px){.chord-main .progression-presets{padding:15px}.chord-main .progression-presets-controls select{font-size:16px;min-height:44px}.chord-main .progression-presets-controls button{width:100%}}
+
+/* Visible inversion selection alongside the existing accessible dropdown. */
+.piano-inversion-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}
+.piano-inversion-buttons button{padding:9px 12px;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 12px/1.4 'DM Sans',sans-serif;cursor:pointer}
+.piano-inversion-buttons button[aria-pressed='true']{border-color:var(--accent);background:var(--accent);color:var(--bg)}
+.piano-inversion-buttons button[hidden]{display:none}
+.piano-inversion-buttons button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+html[data-theme='readable'] .piano-inversion-buttons button[aria-pressed='true']{background:#b8d49f;color:#183522;border-color:#638759}
