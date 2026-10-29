@@ -28,6 +28,13 @@ assert.deepEqual([...progression].sort(),articles.map(a=>a.slug).sort(),'Every a
 assert.deepEqual(progression.slice(0,5),['toner-og-intervaller','dur-og-moll','bygg-akkorder-i-en-toneart','kvintsirkelen','romertall-i-musikk']);
 assert(html.includes('data-group-by="order" aria-pressed="true"'),'Reading order must be selected by default');
 assert(html.includes('id="orderGroupTemplate"'),'Reading order view must be available');
+assert(html.includes('data-category="reading-beginner"'),'Beginner heading must exist');
+assert(html.includes('data-category="reading-intermediate"'),'Intermediate heading must exist');
+assert(html.includes('data-category="reading-advanced"'),'Advanced heading must exist');
+const readingHeadings=[...html.matchAll(/<section class="article-category" data-category="reading-[^"]+">[\s\S]*?<h3>([^<]+)<\/h3>/g)].map(m=>m[1]);
+assert.deepEqual(readingHeadings.slice(0,3),['Nybegynner','Videre','Fordypning']);
+assert(progression.indexOf('din-forste-improvisasjon')<progression.indexOf('septimakkorder'),'Beginner block must precede intermediate block');
+
 assert(html.includes('data-group-by="topic"'),'Topic grouping must remain available');
 assert(html.includes('data-group-by="level"'),'Level grouping must remain available');
 const mainCards=[...html.matchAll(/data-article-id="([^"]+)"/g)].map(m=>m[1]);
