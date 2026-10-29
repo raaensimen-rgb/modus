@@ -866,5 +866,67 @@
         "explanation": "The collection can remain the same while target notes and the overall tonal centre shape the expression."
       }
     }
+  ],
+  "romertall-i-musikk": [
+    {
+      "question": "Hva betyr IV som romertall?",
+      "options": [
+        "Fire",
+        "Seks",
+        "Ni"
+      ],
+      "answer": 0,
+      "section": 1,
+      "explanation": "I foran V trekkes fra: 5 − 1 = 4. VI er derimot 5 + 1 = 6.",
+      "en": {
+        "question": "What does IV represent as a Roman numeral?",
+        "options": [
+          "Four",
+          "Six",
+          "Nine"
+        ],
+        "explanation": "I before V is subtracted: 5 − 1 = 4. VI is 5 + 1 = 6."
+      }
+    },
+    {
+      "question": "Hvilken akkord er vi i C-dur?",
+      "options": [
+        "A-dur",
+        "A-moll",
+        "G-moll"
+      ],
+      "answer": 1,
+      "section": 2,
+      "explanation": "Sjette skalatrinn er A, og en liten romertallsbokstav viser en mollakkord: Am.",
+      "en": {
+        "question": "Which chord is vi in C major?",
+        "options": [
+          "A major",
+          "A minor",
+          "G minor"
+        ],
+        "explanation": "The sixth scale degree is A; lowercase vi indicates a minor triad: Am."
+      }
+    },
+    {
+      "question": "Hvordan blir I–vi–IV–V i G-dur?",
+      "options": [
+        "G–Em–C–D",
+        "G–E–C–Dm",
+        "C–Am–F–G"
+      ],
+      "answer": 0,
+      "section": 4,
+      "explanation": "I G-dur er I=G, vi=Em, IV=C og V=D. Romertallmønsteret beholdes ved transponering.",
+      "en": {
+        "question": "How do you play I–vi–IV–V in G major?",
+        "options": [
+          "G–Em–C–D",
+          "G–E–C–Dm",
+          "C–Am–F–G"
+        ],
+        "explanation": "In G major: I=G, vi=Em, IV=C, V=D. The numeral pattern remains when transposing."
+      }
+    }
   ]
 }
