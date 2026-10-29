@@ -7,6 +7,11 @@ window.MODUS_MEMBERSHIP_CONFIG = {
   privacyUrl: '',
   supportEmail: '',
   plans: {
+    elev: {
+      name: 'Modus Elev', monthly: 39, yearly: 390,
+      contentReady: false, accessReady: false,
+      checkout: { month: '', year: '' }
+    },
     plus: {
       name: 'Modus+', monthly: 79, yearly: 790,
       contentReady: false, accessReady: false,
