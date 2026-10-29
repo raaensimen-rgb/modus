@@ -4,7 +4,7 @@ async function check(file){
  const source=fs.readFileSync(file,'utf8'),frames=new Map(),sources=[];
  let nextFrame=0;
  const classList=()=>({values:new Set(),toggle(k,on){if(on)this.values.add(k);else this.values.delete(k);}});
- const slots=Array.from({length:4},()=>({classList:classList(),attrs:{},setAttribute(k,v){this.attrs[k]=v;},removeAttribute(k){delete this.attrs[k];}}));
+ const slots=Array.from({length:4},()=>({classList:classList(),attrs:{},setAttribute(k,v){this.attrs[k]=v;},removeAttribute(k){delete this.attrs[k];},querySelector(){return {setAttribute(){}};}}));
  const nodes={chordSlots:{classList:classList(),querySelectorAll:()=>slots},playProgression:{},playSelected:{},chordStatus:{}};
  const context={C:id=>nodes[id],requestAnimationFrame:fn=>{frames.set(++nextFrame,fn);return nextFrame;},cancelAnimationFrame:id=>frames.delete(id)};
  vm.createContext(context);
