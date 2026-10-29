@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "intervallomvendinger",
+    "title": "Intervallomvendinger",
+    "level": "beginner",
+    "topic": "Intervaller",
+    "description": "Se hvordan intervallnummer og -kvalitet endres når en tone flyttes en oktav.",
+    "status": "planned"
+  },
+  {
+    "slug": "kadens-og-tonale-funksjoner",
+    "title": "Kadens og tonale funksjoner",
+    "level": "intermediate",
+    "topic": "Harmonikk",
+    "description": "Utforsk tonika, dominant, subdominant og hvordan akkorder skaper retning.",
+    "status": "planned"
+  },
+  {
+    "slug": "sekundaerdominanter",
+    "title": "Sekundærdominanter",
+    "level": "intermediate",
+    "topic": "Harmonikk",
+    "description": "Forstå hvordan en dominant kan lede midlertidig mot en annen akkord enn tonika.",
+    "status": "planned"
+  },
+  {
+    "slug": "akkordutvidelser",
+    "title": "Akkordutvidelser: 9, 11 og 13",
+    "level": "advanced",
+    "topic": "Akkorder",
+    "description": "Lær hvordan utvidede akkorder bygges, noteres og brukes musikalsk.",
+    "status": "planned"
+  },
+  {
+    "slug": "modal-harmonikk-i-praksis",
+    "title": "Modal harmonikk i praksis",
+    "level": "advanced",
+    "topic": "Modalitet",
+    "description": "Undersøk hvordan karaktertoner, pedaltoner og akkordvalg etablerer et modalt sentrum.",
+    "status": "planned"
+  }
+]
