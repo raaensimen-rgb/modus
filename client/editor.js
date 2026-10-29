@@ -48,13 +48,16 @@ async function loadFeedback(){
  if(!isEditor||!user)return;
  const list=$('feedbackAdminList'),message=$('feedbackAdminStatus');
  message.textContent='Henter henvendelser …';
- const {data,error}=await client.from('modus_feedback').select('id,created_at,category,message,email,page_url,status').order('created_at',{ascending:false}).limit(100);
+ const showResolved=$('feedbackShowResolved').checked;
+ let query=client.from('modus_feedback').select('id,created_at,category,message,email,page_url,status');
+ if(!showResolved)query=query.neq('status','resolved');
+ const {data,error}=await query.order('created_at',{ascending:false}).limit(100);
  if(!isEditor)return;
  if(error){message.textContent='Kunne ikke hente henvendelser. Prøv igjen.';return;}
  const types={error:'Feilrapport',question:'Spørsmål',suggestion:'Forbedringsforslag'};
  const states={new:'Ny',in_progress:'Pågår',resolved:'Løst'};
  list.replaceChildren();
- message.textContent=data.length?data.length+' henvendelser (viser maksimalt 100).':'Ingen henvendelser ennå.';
+ message.textContent=data.length?data.length+(showResolved?' henvendelser':' aktive henvendelser')+' (viser maksimalt 100).':(showResolved?'Ingen henvendelser ennå.':'Ingen aktive henvendelser. Velg «Vis løste» for historikk.');
  for(const item of data){
   const card=document.createElement('article');card.className='editor-inbox-item';
   const head=document.createElement('div');head.className='editor-inbox-item-head';
@@ -69,11 +72,12 @@ async function loadFeedback(){
   const select=document.createElement('select');select.setAttribute('aria-label','Status for '+(types[item.category]||'henvendelse'));
   for(const [key,text] of Object.entries(states)){const opt=document.createElement('option');opt.value=key;opt.textContent=text;select.append(opt);}
   select.value=item.status;
-  select.addEventListener('change',async()=>{select.disabled=true;const previous=item.status;const {error:err}=await client.from('modus_feedback').update({status:select.value}).eq('id',item.id);if(err){select.value=previous;message.textContent='Kunne ikke lagre statusen. Prøv igjen.';}else{item.status=select.value;message.textContent='Status oppdatert.';}select.disabled=false;});
+  select.addEventListener('change',async()=>{select.disabled=true;const previous=item.status;const {error:err}=await client.from('modus_feedback').update({status:select.value}).eq('id',item.id);if(err){select.value=previous;message.textContent='Kunne ikke lagre statusen. Prøv igjen.';}else{item.status=select.value;if(item.status==='resolved'&&!$('feedbackShowResolved').checked){card.remove();const remaining=list.children.length;message.textContent=remaining?remaining+' aktive henvendelser vises.':'Ingen aktive henvendelser. Velg «Vis løste» for historikk.';}else{message.textContent='Status oppdatert.';}}select.disabled=false;});
   label.append(select);row.append(label);card.append(row);list.append(card);
  }
 }
 $('feedbackRefresh').addEventListener('click',()=>{if(isEditor)void loadFeedback();});
+$('feedbackShowResolved').addEventListener('change',()=>{if(isEditor)void loadFeedback();});
 
 async function save(){
  if(saving||!article)return false;clearTimeout(timer);article=normalizeArticle(article);
