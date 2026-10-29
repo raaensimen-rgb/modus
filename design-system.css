@@ -161,11 +161,11 @@ body :is(
   .course-lesson p,.course-exercise>p:not(.eyebrow),.course-reflection p,
   .about-reading p,.about-byline p,.about-credit>p,.about-links p
 ){font-size:18px;line-height:1.75}
-/* Long-form prose deserves a full reading size. */
+/* Keep article reading prose consistent with the larger body-copy standard. */
 body :is(
   .reading-body>p,.reading-body section>p,.reading-body>ul>li,
   .reading-body>ol>li,.reading-body section>ul>li,
   .reading-body .practice-steps li,.article-learning li,
   .about-reading>p
-){font-size:16px;line-height:1.8}
+){font-size:18px;line-height:1.8}
 /* Larger introductions and editorial text already sized intentionally are kept. */
