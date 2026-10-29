@@ -18,16 +18,52 @@ const byId=new Map(catalog.map(m=>[m.id,m]));
 const $=id=>document.getElementById(id);const ns="http://www.w3.org/2000/svg";
 const STORE="modus-musikkart-v1";const valid=new Set(["not-started","exploring","learned"]);
 let stored={};try{stored=JSON.parse(localStorage.getItem(STORE)||"{}")||{}}catch{}
-const records={};for(const m of catalog){const r=stored[m.id]||{};records[m.id]={state:valid.has(r.state)?r.state:"not-started",idea:r.idea===true,note:typeof r.note==="string"?r.note.slice(0,2000):""};}
+const records={};for(const m of catalog){const r=stored[m.id]||{};records[m.id]={state:valid.has(r.state)?r.state:"not-started",manual:r.manual===true||(r.manual===undefined&&valid.has(r.state)&&r.state!=="not-started"),idea:r.idea===true,note:typeof r.note==="string"?r.note.slice(0,2000):""};}
+// Article-to-module links are editorially defined; only directly related
+// material counts. Opening an article is not evidence of mastering a topic.
+const articleModules={
+ 'toner-og-intervaller':'F03',
+ 'dur-og-moll':'E02',
+ 'kvintsirkelen':'E01',
+ 'din-forste-improvisasjon':'I04',
+ 'moduser-og-tonalt-sentrum':'I03',
+ 'kirketonearter-ett-system-sju-uttrykk':'I03',
+ 'romertall-i-musikk':'I01',
+ 'ii-v-i-kadensen':'I02',
+ 'treklanger-fra-grunnform-til-omvending':'E02',
+ 'septimakkorder':'E02',
+ 'harmonisk-moll-og-frygisk-dominant':'I03',
+ 'stemmeforing':'A03',
+ 'rytme-i-sju-aatte':'A04',
+ 'bygg-akkorder-i-en-toneart':'E03',
+ 'ett-skalakart-nye-maltoner':'E04',
+ 'dorisk-og-eolisk':'I03'
+};
+const articleEvidenceKey='modus.atlas.article-evidence.v1';
+function articleEvidence(){try{const data=JSON.parse(localStorage.getItem(articleEvidenceKey)||'{}');return data&&typeof data==='object'&&!Array.isArray(data)?data:{};}catch{return {};}}
+function evidenceState(moduleId){
+ const ids=Object.keys(articleModules).filter(id=>articleModules[id]===moduleId);
+ if(!ids.length)return 'not-started';
+ const seen=articleEvidence();
+ const completed=id=>seen[id]?.passed===true||localStorage.getItem('modus.article-quiz.v1.'+id)==='passed'||window.ModusAccount?.has?.(id)===true;
+ try{
+  if(ids.every(completed))return 'learned';
+  if(ids.some(id=>seen[id]?.opened===true||completed(id)))return 'exploring';
+ }catch{
+  if(ids.some(id=>seen[id]?.opened===true||seen[id]?.passed===true))return 'exploring';
+ }
+ return 'not-started';
+}
+function moduleState(id){return records[id]?.manual?records[id].state:evidenceState(id);}
 const categoryRecords={};for(const g of groups){categoryRecords[g.id]=valid.has(stored._categories?.[g.id])?stored._categories[g.id]:"not-started";}
 let chosen=null,category=null,search="";
 const svg=$("music-map");
 function svgEl(tag,attr={},content){const e=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attr))e.setAttribute(k,String(v));if(content!==undefined)e.textContent=content;return e;}
 function save(){try{localStorage.setItem(STORE,JSON.stringify({...records,_categories:categoryRecords}));$("map-save-status").textContent="Lagret i denne nettleseren.";}catch{$("map-save-status").textContent="Nettleseren tillot ikke lagring. Bruk eksport for å ta vare på kartleggingen.";}}
 function groupModules(g){return g.ids.map(id=>byId.get(id)).filter(Boolean);}
-function groupState(g){const a=groupModules(g);if(!a.length)return categoryRecords[g.id];const num=a.filter(m=>records[m.id].state==="learned").length;const active=a.some(m=>records[m.id].state!=="not-started");return num===a.length?"learned":active?"exploring":"not-started";}
+function groupState(g){const a=groupModules(g);if(!a.length)return categoryRecords[g.id];const num=a.filter(m=>moduleState(m.id)==="learned").length;const active=a.some(m=>moduleState(m.id)!=="not-started");return num===a.length?"learned":active?"exploring":"not-started";}
 function variant(state){return state==="learned"?"on":state==="exploring"?"mid":"off";}
-function activityState(id){return records[id]?.state||"not-started";}
+function activityState(id){return moduleState(id);}
 function curve(x1,y1,x2,y2,color,state,width){return svgEl("path",{d:"M "+x1+" "+y1+" C "+(x1+135)+" "+y1+", "+(x2-140)+" "+y2+", "+x2+" "+y2,stroke:color,"stroke-width":width,class:"map-branch "+variant(state),style:"color:"+color});}
 function node(x,y,w,h,label,color,state,type,id){
  const group=svgEl("g",{class:"map-node "+variant(state)+" "+type+(chosen===id||category===id?" selected":""),role:"button",tabindex:"0","aria-label":label+". "+(state==="learned"?"Egenvurdert lært":state==="exploring"?"Under arbeid":"Ikke gjennomgått")});
@@ -124,12 +160,12 @@ function render(){
  layer.append(hub);
  svg.append(layer);
  $("map-count").textContent=groups.length+" fagområder · "+catalog.length+" synlige moduler";
- $("map-learned").textContent=catalog.filter(m=>records[m.id].state==="learned").length;
- $("map-exploring").textContent=catalog.filter(m=>records[m.id].state==="exploring").length;
+ $("map-learned").textContent=catalog.filter(m=>moduleState(m.id)==="learned").length;
+ $("map-exploring").textContent=catalog.filter(m=>moduleState(m.id)==="exploring").length;
  $("map-planned").textContent=catalog.filter(m=>records[m.id].idea).length;
  for(const b of $("inspector-module").querySelectorAll("[data-state]")){
    const g=groups.find(g=>g.id===category);
-   const state=chosen?records[chosen].state:g?groupState(g):"not-started";
+   const state=chosen?moduleState(chosen):g?groupState(g):"not-started";
    b.setAttribute("aria-pressed",String(b.dataset.state===state));
  }
 }
@@ -141,7 +177,7 @@ function choose(type,id){
  chosen=m?.id||null;category=g?.id||(m?groups.find(group=>group.ids.includes(m.id))?.id:null)||null;
  $("inspector-module").hidden=false;
  $("inspector-heading").textContent=m?m.title:g.name;
- $("inspector-description").textContent=m?"Velg hvordan du selv vurderer din kjennskap til dette emnet. Du kan også registrere det som en mulig kursidé.":"Dette fagområdet samler "+g.ids.length+" planlagte moduler. Endrer du status her, får alle modulene i grenen samme egenvurderte status.";
+ $("inspector-description").textContent=m?"Atlaset følger åpnete artikler og fullførte quizer. Du kan også velge en egen status som overstyrer den automatiske statusen. Bestått quiz er ikke en faglig godkjenning.":"Dette fagområdet samler "+g.ids.length+" planlagte moduler. Endrer du status her, får alle modulene i grenen samme egenvurderte status.";
  $("inspector-meta").textContent=m?"MODUL "+m.id+" · NIVÅ "+m.level:"FAGOMRÅDE · "+g.ids.length+" MODULER";
  $("map-personal-note").disabled=!m;
  $("map-personal-note").value=m?records[m.id].note:"";
@@ -154,8 +190,8 @@ function choose(type,id){
 }
 $("inspector-module").querySelectorAll("[data-state]").forEach(b=>b.addEventListener("click",()=>{
  const state=b.dataset.state;if(!valid.has(state))return;
- if(chosen)records[chosen].state=state;
- else if(category){const g=groups.find(g=>g.id===category);if(g.ids.length){for(const id of g.ids)records[id].state=state;}else categoryRecords[g.id]=state;}
+ if(chosen){records[chosen].state=state;records[chosen].manual=true;}
+ else if(category){const g=groups.find(g=>g.id===category);if(g.ids.length){for(const id of g.ids){records[id].state=state;records[id].manual=true;}}else categoryRecords[g.id]=state;}
  save();render();
 }));
 $("map-personal-note").addEventListener("input",e=>{if(chosen){records[chosen].note=e.target.value.slice(0,2000);save();}});
@@ -179,12 +215,16 @@ $("map-export").addEventListener("click",()=>{
 });
 $("map-clear").addEventListener("click",()=>{
  if(!window.confirm("Nullstille alle dine lokale læringsmarkeringer og notater?"))return;
- for(const m of catalog)records[m.id]={state:"not-started",idea:false,note:""};
+ for(const m of catalog)records[m.id]={state:"not-started",manual:false,idea:false,note:""};
  for(const g of groups)categoryRecords[g.id]="not-started";
  try{localStorage.removeItem(STORE)}catch{}
  chosen=null;category=null;$("inspector-module").hidden=true;$("inspector-heading").textContent="Velg et område";$("inspector-description").textContent="Kartet er nullstilt.";render();
 });
 render();
+window.addEventListener('pageshow',render);
+window.addEventListener('storage',event=>{if(!event.key||event.key===articleEvidenceKey||event.key.startsWith('modus.article-quiz.v1.'))render();});
+document.addEventListener('modus-account-change',render);
+if(window.ModusAccount?.ready)Promise.resolve(window.ModusAccount.ready).then(render).catch(()=>{});
 })();
 
 
