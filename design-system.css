@@ -142,6 +142,25 @@ body :is(
   .account-panel .account-note,.account-panel .account-preview-note,
   .modus-feedback-heading p,.modus-feedback-note
 ){font-size:15px;line-height:1.75}
+/* Full-sized explanatory paragraphs, including the Musikkatlas passage
+   "Musikkatlaset samler teori..." previously missed by the generic selector.
+   Only body copy: do not enlarge headings, badges, captions or controls. */
+body :is(
+  .atlas-intro-heading>p:not(.map-eyebrow),
+  .atlas-intro-step p,.atlas-intro-note,
+  .map-hero>p:not(.map-eyebrow),.map-next p:not(.map-eyebrow),
+  .map-small,.map-copy,.map-note,
+  .path-lead,.path-intro,.path-card p,.path-note,
+  .articles-hero p:last-child,.article-card p,
+  .overview-heading>p,.journey-stage p,.category-header p:last-child,
+  .article-category[data-category^="reading-"] .category-header p,
+  .home-feature-grid>.theory-entry p:last-child,
+  .tool-copy>p,.section-intro>p:last-child,.theory-entry p:last-child,
+  .theory-hero p:last-child,.aside-note p,.lesson .lead,
+  .lesson-reflection>p,.lesson-reflection details p,
+  .course-lesson p,.course-exercise>p:not(.eyebrow),.course-reflection p,
+  .about-reading p,.about-byline p,.about-credit>p,.about-links p
+){font-size:18px;line-height:1.75}
 /* Long-form prose deserves a full reading size. */
 body :is(
   .reading-body>p,.reading-body section>p,.reading-body>ul>li,
