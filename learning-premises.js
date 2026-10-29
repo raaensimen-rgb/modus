@@ -43,7 +43,7 @@
       dialog.close();
     });
     const input = dialog.querySelector("#modus-premises-accept");
-    const button = dialog.querySelector("button");
+    const button = dialog.querySelector(".modus-premises-confirm");
     input.addEventListener("change", () => { button.disabled = !input.checked; });
     dialog.querySelector("form").addEventListener("submit", (event) => {
       if (!input.checked) { event.preventDefault(); return; }
