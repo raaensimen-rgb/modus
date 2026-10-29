@@ -8,7 +8,7 @@ NAV_ITEMS = (
     ('home', './', 'Hjem'),
     ('jam', 'backingtracks.html', 'MODUS JAM'),
     ('theory', 'teori.html', 'Teorirommet'),
-    ('chords', 'akkorder.html', 'Akkordverksted'),
+    ('chords', 'akkorder.html', 'MODUS HARMONI'),
     ('articles', 'artikler.html', 'Artikler'),
     ('path', 'laeringssti.html', 'Læringssti'),
     ('mindmap', 'musikkart.html', 'Mitt musikkatlas'),
@@ -50,7 +50,7 @@ def render_header(prefix='', active='home'):
                 f'<div class="nav-panel" id="nav-panel-{key}" aria-labelledby="nav-{key}" hidden>{links}</div></div>')
     play = group('play', 'Spill', (
         ('jam', 'backingtracks.html', 'MODUS JAM', 'Spill med trommer, bass og piano.'),
-        ('chords', 'akkorder.html', 'Akkordverksted', 'Bygg akkordrekker og utforsk grep.'),
+        ('chords', 'akkorder.html', 'MODUS HARMONI', 'Bygg akkordrekker og utforsk grep.'),
     ))
     learn = group('learn', 'Studier', (
         ('path', 'laeringssti.html', 'Start å lære', 'Finn ditt utgangspunkt og neste steg.'),
