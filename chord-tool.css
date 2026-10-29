@@ -8,3 +8,58 @@
 /* Harmonic context and chord degrees use the selected tonic and scale. */
 .harmonic-context{border:1px solid var(--modus-b-4b6236,#4b6236);background:var(--modus-c-202e18,#202e18);border-radius:9px;padding:18px;margin-bottom:20px}.harmonic-context-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}.harmonic-context-heading>span{font-size:9px;letter-spacing:1.5px;color:var(--modus-c-aac294,#aac294)}.harmonic-context-heading>strong{font-size:13px;color:var(--accent);font-weight:500}.harmonic-context-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.harmonic-context-controls label{display:flex;flex-direction:column;gap:7px;font-size:11px;color:var(--modus-c-b6c9a2,#b6c9a2);min-width:0}.harmonic-context-controls select{width:100%;min-height:42px;font-size:14px}.harmonic-context>p{margin:14px 0 0;font-size:11px;line-height:1.8;color:var(--modus-c-aabd96,#aabd96)}.chord-name{display:block}.chord-roman{display:block;font:500 14px/1.4 'DM Sans',sans-serif;letter-spacing:.02em;color:var(--accent);margin-top:5px}.selected-roman{font-size:16px;line-height:1.5;color:var(--accent);margin:7px 0 0}.slot-head{min-height:36px}.remove-chord{display:inline-flex;align-items:center;justify-content:center;min-width:36px;min-height:36px;cursor:pointer;border-radius:6px}.remove-chord:disabled{opacity:.4;cursor:not-allowed}.remove-chord:hover:not(:disabled){background:var(--modus-c-354d25,#354d25)}.chord-slot:focus-within{outline:1px solid var(--accent);outline-offset:2px}.chord-slot .select-chord:focus-visible,.chord-slot .remove-chord:focus-visible,.text-button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.builder-panel,.selected-panel,.harmonic-context-controls>*{min-width:0}
 @media(max-width:700px){.harmonic-context{padding:15px}.harmonic-context-controls{gap:10px}.harmonic-context-controls select,.slot-edit select,.builder-transport input,.piano-voicing select{font-size:16px;min-height:44px;box-sizing:border-box}.slot-head{min-height:44px}.remove-chord{min-width:44px;min-height:44px;font-size:21px;margin-right:-6px}.select-chord{padding-top:6px;padding-bottom:14px}.chord-roman{font-size:14px}.text-button{min-height:44px;padding:10px 2px;display:inline-flex;align-items:center}.secondary,.listen-button,.jam-scale .button{min-height:44px;box-sizing:border-box}.builder-transport label{min-height:44px}.piano-voicing .diagram-heading{gap:12px}.slot-edit label{font-size:10px}}
+
+/* MODUS HARMONI · visual alignment with MODUS JAM (no changes to tool logic) */
+.chord-main{max-width:1440px;margin-inline:auto;padding:0 5% 55px}
+.chord-main .theory-hero{min-height:310px;padding:50px 0 45px;margin-bottom:19px;overflow:hidden;isolation:isolate}
+.chord-main .theory-hero>div:first-child{position:relative;z-index:1;max-width:600px}
+.chord-main .theory-hero .eyebrow{color:var(--accent);font-size:10px;letter-spacing:2px;margin:0 0 21px}
+.chord-main .theory-hero h1{font:500 clamp(38px,4.4vw,62px)/1.12 Manrope,sans-serif;letter-spacing:-.055em;margin:0}
+.chord-main .theory-hero h1 em{font-family:Georgia,serif;font-weight:400;color:var(--accent)}
+.chord-main .theory-hero p:last-child{font-size:15px;line-height:1.8;max-width:540px;margin:21px 0 0;color:var(--modus-c-aeb6a4,#aeb6a4)}
+.chord-main .theory-landscape{inset:0 0 0 27%;opacity:.88;background:linear-gradient(90deg,#111310 0%,rgba(17,19,16,.92) 14%,rgba(17,19,16,.18) 68%),linear-gradient(0deg,#111310 0%,transparent 27%,transparent 78%,rgba(17,19,16,.78) 100%),url('images/mountain-lake.webp') center 50%/cover}
+.chord-main .builder-panel,.chord-main .selected-panel{background:var(--modus-c-1a1d18,#1a1d18);border:1px solid var(--modus-b-30342a,#30342a);border-radius:14px;padding:28px}
+.chord-main .builder-heading{margin:0 0 15px;align-items:center}
+.chord-main .builder-heading h2{font:500 clamp(23px,2.5vw,29px)/1.3 Manrope,sans-serif;letter-spacing:-.035em;margin:0}
+.chord-main .builder-heading .eyebrow,.chord-main .selected-heading .eyebrow{font-size:10px;letter-spacing:1.4px;color:var(--modus-c-a5ad9a,#a5ad9a);margin:0 0 15px}
+.chord-main .builder-help{font-size:14px;line-height:1.7;color:var(--modus-c-a5ad9a,#a5ad9a);margin:0 0 22px}
+.chord-main .harmonic-context{background:var(--modus-c-20251d,#20251d);border:1px solid var(--modus-b-3c4634,#3c4634);border-radius:10px;padding:20px;margin-bottom:20px}
+.chord-main .harmonic-context-heading{margin-bottom:18px}
+.chord-main .harmonic-context-heading span{color:var(--modus-c-aeb6a4,#aeb6a4)}
+.chord-main .harmonic-context>p{font-size:13px;line-height:1.75;color:var(--modus-c-aeb6a4,#aeb6a4)}
+.chord-main .harmonic-context-controls label{color:var(--modus-c-aeb6a4,#aeb6a4);font-size:12px}
+.chord-main :is(.harmonic-context-controls select,.slot-edit select,.piano-voicing select,.sequence-library select,.sequence-library input){background:var(--modus-c-22271f,#22271f);border:1px solid var(--modus-b-444a3b,#444a3b);border-radius:7px;color:var(--modus-c-f0f0e6,#f0f0e6)}
+.chord-main .chord-slots{gap:11px}
+.chord-main .chord-slot{background:var(--modus-c-20251d,#20251d);border:1px solid var(--modus-b-30342a,#30342a);border-radius:9px;padding:17px 15px;transition:border-color .16s ease,background .16s ease}
+.chord-main .chord-slots:not(.is-playing) .chord-slot.selected,.chord-main .chord-slot.playing{background:var(--modus-c-313e23,#313e23);border-color:var(--accent);box-shadow:none}
+.chord-main .slot-head{color:var(--modus-c-9ba797,#9ba797)}
+.chord-main .select-chord{font:500 clamp(22px,2.5vw,30px)/1.3 Manrope,sans-serif;letter-spacing:-.035em;min-height:50px}
+.chord-main .slot-edit label{font-size:11px;color:var(--modus-c-aeb6a4,#aeb6a4)}
+.chord-main .chord-roman{font:400 15px/1.4 Georgia,serif;color:var(--accent)}
+.chord-main .builder-transport,.chord-main .jam-transfer,.chord-main .selected-heading{border-color:var(--modus-b-30342a,#30342a)}
+.chord-main .listen-button{background:var(--accent);color:#172014;border-color:var(--accent);border-radius:7px;font-weight:700;min-height:44px;padding:12px 19px}
+.chord-main .listen-button:hover{filter:brightness(1.06)}
+.chord-main .secondary{background:var(--modus-c-22271f,#22271f);border:1px solid var(--modus-b-546244,#546244);border-radius:7px;color:var(--accent);font-size:12px;min-height:40px}
+.chord-main .secondary:hover{background:var(--modus-c-313e23,#313e23)}
+.chord-main .jam-transfer h3{font:500 22px/1.4 Manrope,sans-serif;color:var(--ink)}
+.chord-main .jam-transfer p{font-size:14px;color:var(--modus-c-a5ad9a,#a5ad9a)}
+.chord-main .sequence-library{background:var(--modus-c-20251d,#20251d);border-color:var(--modus-b-30342a,#30342a);border-radius:9px}
+.chord-main .selected-panel{margin-top:18px}
+.chord-main .selected-heading h2{font:500 clamp(27px,3vw,38px)/1.2 Manrope,sans-serif}
+.chord-main :is(.guitar-voicing,.piano-voicing){min-width:0}
+.chord-main .voicing-grid{gap:26px}
+.chord-main .voicing-note{background:var(--modus-c-20251d,#20251d);border-color:var(--modus-b-546244,#546244)}
+.chord-main .chord-bottom{padding:34px 0 8px}
+@media(max-width:700px){
+ .chord-main{padding:0 18px 40px}
+ .chord-main .theory-hero{min-height:290px;padding:35px 0 32px;margin-bottom:12px}
+ .chord-main .theory-hero>div:first-child{max-width:94%}
+ .chord-main .theory-landscape{inset:0;opacity:.48;background:linear-gradient(90deg,#111310 0%,rgba(17,19,16,.73) 58%,rgba(17,19,16,.3) 100%),linear-gradient(0deg,#111310,transparent 40%,#111310),url('images/mountain-lake.webp') center/cover}
+ .chord-main .theory-hero p:last-child{font-size:15px;line-height:1.7}
+ .chord-main .builder-panel,.chord-main .selected-panel{padding:19px 17px}
+ .chord-main .builder-heading{align-items:flex-start}
+ .chord-main .harmonic-context{padding:16px}
+ .chord-main .chord-slot{padding:13px 11px}
+ .chord-main .builder-transport{gap:14px}
+ .chord-main .voicing-grid{grid-template-columns:1fr}
+}
