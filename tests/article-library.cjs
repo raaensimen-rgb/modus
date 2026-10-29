@@ -36,7 +36,7 @@ assert.deepEqual(readingHeadings.slice(0,3),['Grunnleggende musikkteori','Videre
 assert(progression.indexOf('din-forste-improvisasjon')<progression.indexOf('septimakkorder'),'Beginner block must precede intermediate block');
 
 assert.equal((html.match(/class="card-level-row"/g)||[]).length,16,'Every article badge must occupy its own row');
-assert(!/<div class="card-art">[\\s\\S]*?<span class="level-badge/.test(html),'Badges must not overlay illustration graphics');
+for(const art of html.match(/<div class="card-art">[^]*?<\/div>/g)||[]) assert(!art.includes('level-badge'),'Badges must not overlay diagrams');
 assert(html.includes('data-group-by="topic"'),'Topic grouping must remain available');
 assert(html.includes('data-group-by="level"'),'Level grouping must remain available');
 const mainCards=[...html.matchAll(/data-article-id="([^"]+)"/g)].map(m=>m[1]);
