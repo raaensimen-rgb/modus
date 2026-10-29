@@ -38,3 +38,12 @@ html[data-theme='readable'] .modus-help-panel{background:#f4f5f1;color:#1b2a20;b
 html[data-theme='readable'] .modus-help-panel dt{color:#245b34}
 html[data-theme='readable'] .modus-help-panel dd{color:#43533b}
 @media(max-width:620px){.modus-feedback-actions{gap:8px}.modus-help-toggle{width:42px;height:42px;flex-basis:42px}.modus-help-panel{padding:17px 19px}}
+
+
+/* Small contextual explanations, positioned near the relevant control. */
+.modus-context-tip{position:fixed;z-index:7100;width:max-content;max-width:min(290px,calc(100vw - 24px));padding:11px 14px;border:1px solid #64835a;border-radius:9px;background:#18251d;color:#edf4e9;font:500 12px/1.6 'DM Sans',sans-serif;box-shadow:0 9px 28px #0005;pointer-events:none}
+.modus-context-tip[hidden]{display:none!important}
+.modus-help-toggle[aria-pressed='true']{background:#d7f48c;color:#18251d;border-color:#d7f48c}
+.modus-context-help-active :is(button,select,a,input):focus-visible{outline-offset:3px}
+html[data-theme='readable'] .modus-context-tip{background:#f4f5f1;color:#1b2a20;border-color:#8c9b86}
+html[data-theme='readable'] .modus-help-toggle[aria-pressed='true']{background:#b8d49f;color:#183522}
