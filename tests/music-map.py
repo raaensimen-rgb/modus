@@ -33,7 +33,7 @@ assert '.map-layout{grid-template-columns:minmax(0,1fr)' in css
 assert '.map-node.module-node text{font-size:14px' in css
 assert 'leafX=left?33:1227' in js, 'All 24 module labels need visible positions'
 assert 'class:"map-branch "+variant(state)' in js
-assert 'records[m.id].state==="learned"' in js
+assert 'moduleState(m.id)==="learned"' in js and 'articleModules' in js and 'evidenceState' in js
 assert 'window.confirm(' in js and 'JSON.stringify(payload' in js
 assert 'atlas-globe' in js and 'MITT MUSIKKATLAS' in js
 assert 'id:"atlas-globe-halo"' in js and 'fill:"#d7f48c"' not in js, "Globe should replace former filled tile"
@@ -56,4 +56,4 @@ assert len(mapped)==len(set(mapped)), "The same module appears in more than one 
 assert set(mapped)==source_ids, "Missing or invented module in music map"
 assert len(data["modules"]) == 24
 assert all(module["status"]!="approved" for module in data["modules"])
-print("Music map checks passed: 10 branches, 24 module IDs, dimmed and lit learning states, local-only data.")
+print("Music map checks passed: 10 branches, 24 module IDs, local article/quiz evidence and manual states.")
