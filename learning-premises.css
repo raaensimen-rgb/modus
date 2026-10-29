@@ -19,3 +19,6 @@
 .modus-premises-close:hover{background:rgba(128,128,128,.14)}
 .modus-premises-close:focus-visible{outline:2px solid var(--accent,#a3b977);outline-offset:3px}
 .modus-premises-inner{padding-top:clamp(52px,7vw,64px)}
+
+/* Make the temporary close control unmistakably visible in the upper left. */
+.modus-premises-dialog .modus-premises-close{top:13px;left:13px;display:grid!important;visibility:visible!important;opacity:1!important;width:38px;height:38px;background:rgba(163,185,119,.13);color:var(--accent,#c4df86)!important;border:1px solid var(--accent,#c4df86);font-size:28px;line-height:1}
