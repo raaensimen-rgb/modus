@@ -27,3 +27,7 @@
 .editor-top .editor-brandmark{width:34px;height:34px;display:block;flex:none;border-radius:9px}
 .editor-top .editor-wordmark{border-left:1px solid #415437;padding-left:18px;margin-left:2px;line-height:1.5}
 @media(max-width:650px){.editor-top{flex-wrap:wrap;gap:10px 15px;padding:17px 5%}.editor-top .editor-brand{font-size:20px}.editor-top .editor-brandmark{width:29px;height:29px}.editor-top .editor-wordmark{padding-left:12px;letter-spacing:2px}.editor-top>a:not(.brand){margin-left:0}}
+
+/* Match editor mark to the transparent Arch used on the public site. */
+.editor-top .editor-brandmark{width:37px;height:33px;border-radius:0;object-fit:contain}
+@media(max-width:650px){.editor-top .editor-brandmark{width:31px;height:29px}}
