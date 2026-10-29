@@ -11,7 +11,7 @@
   }
   function localPage(value){return typeof value==='string'&&/^\/(?!\/)[a-zA-Z0-9_\-/.]+$/.test(value)&&!value.includes('..');}
   function checkout(config,id,period){
-    if(!['plus','studio'].includes(id)||!['month','year'].includes(period))return null;
+    if(!['elev','plus','studio'].includes(id)||!['month','year'].includes(period))return null;
     const p=config?.plans?.[id];
     if(config?.salesOpen!==true||p?.contentReady!==true||p?.accessReady!==true)return null;
     if(!localPage(config.termsUrl)||!localPage(config.privacyUrl)||!stripeUrl(config.customerPortal,true)||!/^\S+@\S+\.\S+$/.test(config.supportEmail||''))return null;
