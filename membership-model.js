@@ -13,7 +13,7 @@
   function checkout(config,id,period){
     if(!['elev','plus','studio'].includes(id)||!['month','year'].includes(period))return null;
     const p=config?.plans?.[id];
-    if(config?.salesOpen!==true||p?.contentReady!==true||p?.accessReady!==true)return null;
+    if(config?.salesOpen!==true||config?.lifecycleReady!==true||p?.contentReady!==true||p?.accessReady!==true)return null;
     if(id==='elev'&&p?.verificationReady!==true)return null;
     if(!localPage(config.termsUrl)||!localPage(config.privacyUrl)||!stripeUrl(config.customerPortal,true)||!/^\S+@\S+\.\S+$/.test(config.supportEmail||''))return null;
     const url=stripeUrl(p.checkout?.[period]);
