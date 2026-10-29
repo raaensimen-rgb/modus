@@ -28,7 +28,7 @@ for(const plan of ['elev','plus','studio']){
  const opening=new RegExp('<article class="price-card[^"]*" data-plan="'+plan+'"[^>]*><span class="plan-coming-badge">Kommer</span>');
  assert.match(membershipHTML,opening,'Premium plan '+plan+' must clearly show coming-soon status');
 }
-assert.match(membershipHTML,/<article class="price-card free-card">/,'Free plan stays available');
+assert.match(membershipHTML,/<article class="price-card free-card" data-tier="free">/,'Free plan stays available');
 assert(membershipHTML.indexOf('data-plan="elev"')>membershipHTML.indexOf('Modus Fri'));
 assert(membershipHTML.indexOf('data-plan="elev"')<membershipHTML.indexOf('data-plan="plus"'));
 assert.match(membershipHTML,/Samme planlagte innhold som MODUS\+/,'Student tier must receive the full MODUS+ package');
