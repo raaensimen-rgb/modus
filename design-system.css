@@ -133,7 +133,7 @@ body :is(
   .intro p,.mode-detail p,.mixer p,.custom-sequence-note p,
   .chord-type-row p,.course-lesson p,.course-exercise>p:not(.eyebrow),
   .course-reflection p,.practice-note,
-  .about-byline p,.about-reading p,.about-credit>p,.about-links p,
+  .about-reading p,.about-credit>p,.about-links p,
   .builder-help,.guitar-voicing>p,.piano-help,.voicing-note,
   .jam-transfer p,.sequence-library p,.harmonic-context>p,
   .map-small,.map-copy,.map-note,.map-next p:not(.map-eyebrow),
@@ -159,7 +159,7 @@ body :is(
   .theory-hero p:last-child,.aside-note p,.lesson .lead,
   .lesson-reflection>p,.lesson-reflection details p,
   .course-lesson p,.course-exercise>p:not(.eyebrow),.course-reflection p,
-  .about-reading p,.about-byline p,.about-credit>p,.about-links p
+  .about-reading p,.about-credit>p,.about-links p
 ){font-size:18px;line-height:1.75}
 /* Keep article reading prose consistent with the larger body-copy standard. */
 body :is(
@@ -184,4 +184,4 @@ html,body{max-width:100%;overflow-x:clip}
 .brand > .branddot{display:none}
 
 /* The short founder bio is a compact sidebar caption, not long-form body copy. */
-body .about-main .about-byline p{font-size:12px;line-height:1.65;margin:13px 0 19px}
+
