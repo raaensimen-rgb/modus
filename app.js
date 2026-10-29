@@ -43,7 +43,7 @@ function chordAt(d){
  return{degree:d,name:notes[d]+suffix,roman:(alteration===-1?'♭':alteration===1?'♯':'')+numeral+quality,midi:48+KEYS[state.key][1]+r,ints};
 }
 function chordSampleName(){return state.chordInstrument==='acoustic'||state.chordInstrument==='auto'&&state.style==='jazz'?'jazz-piano':'piano';}
-function updateSoundDescription(){$('soundDescription').textContent=(chordSampleName()==='jazz-piano'?'Akustisk flygel':'Elpiano')+(state.style==='jazz'?' · kontrabass · swing på hi-hat.':' · elbass · akustiske trommer.');}
+function updateSoundDescription(){$('soundDescription').textContent=(chordSampleName()==='jazz-piano'?'Akustisk flygel':'Elpiano')+(state.style==='jazz'?' · kontrabass · jevn 4/4-puls.':' · elbass · akustiske trommer.');}
 function update(){updateSoundDescription();notes=spellScale();const m=MODES[state.mode],custom=state.harmony==='custom'&&state.customChords.length;progression=custom?state.customChords.map(ch=>window.ModusProgressions.model(ch,state.key,state.mode)):(state.harmony==='drone'||state.mode===6?[0,0,0,0]:m.degrees).map(chordAt);$('chords').innerHTML=progression.map((c,i)=>`<div class="chord" id="chord${i}"><small>${String(i+1).padStart(2,'0')}</small><strong>${c.name}</strong><span class="roman">${c.roman}</span></div>`).join('');$('scaleTitle').textContent=KEYS[state.key][0]+' '+m.name.toLowerCase();$('modeFormula').textContent=m.intervals.join(' – ');$('scaleNotes').innerHTML=notes.map((n,i)=>`<span title="${m.intervals[i]}">${n}</span>`).join('');$('modePill').textContent=m.focus;$('modeDescription').textContent=m.color;$('loopInfo').textContent=custom?'EGEN REKKE · '+progression.length+' TAKTER':state.harmony==='drone'||state.mode===6?'TONIKADRONE · 4 TAKTER':'4 TAKTER';$('chordType').disabled=Boolean(custom);$('chordTypeHelp').textContent=custom?'Akkordtypene følger den egne rekken. Endre dem i akkordverkstedet.':state.chordType==='triad'?'Tre toner per akkord: dur, moll, forminsket eller forstørret, ut fra valgt skala.':'Fire toner per akkord: maj7, m7, 7 og andre septimakkorder, ut fra valgt skala.';$('customSequenceNote').hidden=!custom;$('harmony').querySelector('option[value="custom"]').disabled=!state.customChords.length;if(custom){const outside=progression.filter(c=>c.outside.length).map(c=>c.name+': '+c.outside.join(', '));$('customScaleInfo').textContent=outside.length?'Toner utenfor valgt skalakart – '+outside.join(' · ')+'. Kartet viser fortsatt '+KEYS[state.key][0]+' '+m.name.toLowerCase()+'.':'Akkordtonene passer i valgt skalakart: '+KEYS[state.key][0]+' '+m.name.toLowerCase()+'.';$('editCustomSequence').href=window.ModusProgressions.link('akkorder.html',{chords:state.customChords,key:state.key,mode:state.mode,tempo:state.tempo,style:state.style});}drawFretboard();save();}
 function drawFretboard(){
  if(state.mapInstrument==='piano'){drawPiano();return;}
@@ -146,17 +146,17 @@ function walkingBassNote(c,next,beatIndex,variation){
  const candidates=[];for(let n=target-2;n<=target+2;n++)if(n!==target&&scale.includes((n-tonic+120)%12))candidates.push(n);
  return candidates.sort((a,b)=>Math.abs(a-target)-Math.abs(b-target)||(variation%2?b-a:a-b))[0]??root+c.ints[1];
 }
-function schedule(s,t){const bar=Math.floor(s/16)%progression.length,p=s%16,beat=60/state.tempo,c=progression[bar],ambient=state.style==='ambient',cycle=Math.floor(s/(16*progression.length)),funk=state.style==='funk',rock=state.style==='rock',jazz=state.style==='jazz';const groove=t+(funk&&p%2?beat*.025:0)+Math.random()*.004;
+function schedule(s,t){const bar=Math.floor(s/16)%progression.length,p=s%16,beat=60/state.tempo,c=progression[bar],ambient=state.style==='ambient',cycle=Math.floor(s/(16*progression.length)),funk=state.style==='funk',rock=state.style==='rock',jazz=state.style==='jazz';const groove=t+(funk&&p%2?beat*.025:0)+(jazz?0:Math.random()*.004);
 if(jazz){
- const compPatterns=[[0,6,12],[2,8,14],[0,10],[4,14]];
- if(compPatterns[(bar+cycle)%4].includes(p))chordSound(c,groove,beat*(p%4===0?1.15:.65));
+ // Consistent 4/4: piano on beats 2 and 4 in every bar.
+ if(p===4||p===12)chordSound(c,groove,beat*.8);
  if(p%4===0)bassSound(walkingBassNote(c,progression[(bar+1)%progression.length],p/4,bar+cycle),groove,beat*.87,p===0?1:.88);
  // Swing eighths on the hi-hat, with a softer kick and light snare punctuation.
  if(p%4===0)drum('hihat',groove,p===4||p===12?.95:.68);
- if(p===6||p===14)drum('hihat',groove,.48);
+ if(p===8)drum('hihat',groove,.68);
  if(p===0||p===8)drum('kick',groove,.26);
- if(p===4||p===12)drum('snare',groove+.009,.23);
- if(p===10&&(bar+cycle)%2===1)drum('snare',groove,.11);
+ if(p===4||p===12)drum('snare',groove,.23);
+ 
 }else{
  if(p===0)chordSound(c,groove,beat*(ambient?3.9:funk?.55:2.7));if(!ambient&&((funk&&[6,10,14].includes(p))||(!rock&&!funk&&p===10)||(rock&&p===8)))chordSound(c,groove,beat*(rock?1.6:.65));
  const bass=c.midi-24;
