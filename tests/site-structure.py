@@ -28,7 +28,7 @@ class Page(HTMLParser):
 
 pages={p.resolve():Page(p.read_text()) for p in ROOT.rglob('*.html') if p.name!='redaktor.html'}
 article_count=len(json.loads((ROOT.parent/'content/articles.json').read_text()))
-assert len(pages)==2*(article_count+14), f'Unexpected page count: {len(pages)}'
+assert len(pages)==2*(article_count+15), f'Unexpected page count: {len(pages)}'
 nav=['./','laeringssti.html','laereplan.html','undervisning.html','teori.html','backingtracks.html','akkorder.html','musikkart.html','artikler.html','om-modus.html']
 for file,page in pages.items():
     assert page.links.count('/redaktor.html')==1, ('editor footer link',file)
@@ -63,6 +63,15 @@ assert home.count('id="founderWelcomeTitle"') == 1
 assert 'mine egne selvstudier' in home and 'Fra grunnleggeren av MODUS' in home
 assert 'my own independent studies' in home_en and 'From the founder of MODUS' in home_en
 assert 'class="founder-welcome-link"' in home and 'om-modus.html' in home
+foundation=(ROOT/'grunnstudier.html').read_text(encoding='utf-8')
+foundation_en=(ROOT/'en'/'grunnstudier.html').read_text(encoding='utf-8')
+assert foundation.count('class="foundation-step"') == 6, 'Foundation course needs six study units'
+assert foundation.count('class="foundation-exercise"') == 6, 'Each unit needs an applied exercise'
+assert foundation.count('class="foundation-goal"') == 6, 'Each unit needs a measurable goal'
+assert foundation.count('class="foundation-check"') == 6, 'Each unit needs a comprehension check'
+assert 'not an accredited course' in foundation_en, 'English course must honestly disclose editorial status'
+assert 'grunnstudier.html' in (ROOT/'laeringssti.html').read_text(), 'Learning hub must link to course'
+assert 'grunnstudier.html' in (ROOT/'artikler.html').read_text(), 'Article library must link to course'
 for stem,lo,hi in [('piano',48,84),('grand',48,84),('bass',28,64),('jazz-bass',28,64)]:
     for n in range(lo,hi+1,3): assert (ROOT/'audio'/f'{stem}-{n}.mp3').is_file()
 for name in ('kick','snare','hihat'): assert (ROOT/'audio'/f'{name}.mp3').is_file()
