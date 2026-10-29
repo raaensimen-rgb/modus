@@ -27,3 +27,22 @@ Dette er en **kodebase for integrasjon**, ikke en fungerende offentlig betalings
 ## Sikkerhet
 
 Aldri lagre API-hemmeligheter i GitHub, HTML eller JS for nettleseren. Bare `sk_test_` aksepteres. Kundekoblingen eies av autentisert bruker og en serverprivilegert tabell. Gi ikke medlemsfordeler basert på `?checkout=success` alene. Testmiljø må holdes isolert fra produksjon.
+
+## PL-056 beslutning – 60 % etterbetalt medlemskap
+
+Valgt konsept: en avtalt periode har et på forhånd definert mål for **kvalifiserende aktivitet**. Hvis aktivitet når minst 60 % av målet, beregnes ett avtalt periodebeløp. Under 60 % beregnes 0 kroner. Beslutningen skjer **etter at perioden er avsluttet**.
+
+Implementert som isolert ren beregningsfunksjon i `cms/usage-billing.mjs`, med grenseverdier og ugyldige input dekket i `tests/usage-billing.mjs`. Funktionen kan **ikke belaste noen** og gir alltid `chargeAuthorization:false`.
+
+**Uavklart før integrasjon med faktisk Stripe-fakturering:**
+
+- Definer hva en kvalifiserende aktivitetsenhet er (f.eks. fullført meningsfull leksjon), hvordan den verifiseres og hvordan misbruk/syklisk klikking unngås.
+- Definer perioden, aktivitetsterskelens nevner og hvordan den vises før brukeren samtykker.
+- Avklar fast beløp, MVA, studentrabatt og brukervilkår. Testfunksjonens beløp er kun testdata.
+- Implementer serverbasert, idempotent aktivitetsjournal og låsing av perioder; unngå klientrapporterte tall.
+- Implementer en unik fakturabeslutning per kunde og periode, idempotensnøkkel, webhookverifisering, retry-policy og manuell revisjonslogg.
+- Under terskelen skal det ikke opprettes betalingskrav; ved terskel kan en godkjent serverrutine opprette faktura **etter** periodeslutt.
+- Stripe Checkout med `mode=subscription` og vanlig fast pris kan ta betaling fra starten av og oppfyller **ikke** dette konseptet. Den foreløpige Checkout-ruten skal derfor ikke monteres eller brukes til tester som kan utstede abonnement før betalingsarkitekturen er omarbeidet.
+- Personvern, forbrukerrettigheter, NAV/KLP og økonomisk/skattemessig status må avklares før ekte betaling.
+
+Ingen Stripe API-betalinger er opprettet av PL-056. Ingen Supabase SQL er kjørt.
