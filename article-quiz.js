@@ -41,7 +41,23 @@
   window.addEventListener('storage', updateCards);
   document.addEventListener('modus-account-change', updateCards);
   window.addEventListener('pageshow', updateCards);
+  // Locally record opened articles as evidence of work started, not mastery.
+  // Only known article IDs are accepted; results are separate from billable activity.
   const quiz = document.querySelector('[data-quiz-id]');
+  const articleId = quiz?.dataset.quizId;
+  const atlasEvidenceKey='modus.atlas.article-evidence.v1';
+  function recordAtlasEvidence(kind){
+    if(!articleId||!IDS.includes(articleId)||!storage)return;
+    try{
+      const evidence=JSON.parse(storage.getItem(atlasEvidenceKey)||'{}');
+      const safe=evidence&&typeof evidence==='object'&&!Array.isArray(evidence)?evidence:{};
+      const current=safe[articleId]&&typeof safe[articleId]==='object'?safe[articleId]:{};
+      safe[articleId]={...current,[kind]:true};
+      storage.setItem(atlasEvidenceKey,JSON.stringify(safe));
+    }catch(_){}
+  }
+  if(articleId)recordAtlasEvidence('opened');
+
   if (!quiz) return;
   const form = quiz.querySelector('form'), fields = [...form.querySelectorAll('fieldset')];
   const result = quiz.querySelector('.quiz-result'), complete = quiz.querySelector('.quiz-complete');
@@ -85,6 +101,7 @@
     submit.hidden = true;
     if (attempt.passed) {
       const savedResult = await saved.pass(id);
+      recordAtlasEvidence('passed');
       const persisted = typeof savedResult === 'object' ? savedResult.saved : savedResult;
       complete.hidden = false;
       result.textContent = savedResult.where === 'pending' ? t('3 av 3 riktige. Lagret på denne enheten; venter på synkronisering.','3 of 3 correct. Saved on this device; waiting to sync.') : savedResult.where === 'account' ? t('3 av 3 riktige. Fullføringen er lagret på kontoen din.','3 of 3 correct. Completion is saved to your account.') : persisted ? t('3 av 3 riktige. Fullføringen er lagret.','3 of 3 correct. Completion saved.') : t('3 av 3 riktige. Nettleseren kunne ikke lagre fullføringen.','3 of 3 correct. This browser could not save completion.');
