@@ -9,7 +9,7 @@ assert.equal(configReady({...base,SUPABASE_SERVICE_ROLE_KEY:''}),false);
 const off=await handleStripeTestRequest(new Request('https://preview.example/api/stripe/test-checkout',{method:'POST'}),{...base,MODUS_STRIPE_TEST_ENABLED:'false'});
 assert.equal(off.status,503);
 const unauth=await handleStripeTestRequest(new Request('https://preview.example/api/stripe/test-checkout',{method:'POST'}),base);
-assert.equal(unauth.status,401);
+assert.equal(unauth.status,501); // subscription checkout disabled pending post-period billing design
 const portal=await handleStripeTestRequest(new Request('https://preview.example/api/stripe/test-portal',{method:'POST'}),base);
 assert.equal(portal.status,401);
 console.log('Stripe test-mode fail-closed and auth guards passed');
