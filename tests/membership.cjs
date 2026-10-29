@@ -9,8 +9,9 @@ for(const id of ['elev','plus','studio'])for(const p of ['month','year'])assert.
 for(const u of ['javascript:alert(1)','http://buy.stripe.com/a','https://buy.stripe.com.evil.test/a','https://evil.test/a','https://x@buy.stripe.com/a','https://buy.stripe.com:444/a'])assert.equal(M.stripeUrl(u),null);
 assert.equal(M.stripeUrl('https://billing.stripe.com/p/login/abc',true),'https://billing.stripe.com/p/login/abc');
 assert.equal(M.stripeUrl('https://billing.stripe.com/p/session/abc',true),null);
+assert.equal(C.lifecycleReady,false,'The live dormancy lifecycle must remain disabled before server integration');
 // Fake URLs are isolated fixtures; never written into production configuration.
-const fixture=JSON.parse(JSON.stringify(C));fixture.salesOpen=true;fixture.termsUrl='/vilkar';fixture.privacyUrl='/personvern';fixture.supportEmail='test@example.test';fixture.customerPortal='https://billing.stripe.com/p/login/fixture';
+const fixture=JSON.parse(JSON.stringify(C));fixture.salesOpen=true;fixture.lifecycleReady=true;fixture.termsUrl='/vilkar';fixture.privacyUrl='/personvern';fixture.supportEmail='test@example.test';fixture.customerPortal='https://billing.stripe.com/p/login/fixture';
 for(const id of ['elev','plus','studio']){fixture.plans[id].contentReady=true;fixture.plans[id].accessReady=true;if(id==='elev')fixture.plans[id].verificationReady=true;for(const p of ['month','year'])fixture.plans[id].checkout[p]='https://buy.stripe.com/fixture_'+id+'_'+p;}
 for(const id of ['elev','plus','studio'])for(const p of ['month','year'])assert.equal(M.checkout(fixture,id,p),'https://buy.stripe.com/fixture_'+id+'_'+p);
 fixture.plans.plus.checkout.month='https://buy.stripe.com/test_fixture';assert.equal(M.checkout(fixture,'plus','month'),null);
@@ -81,4 +82,9 @@ assert.match(membershipCSS,/grid-row:span 11/,'All pricing cards must span ident
 for(const [name,row] of [['.card-kicker',1],['h3',2],['.card-description',3],['.student-info-trigger',4],['.price',5],['.cost-note',6],['.plan-action',7],['.feature-label',8],['ul',9],['.student-eligibility-note',10],['.plan-state',11]]){
  assert(membershipCSS.includes(name+'{grid-row:'+row+';'),'Missing aligned row '+row+' for '+name);
 }
+const notReady=JSON.parse(JSON.stringify(fixture));notReady.lifecycleReady=false;
+assert.equal(M.checkout(notReady,'elev','year'),null,'Even a configured plan must not sell without server-side dormancy enforcement');
+assert.match(membershipHTML,/Hva skjer hvis jeg ikke bruker MODUS på 30 dager/,'Publish the planned 30-day dormancy policy');
+assert.match(membershipHTML,/Bare det å logge inn skal aldri utløse et nytt trekk/,'No surprise charge on return');
+assert.match(membershipHTML,/Ordningen er under utvikling og ikke aktiv ennå/,'The unfinished feature must be visibly labeled');
 console.log('Passed: membership amounts, annual savings, four checkout routes, blocked unconfigured sales, test links and unsafe URLs.');
