@@ -48,4 +48,11 @@ assert.equal(M.checkout(noVerification,'elev','month'),null,'Student checkout is
 assert.match(membershipCSS,/grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/,'Four pricing cards should use four columns on wide screens');
 assert.match(membershipCSS,/\.plan-coming-badge/,'Coming-soon badge must be styled');
 assert.match(membershipHTML,/Se Modus\+ →/,'Premium tier preview remains accessible');
+const ribbons=[...membershipHTML.matchAll(/<span class="plan-ribbon">([^<]+)<\/span>/g)].map(m=>m[1]);
+assert.equal(ribbons.length,4,'All four tiers must have short ribbon labels');
+assert(membershipHTML.includes('class="price-card is-selected" data-plan="plus"'),'Plus is highlighted by default');
+assert(!membershipCSS.includes('.price-card.featured{'),'Only dynamically selected cards receive the bright gradient');
+assert(membershipCSS.includes('.price-card.is-selected{'),'Selected-card gradient must exist');
+assert(membershipJS.includes("selectCard(id);"),'Plan preview must update active card');
+assert(membershipJS.includes("selectCard('plus');"),'Plus is the initial active card');
 console.log('Passed: membership amounts, annual savings, four checkout routes, blocked unconfigured sales, test links and unsafe URLs.');
