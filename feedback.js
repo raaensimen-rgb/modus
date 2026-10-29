@@ -30,7 +30,85 @@ root.insertBefore(helpPanel,root.firstChild);
 root.insertBefore(actionRow,root.querySelector('.modus-feedback-toggle'));
 actionRow.append(helpButton,root.querySelector('.modus-feedback-toggle'));
 function showHelp(open){helpPanel.hidden=!open;helpButton.setAttribute('aria-expanded',String(open));if(open){root.querySelector('.modus-feedback-panel').hidden=true;root.querySelector('.modus-feedback-toggle').setAttribute('aria-expanded','false');}}
-helpButton.addEventListener('click',()=>showHelp(helpPanel.hidden));
+/* Activate contextual explanations rather than opening a static list. */
+const hints={
+ '#key':'Velg grunntonen eller tonesenteret for musikken.',
+ '#mode':'Velg skalaens musikalske karakter, for eksempel dorisk eller eolisk.',
+ '#style':'Velg akkompagnementets rytmiske stil.',
+ '#harmony':'Velg hvordan akkordrekken bygges opp.',
+ '#tempo,#bpm,#tap':'Styr tempoet i slag per minutt (BPM).',
+ '#click':'Slå metronomklikk av eller på.',
+ '#play':'Start eller stopp backingtracken.',
+ '#chordInstrument':'Velg piano- eller flygelljud for akkordene.',
+ '#chordSlots select':'Velg grunntone eller akkordtype for dette akkordfeltet.',
+ '#pianoInversionButtons button':'Velg hvilken akkordtone som ligger nederst i pianoakkorden.',
+ '#guitarGripTabs button':'Velg et alternativt grep for den samme akkorden.',
+ '#alternateGrip':'Vis et annet gitargrep for akkorden.',
+ '#map-search':'Finn et fagområde eller en modul i musikkatlaset.',
+ '#map-clear':'Nullstill egne atlasmarkeringer og notater. Quizresultatene beholdes.',
+ '#map-export':'Last ned en kopi av dine personlige atlasmarkeringer.',
+ '#map-reset':'Fjern markering av valgt område uten å slette progresjon.',
+ '[data-state]':'Marker egen vurdering av arbeidet med dette emnet.',
+ '.theme-picker summary':'Velg mørk, lesevennlig eller høy kontrast.',
+ '.language-picker a':'Bytt språk på siden.',
+ '.nav-trigger':'Åpne menyen for å se flere sider i denne kategorien.',
+ '.modus-feedback-toggle':'Send et spørsmål, meld inn feil eller foreslå en forbedring.'
+};
+const hintEntries=Object.entries(hints);
+const contextualTip=document.createElement('div');
+contextualTip.className='modus-context-tip';
+contextualTip.id='modus-context-tip';
+contextualTip.setAttribute('role','tooltip');
+contextualTip.hidden=true;
+document.body.append(contextualTip);
+let contextualHelp=false,activeHintTarget=null;
+function explainTarget(el){
+ if(!(el instanceof Element))return null;
+ for(const [selector,message] of hintEntries){const match=el.closest(selector);if(match&&!match.disabled)return {target:match,message};}
+ return null;
+}
+function closeContextTip(){contextualTip.hidden=true;activeHintTarget=null;}
+function openContextTip(target,message){
+ activeHintTarget=target;
+ contextualTip.textContent=message;
+ contextualTip.hidden=false;
+ const rect=target.getBoundingClientRect(), width=contextualTip.offsetWidth,height=contextualTip.offsetHeight;
+ let x=Math.min(window.innerWidth-width-12,Math.max(12,rect.left+rect.width/2-width/2));
+ let y=rect.top-height-12;
+ if(y<12)y=Math.min(window.innerHeight-height-12,rect.bottom+12);
+ contextualTip.style.left=Math.max(12,x)+'px';
+ contextualTip.style.top=Math.max(12,y)+'px';
+}
+function setContextHelp(enabled){
+ contextualHelp=enabled;
+ helpButton.setAttribute('aria-pressed',String(enabled));
+ helpButton.setAttribute('aria-label',enabled?'Avslutt forklaringsmodus':'Aktiver forklaringsmodus');
+ helpButton.title=enabled?'Klikk for å avslutte. Hold pekeren over kontroller for forklaring.':'Aktiver forklaringer ved å holde pekeren over kontroller.';
+ showHelp(false);
+ closeContextTip();
+ document.documentElement.classList.toggle('modus-context-help-active',enabled);
+}
+helpButton.addEventListener('click',()=>setContextHelp(!contextualHelp));
+document.addEventListener('pointerover',e=>{
+ if(!contextualHelp||e.pointerType==='touch')return;
+ const hit=explainTarget(e.target);
+ if(hit&&hit.target!==activeHintTarget)openContextTip(hit.target,hit.message);
+ else if(!hit)closeContextTip();
+});
+document.addEventListener('focusin',e=>{
+ if(!contextualHelp)return;
+ const hit=explainTarget(e.target);
+ if(hit)openContextTip(hit.target,hit.message);
+});
+document.addEventListener('pointerdown',e=>{
+ if(!contextualHelp||e.pointerType!=='touch')return;
+ const hit=explainTarget(e.target);
+ if(hit){e.preventDefault();if(activeHintTarget===hit.target)closeContextTip();else openContextTip(hit.target,hit.message);}
+ else closeContextTip();
+},true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&contextualHelp){setContextHelp(false);helpButton.focus();}});
+window.addEventListener('scroll',closeContextTip,{passive:true});
+window.addEventListener('resize',closeContextTip,{passive:true});
 document.addEventListener('pointerdown',e=>{if(!root.contains(e.target))showHelp(false);});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!helpPanel.hidden){showHelp(false);helpButton.focus();}});
 
