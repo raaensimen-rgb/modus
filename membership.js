@@ -34,5 +34,15 @@
   $('closeMembership').onclick=()=>dialog.close();
   dialog.addEventListener('close',()=>{selected=null;previousFocus?.focus();});
   dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
+  const school=$('studentSchool'),schoolInfo=$('studentSchoolInfo');
+  if(school&&schoolInfo){
+    school.addEventListener('change',()=>{
+      schoolInfo.textContent=!school.value
+        ? 'Eksempellisten er ikke komplett. Andre norske skoler skal kunne vurderes når ordningen åpner.'
+        : school.value==='other'||school.value==='missing'
+          ? 'Skolen din kan vurderes selv om den ikke finnes i listen. En sikker bekreftelsesløsning er ennå ikke tilgjengelig.'
+          : 'Valgt lærested: '+school.value+'. Dette er bare en forhåndsvisning og ikke en bekreftelse av studentstatus.';
+    });
+  }
   render();
 })();
