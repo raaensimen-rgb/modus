@@ -5,7 +5,7 @@ from pathlib import Path
 from html import escape
 
 NAV_ITEMS = (
-    ('home', './', 'Forsiden'),
+    ('home', './', 'Hjem'),
     ('jam', 'backingtracks.html', 'Backingtracks'),
     ('theory', 'teori.html', 'Teorirommet'),
     ('chords', 'akkorder.html', 'Akkordverksted'),
@@ -50,7 +50,7 @@ def render_header(prefix='', active='home'):
         ('jam', 'backingtracks.html', 'Backingtracks', 'Spill med trommer, bass og piano.'),
         ('chords', 'akkorder.html', 'Akkordverksted', 'Bygg akkordrekker og utforsk grep.'),
     ))
-    learn = group('learn', 'Lær', (
+    learn = group('learn', 'Studier', (
         ('path', 'laeringssti.html', 'Start å lære', 'Finn ditt utgangspunkt og neste steg.'),
         ('curriculum', 'laereplan.html', 'Hele utdanningsløpet', 'Se nivåene, fagområdene og progresjonen.'),
         ('lesson', 'undervisning.html', 'Leksjoner og øvelser', 'Prøv undervisningsmoduler under utvikling.'),
@@ -59,7 +59,7 @@ def render_header(prefix='', active='home'):
     return (
         f'<header class="site-header"><a class="brand" href="{home}" aria-label="MODUS – forsiden">'
         '<span class="brandmark" aria-hidden="true">m</span>MODUS<span class="branddot">.</span></a>'
-        '<nav class="site-nav" aria-label="Hovedmeny">' + link('home', './', 'Forside') + learn + play + link('mindmap', 'musikkart.html', 'Mitt musikkatlas') + link('articles', 'artikler.html', 'Artikler')
+        '<nav class="site-nav" aria-label="Hovedmeny">' + link('home', './', 'Hjem') + learn + play + link('mindmap', 'musikkart.html', 'Mitt musikkatlas') + link('articles', 'artikler.html', 'Artikler')
         + link('about', 'om-modus.html', 'Om MODUS') + '</nav><div class="header-tools">'
         + link('membership', 'modus-plus.html', 'Medlemskap', css='nav-membership')
         + link('account', 'konto.html', 'Logg inn', css='nav-account')
