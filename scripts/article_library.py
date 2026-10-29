@@ -12,7 +12,7 @@ LEVEL_DESCRIPTIONS = {
  'intermediate': 'Knytt akkordfarger, harmoniske funksjoner og moduser sammen.',
  'advanced': 'Gå dypere i harmonisk moll, stemmeføring og ujevne taktarter.',
 }
-ORDER = ['toner-og-intervaller', 'dur-og-moll', 'bygg-akkorder-i-en-toneart', 'kvintsirkelen', 'din-forste-improvisasjon', 'septimakkorder', 'ett-skalakart-nye-maltoner', 'ii-v-i-kadensen', 'moduser-og-tonalt-sentrum', 'dorisk-og-eolisk', 'harmonisk-moll-og-frygisk-dominant', 'stemmeforing', 'rytme-i-sju-aatte']
+ORDER = ['toner-og-intervaller', 'dur-og-moll', 'bygg-akkorder-i-en-toneart', 'kvintsirkelen', 'din-forste-improvisasjon', 'septimakkorder', 'ett-skalakart-nye-maltoner', 'ii-v-i-kadensen', 'moduser-og-tonalt-sentrum', 'kirketonearter-ett-system-sju-uttrykk', 'dorisk-og-eolisk', 'harmonisk-moll-og-frygisk-dominant', 'stemmeforing', 'rytme-i-sju-aatte']
 
 def group_section(key, label, description, cards='', kind='level'):
  return f'<section class="article-category" data-category="{key}"><header class="category-header"><div><p class="eyebrow">{"NIVÅ" if kind=="level" else "TEMA"}</p><h3>{label}</h3><p>{description}</p></div><span class="category-count" data-category-count></span></header><div class="article-grid">{cards}</div></section>'
