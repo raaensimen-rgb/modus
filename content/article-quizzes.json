@@ -804,5 +804,67 @@
         "explanation": "A parallel comparison keeps the tonic. Here E is shared while the sixth degree changes."
       }
     }
+  ],
+  "kirketonearter-ett-system-sju-uttrykk": [
+    {
+      "question": "Hvorfor er det ikke nok å spille C-durs toner fra D til D for å etablere D dorisk?",
+      "options": [
+        "Fordi dorisk alltid krever andre toner enn C-dur",
+        "Fordi musikalsk sentrum må etableres av sammenhengen",
+        "Fordi D ikke finnes i C-dur"
+      ],
+      "answer": 1,
+      "section": 1,
+      "explanation": "Relative moduser kan ha identiske toner. Bass, harmonikk og melodiske hvilepunkter hjelper øret å høre D som sentrum.",
+      "en": {
+        "question": "Why is playing C-major notes from D to D not enough to establish D Dorian?",
+        "options": [
+          "Dorian always needs different notes from C major",
+          "The musical centre must be established in context",
+          "D is not part of C major"
+        ],
+        "explanation": "Relative modes may share the same notes. Bass, harmony, and melodic resting points help the ear hear D as the centre."
+      }
+    },
+    {
+      "question": "Hvilken tone skiller D dorisk fra D eolisk?",
+      "options": [
+        "B kontra B♭",
+        "F kontra F♯",
+        "C kontra C♯"
+      ],
+      "answer": 0,
+      "section": 3,
+      "explanation": "Begge har D som sentrum og liten ters F. D dorisk har stor sekst B; D eolisk har liten sekst B♭.",
+      "en": {
+        "question": "Which note distinguishes D Dorian from D Aeolian?",
+        "options": [
+          "B versus B♭",
+          "F versus F♯",
+          "C versus C♯"
+        ],
+        "explanation": "Both have D as centre and minor third F. D Dorian has major sixth B; D Aeolian has minor sixth B♭."
+      }
+    },
+    {
+      "question": "Hva er mest presist når Em–C–G–D bruker ett felles toneutvalg?",
+      "options": [
+        "Hver akkord tvinger musikken over i en ny modus",
+        "Improvisasjon kan bare bruke akkordens grunntone",
+        "Én skala kan beholdes mens måltoner og akkordfunksjoner skifter"
+      ],
+      "answer": 2,
+      "section": 6,
+      "explanation": "Skalaens toner kan være felles gjennom progresjonen, mens måltoner og den overordnede tonale forankringen styrer uttrykket.",
+      "en": {
+        "question": "What best describes Em–C–G–D when one pitch collection works throughout?",
+        "options": [
+          "Each chord forces a new mode",
+          "Improvisation may only use chord roots",
+          "The note collection can stay while target notes and chord roles change"
+        ],
+        "explanation": "The collection can remain the same while target notes and the overall tonal centre shape the expression."
+      }
+    }
   ]
 }
