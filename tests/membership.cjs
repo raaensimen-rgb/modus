@@ -55,4 +55,17 @@ assert(!membershipCSS.includes('.price-card.featured{'),'Only dynamically select
 assert(membershipCSS.includes('.price-card.is-selected{'),'Selected-card gradient must exist');
 assert(membershipJS.includes("selectCard(id);"),'Plan preview must update active card');
 assert(membershipJS.includes("selectCard('plus');"),'Plus is the initial active card');
+// Teachers and parents should see a separate, factual information dialog only from the Elev card.
+const elevStart=membershipHTML.indexOf('<article class="price-card" data-plan="elev"');
+const plusStart=membershipHTML.indexOf('data-plan="plus"');
+const infoTriggerPosition=membershipHTML.indexOf('id="studentInfoTrigger"');
+const infoDialogPosition=membershipHTML.indexOf('<dialog id="studentInfoDialog"');
+assert(elevStart>=0 && infoTriggerPosition>elevStart && infoTriggerPosition<plusStart,'Information button must be within the Elev card');
+assert(infoDialogPosition>membershipHTML.indexOf('</main>'),'Info dialog must not clutter the main pricing page');
+assert.match(membershipHTML,/id="studentInfoDialog"[^>]*aria-labelledby="studentInfoTitle"/,'Information dialog has accessible title');
+assert.match(membershipHTML,/id="closeStudentInfo"/,'Information dialog has a close button');
+assert.match(membershipHTML,/Automatiske tester er ikke en uavhengig fagfellevurdering/,'Independent academic review is not implied');
+assert.match(membershipHTML,/er ikke en akkreditert skole/,'MODUS must not imply accreditation');
+assert.match(membershipJS,/studentInfo\.showModal\(\)/,'Info button opens its own modal');
+assert.match(membershipJS,/studentInfoTrigger\.focus\(\)/,'Info dialog returns focus to the trigger');
 console.log('Passed: membership amounts, annual savings, four checkout routes, blocked unconfigured sales, test links and unsafe URLs.');
