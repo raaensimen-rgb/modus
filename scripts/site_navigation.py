@@ -105,7 +105,8 @@ def with_navigation_css(page, prefix=''):
     page = re.sub(r'<script src="(?:\.\./)?navigation(?:\.[a-f0-9]{10})?\.js" defer></script>', '', page)
     page = re.sub(r'<link rel="stylesheet" href="(?:\.\./)?navigation(?:\.[a-f0-9]{10})?\.css">', '', page)
     page = page.replace('</head>', f'<link rel="stylesheet" href="{paths["css"]}"><script src="{paths["js"]}" defer></script></head>', 1)
-    # Single branded icon for Safari tabs, mobile bookmarks and app shortcuts.
+    # Use the current icon even if a source page still references an earlier brand asset.
+    page = re.sub(r'href="(?:\\.\\./)?modus-mark\\.svg"', f'href="{prefix}modus-identity-icon.svg"', page)
     if 'rel="icon"' not in page:
         page = page.replace('</head>', f'<link rel="icon" type="image/svg+xml" href="{prefix}modus-identity-icon.svg"></head>', 1)
     if 'language-init.js' not in page:
