@@ -2,6 +2,7 @@
 from pathlib import Path
 import json
 import re
+import subprocess
 root=Path(__file__).resolve().parents[1]
 html=(root/"dist/musikkart.html").read_text()
 js=(root/"dist/musikkart.js").read_text()
@@ -21,7 +22,8 @@ assert 'data-state="not-started"' in html and 'data-state="exploring"' in html a
 assert 'Jeg har lært dette' in html and 'ikke en attestert' in html
 assert 'noindex,nofollow' in html
 assert 'musikkart.html' in page and "('mindmap', 'musikkart.html', 'Mitt musikkatlas')" in nav
-assert 'localStorage.setItem(STORE' in js and 'localStorage.removeItem(STORE)' in js
+assert 'localStorage.setItem(STORE' in js, 'Atlas must save personal state'
+subprocess.run(['node', 'tests/music-map-reset.cjs'], cwd=root, check=True)
 assert 'categoryRecords' in js and 'groupState' in js and 'filter' in js
 assert 'branchLayout(leftIds,true)' in js and 'branchLayout(rightIds,false)' in js, 'Whole mind map must be visible'
 assert 'const leftIds=' in js and 'const rightIds=' in js, 'Both sides need all categories'
