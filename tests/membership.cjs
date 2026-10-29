@@ -34,6 +34,14 @@ assert(membershipHTML.indexOf('data-plan="elev"')<membershipHTML.indexOf('data-p
 assert.match(membershipHTML,/Samme planlagte innhold som MODUS\+/,'Student tier must receive the full MODUS+ package');
 assert.match(membershipHTML,/Studentpris krever bekreftet elev- eller studentstatus/,'Student discount requires student status');
 assert.match(membershipHTML,/id="studentSchool"/,'School selection preview must exist');
+const dialoguePosition=membershipHTML.indexOf('<dialog id="membershipDialog"');
+const schoolPosition=membershipHTML.indexOf('id="studentSchool"');
+assert(schoolPosition>dialoguePosition,'School selection should be inside the plan dialog');
+assert.equal((membershipHTML.match(/id="studentVerification"/g)||[]).length,1);
+assert.match(membershipHTML,/id="studentVerification"[^>]*hidden/,'Student verification should be hidden for other plans');
+const membershipJS=fs.readFileSync('dist/membership.js','utf8');
+assert.match(membershipJS,/studentVerification'\)\.hidden=id!=='elev'/,'Only Elev should show school choice');
+
 assert.match(membershipHTML,/valget sendes ikke inn, lagres ikke/,'Preview must disclose that school selections are not collected');
 const noVerification=JSON.parse(JSON.stringify(C));noVerification.salesOpen=true;noVerification.plans.elev.contentReady=true;noVerification.plans.elev.accessReady=true;
 assert.equal(M.checkout(noVerification,'elev','month'),null,'Student checkout is blocked until verification integration is ready');
