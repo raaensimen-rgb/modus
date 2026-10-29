@@ -63,3 +63,7 @@ html[data-theme=contrast] .site-header .nav-tooltip{background:#fff;color:#000;b
 @media(max-width:1050px){.site-header{gap:10px 20px;padding-bottom:calc(19px + var(--nav-panel-space,0px))}.site-header .brand{order:0}.site-header .header-tools{order:1;margin-left:auto}.site-header .site-nav{order:2;width:100%;margin-left:0;align-items:flex-start;justify-content:flex-start}}
 @media(max-width:700px){.site-header{padding:15px 20px;padding-bottom:calc(15px + var(--nav-panel-space,0px));gap:8px 16px}.site-header .site-nav{gap:2px 12px}.site-header .nav-group{position:static}.site-header .brand{font-size:20px}.site-header .header-tools{gap:12px;flex-wrap:wrap}.site-header .header-tools .theme-picker{margin-left:0}.site-header .nav-membership{font-size:11px}}
 .site-header .nav-account{display:inline-flex;align-items:center;min-height:36px;border:1px solid var(--modus-b-718b52,#718b52);border-radius:6px;padding:5px 10px;font-size:11px;color:var(--modus-c-d7f48c,#d7f48c);white-space:nowrap;text-decoration:none}.site-header .nav-account:hover{background:var(--modus-b-30372a,#30372a)}.site-header .nav-account[aria-current=page]{font-weight:700}
+
+/* Primary brand: refined, transparent Subtle Arch paired with the wordmark. */
+.site-header .brand-arch{display:block;width:37px;height:33px;flex:none;object-fit:contain}
+@media(max-width:700px){.site-header .brand-arch{width:31px;height:29px}}
