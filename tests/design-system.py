@@ -42,6 +42,7 @@ assert ".reading-body td,.reading-body th{font-size:15px" in article_css
 # Brand consistency: public navigation uses the wordmark; editor gets the monogram.
 assert (dist / "modus-mark.svg").is_file(), "Missing MODUS monogram asset"
 assert (dist / "modus-arch.svg").is_file(), "Missing primary MODUS Arch asset"
+assert 'gradientUnits="userSpaceOnUse"' in (dist / "index.html").read_text(), "Explicit Arch gradient missing on homepage"
 for name in pages:
     html = (dist / name).read_text(encoding="utf-8")
     assert 'class="brand"' in html, f"Missing public logo: {name}"
