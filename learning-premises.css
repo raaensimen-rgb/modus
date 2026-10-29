@@ -14,11 +14,11 @@
 .modus-premises-note strong{font-size:15px}
 .modus-premises-note p{font-size:14px;line-height:1.7;color:var(--muted,#b5bcb1);margin:10px 0 0}
 
-/* Temporary development shortcut: upper-left close button. Does not count as acceptance. */
-.modus-premises-close{position:absolute;top:12px;left:12px;display:grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid var(--line,#4c514d);border-radius:9px;background:transparent;color:var(--ink,#f1f1e9);font:400 26px/1 sans-serif;cursor:pointer;z-index:1}
+/* Temporary development shortcut: upper-right close button. Does not count as acceptance. */
+.modus-premises-close{position:absolute;top:12px;right:12px;display:grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid var(--line,#4c514d);border-radius:9px;background:transparent;color:var(--ink,#f1f1e9);font:400 26px/1 sans-serif;cursor:pointer;z-index:1}
 .modus-premises-close:hover{background:rgba(128,128,128,.14)}
 .modus-premises-close:focus-visible{outline:2px solid var(--accent,#a3b977);outline-offset:3px}
 .modus-premises-inner{padding-top:clamp(52px,7vw,64px)}
 
-/* Make the temporary close control unmistakably visible in the upper left. */
-.modus-premises-dialog .modus-premises-close{top:13px;left:13px;display:grid!important;visibility:visible!important;opacity:1!important;width:38px;height:38px;background:rgba(163,185,119,.13);color:var(--accent,#c4df86)!important;border:1px solid var(--accent,#c4df86);font-size:28px;line-height:1}
+/* Keep the temporary close control visible in the upper right. */
+.modus-premises-dialog .modus-premises-close{top:13px;right:13px;display:grid!important;visibility:visible!important;opacity:1!important;width:38px;height:38px;background:rgba(163,185,119,.13);color:var(--accent,#c4df86)!important;border:1px solid var(--accent,#c4df86);font-size:28px;line-height:1}
