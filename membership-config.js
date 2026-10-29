@@ -2,6 +2,7 @@
    Keep salesOpen false until payments, access control and terms are verified. */
 window.MODUS_MEMBERSHIP_CONFIG = {
   salesOpen: false,
+  lifecycleReady: false, // No live charges before server-side 30-day dormancy and cancellation safeguards exist.
   customerPortal: '',
   termsUrl: '',
   privacyUrl: '',
