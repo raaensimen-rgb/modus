@@ -2,13 +2,13 @@
 
 /* About MODUS: clear hierarchy in the compact founder card. */
 .about-main .about-story .about-byline .eyebrow{
-  font-size:12px;letter-spacing:1.8px;line-height:1.5;font-weight:700;
+  font-size:16px;letter-spacing:1.8px;line-height:1.5;font-weight:700;
   margin-bottom:19px;
 }
 .about-main .about-story .about-byline>p{
   font-size:12px;line-height:1.65;margin:13px 0 19px;
 }
 @media(max-width:700px){
-  .about-main .about-story .about-byline .eyebrow{font-size:12px}
+  .about-main .about-story .about-byline .eyebrow{font-size:15px}
   .about-main .about-story .about-byline>p{font-size:12px;line-height:1.65}
 }
