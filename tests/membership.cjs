@@ -18,6 +18,11 @@ fixture.termsUrl='//evil.test';assert.equal(M.checkout(fixture,'plus','year'),nu
 assert.equal(M.checkout(fixture,'unknown','month'),null);
 const membershipHTML=fs.readFileSync('dist/modus-plus.html','utf8');
 const membershipCSS=fs.readFileSync('dist/membership.css','utf8');
+assert.match(membershipHTML,/<h1>MODUS<span class="membership-plus-mark">\+<\/span><\/h1>/,'MODUS+ must be the main heading');
+assert.match(membershipHTML,/<h2 class="membership-hero-subtitle">Mer rom for <em>musikken\.<\/em><\/h2>/,'The previous headline becomes the subtitle');
+assert.match(membershipHTML, /<title>MODUS\+ · Medlemskap og priser<\/title>/,'Update page title');
+assert.match(membershipCSS, /\.membership-hero \.membership-hero-subtitle/,'Subtitle needs an explicit smaller typographic style');
+
 for(const plan of ['plus','studio']){
  const opening=new RegExp('<article class="price-card[^"]*" data-plan="'+plan+'"><span class="plan-coming-badge">Kommer</span>');
  assert.match(membershipHTML,opening,'Premium plan '+plan+' must clearly show coming-soon status');
