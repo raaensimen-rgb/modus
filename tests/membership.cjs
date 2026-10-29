@@ -78,8 +78,8 @@ assert.match(membershipCSS,/\.membership-faq details p\{font-size:15px/,'FAQ ans
 assert.match(membershipCSS,/max-width:1399px/,'Four-card layout must adapt before text is cramped');
 // A single set of grid tracks must line up comparison details across all four cards.
 assert.match(membershipCSS,/grid-template-rows:subgrid/,'Pricing cards must share aligned comparison rows');
-assert.match(membershipCSS,/grid-row:span 11/,'All pricing cards must span identical row tracks');
-for(const [name,row] of [['.card-kicker',1],['h3',2],['.card-description',3],['.student-info-trigger',4],['.price',5],['.cost-note',6],['.plan-action',7],['.feature-label',8],['ul',9],['.student-eligibility-note',10],['.plan-state',11]]){
+assert.match(membershipCSS,/grid-row:span 12/,'All pricing cards must span identical row tracks');
+for(const [name,row] of [['.card-kicker',1],['h3',2],['.card-description',3],['.student-info-trigger',4],['.price',5],['.cost-note',6],['.dvale-card-note',7],['.plan-action',8],['.feature-label',9],['ul',10],['.student-eligibility-note',11],['.plan-state',12]]){
  assert(membershipCSS.includes(name+'{grid-row:'+row+';'),'Missing aligned row '+row+' for '+name);
 }
 const notReady=JSON.parse(JSON.stringify(fixture));notReady.lifecycleReady=false;
@@ -87,4 +87,9 @@ assert.equal(M.checkout(notReady,'elev','year'),null,'Even a configured plan mus
 assert.match(membershipHTML,/Hva skjer hvis jeg ikke bruker MODUS på 30 dager/,'Publish the planned 30-day dormancy policy');
 assert.match(membershipHTML,/Bare det å logge inn skal aldri utløse et nytt trekk/,'No surprise charge on return');
 assert.match(membershipHTML,/Ordningen er under utvikling og ikke aktiv ennå/,'The unfinished feature must be visibly labeled');
+assert.equal((membershipHTML.match(/class="dvale-card-note"/g)||[]).length,3,'Dormancy is disclosed on every paid pricing card');
+assert.match(membershipHTML,/id="dvalePurchaseTitle"/,'Dormancy conditions must be shown inside checkout preview');
+assert.match(membershipHTML,/Neste automatiske fornyelse stoppes/,'Explain the effect after inactivity before checkout');
+assert.match(membershipHTML,/Planlagt ordning – ikke aktiv før abonnementene lanseres/,'Unreleased functionality must be clearly marked');
+assert.match(membershipJS,/dvaleBillingClarification/,'The disclaimer should adapt to yearly and monthly billing');
 console.log('Passed: membership amounts, annual savings, four checkout routes, blocked unconfigured sales, test links and unsafe URLs.');
