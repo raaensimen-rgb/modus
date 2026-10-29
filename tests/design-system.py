@@ -40,7 +40,7 @@ assert ".reading-body table{font-size:16px" in article_css
 assert ".reading-body td,.reading-body th{font-size:15px" in article_css
 
 # Brand consistency: public navigation uses the wordmark; editor gets the monogram.
-assert (dist / "modus-mark.svg").is_file(), "Missing MODUS monogram asset"
+assert (dist / "modus-identity-icon.svg").is_file(), "Missing MODUS Safari icon"
 assert (dist / "modus-arch.svg").is_file(), "Missing primary MODUS Arch asset"
 assert 'gradientUnits="userSpaceOnUse"' in (dist / "index.html").read_text(), "Explicit Arch gradient missing on homepage"
 for name in pages:
@@ -55,7 +55,7 @@ assert 'class="brand editor-brand"' in editor, "Editor is missing branded header
 assert 'class="editor-brandmark"' in editor, "Editor monogram missing"
 assert '<svg class="editor-brandmark"' in editor, "Editor must use an inline Arch mark"
 assert '<svg class="editor-brandmark-end"' in editor, "Editor second Arch mark missing"
-assert 'href="modus-mark.svg"' in editor, "Editor favicon missing"
+assert 'href="modus-identity-icon.svg"' in editor, "Editor favicon missing"
 print("MODUS public wordmark, editor monogram and branded icon verified.")
 
 print("MODUS design-system integration and page styles verified.")
