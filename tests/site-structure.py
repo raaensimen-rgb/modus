@@ -55,6 +55,14 @@ for file,page in pages.items():
     common=set(page.text)&set(translated.text)
     leftovers=[s for s in common if len(s)>16 and any(w in s.lower() for w in (' og ',' til ',' med ',' du ','akkord','toneart','æ','å'))]
     assert not leftovers, ('untranslated text',file,leftovers)
+# The founder's first-person welcome belongs after the tool overview, not in the hero.
+home=(ROOT/'index.html').read_text(encoding='utf-8')
+home_en=(ROOT/'en'/'index.html').read_text(encoding='utf-8')
+assert home.index('class="home-feature-grid"') < home.index('class="founder-welcome"') < home.index('class="closing"')
+assert home.count('id="founderWelcomeTitle"') == 1
+assert 'mine egne selvstudier' in home and 'Fra grunnleggeren av MODUS' in home
+assert 'my own independent studies' in home_en and 'From the founder of MODUS' in home_en
+assert 'class="founder-welcome-link"' in home and 'om-modus.html' in home
 for stem,lo,hi in [('piano',48,84),('grand',48,84),('bass',28,64),('jazz-bass',28,64)]:
     for n in range(lo,hi+1,3): assert (ROOT/'audio'/f'{stem}-{n}.mp3').is_file()
 for name in ('kick','snare','hihat'): assert (ROOT/'audio'/f'{name}.mp3').is_file()
