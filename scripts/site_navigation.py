@@ -15,7 +15,7 @@ NAV_ITEMS = (
     ('course', 'laer-dorisk.html', 'Dorisk leksjon'),
     ('curriculum', 'laereplan.html', 'Læreplan'),
     ('lesson', 'undervisning.html', 'Undervisningsrom'),
-    ('membership', 'modus-plus.html', 'Medlemskap'),
+    ('membership', 'modus-plus.html', 'MODUS+'),
     ('about', 'om-modus.html', 'Om MODUS'),
 )
 
@@ -63,7 +63,7 @@ def render_header(prefix='', active='home'):
         '<span class="brandmark" aria-hidden="true">m</span>MODUS<span class="branddot">.</span></a>'
         '<nav class="site-nav" aria-label="Hovedmeny">' + link('home', './', 'Hjem') + learn + play + link('mindmap', 'musikkart.html', 'Mitt musikkatlas') + link('articles', 'artikler.html', 'Artikler')
         + link('about', 'om-modus.html', 'Om MODUS') + '</nav><div class="header-tools">'
-        + link('membership', 'modus-plus.html', 'Medlemskap', css='nav-membership')
+        + link('membership', 'modus-plus.html', 'MODUS+', css='nav-membership')
         + link('account', 'konto.html', 'Logg inn', css='nav-account')
         + render_language_picker() + render_theme_picker() + '</div></header>'
     )
