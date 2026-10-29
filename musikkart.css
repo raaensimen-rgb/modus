@@ -105,3 +105,47 @@
 @media(max-width:720px){
   .map-hero h1{margin-bottom:14px}
 }
+
+
+/* Readable mode: light editorial treatment for the globe hero only.
+   The original dark composition remains untouched. */
+html[data-theme="readable"] .map-hero{
+  background:#e8e9e4;
+}
+html[data-theme="readable"] .map-hero::before{
+  inset:0 -6vw 0 31%;
+  opacity:1;
+  background-image:
+    linear-gradient(90deg,#e8e9e4 0%,rgba(232,233,228,.96) 13%,rgba(232,233,228,.61) 48%,rgba(232,233,228,.18) 100%),
+    linear-gradient(0deg,#e8e9e4 0%,rgba(232,233,228,0) 38%),
+    url("images/earth-atlas.webp?v=20261029-hires");
+  background-position:center 31%;
+}
+html[data-theme="readable"] .map-hero::after{
+  background:linear-gradient(90deg,#e8e9e4 0%,rgba(232,233,228,.96) 21%,rgba(232,233,228,.66) 49%,transparent 85%);
+}
+html[data-theme="readable"] .map-hero h1,
+html[data-theme="readable"] .map-hero .map-hero-subtitle{
+  color:#1b2a20;
+}
+html[data-theme="readable"] .map-hero>p:not(.map-eyebrow):not(.map-hero-subtitle){
+  color:#354438;
+}
+html[data-theme="readable"] .map-hero .map-eyebrow,
+html[data-theme="readable"] .map-hero h1 em,
+html[data-theme="readable"] .map-hero-links a{
+  color:#245b34;
+}
+@media(max-width:720px){
+  html[data-theme="readable"] .map-hero::before{
+    inset:0 -18vw 0 12%;
+    background-position:54% center;
+    background-image:
+      linear-gradient(90deg,#e8e9e4 0%,rgba(232,233,228,.92) 50%,rgba(232,233,228,.61) 100%),
+      linear-gradient(0deg,#e8e9e4,transparent 48%),
+      url("images/earth-atlas.webp?v=20261029-hires");
+  }
+  html[data-theme="readable"] .map-hero::after{
+    background:linear-gradient(90deg,rgba(232,233,228,.97) 0%,rgba(232,233,228,.72) 100%);
+  }
+}
