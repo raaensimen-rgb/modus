@@ -63,6 +63,7 @@ function render(){
  root.querySelector('#accountMember').hidden=!user;
  if(!user)return;
  root.querySelector('#accountEmail').textContent=user.email;
+ root.querySelector('#accountProfileEmail').textContent=user.email||'—';
  root.querySelector('#accountSync').textContent=cloudError?t('Fremdriften kunne ikke synkroniseres. Prøv igjen når du er på nett.','Progress could not be synced. Try again when you are online.'):t('Fremdriften er synkronisert med kontoen din.','Your progress is synced with your account.');
  const count=local.list().length;root.querySelector('#accountCount').textContent=en?`${count} of ${IDS.length} quizzes completed`:`${count} av ${IDS.length} quizer fullført`;
  const progress=root.querySelector('progress');progress.value=count;progress.max=IDS.length;
