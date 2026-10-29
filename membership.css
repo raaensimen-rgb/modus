@@ -59,3 +59,79 @@ html[data-theme=contrast] .price-card[data-plan] .plan-coming-badge{background:#
 .student-info-sections p:last-child{margin-bottom:0}
 .student-info-dialog .student-info-footer{font-size:11px;line-height:1.75;padding:14px;border:1px solid var(--modus-b-465b35,#465b35);border-radius:7px;background:var(--modus-c-27371d,#27371d);margin:7px 0 0}
 @media(max-width:760px){.student-info-dialog{padding:26px 20px}.student-info-sections section{padding:14px 0}}
+
+
+/* Readability pass: MODUS+ is used at normal desktop viewing distance.
+   Avoid microtype for information, prices, benefits, FAQs and dialogs. */
+.membership-main{font-size:15px}
+.membership-hero>p:last-child{font-size:16px;line-height:1.85}
+.launch-notice{padding:21px 24px}
+.launch-notice strong{font-size:15px;font-weight:600}
+.launch-notice p{font-size:14px;line-height:1.7}
+.pricing-heading .eyebrow,.membership-faq>.eyebrow{font-size:11px}
+.billing-switch button{font-size:14px;min-height:44px}
+.billing-switch span{font-size:11px}
+.billing-explanation{font-size:13px;line-height:1.6}
+.price-card{padding:33px 24px}
+.price-card .card-kicker{font-size:11px;line-height:1.5;letter-spacing:.9px;margin-bottom:19px}
+.price-card h3{font-size:clamp(26px,2.25vw,31px);line-height:1.25}
+.price-card .card-description{font-size:15px;line-height:1.75;min-height:78px}
+.price-card .price>strong{font-size:clamp(43px,3.5vw,52px)}
+.price-card .price>span{font-size:14px}
+.price-card .cost-note{font-size:13px;line-height:1.65;min-height:43px}
+.price-card .plan-action{font-size:14px;min-height:46px}
+.price-card .feature-label{font-size:13px;line-height:1.6}
+.price-card ul{font-size:14px;line-height:1.65}
+.price-card li{padding:10px 0 10px 20px}
+.price-card .student-eligibility-note{font-size:13px;line-height:1.7}
+.price-card .plan-state{font-size:12px;line-height:1.65}
+.price-card .plan-ribbon{font-size:10px;line-height:1.35;padding:8px 11px}
+.price-card[data-plan] .plan-coming-badge{font-size:10px;padding:5px 7px}
+.price-footnote,.membership-main .price-footnote{font-size:12px;line-height:1.75}
+.membership-details>div>p:not(.eyebrow){font-size:15px;line-height:1.8}
+.membership-details a{font-size:14px}
+.membership-principles article>span{font-size:12px}
+.membership-principles h3{font-size:16px}
+.membership-principles p{font-size:14px;line-height:1.75}
+.billing-panel>div>p:not(.eyebrow){font-size:15px;line-height:1.75}
+.billing-management p{font-size:15px}
+.billing-management>span{font-size:13px;line-height:1.7}
+.membership-faq summary{font-size:16px;line-height:1.55;min-height:62px;align-items:center}
+.membership-faq details p{font-size:15px;line-height:1.8}
+.membership-dialog{font-size:15px;line-height:1.75}
+.membership-dialog .eyebrow{font-size:11px}
+.membership-dialog p{font-size:15px;line-height:1.75}
+.membership-dialog .chosen-price{font-size:30px}
+.membership-dialog .chosen-renewal,#chosenTerms{font-size:13px}
+.membership-dialog .checkout-unavailable strong{font-size:16px}
+.membership-dialog .checkout-unavailable p{font-size:14px}
+.student-info-trigger{font-size:13px}
+.student-info-dialog .student-info-lead{font-size:16px;line-height:1.75}
+.student-info-sections h3{font-size:18px}
+.student-info-sections p{font-size:15px;line-height:1.8}
+.student-info-dialog .student-info-footer{font-size:14px;line-height:1.7}
+.membership-dialog .student-verification-intro>p:not(.eyebrow){font-size:14px;line-height:1.7}
+.student-verification-panel label{font-size:14px}
+.student-verification-panel select{font-size:15px}
+.membership-dialog #studentSchoolInfo{font-size:13px;line-height:1.65}
+.membership-dialog .verification-roadmap span{font-size:13px;line-height:1.65}
+.membership-dialog .student-verification-panel .verification-safety{font-size:13px;line-height:1.7}
+/* Four readable cards need enough width; switch to two before text becomes cramped. */
+@media(min-width:761px) and (max-width:1399px){
+ .pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 18px}
+ .price-card{padding:31px 26px}
+ .price-card .card-description{min-height:0}
+ .price-card .cost-note{min-height:0}
+}
+@media(max-width:760px){
+ .membership-hero>p:last-child{font-size:15px}
+ .price-card{padding:30px 23px}
+ .price-card .card-description{min-height:0}
+ .price-card .cost-note{min-height:0}
+ .price-card .plan-ribbon{font-size:10px}
+ .billing-switch button{font-size:13px}
+ .billing-switch span{font-size:10px}
+ .billing-explanation{font-size:13px}
+ .membership-faq summary{font-size:15px}
+ .student-info-dialog .student-info-lead{font-size:15px}
+}
