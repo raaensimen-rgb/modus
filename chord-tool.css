@@ -140,3 +140,8 @@
 .piano-inversion-buttons button[hidden]{display:none}
 .piano-inversion-buttons button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 html[data-theme='readable'] .piano-inversion-buttons button[aria-pressed='true']{background:#b8d49f;color:#183522;border-color:#638759}
+
+/* Piano inversion choices are direct controls in the heading, not a dropdown. */
+.piano-voicing .diagram-heading{flex-wrap:wrap;align-items:center}
+.piano-voicing .piano-inversion-buttons{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 0 auto}
+@media(max-width:700px){.piano-voicing .piano-inversion-buttons{width:100%;margin:8px 0 0}}
