@@ -69,3 +69,18 @@
 .atlas-globe-back{opacity:.27}
 .atlas-globe-front{opacity:.85}
 .atlas-globe-caption{font:700 12px Manrope,Arial,sans-serif;letter-spacing:2px;fill:#d5e6c9}
+
+
+/* Atlas introduction: restrained editorial explanation before the illustration. */
+.map-hero .map-hero-subtitle{font:500 clamp(21px,2.6vw,32px)/1.3 Manrope,sans-serif;color:var(--ink);letter-spacing:-.025em;margin:0 0 19px;max-width:790px}
+.atlas-intro{padding:51px 0 54px;border-bottom:1px solid var(--line)}
+.atlas-intro-heading{max-width:790px}
+.atlas-intro h2{font:500 clamp(27px,3.1vw,39px)/1.2 Manrope,sans-serif;letter-spacing:-.035em;margin:11px 0 17px}
+.atlas-intro-heading>p:not(.map-eyebrow){font-size:15px;line-height:1.85;color:var(--muted);margin:0}
+.atlas-intro-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:29px}
+.atlas-intro-step{padding:21px 22px 19px;background:var(--panel);border:1px solid var(--line);border-radius:10px;display:flex;flex-direction:column;gap:11px;min-width:0}
+.atlas-intro-step>span{font-size:10px;letter-spacing:.15em;color:var(--accent);font-weight:700}
+.atlas-intro-step strong{font:600 16px/1.35 Manrope,sans-serif;letter-spacing:-.018em;color:var(--ink)}
+.atlas-intro-step p{margin:0;font-size:13px;line-height:1.75;color:var(--muted)}
+.atlas-intro-note{margin:21px 0 0;font-size:12px;line-height:1.75;color:var(--muted);max-width:860px}
+@media(max-width:760px){.atlas-intro{padding:39px 0}.atlas-intro-steps{grid-template-columns:1fr;gap:12px}.atlas-intro-step{padding:20px}}
