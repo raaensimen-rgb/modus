@@ -4,7 +4,7 @@ const articles=require('../content/articles.json');
 const filters={level:'all',topic:'all',q:''};
 const items=articles.map(a=>({id:a.slug,level:a.level,topic:a.category,search:a.title+' '+a.intro}));
 const result=extra=>items.filter(a=>matches(a,{...filters,...extra})).map(a=>a.id);
-assert.equal(result({}).length,14);
+assert.equal(result({}).length,15);
 assert.deepEqual(result({level:'intermediate',topic:'chords'}),['septimakkorder']);
 assert.deepEqual(result({level:'beginner',topic:'modes'}),[]);
 assert.deepEqual(result({topic:'harmony'}),['kvintsirkelen','ii-v-i-kadensen','stemmeforing']);
