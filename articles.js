@@ -10,19 +10,19 @@
  if(typeof document==='undefined')return;
  const en=document.documentElement.lang==='en',t=(nb,english)=>en?english:nb;
  const cards=[...document.querySelectorAll('.article-card')];
- const orderedIds=["toner-og-intervaller", "dur-og-moll", "bygg-akkorder-i-en-toneart", "kvintsirkelen", "din-forste-improvisasjon", "septimakkorder", "ett-skalakart-nye-maltoner", "ii-v-i-kadensen", "moduser-og-tonalt-sentrum", "dorisk-og-eolisk", "harmonisk-moll-og-frygisk-dominant", "stemmeforing", "rytme-i-sju-aatte"];
+ const orderedIds=["toner-og-intervaller","dur-og-moll","bygg-akkorder-i-en-toneart","kvintsirkelen","romertall-i-musikk","septimakkorder","ii-v-i-kadensen","din-forste-improvisasjon","ett-skalakart-nye-maltoner","moduser-og-tonalt-sentrum","kirketonearter-ett-system-sju-uttrykk","dorisk-og-eolisk","stemmeforing","harmonisk-moll-og-frygisk-dominant","rytme-i-sju-aatte"];
  cards.sort((a,b)=>(orderedIds.includes(a.dataset.articleId)?orderedIds.indexOf(a.dataset.articleId):999)-(orderedIds.includes(b.dataset.articleId)?orderedIds.indexOf(b.dataset.articleId):999));
  const items=cards.map(card=>({id:card.dataset.articleId,level:card.dataset.level,topic:card.dataset.topic,search:card.dataset.search+' '+card.querySelector('h2').textContent,card}));
  const search=document.getElementById('articleSearch'),container=document.getElementById('articleGroups');
  const levelButtons=[...document.querySelectorAll('[data-filter]')],topicButtons=[...document.querySelectorAll('[data-topic-filter]')],views=[...document.querySelectorAll('[data-group-by]')];
- const state={level:'all',topic:'all',q:'',view:'level'};
+ const state={level:'all',topic:'all',q:'',view:'order'};
  const hints={all:t('Fra de første tonene til nye harmoniske muligheter.','From your first notes to new harmonic possibilities.'),beginner:t('Start med byggesteinene. Ingen forkunnskaper nødvendig.','Start with the building blocks. No prior knowledge needed.'),intermediate:t('Knytt skalaer, akkorder og improvisasjon sammen.','Connect scales, chords and improvisation.'),advanced:t('Gå videre med modalitet, stemmeføring og rytmikk.','Go further with modality, voice leading and rhythm.')};
  function completed(id){return window.ModusAccount?window.ModusAccount.has(id):cards.find(c=>c.dataset.articleId===id)?.classList.contains('is-complete');}
  function regroup(){
-  const template=document.getElementById(state.view==='topic'?'topicGroupTemplate':'levelGroupTemplate');
+  const template=document.getElementById(state.view==='topic'?'topicGroupTemplate':state.view==='level'?'levelGroupTemplate':'orderGroupTemplate');
   // Keep the existing card nodes and their completion state while changing groups.
   container.replaceChildren(template.content.cloneNode(true));
-  items.forEach(item=>container.querySelector(`[data-category="${item[state.view]}"] .article-grid`).append(item.card));
+  items.forEach(item=>container.querySelector(`[data-category="${state.view==='order'?'all':item[state.view]}"] .article-grid`).append(item.card));
  }
  function updateProgress(){
   document.querySelectorAll('[data-stage-progress]').forEach(label=>{
@@ -47,7 +47,7 @@
  function saveUrl(){
   const url=new URL(location.href);
   for(const key of ['level','topic','q','view']){
-   const value=state[key],empty=key==='view'?value==='level':key==='q'?!value:value==='all';
+   const value=state[key],empty=key==='view'?value==='order':key==='q'?!value:value==='all';
    if(empty)url.searchParams.delete(key);else url.searchParams.set(key,value);
   }
   history.replaceState(null,'',url.pathname+url.search+url.hash);
@@ -66,7 +66,7 @@
   const params=new URL(location.href).searchParams;
   state.level=levelButtons.some(b=>b.dataset.filter===params.get('level'))?params.get('level'):'all';
   state.topic=topicButtons.some(b=>b.dataset.topicFilter===params.get('topic'))?params.get('topic'):'all';
-  state.view=params.get('view')==='topic'?'topic':'level';state.q=params.get('q')||'';search.value=state.q;
+  state.view=['topic','level'].includes(params.get('view'))?params.get('view'):'order';state.q=params.get('q')||'';search.value=state.q;
   regroup();apply(false);updateProgress();
  }
  levelButtons.forEach(b=>b.addEventListener('click',()=>{state.level=b.dataset.filter;apply();}));
