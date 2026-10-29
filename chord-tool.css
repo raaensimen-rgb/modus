@@ -110,3 +110,11 @@
  .harmony-workbench .slot-head{font-size:9px}
  .harmony-workbench .voicing-grid{min-width:0}
 }
+
+/* Desktop: both workbench cards share an exact bottom edge.
+   Remove the viewport-height cap that previously shortened the right panel. */
+@media(min-width:1051px){
+ .harmony-workbench{align-items:stretch}
+ .harmony-workbench>.builder-panel,.harmony-workbench>.selected-panel{align-self:stretch;height:100%;box-sizing:border-box}
+ .harmony-workbench>.selected-panel{position:static;top:auto;max-height:none;overflow:visible}
+}
