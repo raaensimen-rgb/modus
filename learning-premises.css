@@ -25,3 +25,53 @@
 .modus-premises-check input:checked{background:var(--accent,#b9d47f)}
 .modus-premises-check input:checked::after{content:'✓';color:#121b0d;font-size:21px;font-weight:900;line-height:1}
 .modus-premises-confirm:disabled{opacity:.40}
+
+
+/* Accessible light-theme confirmation dialog: explicit colors because <dialog>
+   is in the browser top layer and must not inherit dark surface fallbacks. */
+html[data-theme="readable"] .modus-premises-dialog{
+  color:#1b2a20;
+  background:#f4f5f1;
+  border-color:#8c9b86;
+  color-scheme:light;
+  box-shadow:0 25px 90px rgba(22,35,24,.20);
+}
+html[data-theme="readable"] .modus-premises-dialog::backdrop{
+  background:rgba(23,32,25,.48);
+}
+html[data-theme="readable"] .modus-premises-eyebrow,
+html[data-theme="readable"] .modus-premises-inner h2,
+html[data-theme="readable"] .modus-premises-check,
+html[data-theme="readable"] .modus-premises-check span{
+  color:#1b2a20;
+}
+html[data-theme="readable"] .modus-premises-eyebrow{color:#245b34}
+html[data-theme="readable"] .modus-premises-inner p{color:#43533b}
+html[data-theme="readable"] .modus-premises-check{
+  background:#e8ebe2;
+  border-color:#41724c;
+}
+html[data-theme="readable"] .modus-premises-check:hover{background:#dce5d8}
+html[data-theme="readable"] .modus-premises-check:has(input:checked){background:#d6e5d2}
+html[data-theme="readable"] .modus-premises-check input{
+  border-color:#245b34;
+  background:#f4f5f1;
+}
+html[data-theme="readable"] .modus-premises-check input:checked{background:#245b34}
+html[data-theme="readable"] .modus-premises-check input:checked::after{color:#fff}
+html[data-theme="readable"] .modus-premises-confirm{
+  background:#245b34;
+  color:#fff;
+}
+html[data-theme="readable"] .modus-premises-confirm:disabled{
+  opacity:.55;
+  background:#688371;
+  color:#fff;
+}
+html[data-theme="readable"] .modus-premises-note{
+  color:#1b2a20;
+  background:#f4f5f1;
+  border-color:#8c9b86;
+  border-left-color:#245b34;
+}
+html[data-theme="readable"] .modus-premises-note p{color:#43533b}
