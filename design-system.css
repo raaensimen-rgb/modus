@@ -184,4 +184,4 @@ html,body{max-width:100%;overflow-x:clip}
 .brand > .branddot{display:none}
 
 /* The short founder bio is a compact sidebar caption, not long-form body copy. */
-body .about-main .about-byline p{font-size:14px;line-height:1.7}
+body .about-main .about-byline p{font-size:12px;line-height:1.65;margin:13px 0 19px}
