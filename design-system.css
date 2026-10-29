@@ -110,3 +110,43 @@ body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; 
 :where(.course-main,.about-main) :where(a,button,input,select) {
   max-width: 100%;
 }
+
+
+/*
+ * MODUS body-copy readability only.
+ * No changes to headings, labels, overlines, icons, controls or numerical diagrams.
+ * Apply to explanatory prose and actual reading content across the site.
+ */
+body :is(
+  .tool-copy>p,.section-intro>p:last-child,.theory-entry p:last-child,
+  .home-feature-grid>.theory-entry p:last-child,
+  .hero-note,.hero .quote-explanation,.hero-route-note,.quote-translation,
+  .articles-hero p:last-child,.article-card p,.library-bottom p:last-child,
+  .no-results p,.plus-teaser p,.overview-heading>p,.journey-stage p,
+  .next-article p,.category-header p:last-child,
+  .article-category[data-category^="reading-"] .category-header p,
+  .article-practice p,.article-prerequisites p,
+  .reading-body .article-quiz>p,.reading-body .quiz-feedback p,
+  .reading-body .quiz-complete p,
+  .theory-hero p:last-child,.aside-note p,.lesson .lead,.concept,
+  .lesson-reflection>p,.lesson-reflection details p,
+  .intro p,.mode-detail p,.mixer p,.custom-sequence-note p,
+  .chord-type-row p,.course-lesson p,.course-exercise>p:not(.eyebrow),
+  .course-reflection p,.practice-note,
+  .about-byline p,.about-reading p,.about-credit>p,.about-links p,
+  .builder-help,.guitar-voicing>p,.piano-help,.voicing-note,
+  .jam-transfer p,.sequence-library p,.harmonic-context>p,
+  .map-small,.map-copy,.map-note,.map-next p:not(.map-eyebrow),
+  .atlas-intro-heading>p:not(.map-eyebrow),.atlas-intro-step p,
+  .path-card p,.path-intro,.path-note,
+  .account-panel .account-note,.account-panel .account-preview-note,
+  .modus-feedback-heading p,.modus-feedback-note
+){font-size:15px;line-height:1.75}
+/* Long-form prose deserves a full reading size. */
+body :is(
+  .reading-body>p,.reading-body section>p,.reading-body>ul>li,
+  .reading-body>ol>li,.reading-body section>ul>li,
+  .reading-body .practice-steps li,.article-learning li,
+  .about-reading>p
+){font-size:16px;line-height:1.8}
+/* Larger introductions and editorial text already sized intentionally are kept. */
