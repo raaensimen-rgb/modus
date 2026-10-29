@@ -214,11 +214,13 @@ $("map-export").addEventListener("click",()=>{
  const a=document.createElement("a");a.href=url;a.download="modus-musikkart.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 $("map-clear").addEventListener("click",()=>{
- if(!window.confirm("Nullstille alle dine lokale læringsmarkeringer og notater?"))return;
- for(const m of catalog)records[m.id]={state:"not-started",manual:false,idea:false,note:""};
+ if(!window.confirm("Nullstille all synlig progresjon og alle notater i Musikkatlaset? Quizresultater på kontoen beholdes."))return;
+ // Explicitly mark every module as not started, overriding previously imported
+ // article/quiz evidence in the atlas without deleting actual quiz results.
+ for(const m of catalog)records[m.id]={state:"not-started",manual:true,idea:false,note:""};
  for(const g of groups)categoryRecords[g.id]="not-started";
- try{localStorage.removeItem(STORE)}catch{}
- chosen=null;category=null;$("inspector-module").hidden=true;$("inspector-heading").textContent="Velg et område";$("inspector-description").textContent="Kartet er nullstilt.";render();
+ save();
+ chosen=null;category=null;$("inspector-module").hidden=true;$("inspector-heading").textContent="Velg et område";$("inspector-description").textContent="Alle atlasmarkeringer er nullstilt. Tidligere quizresultater på kontoen er beholdt.";render();
 });
 render();
 window.addEventListener('pageshow',render);
