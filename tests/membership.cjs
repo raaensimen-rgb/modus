@@ -16,4 +16,13 @@ fixture.plans.plus.checkout.month='https://buy.stripe.com/test_fixture';assert.e
 fixture.plans.studio.accessReady=false;assert.equal(M.checkout(fixture,'studio','year'),null);
 fixture.termsUrl='//evil.test';assert.equal(M.checkout(fixture,'plus','year'),null);
 assert.equal(M.checkout(fixture,'unknown','month'),null);
+const membershipHTML=fs.readFileSync('dist/modus-plus.html','utf8');
+const membershipCSS=fs.readFileSync('dist/membership.css','utf8');
+for(const plan of ['plus','studio']){
+ const opening=new RegExp('<article class="price-card[^"]*" data-plan="'+plan+'"><span class="plan-coming-badge">Kommer</span>');
+ assert.match(membershipHTML,opening,'Premium plan '+plan+' must clearly show coming-soon status');
+}
+assert.match(membershipHTML,/<article class="price-card free-card">/,'Free plan stays available');
+assert.match(membershipCSS,/\.plan-coming-badge/,'Coming-soon badge must be styled');
+assert.match(membershipHTML,/Se Modus\+ →/,'Premium tier preview remains accessible');
 console.log('Passed: membership amounts, annual savings, four checkout routes, blocked unconfigured sales, test links and unsafe URLs.');
