@@ -1,0 +1,73 @@
+name: Temporary isolated QA verification (PL-025)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/qa-pl-025.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    name: Regression — ${{ matrix.label }}
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: pr-5
+            sha: 88e609aa2446e2e455b6bf142bb3eb2e46e94fcf
+          - label: reference-main
+            sha: 3cbdec5f174fd9dcc5340be62fd1cc30436af444
+    steps:
+      - name: Checkout exact pinned commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.sha }}
+          persist-credentials: false
+      - name: Verify exact commit
+        env:
+          EXPECTED_SHA: ${{ matrix.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          git status --short
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Run every configured test command independently
+        run: |
+          python3 - <<'PY'
+          import json, subprocess, pathlib, sys
+          commands=json.loads(pathlib.Path('package.json').read_text())['scripts']['test'].split(' && ')
+          out=pathlib.Path('qa-results')
+          out.mkdir(exist_ok=True)
+          results=[]
+          for i,command in enumerate(commands,1):
+              completed=subprocess.run(command,shell=True,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+              (out/f'{i:02d}.log').write_text('$ '+command+'\n'+completed.stdout)
+              results.append({'index':i,'command':command,'exit_code':completed.returncode})
+              print(f'{i:02d}: exit={completed.returncode}: {command}',flush=True)
+          (out/'summary.json').write_text(json.dumps(results,indent=2))
+          sys.exit(1 if any(x['exit_code'] for x in results) else 0)
+          PY
+      - name: Upload independent test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-pl025-${{ matrix.label }}
+          path: qa-results/
+          if-no-files-found: warn
