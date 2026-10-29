@@ -182,3 +182,6 @@ html,body{max-width:100%;overflow-x:clip}
 
 /* Paired Arch logos frame MODUS without a trailing dot, including generated footers. */
 .brand > .branddot{display:none}
+
+/* The short founder bio is a compact sidebar caption, not long-form body copy. */
+body .about-main .about-byline p{font-size:14px;line-height:1.7}
