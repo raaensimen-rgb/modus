@@ -5,6 +5,35 @@ const t=en?{open:'Contact MODUS',title:'Contact MODUS',intro:'Report an issue, a
 const root=document.createElement('aside');root.className='modus-feedback';root.setAttribute('aria-label',t.title);
 root.innerHTML=`<div class="modus-feedback-panel" id="modus-feedback-panel" hidden><div class="modus-feedback-heading"><div><strong>${t.title}</strong><p>${t.intro}</p></div><button type="button" class="modus-feedback-close" aria-label="${t.close}">×</button></div><form class="modus-feedback-form"><label for="modus-feedback-type">${t.type}</label><select id="modus-feedback-type" name="category" required><option value="error">${t.error}</option><option value="question">${t.question}</option><option value="suggestion">${t.suggestion}</option></select><label for="modus-feedback-message">${t.message}</label><textarea id="modus-feedback-message" name="message" minlength="10" maxlength="3000" required placeholder="${t.placeholder}"></textarea><label for="modus-feedback-email">${t.email}</label><input id="modus-feedback-email" name="email" type="email" maxlength="254" autocomplete="email"><input name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><p class="modus-feedback-note">${t.privacy}</p><button class="modus-feedback-send" type="submit">${t.send}</button><p class="modus-feedback-status" role="status" aria-live="polite"></p></form></div><button type="button" class="modus-feedback-toggle" aria-expanded="false" aria-controls="modus-feedback-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5 9 9 0 0 1-3.5-.7L4 20l1.7-4.8A7.5 7.5 0 1 1 20 11.5Z"/></svg><span>${t.open}</span></button>`;
 document.body.append(root);
+/* Global contextual help, paired with the existing floating contact control. */
+const helpPages={
+ 'backingtracks.html':[['Toneart','Bestemmer tonesenteret for backingtracken.'],['Modus','Velger skala og tonal karakter.'],['Groove','Velger rytmisk akkompagnement.'],['Harmonikk','Velger hvordan akkordene bygges opp.'],['Tempo','Hastighet målt i slag per minutt (BPM).'],['Klikk','Hør en jevn metronompuls mens du spiller.']],
+ 'akkorder.html':[['Grunntone','Tonen akkorden er oppkalt etter.'],['Akkordtype','Bestemmer hvilke intervaller akkorden inneholder.'],['Gitargrep','Alternative plasseringer av akkordtonene på gitarhalsen.'],['Omvending','Samme akkordtoner, men en annen tone ligger nederst på pianoet.']],
+ 'musikkart.html':[['Mitt musikkatlas','Viser sammenhenger mellom musikalske fagområder og moduler.'],['Under arbeid','Et område du arbeider med, eller har åpnet tilknyttet undervisningsstoff for.'],['Lært','Egenmarkert status, ikke formell vurdering av kompetanse.'],['Nullstill','Nullstiller atlasets synlige markeringer og notater, men ikke quizresultatene på kontoen.']],
+ 'laeringssti.html':[['Læringssti','Foreslått rekkefølge for å utforske teori og praktiske øvelser.'],['Grunnstudier','Innføring i sentrale musikalske begreper og sammenhenger.']],
+ 'modus-plus.html':[['MODUS+','Planlagt medlemskap. Kjøp er foreløpig ikke åpnet.'],['Priser','Forslag under utvikling, ikke et aktivt abonnement.']],
+ 'artikler.html':[['Artikler','Musikkfaglige tekster og forklaringer.'],['Quiz','Oppgaver for å kontrollere forståelsen av et tema.']],
+ 'teori.html':[['Teorirommet','Utforsk hvordan skalaer, akkorder og intervaller henger sammen.']],
+ 'grunnstudier.html':[['Grunnstudier','Et planlagt studieløp med gradvis progresjon.']]
+};
+const currentPage=location.pathname.split('/').pop()||'index.html';
+const helpItems=helpPages[currentPage]||[['Navigasjon','Bruk menyen øverst til å finne læringsstoff og musikkverktøy.'],['Visning','Bytt mellom mørk, lesevennlig og høy kontrast.'],['Kontakt MODUS','Send inn spørsmål, feil eller forbedringsforslag.']];
+const helpTitle=en?'Help on this page':'Hjelp på denne siden';
+const helpButton=document.createElement('button');helpButton.type='button';helpButton.className='modus-help-toggle';helpButton.setAttribute('aria-label',helpTitle);helpButton.setAttribute('aria-expanded','false');helpButton.setAttribute('aria-controls','modus-help-panel');helpButton.textContent='?';helpButton.title=helpTitle;
+const helpPanel=document.createElement('section');helpPanel.className='modus-help-panel';helpPanel.id='modus-help-panel';helpPanel.hidden=true;helpPanel.setAttribute('aria-label',helpTitle);
+const helpHeading=document.createElement('strong');helpHeading.textContent=helpTitle;helpPanel.append(helpHeading);
+const helpList=document.createElement('dl');
+for(const [term,description] of helpItems){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=term;dd.textContent=description;helpList.append(dt,dd);}
+helpPanel.append(helpList);
+const actionRow=document.createElement('div');actionRow.className='modus-feedback-actions';
+root.insertBefore(helpPanel,root.firstChild);
+root.insertBefore(actionRow,root.querySelector('.modus-feedback-toggle'));
+actionRow.append(helpButton,root.querySelector('.modus-feedback-toggle'));
+function showHelp(open){helpPanel.hidden=!open;helpButton.setAttribute('aria-expanded',String(open));if(open){root.querySelector('.modus-feedback-panel').hidden=true;root.querySelector('.modus-feedback-toggle').setAttribute('aria-expanded','false');}}
+helpButton.addEventListener('click',()=>showHelp(helpPanel.hidden));
+document.addEventListener('pointerdown',e=>{if(!root.contains(e.target))showHelp(false);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!helpPanel.hidden){showHelp(false);helpButton.focus();}});
+
 /* Keep the fixed contact control above the footer divider and its links.
    As the footer enters view, the widget tracks its top edge rather than
    overlapping the footer. The normal viewport inset is restored on scroll-up. */
@@ -28,7 +57,7 @@ if(footer){
   scheduleFeedbackPosition();
 }
 const toggle=root.querySelector('.modus-feedback-toggle'),panel=root.querySelector('.modus-feedback-panel'),close=root.querySelector('.modus-feedback-close'),form=root.querySelector('form'),send=root.querySelector('.modus-feedback-send'),status=root.querySelector('.modus-feedback-status');
-function show(open){panel.hidden=!open;toggle.setAttribute('aria-expanded',String(open));if(open)panel.querySelector('select').focus();else toggle.focus();}
+function show(open){if(open)showHelp(false);panel.hidden=!open;toggle.setAttribute('aria-expanded',String(open));if(open)panel.querySelector('select').focus();else toggle.focus();}
 toggle.addEventListener('click',()=>show(panel.hidden));close.addEventListener('click',()=>show(false));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)show(false);});
 form.addEventListener('submit',async e=>{e.preventDefault();if(!form.reportValidity())return;if(form.elements.website.value)return;
 const message=form.elements.message.value.trim(),email=form.elements.email.value.trim();if(message.length<10){status.textContent=t.short;status.dataset.error='true';return;}
