@@ -25,7 +25,7 @@ assert.equal(originals.length,JSON.parse(fs.readFileSync('content/articles.json'
 for(const file of originals){
  const nb=fs.readFileSync(file,'utf8'),enPath=file.replace('dist/','dist/en/'),en=fs.readFileSync(enPath,'utf8');
  assert(nb.includes('data-language="nb"')&&nb.includes('data-language="en"'));assert(en.includes('<html lang="en"'));
- assert(en.includes('Main navigation')&&en.includes('Chord Workshop'));
+ assert(en.includes('Main navigation')&&en.includes('Chord Workshop'), 'Missing English navigation on '+file);
  // Every local linked page and asset must resolve inside its own locale.
  for(const [,raw] of en.matchAll(/(?:href|src)="([^"#]+)"/g)){
   if(raw==='/redaktor.html'){assert(fs.existsSync('dist/redaktor.html'));continue;}
