@@ -3,6 +3,7 @@
   "use strict";
   const KEY = "modus-learning-premises-v1";
   const MONTHS = 3;
+  const PREVIEW_DISMISS_KEY = "modus-premises-preview-dismissed";
   const route = location.pathname.split("/").pop().toLowerCase();
   const isPlus = route === "modus-plus.html";
   function isDue() {
@@ -31,11 +32,16 @@
   }
   function createDialog() {
     if (!isDue()) return;
+    try { if (sessionStorage.getItem(PREVIEW_DISMISS_KEY) === "1") return; } catch (_) {}
     const dialog = document.createElement("dialog");
     dialog.className = "modus-premises-dialog";
     dialog.setAttribute("aria-labelledby", "modus-premises-title");
-    dialog.innerHTML = '<div class="modus-premises-inner"><span class="modus-premises-eyebrow">FØR DU UTFORSKER</span><h2 id="modus-premises-title">Lær, forstå og finn din egen vei.</h2><p>MODUS bygger på dokumentert eget studiearbeid og musikkfaglig kvalitetssikring. Vi ønsker å gi deg en grunnmur for videre læring – ikke en endelig fasit på musikk.</p><p>Innholdet er veiledning og et supplement til egen øving, utforskning og eventuell undervisning med lærer. MODUS er ikke en komplett eller akkreditert utdanning, og gir ikke studiepoeng.</p><form method="dialog" id="modus-premises-form"><label class="modus-premises-check"><input type="checkbox" id="modus-premises-accept" required><span>Jeg har lest og forstått hva MODUS er ment å være.</span></label><button type="submit" class="modus-premises-confirm" disabled>Fortsett til MODUS</button></form><p class="modus-premises-fine">Du blir bedt om å bekrefte dette igjen etter tre måneder på denne nettleseren.</p></div>';
+    dialog.innerHTML = '<button type="button" class="modus-premises-close" aria-label="Lukk informasjonsboksen (testmodus)" title="Lukk for denne økten">×</button><div class="modus-premises-inner"><span class="modus-premises-eyebrow">FØR DU UTFORSKER</span><h2 id="modus-premises-title">Lær, forstå og finn din egen vei.</h2><p>MODUS bygger på dokumentert eget studiearbeid og musikkfaglig kvalitetssikring. Vi ønsker å gi deg en grunnmur for videre læring – ikke en endelig fasit på musikk.</p><p>Innholdet er veiledning og et supplement til egen øving, utforskning og eventuell undervisning med lærer. MODUS er ikke en komplett eller akkreditert utdanning, og gir ikke studiepoeng.</p><form method="dialog" id="modus-premises-form"><label class="modus-premises-check"><input type="checkbox" id="modus-premises-accept" required><span>Jeg har lest og forstått hva MODUS er ment å være.</span></label><button type="submit" class="modus-premises-confirm" disabled>Fortsett til MODUS</button></form><p class="modus-premises-fine">Du blir bedt om å bekrefte dette igjen etter tre måneder på denne nettleseren.</p></div>';
     document.body.append(dialog);
+    dialog.querySelector(".modus-premises-close").addEventListener("click", () => {
+      try { sessionStorage.setItem(PREVIEW_DISMISS_KEY, "1"); } catch (_) {}
+      dialog.close();
+    });
     const input = dialog.querySelector("#modus-premises-accept");
     const button = dialog.querySelector("button");
     input.addEventListener("change", () => { button.disabled = !input.checked; });
