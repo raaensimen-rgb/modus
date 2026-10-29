@@ -186,3 +186,21 @@ $("map-clear").addEventListener("click",()=>{
 });
 render();
 })();
+
+
+/* Visual-only MODUS+ notification demonstration; never measures usage or charges. */
+const demoTrigger=document.getElementById('atlas-billing-demo-trigger');
+if(demoTrigger){
+ const toast=document.createElement('aside');
+ toast.className='atlas-billing-toast';
+ toast.hidden=true;
+ toast.setAttribute('role','status');
+ toast.setAttribute('aria-live','polite');
+ toast.innerHTML='<div class="atlas-billing-toast-head"><span class="atlas-billing-toast-label">MODUS+ · EKSEMPEL</span><button type="button" class="atlas-billing-toast-close" aria-label="Lukk varsel">×</button></div><div class="atlas-billing-toast-title">Du har nådd 50 % aktivitet</div><p class="atlas-billing-toast-body">Du nærmer deg den foreløpige betalingsgrensen på 60 %. Dette er kun en forhåndsvisning – ingen aktivitet måles og ingen betaling utløses.</p><div class="atlas-billing-toast-progress"><span></span></div><div class="atlas-billing-toast-meta"><span>50 % aktivitet</span><span>60 % foreløpig grense</span></div><p class="atlas-billing-toast-foot">Demo · Ingen betaling er aktivert</p>';
+ document.body.appendChild(toast);
+ const close=()=>{toast.hidden=true;demoTrigger.setAttribute('aria-expanded','false');};
+ demoTrigger.setAttribute('aria-expanded','false');
+ demoTrigger.addEventListener('click',()=>{toast.hidden=false;demoTrigger.setAttribute('aria-expanded','true');});
+ toast.querySelector('.atlas-billing-toast-close').addEventListener('click',close);
+ document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!toast.hidden)close();});
+}
