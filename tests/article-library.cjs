@@ -7,7 +7,7 @@ const result=extra=>items.filter(a=>matches(a,{...filters,...extra})).map(a=>a.i
 assert.equal(result({}).length,15);
 assert.deepEqual(result({level:'intermediate',topic:'chords'}),['septimakkorder']);
 assert.deepEqual(result({level:'beginner',topic:'modes'}),[]);
-assert.deepEqual(result({topic:'harmony'}),['kvintsirkelen','ii-v-i-kadensen','stemmeforing']);
+assert.deepEqual(result({topic:'harmony'}),['kvintsirkelen','ii-v-i-kadensen','stemmeforing','romertall-i-musikk']);
 assert.deepEqual(result({q:'KVINTSIRKELEN'}),['kvintsirkelen']);
 assert.deepEqual(result({q:'KIRKETONEARTER'}),['kirketonearter-ett-system-sju-uttrykk']);
 assert.deepEqual(result({q:'byggesteiner TONER'}),['toner-og-intervaller']);
