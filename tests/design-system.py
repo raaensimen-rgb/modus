@@ -25,7 +25,7 @@ for selector in (".article-card p", ".journey-stage p", ".reading-body section>p
     assert selector in type_css, f"Missing content readability rule: {selector}"
 type_rules = type_css.split("MODUS body-copy readability only", 1)[1]
 assert "font-size:15px;line-height:1.75" in type_rules
-assert "font-size:16px;line-height:1.8" in type_rules
+assert "font-size:18px;line-height:1.8" in type_rules
 assert "body{font-size:" not in type_rules, "Do not override the site's global font-size"
 # Explicitly guard real prose in Musikkatlas and other editorial pages, not headings.
 assert ".atlas-intro-heading>p:not(.map-eyebrow)" in type_css, "Atlas explanatory introduction must be covered"
