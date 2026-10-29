@@ -10,3 +10,18 @@
 @media(max-width:700px){.price-card[data-plan] .plan-coming-badge{top:17px;right:16px}}
 html[data-theme=readable] .price-card[data-plan] .plan-coming-badge{background:#e7efd9;color:#304c24;border-color:#879e74}
 html[data-theme=contrast] .price-card[data-plan] .plan-coming-badge{background:#fff;color:#000;border-color:#000}
+
+/* Student discount preview – school choice is informational, not verification. */
+.student-eligibility-note{font-size:10px;line-height:1.75;color:var(--modus-c-c0d5af,#c0d5af);margin:18px 0 0}
+.student-verification{margin-top:54px;padding:31px 0 46px;border-top:1px solid var(--modus-b-455c32,#455c32);border-bottom:1px solid var(--modus-b-455c32,#455c32);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:45px;align-items:start}
+.student-verification-intro h2{font-size:clamp(24px,3vw,34px);line-height:1.24;letter-spacing:-.035em;margin:12px 0 17px}
+.student-verification-intro>p:not(.eyebrow){font-size:13px;line-height:1.85;color:var(--modus-c-b5c5a5,#b5c5a5);max-width:490px}
+.student-verification-panel{padding:25px;border-radius:11px;border:1px solid var(--modus-b-465b35,#465b35);background:var(--modus-c-1b2417,#1b2417)}
+.student-verification-panel label{display:block;font-size:12px;font-weight:600;margin:0 0 10px}
+.student-verification-panel select{width:100%;border:1px solid var(--modus-b-6b874c,#6b874c);border-radius:7px;background:var(--modus-c-27371d,#27371d);color:var(--modus-c-eef5e4,#eef5e4);font:13px 'DM Sans',sans-serif;padding:12px;min-height:44px}
+.student-verification-panel select:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+#studentSchoolInfo{font-size:11px;line-height:1.8;color:var(--modus-c-b2c59f,#b2c59f);min-height:38px}
+.verification-roadmap{display:grid;gap:10px;margin:22px 0;padding:17px 0;border-top:1px solid var(--modus-b-455c32,#455c32);border-bottom:1px solid var(--modus-b-455c32,#455c32)}
+.verification-roadmap span{font-size:11px;line-height:1.6;color:var(--modus-c-d4e6c0,#d4e6c0)}
+.student-verification-panel .verification-safety{font-size:11px;line-height:1.8;color:var(--modus-c-b2c59f,#b2c59f);margin-bottom:0}
+@media(max-width:760px){.student-verification{grid-template-columns:1fr;gap:15px;margin-top:35px;padding:29px 0}.student-verification-panel{padding:20px}}
