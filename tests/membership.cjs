@@ -25,7 +25,7 @@ assert.match(membershipHTML, /<title>MODUS\+ · Medlemskap og priser<\/title>/,'
 assert.match(membershipCSS, /\.membership-hero \.membership-hero-subtitle/,'Subtitle needs an explicit smaller typographic style');
 
 for(const plan of ['elev','plus','studio']){
- const opening=new RegExp('<article class="price-card[^"]*" data-plan="'+plan+'"><span class="plan-coming-badge">Kommer</span>');
+ const opening=new RegExp('<article class="price-card[^"]*" data-plan="'+plan+'"[^>]*><span class="plan-coming-badge">Kommer</span>');
  assert.match(membershipHTML,opening,'Premium plan '+plan+' must clearly show coming-soon status');
 }
 assert.match(membershipHTML,/<article class="price-card free-card">/,'Free plan stays available');
