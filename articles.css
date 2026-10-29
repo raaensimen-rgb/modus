@@ -59,3 +59,31 @@
 .article-category[data-category^="reading-"] .category-header{padding-bottom:13px;border-bottom:1px solid var(--modus-b-425733,#425733)}
 .article-category[data-category^="reading-"] .category-header h3{font-size:clamp(21px,2.4vw,28px);letter-spacing:-.035em}
 .article-category[data-category^="reading-"] .category-header p{font-size:12px}
+
+
+/* Comfortable article reading size – prose only, not headings or navigation. */
+.reading-body p,
+.reading-body li,
+.reading-body .practice-steps li,
+.article-learning li,
+.article-prerequisites p,
+.article-practice p,
+.reading-body .article-quiz>p,
+.reading-body .quiz-feedback p,
+.reading-body .quiz-complete p{
+  font-size:18px;
+  line-height:1.8;
+}
+.reading-note{font-size:17px;line-height:1.8}
+.reading-example>span{font-size:15px;line-height:1.6}
+.reading-body table{font-size:16px;line-height:1.65}
+.reading-body td,.reading-body th{font-size:15px;line-height:1.65;padding:12px 13px}
+.reading-body .article-quiz legend{font-size:17px;line-height:1.65}
+@media(max-width:650px){
+  .reading-body p,.reading-body li,.reading-body .practice-steps li,
+  .article-learning li,.article-prerequisites p,.article-practice p,
+  .reading-body .article-quiz>p,.reading-body .quiz-feedback p,
+  .reading-body .quiz-complete p{font-size:17px;line-height:1.75}
+  .reading-body table{font-size:15px}
+  .reading-body td,.reading-body th{font-size:14px;padding:11px 9px}
+}
