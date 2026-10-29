@@ -92,21 +92,20 @@ function presetChords(preset){
 }
 function updatePresetPreview(){
  const chosen=progressionPresets[C('progressionPreset').value];
- C('applyProgressionPreset').disabled=!chosen;
  C('progressionPresetPreview').textContent=chosen
-  ?chosen.name+': '+presetChords(chosen).map(c=>c.rootName+qualities[c.q].suffix).join(' – ')+'. '+(chosen.mode===5?'Bruker naturlig moll. ':'Bruker dur. ')+'Trykk «Bruk akkordrekken» for å legge den inn.'
-  :'Velg en progresjon for å se akkordene før du bruker den. Akkordene kan endres fritt etterpå.';
+  ?chosen.name+': '+presetChords(chosen).map(c=>c.rootName+qualities[c.q].suffix).join(' – ')+'. '+(chosen.mode===5?'Naturlig moll. ':'Dur. ')+'Du kan endre akkordene fritt.'
+  :'Velg en progresjon for å sette inn akkordene automatisk. Du kan endre dem fritt etterpå.';
 }
-C('progressionPreset').addEventListener('change',updatePresetPreview);
-C('applyProgressionPreset').addEventListener('click',()=>{
+C('progressionPreset').addEventListener('change',()=>{
  const preset=progressionPresets[C('progressionPreset').value];
- if(!preset)return;
+ if(!preset){updatePresetPreview();return;}
  stop();
  chords=presetChords(preset);
  scaleMode=preset.mode;
  C('jamMode').value=scaleMode;
  selected=0;gripIndex=0;inversion=0;
  render();
+ updatePresetPreview();
  C('chordStatus').textContent=preset.name+' er lagt inn. Du kan endre akkordene fritt.';
 });
 C('jamKey').onchange=e=>{changeContext(+e.target.value,scaleMode);updatePresetPreview();};C('jamMode').onchange=e=>{changeContext(centerKey,+e.target.value);updatePresetPreview();};
