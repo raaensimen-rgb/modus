@@ -83,3 +83,9 @@ html[data-theme=contrast] .site-header .nav-tooltip{background:#fff;color:#000;b
 .site-header .brand-arch{margin-right:10px}
 .site-header .brand-arch-end{margin-left:12px}
 @media(max-width:700px){.site-header .brand-arch{margin-right:8px}.site-header .brand-arch-end{margin-left:9px}}
+
+/* Final optical adjustment: icons frame MODUS closely without touching glyphs. */
+.site-header .brand{gap:4px}
+.site-header .brand-arch{margin-right:3px}
+.site-header .brand-arch-end{margin-left:4px}
+@media(max-width:700px){.site-header .brand-arch{margin-right:3px}.site-header .brand-arch-end{margin-left:4px}}
