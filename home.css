@@ -61,3 +61,9 @@ html[data-theme=contrast] .hero-actions .button-secondary{background:#fff;color:
 .founder-welcome-link:hover{border-color:currentColor}
 .founder-welcome-link:focus-visible{outline:2px solid currentColor;outline-offset:4px}
 @media(max-width:760px){.founder-welcome{grid-template-columns:1fr;gap:22px;margin:46px 20px 16px;padding:29px 24px}.founder-welcome-side{gap:5px}.founder-welcome-mark{display:none}.founder-welcome h2{margin-bottom:18px}.founder-welcome-content p{font-size:16px;line-height:1.75}.founder-welcome-content .founder-welcome-lead{font-size:18px;margin-bottom:21px}}
+
+/* Footer balance: retain the MODUS mark at left and center the motto
+   independently of optional editor and utility links at the right. */
+footer:has(> .footer-brand){position:relative}
+footer:has(> .footer-brand) > span:nth-child(2){position:absolute;left:50%;transform:translateX(-50%);width:max-content;max-width:46%;text-align:center}
+@media(max-width:700px){footer:has(> .footer-brand) > span:nth-child(2){position:static;transform:none;order:3;width:100%;max-width:none;text-align:center}}
