@@ -14,11 +14,14 @@
 .modus-premises-note strong{font-size:15px}
 .modus-premises-note p{font-size:14px;line-height:1.7;color:var(--muted,#b5bcb1);margin:10px 0 0}
 
-/* Temporary development shortcut: upper-right close button. Does not count as acceptance. */
-.modus-premises-close{position:absolute;top:12px;right:12px;display:grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid var(--line,#4c514d);border-radius:9px;background:transparent;color:var(--ink,#f1f1e9);font:400 26px/1 sans-serif;cursor:pointer;z-index:1}
-.modus-premises-close:hover{background:rgba(128,128,128,.14)}
-.modus-premises-close:focus-visible{outline:2px solid var(--accent,#a3b977);outline-offset:3px}
-.modus-premises-inner{padding-top:clamp(52px,7vw,64px)}
 
-/* Keep the temporary close control visible in the upper right. */
-.modus-premises-dialog .modus-premises-close{top:13px;right:13px;display:grid!important;visibility:visible!important;opacity:1!important;width:38px;height:38px;background:rgba(163,185,119,.13);color:var(--accent,#c4df86)!important;border:1px solid var(--accent,#c4df86);font-size:28px;line-height:1}
+/* Prominent required confirmation. No dismiss shortcut. */
+.modus-premises-inner{padding-top:clamp(24px,5vw,40px)}
+.modus-premises-check{display:flex;align-items:center;gap:15px;padding:17px 18px;margin:26px 0 16px;border:2px solid var(--accent,#b9d47f);border-radius:12px;background:rgba(163,185,119,.09);font-size:16px;font-weight:700;color:var(--ink,#f2f2ee);line-height:1.45;cursor:pointer;transition:background .15s,border-color .15s}
+.modus-premises-check:hover{background:rgba(163,185,119,.16)}
+.modus-premises-check:has(input:checked){background:rgba(163,185,119,.20)}
+.modus-premises-check:focus-within{outline:2px solid var(--accent,#b9d47f);outline-offset:3px}
+.modus-premises-check input{appearance:none;-webkit-appearance:none;width:27px;height:27px;min-width:27px;margin:0;flex-shrink:0;border:2px solid var(--accent,#b9d47f);border-radius:6px;background:transparent;display:grid;place-content:center;cursor:pointer}
+.modus-premises-check input:checked{background:var(--accent,#b9d47f)}
+.modus-premises-check input:checked::after{content:'✓';color:#121b0d;font-size:21px;font-weight:900;line-height:1}
+.modus-premises-confirm:disabled{opacity:.40}
