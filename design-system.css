@@ -214,3 +214,16 @@ body :is(.modus-feedback-form input,.modus-feedback-form textarea){font-size:15p
  :root{--modus-reading-body:15px}
  body :is(.reading-body,.reading-body p,.reading-body li){font-size:15px}
 }
+
+
+/* Learning-path landing page uses inline legacy styling; shared rules win. */
+body :is(.path-eyebrow,.path-kicker,.path-pill,.path-levels span){font-size:12px;line-height:1.5}
+body :is(.path-card p,.path-intro,.path-note){font-size:16px;line-height:1.75}
+body :is(.path-card a,.path-action,.path-levels strong){font-size:14px;line-height:1.6}
+/* Navigation helper copy and small shared controls. */
+body :is(.site-header .nav-panel small,.site-header .nav-tooltip,
+ .site-header .nav-membership,.site-header .nav-account){font-size:13px;line-height:1.5}
+body :is(.site-header .language-picker a){font-size:12px;min-height:32px}
+body :is(.site-header .nav-coming){font-size:10px}
+/* More comfortable text even where a component uses the legacy .tiny class. */
+body :is(.tiny,.click-label,.legend,.sound-note,.credits,.fret-panel .legend){font-size:13px;line-height:1.55}
