@@ -240,6 +240,76 @@
     }
   },
   {
+    "slug": "romertall-i-musikk",
+    "level": "beginner",
+    "topic": "Harmonikk",
+    "category": "harmony",
+    "title": "Romertall i musikk: forstå akkordene bak tallene",
+    "intro": "Hva betyr I, IV, V og ii–V–I? Lær først å lese romertallene, og oppdag hvordan de beskriver akkordenes plass i tonearten – uansett hvor du spiller.",
+    "art": "romans",
+    "practice": "teori.html#akkorder",
+    "practice_label": "Bygg akkordene selv i teorirommet",
+    "learning": {
+      "goals": [
+        "Lese romertallene I til X og forstå hvorfor IV betyr fire.",
+        "Finne akkordens skalatrinn og skille dur, moll og forminsket.",
+        "Oversette en progresjon fra romertall til akkorder i ulike tonearter.",
+        "Forstå forskjellen på romertall, akkordnavn og omvendinger."
+      ],
+      "prerequisites": "Du bør vite hva en toneart, en durskala og en dur- eller molltreklang er. Start gjerne med artiklene om intervaller og akkorder.",
+      "links": [
+        {
+          "slug": "toner-og-intervaller",
+          "label": "Toner og intervaller"
+        },
+        {
+          "slug": "bygg-akkorder-i-en-toneart",
+          "label": "Bygg akkordene i en toneart"
+        }
+      ]
+    },
+    "sections": [
+      [
+        "Først: en liten innføring i romertall",
+        "<p>Romertall er et eldre tallsystem som også brukes i musikkteori. Før vi analyserer en eneste akkord, trenger vi bare å kjenne noen få tegn: <strong>I betyr 1, V betyr 5 og X betyr 10</strong>. Ved å sette tegnene sammen kan vi skrive flere tall.</p><table><thead><tr><th>Romertall</th><th>Vanlig tall</th><th>Huskeregel</th></tr></thead><tbody><tr><td>I</td><td>1</td><td>Én ener</td></tr><tr><td>II</td><td>2</td><td>To enere</td></tr><tr><td>III</td><td>3</td><td>Tre enere</td></tr><tr><td>IV</td><td>4</td><td>Én før fem: 5 − 1</td></tr><tr><td>V</td><td>5</td><td>Fem</td></tr><tr><td>VI</td><td>6</td><td>Fem pluss én</td></tr><tr><td>VII</td><td>7</td><td>Fem pluss to</td></tr><tr><td>VIII</td><td>8</td><td>Fem pluss tre</td></tr><tr><td>IX</td><td>9</td><td>Én før ti: 10 − 1</td></tr><tr><td>X</td><td>10</td><td>Ti</td></tr></tbody></table><p>Når et mindre tegn står <em>foran</em> et større, trekkes det fra: <strong>IV = 4</strong> og <strong>IX = 9</strong>. Når det står etter, legges det til: <strong>VI = 6</strong>. I vanlig funksjonell harmoni bruker vi først og fremst I til VII, fordi vi bygger akkorder fra de sju skalatrinnene.</p>"
+      ],
+      [
+        "Akkordnavnet forteller hva – romertallet forteller hvor",
+        "<p>Se for deg en C-durskala: <strong>C–D–E–F–G–A–B</strong>. Vi kan bygge én treklang fra hvert trinn ved å ta annenhver tone. C–E–G blir C-dur, D–F–A blir D-moll, og slik fortsetter vi.</p><p>Et vanlig akkordnavn, som <strong>G</strong>, forteller hvilke toner som danner akkorden. Et romertall, som <strong>V</strong>, forteller hvor akkordens grunntone ligger <em>i tonearten vi analyserer</em>. G er V i C-dur, men I i G-dur. Det er nøyaktig derfor dette systemet er nyttig.</p><table><thead><tr><th>Trinn i C-dur</th><th>Akkord</th><th>Romertall</th></tr></thead><tbody><tr><td>1 · C</td><td>C</td><td><strong>I</strong></td></tr><tr><td>2 · D</td><td>Dm</td><td><strong>ii</strong></td></tr><tr><td>3 · E</td><td>Em</td><td><strong>iii</strong></td></tr><tr><td>4 · F</td><td>F</td><td><strong>IV</strong></td></tr><tr><td>5 · G</td><td>G</td><td><strong>V</strong></td></tr><tr><td>6 · A</td><td>Am</td><td><strong>vi</strong></td></tr><tr><td>7 · B</td><td>Bdim (B–D–F)</td><td><strong>vii°</strong></td></tr></tbody></table><div class=\"reading-example\"><span>C-dur: akkordrekke</span><strong>C → F → G → C</strong><span>Samme rekke som romertall</span><strong>I → IV → V → I</strong></div>"
+      ],
+      [
+        "Store og små bokstaver betyr noe",
+        "<p>Vi bruker en viktig konvensjon: <strong>store romertall</strong> betegner durtreklanger (<strong>I, IV, V</strong>), mens <strong>små romertall</strong> betegner molltreklanger (<strong>ii, iii, vi</strong>). Et lite sirkeltegn, <strong>°</strong>, betyr forminsket treklang: <strong>vii°</strong>. Et plusstegn, <strong>+</strong>, brukes for forstørret treklang, for eksempel III+.</p><p>Derfor er <strong>II</strong> ikke det samme som <strong>ii</strong>. Begge har grunntone på andre skalatrinn, men II er dur og ii er moll. I C-dur er Dm den diatoniske <strong>ii</strong>-akkorden. D-dur kan forekomme som <strong>II</strong>, men inneholder F♯ og ligger dermed utenfor C-durs vanlige diatoniske treklanger. Ofte vil vi undersøke om den har en særskilt harmonisk funksjon.</p><aside class=\"reading-note\"><strong>Husk:</strong> Tallet angir <em>skalatrinnet til akkordens grunntone</em>. Stor eller liten bokstav angir <em>akkordtypen</em>. Det er to forskjellige opplysninger.</aside>"
+      ],
+      [
+        "Flytt progresjonen – behold betydningen",
+        "<p>Ta akkordrekken <strong>C–Am–F–G</strong>. I C-dur er det <strong>I–vi–IV–V</strong>. Nå flytter vi den til G-dur. G-durs tonerekke er G–A–B–C–D–E–F♯. Samme trinn gir <strong>G–Em–C–D</strong>. Akkordnavnene har endret seg, men romertallene er identiske.</p><table><thead><tr><th>Toneart</th><th>I</th><th>vi</th><th>IV</th><th>V</th></tr></thead><tbody><tr><td>C-dur</td><td>C</td><td>Am</td><td>F</td><td>G</td></tr><tr><td>G-dur</td><td>G</td><td>Em</td><td>C</td><td>D</td></tr><tr><td>D-dur</td><td>D</td><td>Bm</td><td>G</td><td>A</td></tr></tbody></table><p>Dette er transponering i praksis. I stedet for å memorere hver låt som løsrevne akkordnavn kan du forstå forholdene mellom akkordene. På gitar kan du velge nye grep; på piano finner du de nye akkordtonene. Romertallene er det felles språket.</p>"
+      ],
+      [
+        "Hva betyr i–iv–V og ii–V–I?",
+        "<p>La oss bruke romertallene til å forstå to vanlige progresjoner. I C-dur er <strong>ii–V–I = Dm–G–C</strong>, eller <strong>Dm7–G7–Cmaj7</strong> med septimakkorder. Her bygger vi fra andre, femte og første trinn. Den siste akkorden er hjemmet i den aktuelle tonearten. Romertallene beskriver akkordforholdene; de forteller ikke automatisk hvilken modus du improviserer med.</p><p>I A-moll kan vi se <strong>i–iv–V = Am–Dm–E</strong>. Legg merke til at E er <strong>dur</strong>. A naturlig moll inneholder G, og ville gitt Em som en diatonisk <strong>v</strong>. Når G heves til G♯, får E-dur en sterkere dominantvirkning. Derfor er <strong>V</strong> vanlig i mollharmonikk. Romertallsanalyse må alltid ta hensyn til den faktiske akkorden og den musikalske konteksten.</p><p>En nyttig måte å lytte på: Spill C–F–G–C sakte, og legg merke til hvordan G vil tilbake mot C. Spill deretter Dm–G–C. Nå kommer du til det samme hjemmet via et nytt utgangspunkt.</p><p><a href=\"ii-v-i-kadensen.html\">Les videre: ii–V–I – hvorfor akkorder vil hjem ↗</a></p>"
+      ],
+      [
+        "Videre: septimer, omvendinger og vanlige feiltolkninger",
+        "<p>Romertall kan også vise flere detaljer. <strong>V7</strong> betyr en septimakkord på femte trinn, for eksempel G7 i C-dur. Sjueren viser en akkordutvidelse, ikke at du har gått til sjuende skalatrinn. <strong>vii°</strong> betyr en forminsket treklang på sjuende trinn; sirkelen er ikke et nulltall.</p><p>Et lite, men viktig skille: <strong>I6</strong> i tradisjonell generalbass-/romertallsanalyse betyr vanligvis en <em>første omvending</em> av tonikatreklangen, for eksempel C/E i C-dur. Det betyr <strong>ikke</strong> automatisk en C6-akkord med A lagt til. <strong>I6/4</strong> betyr andre omvending, C/G. I enkelte moderne pop-/jazzskjemaer brukes andre symbolsystemer; se alltid hvilken notasjon analysen følger.</p><p>På samme måte er <strong>I–IV–V</strong> ikke en beskjed om å spille ionisk, lydisk og miksolydisk etter tur. Tallene identifiserer akkordene relativt til en toneart. En modal merkelapp og et romertall svarer på forskjellige musikalske spørsmål.</p><aside class=\"reading-note\">Forskjellige lærebøker kan ha litt ulike skrivemåter, særlig for septimakkorder og kromatisk harmoni. Her bruker vi store/små romertall for dur/moll og vanlig funksjonell romertallsanalyse. Sjekk alltid tonearten først.</aside>"
+      ],
+      [
+        "Arbeidsmetoden vår: hør → forutsi → spill → forklar → endre",
+        "<p><strong>Hør:</strong> Spill I–IV–V–I i C-dur og prøv å kjenne igjen hjemkomsten. <strong>Forutsi:</strong> Før du spiller i G-dur, si høyt hvilke akkorder I, IV og V må bli. <strong>Spill:</strong> Kontroller med gitar eller piano. <strong>Forklar:</strong> Hvorfor er D-dur V i G-dur, men II i C-dur? <strong>Endre:</strong> Skriv om I–vi–IV–V til en ny toneart, og lag en kort melodi som lander på en akkordtone ved hvert skifte.</p><p>Hvis du kan gjøre dette, har du flyttet deg fra å <em>kunne symbolene</em> til å <em>bruke harmonikken</em>. Romertall er ikke musikk i seg selv; de er en måte å se mønstrene du allerede hører og spiller.</p><p><strong>Faglige referanser:</strong> <a href=\"https://viva.pressbooks.pub/openmusictheory/chapter/roman-numerals/\">Open Music Theory – Roman Numerals</a> og <a href=\"https://www.musictheory.net/lessons/44\">musictheory.net – Roman Numeral Analysis: Triads</a>. Forklaringene og øvingsrekkefølgen er tilpasset MODUS.</p>"
+      ]
+    ],
+    "exercise": "Analyser C–Am–F–G i C-dur som romertall. Flytt deretter progresjonen til G-dur uten å se på tabellen. Kontroller med gitar eller piano, og forklar hvorfor Em må være vi i G-dur.",
+    "practice_steps": [
+      "Les: Si høyt I, II, III, IV, V, VI, VII og oversett til tallene 1–7.",
+      "Bygg: Finn C, Dm, Em, F, G, Am og Bdim på instrumentet. Merk hver med riktig romertall.",
+      "Flytt: Spill I–vi–IV–V i både C-dur og G-dur. Hør og forklar hva som beholdes."
+    ],
+    "next_step": {
+      "slug": "ii-v-i-kadensen",
+      "reason": "Bruk romertallene til å høre og forklare en funksjonell kadens i flere tonearter."
+    }
+  },
+  {
     "slug": "ii-v-i-kadensen",
     "level": "intermediate",
     "topic": "Harmonikk",
