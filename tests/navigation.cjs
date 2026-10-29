@@ -20,6 +20,9 @@ assert(dropdownMarkup.includes('>Studier<span class="nav-chevron"'),'Studies dro
 for(const label of ['Start å lære','Hele utdanningsløpet','Leksjoner og øvelser','Utforsk musikkteori']) {
  assert(dropdownMarkup.includes(label),'missing descriptive label: '+label);
 }
+assert(dropdownMarkup.includes('href="modus-plus.html" class="nav-membership"'),'membership preview must remain navigable');
+assert(dropdownMarkup.includes('class="nav-coming" aria-hidden="true">Kommer</span>'),'membership must show coming-soon status');
+assert(dropdownMarkup.includes('Kjøp er ikke åpnet.'),'membership preview tooltip must clarify no purchases');
 const navStyles=fs.readFileSync('dist/navigation.css','utf8');
 assert(dropdownMarkup.includes('class="nav-tooltip" aria-hidden="true"'),'main links need explanatory hover tips');
 assert(dropdownMarkup.includes('aria-description="'),'hover tips must have an accessible equivalent');
