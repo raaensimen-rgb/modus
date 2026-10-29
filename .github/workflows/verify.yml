@@ -32,3 +32,13 @@ jobs:
         run: npm run build
       - name: Validate site and music features
         run: npm test
+
+      - name: Upload individual test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: modus-test-results
+          path: |
+            test-results/test-results.json
+            test-results/test-results.md
+          if-no-files-found: warn
