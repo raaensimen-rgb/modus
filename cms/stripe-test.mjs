@@ -41,6 +41,7 @@ export async function handleStripeTestRequest(request,env){
  if(request.method!=="POST")return json({error:"Method not allowed"},405);
  const route=new URL(request.url).pathname;
  if(route!=="/api/stripe/test-checkout"&&route!=="/api/stripe/test-portal")return json({error:"Not found"},404);
+ if(route.endsWith("test-checkout"))return json({error:"Usage-based checkout requires post-period billing architecture"},501);
  const user=await authenticate(request,env);if(!user)return json({error:"Sign in required"},401);
  try{
   const customer=await getOrCreateCustomer(env,user);
