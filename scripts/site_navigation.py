@@ -6,7 +6,7 @@ from html import escape
 
 NAV_ITEMS = (
     ('home', './', 'Hjem'),
-    ('jam', 'backingtracks.html', 'Backingtracks'),
+    ('jam', 'backingtracks.html', 'MODUS JAM'),
     ('theory', 'teori.html', 'Teorirommet'),
     ('chords', 'akkorder.html', 'Akkordverksted'),
     ('articles', 'artikler.html', 'Artikler'),
@@ -49,7 +49,7 @@ def render_header(prefix='', active='home'):
                 f'<button type="button" class="nav-trigger" id="nav-{key}" aria-expanded="false" aria-controls="nav-panel-{key}">{label}<span class="nav-chevron" aria-hidden="true"></span></button>'
                 f'<div class="nav-panel" id="nav-panel-{key}" aria-labelledby="nav-{key}" hidden>{links}</div></div>')
     play = group('play', 'Spill', (
-        ('jam', 'backingtracks.html', 'Backingtracks', 'Spill med trommer, bass og piano.'),
+        ('jam', 'backingtracks.html', 'MODUS JAM', 'Spill med trommer, bass og piano.'),
         ('chords', 'akkorder.html', 'Akkordverksted', 'Bygg akkordrekker og utforsk grep.'),
     ))
     learn = group('learn', 'Studier', (
