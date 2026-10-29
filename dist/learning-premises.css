@@ -1,0 +1,27 @@
+/* Learning premise confirmation */
+.modus-premises-dialog{position:relative;box-sizing:border-box;width:min(94vw,570px);max-height:min(85vh,740px);overflow-y:auto;border:1px solid var(--line,#4c514d);border-radius:18px;padding:0;color:var(--ink,#f1f1e9);background:var(--surface,#1a1c19);box-shadow:0 25px 100px #0008}
+.modus-premises-dialog::backdrop{background:rgba(4,8,5,.76);backdrop-filter:blur(5px)}
+.modus-premises-inner{padding:clamp(24px,5vw,40px);font-family:inherit}
+.modus-premises-eyebrow{font-size:11px;letter-spacing:.19em;color:var(--accent,#a3b977);font-weight:700}
+.modus-premises-inner h2{font-size:clamp(24px,4vw,34px);line-height:1.16;margin:15px 0 18px;letter-spacing:-.035em;color:var(--ink,#f2f2ee)}
+.modus-premises-inner p{font-size:15px;line-height:1.75;color:var(--muted,#b5bcb1)}
+.modus-premises-check{display:flex;align-items:flex-start;gap:12px;margin:22px 0 16px;cursor:pointer;font-size:14px;line-height:1.55}
+.modus-premises-check input{margin-top:4px;accent-color:var(--accent,#a3b977);width:18px;height:18px;flex-shrink:0}
+.modus-premises-confirm{width:100%;padding:15px 20px;border:0;border-radius:9px;background:var(--accent,#a3b977);color:#101b0c;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.modus-premises-confirm:disabled{cursor:not-allowed;opacity:.35}
+.modus-premises-inner .modus-premises-fine{font-size:12px;margin-top:15px}
+.modus-premises-note{box-sizing:border-box;max-width:1200px;margin:28px auto;padding:20px 25px;border:1px solid var(--line,#4c514d);border-left:3px solid var(--accent,#a3b977);border-radius:10px;background:var(--surface,#1a1c19);color:var(--ink,#f2f2ee)}
+.modus-premises-note strong{font-size:15px}
+.modus-premises-note p{font-size:14px;line-height:1.7;color:var(--muted,#b5bcb1);margin:10px 0 0}
+
+
+/* Prominent required confirmation. No dismiss shortcut. */
+.modus-premises-inner{padding-top:clamp(24px,5vw,40px)}
+.modus-premises-check{display:flex;align-items:center;gap:15px;padding:17px 18px;margin:26px 0 16px;border:2px solid var(--accent,#b9d47f);border-radius:12px;background:rgba(163,185,119,.09);font-size:16px;font-weight:700;color:var(--ink,#f2f2ee);line-height:1.45;cursor:pointer;transition:background .15s,border-color .15s}
+.modus-premises-check:hover{background:rgba(163,185,119,.16)}
+.modus-premises-check:has(input:checked){background:rgba(163,185,119,.20)}
+.modus-premises-check:focus-within{outline:2px solid var(--accent,#b9d47f);outline-offset:3px}
+.modus-premises-check input{appearance:none;-webkit-appearance:none;width:27px;height:27px;min-width:27px;margin:0;flex-shrink:0;border:2px solid var(--accent,#b9d47f);border-radius:6px;background:transparent;display:grid;place-content:center;cursor:pointer}
+.modus-premises-check input:checked{background:var(--accent,#b9d47f)}
+.modus-premises-check input:checked::after{content:'✓';color:#121b0d;font-size:21px;font-weight:900;line-height:1}
+.modus-premises-confirm:disabled{opacity:.40}
