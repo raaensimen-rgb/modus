@@ -5,7 +5,7 @@ from article_library import TOPICS, ORDER, render_library
 ROOT=Path(__file__).resolve().parents[1];DIST=ROOT/'dist';ARTICLES=json.loads((ROOT/'content/articles.json').read_text())
 QUIZZES=json.loads((ROOT/'content/article-quizzes.json').read_text())
 LEVELS={'beginner':('Nybegynner','Start med byggesteinene.'),'intermediate':('Videre','Se de større sammenhengene.'),'advanced':('Fordypning','Utforsk flere nyanser.')}
-ALT={'circle':'Kvintsirkelen med durtonearter ytterst, relativ moll innenfor og antall faste fortegn. Med klokken: C, G, D, A, E, B, F♯ eller G♭, D♭, A♭, E♭, B♭, F.', 'intervals':'C og G, en ren kvint med sju halvtoners avstand','triads':'C-dur med C E G sammenlignet med C-moll med C E♭ G','melody':'En enkel melodisk frase med E G B og en pause','modes':'E dorisk med stor sekst C♯ fremhevet', 'sevenmodes':'De sju diatoniske modusene fra ett C-dur-tonemateriale: C ionisk, D dorisk, E frygisk, F lydisk, G miksolydisk, A eolisk og B lokrisk','romans':'Romertallene I, ii, iii, IV, V, vi og vii° under de sju akkordene C, Dm, Em, F, G, Am og Bdim i C-dur','cadence':'Dm7 G7 Cmaj7 med romertall ii7 V7 Imaj7','sevenths':'Cmaj7 bygget av C E G B, trinnene 1 3 5 7','harmonic':'A harmonisk moll og E frygisk dominant med samme toner og ulikt sentrum','voices':'C E G beholdes mens B går til A, fra Cmaj7 til Am7/C','rhythm':'Sju åttendedeler gruppert som to pluss to pluss tre'}
+ALT={'circle':'Kvintsirkelen med durtonearter ytterst, relativ moll innenfor og antall faste fortegn. Med klokken: C, G, D, A, E, B, F♯ eller G♭, D♭, A♭, E♭, B♭, F.', 'intervals':'C og G, en ren kvint med sju halvtoners avstand','triads':'C-dur med C E G sammenlignet med C-moll med C E♭ G', 'triadfamily':'Treklangstyper fra C: C E G, C E♭ G, C E♭ G♭ og C E G♯ med formler og intervallkvaliteter','melody':'En enkel melodisk frase med E G B og en pause','modes':'E dorisk med stor sekst C♯ fremhevet', 'sevenmodes':'De sju diatoniske modusene fra ett C-dur-tonemateriale: C ionisk, D dorisk, E frygisk, F lydisk, G miksolydisk, A eolisk og B lokrisk','romans':'Romertallene I, ii, iii, IV, V, vi og vii° under de sju akkordene C, Dm, Em, F, G, Am og Bdim i C-dur','cadence':'Dm7 G7 Cmaj7 med romertall ii7 V7 Imaj7','sevenths':'Cmaj7 bygget av C E G B, trinnene 1 3 5 7','harmonic':'A harmonisk moll og E frygisk dominant med samme toner og ulikt sentrum','voices':'C E G beholdes mens B går til A, fra Cmaj7 til Am7/C','rhythm':'Sju åttendedeler gruppert som to pluss to pluss tre'}
 ALT.update({'diatonic':'G-durtreklanger bygget fra G-durskalaen: G, Am, Bm, C, D, Em og F♯dim.','targets':'Akkordtonene i Em, C, G og D ligger i ett felles toneutvalg.','parallel':'E eolisk og E dorisk sammenlignet med C og C♯ fremhevet.'})
 def esc(s):return html.escape(str(s),quote=True)
 def txt(x,y,s,size=24,color='#dce9cd',weight=500,anchor='middle'):
@@ -57,6 +57,16 @@ def illustration(kind):
   s+=txt(400,68,'AVSTAND BLIR TIL KLANG',14,'#a9bd96',500)+f'<path d="M205 228 Q400 50 595 228" stroke="#8fab6c" stroke-width="2" fill="none"/><line x1="200" y1="250" x2="600" y2="250" stroke="#576d45" stroke-width="2"/>'
   for i in range(8):s+=f'<circle cx="{200+i*400/7}" cy="250" r="4" fill="#76915a"/>'
   s+=node(200,250,'C',r=44)+node(600,250,'G','#d5b979',44)+txt(400,210,'7 halvtoner',23)+txt(400,355,'REN KVINT',18,'#d7f48c',600)
+ elif kind=='triadfamily':
+  s+=txt(400,58,'FIRE TREKLANGSTYPER',22,'#d7f48c',600)
+  triads=[('DUR','C · E · G','1 · 3 · 5'),('MOLL','C · E♭ · G','1 · ♭3 · 5'),('FORMINSKET','C · E♭ · G♭','1 · ♭3 · ♭5'),('FORSTØRRET','C · E · G♯','1 · 3 · ♯5')]
+  for i,(name,notes,formula) in enumerate(triads):
+   x=28+i*196
+   s+=f'<rect x="{x}" y="119" width="181" height="205" rx="12" fill="#23311c" stroke="#627e4b"/>'
+   s+=txt(x+90,156,name,15,'#d7f48c',600)
+   s+=txt(x+90,220,notes,24,'#e3efd7')
+   s+=txt(x+90,281,formula,19,'#d5b979')
+  s+=txt(400,390,'SAMME GRUNNTONE · ULIKE TERSER OG KVINTER',16,'#b8cda5')
  elif kind=='triads':
   s+=txt(225,83,'DUR',18,'#d7f48c',600)+txt(575,83,'MOLL',18,'#d5b979',600)
   for x in [80,430]:s+=f'<rect x="{x}" y="118" width="290" height="220" rx="16" fill="#20301b" stroke="#526b3e"/>'
