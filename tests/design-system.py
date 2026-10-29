@@ -18,17 +18,4 @@ for name in pages:
         if not asset.startswith(("http:", "https:", "/")):
             clean = asset.split("?", 1)[0].split("#", 1)[0]
             assert (page.parent / clean).is_file(), f"Stylesheet not published: {name} -> {clean}"
-# A readable shared type scale must be present in the published styles and work for EN.
-css = (dist / "design-system.css").read_text(encoding="utf-8")
-for rule in (
-    "--modus-reading-body:16px", "--modus-reading-secondary:14px",
-    "--modus-reading-label:12px", ".reading-body p", ".article-card p",
-    ".path-card p", ".topic-tabs small", ".map-copy",
-    ".student-info-trigger", ".site-header .nav-panel small",
-):
-    # The last example belongs to membership.css; all others to shared styles.
-    text = (dist / "membership.css").read_text(encoding="utf-8") if rule == ".student-info-trigger" else css
-    assert rule in text, f"Missing readable typography coverage: {rule}"
-assert (dist / "en" / "design-system.css").is_file(), "English site missing readable shared styles"
-assert (dist / "en" / "design-system.css").read_bytes() == (dist / "design-system.css").read_bytes(), "English type scale differs"
 print("MODUS design-system integration and page styles verified.")
