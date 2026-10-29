@@ -93,7 +93,7 @@ function setContextHelp(enabled){
  helpButton.title=enabled?'Klikk for å avslutte. Hold pekeren over kontroller for forklaring.':'Aktiver forklaringer ved å holde pekeren over kontroller.';
  showHelp(false);
  closeContextTip();
- if(enabled){contextualTip.textContent='Hjelp er aktiv. Hold pekeren over en knapp eller et valg.';contextualTip.hidden=false;contextualTip.style.left='auto';contextualTip.style.right='18px';contextualTip.style.top='18px';}
+ if(enabled)openContextTip(helpButton,'Hjelp er aktiv. Hold pekeren over en knapp eller et valg.');
  document.documentElement.classList.toggle('modus-context-help-active',enabled);
 }
 helpButton.addEventListener('click',()=>setContextHelp(!contextualHelp));
