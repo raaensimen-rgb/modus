@@ -41,14 +41,17 @@ assert ".reading-body td,.reading-body th{font-size:15px" in article_css
 
 # Brand consistency: public navigation uses the wordmark; editor gets the monogram.
 assert (dist / "modus-mark.svg").is_file(), "Missing MODUS monogram asset"
+assert (dist / "modus-arch.svg").is_file(), "Missing primary MODUS Arch asset"
 for name in pages:
     html = (dist / name).read_text(encoding="utf-8")
     assert 'class="brand"' in html, f"Missing public logo: {name}"
+    assert 'class="brand-arch"' in html, f"Primary Arch logo missing: {name}"
     assert '<span class="brandmark"' not in html, f"Legacy monogram in primary navigation: {name}"
     assert 'rel="icon" type="image/svg+xml"' in html, f"Missing branded favicon: {name}"
 editor = (dist / "redaktor.html").read_text(encoding="utf-8")
 assert 'class="brand editor-brand"' in editor, "Editor is missing branded header"
 assert 'class="editor-brandmark"' in editor, "Editor monogram missing"
+assert 'src="modus-arch.svg"' in editor, "Editor must use the Arch mark"
 assert 'href="modus-mark.svg"' in editor, "Editor favicon missing"
 print("MODUS public wordmark, editor monogram and branded icon verified.")
 
