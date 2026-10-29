@@ -2,16 +2,17 @@ const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/st
 const box={window:{},URL,Intl};vm.createContext(box);
 for(const file of ['membership-config.js','membership-model.js'])vm.runInContext(fs.readFileSync('dist/'+file,'utf8'),box);
 const M=box.window.ModusMemberships,C=box.window.MODUS_MEMBERSHIP_CONFIG;
+assert.equal(M.quote(C,'elev','month').amount,39);assert.equal(M.quote(C,'elev','year').amount,390);assert.equal(M.quote(C,'elev','year').saving,78);
 assert.equal(M.quote(C,'plus','month').amount,79);assert.equal(M.quote(C,'plus','year').amount,790);
 assert.equal(M.quote(C,'studio','year').saving,258);
-for(const id of ['plus','studio'])for(const p of ['month','year'])assert.equal(M.checkout(C,id,p),null);
+for(const id of ['elev','plus','studio'])for(const p of ['month','year'])assert.equal(M.checkout(C,id,p),null);
 for(const u of ['javascript:alert(1)','http://buy.stripe.com/a','https://buy.stripe.com.evil.test/a','https://evil.test/a','https://x@buy.stripe.com/a','https://buy.stripe.com:444/a'])assert.equal(M.stripeUrl(u),null);
 assert.equal(M.stripeUrl('https://billing.stripe.com/p/login/abc',true),'https://billing.stripe.com/p/login/abc');
 assert.equal(M.stripeUrl('https://billing.stripe.com/p/session/abc',true),null);
 // Fake URLs are isolated fixtures; never written into production configuration.
 const fixture=JSON.parse(JSON.stringify(C));fixture.salesOpen=true;fixture.termsUrl='/vilkar';fixture.privacyUrl='/personvern';fixture.supportEmail='test@example.test';fixture.customerPortal='https://billing.stripe.com/p/login/fixture';
-for(const id of ['plus','studio']){fixture.plans[id].contentReady=true;fixture.plans[id].accessReady=true;for(const p of ['month','year'])fixture.plans[id].checkout[p]='https://buy.stripe.com/fixture_'+id+'_'+p;}
-for(const id of ['plus','studio'])for(const p of ['month','year'])assert.equal(M.checkout(fixture,id,p),'https://buy.stripe.com/fixture_'+id+'_'+p);
+for(const id of ['elev','plus','studio']){fixture.plans[id].contentReady=true;fixture.plans[id].accessReady=true;for(const p of ['month','year'])fixture.plans[id].checkout[p]='https://buy.stripe.com/fixture_'+id+'_'+p;}
+for(const id of ['elev','plus','studio'])for(const p of ['month','year'])assert.equal(M.checkout(fixture,id,p),'https://buy.stripe.com/fixture_'+id+'_'+p);
 fixture.plans.plus.checkout.month='https://buy.stripe.com/test_fixture';assert.equal(M.checkout(fixture,'plus','month'),null);
 fixture.plans.studio.accessReady=false;assert.equal(M.checkout(fixture,'studio','year'),null);
 fixture.termsUrl='//evil.test';assert.equal(M.checkout(fixture,'plus','year'),null);
@@ -23,11 +24,15 @@ assert.match(membershipHTML,/<h2 class="membership-hero-subtitle">Mer rom for <e
 assert.match(membershipHTML, /<title>MODUS\+ · Medlemskap og priser<\/title>/,'Update page title');
 assert.match(membershipCSS, /\.membership-hero \.membership-hero-subtitle/,'Subtitle needs an explicit smaller typographic style');
 
-for(const plan of ['plus','studio']){
+for(const plan of ['elev','plus','studio']){
  const opening=new RegExp('<article class="price-card[^"]*" data-plan="'+plan+'"><span class="plan-coming-badge">Kommer</span>');
  assert.match(membershipHTML,opening,'Premium plan '+plan+' must clearly show coming-soon status');
 }
 assert.match(membershipHTML,/<article class="price-card free-card">/,'Free plan stays available');
+assert(membershipHTML.indexOf('data-plan="elev"')>membershipHTML.indexOf('Modus Fri'));
+assert(membershipHTML.indexOf('data-plan="elev"')<membershipHTML.indexOf('data-plan="plus"'));
+assert.match(membershipHTML,/Planlagt · alt i Elev, og/,'Modus+ includes Elev rather than duplicating it');
+assert.match(membershipCSS,/grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/,'Four pricing cards should use four columns on wide screens');
 assert.match(membershipCSS,/\.plan-coming-badge/,'Coming-soon badge must be styled');
 assert.match(membershipHTML,/Se Modus\+ →/,'Premium tier preview remains accessible');
 console.log('Passed: membership amounts, annual savings, four checkout routes, blocked unconfigured sales, test links and unsafe URLs.');
