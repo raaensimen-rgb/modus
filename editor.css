@@ -33,3 +33,8 @@
 @media(max-width:650px){.editor-top .editor-brandmark{width:31px;height:29px}}
 
 .editor-top .editor-brandmark{color:#d7f48c;overflow:visible}
+
+/* Match the public Arch signature and its comfortable separation. */
+.editor-top .editor-brand{gap:0}
+.editor-top .editor-brandmark{width:30px;height:28px;flex:none;margin-right:13px;color:#d7f48c}
+@media(max-width:650px){.editor-top .editor-brandmark{width:27px;height:25px;margin-right:11px}}
