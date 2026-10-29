@@ -5,7 +5,7 @@ from article_library import TOPICS, ORDER, render_library
 ROOT=Path(__file__).resolve().parents[1];DIST=ROOT/'dist';ARTICLES=json.loads((ROOT/'content/articles.json').read_text())
 QUIZZES=json.loads((ROOT/'content/article-quizzes.json').read_text())
 LEVELS={'beginner':('Nybegynner','Start med byggesteinene.'),'intermediate':('Videre','Se de større sammenhengene.'),'advanced':('Fordypning','Utforsk flere nyanser.')}
-ALT={'circle':'Kvintsirkelen med durtonearter ytterst, relativ moll innenfor og antall faste fortegn. Med klokken: C, G, D, A, E, B, F♯ eller G♭, D♭, A♭, E♭, B♭, F.', 'intervals':'C og G, en ren kvint med sju halvtoners avstand','triads':'C-dur med C E G sammenlignet med C-moll med C E♭ G','melody':'En enkel melodisk frase med E G B og en pause','modes':'E dorisk med stor sekst C♯ fremhevet','cadence':'Dm7 G7 Cmaj7 med romertall ii7 V7 Imaj7','sevenths':'Cmaj7 bygget av C E G B, trinnene 1 3 5 7','harmonic':'A harmonisk moll og E frygisk dominant med samme toner og ulikt sentrum','voices':'C E G beholdes mens B går til A, fra Cmaj7 til Am7/C','rhythm':'Sju åttendedeler gruppert som to pluss to pluss tre'}
+ALT={'circle':'Kvintsirkelen med durtonearter ytterst, relativ moll innenfor og antall faste fortegn. Med klokken: C, G, D, A, E, B, F♯ eller G♭, D♭, A♭, E♭, B♭, F.', 'intervals':'C og G, en ren kvint med sju halvtoners avstand','triads':'C-dur med C E G sammenlignet med C-moll med C E♭ G','melody':'En enkel melodisk frase med E G B og en pause','modes':'E dorisk med stor sekst C♯ fremhevet', 'sevenmodes':'De sju diatoniske modusene fra ett C-dur-tonemateriale: C ionisk, D dorisk, E frygisk, F lydisk, G miksolydisk, A eolisk og B lokrisk','cadence':'Dm7 G7 Cmaj7 med romertall ii7 V7 Imaj7','sevenths':'Cmaj7 bygget av C E G B, trinnene 1 3 5 7','harmonic':'A harmonisk moll og E frygisk dominant med samme toner og ulikt sentrum','voices':'C E G beholdes mens B går til A, fra Cmaj7 til Am7/C','rhythm':'Sju åttendedeler gruppert som to pluss to pluss tre'}
 ALT.update({'diatonic':'G-durtreklanger bygget fra G-durskalaen: G, Am, Bm, C, D, Em og F♯dim.','targets':'Akkordtonene i Em, C, G og D ligger i ett felles toneutvalg.','parallel':'E eolisk og E dorisk sammenlignet med C og C♯ fremhevet.'})
 def esc(s):return html.escape(str(s),quote=True)
 def txt(x,y,s,size=24,color='#dce9cd',weight=500,anchor='middle'):
@@ -59,6 +59,17 @@ def illustration(kind):
   s+='<path d="M130 270 C220 270 210 210 295 210 S385 140 465 140 S540 210 615 210" fill="none" stroke="#c4dd9a" stroke-width="2"/>'
   for x,y,n in [(130,270,'E'),(295,210,'G'),(465,140,'B'),(615,210,'G')]:s+=node(x,y,n,r=25)
   s+=txt(400,373,'SPILL · VENT · LYTT · SVAR',18,'#d7f48c',600)
+ elif kind=='sevenmodes':
+  s+=txt(400,52,'ETT TONEUTVALG · SJU SENTRE',20,'#d7f48c',600)+txt(400,81,'C · D · E · F · G · A · B',20,'#c7d7b5')
+  modes=[('IONISK','C','1 2 3 4 5 6 7','DUR'),('DORISK','D','1 2 ♭3 4 5 6 ♭7','6'),('FRYGISK','E','1 ♭2 ♭3 4 5 ♭6 ♭7','♭2'),('LYDISK','F','1 2 3 ♯4 5 6 7','♯4'),('MIKSOLYDISK','G','1 2 3 4 5 6 ♭7','♭7'),('EOLISK','A','1 2 ♭3 4 5 ♭6 ♭7','MOLL'),('LOKRISK','B','1 ♭2 ♭3 4 ♭5 ♭6 ♭7','♭5')]
+  for i,(mode,root,formula,colour) in enumerate(modes):
+   x=23+i*110
+   s+=f'<rect x="{x}" y="118" width="103" height="220" rx="11" fill="#23311c" stroke="#536e43"/>'
+   s+=txt(x+51,155,mode,11,'#c9d9b5',600)
+   s+=txt(x+51,219,root,39,'#d7f48c',600)
+   s+=txt(x+51,260,colour,15,'#d5b979',600)
+   s+=txt(x+51,309,formula,7,'#dde7d1')
+  s+=txt(400,386,'TONALT SENTRUM + INTERVALLER = NY MODAL KARAKTER',15,'#b8cda5')
  elif kind=='modes':
   s+=txt(400,91,'E DORISK',30,'#e2f0d1',500)
   for i,n in enumerate(['E','F♯','G','A','B','C♯','D']):s+=pill(132+i*78,170,n,'#d5b979' if i==5 else '#d7f48c' if i==0 else '#2b3d23','#182216' if i in [0,5] else '#dce9cd')
