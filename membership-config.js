@@ -9,6 +9,7 @@ window.MODUS_MEMBERSHIP_CONFIG = {
   plans: {
     elev: {
       name: 'Modus Elev', monthly: 39, yearly: 390,
+      verificationReady: false, // Student checkout requires approved server-side eligibility enforcement.
       contentReady: false, accessReady: false,
       checkout: { month: '', year: '' }
     },
