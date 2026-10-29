@@ -89,3 +89,22 @@ html[data-theme=contrast] .site-header .nav-tooltip{background:#fff;color:#000;b
 .site-header .brand-arch{margin-right:3px}
 .site-header .brand-arch-end{margin-left:4px}
 @media(max-width:700px){.site-header .brand-arch{margin-right:3px}.site-header .brand-arch-end{margin-left:4px}}
+
+/* Unified header typography: use the MODUS wordmark's Manrope family
+   across navigation and controls while preserving visual hierarchy. */
+.site-header .site-nav,
+.site-header .site-nav > a,
+.site-header .nav-trigger,
+.site-header .header-tools,
+.site-header .nav-membership,
+.site-header .nav-coming,
+.site-header .nav-account,
+.site-header .language-picker,
+.site-header .language-picker a,
+.site-header .theme-picker,
+.site-header .theme-picker button {
+  font-family:Manrope,sans-serif;
+}
+.site-header .site-nav > a,
+.site-header .nav-trigger {font-weight:500;letter-spacing:-.015em}
+.site-header .nav-account {font-weight:600}
