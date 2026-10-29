@@ -92,4 +92,12 @@ assert.match(membershipHTML,/id="dvalePurchaseTitle"/,'Dormancy conditions must 
 assert.match(membershipHTML,/Neste automatiske fornyelse stoppes/,'Explain the effect after inactivity before checkout');
 assert.match(membershipHTML,/Planlagt ordning – ikke aktiv før abonnementene lanseres/,'Unreleased functionality must be clearly marked');
 assert.match(membershipJS,/dvaleBillingClarification/,'The disclaimer should adapt to yearly and monthly billing');
+const heroStart=membershipHTML.indexOf('<section class="membership-hero"');
+const heroEnd=membershipHTML.indexOf('</section>',heroStart);
+const heroDvalePosition=membershipHTML.indexOf('class="hero-dvale-notice"');
+assert(heroDvalePosition>heroStart&&heroDvalePosition<heroEnd,'Dvale reassurance must appear above pricing inside hero');
+assert(heroDvalePosition<membershipHTML.indexOf('class="pricing-grid"'),'Dvale terms must be visible before plan selection');
+assert.match(membershipHTML,/30 dager uten bruk\? Neste fornyelse stoppes/,'Hero must explain the 30-day rule');
+assert.match(membershipHTML,/MODUS Dvale <span>· Planlagt<\/span>/,'Hero must disclose that the benefit is not live');
+assert.match(membershipCSS,/\.hero-dvale-notice\{display:flex/,'Early reassurance must be styled');
 console.log('Passed: membership amounts, annual savings, four checkout routes, blocked unconfigured sales, test links and unsafe URLs.');
