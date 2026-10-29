@@ -135,3 +135,32 @@ html[data-theme=contrast] .price-card[data-plan] .plan-coming-badge{background:#
  .membership-faq summary{font-size:15px}
  .student-info-dialog .student-info-lead{font-size:15px}
 }
+
+
+/* Align pricing cards as one comparison table, not four unrelated vertical stacks.
+   Shared subgrid rows keep headings, prices, actions and feature lists level,
+   including the optional parent/teacher link in the Elev plan. */
+@media(min-width:761px){
+ .pricing-grid{row-gap:0}
+ .pricing-grid>.price-card{
+   display:grid;
+   grid-template-columns:minmax(0,1fr);
+   grid-template-rows:subgrid;
+   grid-row:span 11;
+   align-content:stretch;
+ }
+ .pricing-grid>.price-card .card-kicker{grid-row:1;min-height:0;margin:0;padding:0 0 12px}
+ .pricing-grid>.price-card h3{grid-row:2;margin:0;padding:0 0 13px}
+ .pricing-grid>.price-card .card-description{grid-row:3;min-height:0;margin:0;padding:0 0 13px}
+ .pricing-grid>.price-card .student-info-trigger{grid-row:4;align-self:start;margin:0;padding:0 0 13px}
+ .pricing-grid>.price-card .price{grid-row:5;min-height:0;align-self:start;padding:0 0 7px}
+ .pricing-grid>.price-card .cost-note{grid-row:6;min-height:0;margin:0;padding:0 0 16px}
+ .pricing-grid>.price-card .plan-action{grid-row:7;align-self:start;min-height:46px}
+ .pricing-grid>.price-card .feature-label{grid-row:8;margin:22px 0 0;padding:19px 0 12px}
+ .pricing-grid>.price-card ul{grid-row:9;margin:0}
+ .pricing-grid>.price-card .student-eligibility-note{grid-row:10;align-self:start;margin:17px 0 0}
+ .pricing-grid>.price-card .plan-state{grid-row:11;align-self:end;margin:17px 0 0}
+}
+@media(min-width:761px) and (max-width:1399px){
+ .pricing-grid{row-gap:26px}
+}
