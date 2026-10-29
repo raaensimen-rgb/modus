@@ -38,4 +38,18 @@ assert ".reading-body p," in article_css and ".reading-body li," in article_css
 assert "font-size:18px;" in article_css
 assert ".reading-body table{font-size:16px" in article_css
 assert ".reading-body td,.reading-body th{font-size:15px" in article_css
+
+# Brand consistency: public navigation uses the wordmark; editor gets the monogram.
+assert (dist / "modus-mark.svg").is_file(), "Missing MODUS monogram asset"
+for name in pages:
+    html = (dist / name).read_text(encoding="utf-8")
+    assert 'class="brand"' in html, f"Missing public logo: {name}"
+    assert '<span class="brandmark"' not in html, f"Legacy monogram in primary navigation: {name}"
+    assert 'rel="icon" type="image/svg+xml"' in html, f"Missing branded favicon: {name}"
+editor = (dist / "redaktor.html").read_text(encoding="utf-8")
+assert 'class="brand editor-brand"' in editor, "Editor is missing branded header"
+assert 'class="editor-brandmark"' in editor, "Editor monogram missing"
+assert 'href="modus-mark.svg"' in editor, "Editor favicon missing"
+print("MODUS public wordmark, editor monogram and branded icon verified.")
+
 print("MODUS design-system integration and page styles verified.")
