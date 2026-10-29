@@ -5,7 +5,7 @@ from article_library import TOPICS, ORDER, render_library
 ROOT=Path(__file__).resolve().parents[1];DIST=ROOT/'dist';ARTICLES=json.loads((ROOT/'content/articles.json').read_text())
 QUIZZES=json.loads((ROOT/'content/article-quizzes.json').read_text())
 LEVELS={'beginner':('Nybegynner','Start med byggesteinene.'),'intermediate':('Videre','Se de større sammenhengene.'),'advanced':('Fordypning','Utforsk flere nyanser.')}
-ALT={'circle':'Kvintsirkelen med durtonearter ytterst, relativ moll innenfor og antall faste fortegn. Med klokken: C, G, D, A, E, B, F♯ eller G♭, D♭, A♭, E♭, B♭, F.', 'intervals':'C og G, en ren kvint med sju halvtoners avstand','triads':'C-dur med C E G sammenlignet med C-moll med C E♭ G','melody':'En enkel melodisk frase med E G B og en pause','modes':'E dorisk med stor sekst C♯ fremhevet', 'sevenmodes':'De sju diatoniske modusene fra ett C-dur-tonemateriale: C ionisk, D dorisk, E frygisk, F lydisk, G miksolydisk, A eolisk og B lokrisk','cadence':'Dm7 G7 Cmaj7 med romertall ii7 V7 Imaj7','sevenths':'Cmaj7 bygget av C E G B, trinnene 1 3 5 7','harmonic':'A harmonisk moll og E frygisk dominant med samme toner og ulikt sentrum','voices':'C E G beholdes mens B går til A, fra Cmaj7 til Am7/C','rhythm':'Sju åttendedeler gruppert som to pluss to pluss tre'}
+ALT={'circle':'Kvintsirkelen med durtonearter ytterst, relativ moll innenfor og antall faste fortegn. Med klokken: C, G, D, A, E, B, F♯ eller G♭, D♭, A♭, E♭, B♭, F.', 'intervals':'C og G, en ren kvint med sju halvtoners avstand','triads':'C-dur med C E G sammenlignet med C-moll med C E♭ G','melody':'En enkel melodisk frase med E G B og en pause','modes':'E dorisk med stor sekst C♯ fremhevet', 'sevenmodes':'De sju diatoniske modusene fra ett C-dur-tonemateriale: C ionisk, D dorisk, E frygisk, F lydisk, G miksolydisk, A eolisk og B lokrisk','romans':'Romertallene I, ii, iii, IV, V, vi og vii° under de sju akkordene C, Dm, Em, F, G, Am og Bdim i C-dur','cadence':'Dm7 G7 Cmaj7 med romertall ii7 V7 Imaj7','sevenths':'Cmaj7 bygget av C E G B, trinnene 1 3 5 7','harmonic':'A harmonisk moll og E frygisk dominant med samme toner og ulikt sentrum','voices':'C E G beholdes mens B går til A, fra Cmaj7 til Am7/C','rhythm':'Sju åttendedeler gruppert som to pluss to pluss tre'}
 ALT.update({'diatonic':'G-durtreklanger bygget fra G-durskalaen: G, Am, Bm, C, D, Em og F♯dim.','targets':'Akkordtonene i Em, C, G og D ligger i ett felles toneutvalg.','parallel':'E eolisk og E dorisk sammenlignet med C og C♯ fremhevet.'})
 def esc(s):return html.escape(str(s),quote=True)
 def txt(x,y,s,size=24,color='#dce9cd',weight=500,anchor='middle'):
@@ -34,6 +34,16 @@ def illustration(kind):
   for i,(ch,roman,notes) in enumerate([('G','I','G B D'),('Am','ii','A C E'),('Bm','iii','B D F♯'),('C','IV','C E G'),('D','V','D F♯ A'),('Em','vi','E G B'),('F♯dim','vii°','F♯ A C')]):
    x=56+i*113;s+=f'<rect x="{x-40}" y="120" width="103" height="190" rx="10" fill="#23311c" stroke="#607b47"/>'+txt(x+12,170,ch,23,'#d7f48c')+txt(x+12,221,notes,15)+txt(x+12,274,roman,20,'#d5b979')
   s+=txt(400,373,'G A B C D E F♯',25)
+ elif kind=='romans':
+  s+=txt(400,64,'AKKORDENE I C-DUR',21,'#d7f48c',600)
+  chords=[('I','C'),('ii','Dm'),('iii','Em'),('IV','F'),('V','G'),('vi','Am'),('vii°','Bdim')]
+  for i,(roman,chord) in enumerate(chords):
+   x=18+i*111
+   s+=f'<rect x="{x}" y="120" width="101" height="203" rx="12" fill="#23311c" stroke="#607b47"/>'
+   s+=txt(x+50,180,roman,33,'#d7f48c',600)
+   s+=txt(x+50,231,chord,24,'#e3efd7',500)
+   s+=txt(x+50,284,'DUR' if roman in ('I','IV','V') else 'DIM' if roman=='vii°' else 'MOLL',12,'#d5b979')
+  s+=txt(400,388,'SAMME TRINN · NY TONEART · NYE AKKORDNAVN',15,'#b8cda5')
  elif kind=='targets':
   s+=txt(400,65,'ETT TONEUTVALG',19,'#d7f48c')+txt(400,111,'E F♯ G A B C D',25)
   for i,(ch,notes,target) in enumerate([('Em','E G B','G'),('C','C E G','E'),('G','G B D','B'),('D','D F♯ A','F♯')]):
