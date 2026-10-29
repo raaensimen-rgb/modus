@@ -109,6 +109,8 @@ def with_navigation_css(page, prefix=''):
     page = re.sub(r'href="(?:\\.\\./)?modus-mark\\.svg"', f'href="{prefix}modus-identity-icon.svg"', page)
     if 'rel="icon"' not in page:
         page = page.replace('</head>', f'<link rel="icon" type="image/svg+xml" href="{prefix}modus-identity-icon.svg"></head>', 1)
+    if 'rel="apple-touch-icon"' not in page:
+        page = page.replace('</head>', f'<link rel="apple-touch-icon" sizes="180x180" href="{prefix}apple-touch-icon.png"></head>', 1)
     if 'language-init.js' not in page:
         page = page.replace('<head>', f'<head><script src="{prefix}language-init.js"></script>', 1)
     if 'language.js"' not in page:
