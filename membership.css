@@ -25,3 +25,14 @@ html[data-theme=contrast] .price-card[data-plan] .plan-coming-badge{background:#
 .verification-roadmap span{font-size:11px;line-height:1.6;color:var(--modus-c-d4e6c0,#d4e6c0)}
 .student-verification-panel .verification-safety{font-size:11px;line-height:1.8;color:var(--modus-c-b2c59f,#b2c59f);margin-bottom:0}
 @media(max-width:760px){.student-verification{grid-template-columns:1fr;gap:15px;margin-top:35px;padding:29px 0}.student-verification-panel{padding:20px}}
+
+/* Student verification belongs to the Elev preview dialog, not the pricing page. */
+.membership-dialog:has(#studentVerification:not([hidden])){max-width:590px}
+.membership-dialog .student-verification{display:block;margin:22px 0 0;padding:21px 0 0;border-top:1px solid var(--modus-b-455c32,#455c32);border-bottom:0}
+.membership-dialog .student-verification-intro h2{font-size:21px;margin:7px 0 10px}
+.membership-dialog .student-verification-intro>p:not(.eyebrow){font-size:12px;line-height:1.65;margin:0 0 11px}
+.membership-dialog .student-verification-panel{padding:15px 17px;margin-top:15px}
+.membership-dialog .verification-roadmap{gap:5px;margin:12px 0;padding:12px 0}
+.membership-dialog .student-verification-panel .verification-safety{font-size:10px;line-height:1.7}
+.membership-dialog #studentSchoolInfo{min-height:0;margin:9px 0}
+@media(max-width:760px){.membership-dialog .student-verification{margin:17px 0 0;padding:17px 0 0}.membership-dialog .student-verification-panel{padding:13px}.membership-dialog .student-verification-intro h2{font-size:20px}}
