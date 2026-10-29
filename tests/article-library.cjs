@@ -6,7 +6,7 @@ const items=articles.map(a=>({id:a.slug,level:a.level,topic:a.category,search:a.
 const result=extra=>items.filter(a=>matches(a,{...filters,...extra})).map(a=>a.id);
 assert.equal(result({}).length,16);
 assert.deepEqual(result({level:'intermediate',topic:'chords'}),['septimakkorder']);
-assert.deepEqual(result({level:'beginner',topic:'chords'}),['dur-og-moll','bygg-akkorder-i-en-toneart','treklanger-fra-grunnform-til-omvending']);
+assert.deepEqual(result({level:'beginner',topic:'chords'}),['dur-og-moll','treklanger-fra-grunnform-til-omvending','bygg-akkorder-i-en-toneart']);
 assert.deepEqual(result({level:'beginner',topic:'modes'}),[]);
 assert.deepEqual(result({topic:'harmony'}),['kvintsirkelen','romertall-i-musikk','ii-v-i-kadensen','stemmeforing']);
 assert.deepEqual(result({q:'KVINTSIRKELEN'}),['kvintsirkelen']);
