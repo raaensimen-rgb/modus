@@ -146,7 +146,7 @@ function walkingBassNote(c,next,beatIndex,variation){
  const candidates=[];for(let n=target-2;n<=target+2;n++)if(n!==target&&scale.includes((n-tonic+120)%12))candidates.push(n);
  return candidates.sort((a,b)=>Math.abs(a-target)-Math.abs(b-target)||(variation%2?b-a:a-b))[0]??root+c.ints[1];
 }
-function schedule(s,t){const bar=Math.floor(s/16)%progression.length,p=s%16,beat=60/state.tempo,c=progression[bar],ambient=state.style==='ambient',cycle=Math.floor(s/(16*progression.length)),funk=state.style==='funk',rock=state.style==='rock',jazz=state.style==='jazz';const groove=t+(jazz&&p%4===2?beat/6:funk&&p%2?beat*.025:0)+Math.random()*.004;
+function schedule(s,t){const bar=Math.floor(s/16)%progression.length,p=s%16,beat=60/state.tempo,c=progression[bar],ambient=state.style==='ambient',cycle=Math.floor(s/(16*progression.length)),funk=state.style==='funk',rock=state.style==='rock',jazz=state.style==='jazz';const groove=t+(funk&&p%2?beat*.025:0)+Math.random()*.004;
 if(jazz){
  const compPatterns=[[0,6,12],[2,8,14],[0,10],[4,14]];
  if(compPatterns[(bar+cycle)%4].includes(p))chordSound(c,groove,beat*(p%4===0?1.15:.65));
