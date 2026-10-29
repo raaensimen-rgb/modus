@@ -10,7 +10,7 @@
  if(typeof document==='undefined')return;
  const en=document.documentElement.lang==='en',t=(nb,english)=>en?english:nb;
  const cards=[...document.querySelectorAll('.article-card')];
- const orderedIds=["toner-og-intervaller","dur-og-moll","bygg-akkorder-i-en-toneart","kvintsirkelen","romertall-i-musikk","septimakkorder","ii-v-i-kadensen","din-forste-improvisasjon","ett-skalakart-nye-maltoner","moduser-og-tonalt-sentrum","kirketonearter-ett-system-sju-uttrykk","dorisk-og-eolisk","stemmeforing","harmonisk-moll-og-frygisk-dominant","rytme-i-sju-aatte"];
+ const orderedIds=["toner-og-intervaller","dur-og-moll","bygg-akkorder-i-en-toneart","kvintsirkelen","romertall-i-musikk","treklanger-fra-grunnform-til-omvending","septimakkorder","ii-v-i-kadensen","din-forste-improvisasjon","ett-skalakart-nye-maltoner","moduser-og-tonalt-sentrum","kirketonearter-ett-system-sju-uttrykk","dorisk-og-eolisk","stemmeforing","harmonisk-moll-og-frygisk-dominant","rytme-i-sju-aatte"];
  cards.sort((a,b)=>(orderedIds.includes(a.dataset.articleId)?orderedIds.indexOf(a.dataset.articleId):999)-(orderedIds.includes(b.dataset.articleId)?orderedIds.indexOf(b.dataset.articleId):999));
  const items=cards.map(card=>({id:card.dataset.articleId,level:card.dataset.level,topic:card.dataset.topic,search:card.dataset.search+' '+card.querySelector('h2').textContent,card}));
  const search=document.getElementById('articleSearch'),container=document.getElementById('articleGroups');
