@@ -32,7 +32,7 @@
     const url=M.checkout(config,id,period),link=$('checkoutLink');
     link.hidden=!url;if(url)link.href=url;else link.removeAttribute('href');
     $('checkoutUnavailable').hidden=Boolean(url);
-    $('chosenRenewal').textContent=url?'Abonnementet fornyes automatisk til samme pris per periode. Du kan si opp videre fornyelse i kundeportalen. Se vilkårene før kjøp.':'Dette er en forhåndsvisning. Ingen betaling eller abonnement opprettes her.';
+    $('chosenRenewal').textContent=url?'Planlagt MODUS Dvale: Etter 30 dager uten aktivitet stopper videre fornyelse. Du kan si opp når som helst. Gjenaktivering etter utløp krever et nytt, godkjent kjøp. Reglene må være operative før betaling åpnes.':'Dette er en forhåndsvisning. Ingen betaling eller abonnement opprettes her.';
     $('chosenTerms').hidden=!url;
     if(url){$('membershipTerms').href=config.termsUrl;$('membershipPrivacy').href=config.privacyUrl;}
     dialog.showModal();$('closeMembership').focus();
