@@ -146,7 +146,7 @@ html[data-theme=contrast] .price-card[data-plan] .plan-coming-badge{background:#
    display:grid;
    grid-template-columns:minmax(0,1fr);
    grid-template-rows:subgrid;
-   grid-row:span 11;
+   grid-row:span 12;
    align-content:stretch;
  }
  .pricing-grid>.price-card .card-kicker{grid-row:1;min-height:0;margin:0;padding:0 0 12px}
@@ -155,12 +155,25 @@ html[data-theme=contrast] .price-card[data-plan] .plan-coming-badge{background:#
  .pricing-grid>.price-card .student-info-trigger{grid-row:4;align-self:start;margin:0;padding:0 0 13px}
  .pricing-grid>.price-card .price{grid-row:5;min-height:0;align-self:start;padding:0 0 7px}
  .pricing-grid>.price-card .cost-note{grid-row:6;min-height:0;margin:0;padding:0 0 16px}
- .pricing-grid>.price-card .plan-action{grid-row:7;align-self:start;min-height:46px}
- .pricing-grid>.price-card .feature-label{grid-row:8;margin:22px 0 0;padding:19px 0 12px}
- .pricing-grid>.price-card ul{grid-row:9;margin:0}
- .pricing-grid>.price-card .student-eligibility-note{grid-row:10;align-self:start;margin:17px 0 0}
- .pricing-grid>.price-card .plan-state{grid-row:11;align-self:end;margin:17px 0 0}
+ .pricing-grid>.price-card .dvale-card-note{grid-row:7;align-self:start;margin:0;padding:0 0 15px}
+ .pricing-grid>.price-card .plan-action{grid-row:8;align-self:start;min-height:46px}
+ .pricing-grid>.price-card .feature-label{grid-row:9;margin:22px 0 0;padding:19px 0 12px}
+ .pricing-grid>.price-card ul{grid-row:10;margin:0}
+ .pricing-grid>.price-card .student-eligibility-note{grid-row:11;align-self:start;margin:17px 0 0}
+ .pricing-grid>.price-card .plan-state{grid-row:12;align-self:end;margin:17px 0 0}
 }
 @media(min-width:761px) and (max-width:1399px){
  .pricing-grid{row-gap:26px}
 }
+
+/* Visible dormancy terms at the decision point, separate from fine print. */
+.price-card .dvale-card-note{font-size:12px;line-height:1.55;color:var(--modus-c-bbd0a7,#bbd0a7)}
+.price-card .dvale-card-note strong{font-weight:700;color:var(--modus-c-d7f48c,#d7f48c)}
+.price-card .dvale-card-note span{color:var(--modus-c-afc69a,#afc69a)}
+.dvale-purchase-info{margin:20px 0 23px;padding:20px 21px;border-radius:10px;border:1px solid var(--modus-b-6b874c,#6b874c);background:var(--modus-c-27371d,#27371d)}
+.membership-dialog .dvale-purchase-label{font:700 11px/1.5 'DM Sans',sans-serif;letter-spacing:.075em;color:var(--modus-c-d7f48c,#d7f48c);margin:0 0 9px}
+.dvale-purchase-info h3{font:600 19px/1.4 Manrope,sans-serif;letter-spacing:-.025em;margin:0 0 13px;color:var(--modus-c-eef5e4,#eef5e4)}
+.membership-dialog .dvale-purchase-info p:not(.dvale-purchase-label){font-size:14px;line-height:1.75;margin:9px 0;color:var(--modus-c-d8e6c9,#d8e6c9)}
+.dvale-purchase-info strong{color:var(--modus-c-eef5e4,#eef5e4);font-weight:650}
+.membership-dialog .dvale-purchase-info .dvale-purchase-status{border-top:1px solid var(--modus-b-6b874c,#6b874c);padding-top:12px;margin-top:16px;font-size:12px;color:var(--modus-c-b9c8ab,#b9c8ab)}
+@media(max-width:760px){.price-card .dvale-card-note{font-size:12px}.dvale-purchase-info{padding:17px 16px}}
