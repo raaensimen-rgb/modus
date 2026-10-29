@@ -47,3 +47,8 @@
 .editor-top .editor-brandmark{margin-right:9px}
 .editor-top .editor-brandmark-end{margin-left:11px}
 @media(max-width:650px){.editor-top .editor-brandmark{margin-right:8px}.editor-top .editor-brandmark-end{margin-left:9px}}
+
+/* Match closer public wordmark framing. */
+.editor-top .editor-brandmark{margin-right:7px}
+.editor-top .editor-brandmark-end{margin-left:8px}
+@media(max-width:650px){.editor-top .editor-brandmark{margin-right:7px}.editor-top .editor-brandmark-end{margin-left:8px}}
