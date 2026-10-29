@@ -12,15 +12,15 @@ LEVEL_DESCRIPTIONS = {
  'intermediate': 'Knytt akkordfarger, harmoniske funksjoner og moduser sammen.',
  'advanced': 'Gå dypere i harmonisk moll, stemmeføring og ujevne taktarter.',
 }
-ORDER = ['toner-og-intervaller','dur-og-moll','bygg-akkorder-i-en-toneart','kvintsirkelen','romertall-i-musikk','treklanger-fra-grunnform-til-omvending','septimakkorder','ii-v-i-kadensen','din-forste-improvisasjon','ett-skalakart-nye-maltoner','moduser-og-tonalt-sentrum','kirketonearter-ett-system-sju-uttrykk','dorisk-og-eolisk','stemmeforing','harmonisk-moll-og-frygisk-dominant','rytme-i-sju-aatte']
+ORDER = ['toner-og-intervaller','dur-og-moll','bygg-akkorder-i-en-toneart','kvintsirkelen','romertall-i-musikk','treklanger-fra-grunnform-til-omvending','din-forste-improvisasjon','septimakkorder','ii-v-i-kadensen','ett-skalakart-nye-maltoner','moduser-og-tonalt-sentrum','kirketonearter-ett-system-sju-uttrykk','dorisk-og-eolisk','stemmeforing','harmonisk-moll-og-frygisk-dominant','rytme-i-sju-aatte']
 
 def group_section(key, label, description, cards='', kind='level'):
  return f'<section class="article-category" data-category="{key}"><header class="category-header"><div><p class="eyebrow">{"NIVÅ" if kind=="level" else "TEMA" if kind=="topic" else "LESEREKKEFØLGE"}</p><h3>{label}</h3><p>{description}</p></div><span class="category-count" data-category-count></span></header><div class="article-grid">{cards}</div></section>'
 
 def render_library(articles, levels, card):
  ordered=sorted(articles,key=lambda a:ORDER.index(a['slug']))
- groups=group_section('all', 'Anbefalt leserekkefølge', 'Fra grunnleggende toner til harmonikk, improvisasjon og fordypning. Nummereringen er en anbefalt vei, ikke et krav.', ''.join(card(a) for a in ordered), kind='order')
- order_templates=group_section('all', 'Anbefalt leserekkefølge', 'Fra grunnleggende toner til harmonikk, improvisasjon og fordypning.', kind='order')
+ groups=''.join(group_section('reading-'+k, levels[k][0], LEVEL_DESCRIPTIONS[k], ''.join(card(a) for a in ordered if a['level']==k), kind='order') for k in levels)
+ order_templates=''.join(group_section('reading-'+k, levels[k][0], LEVEL_DESCRIPTIONS[k], kind='order') for k in levels)
  level_templates=''.join(group_section(k,v[0],LEVEL_DESCRIPTIONS[k]) for k,v in levels.items())
  topic_templates=''.join(group_section(k,v[0],v[1],kind='topic') for k,v in TOPICS.items())
  level_buttons=''.join(f'<button type="button" data-filter="{k}" aria-pressed="false">{v[0]} <span>{sum(a["level"]==k for a in articles)}</span></button>' for k,v in levels.items())
