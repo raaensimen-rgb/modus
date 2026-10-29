@@ -94,11 +94,11 @@
 .atlas-billing-toast-label{font-size:10px;letter-spacing:1.6px;color:#c8ef89;font-weight:750}
 .atlas-billing-toast-close{background:transparent;color:#c5d6bc;border:0;font-size:22px;cursor:pointer;padding:2px 5px}
 .atlas-billing-toast-title{font-size:17px;font-weight:700;margin:9px 0}
-.atlas-billing-toast-body{font-size:12px;line-height:1.65;color:#b9c9b4;margin:0 0 14px}
+.atlas-billing-toast-body{font-size:14px;line-height:1.7;color:#b9c9b4;margin:0 0 14px}
 .atlas-billing-toast-progress{height:8px;background:#0e170f;border:1px solid #41543a;border-radius:100px;overflow:hidden}
 .atlas-billing-toast-progress>span{display:block;height:100%;width:50%;background:#c6ed87;border-radius:inherit}
-.atlas-billing-toast-meta{display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:#bbccb5}
-.atlas-billing-toast-foot{font-size:10px;color:#a8b89e;margin-top:13px}
+.atlas-billing-toast-meta{display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:#bbccb5}
+.atlas-billing-toast-foot{font-size:11px;color:#a8b89e;margin-top:13px}
 @keyframes atlas-toast-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:620px){.atlas-billing-toast{right:12px;bottom:80px;padding:16px}}
 @media(prefers-reduced-motion:reduce){.atlas-billing-toast{animation:none}}
