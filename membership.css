@@ -190,3 +190,18 @@ html[data-theme=contrast] .price-card[data-plan] .plan-coming-badge{background:#
 .hero-dvale-link{font-size:12px;line-height:1.5;flex-shrink:0;white-space:nowrap;color:var(--modus-c-d7f48c,#d7f48c);text-decoration:underline;text-underline-offset:4px}
 .hero-dvale-link:focus-visible{outline:2px solid var(--modus-c-d7f48c,#d7f48c);outline-offset:4px}
 @media(max-width:700px){.hero-dvale-notice{align-items:flex-start;flex-wrap:wrap;gap:10px;margin-top:25px}.hero-dvale-notice>div{flex-basis:calc(100% - 44px)}.hero-dvale-link{margin-left:44px}}
+
+/* Future MODUS app: deliberately understated announcement beneath member billing. */
+.modus-app-announcement{display:grid;grid-template-columns:minmax(150px,210px) minmax(0,1fr);align-items:center;gap:clamp(24px,5vw,68px);padding:54px clamp(20px,4vw,54px);margin:38px 0 0;border:1px solid var(--modus-b-35452a,#35452a);border-radius:18px;background:linear-gradient(120deg,rgba(30,46,24,.45),rgba(17,19,16,.4) 70%);overflow:hidden}
+.modus-app-art{display:flex;flex-direction:column;align-items:center;gap:13px}
+.modus-app-art img{display:block;width:clamp(136px,15vw,176px);height:auto;aspect-ratio:1;border-radius:30px;box-shadow:0 14px 38px #0004}
+.modus-app-art span{font:700 9px/1.3 Manrope,sans-serif;letter-spacing:.12em;color:var(--modus-c-9dc773,#9dc773);text-align:center}
+.modus-app-copy{min-width:0}
+.modus-app-copy .eyebrow{margin:0 0 17px;color:var(--modus-c-d7f48c,#d7f48c)}
+.modus-app-copy h2{margin:0 0 19px;font:500 clamp(26px,3vw,38px)/1.25 Manrope,sans-serif;letter-spacing:-.045em;color:var(--modus-c-eef5e4,#eef5e4)}
+.modus-app-copy h2 em{font-family:Georgia,serif;font-weight:400;color:var(--modus-c-d7f48c,#d7f48c);letter-spacing:-.025em}
+.modus-app-copy>p:not(.eyebrow){max-width:660px;font-size:15px;line-height:1.8;color:var(--modus-c-b1c59e,#b1c59e)}
+.modus-app-copy .modus-app-status{display:flex;align-items:center;gap:10px;margin-top:18px;font-weight:700;color:var(--modus-c-d7f48c,#d7f48c)!important}
+.modus-app-status span{width:7px;height:7px;border-radius:50%;background:#d7f48c;flex:none}
+.modus-app-copy .modus-app-note{margin:9px 0 0;font-size:12px!important;color:var(--modus-c-a8bc96,#a8bc96)!important}
+@media(max-width:760px){.modus-app-announcement{grid-template-columns:1fr;gap:21px;padding:29px 23px;margin:24px 0 0}.modus-app-art img{width:144px}.modus-app-art span{font-size:9px}.modus-app-copy h2{font-size:29px}.modus-app-copy>p:not(.eyebrow){font-size:14px}}
