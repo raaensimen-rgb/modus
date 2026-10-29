@@ -16,8 +16,15 @@
     const portal=M.stripeUrl(config.customerPortal,true);
     if(portal){$('customerPortal').href=portal;$('customerPortal').hidden=false;$('portalUnavailable').hidden=true;}
   }
+  function selectCard(id){
+    document.querySelectorAll('.pricing-grid .price-card').forEach(card=>{
+      const chosen=(card.dataset.plan||card.dataset.tier)===id;
+      card.classList.toggle('is-selected',chosen);
+    });
+  }
   function show(id){
     selected=id;previousFocus=document.activeElement;const q=M.quote(config,id,period);if(!q)return;
+    selectCard(id);
     $('studentVerification').hidden=id!=='elev';
     $('chosenName').textContent=q.name;
     $('chosenPrice').textContent=M.money(q.amount)+' kr / '+q.unit;
@@ -32,6 +39,14 @@
   }
   document.querySelectorAll('[data-period]').forEach(b=>b.onclick=()=>{period=b.dataset.period;render();});
   document.querySelectorAll('[data-choose]').forEach(b=>b.onclick=()=>show(b.closest('[data-plan]').dataset.plan));
+  document.querySelectorAll('.pricing-grid .price-card').forEach(card=>{
+    card.addEventListener('click',event=>{
+      if(event.target.closest('a,button')){selectCard(card.dataset.plan||card.dataset.tier);return;}
+      const id=card.dataset.plan||card.dataset.tier;
+      selectCard(id);
+      if(card.dataset.plan)show(id);
+    });
+  });
   $('closeMembership').onclick=()=>dialog.close();
   dialog.addEventListener('close',()=>{selected=null;const school=$('studentSchool');if(school)school.value='';const info=$('studentSchoolInfo');if(info)info.textContent='Eksempellisten er ikke komplett. Andre norske skoler skal kunne vurderes når ordningen åpner.';previousFocus?.focus();});
   dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
@@ -45,5 +60,6 @@
           : 'Valgt lærested: '+school.value+'. Dette er bare en forhåndsvisning og ikke en bekreftelse av studentstatus.';
     });
   }
+  selectCard('plus');
   render();
 })();
