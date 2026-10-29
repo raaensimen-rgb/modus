@@ -74,7 +74,42 @@ function changeContext(nextKey,nextMode){
  });
  centerKey=nextKey;scaleMode=nextMode;gripIndex=0;inversion=0;render();
 }
-C('jamKey').onchange=e=>changeContext(+e.target.value,scaleMode);C('jamMode').onchange=e=>changeContext(centerKey,+e.target.value);
+/* Familiar harmonic progressions. Values are scale degrees with explicit qualities,
+   not fixed chord names, so every preset follows the chosen tonic. */
+const progressionPresets={
+ pop:{name:'Pop',degrees:[0,4,5,3],qualities:[0,0,1,0],mode:0},
+ rock:{name:'Rock',degrees:[0,3,4,0],qualities:[0,0,0,0],mode:0},
+ ballad:{name:'Popballade',degrees:[5,3,0,4],qualities:[1,0,0,0],mode:0},
+ jazz:{name:'Jazz / ii–V–I',degrees:[1,4,0],qualities:[4,2,3],mode:0},
+ minor:{name:'Moll / moderne rock',degrees:[0,5,2,6],qualities:[1,0,0,0],mode:5}
+};
+function presetChords(preset){
+ const tonic=CK[centerKey],steps=window.ModusTheoryData.modes[preset.mode].steps;
+ return preset.degrees.map((degree,i)=>{
+  const offset=steps[degree],pc=(tonic[1]+offset)%12;
+  return {key:CK.findIndex(key=>key[1]===pc),q:preset.qualities[i],rootName:spell(tonic[0],tonic[1],offset,degree)};
+ });
+}
+function updatePresetPreview(){
+ const chosen=progressionPresets[C('progressionPreset').value];
+ C('applyProgressionPreset').disabled=!chosen;
+ C('progressionPresetPreview').textContent=chosen
+  ?chosen.name+': '+presetChords(chosen).map(c=>c.rootName+qualities[c.q].suffix).join(' – ')+'. '+(chosen.mode===5?'Bruker naturlig moll. ':'Bruker dur. ')+'Trykk «Bruk akkordrekken» for å legge den inn.'
+  :'Velg en progresjon for å se akkordene før du bruker den. Akkordene kan endres fritt etterpå.';
+}
+C('progressionPreset').addEventListener('change',updatePresetPreview);
+C('applyProgressionPreset').addEventListener('click',()=>{
+ const preset=progressionPresets[C('progressionPreset').value];
+ if(!preset)return;
+ stop();
+ chords=presetChords(preset);
+ scaleMode=preset.mode;
+ C('jamMode').value=scaleMode;
+ selected=0;gripIndex=0;inversion=0;
+ render();
+ C('chordStatus').textContent=preset.name+' er lagt inn. Du kan endre akkordene fritt.';
+});
+C('jamKey').onchange=e=>{changeContext(+e.target.value,scaleMode);updatePresetPreview();};C('jamMode').onchange=e=>{changeContext(centerKey,+e.target.value);updatePresetPreview();};
 C('saveSequence').onclick=()=>{const name=(C('sequenceName').value.trim()||chords.map(c=>info(c).name).join(' – ')).slice(0,80),rows=readLibrary(),existing=rows.find(row=>row.name===name),id=existing?existing.id:String(Date.now());if(!existing&&rows.length>=20){C('chordStatus').textContent='Du har 20 lagrede rekker. Gi rekken samme navn som en eksisterende for å oppdatere den.';return;}const item={id,name,...currentSetup()},next=existing?rows.map(row=>row.id===id?item:row):rows.concat(item);try{localStorage.setItem(libraryStorage,JSON.stringify(next));renderLibrary();C('savedSequences').value=id;C('chordStatus').textContent='Lagret: '+name;}catch{C('chordStatus').textContent='Kunne ikke lagre i nettleseren. Du kan fortsatt laste ned MIDI.';}};
 C('loadSequence').onclick=()=>{const row=readLibrary().find(r=>r.id===C('savedSequences').value);if(!row){C('chordStatus').textContent='Velg en lagret rekke først.';return;}stop();chords=window.ModusProgressions.validSequence(row.chords);tempo=Number.isInteger(row.tempo)&&row.tempo>=40&&row.tempo<=200?row.tempo:90;centerKey=Number.isInteger(row.key)&&CK[row.key]?row.key:0;scaleMode=Number.isInteger(row.mode)&&window.ModusTheoryData.modes[row.mode]?row.mode:0;selected=0;gripIndex=0;inversion=0;C('chordTempo').value=tempo;C('jamKey').value=centerKey;C('jamMode').value=scaleMode;C('sequenceName').value=row.name;render();C('chordStatus').textContent='Åpnet: '+row.name;};
 renderLibrary();render();
