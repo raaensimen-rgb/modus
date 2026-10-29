@@ -37,12 +37,44 @@ function renderSections(){const container=$('editorSections');container.replaceC
 function renderQuiz(){const container=$('editorQuiz');container.replaceChildren();article.quiz.forEach((q,i)=>{const f=document.createElement('fieldset');f.className='editor-question';f.innerHTML=`<legend>Spørsmål ${i+1}</legend><label>Spørsmål<input data-question maxlength="500" value="${escape(q.question)}"></label><div class="editor-answers">${q.options.map((v,j)=>`<label class="editor-answer"><input type="radio" name="answer-${i}" value="${j}" ${q.answer===j?'checked':''} aria-label="Svar ${j+1} er riktig"><input data-option="${j}" maxlength="500" value="${escape(v)}" aria-label="Svaralternativ ${j+1}"></label>`).join('')}</div><label>Forklaring<textarea data-explanation rows="3" maxlength="2000">${escape(q.explanation)}</textarea></label><label>Forklaringen finnes i del<select data-section>${article.sections.map((s,j)=>`<option value="${j+1}">${j+1}. ${escape(s[0]||'Uten overskrift')}</option>`).join('')}</select></label>`;f.querySelector('[data-question]').oninput=e=>{q.question=e.target.value;markDirty();};f.querySelector('[data-explanation]').oninput=e=>{q.explanation=e.target.value;markDirty();};f.querySelectorAll('[data-option]').forEach(n=>n.oninput=e=>{q.options[+n.dataset.option]=e.target.value;markDirty();});f.querySelectorAll('[type=radio]').forEach(n=>n.onchange=()=>{q.answer=+n.value;markDirty();});const select=f.querySelector('[data-section]');select.value=q.section;select.onchange=e=>{q.section=+e.target.value;markDirty();};container.append(f);});}
 async function refresh(){const run=++generation;const {data:{user:next}}=await client.auth.getUser();if(run!==generation)return;user=next;isEditor=false;
  if(user){const {data,error}=await client.from('cms_editors').select('user_id').eq('user_id',user.id).maybeSingle();if(run!==generation)return;isEditor=!!data&&!error;}
- $('editorLogin').hidden=!!user||previewMode;$('editorWorkspace').hidden=!isEditor&&!previewMode;$('editorAccess').hidden=!user||isEditor||previewMode;$('editorSignOut').hidden=!user;$('editorAccount').textContent=user?.email|| (previewMode?'Lokal prøvevisning':'');
+ $('editorInbox').hidden=!isEditor;$('editorLogin').hidden=!!user||previewMode;$('editorWorkspace').hidden=!isEditor&&!previewMode;$('editorAccess').hidden=!user||isEditor||previewMode;$('editorSignOut').hidden=!user;$('editorAccount').textContent=user?.email|| (previewMode?'Lokal prøvevisning':'');
  if(user&&!isEditor){$('editorUserId').textContent=user.id;$('copyEditorId').onclick=()=>navigator.clipboard.writeText(user.id).then(()=>status('Bruker-ID kopiert. Dette er ikke et passord.'));}
  if(!isEditor&&!previewMode){article=null;dirty=false;$('editorForm').hidden=true;return;}
  if(isEditor){const [d,p]=await Promise.all([client.from('cms_article_drafts').select('*').order('updated_at',{ascending:false}),client.from('cms_article_publications').select('slug,locale,revision,published_at')]);if(run!==generation)return;if(d.error||p.error){status('Kunne ikke hente artiklene. Prøv Oppdater.',true);return;}drafts=d.data;publications=p.data;}
- $('editorModeNote').hidden=!previewMode;renderList();
+ $('editorModeNote').hidden=!previewMode;renderList();if(isEditor)void loadFeedback();
 }
+// Feedback inbox: a private editor-only view, with RLS enforcing access in Supabase.
+async function loadFeedback(){
+ if(!isEditor||!user)return;
+ const list=$('feedbackAdminList'),message=$('feedbackAdminStatus');
+ message.textContent='Henter henvendelser …';
+ const {data,error}=await client.from('modus_feedback').select('id,created_at,category,message,email,page_url,status').order('created_at',{ascending:false}).limit(100);
+ if(!isEditor)return;
+ if(error){message.textContent='Kunne ikke hente henvendelser. Prøv igjen.';return;}
+ const types={error:'Feilrapport',question:'Spørsmål',suggestion:'Forbedringsforslag'};
+ const states={new:'Ny',in_progress:'Pågår',resolved:'Løst'};
+ list.replaceChildren();
+ message.textContent=data.length?data.length+' henvendelser (viser maksimalt 100).':'Ingen henvendelser ennå.';
+ for(const item of data){
+  const card=document.createElement('article');card.className='editor-inbox-item';
+  const head=document.createElement('div');head.className='editor-inbox-item-head';
+  const title=document.createElement('strong');title.textContent=types[item.category]||item.category;
+  const date=document.createElement('time');date.dateTime=item.created_at;date.textContent=new Date(item.created_at).toLocaleString('nb-NO');
+  head.append(title,date);card.append(head);
+  const body=document.createElement('p');body.className='editor-inbox-message';body.textContent=item.message;card.append(body);
+  if(item.email){const email=document.createElement('a');email.href='mailto:'+item.email;email.textContent=item.email;email.className='editor-inbox-email';card.append(email);}
+  if(item.page_url){try{const url=new URL(item.page_url);if(url.protocol==='https:'||url.protocol==='http:'){const link=document.createElement('a');link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.className='editor-inbox-page';link.textContent='Side: '+url.pathname;card.append(link);}}catch{}}
+  const row=document.createElement('div');row.className='editor-inbox-controls';
+  const label=document.createElement('label');label.textContent='Status';
+  const select=document.createElement('select');select.setAttribute('aria-label','Status for '+(types[item.category]||'henvendelse'));
+  for(const [key,text] of Object.entries(states)){const opt=document.createElement('option');opt.value=key;opt.textContent=text;select.append(opt);}
+  select.value=item.status;
+  select.addEventListener('change',async()=>{select.disabled=true;const previous=item.status;const {error:err}=await client.from('modus_feedback').update({status:select.value}).eq('id',item.id);if(err){select.value=previous;message.textContent='Kunne ikke lagre statusen. Prøv igjen.';}else{item.status=select.value;message.textContent='Status oppdatert.';}select.disabled=false;});
+  label.append(select);row.append(label);card.append(row);list.append(card);
+ }
+}
+$('feedbackRefresh').addEventListener('click',()=>{if(isEditor)void loadFeedback();});
+
 async function save(){
  if(saving||!article)return false;clearTimeout(timer);article=normalizeArticle(article);
  if(!article.slug||!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(article.slug)){status('Gi artikkelen en gyldig adresse først.',true);return false;}
