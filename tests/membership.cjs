@@ -11,7 +11,7 @@ assert.equal(M.stripeUrl('https://billing.stripe.com/p/login/abc',true),'https:/
 assert.equal(M.stripeUrl('https://billing.stripe.com/p/session/abc',true),null);
 // Fake URLs are isolated fixtures; never written into production configuration.
 const fixture=JSON.parse(JSON.stringify(C));fixture.salesOpen=true;fixture.termsUrl='/vilkar';fixture.privacyUrl='/personvern';fixture.supportEmail='test@example.test';fixture.customerPortal='https://billing.stripe.com/p/login/fixture';
-for(const id of ['elev','plus','studio']){fixture.plans[id].contentReady=true;fixture.plans[id].accessReady=true;for(const p of ['month','year'])fixture.plans[id].checkout[p]='https://buy.stripe.com/fixture_'+id+'_'+p;}
+for(const id of ['elev','plus','studio']){fixture.plans[id].contentReady=true;fixture.plans[id].accessReady=true;if(id==='elev')fixture.plans[id].verificationReady=true;for(const p of ['month','year'])fixture.plans[id].checkout[p]='https://buy.stripe.com/fixture_'+id+'_'+p;}
 for(const id of ['elev','plus','studio'])for(const p of ['month','year'])assert.equal(M.checkout(fixture,id,p),'https://buy.stripe.com/fixture_'+id+'_'+p);
 fixture.plans.plus.checkout.month='https://buy.stripe.com/test_fixture';assert.equal(M.checkout(fixture,'plus','month'),null);
 fixture.plans.studio.accessReady=false;assert.equal(M.checkout(fixture,'studio','year'),null);
@@ -31,7 +31,12 @@ for(const plan of ['elev','plus','studio']){
 assert.match(membershipHTML,/<article class="price-card free-card">/,'Free plan stays available');
 assert(membershipHTML.indexOf('data-plan="elev"')>membershipHTML.indexOf('Modus Fri'));
 assert(membershipHTML.indexOf('data-plan="elev"')<membershipHTML.indexOf('data-plan="plus"'));
-assert.match(membershipHTML,/Planlagt · alt i Elev, og/,'Modus+ includes Elev rather than duplicating it');
+assert.match(membershipHTML,/Samme planlagte innhold som MODUS\+/,'Student tier must receive the full MODUS+ package');
+assert.match(membershipHTML,/Studentpris krever bekreftet elev- eller studentstatus/,'Student discount requires student status');
+assert.match(membershipHTML,/id="studentSchool"/,'School selection preview must exist');
+assert.match(membershipHTML,/valget sendes ikke inn, lagres ikke/,'Preview must disclose that school selections are not collected');
+const noVerification=JSON.parse(JSON.stringify(C));noVerification.salesOpen=true;noVerification.plans.elev.contentReady=true;noVerification.plans.elev.accessReady=true;
+assert.equal(M.checkout(noVerification,'elev','month'),null,'Student checkout is blocked until verification integration is ready');
 assert.match(membershipCSS,/grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/,'Four pricing cards should use four columns on wide screens');
 assert.match(membershipCSS,/\.plan-coming-badge/,'Coming-soon badge must be styled');
 assert.match(membershipHTML,/Se Modus\+ →/,'Premium tier preview remains accessible');
