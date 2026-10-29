@@ -188,3 +188,11 @@ html[data-theme='readable'] .piano-voicing .piano-inversion-buttons button[aria-
   .piano-voicing .piano-inversion-buttons{gap:14px;margin:12px 0 0}
   .piano-voicing .piano-inversion-buttons button{font-size:12px}
 }
+
+/* Guitar voicing navigation mirrors the understated piano inversion tabs. */
+.guitar-voicing .guitar-grip-tabs{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 0;align-items:center}
+.guitar-voicing .guitar-grip-tabs button{appearance:none;-webkit-appearance:none;background:transparent;border:0;border-bottom:1px solid transparent;border-radius:0;padding:7px 1px 9px;min-height:34px;box-shadow:none;color:var(--muted);font:500 12px/1.45 'DM Sans',sans-serif;letter-spacing:.015em;cursor:pointer}
+.guitar-voicing .guitar-grip-tabs button:hover{color:var(--ink)}
+.guitar-voicing .guitar-grip-tabs button[aria-pressed='true']{border-bottom:2px solid var(--accent);color:var(--ink);font-weight:700}
+html[data-theme='readable'] .guitar-voicing .guitar-grip-tabs button[aria-pressed='true']{border-bottom-color:#245b34;color:#245b34}
+.guitar-voicing .guitar-grip-tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
