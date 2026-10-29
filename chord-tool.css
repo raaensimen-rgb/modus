@@ -118,3 +118,17 @@
  .harmony-workbench>.builder-panel,.harmony-workbench>.selected-panel{align-self:stretch;height:100%;box-sizing:border-box}
  .harmony-workbench>.selected-panel{position:static;top:auto;max-height:none;overflow:visible}
 }
+
+/* MODUS HARMONI: optional genre progression starter, immediately above the chords */
+.chord-main .progression-presets{margin:0 0 19px;padding:18px;border:1px solid var(--modus-b-3c4634,#3c4634);border-radius:10px;background:var(--modus-c-20251d,#20251d)}
+.chord-main .progression-presets-heading{margin-bottom:13px}
+.chord-main .progression-presets-eyebrow{display:block;color:var(--modus-c-a5ad9a,#a5ad9a);font-size:10px;letter-spacing:1.1px;margin-bottom:7px}
+.chord-main .progression-presets h3{font:500 18px/1.35 Manrope,sans-serif;letter-spacing:-.025em;color:var(--ink);margin:0}
+.chord-main .progression-presets-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:end}
+.chord-main .progression-presets-controls label{font-size:12px;color:var(--modus-c-a5ad9a,#a5ad9a);min-width:0}
+.chord-main .progression-presets-controls select{display:block;width:100%;max-width:100%;margin-top:7px;min-height:42px;box-sizing:border-box;background:var(--modus-c-22271f,#22271f);border:1px solid var(--modus-b-444a3b,#444a3b);border-radius:7px;padding:9px;color:var(--ink);font-size:13px}
+.chord-main .progression-presets-controls button{min-height:42px;white-space:normal}
+.chord-main .progression-presets-controls button:disabled{opacity:.45;cursor:not-allowed}
+.chord-main .progression-preset-preview{font-size:12px;line-height:1.7;color:var(--modus-c-a5ad9a,#a5ad9a);margin:12px 0 0}
+@media(max-width:1250px){.chord-main .progression-presets-controls{grid-template-columns:minmax(0,1fr)}.chord-main .progression-presets-controls button{justify-self:start}}
+@media(max-width:700px){.chord-main .progression-presets{padding:15px}.chord-main .progression-presets-controls select{font-size:16px;min-height:44px}.chord-main .progression-presets-controls button{width:100%}}
