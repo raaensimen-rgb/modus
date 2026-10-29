@@ -65,12 +65,19 @@ let contextualHelp=false,activeHintTarget=null;
 function explainTarget(el){
  if(!(el instanceof Element))return null;
  for(const [selector,message] of hintEntries){const match=el.closest(selector);if(match&&!match.disabled)return {target:match,message};}
- return null;
+ // Global fallback: every ordinary interactive control should explain its purpose.
+ const control=el.closest('button, a[href], select, input:not([type="hidden"]), summary, textarea, [role="button"]');
+ if(!control||control.disabled||root.contains(control))return null;
+ const label=control.getAttribute('aria-label')||control.labels?.[0]?.textContent||control.closest('label')?.textContent||control.textContent||control.title||control.getAttribute('placeholder')||'Dette valget';
+ const name=label.replace(/\\s+/g,' ').trim().slice(0,100);
+ const action=control.matches('a[href]')?'Åpner siden eller innholdet':control.matches('select')?'Velg et alternativ for':control.matches('input, textarea')?'Skriv inn eller endre':'Aktiverer';
+ return {target:control,message:action+' «'+(name||'dette valget')+'».'};
 }
 function closeContextTip(){contextualTip.hidden=true;activeHintTarget=null;}
 function openContextTip(target,message){
  activeHintTarget=target;
  contextualTip.textContent=message;
+ contextualTip.style.right='auto';
  contextualTip.hidden=false;
  const rect=target.getBoundingClientRect(), width=contextualTip.offsetWidth,height=contextualTip.offsetHeight;
  let x=Math.min(window.innerWidth-width-12,Math.max(12,rect.left+rect.width/2-width/2));
@@ -86,11 +93,12 @@ function setContextHelp(enabled){
  helpButton.title=enabled?'Klikk for å avslutte. Hold pekeren over kontroller for forklaring.':'Aktiver forklaringer ved å holde pekeren over kontroller.';
  showHelp(false);
  closeContextTip();
+ if(enabled){contextualTip.textContent='Hjelp er aktiv. Hold pekeren over en knapp eller et valg.';contextualTip.hidden=false;contextualTip.style.left='auto';contextualTip.style.right='18px';contextualTip.style.top='18px';}
  document.documentElement.classList.toggle('modus-context-help-active',enabled);
 }
 helpButton.addEventListener('click',()=>setContextHelp(!contextualHelp));
-document.addEventListener('pointerover',e=>{
- if(!contextualHelp||e.pointerType==='touch')return;
+document.addEventListener('mouseover',e=>{
+ if(!contextualHelp)return;
  const hit=explainTarget(e.target);
  if(hit&&hit.target!==activeHintTarget)openContextTip(hit.target,hit.message);
  else if(!hit)closeContextTip();
