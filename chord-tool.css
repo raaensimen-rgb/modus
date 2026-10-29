@@ -145,3 +145,46 @@ html[data-theme='readable'] .piano-inversion-buttons button[aria-pressed='true']
 .piano-voicing .diagram-heading{flex-wrap:wrap;align-items:center}
 .piano-voicing .piano-inversion-buttons{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 0 auto}
 @media(max-width:700px){.piano-voicing .piano-inversion-buttons{width:100%;margin:8px 0 0}}
+
+
+/* MODUS editorial inversion tabs: same restrained type scale as the panel. */
+.piano-voicing .piano-inversion-buttons{
+  margin:12px 0 0;
+  gap:18px;
+  align-items:center;
+}
+.piano-voicing .piano-inversion-buttons button{
+  appearance:none;
+  -webkit-appearance:none;
+  background:transparent;
+  border:0;
+  border-bottom:1px solid transparent;
+  border-radius:0;
+  padding:7px 1px 9px;
+  min-height:34px;
+  font:500 12px/1.45 'DM Sans',sans-serif;
+  letter-spacing:.015em;
+  color:var(--muted);
+  box-shadow:none;
+  transition:color .15s,border-color .15s;
+}
+.piano-voicing .piano-inversion-buttons button:hover{
+  color:var(--ink);
+}
+.piano-voicing .piano-inversion-buttons button[aria-pressed='true'],
+html[data-theme='readable'] .piano-voicing .piano-inversion-buttons button[aria-pressed='true']{
+  background:transparent;
+  border:0;
+  border-bottom:2px solid var(--accent);
+  border-radius:0;
+  color:var(--ink);
+  font-weight:700;
+}
+html[data-theme='readable'] .piano-voicing .piano-inversion-buttons button[aria-pressed='true']{
+  border-bottom-color:#245b34;
+  color:#245b34;
+}
+@media(max-width:700px){
+  .piano-voicing .piano-inversion-buttons{gap:14px;margin:12px 0 0}
+  .piano-voicing .piano-inversion-buttons button{font-size:12px}
+}
