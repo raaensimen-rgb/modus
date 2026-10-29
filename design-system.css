@@ -169,3 +169,13 @@ body :is(
   .about-reading>p
 ){font-size:18px;line-height:1.8}
 /* Larger introductions and editorial text already sized intentionally are kept. */
+
+/* Keep the document inside the mobile viewport. Tool-owned horizontal scrollers
+   remain scrollable; only accidental page-level horizontal overflow is clipped. */
+html,body{max-width:100%;overflow-x:clip}
+@supports not (overflow:clip){html,body{overflow-x:hidden}}
+@media(max-width:700px){
+  .site-header,.site-header .site-nav,.site-header .header-tools{max-width:100%;min-width:0}
+  main,footer{min-width:0}
+  img,svg,video,canvas{max-width:100%}
+}
