@@ -68,4 +68,11 @@ assert.match(membershipHTML,/Automatiske tester er ikke en uavhengig fagfellevur
 assert.match(membershipHTML,/er ikke en akkreditert skole/,'MODUS must not imply accreditation');
 assert.match(membershipJS,/studentInfo\.showModal\(\)/,'Info button opens its own modal');
 assert.match(membershipJS,/studentInfoTrigger\.focus\(\)/,'Info dialog returns focus to the trigger');
+// Prevent regression to unreadable microtype on the four-card pricing page.
+assert.match(membershipCSS,/Readability pass: MODUS\+/,'Readable typography rules must be present');
+assert.match(membershipCSS,/\.price-card ul\{font-size:14px/,'Membership benefits must be legible');
+assert.match(membershipCSS,/\.price-card \.card-description\{font-size:15px/,'Plan descriptions must be legible');
+assert.match(membershipCSS,/\.student-info-sections p\{font-size:15px/,'Parent and teacher information must be legible');
+assert.match(membershipCSS,/\.membership-faq details p\{font-size:15px/,'FAQ answers must be legible');
+assert.match(membershipCSS,/max-width:1399px/,'Four-card layout must adapt before text is cramped');
 console.log('Passed: membership amounts, annual savings, four checkout routes, blocked unconfigured sales, test links and unsafe URLs.');
