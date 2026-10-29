@@ -29,6 +29,7 @@
     $('chosenName').textContent=q.name;
     $('chosenPrice').textContent=M.money(q.amount)+' kr / '+q.unit;
     $('chosenPeriod').textContent=period==='year'?'Årsabonnement · hele årsbeløpet betales samlet.':'Månedsabonnement · faktureres hver måned.';
+    $('dvaleBillingClarification').textContent=period==='year'?'Ved årsbetaling beholdes hele det betalte året. Dvale stanser neste årsfornyelse; tilbakekomst i betalt periode utløser ikke en ny årsbetaling.':'Ved månedsbetaling stanser dvale neste månedsfornyelse; allerede betalt tid beholdes.';
     const url=M.checkout(config,id,period),link=$('checkoutLink');
     link.hidden=!url;if(url)link.href=url;else link.removeAttribute('href');
     $('checkoutUnavailable').hidden=Boolean(url);
