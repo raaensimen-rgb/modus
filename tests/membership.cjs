@@ -79,7 +79,9 @@ assert.match(membershipCSS,/max-width:1399px/,'Four-card layout must adapt befor
 assert.match(membershipCSS,/grid-template-rows:subgrid/,'Pricing cards must share aligned comparison rows');
 assert.match(membershipCSS,/grid-row:span 11/,'All pricing cards must span identical row tracks');
 for(const [name,row] of [['.card-kicker',1],['h3',2],['.card-description',3],['.student-info-trigger',4],['.price',5],['.cost-note',6],['.plan-action',7],['.feature-label',8],['ul',9],['.student-eligibility-note',10],['.plan-state',11]]){
- const escaped=name.replace(/[.*+?^$\{\}()|[\]\\]/g,'\\console.log('Passed: membership amounts');
+ assert(membershipCSS.includes(name+'{grid-row:'+row+';'),'Missing aligned row '+row+' for '+name);
+}
+console.log('Passed: membership amounts');
  assert(new RegExp(escaped+'\\{grid-row:'+row+'(?:;|\\})').test(membershipCSS),'Missing aligned row '+row+' for '+name);
 }
 console.log('Passed: membership amounts, annual savings, four checkout routes, blocked unconfigured sales, test links and unsafe URLs.');
