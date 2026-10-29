@@ -63,3 +63,37 @@
  .chord-main .builder-transport{gap:14px}
  .chord-main .voicing-grid{grid-template-columns:1fr}
 }
+
+/* Keep the chord progression and sounding voicing together while practicing.
+   Wide screens show a two-column workstation; smaller screens retain the
+   familiar vertical flow and horizontal scrolling inside the keyboard. */
+.harmony-workbench{display:grid;grid-template-columns:minmax(0,0.94fr) minmax(0,1.06fr);gap:18px;align-items:start}
+.harmony-workbench>.builder-panel,.harmony-workbench>.selected-panel{min-width:0;margin-top:0}
+.harmony-workbench .selected-panel{position:sticky;top:12px;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.harmony-workbench .chord-slots{grid-template-columns:repeat(2,minmax(0,1fr))}
+.harmony-workbench .builder-heading{flex-wrap:wrap}
+.harmony-workbench .harmonic-context-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+.harmony-workbench .voicing-grid{grid-template-columns:minmax(0,1fr);gap:20px;padding-top:18px}
+.harmony-workbench .guitar-voicing{border-bottom:1px solid var(--modus-b-30342a,#30342a);padding-bottom:14px}
+.harmony-workbench .guitar-voicing svg{max-width:205px;margin:5px auto 0}
+.harmony-workbench .guitar-voicing>p{margin:6px 0}
+.harmony-workbench .guitar-voicing>small{font-size:10px}
+.harmony-workbench .piano-voicing .keyboard-wrap{overflow-x:auto;max-width:100%;margin-top:12px}
+.harmony-workbench .piano-voicing .keyboard-wrap svg{min-width:570px}
+.harmony-workbench .selected-heading{padding-bottom:16px}
+.harmony-workbench .selected-heading h2{font-size:30px}
+.harmony-workbench .selected-panel{scrollbar-color:var(--modus-b-546244,#546244) transparent}
+@media(max-width:1050px){
+ .harmony-workbench{grid-template-columns:minmax(0,1fr)}
+ .harmony-workbench .selected-panel{position:static;max-height:none;overflow:visible;margin-top:0}
+ .harmony-workbench .chord-slots{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .harmony-workbench .voicing-grid{grid-template-columns:230px minmax(0,1fr)}
+ .harmony-workbench .guitar-voicing{border-bottom:0;padding-bottom:0}
+}
+@media(max-width:700px){
+ .harmony-workbench{gap:16px}
+ .harmony-workbench .chord-slots{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .harmony-workbench .voicing-grid{grid-template-columns:minmax(0,1fr)}
+ .harmony-workbench .guitar-voicing{border-bottom:1px solid var(--modus-b-30342a,#30342a);padding-bottom:18px}
+ .harmony-workbench .harmonic-context-controls{grid-template-columns:minmax(0,1fr)}
+}
