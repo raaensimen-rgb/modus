@@ -206,14 +206,21 @@ html[data-theme=contrast] .price-card[data-plan] .plan-coming-badge{background:#
 .modus-app-copy .modus-app-note{margin:9px 0 0;font-size:12px!important;color:var(--modus-c-a8bc96,#a8bc96)!important}
 @media(max-width:760px){.modus-app-announcement{grid-template-columns:1fr;gap:21px;padding:29px 23px;margin:24px 0 0}.modus-app-art img{width:144px}.modus-app-art span{font-size:9px}.modus-app-copy h2{font-size:29px}.modus-app-copy>p:not(.eyebrow){font-size:14px}}
 
-/* Student plan: reserve a real layout row for the coming-soon badge.
-   An absolutely positioned badge can overlap the two-line kicker. */
+/* Student card: badge stays in the same upper-right position as the other
+   plans, while its two-line subtitle starts safely below the badge. */
+.price-card[data-plan="elev"]{
+  padding-top:65px;
+}
 .price-card[data-plan="elev"] .plan-coming-badge{
-  position:static;
-  align-self:flex-end;
-  margin:0 0 14px;
-  flex:none;
+  position:absolute;
+  top:18px;
+  right:18px;
+  margin:0;
 }
 .price-card[data-plan="elev"] .card-kicker{
   padding-right:0;
+}
+@media(max-width:700px){
+  .price-card[data-plan="elev"]{padding-top:61px}
+  .price-card[data-plan="elev"] .plan-coming-badge{top:17px;right:16px}
 }
