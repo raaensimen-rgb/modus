@@ -169,8 +169,8 @@
 .article-grid > article.upcoming-card .upcoming-illustration,
 .article-grid > article.upcoming-card .card-copy,
 .article-grid > article.upcoming-card .card-level-row .level-badge {
-  filter: blur(4px);
-  -webkit-filter: blur(4px);
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
 }
 .article-grid > article.upcoming-card::after {
   content: "";
