@@ -1,0 +1,76 @@
+name: PL-081 isolated QA Preview (manual)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pl-081-qa-preview
+  cancel-in-progress: false
+
+jobs:
+  qa-preview:
+    name: Verify baseline and deploy Preview only
+    # Never run from a feature branch or a pull request.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out exact approved baseline
+        uses: actions/checkout@v4
+        with:
+          ref: 41449f99b39f45fd8c28a4ac7569dc32610fbedc
+          persist-credentials: false
+      - name: Verify exact source commit
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD)" = "41449f99b39f45fd8c28a4ac7569dc32610fbedc"
+          test -z "$(git status --porcelain)"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Assemble public assets as configured in Cloudflare
+        shell: bash
+        run: |
+          mkdir -p dist
+          cp -R *.html *.css *.js artikler audio en images dist/
+      - name: Build
+        run: npm run build
+      - name: Run full regression suite
+        run: npm test
+      - name: Preserve QA test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pl081-qa-test-results
+          path: |
+            test-results/test-results.json
+            test-results/test-results.md
+          if-no-files-found: warn
+      - name: Ensure Cloudflare credentials exist
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        shell: bash
+        run: |
+          test -n "$CF_API_TOKEN" || { echo 'Missing CLOUDFLARE_API_TOKEN'; exit 1; }
+          test -n "$CF_ACCOUNT_ID" || { echo 'Missing CLOUDFLARE_ACCOUNT_ID'; exit 1; }
+      - name: Deploy strictly to isolated QA Preview branch
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        shell: bash
+        run: |
+          npx --yes wrangler@4 pages deploy dist \
+            --project-name modus \
+            --branch qa/pl-080-baseline \
+            --commit-hash 41449f99b39f45fd8c28a4ac7569dc32610fbedc \
+            --commit-dirty=false
