@@ -190,3 +190,36 @@
 /* Cards remain readable and naturally reflow at mobile widths and 200% zoom. */
 
 /* PL-059: Preview rebuild trigger; no visual or functional change. */
+
+
+/* QA-078-02: prevent intrinsic-width overflow in planned cards on narrow screens. */
+@media (max-width: 550px) {
+  .article-grid { grid-template-columns: minmax(0, 1fr); }
+  .article-grid > article.upcoming-card {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .article-grid > article.upcoming-card .card-level-row {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .article-grid > article.upcoming-card .card-level-row .level-badge,
+  .article-grid > article.upcoming-card .upcoming-status {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .article-grid > article.upcoming-card .card-copy,
+  .article-grid > article.upcoming-card .card-copy h2,
+  .article-grid > article.upcoming-card .card-copy p,
+  .article-grid > article.upcoming-card .card-meta {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  /* Keep the last row of cards reachable above the fixed contact control. */
+  .articles-page { padding-bottom: max(100px, env(safe-area-inset-bottom)); }
+}
