@@ -21,7 +21,7 @@ før neste oppgave velges. Endringer i status krever konkret bevis.
 | ID | Arbeid | Status | Ferdigkriterium |
 | --- | --- | --- | --- |
 | A01 | Samlet automatisk kvalitetsrunde | Implementert i PR #14, ikke merget | Bygg og 25 kontroller bestått for aktuell commit i GitHub Actions; rapport og avgrensninger dokumentert. |
-| A02 | Én lokal kommando for bygg og kontroll | Implementert, validering dokumenteres i PR | `npm ci` og `npm run quality` fungerer fra prosjektroten; tester starter ikke etter et mislykket bygg. |
+| A02 | Én lokal kommando for bygg og kontroll | Implementert og kontrollert i ren utsjekking | `npm ci` og `npm run quality` fungerer fra prosjektroten; tester starter ikke etter et mislykket bygg. |
 | A03 | Dokumentere første kartlegging og gjenstående kontrollbehov | Utført som kartlegging, ikke slutt-QA | Funn har kilde/avgrensning; ukontrollerte punkter merkes tydelig. |
 | A04 | Nettleserbasert grunnkontroll og skjermbilder | Planlagt | Hovedsider på norsk/engelsk kontrolleres ved 1440 og 375 px; skjermbilder og faktiske funksjonssjekker knyttes til commit. Ingen påstand om full visuell godkjenning. |
 | A05 | Samlet prioritering av funksjonsavvik | Planlagt etter A04 | Reproduserbare avvik får alvorlighet, fremgangsmåte og ansvar; feil rettes i avgrensede PR-er med relevante regresjonskontroller. |
@@ -43,6 +43,11 @@ Utgangspunkt: `main` på `43141c3e566769cf0bb6e07fe63046fdf0f615a3`.
   dem selvstendige, synlige og uavhengige av at karttesten når slutten.
 - PR #14 på `04ecc6a971d9c1c01be04c281812ce3e1e945970` bestod 25/25 lokalt
   og GitHub Actions-kjøring `41001215910`. Nye commits må kontrolleres på nytt.
+- Oppfølging på `d4aaeeb37a586232e539fb1ca07c77d6f6413461`: `npm ci` og
+  `npm run quality` bestod 25/25 i en ny, ren utsjekking av utviklingsgrenen.
+  GitHub Actions-kjøring `41001830376` bestod også. En tidligere lokal
+  arbeidsmappe ga avvik etter tilbakeføring av genererte filer; den brukes
+  ikke som grunnlag for godkjenning. Ren utsjekking er verifiseringsgrunnlaget.
 - Oversettelseskontrollen dekker 689 aktive registrerte HTML-strenger.
   Dette dokumenterer katalogdekning, ikke fullstendig eller faglig god
   oversettelse. Engelsk har flere bevisste sammendrag/ventesider.
