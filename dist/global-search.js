@@ -39,7 +39,7 @@
     input.focus();
     if (entries) {render();return;}
     try {
-      const response = await fetch("/search-index.json");
+      const response = await fetch(root + "search-index.json");
       if (!response.ok) throw new Error("Search index unavailable");
       entries = await response.json(); render();
     } catch (_) {status.textContent = english ? "Search is temporarily unavailable." : "Søket er midlertidig utilgjengelig.";}
