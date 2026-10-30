@@ -29,7 +29,7 @@ const makeElement = () => ({
 });
 async function exercise(pathname) {
  const input=makeElement(), results=makeElement(), status=makeElement(), close=makeElement(), trigger=makeElement();
- const dialog={open:false,querySelector(s){return {'[data-global-search-input]':input,'[data-global-search-results]':results,'[data-global-search-status]':status,'[data-global-search-close]':close}[s]},showModal(){this.open=true},close(){this.open=false},addEventListener(){}};
+ const dialog={open:false,querySelector(s){return {'[data-global-search-input]':input,'[data-global-search-results]':results,'[data-global-search-status]':status,'[data-global-search-close]':close}[s]},showModal(){this.open=true},close(){this.open=false;this.listeners.close?.()},listeners:{},addEventListener(name,fn){this.listeners[name]=fn}};
  const listeners={};
  const document={querySelector(s){return {'[data-global-search-dialog]':dialog,'[data-global-search-open]':trigger}[s]},createElement:makeElement,addEventListener(n,fn){listeners[n]=fn}};
  const english = pathname.startsWith('/en/');
@@ -51,6 +51,23 @@ async function exercise(pathname) {
  input.value='modus';input.listeners.input();assert(results.children.length>0,'Partial query must match');
  input.value='';input.listeners.input();assert.equal(results.children.length,0,'Cleared query must remove matches');
  let prevented=false;listeners.keydown({metaKey:true,ctrlKey:false,key:'k',preventDefault(){prevented=true}});assert(prevented,'Keyboard shortcut not handled');
+ // Safari: Escape must close even when the search input holds text.
+ input.value='dorisk'; input.listeners.input();
+ let escaped=false, stopped=false;
+ dialog.listeners.keydown({key:'Escape',isComposing:false,preventDefault(){escaped=true},stopPropagation(){stopped=true}});
+ assert(escaped && stopped,'Escape must be handled before search-input clearing');
+ assert(!dialog.open,'Escape must close dialog with nonempty search input');
+ assert(trigger.focused,'Focus must return to search trigger on close');
+ // No action should be taken when the dialog is closed.
+ escaped=false;
+ dialog.listeners.keydown({key:'Escape',isComposing:false,preventDefault(){escaped=true},stopPropagation(){}});
+ assert(!escaped,'Escape must not be captured after dialog closes');
+ await trigger.listeners.click();
+ let cancelled=false;
+ dialog.listeners.cancel({preventDefault(){cancelled=true}});
+ assert(cancelled && !dialog.open,'Native cancel must close dialog');
+ await trigger.listeners.click();
  close.listeners.click();assert(!dialog.open,'Close control must close dialog');
+ assert(trigger.focused,'Close control must restore focus');
 }
 (async()=>{await exercise('/');await exercise('/en/artikler.html');console.log('Passed global search: index, links, matching, empty state, locales and keyboard access.');})().catch(e=>{console.error(e);process.exitCode=1});
