@@ -55,7 +55,12 @@ jobs:
             test-results/test-results.json
             test-results/test-results.md
           if-no-files-found: warn
-      # Security: use an API token with Account / Cloudflare Pages / Edit (Pages Write)\n      # restricted to the MODUS Cloudflare account, not a global API key.\n      # This account permission is NOT a branch-level restriction; only an\n      # explicitly approved manual run and the hardcoded Preview branch protect production.\n      # Store token and account ID as GitHub Actions secrets; never commit values.\n      - name: Ensure Cloudflare credentials exist
+      # Security: use a Cloudflare API token with Account / Cloudflare Pages / Edit.
+      # Restrict token resources to the MODUS Cloudflare account.
+      # This permission is account-scoped, NOT restricted to a Preview branch.
+      # Require separate risk acceptance before adding GitHub Actions secrets.
+      # Never commit secrets or paste them into a conversation.
+      - name: Ensure Cloudflare credentials exist
         env:
           CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
