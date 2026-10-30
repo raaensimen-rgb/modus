@@ -164,11 +164,9 @@
   background: #263425;
   border-color: #778a69;
 }
-/* PL-061: frost the actual content, not only the background behind it. */
+/* PL-077: keep editorial text crisp; soften only the passive illustration. */
 .article-grid > article.upcoming-card { position: relative; isolation: isolate; }
-.article-grid > article.upcoming-card .upcoming-illustration,
-.article-grid > article.upcoming-card .card-copy,
-.article-grid > article.upcoming-card .card-level-row .level-badge {
+.article-grid > article.upcoming-card .upcoming-illustration {
   filter: blur(2px);
   -webkit-filter: blur(2px);
 }
@@ -188,7 +186,7 @@
   filter: none;
   -webkit-filter: none;
 }
-/* Status remains crisp; text and artwork are intentionally softened. */
+/* Status, category, title and description remain crisp; illustration alone is blurred. */
 /* Cards remain readable and naturally reflow at mobile widths and 200% zoom. */
 
 /* PL-059: Preview rebuild trigger; no visual or functional change. */
