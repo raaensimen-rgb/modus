@@ -19,3 +19,28 @@ for a in articles:
 output = ROOT / "dist/search-index.json"
 output.write_text(json.dumps(items,ensure_ascii=False,separators=(",",":"))+"\n")
 print(f"Generated {len(items)} global search entries.")
+
+# English results are extracted from the built English pages, not machine-translated
+# from the Norwegian search index. Unreviewed content is never inferred as published.
+from html.parser import HTMLParser
+class PageMetadata(HTMLParser):
+ def __init__(self):
+  super().__init__();self.in_h1=False;self.title=[];self.description=""
+ def handle_starttag(self,tag,attrs):
+  a=dict(attrs)
+  if tag=="h1" and not self.title:self.in_h1=True
+  if tag=="meta" and a.get("name")=="description":self.description=a.get("content","")
+ def handle_endtag(self,tag):
+  if tag=="h1":self.in_h1=False
+ def handle_data(self,data):
+  if self.in_h1:self.title.append(data)
+english=[]
+for item in items:
+ target=ROOT/"dist/en"/item["url"]
+ page=PageMetadata()
+ if target.is_file():page.feed(target.read_text(encoding="utf-8"))
+ title=" ".join(" ".join(page.title).split()) or item["title"]
+ english.append({**item,"title":title,"description":page.description or title,
+                 "keywords":item["keywords"]+" "+title})
+(ROOT/"dist/en/search-index.json").write_text(json.dumps(english,ensure_ascii=False,separators=(",",":"))+"\n")
+print(f"Generated {len(english)} English search entries.")
