@@ -61,4 +61,5 @@ assert all(module["status"]!="approved" for module in data["modules"])
 # Phase 1 atlas registry checks run alongside the existing map and reset checks.
 import subprocess
 subprocess.run(['python3', 'tests/atlas-links.py'], cwd=root, check=True)
+subprocess.run(['python3', 'tests/atlas-links-mutation.py'], cwd=root, check=True)
 print("Music map checks passed: 10 branches, 24 module IDs, local article/quiz evidence and manual states.")
