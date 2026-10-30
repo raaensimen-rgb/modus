@@ -41,6 +41,6 @@ for item in items:
  if target.is_file():page.feed(target.read_text(encoding="utf-8"))
  title=" ".join(" ".join(page.title).split()) or item["title"]
  english.append({**item,"title":title,"description":page.description or title,
-                 "keywords":item["keywords"]+" "+title})
+                 "keywords":" ".join((item["keywords"],item["title"],item["description"],title))})
 (ROOT/"dist/en/search-index.json").write_text(json.dumps(english,ensure_ascii=False,separators=(",",":"))+"\n")
 print(f"Generated {len(english)} English search entries.")
