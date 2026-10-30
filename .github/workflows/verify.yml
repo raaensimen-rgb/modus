@@ -10,6 +10,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: modus-quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -29,9 +33,24 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
       - name: Build the public site
+        id: build
         run: npm run build
       - name: Validate site and music features
+        id: tests
         run: npm test
+
+      - name: Publish quality summary
+        if: always()
+        env:
+          BUILD_RESULT: ${{ steps.build.outcome }}
+          TEST_RESULT: ${{ steps.tests.outcome }}
+        run: |
+          if [ -f test-results/test-results.md ]; then
+            cat test-results/test-results.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            printf '## MODUS quality round\n\nNo test report was produced. Build: %s. Tests: %s. Inspect the failed or skipped steps.\n' "$BUILD_RESULT" "$TEST_RESULT" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          printf '\nAutomated checks do not approve music theory, visual appearance or production publication.\n' >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload individual test results
         if: always()

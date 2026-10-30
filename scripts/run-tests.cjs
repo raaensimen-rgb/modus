@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { performance } = require('node:perf_hooks');
 
-// Keep the original npm test sequence unchanged; failures never skip later tests.
+// Preserve existing checks; failures never skip later tests.
 const tests = [
   [
     "python3",
@@ -92,6 +92,22 @@ const tests = [
   [
     "python3",
     "tests/upcoming-articles.py"
+  ],
+  [
+    "python3",
+    "tests/atlas-links.py"
+  ],
+  [
+    "python3",
+    "tests/atlas-links-mutation.py"
+  ],
+  [
+    "python3",
+    "scripts/check-translations.py"
+  ],
+  [
+    "python3",
+    "tests/translation-catalog.py"
   ]
 ];
 const outputDir = path.join(process.cwd(), 'test-results');
@@ -103,7 +119,7 @@ for (let i = 0; i < tests.length; i++) {
   const start = performance.now();
   let run;
   try {
-    run = spawnSync(command, args, { cwd: process.cwd(), encoding: 'utf8', maxBuffer: 20 * 1024 * 1024, shell: false });
+    run = spawnSync(command, args, { cwd: process.cwd(), encoding: 'utf8', maxBuffer: 20 * 1024 * 1024, timeout: 120000, shell: false });
   } catch (error) {
     run = { status: null, error, stdout: '', stderr: '' };
   }

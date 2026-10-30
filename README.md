@@ -26,6 +26,9 @@ Cloudflare installerer npm-avhengighetene fra låsefilen før byggingen. Prosjek
 
 ## Bygg og kontroller lokalt
 
+Se [automatisk kvalitetsrunde](docs/automated-quality.md) for PR-kontroller,
+rapporter, avgrensninger og arbeidsform for større kodeoppdrag.
+
 Installer Node.js 22 og Python 3.12, og kjør fra prosjektroten:
 
 ```sh

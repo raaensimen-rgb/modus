@@ -58,8 +58,6 @@ assert len(mapped)==len(set(mapped)), "The same module appears in more than one 
 assert set(mapped)==source_ids, "Missing or invented module in music map"
 assert len(data["modules"]) == 24
 assert all(module["status"]!="approved" for module in data["modules"])
-# Phase 1 atlas registry checks run alongside the existing map and reset checks.
-import subprocess
-subprocess.run(['python3', 'tests/atlas-links.py'], cwd=root, check=True)
-subprocess.run(['python3', 'tests/atlas-links-mutation.py'], cwd=root, check=True)
+# Atlas registry checks are separate entries in scripts/run-tests.cjs so their
+# outcomes remain visible even if this test fails before reaching its end.
 print("Music map checks passed: 10 branches, 24 module IDs, local article/quiz evidence and manual states.")
