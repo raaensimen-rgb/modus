@@ -33,3 +33,20 @@ ikke løs dette ved å svekke testene.
 
 Resultat fra separat GitHub Actions-kjøring og eksakt rettelsescommit oppgis
 i Draft PR og leveransen. Ingen merge eller eksplisitt deployment inngår.
+
+
+## Oppfølging av lokal testforskjell
+
+Et nytt komplett bygg ga 22/22 bestått lokalt. Deretter bestod to nye
+bygg/test-sykluser, begge 22/22, med uendrede testkilder. SHA-256 for
+`articles.css`, `articles.js` og `article-quiz.js` viste at kilde og bygget
+ressurs var like før hver kjøring og uendret under kjøringen.
+
+Actions #41144433042 bestod også for implementasjonscommit
+`198f4423a53ab10b05adbb7c1d22b2ba2c973376`.
+
+Den tidligere 18/22-kjøringen beholdes som historisk avvik. Feilen lot seg
+ikke gjenskape etter ny bygging. Dette er forenlig med en tidligere lokal
+byggtilstand som ikke samsvarte, men rotårsaken er ikke bevist. Ingen
+produksjonsrettelse eller svekking av testene er gjort. Ved gjentakelse må
+ressurskontrollsummer og miljøinformasjon samles før byggingen endres.
