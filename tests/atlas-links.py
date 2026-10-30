@@ -44,10 +44,22 @@ approved = {
     "akkordutvidelser": ("P02", ["E02"]),
     "modal-harmonikk-i-praksis": ("A02", ["I03"]),
 }
-assert all(a["status"] == "planned" and a["approval"] == "subject_approved" for a in pending)
-assert {a["slug"]: (a["module_id"], a["related_module_ids"]) for a in pending} == approved
-assert all(a["module_id"] in module_ids and set(a["related_module_ids"]) <= module_ids for a in pending)
-assert all(a["module_id"] not in a["related_module_ids"] for a in pending)
+def validate_planned_links(entries, valid_ids):
+    """Fail closed on missing/invalid primary or secondary references."""
+    assert len(entries) == len(approved), "Wrong number of planned articles"
+    for entry in entries:
+        assert all(key in entry for key in ("slug", "status", "approval", "module_id", "related_module_ids")), "Missing required planned article field"
+        assert entry["slug"] in approved, "Unrecognized planned article"
+        assert entry["status"] == "planned" and entry["approval"] == "subject_approved", "Incorrect editorial approval/status"
+        assert isinstance(entry["module_id"], str) and entry["module_id"] in valid_ids, "Invalid primary module reference"
+        links = entry["related_module_ids"]
+        assert isinstance(links, list) and all(isinstance(link, str) and link in valid_ids for link in links), "Invalid secondary module reference"
+        assert len(set(links)) == len(links) and entry["module_id"] not in links, "Duplicate or self-reference"
+    actual = {a["slug"]: (a["module_id"], a["related_module_ids"]) for a in entries}
+    assert len(actual) == len(entries), "Duplicate planned article"
+    assert actual == approved, "Approved module matrix mismatch"
+
+validate_planned_links(pending, module_ids)
 
 # Undertopics / lessons are deliberately empty until their editorial links are authorized.
 assert all(not m["topics"] and not m["lessons"] for m in registry["modules"])
