@@ -16,6 +16,9 @@ for (const entry of index) {
 }
 assert(index.some(x=>x.type==='article'),'Article search missing');
 assert(index.some(x=>x.type==='atlas'),'Atlas search missing');
+const englishIndex = JSON.parse(fs.readFileSync(path.join(root,'dist/en/search-index.json'),'utf8'));
+assert.equal(englishIndex.length,index.length,'Both locales must index the same public URLs');
+assert(englishIndex.some((x,i)=>x.title!==index[i].title),'English titles must not simply duplicate Norwegian index');
 const code = fs.readFileSync(path.join(root,'dist/global-search.js'),'utf8');
 const makeElement = () => ({
   value:'', textContent:'', href:'', className:'', children:[], listeners:{},
@@ -29,18 +32,24 @@ async function exercise(pathname) {
  const dialog={open:false,querySelector(s){return {'[data-global-search-input]':input,'[data-global-search-results]':results,'[data-global-search-status]':status,'[data-global-search-close]':close}[s]},showModal(){this.open=true},close(){this.open=false},addEventListener(){}};
  const listeners={};
  const document={querySelector(s){return {'[data-global-search-dialog]':dialog,'[data-global-search-open]':trigger}[s]},createElement:makeElement,addEventListener(n,fn){listeners[n]=fn}};
- const context={document,location:{pathname},fetch:async()=>({ok:true,json:async()=>index})};
+ const english = pathname.startsWith('/en/');
+ let fetched='';
+ const context={document,location:{pathname},fetch:async(url)=>{fetched=url;return {ok:true,json:async()=>english?englishIndex:index}}};
  vm.runInNewContext(code,context,{filename:'global-search.js'});
  assert.equal(typeof trigger.listeners.click,'function','Search trigger missing');
  await trigger.listeners.click();
  assert(dialog.open,'Dialog must open');
  assert(input.focused,'Search input must receive focus');
+ assert.equal(fetched,english?'/en/search-index.json':'/search-index.json','Wrong localized search index');
+ assert(status.textContent.includes(english?'Type':'Skriv'),'Initial empty search state missing');
  input.value='dorisk'; input.listeners.input();
  assert(results.children.length>0,'Dorian query should return matches');
  assert(results.children.some(x=>x.href.includes('dorisk')),'Dorian article/lesson must be reachable');
  assert(results.children.every(x=>x.href.startsWith(pathname.startsWith('/en/')?'/en/':'/')),'Wrong locale prefix');
  input.value='xyzz_not_a_topic';input.listeners.input();assert.equal(results.children.length,0,'No match must yield empty list');
- input.value='akkorder';input.listeners.input();assert(results.children.length>0,'Chord query must match');
+ for (const term of ['akkorder','intervaller','atlas']) {input.value=term;input.listeners.input();assert(results.children.length>0,'Required term missing: '+term)}
+ input.value='modus';input.listeners.input();assert(results.children.length>0,'Partial query must match');
+ input.value='';input.listeners.input();assert.equal(results.children.length,0,'Cleared query must remove matches');
  let prevented=false;listeners.keydown({metaKey:true,ctrlKey:false,key:'k',preventDefault(){prevented=true}});assert(prevented,'Keyboard shortcut not handled');
  close.listeners.click();assert(!dialog.open,'Close control must close dialog');
 }
