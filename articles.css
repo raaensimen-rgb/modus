@@ -164,6 +164,28 @@
   background: #263425;
   border-color: #778a69;
 }
+/* PL-060: visibly blur only the preview; keep titles, descriptions and status crisp. */
+.article-grid > article.upcoming-card .upcoming-illustration {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.article-grid > article.upcoming-card .upcoming-illustration::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: rgba(17, 26, 17, .20);
+  -webkit-backdrop-filter: blur(5px) saturate(.65);
+  backdrop-filter: blur(5px) saturate(.65);
+}
+.article-grid > article.upcoming-card .card-copy,
+.article-grid > article.upcoming-card .card-level-row {
+  position: relative;
+  z-index: 2;
+}
+/* No blur or opacity on readable card text. */
 /* Cards remain readable and naturally reflow at mobile widths and 200% zoom. */
 
 /* PL-059: Preview rebuild trigger; no visual or functional change. */
