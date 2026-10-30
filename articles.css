@@ -123,3 +123,45 @@
 .upcoming-card .card-copy{flex:1}
 .upcoming-card .upcoming-footer{margin-top:auto;border-top:1px solid #394d2c;padding-top:15px;font-size:11px;color:#c1d0b4}
 .upcoming-card[hidden]{display:none!important}
+
+/* PL-059: upcoming cards stay in the article grid but never look interactive. */
+.article-grid > article.upcoming-card {
+  background: #172017;
+  border-color: #374633;
+  color: var(--text);
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+  transition: none;
+}
+.article-grid > article.upcoming-card:hover,
+.article-grid > article.upcoming-card:focus-within {
+  background: #172017;
+  border-color: #374633;
+  box-shadow: none;
+  transform: none;
+}
+.article-grid > article.upcoming-card .card-level-row {
+  background: #151d14;
+  border-bottom-color: #35442f;
+}
+.article-grid > article.upcoming-card .upcoming-illustration {
+  background: radial-gradient(ellipse at center, #253322 0%, #151d14 72%);
+  color: #b2c3a5;
+  border-bottom-color: #35442f;
+}
+.article-grid > article.upcoming-card .card-copy h2 {
+  color: var(--text);
+  opacity: .92;
+}
+.article-grid > article.upcoming-card .card-copy p,
+.article-grid > article.upcoming-card .card-meta,
+.article-grid > article.upcoming-card .upcoming-footer {
+  color: #bbcab0;
+}
+.article-grid > article.upcoming-card .upcoming-status {
+  color: #e1edcf;
+  background: #263425;
+  border-color: #778a69;
+}
+/* Cards remain readable and naturally reflow at mobile widths and 200% zoom. */
