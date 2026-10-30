@@ -74,7 +74,7 @@ def render_search_widget():
             '<dialog class="global-search-dialog" data-global-search-dialog aria-label="Søk i MODUS">'
             '<div class="global-search-top"><strong>Søk i MODUS</strong><button type="button" data-global-search-close aria-label="Lukk søk">✕</button></div>'
             '<label for="global-search-input">Finn artikler, verktøy og undervisning</label>'
-            '<input id="global-search-input" class="global-search-input" type="search" data-global-search-input autocomplete="off" placeholder="Moduser, akkorder, intervaller …">'
+            '<input id="global-search-input" class="global-search-input" type="text" role="searchbox" inputmode="search" enterkeyhint="search" data-global-search-input autocomplete="off" placeholder="Moduser, akkorder, intervaller …">'
             '<p class="global-search-status" data-global-search-status role="status" aria-live="polite"></p>'
             '<div class="global-search-results" data-global-search-results></div></dialog>')
 
