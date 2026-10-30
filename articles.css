@@ -113,3 +113,13 @@
 .upcoming-card h3{margin:0;font-size:1.12rem;line-height:1.4}
 .upcoming-card p{margin:0 0 .5rem;color:#c2d1b7;line-height:1.6;flex:1}
 .upcoming-status{align-self:flex-start;padding:.35rem .7rem;border:1px solid rgba(194,213,167,.35);border-radius:100px;font-size:.78rem;color:#d4e7b7}
+
+/* PL-058: non-clickable upcoming entries inside the existing article grid */
+.article-grid>.upcoming-card{display:flex;flex-direction:column;min-width:0;overflow:hidden;background:#1b2416;border:1px solid #45543b;border-radius:11px;cursor:default;transition:none}
+.article-grid>.upcoming-card:hover{border-color:#45543b;transform:none}
+.upcoming-card .card-level-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:46px;padding:10px 15px;background:#182216;border-bottom:1px solid #394d2c}
+.upcoming-card .upcoming-status{flex-shrink:0;padding:5px 9px;border-radius:5px;border:1px solid #738664;color:#e1edcf;background:#283524;font-size:11px}
+.upcoming-card .upcoming-illustration{aspect-ratio:800/430;display:grid;place-items:center;background:radial-gradient(ellipse at center,#2a3925 0,#182216 72%);border-bottom:1px solid #394d2c;color:#a9bd95;letter-spacing:.17em;font-size:11px}
+.upcoming-card .card-copy{flex:1}
+.upcoming-card .upcoming-footer{margin-top:auto;border-top:1px solid #394d2c;padding-top:15px;font-size:11px;color:#c1d0b4}
+.upcoming-card[hidden]{display:none!important}
