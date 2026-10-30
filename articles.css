@@ -123,3 +123,103 @@
 .upcoming-card .card-copy{flex:1}
 .upcoming-card .upcoming-footer{margin-top:auto;border-top:1px solid #394d2c;padding-top:15px;font-size:11px;color:#c1d0b4}
 .upcoming-card[hidden]{display:none!important}
+
+/* PL-059: upcoming cards stay in the article grid but never look interactive. */
+.article-grid > article.upcoming-card {
+  background: #172017;
+  border-color: #374633;
+  color: var(--text);
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+  transition: none;
+}
+.article-grid > article.upcoming-card:hover,
+.article-grid > article.upcoming-card:focus-within {
+  background: #172017;
+  border-color: #374633;
+  box-shadow: none;
+  transform: none;
+}
+.article-grid > article.upcoming-card .card-level-row {
+  background: #151d14;
+  border-bottom-color: #35442f;
+}
+.article-grid > article.upcoming-card .upcoming-illustration {
+  background: radial-gradient(ellipse at center, #253322 0%, #151d14 72%);
+  color: #b2c3a5;
+  border-bottom-color: #35442f;
+}
+.article-grid > article.upcoming-card .card-copy h2 {
+  color: var(--text);
+  opacity: .92;
+}
+.article-grid > article.upcoming-card .card-copy p,
+.article-grid > article.upcoming-card .card-meta,
+.article-grid > article.upcoming-card .upcoming-footer {
+  color: #bbcab0;
+}
+.article-grid > article.upcoming-card .upcoming-status {
+  color: #e1edcf;
+  background: #263425;
+  border-color: #778a69;
+}
+/* PL-077: keep editorial text crisp; soften only the passive illustration. */
+.article-grid > article.upcoming-card { position: relative; isolation: isolate; }
+.article-grid > article.upcoming-card .upcoming-illustration {
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
+.article-grid > article.upcoming-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(15, 23, 16, .12);
+  pointer-events: none;
+  z-index: 1;
+}
+.article-grid > article.upcoming-card .card-level-row { position: relative; }
+.article-grid > article.upcoming-card .upcoming-status {
+  position: relative;
+  z-index: 2;
+  filter: none;
+  -webkit-filter: none;
+}
+/* Status, category, title and description remain crisp; illustration alone is blurred. */
+/* Cards remain readable and naturally reflow at mobile widths and 200% zoom. */
+
+/* PL-059: Preview rebuild trigger; no visual or functional change. */
+
+
+/* QA-078-02: prevent intrinsic-width overflow in planned cards on narrow screens. */
+@media (max-width: 550px) {
+  .article-grid { grid-template-columns: minmax(0, 1fr); }
+  .article-grid > article.upcoming-card {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .article-grid > article.upcoming-card .card-level-row {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .article-grid > article.upcoming-card .card-level-row .level-badge,
+  .article-grid > article.upcoming-card .upcoming-status {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .article-grid > article.upcoming-card .card-copy,
+  .article-grid > article.upcoming-card .card-copy h2,
+  .article-grid > article.upcoming-card .card-copy p,
+  .article-grid > article.upcoming-card .card-meta {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  /* Keep the last row of cards reachable above the fixed contact control. */
+  .articles-page { padding-bottom: max(100px, env(safe-area-inset-bottom)); }
+}
