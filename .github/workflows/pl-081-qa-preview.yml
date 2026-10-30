@@ -55,7 +55,7 @@ jobs:
             test-results/test-results.json
             test-results/test-results.md
           if-no-files-found: warn
-      - name: Ensure Cloudflare credentials exist
+      # Security: use an API token with Account / Cloudflare Pages / Edit (Pages Write)\n      # restricted to the MODUS Cloudflare account, not a global API key.\n      # This account permission is NOT a branch-level restriction; only an\n      # explicitly approved manual run and the hardcoded Preview branch protect production.\n      # Store token and account ID as GitHub Actions secrets; never commit values.\n      - name: Ensure Cloudflare credentials exist
         env:
           CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -69,7 +69,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         shell: bash
         run: |
-          npx --yes wrangler@4 pages deploy dist \
+          npx --yes wrangler@4.151.3 pages deploy dist \
             --project-name modus \
             --branch qa/pl-080-baseline \
             --commit-hash 41449f99b39f45fd8c28a4ac7569dc32610fbedc \
