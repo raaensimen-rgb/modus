@@ -65,8 +65,18 @@ def render_header(prefix='', active='home'):
         + link('about', 'om-modus.html', 'Om MODUS') + '</nav><div class="header-tools">'
         + link('membership', 'modus-plus.html', 'MODUS+', css='nav-membership')
         + link('account', 'konto.html', 'Logg inn', css='nav-account')
-        + render_language_picker() + render_theme_picker() + '</div></header>'
+        + render_search_widget() + render_language_picker() + render_theme_picker() + '</div></header>'
     )
+
+
+def render_search_widget():
+    return ('<button type="button" class="global-search-trigger" data-global-search-open aria-label="Søk i MODUS / Search MODUS" title="Søk (Ctrl/⌘ K)">⌕ Søk</button>'
+            '<dialog class="global-search-dialog" data-global-search-dialog aria-label="Søk i MODUS">'
+            '<div class="global-search-top"><strong>Søk i MODUS</strong><button type="button" data-global-search-close aria-label="Lukk søk">✕</button></div>'
+            '<label for="global-search-input">Finn artikler, verktøy og undervisning</label>'
+            '<input id="global-search-input" class="global-search-input" type="search" data-global-search-input autocomplete="off" placeholder="Moduser, akkorder, intervaller …">'
+            '<p class="global-search-status" data-global-search-status role="status" aria-live="polite"></p>'
+            '<div class="global-search-results" data-global-search-results></div></dialog>')
 
 
 def render_language_picker():
@@ -125,7 +135,7 @@ def with_navigation_css(page, prefix=''):
         (root / filename).write_bytes((root / 'account.js').read_bytes())
         page = re.sub(r'<script src="(?:\.\./)?account(?:\.[a-f0-9]{10})?\.js" defer></script>', '', page)
         page = page.replace('</head>', f'<script src="{prefix}{filename}" defer></script></head>', 1)
-    # Shared visitor feedback is added at build time, including article and language pages.
+    if 'global-search.js' not in page:\n        page = page.replace('</head>', f'<link rel="stylesheet" href="{prefix}global-search.css"><script src="{prefix}global-search.js" defer></script></head>', 1)\n    # Shared visitor feedback is added at build time, including article and language pages.
     if 'feedback.css' not in page:
         page = page.replace('</head>', f'<link rel="stylesheet" href="{prefix}feedback.css"><script src="{prefix}feedback.js" defer></script></head>', 1)
     page = page.replace('class="nav-account"', 'class="nav-account" data-account-link')
