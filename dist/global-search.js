@@ -44,9 +44,24 @@
       entries = await response.json(); render();
     } catch (_) {status.textContent = english ? "Search is temporarily unavailable." : "Søket er midlertidig utilgjengelig.";}
   }
+  function closeSearch() {
+    if (dialog.open) dialog.close();
+  }
+  dialog.addEventListener("close", () => trigger.focus());
+  // Safari may consume Escape to clear a focused search field first.
+  dialog.addEventListener("keydown", event => {
+    if (event.key !== "Escape" || !dialog.open || event.isComposing) return;
+    event.preventDefault();
+    event.stopPropagation();
+    closeSearch();
+  }, true);
+  dialog.addEventListener("cancel", event => {
+    event.preventDefault();
+    closeSearch();
+  });
   trigger.addEventListener("click",open);
-  dialog.querySelector("[data-global-search-close]").addEventListener("click",()=>dialog.close());
-  dialog.addEventListener("click",event=>{if(event.target===dialog)dialog.close();});
+  dialog.querySelector("[data-global-search-close]").addEventListener("click",closeSearch);
+  dialog.addEventListener("click",event=>{if(event.target===dialog)closeSearch();});
   input.addEventListener("input",render);
   document.addEventListener("keydown",event=>{
     if ((event.metaKey||event.ctrlKey) && event.key.toLowerCase()==="k") {event.preventDefault();open();}
