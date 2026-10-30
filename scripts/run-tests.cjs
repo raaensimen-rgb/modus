@@ -92,6 +92,10 @@ const tests = [
   [
     "python3",
     "tests/upcoming-articles.py"
+  ],
+  [
+    "node",
+    "tests/global-search.cjs"
   ]
 ];
 const outputDir = path.join(process.cwd(), 'test-results');

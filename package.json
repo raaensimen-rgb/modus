@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build:account": "esbuild client/account.js --bundle --minify --format=iife --target=es2020 --outfile=dist/account.js",
-    "build": "python3 scripts/sync-design-system.py && npm run build:account && python3 scripts/build-account.py && python3 scripts/sync-navigation.py && python3 scripts/build-articles.py && python3 scripts/sync-design-system.py --finish && python3 scripts/build-languages.py && npm run build:editor",
+    "build": "python3 scripts/sync-design-system.py && npm run build:account && python3 scripts/build-account.py && python3 scripts/sync-navigation.py && python3 scripts/build-articles.py && python3 scripts/sync-design-system.py --finish && python3 scripts/build-languages.py && python3 scripts/build-search.py && npm run build:editor",
     "test": "node scripts/run-tests.cjs",
     "build:editor": "python3 scripts/build-editor.py && esbuild client/editor.js --bundle --minify --format=esm --target=es2022 --outfile=dist/editor.js",
     "build:cms-runtime": "esbuild cms/worker.mjs --bundle --minify --format=esm --target=es2022 --outfile=dist/_worker.js"
