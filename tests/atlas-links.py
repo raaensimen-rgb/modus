@@ -37,7 +37,17 @@ assert len(pending) == len(planned) == 5
 assert {a["slug"] for a in pending} == {a["slug"] for a in planned}
 assert len({a["slug"] for a in pending}) == len(pending)
 assert not ({a["slug"] for a in pending} & expected_slugs)
-assert all(a["status"] == "planned" and a["module_id"] is None and a["approval"] == "awaiting_subject_review" for a in pending)
+approved = {
+    "intervallomvendinger": ("F03", []),
+    "kadens-og-tonale-funksjoner": ("I01", ["I02"]),
+    "sekundaerdominanter": ("A01", []),
+    "akkordutvidelser": ("P02", ["E02"]),
+    "modal-harmonikk-i-praksis": ("A02", ["I03"]),
+}
+assert all(a["status"] == "planned" and a["approval"] == "subject_approved" for a in pending)
+assert {a["slug"]: (a["module_id"], a["related_module_ids"]) for a in pending} == approved
+assert all(a["module_id"] in module_ids and set(a["related_module_ids"]) <= module_ids for a in pending)
+assert all(a["module_id"] not in a["related_module_ids"] for a in pending)
 
 # Undertopics / lessons are deliberately empty until their editorial links are authorized.
 assert all(not m["topics"] and not m["lessons"] for m in registry["modules"])
@@ -48,4 +58,4 @@ assert "localStorage.setItem(STORE" in js
 assert 'const articleEvidenceKey=\'modus.atlas.article-evidence.v1\'' in js
 assert "publication_approval" in (ROOT / "content/curriculum/quality-register.json").read_text(encoding="utf-8")
 
-print("Atlas links integrity passed: 24 stable modules, 16 published links, 5 unlinked planned articles.")
+print("Atlas links integrity passed: 24 stable modules, 16 published links, 5 subject-approved planned article mappings.")
