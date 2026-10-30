@@ -209,32 +209,43 @@
     {
       "slug": "intervallomvendinger",
       "status": "planned",
-      "module_id": null,
-      "approval": "awaiting_subject_review"
+      "module_id": "F03",
+      "approval": "subject_approved",
+      "related_module_ids": []
     },
     {
       "slug": "kadens-og-tonale-funksjoner",
       "status": "planned",
-      "module_id": null,
-      "approval": "awaiting_subject_review"
+      "module_id": "I01",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "I02"
+      ]
     },
     {
       "slug": "sekundaerdominanter",
       "status": "planned",
-      "module_id": null,
-      "approval": "awaiting_subject_review"
+      "module_id": "A01",
+      "approval": "subject_approved",
+      "related_module_ids": []
     },
     {
       "slug": "akkordutvidelser",
       "status": "planned",
-      "module_id": null,
-      "approval": "awaiting_subject_review"
+      "module_id": "P02",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "E02"
+      ]
     },
     {
       "slug": "modal-harmonikk-i-praksis",
       "status": "planned",
-      "module_id": null,
-      "approval": "awaiting_subject_review"
+      "module_id": "A02",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "I03"
+      ]
     }
   ]
 }
