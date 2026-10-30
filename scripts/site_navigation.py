@@ -135,7 +135,9 @@ def with_navigation_css(page, prefix=''):
         (root / filename).write_bytes((root / 'account.js').read_bytes())
         page = re.sub(r'<script src="(?:\.\./)?account(?:\.[a-f0-9]{10})?\.js" defer></script>', '', page)
         page = page.replace('</head>', f'<script src="{prefix}{filename}" defer></script></head>', 1)
-    if 'global-search.js' not in page:\n        page = page.replace('</head>', f'<link rel="stylesheet" href="{prefix}global-search.css"><script src="{prefix}global-search.js" defer></script></head>', 1)\n    # Shared visitor feedback is added at build time, including article and language pages.
+    if 'global-search.js' not in page:
+        page = page.replace('</head>', f'<link rel="stylesheet" href="{prefix}global-search.css"><script src="{prefix}global-search.js" defer></script></head>', 1)
+    # Shared visitor feedback is added at build time, including article and language pages.
     if 'feedback.css' not in page:
         page = page.replace('</head>', f'<link rel="stylesheet" href="{prefix}feedback.css"><script src="{prefix}feedback.js" defer></script></head>', 1)
     page = page.replace('class="nav-account"', 'class="nav-account" data-account-link')
