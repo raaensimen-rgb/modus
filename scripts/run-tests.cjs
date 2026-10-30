@@ -88,6 +88,10 @@ const tests = [
   [
     "node",
     "tests/feedback.cjs"
+  ],
+  [
+    "python3",
+    "tests/upcoming-articles.py"
   ]
 ];
 const outputDir = path.join(process.cwd(), 'test-results');
