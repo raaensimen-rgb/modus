@@ -40,13 +40,14 @@ Fra prosjektroten, med Node.js 22 og Python 3.12:
 
 ```sh
 npm ci
-npm run build
-npm test
+npm run quality
 ```
 
 Rapportene skrives til `test-results/`. Denne mappen og `node_modules/` skal
 ikke committes. Byggingen oppdaterer også genererte filer; vurder diffen før
 commit. Ikke inkluder utilsiktede genererte frontendendringer i en test-PR.
+`npm run quality` bygger før testing og stopper hvis byggingen feiler.
+`npm test` alene forutsetter at en oppdatert bygging allerede finnes.
 
 ## Hva krever fortsatt vurdering?
 
