@@ -10,9 +10,11 @@
  if(typeof document==='undefined')return;
  const en=document.documentElement.lang==='en',t=(nb,english)=>en?english:nb;
  const cards=[...document.querySelectorAll('.article-card')];
+ const upcomingCards=[...document.querySelectorAll('.upcoming-card')];
  const orderedIds=["toner-og-intervaller","dur-og-moll","bygg-akkorder-i-en-toneart","kvintsirkelen","romertall-i-musikk","treklanger-fra-grunnform-til-omvending","din-forste-improvisasjon","septimakkorder","ii-v-i-kadensen","ett-skalakart-nye-maltoner","moduser-og-tonalt-sentrum","kirketonearter-ett-system-sju-uttrykk","dorisk-og-eolisk","stemmeforing","harmonisk-moll-og-frygisk-dominant","rytme-i-sju-aatte"];
  cards.sort((a,b)=>(orderedIds.includes(a.dataset.articleId)?orderedIds.indexOf(a.dataset.articleId):999)-(orderedIds.includes(b.dataset.articleId)?orderedIds.indexOf(b.dataset.articleId):999));
- const items=cards.map(card=>({id:card.dataset.articleId,level:card.dataset.level,topic:card.dataset.topic,search:card.dataset.search+' '+card.querySelector('h2').textContent,card}));
+ const published=cards.map(card=>({id:card.dataset.articleId,level:card.dataset.level,topic:card.dataset.topic,search:card.dataset.search+' '+card.querySelector('h2').textContent,card}));
+ const items=[...published,...upcomingCards.map((card,i)=>({id:'planned-'+i,level:card.dataset.level,topic:card.dataset.topic,search:card.dataset.search+' '+card.querySelector('h2').textContent,card,planned:true}))];
  const search=document.getElementById('articleSearch'),container=document.getElementById('articleGroups');
  const levelButtons=[...document.querySelectorAll('[data-filter]')],topicButtons=[...document.querySelectorAll('[data-topic-filter]')],views=[...document.querySelectorAll('[data-group-by]')];
  const state={level:'all',topic:'all',q:'',view:'order'};
@@ -26,12 +28,12 @@
  }
  function updateProgress(){
   document.querySelectorAll('[data-stage-progress]').forEach(label=>{
-   const stage=items.filter(a=>a.level===label.dataset.stageProgress),done=stage.filter(a=>completed(a.id)).length;
+   const stage=published.filter(a=>a.level===label.dataset.stageProgress),done=stage.filter(a=>completed(a.id)).length;
    label.textContent=en?`${done} / ${stage.length} quizzes completed`:`${done} / ${stage.length} quizer fullført`;
    label.closest('.journey-stage').classList.toggle('stage-complete',done===stage.length);
   });
-  const next=nextArticle(items,completed),link=document.getElementById('nextArticle');
-  const item=next||items[0];link.href=item.card.querySelector('.card-main').getAttribute('href');
+  const next=nextArticle(published,completed),link=document.getElementById('nextArticle');
+  const item=next||published[0];link.href=item.card.querySelector('.card-main').getAttribute('href');
   link.querySelector('[data-next-label]').textContent=next?t('DITT NESTE STEG','YOUR NEXT STEP'):t('ALLE QUIZER FULLFØRT','ALL QUIZZES COMPLETED');
   link.querySelector('[data-next-title]').textContent=next?item.card.querySelector('h2').textContent:t('Ta ideene videre til instrumentet.','Take these ideas to your instrument.');
   link.querySelector('[data-next-note]').textContent=next?t('Første artikkel uten fullført quiz. Rekkefølgen er et forslag, ikke et krav.','The first article without a completed quiz. This order is a suggestion, not a requirement.'):t('Du kan åpne og repetere artiklene når du vil. Begynn med byggesteinene igjen ↗','You can revisit any article whenever you like. Review the building blocks ↗');
@@ -39,7 +41,7 @@
  }
  function updateGroupCounts(){
   container.querySelectorAll('.article-category').forEach(group=>{
-   const visible=[...group.querySelectorAll('.article-card')].filter(c=>!c.hidden),done=visible.filter(c=>completed(c.dataset.articleId)).length;
+   const visible=[...group.querySelectorAll('.article-card,.upcoming-card')].filter(c=>!c.hidden),done=visible.filter(c=>c.classList.contains('article-card')&&completed(c.dataset.articleId)).length;
    group.hidden=visible.length===0;
    group.querySelector('[data-category-count]').textContent=en?`${visible.length} ${visible.length===1?'article':'articles'} · ${done} ${done===1?'quiz':'quizzes'} completed`:`${visible.length} ${visible.length===1?'artikkel':'artikler'} · ${done} ${done===1?'quiz':'quizer'} fullført`;
   });
