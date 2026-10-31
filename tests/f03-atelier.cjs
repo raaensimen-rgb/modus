@@ -17,7 +17,7 @@ const nodes=new Map(ids.map(id=>[id,new Node(id)]));
 const opts=[2,4,7].map(value=>{const n=new Node();n.dataset.interval=String(value);n.attrs["aria-pressed"]=String(value===2);return n;});
 const calls=[];
 const document={getElementById:id=>nodes.get(id)||null,createElement:tag=>{const n=new Node();n.tag=tag;return n;},querySelectorAll:selector=>{assert.equal(selector,"[data-interval]");return opts;},querySelector:selector=>{assert.equal(selector,'[data-interval][aria-pressed="true"]');return opts.find(x=>x.attrs["aria-pressed"]==="true");}};
-const window={MODUSGrand:{playMidi:async (...args)=>{calls.push(args);}}};
+const window={ModusPiano:{create:()=>({refresh(){},clear(){},track(){}})},MODUSGrand:{setView(){},stop(){},playMidi:async (...args)=>{calls.push(args);}}};
 vm.runInNewContext(code,{document,window,URLSearchParams,location:{search:"?modul=F03"},Math,Number,Set,Object,Array});
 assert.equal(nodes.get("f03-piano").children.length,25,"Two-octave keyboard");
 assert.equal(nodes.get("f03-fretboard").children.length,6*14+14,"Six strings, 13 fret positions and labels");

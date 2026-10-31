@@ -24,9 +24,11 @@
   key.setAttribute("aria-label",labelOf(midi)+" – spill flygel");
   if(black){key.style.left=(whiteIndex*whiteWidth-whiteWidth*.33)+"%";key.style.width=(whiteWidth*.66)+"%";}
   else {key.style.left=(whiteIndex*whiteWidth)+"%";key.style.width=whiteWidth+"%";key.textContent=chroma===0?labelOf(midi):pitchNames[chroma];whiteIndex++;}
-  key.addEventListener("click",()=>sound([midi],"f03-visual-status"));
+
   piano.append(key);pianoKeys.push(key);
  }
+ const f03Piano=window.ModusPiano.create({element:piano,load:midi=>window.MODUSGrand.loadNote(midi),name:midi=>pitchNames[midi%12],onError:()=>{$("f03-visual-status").textContent="Kunne ikke spille tonen.";}});
+ f03Piano.refresh();window.MODUSGrand.setView(f03Piano);
  const stringMidi=[64,59,55,50,45,40];
  const stringNames=["e","H","G","D","A","E"];
  const corner=document.createElement("span");corner.className="fret-label";corner.textContent="Streng";guitar.append(corner);
@@ -36,7 +38,7 @@
   for(let fret=0;fret<=12;fret++){
    const midi=open+fret,key=document.createElement("button");key.type="button";key.className="fret-note";
    key.dataset.midi=String(midi);key.setAttribute("aria-label",stringNames[string]+"-streng bånd "+fret+" – "+labelOf(midi)+" – spill flygel");
-   key.addEventListener("click",()=>sound([midi],"f03-visual-status"));
+
    guitar.append(key);fretKeys.push(key);
   }
  });
@@ -52,11 +54,12 @@
   $("f03-visual-status").textContent=status||(notes?"Viser "+labelOf(root)+" og "+labelOf(top)+".":"Tonene er skjult i gehørøvelsen.");
  }
  async function sound(midis,statusId,simultaneous=false){
-  try{if(!window.MODUSGrand)throw Error("Audio system not ready");await window.MODUSGrand.playMidi(midis,simultaneous);
+  try{if(!window.MODUSGrand)throw Error("Audio system not ready");await window.MODUSGrand.playMidi(midis,simultaneous,f03Piano);
    $(statusId).textContent=simultaneous?"Spiller pianotonene samtidig.":"Spiller akustisk flygel.";
   }catch{$(statusId).textContent="Flygelsamplene kunne ikke lastes. Prøv på nytt.";}
  }
  function manual(){
+  window.MODUSGrand.stop();f03Piano.clear();
   const option=Number(document.querySelector('[data-interval][aria-pressed="true"]')?.dataset.interval||2);
   stage.manual=[60,60+option];
   render(stage.manual);
@@ -64,6 +67,7 @@
  document.querySelectorAll("[data-interval]").forEach(b=>b.addEventListener("click",()=>{stage.quiz=null;manual();}));
  manual();
  function newQuestion(){
+  window.MODUSGrand.stop();f03Piano.clear();
   const difficulty=$("f03-difficulty").value;
   const options=scales[difficulty];
   let candidate;
@@ -104,10 +108,12 @@
   $("f03-ear-feedback").dataset.result=correct?"correct":"retry";
   render([q.root,q.root+q.s],"Svaret er "+name+" ("+q.s+" halvtonetrinn).");
  }
+ for(const id of ["interval-melodic","interval-harmonic"])$(id)?.addEventListener("click",()=>render(stage.manual));
  async function hearQuestion(){
   if(!stage.quiz)newQuestion();
   const q=stage.quiz;
-  try{await window.MODUSGrand.playMidi([q.root,q.root+q.s]);
+  render(stage.revealed?[q.root,q.root+q.s]:null);
+  try{f03Piano.clear();await window.MODUSGrand.playMidi([q.root,q.root+q.s],false,stage.revealed?f03Piano:null);
    if(!stage.attempted)$("f03-ear-feedback").textContent="Lytt til avstanden og velg et svar. Tonene er fortsatt skjult.";
   }catch{$("f03-ear-feedback").textContent="Kunne ikke laste flygelsamplene. Prøv igjen."; }
  }

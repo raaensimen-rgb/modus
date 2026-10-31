@@ -8,7 +8,7 @@
     "test": "node scripts/run-tests.cjs",
     "build:editor": "python3 scripts/build-editor.py && esbuild client/editor.js --bundle --minify --format=esm --target=es2022 --outfile=dist/editor.js",
     "build:cms-runtime": "esbuild cms/worker.mjs --bundle --minify --format=esm --target=es2022 --outfile=dist/_worker.js",
-    "test:browser": "node tests/release-browser.cjs"
+    "test:browser": "node tests/release-browser.cjs && node tests/piano-browser.cjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.118.0",
