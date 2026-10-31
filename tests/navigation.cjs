@@ -17,7 +17,7 @@ g.events.click();handlers.click({target:outside});assert.equal(g.panel.hidden,tr
 const dropdownMarkup=fs.readFileSync('dist/index.html','utf8');
 assert(dropdownMarkup.includes('>Hjem<span class="nav-tooltip"'),'Home should be labeled Hjem');
 assert(dropdownMarkup.includes('>Studier<span class="nav-chevron"'),'Studies dropdown should be labeled Studier');
-for(const label of ['Start å lære','Hele utdanningsløpet','Leksjoner og øvelser','Utforsk musikkteori']) {
+for(const label of ['Start å lære','Læringsløpet','Leksjoner og øvelser','Utforsk musikkteori']) {
  assert(dropdownMarkup.includes(label),'missing descriptive label: '+label);
 }
 assert(dropdownMarkup.includes('href="modus-plus.html" class="nav-membership"'),'membership preview must remain navigable');
