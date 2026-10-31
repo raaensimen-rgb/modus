@@ -1,81 +1,160 @@
-name: PL-081 isolated QA Preview (manual)
+name: MODUS isolated QA deployment
 
-on:
+'on':
   workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Reviewed commit in this repository (full 40-character SHA)
+        required: true
+        type: string
 
 permissions:
   contents: read
 
 concurrency:
-  group: pl-081-qa-preview
+  group: modus-qa-deployment
   cancel-in-progress: false
 
+env:
+  QA_PROJECT: ${{ vars.MODUS_QA_PROJECT }}
+  QA_ACCOUNT_ID: ${{ vars.CF_QA_ACCOUNT_ID }}
+  PRODUCTION_ACCOUNT_ID: ${{ vars.CF_PRODUCTION_ACCOUNT_ID }}
+  QA_ENABLED: ${{ vars.MODUS_QA_ENABLED }}
+  SOURCE_SHA: ${{ inputs.source_sha }}
+
 jobs:
-  qa-preview:
-    name: Verify baseline and deploy Preview only
-    # Never run from a feature branch or a pull request.
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
+  preflight:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.workflow_sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12.14'
+      - run: python -m pip install --requirement .github/qa/requirements.txt
+      - name: Validate workflow and security policies
+        run: python tests/qa-infrastructure.py
+      - name: Validate dispatch configuration
+        run: python scripts/qa/guard.py dispatch
+      - name: Record preflight outcome
+        if: always()
+        env:
+          BUILD_OUTCOME: not_started
+          TEST_OUTCOME: not_started
+          PREFLIGHT_OUTCOME: ${{ job.status }}
+        run: python scripts/qa/guard.py evidence preflight-evidence
+      - name: Preserve preflight evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: qa-preflight-${{ github.run_id }}-${{ github.run_attempt }}
+          path: preflight-evidence/
+          if-no-files-found: warn
+          retention-days: 30
+
+  build:
+    needs: preflight
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
-      - name: Check out exact approved baseline
-        uses: actions/checkout@v4
+      - name: Check out trusted QA controls
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          ref: 41449f99b39f45fd8c28a4ac7569dc32610fbedc
+          ref: ${{ github.workflow_sha }}
+          path: control
           persist-credentials: false
-      - name: Verify exact source commit
-        shell: bash
-        run: |
-          test "$(git rev-parse HEAD)" = "41449f99b39f45fd8c28a4ac7569dc32610fbedc"
-          test -z "$(git status --porcelain)"
-      - uses: actions/setup-node@v4
+      - name: Check out exact source commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          node-version: '22'
-          cache: npm
-      - uses: actions/setup-python@v5
+          ref: ${{ inputs.source_sha }}
+          path: source
+          persist-credentials: false
+      - name: Verify source SHA before executing source
+        run: test "$(git -C source rev-parse HEAD)" = "$SOURCE_SHA"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          python-version: '3.12'
-      - name: Install locked dependencies
+          node-version: '22.22.0'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12.14'
+      - run: python -m pip install --requirement control/.github/qa/requirements.txt
+      - name: Install source dependencies
+        working-directory: source
         run: npm ci
-      - name: Assemble public assets as configured in Cloudflare
-        shell: bash
-        run: |
-          mkdir -p dist
-          cp -R *.html *.css *.js artikler audio en images dist/
-      - name: Build
+      - name: Build source
+        id: build
+        working-directory: source
         run: npm run build
-      - name: Run full regression suite
+      - name: Full source regression suite
+        id: tests
+        working-directory: source
         run: npm test
-      - name: Preserve QA test evidence
-        if: always()
-        uses: actions/upload-artifact@v4
+      - name: Package tested static site and evidence
+        run: python control/scripts/qa/guard.py package source "$RUNNER_TEMP/qa-payload"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: pl081-qa-test-results
-          path: |
-            test-results/test-results.json
-            test-results/test-results.md
+          name: qa-site-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/qa-payload/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Record build and test outcome
+        if: always()
+        env:
+          BUILD_OUTCOME: ${{ steps.build.outcome }}
+          TEST_OUTCOME: ${{ steps.tests.outcome }}
+        run: python control/scripts/qa/guard.py evidence source/test-results
+      - name: Upload QA-07 evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: qa-tests-${{ github.run_id }}-${{ github.run_attempt }}
+          path: source/test-results/
           if-no-files-found: warn
-      # Security: use a Cloudflare API token with Account / Cloudflare Pages / Edit.
-      # Restrict token resources to the MODUS Cloudflare account.
-      # This permission is account-scoped, NOT restricted to a Preview branch.
-      # Require separate risk acceptance before adding GitHub Actions secrets.
-      # Never commit secrets or paste them into a conversation.
-      - name: Ensure Cloudflare credentials exist
+          retention-days: 30
+
+  deploy:
+    needs: [preflight, build]
+    if: needs.preflight.result == 'success' && needs.build.result == 'success' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    environment: modus-qa
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out trusted deployment controls only
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: control
+          persist-credentials: false
+          sparse-checkout: |
+            scripts/qa
+            tools/qa
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22.22.0'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12.14'
+      - name: Install locked deployment tool without lifecycle scripts
+        run: npm ci --prefix control/tools/qa --ignore-scripts
+      - name: Download only this run's tested site
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: qa-site-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/qa-payload
+      - name: Revalidate and deploy only to approved QA project
+        id: deploy
         env:
-          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        shell: bash
-        run: |
-          test -n "$CF_API_TOKEN" || { echo 'Missing CLOUDFLARE_API_TOKEN'; exit 1; }
-          test -n "$CF_ACCOUNT_ID" || { echo 'Missing CLOUDFLARE_ACCOUNT_ID'; exit 1; }
-      - name: Deploy strictly to isolated QA Preview branch
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        shell: bash
-        run: |
-          npx --yes wrangler@4.151.3 pages deploy dist \
-            --project-name modus \
-            --branch qa/pl-080-baseline \
-            --commit-hash 41449f99b39f45fd8c28a4ac7569dc32610fbedc \
-            --commit-dirty=false
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_QA_API_TOKEN }}
+        run: python control/scripts/qa/deploy.py "$RUNNER_TEMP/qa-payload" "$RUNNER_TEMP/qa-deployment"
+      - name: Preserve deployment record even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: qa-deployment-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/qa-deployment/
+          if-no-files-found: warn
+          retention-days: 30
