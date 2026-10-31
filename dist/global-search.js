@@ -48,8 +48,9 @@
     if (dialog.open) dialog.close();
   }
   dialog.addEventListener("close", () => trigger.focus());
-  // Safari may consume Escape to clear a focused search field first.
-  dialog.addEventListener("keydown", event => {
+  // Own Escape before target handlers/default actions. The text input with
+  // role=searchbox avoids Safari's native type=search Escape-to-clear action.
+  document.addEventListener("keydown", event => {
     if (event.key !== "Escape" || !dialog.open || event.isComposing) return;
     event.preventDefault();
     event.stopPropagation();
