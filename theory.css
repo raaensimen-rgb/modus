@@ -12,3 +12,7 @@ button,select{font:inherit}button{cursor:pointer}button:focus-visible,select:foc
 #theoryKeyboard [data-midi]{cursor:pointer;touch-action:none;transition:filter .08s ease,stroke-width .08s ease;}
 #theoryKeyboard [data-midi].piano-playing{filter:brightness(.76);stroke:#d7f48c;stroke-width:3;}
 @media(prefers-reduced-motion:reduce){#theoryKeyboard [data-midi]{transition:none;}}
+
+#theoryKeyboard .piano-note-label{pointer-events:none;}
+#theoryKeyboard .piano-note-label.piano-tone-active circle{stroke:#f4ffc9;stroke-width:4;filter:brightness(1.3);}
+#theoryKeyboard .piano-note-label.piano-tone-active text{font-weight:800;}
