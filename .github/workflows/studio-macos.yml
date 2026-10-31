@@ -1,0 +1,44 @@
+name: ST-001 macOS prototype build
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'studio/**'
+      - '.github/workflows/studio-macos.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build-studio:
+    runs-on: macos-14
+    timeout-minutes: 35
+    defaults:
+      run:
+        working-directory: studio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: studio/package-lock.json
+      - name: Install frontend dependencies
+        run: npm install
+      - name: Generate macOS icon resources
+        run: npm run tauri -- icon icon.svg
+      - name: Build frontend
+        run: npm run build
+      - name: Build macOS app and DMG
+        run: npm run build:mac
+      - name: Upload installable prototype (unsigned)
+        uses: actions/upload-artifact@v4
+        with:
+          name: MODUS-Studio-macOS-unsigned
+          path: |
+            studio/src-tauri/target/release/bundle/dmg/*.dmg
+            studio/src-tauri/target/release/bundle/macos/*.app
+          if-no-files-found: error
+          retention-days: 7
