@@ -46,6 +46,7 @@ function chordSampleName(){return state.chordInstrument==='acoustic'||state.chor
 function updateSoundDescription(){$('soundDescription').textContent=(chordSampleName()==='jazz-piano'?'Akustisk flygel':'Elpiano')+(state.style==='jazz'?' · kontrabass · jevn 4/4-puls.':' · elbass · akustiske trommer.');}
 function update(){updateSoundDescription();notes=spellScale();const m=MODES[state.mode],custom=state.harmony==='custom'&&state.customChords.length;progression=custom?state.customChords.map(ch=>window.ModusProgressions.model(ch,state.key,state.mode)):(state.harmony==='drone'||state.mode===6?[0,0,0,0]:m.degrees).map(chordAt);$('chords').innerHTML=progression.map((c,i)=>`<div class="chord" id="chord${i}"><small>${String(i+1).padStart(2,'0')}</small><strong>${c.name}</strong><span class="roman">${c.roman}</span></div>`).join('');$('scaleTitle').textContent=KEYS[state.key][0]+' '+m.name.toLowerCase();$('modeFormula').textContent=m.intervals.join(' – ');$('scaleNotes').innerHTML=notes.map((n,i)=>`<span title="${m.intervals[i]}">${n}</span>`).join('');$('modePill').textContent=m.focus;$('modeDescription').textContent=m.color;$('loopInfo').textContent=custom?'EGEN REKKE · '+progression.length+' TAKTER':state.harmony==='drone'||state.mode===6?'TONIKADRONE · 4 TAKTER':'4 TAKTER';$('chordType').disabled=Boolean(custom);$('chordTypeHelp').textContent=custom?'Akkordtypene følger den egne rekken. Endre dem i akkordverkstedet.':state.chordType==='triad'?'Tre toner per akkord: dur, moll, forminsket eller forstørret, ut fra valgt skala.':'Fire toner per akkord: maj7, m7, 7 og andre septimakkorder, ut fra valgt skala.';$('customSequenceNote').hidden=!custom;$('harmony').querySelector('option[value="custom"]').disabled=!state.customChords.length;if(custom){const outside=progression.filter(c=>c.outside.length).map(c=>c.name+': '+c.outside.join(', '));$('customScaleInfo').textContent=outside.length?'Toner utenfor valgt skalakart – '+outside.join(' · ')+'. Kartet viser fortsatt '+KEYS[state.key][0]+' '+m.name.toLowerCase()+'.':'Akkordtonene passer i valgt skalakart: '+KEYS[state.key][0]+' '+m.name.toLowerCase()+'.';$('editCustomSequence').href=window.ModusProgressions.link('akkorder.html',{chords:state.customChords,key:state.key,mode:state.mode,tempo:state.tempo,style:state.style});}drawFretboard();save();}
 function drawFretboard(){
+ jamPiano.releaseManual();
  if(state.mapInstrument==='piano'){drawPiano();return;}
  $('fretboard').setAttribute('viewBox','0 0 1060 340');$('fretboard').setAttribute('aria-label','Gripebrett med '+KEYS[state.key][0]+' '+MODES[state.mode].name.toLowerCase()+' i standardstemming');$('mapScroll').classList.remove('piano-map');$('mapCaption').textContent='STANDARDSTEMMING · E A D G B E';$('mapRange').textContent='ÅPEN STRENG → 15. BÅND';
  const m=MODES[state.mode],root=KEYS[state.key][1],tuning=[64,59,55,50,45,40],openNames=['E','B','G','D','A','E'];
@@ -69,25 +70,26 @@ function drawFretboard(){
  });
  $('fretboard').innerHTML=svg;
 }
+const jamPiano=window.ModusPiano.create({element:$('fretboard'),name:m=>{const i=MODES[state.mode].steps.indexOf((m-KEYS[state.key][1]+120)%12);return i<0?window.ModusPiano.noteName(m):notes[i];},load:async midi=>{initAudio();await audio.resume();await loadSamples();master.gain.cancelScheduledValues(audio.currentTime);master.gain.setValueAtTime(.68,audio.currentTime);const sample=samples[chordSampleName()],nearest=[...sample.keys()].reduce((a,b)=>Math.abs(b-midi)<Math.abs(a-midi)?b:a);return {context:audio,output:channelGains.chords,buffer:sample.get(nearest),nearest};},onError:()=>{$('error').textContent='Kunne ikke spille tonen.';}});
 function drawPiano(){
  const m=MODES[state.mode],root=KEYS[state.key][1],whitePC=[0,2,4,5,7,9,11],blackAfter=[0,1,3,4,5],blackPC=[1,3,6,8,10],keyWidth=48,left=24,top=20,height=238;
- let svg='<rect width="1060" height="320" fill="#11170f"/>';
+ let svg='<rect width="1110" height="320" fill="#11170f"/>';
  const labelFor=(midi,cx,black)=>{
   const idx=m.steps.indexOf((midi-root+120)%12);if(idx<0)return '';
   const tonic=idx===0,cy=black?142:219,label=state.intervals?m.intervals[idx]:notes[idx];
-  return `${tonic?`<circle cx="${cx}" cy="${cy}" r="19" fill="none" stroke="${black?'#d7f48c':'#3c5722'}" stroke-width="2"/>`:''}<circle cx="${cx}" cy="${cy}" r="16" fill="${tonic?'#d7f48c':black?'#465b36':'#344a26'}"/><text x="${cx}" y="${cy+.5}" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="${label.length>2?12:15}" font-weight="700" fill="${tonic?'#14200c':'#ffffff'}">${label}</text>`;
+  return `<g data-note-midi="${midi}">${tonic?`<circle cx="${cx}" cy="${cy}" r="19" fill="none" stroke="${black?'#d7f48c':'#3c5722'}" stroke-width="2"/>`:''}<circle cx="${cx}" cy="${cy}" r="16" fill="${tonic?'#d7f48c':black?'#465b36':'#344a26'}"/><text x="${cx}" y="${cy+.5}" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="${label.length>2?12:15}" font-weight="700" fill="${tonic?'#14200c':'#ffffff'}">${label}</text></g>`;
  };
- // Three complete octaves, C3 through B5. Black keys are drawn on top.
- for(let octave=0;octave<3;octave++)for(let w=0;w<7;w++){
+ // Three octaves plus C6, covering every possible Jam voicing. Black keys are drawn on top.
+ for(let octave=0;octave<=3;octave++)for(let w=0;w<(octave===3?1:7);w++){
   const midi=48+octave*12+whitePC[w],x=left+(octave*7+w)*keyWidth,idx=m.steps.indexOf((midi-root+120)%12),tonic=idx===0;
-  svg+=`<g><title>${idx>=0?notes[idx]+' ('+m.intervals[idx]+')':'Utenfor valgt skala'} · MIDI ${midi}</title><rect x="${x}" y="${top}" width="${keyWidth-1}" height="${height}" rx="4" fill="${tonic?'#e0efbc':idx>=0?'#e2e9d7':'#f4f3eb'}" stroke="#647057"/>${labelFor(midi,x+keyWidth/2,false)}</g>`;
+  svg+=`<g><title>${idx>=0?notes[idx]+' ('+m.intervals[idx]+')':'Utenfor valgt skala'} · MIDI ${midi}</title><rect data-midi="${midi}" data-tonic="${tonic}" x="${x}" y="${top}" width="${keyWidth-1}" height="${height}" rx="4" fill="${tonic?'#e0efbc':idx>=0?'#e2e9d7':'#f4f3eb'}" stroke="#647057"/>${labelFor(midi,x+keyWidth/2,false)}</g>`;
   if(w===0)svg+=`<text x="${x+keyWidth/2}" y="291" text-anchor="middle" fill="#c5d0b9" font-size="14">C${octave+3}</text>`;
  }
  for(let octave=0;octave<3;octave++)for(let b=0;b<5;b++){
   const midi=49+octave*12+blackPC[b]-1,cx=left+(octave*7+blackAfter[b]+1)*keyWidth,idx=m.steps.indexOf((midi-root+120)%12),tonic=idx===0;
-  svg+=`<g><title>${idx>=0?notes[idx]+' ('+m.intervals[idx]+')':'Utenfor valgt skala'} · MIDI ${midi}</title><rect x="${cx-17}" y="${top}" width="34" height="148" rx="3" fill="${tonic?'#516d30':idx>=0?'#293d20':'#161a14'}" stroke="#68765a"/>${labelFor(midi,cx,true)}</g>`;
+  svg+=`<g><title>${idx>=0?notes[idx]+' ('+m.intervals[idx]+')':'Utenfor valgt skala'} · MIDI ${midi}</title><rect data-midi="${midi}" data-tonic="${tonic}" x="${cx-17}" y="${top}" width="34" height="148" rx="3" fill="${tonic?'#516d30':idx>=0?'#293d20':'#161a14'}" stroke="#68765a"/>${labelFor(midi,cx,true)}</g>`;
  }
- $('fretboard').setAttribute('viewBox','0 0 1060 320');$('fretboard').setAttribute('aria-label','Pianokart med '+KEYS[state.key][0]+' '+m.name.toLowerCase()+', C3 til B5');$('fretboard').innerHTML=svg;$('mapScroll').classList.add('piano-map');$('mapCaption').textContent='PIANOKART · TRE OKTAVER';$('mapRange').textContent='C3 → B5 · GRUNNTONER MARKERT I LYST GRØNT';
+ $('fretboard').setAttribute('viewBox','0 0 1110 320');$('fretboard').setAttribute('aria-label','Pianokart med '+KEYS[state.key][0]+' '+m.name.toLowerCase()+', C3 til C6');$('fretboard').innerHTML=svg;jamPiano.refresh();$('mapScroll').classList.add('piano-map');$('mapCaption').textContent='PIANOKART · TRE OKTAVER';$('mapRange').textContent='C3 → C6 · GRUNNTONER MARKERT I LYST GRØNT';
 }
 for(const id of ['mapInstrument','chordInstrument']){
  $(id).value=state[id];$(id).addEventListener('change',()=>{state[id]=$(id).value;if(id==='mapInstrument')drawFretboard();else updateSoundDescription();save();});
@@ -119,13 +121,14 @@ function playSample(buffer,t,duration,volume,rate,channel,pan=0,send=0,options={
  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(volume,t+.004);
  if(options.grand){const releaseStart=Math.max(.005,Math.min(gate,end-.01));g.gain.setValueAtTime(volume,t+releaseStart);g.gain.exponentialRampToValueAtTime(Math.max(.00001,volume*.008),t+end);}
  else{g.gain.setValueAtTime(volume,t+Math.max(.005,end-.08));g.gain.linearRampToValueAtTime(0,t+end);}
- src.start(t);src.stop(t+end+.01);
+ src.start(t);src.stop(t+end+.01);return {source:src,end:t+end};
 }
 function instrument(name,midi,t,duration,velocity){
  const nearest=[...samples[name].keys()].reduce((a,b)=>Math.abs(b-midi)<Math.abs(a-midi)?b:a),grand=name==='jazz-piano',keys=name.includes('piano');
  const pan=keys?Math.max(-.4,Math.min(.4,(midi-65)/(grand?85:36))):0;
  const release=state.style==='ambient'?1.65:state.style==='jazz'?.55:state.style==='funk'?.28:.95;
- playSample(samples[name].get(nearest),t,duration,velocity*(grand?.88:1),2**((midi-nearest)/12),keys?'chords':'bass',pan,grand?(state.style==='ambient'?.78:.44):keys?(state.style==='ambient'?1.2:.45):0,grand?{grand:true,release}:{});
+ const voice=playSample(samples[name].get(nearest),t,duration,velocity*(grand?.88:1),2**((midi-nearest)/12),keys?'chords':'bass',pan,grand?(state.style==='ambient'?.78:.44):keys?(state.style==='ambient'?1.2:.45):0,grand?{grand:true,release}:{});
+ if(keys&&voice)jamPiano.track(voice.source,midi,t,voice.end,audio);
 }
 function chooseChordVoicing(c,previousVoicing=null){let voices=c.ints.map(n=>c.midi+n);while(voices[0]>60)voices=voices.map(n=>n-12);const candidates=[];for(let inv=0;inv<voices.length;inv++){const v=voices.slice();for(let i=0;i<inv;i++)v[i]+=12;v.sort((a,b)=>a-b);for(const octave of [-12,0,12]){const candidate=v.map(n=>n+octave);if(candidate[0]>=48&&candidate.at(-1)<=84)candidates.push(candidate);}}let best=candidates[0]||voices;if(previousVoicing&&previousVoicing.length){const score=v=>v.reduce((sum,n)=>sum+Math.min(...previousVoicing.map(p=>Math.abs(n-p))),0)+Math.abs(v[0]-previousVoicing[0])*.2;best=candidates.reduce((a,b)=>score(b)<score(a)?b:a,best);}return best;}
 function chordVoicing(c){return previousVoicing=chooseChordVoicing(c,previousVoicing);}
@@ -169,8 +172,8 @@ if(p%4===0){const id=setTimeout(()=>{if(!playing)return;document.querySelectorAl
 function scheduler(){while(nextTime<audio.currentTime+.12){schedule(step,nextTime);nextTime+=60/state.tempo/4;step=(step+1)%(progression.length*32);}}
 let starting=false,startRun=0;
 async function start(){if(starting)return;starting=true;const run=++startRun;$('play').disabled=true;$('playText').textContent='Laster instrumenter…';try{initAudio();await audio.resume();await loadSamples();if(run!==startRun)return;if(audio.state!=='running')throw Error('blocked');master.gain.cancelScheduledValues(audio.currentTime);master.gain.setValueAtTime(.68,audio.currentTime);playing=true;step=0;previousVoicing=null;nextTime=audio.currentTime+.06;$('playIcon').textContent='■';$('playText').textContent='Stopp jam';$('play').setAttribute('aria-label','Stopp backingtrack');$('error').textContent='';scheduler();timer=setInterval(scheduler,25);}catch{if(run===startRun){$('error').textContent='Kunne ikke laste instrumentene. Sjekk forbindelsen og prøv igjen.';stop();}}finally{if(run===startRun){starting=false;$('play').disabled=false;}}}
-function stop(){startRun++;starting=false;$('play').disabled=false;playing=false;clearInterval(timer);visualTimers.forEach(clearTimeout);visualTimers=[];if(audio){master.gain.cancelScheduledValues(audio.currentTime);master.gain.setTargetAtTime(.0001,audio.currentTime,.012);for(const src of activeSources){try{src.stop(audio.currentTime+.055);}catch{}}}$('playIcon').textContent='▶';$('playText').textContent='Start jam';$('play').setAttribute('aria-label','Start backingtrack');$('position').textContent='Klar når du er';document.querySelectorAll('.chord,.beatlights i').forEach(el=>el.classList.remove('active'));}
-$('play').onclick=()=>playing?stop():start();document.addEventListener('keydown',e=>{if(e.code==='Space'&&!document.activeElement.isContentEditable&&!['INPUT','SELECT','BUTTON','TEXTAREA','A','SUMMARY'].includes(document.activeElement.tagName)){e.preventDefault();playing?stop():start();}});document.addEventListener('visibilitychange',()=>{if(document.hidden&&(playing||starting))stop();});$('reset').onclick=()=>{stop();try{localStorage.removeItem('modus-v1');}catch{}location.reload();};update();
+function stop(){jamPiano.clear();startRun++;starting=false;$('play').disabled=false;playing=false;clearInterval(timer);visualTimers.forEach(clearTimeout);visualTimers=[];if(audio){master.gain.cancelScheduledValues(audio.currentTime);master.gain.setTargetAtTime(.0001,audio.currentTime,.012);for(const src of activeSources){try{src.stop(audio.currentTime+.055);}catch{}}}$('playIcon').textContent='▶';$('playText').textContent='Start jam';$('play').setAttribute('aria-label','Start backingtrack');$('position').textContent='Klar når du er';document.querySelectorAll('.chord,.beatlights i').forEach(el=>el.classList.remove('active'));}
+window.addEventListener('pagehide',stop);$('play').onclick=()=>playing?stop():start();document.addEventListener('keydown',e=>{if(e.code==='Space'&&!e.defaultPrevented&&!document.activeElement.isContentEditable&&!['INPUT','SELECT','BUTTON','TEXTAREA','A','SUMMARY'].includes(document.activeElement.tagName)){e.preventDefault();playing?stop():start();}});document.addEventListener('visibilitychange',()=>{if(document.hidden&&(playing||starting))stop();});$('reset').onclick=()=>{stop();try{localStorage.removeItem('modus-v1');}catch{}location.reload();};update();
 
 $('downloadMidi').onclick=()=>{
  let previous=null;const chords=progression.map(c=>{previous=chooseChordVoicing(c,previous);return {name:c.name,notes:previous};});

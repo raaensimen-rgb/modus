@@ -9,7 +9,7 @@ else {document.getElementById("crumb-level").textContent="Demonstrasjon";documen
 let note="C4";const frequencies={C4:261.625565,D4:293.664768,E4:329.627557};const buttons=[...document.querySelectorAll("[data-note]")];const keys=[...document.querySelectorAll("[data-key]")];
 function select(value){if(!Object.hasOwn(frequencies,value))return;note=value;buttons.forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.note===note)));keys.forEach(k=>k.classList.toggle("chosen",k.dataset.key===note));}
 buttons.forEach(b=>b.addEventListener("click",()=>select(b.dataset.note)));
-let context;const status=document.getElementById("audio-status");
+let context;let grandRun=0;const grandSources=new Set();const status=document.getElementById("audio-status");
 // Use the existing sampled MODUS piano, not sine-wave oscillators.
 // Audio samples are recorded every three semitones; pitch-shift only to the nearest sample.
 const pianoBuffers=new Map();
@@ -29,17 +29,18 @@ async function pianoBuffer(midi){
    const promise=fetch("audio/grand-"+sample+".mp3")
      .then(response=>{if(!response.ok)throw Error("Piano sample unavailable");return response.arrayBuffer();})
      .then(array=>context.decodeAudioData(array));
-   pianoBuffers.set(sample,promise);
+   pianoBuffers.set(sample,promise.catch(error=>{pianoBuffers.delete(sample);throw error;}));
  }
  return {buffer:await pianoBuffers.get(sample),sample};
 }
 // Reusable acoustic grand-piano playback for learning activities.
 // Returns a Promise and supports all chromatic notes within the sampled instrument's range.
-async function playGrandMidi(midiNotes,simultaneous=false){
- const ctx=await pianoContext();
+async function playGrandMidi(midiNotes,simultaneous=false,visual=null){
+ stopGrand();const token=grandRun;const ctx=await pianoContext();
  const values=midiNotes.filter(n=>Number.isInteger(n)&&n>=48&&n<=84);
  if(values.length!==midiNotes.length)throw Error("Note is outside the sample range");
  const loaded=await Promise.all(values.map(async midi=>({midi,...(await pianoBuffer(midi))})));
+ if(token!==grandRun)return;
  const start=ctx.currentTime+.035;
  loaded.forEach(({midi,buffer,sample},i)=>{
   const at=start+(simultaneous?0:i*.54);
@@ -50,28 +51,23 @@ async function playGrandMidi(midiNotes,simultaneous=false){
   gain.gain.linearRampToValueAtTime(simultaneous?.23:.32,at+.02);
   gain.gain.setTargetAtTime(0,at+.35,.35);
   source.connect(gain).connect(ctx.destination);
-  source.start(at);
-  source.stop(Math.min(at+1.9,at+buffer.duration/source.playbackRate.value));
+  const end=Math.min(at+1.9,at+buffer.duration/source.playbackRate.value);
+  grandSources.add(source);source.addEventListener('ended',()=>grandSources.delete(source),{once:true});
+  if(visual)visual.track(source,midi,at,end,ctx);
+  source.start(at);source.stop(end);
  });
 }
-window.MODUSGrand=Object.freeze({playMidi:playGrandMidi});
-async function playPiano(notes,simultaneous=false){
- const ctx=await pianoContext();
- const loaded=await Promise.all(notes.map(async n=>({midi:midiByNote[n],...(await pianoBuffer(midiByNote[n]))})));
- const start=ctx.currentTime+0.035;
- loaded.forEach(({midi,buffer,sample},i)=>{
-   const at=start+(simultaneous?0:i*.58);
-   const source=ctx.createBufferSource(),gain=ctx.createGain();
-   source.buffer=buffer;
-   source.playbackRate.value=Math.pow(2,(midi-sample)/12);
-   gain.gain.setValueAtTime(0,at);
-   gain.gain.linearRampToValueAtTime(simultaneous?.27:.38,at+.018);
-   gain.gain.setTargetAtTime(0,at+.38,.35);
-   source.connect(gain).connect(ctx.destination);
-   source.start(at);
-   source.stop(Math.min(at+1.8,at+buffer.duration/source.playbackRate.value));
- });
+async function loadGrandNote(midi){const ctx=await pianoContext(),{buffer,sample}=await pianoBuffer(midi);return {context:ctx,buffer,nearest:sample,output:ctx.destination};}
+function stopGrand(){grandRun++;for(const source of grandSources){try{source.stop();}catch{}}grandSources.clear();genericPiano?.clear();lessonPiano?.clear();}
+let genericPiano,lessonPiano;
+const mini=document.querySelector('.mini-keys');
+if(mini&&window.ModusPiano){
+ mini.querySelectorAll('.mini-key').forEach((key,i)=>{key.dataset.midi=String([60,62,64,65,67,69,71][i]);});
+ genericPiano=window.ModusPiano.create({element:mini,load:loadGrandNote,onError:()=>{status.textContent='Kunne ikke spille tonen.';}});genericPiano.refresh();
 }
+window.MODUSGrand=Object.freeze({playMidi:playGrandMidi,loadNote:loadGrandNote,stop:stopGrand,setView:view=>{lessonPiano=view;}});
+async function playPiano(notes,simultaneous=false){return playGrandMidi(notes.map(n=>midiByNote[n]),simultaneous,lessonPiano||genericPiano);}
+window.addEventListener('pagehide',stopGrand);document.addEventListener('visibilitychange',()=>{if(document.hidden)stopGrand();});
 async function play(values){
  try{await playPiano(values);status.textContent="Spiller flygellyd · demonstrasjon.";}
  catch{status.textContent="Kunne ikke laste pianolyden. Prøv igjen.";}}

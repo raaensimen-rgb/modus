@@ -6,12 +6,12 @@ async function check(file){
  const classList=()=>({values:new Set(),toggle(k,on){if(on)this.values.add(k);else this.values.delete(k);}});
  const slots=Array.from({length:4},()=>({classList:classList(),attrs:{},setAttribute(k,v){this.attrs[k]=v;},removeAttribute(k){delete this.attrs[k];},querySelector(){return {setAttribute(){}};}}));
  const nodes={chordSlots:{classList:classList(),querySelectorAll:()=>slots},playProgression:{},playSelected:{},chordStatus:{}};
- const context={C:id=>nodes[id],requestAnimationFrame:fn=>{frames.set(++nextFrame,fn);return nextFrame;},cancelAnimationFrame:id=>frames.delete(id)};
+ const context={harmonyPiano:{clear(){},track(){}},initChordAudio(){},C:id=>nodes[id],requestAnimationFrame:fn=>{frames.set(++nextFrame,fn);return nextFrame;},cancelAnimationFrame:id=>frames.delete(id)};
  vm.createContext(context);
  vm.runInContext(`let ctx={currentTime:0,state:'running',resume:async()=>{},createGain:()=>({connect(){},gain:{setValueAtTime(){},exponentialRampToValueAtTime(){}}}),createBufferSource:()=>makeSource()},bus={},run=0,busy=false,selected=2,tempo=120;const live=new Set(),chords=[0,1,2,3];function pianoNotes(ch){return [48+ch];}function renderSelection(){}`,context);
  context.makeSource=()=>{const s={playbackRate:{},connect(){},start(t){this.time=t;},stop(){}};sources.push(s);return s;};
  vm.runInContext(source.slice(source.indexOf('let playback=null'),source.indexOf('async function bufferFor')),context);
- vm.runInContext(source.slice(source.indexOf('async function play(all)'),source.indexOf("C('playProgression').onclick")),context);
+ vm.runInContext(source.slice(source.indexOf('async function play(all)'),source.indexOf("window.addEventListener('pagehide',stop)")),context);
  vm.runInContext('async function bufferFor(n){return {key:n,buffer:{duration:10}};}',context);
  const active=()=>slots.flatMap((s,i)=>s.classList.values.has('playing')?[i]:[]);
  const advance=t=>{vm.runInContext(`ctx.currentTime=${t}`,context);const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn());};
