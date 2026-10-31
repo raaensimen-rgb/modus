@@ -42,16 +42,18 @@ const apps=[{url:'backingtracks.html',start:'#play',stop:'#play',piano:'#fretboa
  const targets=baselineOnly?(process.env.MODUS_AUDIO_BASELINES||'').split(',').filter(Boolean).map(base=>({base,live:true})):[{base:process.env.MODUS_TEST_URL||local,live:false}];
  try{for(const [browserName,type] of Object.entries({chromium,webkit})){
   const browser=await type.launch({headless:true});
-  try{for(const target of targets)for(const locale of ['', 'en/'])for(const app of apps)for(const fault of (target.live?['none']:['none','missing','throwing'])){
+  try{for(const target of targets)for(const locale of ['', 'en/'])for(const app of apps)for(const fault of (target.live?['none']:['none','missing','throwing','tracking'])){
    const context=await browser.newContext(),page=await context.newPage(),errors=[],failedSamples=[];
    page.on('pageerror',error=>errors.push(error.message));page.on('response',response=>{if(response.url().includes('/audio/')&&response.status()!==200)failedSamples.push({url:response.url(),status:response.status()});});
    await page.addInitScript(meter);
    if(fault==='missing')await page.route('**/piano-interaction.js*',route=>route.fulfill({status:404,contentType:'text/javascript',body:''}));
    if(fault==='throwing')await page.route('**/piano-interaction.js*',route=>route.fulfill({status:200,contentType:'text/javascript',body:'window.ModusPiano={create(){throw Error("visual initialization failed");}};'}));
+   if(fault==='tracking')await page.route('**/piano-interaction.js*',route=>route.fulfill({status:200,contentType:'text/javascript',body:'window.ModusPiano={create:()=>({track(){throw Error("visual tracking failed");},refresh(){},clear(){},releaseManual(){}})};'}));
    const result={browser:browserName,base:target.base,locale:locale||'nb',page:app.url,fault};
    try{
     await open(page,`${target.base}/${locale}${app.url}`);
     result.scripts=await page.locator('script[src]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('src')));
+    if(target.live){result.assets=[];for(const file of [app.url,app.jam?'app.js':'chord-tool.js','piano-interaction.js']){const response=await page.request.get(`${target.base}/${locale}${file}`),bytes=await response.body();result.assets.push({file,status:response.status(),sha256:crypto.createHash('sha256').update(bytes).digest('hex'),bytes:bytes.length,cache:response.headers()['cf-cache-status']});}}
     if(app.jam&&fault==='none'&&await page.locator('#mapInstrument').count())await page.selectOption('#mapInstrument','piano');
     await page.locator(app.start).click();result.first=await audible(page);
     assert(result.first.started>0&&result.first.decoded>0,'Real decoded sources must reach the output');assert.deepEqual(failedSamples,[],'All requested samples load');

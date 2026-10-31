@@ -70,7 +70,16 @@ function drawFretboard(){
  });
  $('fretboard').innerHTML=svg;
 }
-const jamPiano=window.ModusPiano.create({element:$('fretboard'),name:m=>{const i=MODES[state.mode].steps.indexOf((m-KEYS[state.key][1]+120)%12);return i<0?window.ModusPiano.noteName(m):notes[i];},load:async midi=>{initAudio();await audio.resume();await loadSamples();master.gain.cancelScheduledValues(audio.currentTime);master.gain.setValueAtTime(.68,audio.currentTime);const sample=samples[chordSampleName()],nearest=[...sample.keys()].reduce((a,b)=>Math.abs(b-midi)<Math.abs(a-midi)?b:a);return {context:audio,output:channelGains.chords,buffer:sample.get(nearest),nearest};},onError:()=>{$('error').textContent='Kunne ikke spille tonen.';}});
+// Piano feedback is optional: its download/init/rendering must never stop the audio engine.
+function createOptionalPiano(options){
+ let view;
+ const disable=error=>{view=null;console.warn('Piano feedback unavailable; audio remains enabled.',error);};
+ try{view=window.ModusPiano?.create?.(options);}catch(error){disable(error);}
+ return Object.fromEntries(['track','refresh','releaseManual','clear'].map(method=>[method,(...args)=>{
+  try{return view?.[method]?.(...args);}catch(error){disable(error);}
+ }]));
+}
+const jamPiano=createOptionalPiano({element:$('fretboard'),name:m=>{const i=MODES[state.mode].steps.indexOf((m-KEYS[state.key][1]+120)%12);return i<0?window.ModusPiano.noteName(m):notes[i];},load:async midi=>{initAudio();await audio.resume();await loadSamples();master.gain.cancelScheduledValues(audio.currentTime);master.gain.setValueAtTime(.68,audio.currentTime);const sample=samples[chordSampleName()],nearest=[...sample.keys()].reduce((a,b)=>Math.abs(b-midi)<Math.abs(a-midi)?b:a);return {context:audio,output:channelGains.chords,buffer:sample.get(nearest),nearest};},onError:()=>{$('error').textContent='Kunne ikke spille tonen.';}});
 function drawPiano(){
  const m=MODES[state.mode],root=KEYS[state.key][1],whitePC=[0,2,4,5,7,9,11],blackAfter=[0,1,3,4,5],blackPC=[1,3,6,8,10],keyWidth=48,left=24,top=20,height=238;
  let svg='<rect width="1110" height="320" fill="#11170f"/>';
