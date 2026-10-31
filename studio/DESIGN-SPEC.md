@@ -5,19 +5,21 @@
 ## Mål
 Studio skal oppleves som samme produktfamilie som MODUS.NO, med samme visuelle identitet, men tilpasset en fokusert macOS-arbeidsflate. Nettsiden er læringsplattform; Studio er et privat arbeidsverktøy. Ikke kopier hele nettsiden ukritisk.
 
-## Visuell basis
-Foreløpige Studio-tokens, **ikke bekreftet eksakt kopi av nettsidens CSS**:
-- Hovedbakgrunn: `#0b1220`
-- Sidepanel: `#0e192b`
-- Innholdspanel: `#15233a`
-- Felter: `#0d192c`
-- Aksent: `#91b5ff`
-- Lys tekst: `#eaf1ff`
-- Sekundærtekst: `#a3b5cc`
-- Kortavrunding: 10–15 px
-- Fokusmarkering: synlig kontrast, også ved tastatur
+## Visuell basis – obligatorisk samsvar med nettstedet
 
-**Må valideres av 01 mot faktiske CSS-kilder og redaktørdesign** før noen hevder identisk identitet. Bruk felles tokens fremfor divergerende kopier når dette er teknisk mulig.
+**Fasit: de faktiske fargene og stilene i `home.css`, `design-system.css`, `themes.css` og de relevante redaktørstilene på MODUS.NO. Ikke definer en alternativ blå Studio-palett.**
+
+Nettstedets standardtema i `home.css` definerer:
+- `--bg: #111310` (bakgrunn)
+- `--panel: #1a1d18` (panel)
+- `--line: #30372a` (skillelinjer)
+- `--ink: #f0f0e6` (hovedtekst)
+- `--muted: #a5ad9a` (sekundærtekst)
+- `--accent: #d7f48c` (aksent)
+- Typografi: **DM Sans** og **Manrope** fra nettstedet (med tilgjengelig macOS-fallback). Avklar lovlig/distribuerbar fontleveranse før bundling.
+- Designsystemet bruker kort-radius 13px og fokusfarge lik `--accent`.
+
+Studio skal gjenbruke disse som design-tokens og følge nettstedets aktive tema-logikk der dette er hensiktsmessig. Avvik krever 01-vurdering og begrunnelse. Ingen nye identitetsfarger uten prosjekteiers godkjenning.
 
 ## Layout
 1. Mac-vindu med rolig toppfelt og fast venstremenynavigasjon.
