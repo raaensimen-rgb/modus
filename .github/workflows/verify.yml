@@ -54,5 +54,7 @@ jobs:
             test-results/test-results.md
             test-results/browser-results.json
             test-results/piano-browser-results.json
+            test-results/journey-*-results.json
+            test-results/pl101-*.png
             test-results/audio-*-results.json
           if-no-files-found: warn
