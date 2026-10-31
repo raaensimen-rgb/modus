@@ -1,0 +1,64 @@
+name: ST-001 macOS prototype build
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'studio/**'
+      - '.github/workflows/studio-macos.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build-studio:
+    runs-on: macos-15
+    timeout-minutes: 35
+    defaults:
+      run:
+        working-directory: studio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install frontend dependencies
+        run: npm install
+      - name: Generate macOS icon resources
+        run: npm run tauri -- icon icon.svg
+      - name: Build frontend
+        run: npm run build
+      - name: Build macOS app and DMG
+        run: npm run build:mac
+      - name: Verify application bundle signature and resources
+        run: |
+          set -euo pipefail
+          APP="src-tauri/target/release/bundle/macos/MODUS Studio.app"
+          test -d "$APP/Contents/MacOS"
+          test -f "$APP/Contents/Info.plist"
+          test -f "$APP/Contents/MacOS/modus-studio"
+          ls -la "$APP/Contents"
+          codesign --display --verbose=4 "$APP" || true
+          codesign --verify --deep --strict --verbose=2 "$APP"
+      - name: Verify mounted DMG app bundle
+        run: |
+          set -euo pipefail
+          DMG=$(find src-tauri/target/release/bundle/dmg -maxdepth 1 -name '*.dmg' -print -quit)
+          test -n "$DMG"
+          hdiutil verify "$DMG"
+          MOUNT=$(mktemp -d)
+          trap 'hdiutil detach "$MOUNT" -quiet || true; rmdir "$MOUNT" || true' EXIT
+          hdiutil attach "$DMG" -mountpoint "$MOUNT" -nobrowse -quiet
+          APP="$MOUNT/MODUS Studio.app"
+          test -d "$APP/Contents/MacOS"
+          codesign --verify --deep --strict --verbose=2 "$APP"
+      - name: Upload installable prototype (unsigned)
+        uses: actions/upload-artifact@v4
+        with:
+          name: MODUS-Studio-macOS-unsigned
+          path: |
+            studio/src-tauri/target/release/bundle/dmg/*.dmg
+            studio/src-tauri/target/release/bundle/macos/*.app
+          if-no-files-found: error
+          retention-days: 7
