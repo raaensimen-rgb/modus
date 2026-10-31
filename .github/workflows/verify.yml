@@ -33,6 +33,11 @@ jobs:
       - name: Validate site and music features
         run: npm test
 
+      - name: Install browser engines
+        run: npx playwright install --with-deps chromium webkit
+      - name: Verify release in desktop and mobile browsers
+        run: node tests/release-browser.cjs
+
       - name: Upload individual test results
         if: always()
         uses: actions/upload-artifact@v4
@@ -41,4 +46,5 @@ jobs:
           path: |
             test-results/test-results.json
             test-results/test-results.md
+            test-results/browser-results.json
           if-no-files-found: warn
