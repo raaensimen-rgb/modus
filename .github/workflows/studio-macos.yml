@@ -36,7 +36,9 @@ jobs:
           set -euo pipefail
           APP="src-tauri/target/release/bundle/macos/MODUS Studio.app"
           test -d "$APP/Contents/MacOS"
-          test -d "$APP/Contents/Resources"
+          test -f "$APP/Contents/Info.plist"
+          test -f "$APP/Contents/MacOS/modus-studio"
+          ls -la "$APP/Contents"
           codesign --display --verbose=4 "$APP" || true
           codesign --verify --deep --strict --verbose=2 "$APP"
       - name: Verify mounted DMG app bundle
