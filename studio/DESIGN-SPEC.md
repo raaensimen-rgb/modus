@@ -1,6 +1,6 @@
 # ST-001 — MODUS Studio Designspesifikasjon 1.0
 
-**Status:** Foreslått designretning, til gjennomgang hos 01 – Design og UX. **Dato:** 2026-10-31.
+**Status:** Design 3.0-retning godkjent av prosjekteier i PR #40; implementert UI krever fortsatt 01-kontroll. **Dato:** 2026-10-31.
 
 ## Mål
 Studio skal oppleves som samme produktfamilie som MODUS.NO, med samme visuelle identitet, men tilpasset en fokusert macOS-arbeidsflate. Nettsiden er læringsplattform; Studio er et privat arbeidsverktøy. Ikke kopier hele nettsiden ukritisk.
@@ -54,3 +54,6 @@ Mørk app-shell, navigasjon Artikler/Design og UX, artikkelsøk, enkel editor, t
 
 ## Ikke ferdig
 Produksjonslik HTML-preview, visuell seksjonsredigering, AI-designagent, direkte designendringer, reproduserbar macOS-installasjon og faktisk QA.
+
+## ST-002 / 0.2.0
+Artikkelbibliotek med kort, valgt-status, søk og nivåfilter erstatter systemlisten. Seksjonsnavigasjon og HTML-formateringshjelpere er implementert. Standard MODUS-tokens er samlet i studio/src/style.css; blå restfarger er fjernet. Se ST-002-QA.md for testomfang og gjenstående faktisk Mac-/designkontroll. Tidligere avsnitt beskriver historisk førsteutkast, ikke ny teststatus.

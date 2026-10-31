@@ -1,32 +1,37 @@
-# MODUS Studio — ST-001 / første kodeutkast
+# MODUS Studio — ST-002 / 0.2.0 testversjon
 
-**Status:** Utestet Tauri 2-kildeskjelett. Ikke en ferdig eller signert macOS-app. Oppgaven ligger isolert i `studio/`; nettstedets build er uendret.
+Isolert Tauri 2-app under `studio/`. Ingen tilkobling til produksjonspublisering.
+Første 0.1.0-versjon er brukerobservert åpnet og testet på Mac (PR #40).
+0.2.0 er neste kontrollerte testversjon; tidligere Mac-test er ikke godkjenning av denne.
 
-## MVP-funksjoner
-- Åpne en lokal JSON-artikkelliste (samme overordnede struktur som `content/articles.json`).
-- Velge artikkel og redigere tittel, introduksjon og seksjoner.
-- Tekstbasert forhåndsvisning uten å kjøre artikkel-HTML.
-- Lagre JSON som **ny** fil ved hjelp av macOS fildialog; eksisterende filer overskrives ikke.
-- Ingen automatisk nettsidepublisering, GitHub, Supabase, konto eller AI-agent.
+## Artikkelarbeid
+- Åpne lokal `articles.json`. Biblioteket viser kort med full tittel, beskrivelse, nivå, språk og valgt-status. Søk omfatter tittel, intro, Artikkel-ID og tema; nivåfilter kan kombineres med søk.
+- Bruk Tab og Enter/Mellomrom på vanlige kortknapper. Filtrering endrer ikke den åpne artikkelen og mister ikke redigering.
+- Artikkel-ID og språk er skrivebeskyttet. Rediger tittel, introduksjon og seksjoner.
+- Seksjonsknapper flytter fokus direkte til valgt seksjon. Formateringsknappene setter inn `<p>`, `<strong>` eller `<em>` rundt valgt tekst i innholdsfeltet. Dette er en kildeeditor med hjelpemidler, ikke en WYSIWYG-editor.
+- HTML beholdes ved eksport og utføres aldri i forhåndsvisningen. Ukjente felter, status og øvrige metadata beholdes; Studio setter ingen faglig godkjenning.
+- Lagre eksplisitt med «Lagre kopi…». Rust-broen krever nytt filnavn og overskriver aldri kilden. Avbrutt eller feilende lagring lar utkastet være ulagret. Redigering under en pågående lagring forblir ulagret etter at eldre snapshot er eksportert.
 
-## Bygg på Mac
-Installer Rust, Xcode Command Line Tools, Node.js og Tauri 2-forutsetninger. Kjør:
+## Tester og bygging
 
 ```sh
 cd studio
-npm install
+npm ci
+npm test
+npm run build
+npm run tauri -- icon icon.svg
 npm run dev:mac
 npm run build:mac
 ```
 
-For signert/notarisert offentlig distribusjon kreves egen Apple-prosess og godkjenning. Ta vare på `package-lock.json` og `Cargo.lock` etter første vellykkede installering før QA.
+`npm test` kjører 13 modell-/DOM-regresjonstester med reelle artikkeldata og en mock av native fildialoger. `npm run build` kjører dem først via `prebuild`, også i eksisterende macOS-workflow. Mockene er kun i testene, ikke i appen. `package-lock.json` låser frontend/testavhengigheter.
 
-## Sikkerhet og begrensninger
-- Filvalg skjer via native dialog; filsystem skrives bare gjennom Rust-kommandoer.
-- Redigerte HTML-seksjoner behandles som tekst i forhåndsvisningen. Riktig HTML-renderer må designes med sanitization før produksjonsbruk.
-- Lokal JSON-validering er bevisst minimal; 02 må kvalitetssikre full samsvar med `cms/model.mjs` og norsk/engelsk datamodell.
-- Lagring krever nytt filnavn og har ingen overskriving. Ulagret arbeid håndteres enkelt, men recovery/backup og feiltilfeller må QA-testes.
-- Ingen installerbar artefakt er bygget i dette arbeidet. Faktisk macOS-kompilering, installasjon, åpning, signering og QA-07 gjenstår.
+Eksisterende workflow «ST-001 macOS prototype build» lager `.app`/`.dmg` på macOS-15 og verifiserer både app-signaturen og appen inne i montert DMG. Hent bare artefakten for siste dokumenterte PR-commit. Rust-avhengighetene har foreløpig ikke innchecket Cargo.lock; eksakt reproduserbar Rust-oppløsning er ikke dokumentert.
 
-## Prosjektgrenser
-F03 Issue #28 går foran videre ST-001-arbeid. Ingen merge eller publisering uten eksplisitt godkjenning.
+## Kontrollgrenser
+
+Se [ST-002-QA.md](ST-002-QA.md). Nettleser-/DOM-tester erstatter ikke faktisk macOS-installasjon, native fildialoger, lukking eller VoiceOver. Ad-hoc-signatur er beholdt fra forrige bygg; ingen Apple-notarisering eller offentlig distribusjon. Ikke slå av macOS-sikkerhet.
+
+Stilene følger faktiske standardverdier fra `home.css` og `design-system.css`: oliven/svart/lime, samme paneler, fokus og kortradius. Manrope/DM Sans brukes dersom installert, ellers eksplisitt lokal macOS-systemfont. Ingen fontfiler eller nettverkskall er lagt til; eksakt fontgjengivelse må designkontrolleres på Mac.
+
+F03 #28 beholder hovedprioriteten. Ingen endring av nettsidens filer, `main`, Cloudflare, merge eller produksjonspublisering.
