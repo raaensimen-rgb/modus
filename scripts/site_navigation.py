@@ -54,7 +54,7 @@ def render_header(prefix='', active='home'):
     ))
     learn = group('learn', 'Studier', (
         ('path', 'laeringssti.html', 'Start å lære', 'Finn ditt utgangspunkt og neste steg.'),
-        ('curriculum', 'laereplan.html', 'Hele utdanningsløpet', 'Se nivåene, fagområdene og progresjonen.'),
+        ('curriculum', 'laereplan.html', 'Læringsløpet', 'Se nivåene, fagområdene og progresjonen.'),
         ('lesson', 'undervisning.html', 'Leksjoner og øvelser', 'Prøv undervisningsmoduler under utvikling.'),
         ('theory', 'teori.html', 'Utforsk musikkteori', 'Interaktive verktøy for harmoni og teori.'),
     ))
