@@ -41,6 +41,15 @@ jobs:
       - name: Verify piano interaction in desktop and mobile browsers
         run: node tests/piano-browser.cjs
 
+      - name: Diagnose deployed audio baselines
+        env:
+          MODUS_AUDIO_BASELINE_ONLY: "1"
+          MODUS_AUDIO_BASELINES: https://modus-4ye.pages.dev,https://064502a4.modus-4ye.pages.dev
+        run: node tests/audio-signal-browser.cjs
+
+      - name: Verify actual audio signal and visualization fallback
+        run: node tests/audio-signal-browser.cjs
+
       - name: Upload individual test results
         if: always()
         uses: actions/upload-artifact@v4
@@ -51,4 +60,5 @@ jobs:
             test-results/test-results.md
             test-results/browser-results.json
             test-results/piano-browser-results.json
+            test-results/audio-*-results.json
           if-no-files-found: warn
