@@ -1,6 +1,6 @@
 # ST-002 – implementering og overlevering
 
-Dato: 31.10.2026. Draft-PR #40, `feature/st-001-studio-mvp`. Appversjon 0.2.1.
+Dato: 31.10.2026. Draft-PR #40, `feature/st-001-studio-mvp`. Appversjon 0.2.3.
 
 ## Implementert
 
@@ -54,3 +54,15 @@ Prosjekteier rapporterte at 0.2.1 avsluttes direkte med ulagret artikkelarbeid. 
 16 frontend-/DOM-tester inkluderer synkronisering til native-vernet. Åtte Rust-tester kontrollerer ren/ulagret tilstand, avbrudd, forkasting, duplikatforespørsler og rekkefølgebeskyttelse. Rust-testene kjøres automatisk som prebuild:mac før eksisterende macOS-bygg. Tidligere 0.2.0/0.2.1-resultater ovenfor er historiske; gjeldende build/commit oppgis i PR-rapporten.
 
 Faktisk Mac-retest: importer, endre Tittel, bekreft Ulagrede endringer, trykk Cmd+Q og velg Fortsett redigering. Tittelen skal være bevart. Gjenta med vinduets røde lukkeknapp. Lagre kopi og kontroller at ren tilstand kan avsluttes normalt. Dette må ikke godkjennes bare fra Rust-/DOM-testene. Native vernet gjelder artikkelarbeid; designnotater er fortsatt separat manuell eksport uten recovery.
+
+
+## 0.2.3 – rettet avslutningsvei for macOS-meny og ⌘Q
+Prosjekteiers faktiske 0.2.2-test viste direkte avslutning med synlige ulagrede endringer. Dermed er 0.2.2-vernet ikke godkjent. Årsaken er at macOS-menyens innebygde Quit kaller native terminate: og kan omgå Tauri ExitRequested (Tauri #13778 / #9198). Tidligere åtte tilstandstester dekket ikke den native menyrutingen.
+
+0.2.3 erstatter bare Quit-elementet i den eksisterende macOS-appmenyen med en vanlig menyevent og samme CmdOrCtrl+Q-snarvei. Denne går eksplisitt gjennom request_close før app.exit. Standard Edit-, Services-, File-, View-, Window- og Help-menyer beholdes. Native standardmeny verifiseres før erstatningen, slik at en endret rammeverksstruktur ikke gir en utilsiktet menyendring.
+
+Tre nye Rust-rutingtester kontrollerer at ulagret menyevent ikke avslutter, at Fortsett/Avbryt ikke tillater avslutning, at eksplisitt forkasting tillater avslutning, at ren avslutning skjer én gang, og at andre menyeventer ikke ber om lukking. Totalt 16 frontend-/DOM-tester og 11 Rust-tester. Dette er komponent-/rutingtester, ikke faktisk trykk på ⌘Q i macOS.
+
+**Gjenstående native QA:** importer, endre Tittel, bekreft Ulagrede endringer, trykk ⌘Q. Velg Fortsett redigering; tittelen skal være bevart. Gjenta med menypunktet Avslutt MODUS Studio og rød lukkeknapp. Avbryt skal beholde arbeidet. Forkast og avslutt skal lukke; lagret dokument skal lukke uten varsel. Denne versjonen må testes fra sin egen DMG.
+
+**Kjent begrensning:** Dock → Avslutt, systemavslutning, tvungen avslutning og krasj er ikke dekket av denne menyrutingen. Ingen automatisk recovery finnes. Lagre kopi før slike handlinger. Derfor er et generelt vern mot tap av ulagret arbeid fortsatt ikke fullt QA-godkjent. Designnotater har fortsatt separat manuell eksport uten native dirty-vern. Ingen merge eller produksjonspublisering.

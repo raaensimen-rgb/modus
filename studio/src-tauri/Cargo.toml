@@ -1,6 +1,6 @@
 [package]
 name = "modus-studio"
-version = "0.2.2"
+version = "0.2.3"
 description = "Local MODUS article editor"
 authors = ["MODUS"]
 edition = "2021"

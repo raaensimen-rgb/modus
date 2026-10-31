@@ -2,6 +2,7 @@ use serde::Serialize;
 use std::fs;
 use tauri::Manager;
 mod unsaved;
+mod quit_menu;
 use unsaved::{CloseDecision, UnsavedState};
 
 #[tauri::command]
@@ -10,9 +11,9 @@ fn set_unsaved_changes(state: tauri::State<'_, UnsavedState>, version: u64, dirt
 }
 
 enum CloseAction { Quit, Window(String) }
-fn request_close(app: &tauri::AppHandle, action: CloseAction, prevent: impl FnOnce()) {
+fn request_close(app: &tauri::AppHandle, action: CloseAction, prevent: impl FnOnce()) -> bool {
     match app.state::<UnsavedState>().begin_close() {
-        CloseDecision::Proceed => {},
+        CloseDecision::Proceed => return true,
         CloseDecision::Wait => prevent(),
         CloseDecision::Prompt(version) => {
             // Block the OS request before opening the native modal dialog.
@@ -40,6 +41,7 @@ fn request_close(app: &tauri::AppHandle, action: CloseAction, prevent: impl FnOn
             if scheduled.is_err() { app.state::<UnsavedState>().finish_prompt(version, false); }
         }
     }
+    false
 }
 
 #[derive(Serialize)]
@@ -70,6 +72,12 @@ fn save_articles_copy(content: String) -> Result<Option<String>, String> {
 pub fn run() {
     tauri::Builder::default()
         .manage(UnsavedState::default())
+        .menu(quit_menu::build)
+        .on_menu_event(|app, event| {
+            quit_menu::route(event.id().as_ref(),
+                || request_close(app, CloseAction::Quit, || {}),
+                || app.exit(0));
+        })
         .invoke_handler(tauri::generate_handler![open_articles, save_articles_copy, set_unsaved_changes])
         .on_window_event(|window, event| {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event {
