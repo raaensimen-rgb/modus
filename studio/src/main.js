@@ -12,6 +12,6 @@ function changed(){dirty=true;status('Ulagrede endringer');preview()}
 for(const id of ['title','intro','sections'])$(id).addEventListener('input',changed);
 $('articleList').addEventListener('change',()=>choose(Number($('articleList').value)));
 $('open').addEventListener('click',async()=>{if(dirty&&!confirm('Ulagrede endringer vil gå tapt. Fortsette?'))return;try{const result=await invoke('open_articles');if(!result)return;const data=validArticles(JSON.parse(result.content));articles=data;current=-1;dirty=false;$('filename').textContent=result.path;$('save').disabled=false;renderList();if(data.length)choose(0);status(data.length+' artikler åpnet lokalt')}catch(e){status('Kunne ikke åpne fil: '+e)}});
-$('save').addEventListener('click',async()=>{try{commitFields();const content=JSON.stringify(validArticles(articles),null,2)+'\\n';const saved=await invoke('save_articles_copy',{content});if(saved){dirty=false;status('Lagring fullført: '+saved)}}catch(e){status('Lagring feilet: '+e)}});
+$('save').addEventListener('click',async()=>{try{commitFields();const content=JSON.stringify(validArticles(articles),null,2)+'\n';const saved=await invoke('save_articles_copy',{content});if(saved){dirty=false;status('Lagring fullført: '+saved)}}catch(e){status('Lagring feilet: '+e)}});
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
 status('Åpne en lokal content/articles.json for å begynne.');
