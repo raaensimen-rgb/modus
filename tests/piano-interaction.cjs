@@ -21,6 +21,12 @@ const settle=async()=>{await Promise.resolve();await Promise.resolve();};
  piano.track(a,60,1,2,context);piano.track(b,64,1.5,2.5,context);
  tick(.9);assert.deepEqual(active(),[]);tick(1.6);assert.deepEqual(active(),[60,64]);assert(labels[1].classList.active);
  a.emit('ended');tick(1.7);assert.deepEqual(active(),[64]);tick(3);assert.deepEqual(active(),[]);assert.equal(frames.size,0,'Expired events stop the frame loop');
+ // Same-pitch voices are independent: the first ended event must not release the second.
+ const sameA=target({stop(){}}),sameB=target({stop(){}});
+ piano.track(sameA,60,3,3.3,context);piano.track(sameB,60,3.1,3.7,context);
+ tick(3.2);assert.deepEqual(active(),[60]);sameA.emit('ended');tick(3.4);assert.deepEqual(active(),[60]);
+ tick(3.4);assert.deepEqual(active(),[60],'Frozen audio clock retains the sounding key across animation frames');
+ sameB.emit('ended');tick(3.6);assert.deepEqual(active(),[]);tick(3);
  pointer('pointerdown',81,keys[1]);await settle();tick(3.1);assert.deepEqual(active(),[64],'Pointer ID is never interpreted as MIDI');
  pointer('pointerdown',82,keys[2]);await settle();tick(3.2);assert.deepEqual(active(),[64,67],'Multitouch preserves independent voices');
  pointer('pointercancel',81);tick(3.4);assert.deepEqual(active(),[67]);pointer('lostpointercapture',82);tick(3.6);assert.deepEqual(active(),[]);
@@ -29,5 +35,19 @@ const settle=async()=>{await Promise.resolve();await Promise.resolve();};
  load=async()=>loaded;pointer('pointerdown',92);await settle();win.emit('blur');tick(4.4);assert.deepEqual(active(),[]);
  element.emit('keydown',{target:keys[2],key:'Enter',preventDefault(){}});await settle();tick(4.5);assert.deepEqual(active(),[67]);element.emit('keyup',{target:keys[2],key:'Enter',preventDefault(){}});tick(4.7);assert.deepEqual(active(),[]);
  pointer('pointerdown',93);await settle();context.state='suspended';context.emit('statechange');tick(4.8);assert.deepEqual(active(),[]);assert.equal(frames.size,0);
+ // Execute the real Teorirommet scheduler with controlled sample durations.
+ // One sample ends naturally before the envelope; the other reaches source.stop.
+ const scheduled=[],theoryContext={currentTime:10,state:'running',resume:async()=>{},
+  createBufferSource(){const voice={playbackRate:{value:1},connect(){},start(t){this.startAt=t;},stop(t){this.stopAt=t;}};return voice;},
+  createGain:()=>({gain:{setValueAtTime(){},linearRampToValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){}})};
+ const text={};const sandbox={audioBusy:false,audioRun:0,ta:theoryContext,output:{},sources:new Set(),
+  T:()=>text,initTheoryAudio(){},stopAudio(){throw Error('Unexpected playback failure');},
+  example:{kind:'scale',groups:[[64,66]]},
+  getBuffer:async midi=>({buffer:{duration:midi===64?.2:5},nearest:64}),
+  theoryPiano:{track(source,midi,start,end){scheduled.push({source,midi,start,end});}}};
+ const theory=fs.readFileSync('theory.js','utf8');
+ vm.runInNewContext(theory.slice(theory.indexOf('async function playExample()'),theory.indexOf('\nwindow.addEventListener',theory.indexOf('async function playExample()'))),sandbox);
+ await sandbox.playExample();assert.equal(scheduled.length,2);
+ for(const v of scheduled)assert.equal(v.end,Math.min(v.start+v.source.buffer.duration/v.source.playbackRate.value,v.source.stopAt),'Teorirommet highlight ends at the actual buffer or stop boundary');
  console.log('Passed: audio clock, overlapping notes, expiry, actual MIDI labels, multitouch, cancellation/loading race, pointer reuse, blur, keyboard and audio suspension.');
 })().catch(e=>{console.error(e);process.exitCode=1;});
