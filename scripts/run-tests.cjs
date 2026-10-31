@@ -6,6 +6,7 @@ const { performance } = require('node:perf_hooks');
 
 // Keep the original npm test sequence unchanged; failures never skip later tests.
 const tests = [
+  ["node", "tests/intro-film.cjs"],
   [
     "python3",
     "tests/site-structure.py"

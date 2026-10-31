@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
 # Public frontend assets only. Never copy configuration, source code or secrets.
 PUBLIC_EXTENSIONS = {".html", ".css", ".js", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".ico", ".woff", ".woff2"}
-PUBLIC_ASSET_DIRS = ("images", "audio")
+PUBLIC_ASSET_DIRS = ("images", "audio", "media")
 
 def add_design_link(path):
     if not path.is_file():
@@ -23,6 +23,9 @@ def add_design_link(path):
             raise RuntimeError(f"Missing </head> in {path}")
         page = page.replace("</head>", '<link rel="stylesheet" href="design-system.css"></head>', 1)
         path.write_text(page, encoding="utf-8")
+
+if not (ROOT / "media/modus-introduksjon.mp4").is_file():
+    raise RuntimeError("Missing approved introduction film: media/modus-introduksjon.mp4")
 
 DIST.mkdir(exist_ok=True)
 if "--finish" in sys.argv:
