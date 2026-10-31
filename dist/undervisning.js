@@ -21,6 +21,7 @@ async function pianoContext(){
  if(!AudioContextClass)throw Error("AudioContext unavailable");
  context ||=new AudioContextClass();
  await context.resume();
+ if(context.state!=='running')throw Error('Audio suspended');
  return context;
 }
 async function pianoBuffer(midi){

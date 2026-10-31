@@ -9,7 +9,7 @@ const keys=[key(60),key(64),key(67)];for(const k of keys)k.classList.toggle=(c,v
 const labels=keys.map(k=>({dataset:{noteMidi:k.dataset.midi},classList:{toggle(c,v){this.active=v;}}}));
 const element=target({classList:{add(){}},setAttribute(){},querySelectorAll:q=>q==='[data-midi]'?keys:labels,contains:k=>keys.includes(k),setPointerCapture(){}});
 const sources=[];
-const context=target({currentTime:0,state:'running',createBufferSource(){const s=target({playbackRate:{},connect(){},start(t){this.startAt=t;},stop(t){this.stopAt=t;}});sources.push(s);return s;},createGain:()=>({gain:{setValueAtTime(){},cancelScheduledValues(){},setTargetAtTime(){}},connect(){}})});
+const context=target({currentTime:0,state:'running',createBufferSource(){const s=target({playbackRate:{},connect(){},start(t){this.startAt=t;},stop(t){this.stopAt=t;}});sources.push(s);return s;},createGain:()=>({gain:{setValueAtTime(){},linearRampToValueAtTime(){},cancelScheduledValues(){},setTargetAtTime(){}},connect(){}})});
 const loaded={context,buffer:{duration:8},nearest:60,output:{}};let load=async()=>loaded;
 const piano=win.ModusPiano.create({element,load:m=>load(m)});piano.refresh();
 const tick=t=>{context.currentTime=t;const pending=[...frames.values()];frames.clear();pending.forEach(f=>f());};

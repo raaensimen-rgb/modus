@@ -34,7 +34,7 @@ window.ModusPiano=(()=>{
     if(slot.cancelled||slot.generation!==generation||held.get(id)!==slot||!key.isConnected)return;
     if(context.state!=='running')throw Error('Audio suspended');
     const source=context.createBufferSource(),gain=context.createGain(),t=context.currentTime;
-    source.buffer=buffer;source.playbackRate.value=2**((midi-nearest)/12);gain.gain.setValueAtTime(.6,t);source.connect(gain);gain.connect(output);
+    source.buffer=buffer;source.playbackRate.value=2**((midi-nearest)/12);gain.gain.setValueAtTime(0,t);gain.gain.linearRampToValueAtTime(.6,t+.005);source.connect(gain);gain.connect(output);
     slot.voice={source,gain,context};const end=t+buffer.duration/source.playbackRate.value;
     slot.event=track(source,midi,t,end,context);source.addEventListener('ended',()=>{if(held.get(id)===slot)held.delete(id);},{once:true});source.start(t);return slot;
    }catch(error){if(!slot.cancelled&&slot.generation===generation){held.delete(id);onError(error);}}

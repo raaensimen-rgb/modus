@@ -16,7 +16,7 @@ async function waitActive(page,id,midi){await page.waitForFunction(({id,midi})=>
 async function waitIdle(page,id){await page.waitForFunction(id=>!document.querySelector(`#${id} .piano-playing`),id);}
 async function manual(page,id){
  const key=page.locator(`#${id} [data-midi="64"]`);await key.scrollIntoViewIfNeeded();await key.focus();
- await key.press('ArrowRight');assert.equal(await page.locator(':focus').getAttribute('data-midi'),'65','Arrow focus follows chromatic pitch');
+ await key.press('ArrowRight');console.log('focus diagnostic',id,JSON.stringify(await page.evaluate(()=>({focused:document.activeElement.outerHTML,keys:[...document.querySelectorAll('[data-midi]')].filter(k=>[64,65].includes(Number(k.dataset.midi))).map(k=>k.outerHTML)}))));assert.equal(await page.locator(':focus').getAttribute('data-midi'),'65','Arrow focus follows chromatic pitch');
  await page.keyboard.down('Enter');await waitActive(page,id,65);
  if(await page.locator(`#${id} .piano-active-label`).count())assert.equal(await page.locator(`#${id} [data-midi="65"] + .piano-active-label text`).textContent(),'F','Label follows the sounded F, not the tonic');
  await page.keyboard.up('Enter');await waitIdle(page,id);
@@ -36,7 +36,7 @@ async function manual(page,id){
     await page.goto(`${base}/${locale}${test.url}`);
     if(test.jam)await page.selectOption('#mapInstrument','piano');
     const tonic=page.locator(`#${test.id} [data-tonic="true"]`).first(),fill=await tonic.getAttribute('fill');
-    await manual(page,test.id);assert.equal(await tonic.getAttribute('fill'),fill,'Manual playing preserves tonic colour');
+    assert.deepEqual(errors,[],'Initialization errors');await manual(page,test.id);assert.equal(await tonic.getAttribute('fill'),fill,'Manual playing preserves tonic colour');
     await page.locator('#'+test.play).click();await page.waitForFunction(id=>!!document.querySelector(`#${id} .piano-playing`),test.id);
     assert.equal(await tonic.getAttribute('fill'),fill,'Automatic playing preserves tonic colour');
     await page.locator('#'+test.stop).click();await waitIdle(page,test.id);
