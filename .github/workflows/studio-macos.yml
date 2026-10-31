@@ -31,6 +31,26 @@ jobs:
         run: npm run build
       - name: Build macOS app and DMG
         run: npm run build:mac
+      - name: Verify application bundle signature and resources
+        run: |
+          set -euo pipefail
+          APP="src-tauri/target/release/bundle/macos/MODUS Studio.app"
+          test -d "$APP/Contents/MacOS"
+          test -d "$APP/Contents/Resources"
+          codesign --display --verbose=4 "$APP" || true
+          codesign --verify --deep --strict --verbose=2 "$APP"
+      - name: Verify mounted DMG app bundle
+        run: |
+          set -euo pipefail
+          DMG=$(find src-tauri/target/release/bundle/dmg -maxdepth 1 -name '*.dmg' -print -quit)
+          test -n "$DMG"
+          hdiutil verify "$DMG"
+          MOUNT=$(mktemp -d)
+          trap 'hdiutil detach "$MOUNT" -quiet || true; rmdir "$MOUNT" || true' EXIT
+          hdiutil attach "$DMG" -mountpoint "$MOUNT" -nobrowse -quiet
+          APP="$MOUNT/MODUS Studio.app"
+          test -d "$APP/Contents/MacOS"
+          codesign --verify --deep --strict --verbose=2 "$APP"
       - name: Upload installable prototype (unsigned)
         uses: actions/upload-artifact@v4
         with:
