@@ -1,1 +1,38 @@
-<!doctype html><html lang="nb"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'"><title>MODUS Studio</title></head><body><main id="app"><header><h1>MODUS <span>Studio</span></h1><small>Lokal redaktør · Prototype</small></header><nav><button id="open">Åpne artikkel-JSON</button><button id="save" disabled>Lagre kopi…</button><span id="filename">Ingen fil åpnet</span></nav><div id="status" role="status" aria-live="polite"></div><div class="layout"><aside><label for="articleList">Artikler</label><select id="articleList" size="12" aria-label="Velg artikkel"></select><p class="hint">Originalfilen overskrives ikke. Lagre en ny JSON-kopi.</p></aside><section class="editor"><h2>Rediger</h2><label for="slug">ID (slug)</label><input id="slug" readonly><label for="title">Tittel</label><input id="title"><label for="intro">Introduksjon</label><textarea id="intro" rows="4"></textarea><label for="sections">Seksjoner (JSON: [[overskrift, HTML], …])</label><textarea id="sections" rows="12" spellcheck="false"></textarea><p class="hint">Seksjonenes HTML vises som ren tekst i denne første prototypen, ikke som aktiv kode.</p></section><section class="preview"><h2>Forhåndsvisning</h2><div id="preview"></div></section></div></main><script type="module" src="/src/main.js"></script></body></html>
+<!doctype html>
+<html lang="nb"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'">
+<title>MODUS Studio</title></head><body>
+<div class="shell">
+<aside class="sidebar">
+ <div class="brand"><div class="brand-mark">M</div><div><strong>MODUS</strong><span>STUDIO</span></div></div>
+ <p class="side-caption">ARBEIDSOMRÅDE</p>
+ <button class="side-link active" type="button" data-view="articles"><span>▤</span> Artikler</button>
+ <button class="side-link" type="button" data-view="design"><span>◈</span> Design og UX</button>
+ <div class="side-spacer"></div>
+ <div class="side-foot"><span class="live-dot"></span><div><strong>Lokalt arbeidsmiljø</strong><small>Ingen direkte publisering</small></div></div>
+</aside>
+<div class="workspace">
+ <header class="topbar"><div class="breadcrumbs">MODUS / <strong id="currentView">Artikler</strong></div><span class="top-tag">Privat Mac-app · Prototype</span></header>
+ <main>
+ <section id="articlesView">
+ <div class="page-heading"><div><div class="eyebrow">MODUS CONTENT STUDIO</div><h1>Artikkelredaktør</h1><p>Samme innhold, samme arbeidsflyt – i ditt eget arbeidsmiljø.</p></div><div class="heading-actions"><button id="open" class="button-secondary">Åpne artikkel-JSON</button><button id="save" disabled>Lagre kopi…</button></div></div>
+ <div class="file-row"><span id="filename">Ingen fil åpnet</span><span class="file-pill">Lokal fil</span></div>
+ <div id="status" role="status" aria-live="polite">Åpne en lokal content/articles.json for å begynne.</div>
+ <div class="layout">
+ <aside class="article-browser"><div class="panel-title"><h2>Artikkelbibliotek</h2><span id="articleCount">0 artikler</span></div><label for="articleSearch">Finn artikkel</label><input id="articleSearch" placeholder="Søk etter tittel eller tema" type="search"><label for="articleList">Velg artikkel</label><select id="articleList" size="12" aria-label="Velg artikkel"></select><p class="hint">Arbeidet lagres som ny JSON-kopi. Kilden overskrives aldri.</p></aside>
+ <section class="editor"><div class="panel-title"><h2>Rediger innhold</h2><span class="tag">Utkast</span></div>
+ <div class="field-row"><div><label for="slug">Artikkel-ID</label><input id="slug" readonly></div><div><label for="articleLocale">Språk</label><input id="articleLocale" readonly placeholder="Fra artikkeldata"></div></div>
+ <label for="title">Tittel</label><input id="title" placeholder="Artikkelens tittel">
+ <label for="intro">Introduksjon</label><textarea id="intro" rows="4" placeholder="Skriv en kort introduksjon"></textarea>
+ <label for="sections">Seksjoner og fagtekst</label><textarea id="sections" rows="12" spellcheck="false"></textarea><p class="hint">Kompatibel med MODUS sitt seksjonsformat [overskrift, HTML]. Visuell seksjonsredigering er neste utviklingstrinn.</p>
+ </section>
+ <section class="preview"><div class="panel-title"><h2>Forhåndsvisning</h2><span class="tag">Sikker tekstvisning</span></div><div class="preview-paper"><div class="eyebrow">MODUS / ARTIKKEL</div><div id="preview"><p>Velg en artikkel for forhåndsvisning.</p></div></div></section>
+ </div></section>
+ <section id="designView" hidden>
+ <div class="page-heading"><div><div class="eyebrow">MODUS DESIGN SYSTEM</div><h1>Design og UX</h1><p>Et eget arbeidsområde for grensesnitt, komponenter og kvalitetskontroll.</p></div><span class="tag">Lokal arbeidsflate</span></div>
+ <div class="design-grid">
+ <article class="design-panel"><h2>Visuell identitet</h2><p>Felles mørkt uttrykk, typografi, kontraster, avrundinger og interaksjonsmønstre fra MODUS.</p><div class="swatches"><div style="background:#0b1220" title="Bakgrunn"></div><div style="background:#16233a" title="Panel"></div><div style="background:#91b5ff" title="Aksent"></div><div style="background:#eaf1ff" title="Tekst"></div></div><small>Designreferanse – endrer ikke nettstedet.</small></article>
+ <article class="design-panel"><h2>Komponentbibliotek</h2><p>Forhåndsvurder knapper, inndatafelt og tilstander. Her blir det mulig å administrere designforslag lokalt.</p><div class="component-demo"><button type="button" id="demoButton">Primærknapp</button><button type="button" class="button-secondary" id="demoSecondary">Sekundærknapp</button><input aria-label="Eksempelfelt" placeholder="Eksempel på tekstfelt"></div></article>
+ <article class="design-panel wide"><h2>Designkontroll</h2><p>Registrer forslag og observasjoner før de eventuelt sendes til utviklingsflyten. Ingen automatisk endring av nettstedet.</p><label for="designNotes">Lokale arbeidsnotater</label><textarea id="designNotes" rows="6" placeholder="Beskriv et UX-funn, forslag eller nødvendig forbedring…"></textarea><div class="note-actions"><button type="button" id="exportDesign">Eksporter designnotater</button><span id="designStatus" role="status" aria-live="polite">Ingen notater eksportert.</span></div></article>
+ </div></section>
+ </main></div></div><script type="module" src="/src/main.js"></script></body></html>
