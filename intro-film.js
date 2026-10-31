@@ -1,6 +1,16 @@
 /* FILM-024 — accessible, user-initiated MODUS introduction video */
 (()=>{'use strict';
 const trigger=document.querySelector('[data-intro-film-open]');if(!trigger)return;
+
+// Keep the film button aligned with the primary action, including after fonts load.
+const primary=document.querySelector('.hero-actions .button');
+if(primary){
+  const matchWidth=()=>{trigger.style.width=primary.getBoundingClientRect().width+'px';trigger.style.maxWidth='100%';trigger.style.paddingInline='10px';trigger.style.gap='8px';};
+  matchWidth();
+  if(typeof ResizeObserver!=='undefined')new ResizeObserver(matchWidth).observe(primary);
+  else window.addEventListener('resize',matchWidth);
+  if(document.fonts)document.fonts.ready.then(matchWidth);
+}
 const english=document.documentElement.lang.toLowerCase().startsWith('en');
 const copy=english?{open:'Watch the introduction',title:'Discover MODUS',close:'Close video',error:'The video is not available yet. Please try again later.',note:'The video plays only when you choose to watch it.'}:{open:'Se introduksjonsfilmen',title:'Oppdag MODUS',close:'Lukk filmen',error:'Filmen er ikke tilgjengelig ennå. Prøv igjen senere.',note:'Filmen spilles bare når du selv velger å se den.'};
 trigger.querySelector('[data-intro-film-label]').textContent=copy.open;
