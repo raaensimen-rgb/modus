@@ -24,9 +24,39 @@ const server = http.createServer((req,res)=>{
     for(const [name,type] of Object.entries({chromium,webkit})) {
       const browser=await type.launch({headless:true});
       try {for(const width of [1440,375])for(const locale of ['', 'en/']) {
-        const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();
+        const context=await browser.newContext({viewport:{width,height:900},hasTouch:width===375}),page=await context.newPage();
         const errors=[];page.on('pageerror',e=>errors.push(e.message));
         await page.goto(base+'/'+locale);
+        // PL-098: both disclosure menus must survive hover -> click, submenu movement and touch.
+        for(const key of ['learn','play']) {
+          const menu=page.locator('#nav-'+key),panel=page.locator('#nav-panel-'+key),first=panel.locator('a').first();
+          if(width===1440) {
+            await menu.hover();assert(await panel.isVisible(),'Hover opens '+key);
+            await menu.click();assert(await panel.isVisible(),'First hover click retains '+key);
+            await first.hover();assert(await panel.isVisible(),'Moving to submenu retains '+key);
+            await menu.click();assert(!(await panel.isVisible()),'Second pointer click closes '+key);
+            await page.mouse.move(0,0);
+          } else {
+            await menu.tap();assert(await panel.isVisible(),'First touch opens '+key);
+            await menu.tap();assert(!(await panel.isVisible()),'Second touch closes '+key);
+          }
+          await menu.focus();await menu.press('Enter');assert(await panel.isVisible(),'Enter opens '+key);
+          await menu.press('Tab');assert(await first.evaluate(e=>e===document.activeElement),'Tab enters '+key);
+          assert(await first.evaluate(e=>{
+            const r=e.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
+            return r.width>0&&r.height>0&&r.x>=0&&r.right<=innerWidth&&hit&&e.contains(hit);
+          }),'Submenu target must fit and remain unobstructed: '+key);
+          await first.press('Escape');assert(!(await panel.isVisible()));
+          assert(await menu.evaluate(e=>e===document.activeElement),'Escape returns '+key+' focus');
+          await menu.press('Space');assert(await panel.isVisible(),'Space opens '+key);
+          await menu.press('ArrowDown');assert(await first.evaluate(e=>e===document.activeElement));
+          await first.press('Escape');
+          if(width===1440)await menu.hover();else await menu.tap();
+          const target=new URL(await first.getAttribute('href'),page.url());
+          if(width===1440)await first.click();else await first.tap();
+          await page.waitForURL(url=>url.pathname.replace(/\.html$/,'')===target.pathname.replace(/\.html$/,''));
+          await page.goto(base+'/'+locale);
+        }
         const trigger=page.locator('[data-global-search-open]'),input=page.locator('[data-global-search-input]');
         assert(await trigger.isVisible());await trigger.click();await input.waitFor({state:'visible'});
         await input.press('Escape');assert(await trigger.evaluate(e=>document.activeElement===e));
