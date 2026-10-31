@@ -99,6 +99,7 @@ const tests = [
   ]
 ];
 const outputDir = path.join(process.cwd(), 'test-results');
+tests.push(['python3', 'tests/qa-infrastructure.py']);
 fs.mkdirSync(outputDir, { recursive: true });
 const results = [];
 for (let i = 0; i < tests.length; i++) {
