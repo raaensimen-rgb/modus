@@ -12,11 +12,16 @@ const cases=[
  {url:'akkorder.html',id:'chordKeyboard',play:'playSelected',stop:'playProgression',key:'jamKey'},
  {url:'backingtracks.html',id:'fretboard',play:'play',stop:'play',key:'key',jam:true},
 ];
+async function openPage(page,url){
+ await page.goto(url);
+ const notice=page.locator('.modus-premises-dialog[open]');
+ if(await notice.isVisible()){await page.locator('#modus-premises-accept').check();await page.locator('.modus-premises-confirm').click();await notice.waitFor({state:'hidden'});}
+}
 async function waitActive(page,id,midi){await page.waitForFunction(({id,midi})=>document.querySelector(`#${id} [data-midi="${midi}"]`)?.dataset.playing==='true',{id,midi});}
 async function waitIdle(page,id){await page.waitForFunction(id=>!document.querySelector(`#${id} .piano-playing`),id);}
 async function manual(page,id){
  const key=page.locator(`#${id} [data-midi="64"]`);await key.scrollIntoViewIfNeeded();await key.focus();
- await key.press('ArrowRight');console.log('focus diagnostic',id,JSON.stringify(await page.evaluate(()=>({focused:document.activeElement.outerHTML,keys:[...document.querySelectorAll('[data-midi]')].filter(k=>[64,65].includes(Number(k.dataset.midi))).map(k=>k.outerHTML)}))));assert.equal(await page.locator(':focus').getAttribute('data-midi'),'65','Arrow focus follows chromatic pitch');
+ await key.press('ArrowRight');assert.equal(await page.locator(':focus').getAttribute('data-midi'),'65','Arrow focus follows chromatic pitch');
  await page.keyboard.down('Enter');await waitActive(page,id,65);
  if(await page.locator(`#${id} .piano-active-label`).count())assert.equal(await page.locator(`#${id} [data-midi="65"] + .piano-active-label text`).textContent(),'F','Label follows the sounded F, not the tonic');
  await page.keyboard.up('Enter');await waitIdle(page,id);
@@ -33,7 +38,7 @@ async function manual(page,id){
   try{for(const width of [1440,375])for(const locale of ['', 'en/']){
    const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
    for(const test of cases){
-    await page.goto(`${base}/${locale}${test.url}`);
+    await openPage(page,`${base}/${locale}${test.url}`);
     if(test.jam)await page.selectOption('#mapInstrument','piano');
     const tonic=page.locator(`#${test.id} [data-tonic="true"]`).first(),fill=await tonic.getAttribute('fill');
     assert.deepEqual(errors,[],'Initialization errors');await manual(page,test.id);assert.equal(await tonic.getAttribute('fill'),fill,'Manual playing preserves tonic colour');
@@ -46,13 +51,13 @@ async function manual(page,id){
     await page.emulateMedia({reducedMotion:'reduce'});const again=page.locator(`#${test.id} [data-midi="64"]`);await again.focus();await page.keyboard.down('Enter');await waitActive(page,test.id,64);
     assert.equal(await again.evaluate(k=>getComputedStyle(k.parentElement).transform),'none','Reduced motion disables movement');await page.keyboard.up('Enter');await waitIdle(page,test.id);await page.emulateMedia({reducedMotion:'no-preference'});
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'No page overflow');
-    results.push({browser:browserName,width,locale:locale||'nb',page:test.url,status:'passed'});
+    results.push({browser:browserName,width,locale:locale||'nb',page:test.url,status:'passed'});console.log(JSON.stringify(results.at(-1)));
    }
    if(!locale){
-    await page.goto(base+'/undervisning.html?modul=F03');await manual(page,'f03-piano');
+    await openPage(page,base+'/undervisning.html?modul=F03');await manual(page,'f03-piano');
     await page.locator('#f03-listen').click();await page.waitForTimeout(700);
     assert.equal(await page.locator('#f03-piano .piano-playing').count(),0,'Hidden ear-training answer is not disclosed');
-    await page.goto(base+'/undervisning.html');await page.locator('.mini-keys [data-midi="65"]').focus();await page.keyboard.down('Enter');await page.waitForFunction(()=>document.querySelector('.mini-keys [data-midi="65"]').dataset.playing==='true');await page.keyboard.up('Enter');
+    await openPage(page,base+'/undervisning.html');await page.locator('.mini-keys [data-midi="65"]').focus();await page.keyboard.down('Enter');await page.waitForFunction(()=>document.querySelector('.mini-keys [data-midi="65"]').dataset.playing==='true');await page.keyboard.up('Enter');
     results.push({browser:browserName,width,locale:'nb',page:'F03 and generic demonstration',status:'passed'});
    }
    assert.deepEqual(errors,[],'No JavaScript runtime errors');await context.close();

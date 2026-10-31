@@ -108,9 +108,11 @@
   $("f03-ear-feedback").dataset.result=correct?"correct":"retry";
   render([q.root,q.root+q.s],"Svaret er "+name+" ("+q.s+" halvtonetrinn).");
  }
+ for(const id of ["interval-melodic","interval-harmonic"])$(id)?.addEventListener("click",()=>render(stage.manual));
  async function hearQuestion(){
   if(!stage.quiz)newQuestion();
   const q=stage.quiz;
+  render(stage.revealed?[q.root,q.root+q.s]:null);
   try{f03Piano.clear();await window.MODUSGrand.playMidi([q.root,q.root+q.s],false,stage.revealed?f03Piano:null);
    if(!stage.attempted)$("f03-ear-feedback").textContent="Lytt til avstanden og velg et svar. Tonene er fortsatt skjult.";
   }catch{$("f03-ear-feedback").textContent="Kunne ikke laste flygelsamplene. Prøv igjen."; }
