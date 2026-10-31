@@ -40,6 +40,7 @@ function commitFields() {
   if (current < 0) return;
   const sections = validSections(JSON.parse($('sections').value));
   const article = articles[current];
+  if (Array.isArray(article.quiz) && article.quiz.length && sections.length < article.sections.length) throw Error('Artikkelen har quizkoblinger. Behold seksjonene til quizkoblingene kan oppdateres samlet.');
   article.title = $('title').value; article.intro = $('intro').value; article.sections = sections;
   validArticles(articles);
 }
@@ -135,6 +136,7 @@ function renderSectionCards() {
     const heading = document.createElement('h4'); heading.textContent = 'Seksjon ' + (index + 1);
     const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'section-remove'; remove.textContent = 'Fjern'; remove.setAttribute('aria-label', 'Fjern seksjon ' + (index + 1)); remove.disabled = blocks.length <= 1;
     remove.addEventListener('click', () => {
+      if (Array.isArray(articles[current].quiz) && articles[current].quiz.length) { status('Artikkelen har quizkoblinger. Seksjoner kan ikke slettes før quizkoblingene kan oppdateres samlet.'); return; }
       if (!confirm('Fjerne seksjon ' + (index + 1) + '? Innholdet fjernes fra denne arbeidskopien.')) return;
       blocks.splice(index, 1); $('sections').value = JSON.stringify(blocks, null, 2); renderSectionCards(); changed();
       $('sectionCards').querySelectorAll('input')[Math.min(index, blocks.length - 1)]?.focus();

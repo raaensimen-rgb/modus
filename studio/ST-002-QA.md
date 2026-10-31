@@ -1,6 +1,6 @@
 # ST-002 – implementering og overlevering
 
-Dato: 31.10.2026. Draft-PR #40, `feature/st-001-studio-mvp`. Appversjon 0.2.0.
+Dato: 31.10.2026. Draft-PR #40, `feature/st-001-studio-mvp`. Appversjon 0.2.1.
 
 ## Implementert
 
@@ -16,7 +16,7 @@ Dato: 31.10.2026. Draft-PR #40, `feature/st-001-studio-mvp`. Appversjon 0.2.0.
 
 ## Teknisk testomfang
 
-`npm test`: 13 tester for ekte artikkeldata uten datatap, validering, artikkelkort, kombinert søk/filter, NO/EN-metadata, redigering/bytte, seksjoner/formatering/navigasjon, ugyldig JSON, avbrutt/feilende lagring/import, redigering under lagring, tom fil og ikke-eksekverbar HTML-preview.
+`npm test`: 15 tester for ekte artikkeldata uten datatap, validering, artikkelkort, kombinert søk/filter, NO/EN-metadata, redigering/bytte, seksjoner/formatering/navigasjon, ugyldig JSON, avbrutt/feilende lagring/import, redigering under lagring, tom fil og ikke-eksekverbar HTML-preview.
 
 Native filbro er mock i DOM-testene. Rust lagringskode er uendret. Ulagret-varsel i vindustittelen er synlig; eksisterende `beforeunload` beholdes, men native lukking må testes og må ikke godkjennes fra DOM-testene alene.
 
@@ -35,7 +35,7 @@ Native filbro er mock i DOM-testene. Rust lagringskode er uendret. Ulagret-varse
 
 ## 07 – faktisk macOS-QA (kontroll kreves)
 
-1. Installer **0.2.0-artefakten for eksakt ny commit**. Første Mac-test av 0.1.0 overføres ikke automatisk.
+1. Installer **0.2.1-artefakten for eksakt ny commit**. Første Mac-test av 0.1.0 overføres ikke automatisk.
 2. Importer 16 artikler; rediger tittel, intro, seksjonstittel/-innhold og formatering. Bytt artikkel og tilbake.
 3. Eksporter til nytt filnavn, gjenåpne og sammenlign. Prøv avbryt, ugyldig JSON, eksisterende filnavn og filfeil. Kilden skal være uendret.
 4. Test ulagret-varsling ved filbytte og vinduslukking/avslutning. Ingen automatisk recovery finnes.
@@ -43,4 +43,7 @@ Native filbro er mock i DOM-testene. Rust lagringskode er uendret. Ulagret-varse
 
 ## Status
 
-Kildekode og lokale tekniske tester er klare. macOS-bygg, signatur/DMG-verifikasjon og artefakt knyttes til eksakt commit i PR-rapporten etter CI. Faktisk installasjon og design-/datamodell-/QA-godkjenning gjenstår for 0.2.0. Ingen merge, nettsideendring eller produksjonspublisering.
+Kildekode og lokale tekniske tester er klare. macOS-bygg, signatur/DMG-verifikasjon og artefakt knyttes til eksakt commit i PR-rapporten etter CI. Faktisk installasjon og design-/datamodell-/QA-godkjenning gjenstår for 0.2.1. Ingen merge, nettsideendring eller produksjonspublisering.
+
+## Teknisk oppfølging etter brukerens 0.2.0-test
+En regresjonstest reproduserte at seksjonssletting kunne forskyve bevarte quizreferanser. Versjon 0.2.1 hindrer seksjonssletting for artikler med quiz både fra kortknappen og via redusert seksjonsliste i avansert JSON. Tittel-/tekstredigering og tillegg av seksjoner er beholdt. Quizdata oppdateres aldri automatisk. 15/15 modell-/DOM-tester dekker nå også begge slettingsforsøkene. Faktisk Mac-test av 0.2.1 er separat fra brukerens 0.2.0-test.

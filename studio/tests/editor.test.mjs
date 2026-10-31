@@ -122,3 +122,20 @@ test('preview never interprets imported HTML or creates external/resource elemen
     assert.match(e.$('preview').textContent,/Safe text/); e.$('save').click(); await tick(); assert.deepEqual(JSON.parse(e.saved),data);
   } finally {e.close();}
 });
+
+test('removing a section cannot break preserved quiz section references', async () => {
+  const data=structuredClone(articles); data[0].quiz=[{question:'Preserve link',section:2,answer:0,options:['A','B','C'],explanation:'Text'}];
+  const e=await editor(data); try {
+    const count=data[0].sections.length; e.$('sectionCards').firstElementChild.querySelector('button').click();
+    assert.equal(e.$('sectionCards').children.length,count); assert.match(e.$('status').textContent,/quiz/i);
+    e.$('save').click(); await tick(); assert.deepEqual(JSON.parse(e.saved),data);
+  } finally {e.close();}
+});
+
+test('advanced JSON cannot bypass section deletion protection for quiz articles', async () => {
+  const data=structuredClone(articles); data[0].quiz=[{section:2}];
+  const e=await editor(data); try {
+    e.input(e.$('sections'),JSON.stringify(data[0].sections.slice(1))); e.$('save').click(); await tick();
+    assert.equal(e.saved,undefined); assert.match(e.$('status').textContent,/quiz/i); assert.match(e.$('dirtyState').textContent,/Ulagrede/);
+  } finally {e.close();}
+});
