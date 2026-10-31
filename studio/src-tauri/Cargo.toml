@@ -1,0 +1,19 @@
+[package]
+name = "modus-studio"
+version = "0.1.0"
+description = "Local MODUS article editor"
+authors = ["MODUS"]
+edition = "2021"
+
+[lib]
+name = "modus_studio_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+rfd = "0.15"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
