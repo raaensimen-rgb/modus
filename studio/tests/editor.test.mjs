@@ -9,14 +9,14 @@ const articles = JSON.parse(await readFile(new URL('../../content/articles.json'
 const tick = () => new Promise(resolve => setImmediate(resolve));
 async function editor(data = articles) {
   const dom = new JSDOM(html, {runScripts:'outside-only', url:'http://studio.local'});
-  const {window:w} = dom; let saved, nextOpen = {path:'articles.json', content:JSON.stringify(data)}, saveResult = 'new-copy.json';
+  const {window:w} = dom; let saved, guardUpdates = [], nextOpen = {path:'articles.json', content:JSON.stringify(data)}, saveResult = 'new-copy.json';
   w.confirm = () => true; w.__model = model;
-  w.invoke = async (name, args) => { if (name === 'open_articles') return nextOpen; saved = args.content; return typeof saveResult === 'function' ? saveResult() : saveResult; };
+  w.invoke = async (name, args) => { if (name === 'set_unsaved_changes') { guardUpdates.push(args); return; } if (name === 'open_articles') return nextOpen; saved = args.content; return typeof saveResult === 'function' ? saveResult() : saveResult; };
   w.eval('const {validArticles, validSections, serializeArticles, articleMatches, levelLabel, localeLabel} = window.__model;\n' + source);
   const $ = id => w.document.getElementById(id);
   const input = (element, value) => { element.value = value; element.dispatchEvent(new w.Event('input', {bubbles:true})); };
   $('open').click(); await tick();
-  return {w,$,input,get saved(){return saved;},set openResult(value){nextOpen=value;},set saveResult(value){saveResult=value;},close:()=>w.close()};
+  return {w,$,input,guardUpdates,get saved(){return saved;},set openResult(value){nextOpen=value;},set saveResult(value){saveResult=value;},close:()=>w.close()};
 }
 test('real article data round-trips losslessly and ends with an actual newline', () => {
   const serialized = model.serializeArticles(structuredClone(articles));
@@ -137,5 +137,15 @@ test('advanced JSON cannot bypass section deletion protection for quiz articles'
   const e=await editor(data); try {
     e.input(e.$('sections'),JSON.stringify(data[0].sections.slice(1))); e.$('save').click(); await tick();
     assert.equal(e.saved,undefined); assert.match(e.$('status').textContent,/quiz/i); assert.match(e.$('dirtyState').textContent,/Ulagrede/);
+  } finally {e.close();}
+});
+
+test('native exit guard tracks dirty edits and only a successful current save clears it', async () => {
+  const e=await editor(); try {
+    assert.equal(e.guardUpdates.at(-1).dirty,false);
+    e.input(e.$('title'),'Native guarded edit'); assert.equal(e.guardUpdates.at(-1).dirty,true);
+    e.saveResult=null; e.$('save').click(); await tick(); assert.equal(e.guardUpdates.at(-1).dirty,true);
+    e.saveResult='copy.json'; e.$('save').click(); await tick(); assert.equal(e.guardUpdates.at(-1).dirty,false);
+    assert.ok(e.guardUpdates.every((u,i,list)=>i===0||u.version>list[i-1].version));
   } finally {e.close();}
 });

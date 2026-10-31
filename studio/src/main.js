@@ -2,9 +2,10 @@ import { invoke } from '@tauri-apps/api/core';
 import { validArticles, validSections, serializeArticles, articleMatches, levelLabel, localeLabel } from './model.js';
 import './style.css';
 const $ = id => document.getElementById(id);
-let articles = [], current = -1, dirty = false, activeFilter = 'all', revision = 0;
+let articles = [], current = -1, dirty = false, activeFilter = 'all', revision = 0, guardVersion = 0;
 function status(message) { $('status').textContent = message; }
 function dirtyIndicator() {
+  invoke('set_unsaved_changes', {version: ++guardVersion, dirty}).catch(() => { status('Kunne ikke aktivere avslutningsvernet. Lagre en kopi før du lukker Studio.'); });
   $('dirtyState').textContent = dirty ? '● Ulagrede endringer' : 'Ingen ulagrede endringer';
   $('dirtyState').classList.toggle('is-dirty', dirty);
   document.title = (dirty ? '● ' : '') + 'MODUS Studio';

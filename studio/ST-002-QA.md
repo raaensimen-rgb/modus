@@ -47,3 +47,10 @@ Kildekode og lokale tekniske tester er klare. macOS-bygg, signatur/DMG-verifikas
 
 ## Teknisk oppfølging etter brukerens 0.2.0-test
 En regresjonstest reproduserte at seksjonssletting kunne forskyve bevarte quizreferanser. Versjon 0.2.1 hindrer seksjonssletting for artikler med quiz både fra kortknappen og via redusert seksjonsliste i avansert JSON. Tittel-/tekstredigering og tillegg av seksjoner er beholdt. Quizdata oppdateres aldri automatisk. 15/15 modell-/DOM-tester dekker nå også begge slettingsforsøkene. Faktisk Mac-test av 0.2.1 er separat fra brukerens 0.2.0-test.
+
+## 0.2.2 – native avslutningsvern
+Prosjekteier rapporterte at 0.2.1 avsluttes direkte med ulagret artikkelarbeid. Nettleserens beforeunload er ikke tilstrekkelig. 0.2.2 synkroniserer ulagret-status med et versjonert native state og fanger både Tauri WindowEvent::CloseRequested og RunEvent::ExitRequested. Operasjonen stoppes før et native varsel vises. Fortsett redigering og Avbryt beholder arbeid; bare eksplisitt Forkast og avslutt tillater lukking. Gjentatte forespørsler stabler ikke dialoger, og gamle IPC-oppdateringer kan ikke fjerne nyere dirty-status. Ingen nye filrettigheter eller endringer av datamodellen.
+
+16 frontend-/DOM-tester inkluderer synkronisering til native-vernet. Åtte Rust-tester kontrollerer ren/ulagret tilstand, avbrudd, forkasting, duplikatforespørsler og rekkefølgebeskyttelse. Rust-testene kjøres automatisk som prebuild:mac før eksisterende macOS-bygg. Tidligere 0.2.0/0.2.1-resultater ovenfor er historiske; gjeldende build/commit oppgis i PR-rapporten.
+
+Faktisk Mac-retest: importer, endre Tittel, bekreft Ulagrede endringer, trykk Cmd+Q og velg Fortsett redigering. Tittelen skal være bevart. Gjenta med vinduets røde lukkeknapp. Lagre kopi og kontroller at ren tilstand kan avsluttes normalt. Dette må ikke godkjennes bare fra Rust-/DOM-testene. Native vernet gjelder artikkelarbeid; designnotater er fortsatt separat manuell eksport uten recovery.
