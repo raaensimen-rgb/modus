@@ -23,6 +23,7 @@ module.exports=async(browser,browserName,base)=>{
    const metadata=previewCards[locale?'en':'nb'];
    assert((await pending.innerText()).includes(metadata.length?(locale?'Article library · in progress':'Artikkelbibliotek · under arbeid'):(locale?'The library is preserved':'Biblioteket er bevart')));
    const cards=page.locator('.catalog-preview-card');assert.equal(await cards.count(),metadata.length);
+   if(metadata.length)assert.equal(await page.locator('.catalog-preview-note').innerText(),metadata.length+(locale?' article cards · full text unavailable':' artikkelkort · fulltekst ikke tilgjengelig'));
    for(const item of metadata){
     const c=page.locator(`[data-catalog-id="${item.slug}"]`);
     assert.equal(await c.getByRole('heading').innerText(),item.title);
