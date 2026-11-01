@@ -69,6 +69,103 @@ def language_assets(page,prefix=''):
         page=page.replace('</head>',f'<script src="{prefix}language.js" defer></script></head>',1)
     return page
 
+# Atlas-only UI translations, without changing lesson manuscripts or other JS.
+# Exact text replacements preserve stable module IDs, persistence keys and selectors.
+ATLAS_EN = {
+    "Mitt ": "My ", "musikkatlas.": "music atlas.",
+    "MODUS / DIN LÆRINGSREISE": "MODUS / YOUR LEARNING JOURNEY",
+    "Se hvordan alt henger sammen.": "See how everything connects.",
+    "Et visuelt landskap over musikkens fagområder. Oppdag sammenhengene mellom det du kan, det du øver på, og det du vil lære videre.": "A visual overview of music subjects. Explore what you know, what you are practising and what you want to learn next.",
+    "← Læringsstien": "← Learning path", "Se læreplanen ↗": "Explore the curriculum ↗",
+    "HVA ER MITT MUSIKKATLAS?": "WHAT IS MY MUSIC ATLAS?",
+    "Et kart som vokser med deg.": "A map that grows with you.",
+    "Musikkatlaset samler teori, gehør, rytme, improvisasjon og komposisjon i ett bilde. Hvert fagområde har sine egne grener, slik at du kan se både helheten og hva som hører sammen. Kartet gir deg en personlig oversikt over læringsreisen din – og en idé om hva du kan utforske videre.": "The atlas brings theory, ear training, rhythm, improvisation and composition into one map. Each subject has its own branches, helping you understand the whole picture and plan what to explore next.",
+    "01 / UTFORSK": "01 / EXPLORE", "Se hele landskapet": "Explore the map",
+    "Alle hovedområder og moduler vises samtidig. Finn temaene du kjenner igjen, og se hva som ligger foran deg.": "All subjects and modules are visible together. Find familiar topics and discover what comes next.",
+    "02 / MARKER": "02 / MARK", "Følg ditt eget arbeid": "Track your learning",
+    "Atlaset følger artiklene du åpner og quizene du fullfører. Du kan fortsatt endre status manuelt. Grenene blir gradvis lysere.": "The atlas can reflect articles you open and quizzes you complete. You can also set your status manually.",
+    "03 / BYGG VIDERE": "03 / BUILD ON IT", "Se neste mulighet": "Find your next step",
+    "Legg inn egne notater og forslag til kurs. Slik kan atlaset inspirere både øvingen din og fremtidig undervisning.": "Add notes and course ideas to guide your future practice and learning.",
+    "Atlaset kobler åpnete artikler og beståtte quizer til relevante emner. En åpnet artikkel betyr «Under arbeid»; når alle tilknyttede quizer er bestått, markeres emnet som lært i kartet. Dette er læringsprogresjon, ikke en faglig godkjenning. Egne markeringer og notater lagres lokalt i denne nettleseren og kan eksporteres. Fullførte quizer kan også være knyttet til kontoen din.": "The map links opened articles and passed quizzes to related topics. An opened article means in progress; completed linked quizzes may mark a topic as learned. This tracks learning activity, not formal approval. Your own notes and marks are stored in this browser and can be exported.",
+    "UTFORSK / MARKER / PLANLEGG": "EXPLORE / MARK / PLAN",
+    "Det musikalske landskapet": "The musical landscape",
+    "Trykk på en gren eller modul. Statusen følger artikkelarbeidet ditt der det finnes tilknyttet innhold; du kan også overstyre den selv. Beståtte quizer gir progresjon, ikke formell godkjenning.": "Select a branch or module. You can set your own status, while linked article and quiz activity may also inform progress. Passing a quiz is not formal approval.",
+    "Søk i kartet": "Search the map", "Søk etter f.eks. moduser": "Search for modes, intervals…",
+    "Vis hele kartet": "Show entire map", "MODUS / FAGKART": "MODUS / SUBJECT MAP",
+    "10 fagområder · 24 moduler": "10 subjects · 24 modules",
+    "Tankekart over musikkteori. Kartet kan rulles både vannrett og loddrett.": "Music theory map. Scroll horizontally or vertically to explore.",
+    "Interaktivt musikalsk tankekart med fagområder og moduler": "Interactive music atlas with subjects and modules",
+    "Ikke gjennomgått": "Not yet studied", "Under arbeid": "In progress",
+    "Lært / fullførte quizer": "Learned / completed quizzes",
+    "Faglig godkjenning føres separat": "Editorial approval is tracked separately",
+    "DETALJER / MITT KART": "DETAILS / MY MAP", "Velg et område": "Choose a subject",
+    "Velg en gren eller modul for å se læringsprogresjonen fra artikler og quizer, eller for å angi status selv.": "Choose a branch or module to review progress or set your own learning status.",
+    "Min egen læringsstatus": "My learning status",
+    "Egenvurdert læringsstatus": "Self-assessed learning status",
+    "Jeg har lært dette": "I have learned this",
+    "Markeringen er din egen vurdering, ikke en attestert eller dokumentert mestring.": "Your mark is a personal assessment, not verified mastery.",
+    "Merk som mulig kurs vi bør lage": "Mark as a possible future course",
+    "Mitt notat": "My notes", "Hva kan jeg? Hva bør jeg lære videre?": "What do I know? What should I learn next?",
+    "MIN OVERSIKT": "MY OVERVIEW", "Selvmarkert lært": "Self-marked learned",
+    "Kursidéer": "Course ideas", "Eksporter min kartlegging (.json)": "Export my map (.json)",
+    "Nullstill lokale markeringer": "Reset local marks",
+    "Kartleggingen lagres bare i denne nettleseren. Den kan eksporteres, men synkroniseres ikke med konto eller Musikkutdannelse 3.0.": "Your map is stored in this browser only. You can export it; it is not synced to your account or formal curriculum.",
+    "FRA KART TIL KURS": "FROM MAP TO LEARNING",
+    "Se hullene. Finn sammenhengene. Bygg videre.": "Find gaps. Make connections. Keep learning.",
+    "Kartet er et orienterings- og planleggingsverktøy. Faglig godkjenning av kurs krever kildekontroll, dokumentert kompetanse, redaksjonell vurdering og eksplisitt godkjenning.": "The atlas is a planning tool. Course approval requires source review, demonstrated knowledge, editorial review and explicit approval.",
+    "Utforsk intervallutkastet ↗": "Explore the intervals draft ↗",
+    "Natur som inspirasjon. Musikk som uttrykk.": "Nature as inspiration. Music as expression.",
+    "Læringsstien ↗": "Learning path ↗",
+    "Lyd og tonehøyde": "Sound and pitch", "Puls, takt og rytme": "Pulse, metre and rhythm",
+    "Tonenavn og intervaller": "Note names and intervals", "Durskalaen": "The major scale",
+    "Tonearter og kvintsirkelen": "Keys and the circle of fifths", "Moll og treklanger": "Minor and triads",
+    "Diatoniske progresjoner": "Diatonic progressions", "Pentatonikk og gehør": "Pentatonics and ear training",
+    "Funksjonsharmonikk": "Functional harmony", "Kadenser og ii–V–I": "Cadences and ii–V–I",
+    "Moduser": "Modes", "Motivisk improvisasjon": "Motivic improvisation",
+    "Sekundærdominanter": "Secondary dominants", "Modal harmonikk": "Modal harmony",
+    "Stemmeføring og reharmonisering": "Voice leading and reharmonization",
+    "Oddetakt og form": "Odd metre and form", "Kromatisk harmonikk": "Chromatic harmony",
+    "Jazzharmonikk": "Jazz harmony", "Kontrapunkt": "Counterpoint",
+    "Orkestrering og produksjon": "Orchestration and production",
+    "Strukturell analyse": "Structural analysis", "Eget harmonisk språk": "Developing a harmonic language",
+    "Original komposisjon": "Original composition", "Kunstnerisk portefølje": "Artistic portfolio",
+    "Musikkens grunnlag": "Music fundamentals", "Rytme og puls": "Rhythm and pulse",
+    "Skalaer og modalitet": "Scales and modes", "Harmonikk og analyse": "Harmony and analysis",
+    "Gehør og lytting": "Ear training and listening", "Gitar og teknikk": "Guitar and technique",
+    "Improvisasjon": "Improvisation", "Komposisjon og form": "Composition and form",
+    "Arrangering og produksjon": "Arranging and production", "Musikalsk praksis": "Musical practice",
+    "Nye emner kommer": "More topics coming", "MITT MUSIKKATLAS": "MY MUSIC ATLAS",
+    "Velg et område": "Choose a subject",
+    "Atlaset følger åpnete artikler og fullførte quizer. Du kan også velge en egen status som overstyrer den automatiske statusen. Bestått quiz er ikke en faglig godkjenning.": "The atlas reflects opened articles and completed quizzes. You can override this with a personal status. Passing a quiz is not formal approval.",
+    "Dette fagområdet samler ": "This subject groups ", " planlagte moduler. Endrer du status her, får alle modulene i grenen samme egenvurderte status.": " planned modules. Changing the status here applies your assessment to every module in the branch.",
+    "MODUL ": "MODULE ", " · NIVÅ ": " · LEVEL ", "FAGOMRÅDE · ": "SUBJECT · ",
+    " MODULER": " MODULES", "Åpne modulvisning ↗": "Open module view ↗",
+    "Se hele læreplanen ↗": "Explore the curriculum ↗",
+    "Hele kartet vises samtidig. Velg et emne for å markere din egen læringsstatus.": "The entire map is visible. Choose a topic to mark your learning status.",
+    "Alle atlasmarkeringer er nullstilt. Tidligere quizresultater på kontoen er beholdt.": "All atlas marks have been reset. Previous quiz results in your account are unchanged.",
+    "Lagret i denne nettleseren.": "Saved in this browser.",
+    "Nettleseren tillot ikke lagring. Bruk eksport for å ta vare på kartleggingen.": "This browser did not allow saving. Export the map to keep your work.",
+    "Nullstille all synlig progresjon og alle notater i Musikkatlaset? Quizresultater på kontoen beholdes.": "Reset all visible atlas progress and notes? Quiz results in your account will remain.",
+    "Egenvurdert lært": "Self-assessed learned", " fagområder · ": " subjects · ",
+    " synlige moduler": " visible modules",
+}
+def atlas_en_html(page):
+    for nb, en in ATLAS_EN.items():
+        page = page.replace('>'+nb+'<', '>'+en+'<')
+        page = page.replace('>'+nb+' ', '>'+en+' ')
+        # Attribute text and long prose can contain punctuation inside quotes.
+        if len(nb) > 30:
+            page = page.replace(nb, en)
+    return page
+
+def atlas_en_js(code):
+    for nb, en in ATLAS_EN.items():
+        # Replace exact string literals (including template fragments), never JS identifiers.
+        quoted_nb = json.dumps(nb, ensure_ascii=False)
+        quoted_en = json.dumps(en, ensure_ascii=False)
+        code = code.replace(quoted_nb, quoted_en)
+    return code
+
 if EN.exists():shutil.rmtree(EN)
 EN.mkdir()
 for source in list(DIST.rglob('*')):
@@ -100,9 +197,10 @@ for source in list(DIST.rglob('*')):
             page = re.sub(r'<main\b[^>]*>[\s\S]*?</main>', '<main class="reading-page"><article><header class="reading-header"><p class="eyebrow">MODUS / MUSIC THEORY</p><h1>Triads: from root notes to chord structure</h1><p class="reading-intro">Learn how major, minor, diminished and augmented triads are built. Explore inversions, bass notes, and how adding a seventh creates a new harmonic colour.</p></header><div class="reading-layout"><div class="reading-body"><h2 id="quiz">Full lesson available in Norwegian</h2><p>The Norwegian article covers four triad qualities, the seven diatonic triads in C major, inversions, voice leading, and the transition to seventh chords. Three comprehension questions are included. The complete English edition is awaiting editorial review.</p><p><a class="button" href="../../artikler/treklanger-fra-grunnform-til-omvending.html">Read the full Norwegian article ↗</a></p></div></div></article></main>', page, count=1)
             page = page.replace('<script src="../article-quiz.js?v=content2" defer></script>', '')
         if rel.as_posix() == 'musikkart.html':
-            # Reviewed English holding page: do not machine-translate unreviewed personal learning-state UI.
-            page = re.sub(r'<main\b[^>]*>[\s\S]*?</main>', '<main class="map-shell"><section class="map-hero"><p class="map-eyebrow">MODUS / YOUR LEARNING JOURNEY</p><h1>My <em>Music Atlas.</em></h1><p class="map-hero-subtitle">See how it all connects.</p><p>This visual map brings the subjects of music together. The interactive Norwegian version shows all branches at once. Select a topic to mark it as not yet studied, in progress, or learned, and watch your personal learning landscape light up. You can also keep notes and export your self-assessment.</p><p>Your marks are stored only in this browser. They are personal reflections, not verified qualifications or account-synced progress.</p><div class="map-hero-links"><a href="../musikkart.html">Open the Norwegian music map</a><a href="laeringssti.html">Explore the learning path</a></div></section></main>', page, count=1)
-            page = re.sub(r'<script src="musikkart\.js(?:\?[^"]*)?" defer></script>', '', page)
+            # Preserve the complete interactive Atlas in English. The map is a
+            # personal self-assessment tool, not approved educational content.
+            # Keep the exact SVG, inspector, controls and accessible JS hooks.
+            page = page.replace('<html lang="nb">', '<html lang="en">', 1)
         if rel.as_posix() == 'laeringssti.html':
             # Separate reviewed English summary: no automatic translation of unapproved lessons.
             page = re.sub(r'<main\b[^>]*>[\s\S]*?</main>', '<main class="path-shell"><section class="path-hero"><p class="path-eyebrow">MODUS / LEARN</p><h1>Your path through <em>music.</em></h1><p class="path-lead">Explore our six-level curriculum, open interactive lesson demonstrations, and connect theory with practical music making.</p><div class="path-actions"><a class="path-action" href="laereplan.html">Explore the curriculum</a><a class="path-action secondary" href="laer-dorisk.html">Explore the Dorian lesson</a></div></section><section class="path-section"><p class="path-eyebrow">LEARNING SPACES</p><h2>One learning path. Different ways to explore.</h2><p class="path-intro">The curriculum outlines the planned modules. The interval exercise is an editorial draft, not an approved course. The Dorian lesson is a separate interactive learning experience.</p><div class="path-grid"><article class="path-card"><h3>Curriculum</h3><p>Six levels and 24 planned modules.</p><a href="laereplan.html">Browse the levels</a></article><article class="path-card"><h3>Dorian mode</h3><p>Explore a six-step interactive lesson.</p><a href="laer-dorisk.html">Open the lesson</a></article><article class="path-card"><h3>Intervals</h3><p>Hear notes on acoustic grand piano and explore an interactive work-in-progress.</p><a href="undervisning.html?modul=F03">Open the demonstration</a></article><article class="path-card"><h3>Music theory tools</h3><p>Explore connections between harmony, listening and playing.</p><a href="teori.html">Open the theory room</a></article></div></section></main>', page, count=1)
@@ -124,9 +222,14 @@ for source in list(DIST.rglob('*')):
         # Re-run translation for generated holding pages, including shared navigation.
         if 'data-publication-hold' in result:
             translated=EnglishHTML();translated.feed(result);result=''.join(translated.out)
+        if rel.as_posix() == 'musikkart.html':
+            result=atlas_en_html(result)
         target.write_text(result)
     elif source.suffix=='.js' and source.name not in ('language-init.js','language.js','account.js') and not source.name.startswith('account.'):
-        target.write_text(script(source.read_text()))
+        localized=script(source.read_text())
+        if rel.as_posix() == 'musikkart.js':
+            localized=atlas_en_js(localized)
+        target.write_text(localized)
     elif rel.parts[:2]==('images','articles') and rel.stem in english_card_images:
         # Exact previously used EN bytes; illustration permission does not open text.
         target.write_bytes(english_card_images[rel.stem]['source'].read_bytes())
