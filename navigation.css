@@ -1,7 +1,7 @@
 /* Primary destinations stay consistent; supporting controls stay secondary. */
 .site-header{position:relative;z-index:200;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 26px;height:auto;min-height:90px;padding:19px 5%;max-width:1440px;width:100%;margin:0 auto;border-bottom:1px solid var(--modus-b-30372a,#30372a);box-sizing:border-box;overflow:visible}
 .site-header .brand{flex-shrink:0}
-.site-header .site-nav{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:4px 24px;margin-left:auto;font-family:'DM Sans',sans-serif;letter-spacing:0}
+.site-header .site-nav{position:relative;display:flex;flex-wrap:nowrap;align-items:center;gap:4px 24px;margin-left:auto;font-family:'DM Sans',sans-serif;letter-spacing:0}
 .site-header .site-nav>a,.site-header .nav-trigger{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:9px 0;border:0;border-bottom:2px solid transparent;border-radius:0;color:var(--modus-c-aebaa1,#aebaa1);background:transparent;font:500 14px/1.4 'DM Sans',sans-serif;letter-spacing:0;text-decoration:none;white-space:nowrap;box-sizing:border-box;cursor:pointer}
 .site-header .nav-group{position:relative}
 .site-header .site-nav>a:hover,.site-header .nav-trigger:hover{color:var(--modus-c-e5f4d1,#e5f4d1);border-bottom-color:var(--modus-b-718b52,#718b52)}
@@ -113,7 +113,7 @@ html[data-theme=contrast] .site-header .nav-tooltip{background:#fff;color:#000;b
 .site-header .site-nav > a,
 .site-header .nav-trigger {
   font-family:Manrope,sans-serif;
- font-size: 19px;
+ font-size: 16px;
 font-weight: 600;
   letter-spacing:.035em;
   text-transform:uppercase;
@@ -152,6 +152,22 @@ html[data-theme=contrast] .site-header .header-tools :is(.nav-account,.global-se
 }
 html[data-theme=contrast] .site-header .header-tools :is(.nav-account,.global-search-trigger,.theme-picker>summary):hover{
   background:#000;color:#fff;
+}@media (min-width: 1051px) {
+  .site-header {
+    column-gap: 12px;
+  }
+
+  .site-header .site-nav {
+    flex-wrap: nowrap;
+    column-gap: 12px;
+  }
+
+  .site-header .header-tools {
+    flex-shrink: 0;
+  }
 }
-
-
+@media (max-width: 700px) {
+  .site-header .site-nav {
+    flex-wrap: wrap;
+  }
+}
