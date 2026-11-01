@@ -35,8 +35,8 @@ module.exports=async(browser,browserName,base)=>{
     assert.equal(await image.getAttribute('src'),'images/articles/'+item.slug+'.svg');
     await image.scrollIntoViewIfNeeded();
     await page.waitForFunction(slug=>{const img=document.querySelector(`[data-catalog-id="${slug}"] img`);return img.complete&&img.naturalWidth>0;},item.slug);
-    const bounds=await c.evaluate(e=>{const r=e.getBoundingClientRect(),a=e.querySelector('.catalog-preview-art').getBoundingClientRect(),copy=e.querySelector('.card-copy').getBoundingClientRect();return {card:r.width,art:a.width,height:a.height,copyTop:copy.top,artBottom:a.bottom};});
-    assert(bounds.art<=bounds.card+1&&bounds.height>80&&bounds.copyTop>=bounds.artBottom-1,'Illustration fits above title');
+    const bounds=await c.evaluate(e=>{const r=e.getBoundingClientRect(),a=e.querySelector('.catalog-preview-art').getBoundingClientRect(),copy=e.querySelector('.card-copy').getBoundingClientRect(),image=e.querySelector('img').getBoundingClientRect();return {card:r.width,art:a.width,height:a.height,imageWidth:image.width,imageHeight:image.height,copyTop:copy.top,artBottom:a.bottom};});
+    assert(bounds.art<=bounds.card+1&&bounds.height>80&&bounds.imageWidth<=bounds.art+1&&bounds.imageHeight<=bounds.height+1&&bounds.copyTop>=bounds.artBottom-1,'Illustration fits above title');
    }
    if(metadata.length){
     const location=page.url();await cards.first().getByRole('heading').click();assert.equal(page.url(),location);
