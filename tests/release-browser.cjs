@@ -50,7 +50,12 @@ const server = http.createServer((req,res)=>{
         assert.deepEqual(errors,[]);
         const result={browser:name,width,locale:locale||'nb',status:'passed'};results.push(result);console.log(JSON.stringify(result));
         await context.close();
-      }} finally {await browser.close()}
+      }
+      const journeyResults=await require('./learning-journey-browser.cjs')(browser,name,base);
+      fs.mkdirSync('test-results',{recursive:true});
+      fs.writeFileSync(`test-results/journey-${name}-results.json`,JSON.stringify(journeyResults,null,2));
+      for(const result of journeyResults) console.log('PL101 journey '+JSON.stringify(result));
+      } finally {await browser.close()}
     }
   } finally {
     fs.mkdirSync('test-results',{recursive:true});fs.writeFileSync('test-results/browser-results.json',JSON.stringify(results,null,2));server.close();
