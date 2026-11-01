@@ -113,8 +113,8 @@ html[data-theme=contrast] .site-header .nav-tooltip{background:#fff;color:#000;b
 .site-header .site-nav > a,
 .site-header .nav-trigger {
   font-family:Manrope,sans-serif;
-  font-size:12px;
-  font-weight:700;
+  font: size 19 px;px;
+  font: weight 600px;;
   letter-spacing:.035em;
   text-transform:uppercase;
 }
@@ -153,3 +153,5 @@ html[data-theme=contrast] .site-header .header-tools :is(.nav-account,.global-se
 html[data-theme=contrast] .site-header .header-tools :is(.nav-account,.global-search-trigger,.theme-picker>summary):hover{
   background:#000;color:#fff;
 }
+
+
