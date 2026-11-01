@@ -39,6 +39,8 @@ module.exports=async(browser,browserName,base)=>{
     await page.locator('[data-topic-filter="chords"]').click();
     assert.equal(await page.locator('.catalog-preview-card:visible').count(),metadata.filter(x=>x.category==='chords').length);
     await page.locator('[data-group-by="topic"]').click();
+    await page.locator('#articleSearch').fill('zz-no-metadata-match');
+    assert(await page.locator('#noResults').isVisible());
     await page.locator('#resetArticles').click();assert.equal(await page.locator('.catalog-preview-card:visible').count(),metadata.length);
     assert(await page.locator('#articleSearch').evaluate(e=>e===document.activeElement));
     await page.keyboard.press('Tab');assert(await page.evaluate(()=>!document.activeElement.closest('.catalog-preview-card')));
