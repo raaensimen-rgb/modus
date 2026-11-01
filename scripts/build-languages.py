@@ -5,12 +5,13 @@ from pathlib import Path
 from html.parser import HTMLParser
 import html, json, re, shutil
 import xml.etree.ElementTree as ET
-from publication import load_policy, is_public, public_articles, holding_page, EN_TRANSLATIONS
+from publication import load_policy, is_public, public_articles, holding_page, EN_TRANSLATIONS, preview_illustrations
 policy=load_policy()
 ROOT=Path(__file__).resolve().parents[1]
 DIST=ROOT/'dist'
 EN=DIST/'en'
 english_articles={a['slug'] for a in public_articles(ROOT,'en')}
+english_card_images=preview_illustrations(ROOT,'en')
 translations=json.loads((ROOT/'content/i18n/en.json').read_text())
 translations.update(EN_TRANSLATIONS)
 for line in (ROOT/'content/i18n/dynamic.tsv').read_text().splitlines():
@@ -73,7 +74,7 @@ EN.mkdir()
 for source in list(DIST.rglob('*')):
     if not source.is_file() or EN in source.parents or 'media' in source.relative_to(DIST).parts or source.name in ('redaktor.html','editor.js','editor.css','cms-seed.json','_routes.json','_headers','_worker.js'):continue
     rel=source.relative_to(DIST)
-    if rel.parts[:2]==('images','articles') and rel.stem not in english_articles:continue
+    if rel.parts[:2]==('images','articles') and rel.stem not in english_articles and rel.stem not in english_card_images:continue
     target=EN/rel;target.parent.mkdir(parents=True,exist_ok=True)
     if source.suffix=='.html':
         localized_source=ROOT/'.build-private/en'/rel
@@ -124,6 +125,9 @@ for source in list(DIST.rglob('*')):
         target.write_text(result)
     elif source.suffix=='.js' and source.name not in ('language-init.js','language.js','account.js') and not source.name.startswith('account.'):
         target.write_text(script(source.read_text()))
+    elif rel.parts[:2]==('images','articles') and rel.stem in english_card_images:
+        # Exact previously used EN bytes; illustration permission does not open text.
+        target.write_bytes(english_card_images[rel.stem]['source'].read_bytes())
     elif source.suffix=='.svg':
         ET.register_namespace('', 'http://www.w3.org/2000/svg')
         svg=ET.fromstring(source.read_text())

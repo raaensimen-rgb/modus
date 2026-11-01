@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from publication import load_policy, is_public, article_permission, public_articles, public_catalog
+from publication import load_policy, is_public, article_permission, public_articles, public_catalog, preview_illustrations
 
 dist = ROOT / 'dist'
 policy = load_policy(ROOT)
@@ -41,13 +41,17 @@ for prefix, locale in [('', 'nb'), ('en/', 'en')]:
             assert b'data-publication-hold' in files[prefix + name]
     for name in ('f03-atelier.js', 'undervisning.js', 'course.js'):
         assert prefix + name not in files, 'Private lesson runtime deployed: ' + name
+    preview_images = preview_illustrations(ROOT,locale)
     allowed = {a['slug'] for a in public_articles(ROOT, locale)}
     index = json.loads(files[prefix + 'search-index.json'])
     assert {Path(x['url']).stem for x in index if x['type'] == 'article'} == allowed
     for source in json.loads((ROOT / 'content/articles.json').read_text()):
         if source['slug'] not in allowed:
             assert b'data-publication-hold' in files[prefix + 'artikler/' + source['slug'] + '.html']
-            assert prefix + 'images/articles/' + source['slug'] + '.svg' not in files
+            image=prefix+'images/articles/'+source['slug']+'.svg'
+            if source['slug'] in preview_images:
+                assert hashlib.sha256(files[image]).hexdigest()==preview_images[source['slug']]['sha256']
+            else:assert image not in files
 
 seed = json.loads(files['cms-seed.json'])
 expected = {(a['slug'], locale) for locale in ('nb', 'en') for a in public_articles(ROOT, locale)}

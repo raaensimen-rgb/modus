@@ -5,7 +5,8 @@
   "approval_reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
   "preview_branches": [
     "fix/pl103b-preview-cards",
-    "test/pl101-visibility-integration"
+    "test/pl101-visibility-integration",
+    "fix/pl103c-illustrated-cards"
   ],
   "fields": [
     "slug",
