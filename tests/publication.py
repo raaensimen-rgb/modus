@@ -1,3 +1,4 @@
+import os
 """Independent data-boundary checks, including real clean/dirty production builds."""
 import copy
 import json
@@ -135,5 +136,14 @@ with tempfile.TemporaryDirectory(prefix='modus-publication-test-') as temp:
     unpublished = build()
     assert all(public_marker.encode() not in data for data in unpublished.values())
     private_absent(unpublished)
+    previous_branch=os.environ.get('CF_PAGES_BRANCH')
+    os.environ['CF_PAGES_BRANCH']='main'
+    try:
+        production=build()
+        assert all(b'catalog-preview-card' not in production[p] for p in ('artikler.html','en/artikler.html'))
+        private_absent(production)
+    finally:
+        if previous_branch is None:os.environ.pop('CF_PAGES_BRANCH',None)
+        else:os.environ['CF_PAGES_BRANCH']=previous_branch
 
 print('Publication boundary passed: default-private, independent fields, locale permission, source preservation, clean/dirty builds and whole-artifact canaries.')

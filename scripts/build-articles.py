@@ -2,7 +2,7 @@ from pathlib import Path
 import json,math,re,html
 from site_navigation import render_header, with_navigation_css
 from article_library import TOPICS, ORDER, render_library
-from publication import public_articles, public_catalog, holding_page
+from publication import public_articles, public_catalog, holding_page, preview_catalog_cards
 ROOT=Path(__file__).resolve().parents[1];DIST=ROOT/'dist';SOURCE_ARTICLES=json.loads((ROOT/'content/articles.json').read_text());ARTICLES=public_articles(ROOT)
 QUIZZES=json.loads((ROOT/'content/article-quizzes.json').read_text())
 LEVELS={'beginner':('Grunnleggende musikkteori','Start med byggesteinene.'),'intermediate':('Videregående musikkteori','Se de større sammenhengene.'),'advanced':('Faglig fordypning','Utforsk flere nyanser.')}
@@ -134,6 +134,9 @@ def quiz(a):
 def card(a,prefix=''):
  label=LEVELS[a['level']][0]
  return f'<article class="article-card {"circle-article" if a["art"]=="circle" else ""}" data-article-id="{a["slug"]}" data-level="{a["level"]}" data-topic="{a["category"]}" data-search="{esc(a["title"]+" "+a["topic"]+" "+a["intro"])}"><a class="card-main" href="{prefix}artikler/{a["slug"]}.html"><div class="card-level-row"><span class="level-badge {a["level"]}">{label}</span></div><div class="card-art"><img src="{prefix}images/articles/{a["slug"]}.svg?v=content2" width="{500 if a["art"]=="circle" else 800}" height="{500 if a["art"]=="circle" else 430}" alt="{esc(ALT[a["art"]])}" loading="lazy"></div><div class="card-copy"><div class="card-meta"><span>{esc(a["topic"])}</span><span>{minutes(a)} min lesing</span></div><h2>{esc(a["title"])}</h2><p>{esc(a["intro"])}</p><span class="read-more">Les artikkelen <span aria-hidden="true">↗</span></span></div></a><div class="card-quiz"><span class="card-quiz-status">3 spørsmål</span><a href="{prefix}artikler/{a["slug"]}.html#quiz" class="card-quiz-link">Ta quizen ↗</a></div></article>'
+def preview_card(a):
+ return f'<article class="upcoming-card catalog-preview-card" data-catalog-id="{esc(a["slug"])}" data-level="{esc(a["level"])}" data-topic="{esc(a["category"])}" data-search="{esc(a["title"]+" "+a["level_label"]+" "+a["category_label"])}" aria-labelledby="catalog-{esc(a["slug"])}"><div class="card-level-row"><span class="level-badge {esc(a["level"])}">{esc(a["level_label"])}</span><span class="upcoming-status">Under arbeid</span></div><div class="card-copy"><div class="card-meta"><span>{esc(a["category_label"])}</span></div><h2 id="catalog-{esc(a["slug"])}">{esc(a["title"])}</h2></div></article>'
+
 def learning_intro(a):
  if not a.get('learning'):return ''
  data=a['learning'];goals=''.join(f'<li>{esc(goal)}</li>' for goal in data['goals'])
@@ -169,8 +172,14 @@ def generate_articles(items, output):
   page=f'''<!DOCTYPE html><html lang="nb"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111310"><title>{esc(a['title'])} · MODUS</title><meta name="description" content="{esc(a['intro'])}"><link rel="stylesheet" href="../home.css"><link rel="stylesheet" href="../articles.css?v=content2"></head><body>{header('../')}<main class="reading-page"><nav class="breadcrumbs" aria-label="Brødsmuler"><a href="../">Forsiden</a><span>/</span><a href="../artikler.html">Artikler</a><span>/</span><span>{label}</span></nav><article><header class="reading-header"><div class="reading-meta"><span class="level-badge {a['level']}">{label}</span><span>{esc(a['topic'])}</span><span>{minutes(a)} min lesing</span></div><h1>{esc(a['title'])}</h1><p class="reading-intro">{esc(a['intro'])}</p></header>{learning_intro(a)}<figure class="reading-illustration"><img src="../images/articles/{a['slug']}.svg?v=content2" width="{500 if a['art']=='circle' else 800}" height="{500 if a['art']=='circle' else 430}" alt="{esc(ALT[a['art']])}"></figure><div class="reading-layout"><aside class="contents"><span>I DENNE ARTIKKELEN</span>{toc}</aside><div class="reading-body">{body}<section class="article-practice"><p class="eyebrow">FRA LESING TIL SPILLING</p><h2>Prøv det selv.</h2><p>{esc(a['exercise'])}</p>{practice_steps(a)}<a class="button" href="../{a['practice']}">{esc(a['practice_label'])} <span aria-hidden="true">↗</span></a></section>{quiz(a)}{next_step(a)}</div></div></article><section class="related"><p class="eyebrow">LES VIDERE</p><div>{related_html}</div><a class="all-articles" href="../artikler.html">← Til alle artiklene</a></section></main>{footer('../')}<script src="../article-quiz.js?v=atlas-progress1" defer></script></body></html>'''
   page=page.replace('</head><body>', '<link rel="stylesheet" href="../learning-premises.css?v=20261029-confirm"><script src="../learning-premises.js?v=20261029-flow2" defer></script></head><body>')
   (output/'artikler'/f'{a["slug"]}.html').write_text(with_navigation_css(page, '../'))
-def build_listing(ARTICLES, UPCOMING):
- journey,library=render_library(ARTICLES, LEVELS, card, UPCOMING, upcoming_card)
+def build_listing(ARTICLES, UPCOMING, locale='nb'):
+ previews=[a for a in preview_catalog_cards(ROOT,locale) if a['slug'] not in {x['slug'] for x in ARTICLES}]
+ items=ARTICLES+previews
+ def render_item(a):return preview_card(a) if a in previews else card(a)
+ journey,library=render_library(items, LEVELS, render_item, UPCOMING, upcoming_card)
+ if previews and not ARTICLES:
+  library=re.sub(r'<div class="library-progress">.*?</div>', f'<div class="library-progress catalog-preview-note"><strong>{len(previews)} <span>artikkelkort · fulltekst ikke tilgjengelig</span></strong></div>', library, count=1)
+
  listing=f'''<!DOCTYPE html><html lang="nb"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111310"><title>MODUS · Artikler om musikkteori</title><meta name="description" content="Illustrerte artikler om musikkteori, fra grunnleggende musikkteori til faglig fordypning. Les om intervaller, akkorder, improvisasjon, moduser, harmonikk og rytme."><link rel="stylesheet" href="home.css"><link rel="stylesheet" href="articles.css?v=content2"></head><body>{header()}<main class="articles-page"><section class="articles-hero"><div><p class="eyebrow">ARTIKKELBIBLIOTEKET</p><h1>Små innsikter.<br><em>Større spillerom.</em></h1><p>Musikkteori du kan ta med til instrumentet.<br>Finn et tema som vekker nysgjerrigheten – og les i ditt eget tempo.</p></div><div class="articles-landscape" aria-hidden="true"></div></section>{journey}<section class="learning-callout"><div><span>LÆRINGSSTI · SEKS STEG</span><strong>Forstå og bruk dorisk</strong></div><a href="laer-dorisk.html">Start med å lytte ↗</a></section>{library}<section class="plus-teaser"><div><span>MODUS+ · KONSEPT</span><h2>Et mulig neste kapittel.</h2><p>Se hvordan et fremtidig medlemskap kan gi mer rom for fordypning. Alle dagens artikler er fortsatt åpne.</p></div><a href="modus-plus.html">Forhåndsvis Modus+ ↗</a></section><section class="library-bottom"><div><p class="eyebrow">LÆR MED ØRET</p><h2>Les litt. Lytt litt. <em>Spill selv.</em></h2><p>Ta ideen videre med pianokart, lydeksempler og praktiske akkordgrep.</p></div><a class="button" href="teori.html">Åpne teorirommet <span aria-hidden="true">↗</span></a></section></main>{footer()}<script src="articles.js?v=content2" defer></script><script src="article-quiz.js?v=atlas-progress1" defer></script></body></html>'''
  listing=listing.replace('</head><body>', '<link rel="stylesheet" href="learning-premises.css?v=20261029-confirm"><script src="learning-premises.js?v=20261029-flow2" defer></script></head><body>')
  if not ARTICLES:
@@ -181,6 +190,8 @@ def build_listing(ARTICLES, UPCOMING):
   notice=f'<section class="learning-overview" id="publicationPending" aria-labelledby="publicationPendingTitle" data-source-count="{len(SOURCE_ARTICLES)}" data-published-count="{len(ARTICLES)}"><h2 id="publicationPendingTitle">Biblioteket er bevart</h2><p>Artiklene er ikke slettet. Tekstene er bevart i redaksjonell kilde og avventer dokumentert publiseringstillatelse.</p><p><span>Bevart i redaksjonell kilde:</span> <strong>{len(SOURCE_ARTICLES)}</strong> · <span>Tilgjengelig for lesing her:</span> <strong>{len(ARTICLES)}</strong></p><p>Titler og artikkeltekst vises først når publiseringstillatelsen er avklart.</p><a href="grunnstudier.html">MODUS Grunnstudier ↗</a></section>'
   listing=listing.replace(journey,notice+journey) if ARTICLES else listing.replace('<section class="learning-overview"><h2>Under arbeid</h2><p>Artiklene venter på redaksjonell publiseringsgodkjenning.</p></section>',notice)
   listing=listing.replace('Alle dagens artikler er fortsatt åpne.','Artikler åpnes etter publiseringsgodkjenning.')
+ if previews:
+  listing=listing.replace('Biblioteket er bevart','Artikkelbibliotek · under arbeid').replace('Titler og artikkeltekst vises først når publiseringstillatelsen er avklart.','Forhåndsvisning: kun titler, nivå og kategori. Artiklene er under arbeid og kan ikke åpnes.')
  return with_navigation_css(listing)
 
 nb=public_articles(ROOT);en=public_articles(ROOT,'en')
@@ -188,5 +199,5 @@ private=ROOT/'.build-private/en';private.mkdir(parents=True,exist_ok=True)
 generate_articles(nb,DIST)
 generate_articles(en,private)
 (DIST/'artikler.html').write_text(build_listing(nb,public_catalog(ROOT)))
-(private/'artikler.html').write_text(build_listing(en,public_catalog(ROOT,'en')))
+(private/'artikler.html').write_text(build_listing(en,public_catalog(ROOT,'en'),'en'))
 print(f'Generated {len(ARTICLES)} complete articles, {len(ARTICLES)} illustrations and article index')

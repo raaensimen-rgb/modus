@@ -1,6 +1,8 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs');
 const publicIds=require('./publication-helper.cjs');
+const {execFileSync}=require('node:child_process');
+const previewCards=JSON.parse(execFileSync('python3',['-c',"import sys,json;sys.path.insert(0,'scripts');from publication import preview_catalog_cards;print(json.dumps({l:preview_catalog_cards(locale=l) for l in ('nb','en')}))"],{encoding:'utf8'}));
 module.exports=async(browser,browserName,base)=>{
  const records=[];
  for(const width of [1440,375])for(const locale of ['','en/']){
@@ -18,11 +20,41 @@ module.exports=async(browser,browserName,base)=>{
    const pending=page.locator('#publicationPending');
    assert.equal(await pending.getAttribute('data-source-count'),'16');
    assert.equal(await pending.getAttribute('data-published-count'),'0');
-   assert((await pending.innerText()).includes(locale?'The library is preserved':'Biblioteket er bevart'));
+   const metadata=previewCards[locale?'en':'nb'];
+   assert((await pending.innerText()).includes(metadata.length?(locale?'Article library · in progress':'Artikkelbibliotek · under arbeid'):(locale?'The library is preserved':'Biblioteket er bevart')));
+   const cards=page.locator('.catalog-preview-card');assert.equal(await cards.count(),metadata.length);
+   if(metadata.length)assert.equal(await page.locator('.catalog-preview-note').innerText(),metadata.length+(locale?' article cards · full text unavailable':' artikkelkort · fulltekst ikke tilgjengelig'));
+   for(const item of metadata){
+    const c=page.locator(`[data-catalog-id="${item.slug}"]`);
+    assert.equal(await c.getByRole('heading').innerText(),item.title);
+    assert((await c.innerText()).includes(item.category_label));
+    assert((await c.innerText()).includes(locale?'In progress':'Under arbeid'));
+    assert.equal(await c.locator('a,button,input,img,script,[tabindex],[onclick]').count(),0);
+   }
+   if(metadata.length){
+    const location=page.url();await cards.first().getByRole('heading').click();assert.equal(page.url(),location);
+    await page.locator('#articleSearch').fill(locale?'circle of fifths':'kvintsirkelen');
+    assert.equal(await page.locator('.catalog-preview-card:visible').count(),1);
+    await page.locator('#articleSearch').fill('');
+    await page.locator('[data-topic-filter="chords"]').click();
+    assert.equal(await page.locator('.catalog-preview-card:visible').count(),metadata.filter(x=>x.category==='chords').length);
+    await page.locator('[data-group-by="topic"]').click();
+    await page.locator('#articleSearch').fill('zz-no-metadata-match');
+    assert(await page.locator('#noResults').isVisible());
+    await page.locator('#resetArticles').click();assert.equal(await page.locator('.catalog-preview-card:visible').count(),metadata.length);
+    assert(await page.locator('#articleSearch').evaluate(e=>e===document.activeElement));
+    await page.keyboard.press('Tab');assert(await page.evaluate(()=>!document.activeElement.closest('.catalog-preview-card')));
+    await page.locator('[data-group-by="order"]').click();
+    const columns=await page.locator('.article-grid:visible').first().evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length);assert.equal(columns,width===375?1:3);
+   }
    assert.equal(await pending.locator('img,script,[data-article-id],a[href*="artikler/"]').count(),0,'Notice must not link to or embed private articles');
    await page.locator('#articleSearch').fill('unpublished-check');
    assert.equal(await page.locator('.article-card:visible').count(),0);
    await page.locator('#articleSearch').fill('');
+   assert.equal(await page.locator('.catalog-preview-card:visible').count(),metadata.length);
+   await page.evaluate(()=>{document.documentElement.style.zoom='2';});
+   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Catalog fits CSS zoom 200%');
+   await page.evaluate(()=>{document.documentElement.style.zoom='';});
    assert(await page.evaluate(w=>innerWidth===w&&document.documentElement.scrollWidth<=w+1,width));
    fs.mkdirSync('test-results',{recursive:true});
    await page.screenshot({path:`test-results/publication-${browserName}-${width}-${locale?'en':'nb'}.png`,fullPage:true,
