@@ -2,105 +2,234 @@
   "schema_version": 1,
   "migration": {
     "from": "legacy-unqualified-content",
-    "decision": "No explicit public permission found; preserve sources, default private.",
-    "order": "GitHub #28 comment 6551064272"
+    "decision": "Per-article evidence reviewed; no complete version-specific public permission located. Preserve all sources and park owner decisions.",
+    "order": "GitHub #28 comment 6551064272",
+    "article_review_order": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074"
   },
   "articles": {
     "toner-og-intervaller": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "dur-og-moll": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "kvintsirkelen": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "din-forste-improvisasjon": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "moduser-og-tonalt-sentrum": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "kirketonearter-ett-system-sju-uttrykk": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "romertall-i-musikk": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "ii-v-i-kadensen": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "treklanger-fra-grunnform-til-omvending": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "septimakkorder": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "harmonisk-moll-og-frygisk-dominant": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "stemmeforing": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "rytme-i-sju-aatte": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "bygg-akkorder-i-en-toneart": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "ett-skalakart-nye-maltoner": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     },
     "dorisk-og-eolisk": {
       "editorial_status": "draft",
       "visibility": "private",
       "approved_locales": [],
-      "approval_reference": null
+      "approval_reference": null,
+      "publication_decision": "awaiting_owner",
+      "publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "private"
     }
   },
   "learning_pages": {

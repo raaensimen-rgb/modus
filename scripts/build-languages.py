@@ -5,11 +5,12 @@ from pathlib import Path
 from html.parser import HTMLParser
 import html, json, re, shutil
 import xml.etree.ElementTree as ET
-from publication import load_policy, is_public, holding_page, EN_TRANSLATIONS
+from publication import load_policy, is_public, public_articles, holding_page, EN_TRANSLATIONS
 policy=load_policy()
 ROOT=Path(__file__).resolve().parents[1]
 DIST=ROOT/'dist'
 EN=DIST/'en'
+english_articles={a['slug'] for a in public_articles(ROOT,'en')}
 translations=json.loads((ROOT/'content/i18n/en.json').read_text())
 translations.update(EN_TRANSLATIONS)
 for line in (ROOT/'content/i18n/dynamic.tsv').read_text().splitlines():
@@ -72,7 +73,7 @@ EN.mkdir()
 for source in list(DIST.rglob('*')):
     if not source.is_file() or EN in source.parents or 'media' in source.relative_to(DIST).parts or source.name in ('redaktor.html','editor.js','editor.css','cms-seed.json','_routes.json','_headers','_worker.js'):continue
     rel=source.relative_to(DIST)
-    if rel.parts[:2]==('images','articles') and not is_public(policy['articles'].get(rel.stem),'en'):continue
+    if rel.parts[:2]==('images','articles') and rel.stem not in english_articles:continue
     target=EN/rel;target.parent.mkdir(parents=True,exist_ok=True)
     if source.suffix=='.html':
         localized_source=ROOT/'.build-private/en'/rel
@@ -115,7 +116,7 @@ for source in list(DIST.rglob('*')):
         result=result.replace('<html lang="en">','<html lang="en">',1)
         if rel.as_posix() in policy['learning_pages'] and not is_public(policy['learning_pages'][rel.as_posix()], 'en'):
             result=language_assets(holding_page(active='course' if rel.name=='laer-dorisk.html' else 'path' if rel.name=='grunnstudier.html' else 'lesson',english=True))
-        if rel.parts[0]=='artikler' and not is_public(policy['articles'].get(rel.stem), 'en'):
+        if rel.parts[0]=='artikler' and rel.stem not in english_articles:
             result=language_assets(holding_page('../',active='articles',english=True),'../')
         # Re-run translation for generated holding pages, including shared navigation.
         if 'data-publication-hold' in result:

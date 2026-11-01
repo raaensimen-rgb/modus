@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from publication import is_public, load_policy
+from publication import is_public, load_policy, article_text_version, article_permission
 
 valid = {'editorial_status': 'approved', 'visibility': 'public',
          'approved_locales': ['nb', 'en'], 'approval_reference': 'Synthetic test approval'}
@@ -92,7 +92,9 @@ with tempfile.TemporaryDirectory(prefix='modus-publication-test-') as temp:
     assert clean == dirty, 'Dirty build is not identical to clean build'
 
     # Explicit public permission opens one locale, without opening EN or private peers.
-    policy['articles'][public_slug] = {**valid, 'approved_locales': ['nb']}
+    policy['articles'][public_slug] = {**valid, 'approved_locales': ['nb'],
+        'publication_evidence': {'nb': {'reference': 'Synthetic version-specific QA decision',
+            'reviewed_version_sha256': article_text_version(articles[0], 'nb', project)}}}
     registry.write_text(json.dumps(policy))
     public = build()
     private_absent(public)
@@ -106,6 +108,26 @@ with tempfile.TemporaryDirectory(prefix='modus-publication-test-') as temp:
     assert not any(x['type'] == 'article' for x in json.loads(public['en/search-index.json']))
     assert b'data-publication-hold' in public['artikler/' + private_slug + '.html']
     assert 'images/articles/' + private_slug + '.svg' not in public
+    # NB approval plus an unproved EN flag must not copy the private EN illustration/text.
+    policy['articles'][public_slug]['approved_locales']=['nb','en']
+    registry.write_text(json.dumps(policy))
+    unproved_en=build()
+    assert public_marker.encode() not in unproved_en['en/artikler/'+public_slug+'.html']
+    assert 'en/images/articles/'+public_slug+'.svg' not in unproved_en
+
+    # Permission for an old text version must not open a changed article or translation.
+    proof=policy['articles'][public_slug]
+    assert article_permission(proof, articles[0], 'nb', project)
+    changed=copy.deepcopy(articles[0]);changed['intro'] += ' changed'
+    assert not article_permission(proof, changed, 'nb', project)
+    assert not article_permission({**valid}, articles[0], 'nb', project)
+    assert not article_permission({**proof, 'publication_evidence': []}, articles[0], 'nb', project)
+    en_proof={**valid,'publication_evidence':{'en':{'reference':'Synthetic EN decision',
+        'reviewed_version_sha256':article_text_version(articles[0],'en',project)}}}
+    assert article_permission(en_proof,articles[0],'en',project)
+    translations=project/'content/i18n/en.json';translation_data=json.loads(translations.read_text())
+    translation_data['Synthetic change']='New translation';translations.write_text(json.dumps(translation_data))
+    assert not article_permission(en_proof,articles[0],'en',project)
 
     # Status, visibility and locale permission remain independently enforceable.
     policy['articles'][public_slug] = {**valid, 'editorial_status': 'draft'}

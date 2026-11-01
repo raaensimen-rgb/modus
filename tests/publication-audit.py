@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from publication import load_policy, is_public, public_articles, public_catalog
+from publication import load_policy, is_public, article_permission, public_articles, public_catalog
 
 dist = ROOT / 'dist'
 policy = load_policy(ROOT)
@@ -25,7 +25,7 @@ for path, data in files.items():
 private_phrases = []
 for article in json.loads((ROOT / 'content/articles.json').read_text()):
     record = policy['articles'].get(article['slug'])
-    if any(is_public(record, locale) for locale in ('nb', 'en')):
+    if any(article_permission(record, article, locale, ROOT) for locale in ('nb', 'en')):
         continue
     private_phrases += [normalized(article['intro'])]
     private_phrases += [normalized(section[1]) for section in article['sections']]
