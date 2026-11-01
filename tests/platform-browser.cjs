@@ -4,7 +4,7 @@ module.exports=async function(browser,browserName,base){
  const results=[];
  for(const width of [1440,375])for(const locale of ['', 'en/']){
   const context=await browser.newContext({viewport:{width,height:1000}}),page=await context.newPage(),errors=[];
-  page.on('pageerror',e=>errors.push(e.message));
+  page.on('pageerror',e=>errors.push({page:page.url(),message:e.message,stack:e.stack}));
   const acknowledge=async()=>{const d=page.locator('.modus-premises-dialog[open]');if(await d.isVisible()){await page.locator('#modus-premises-accept').check();await page.locator('.modus-premises-confirm').click();await d.waitFor({state:'hidden'});}};
   const open=async path=>{await page.goto(base+'/'+locale+path);await acknowledge();};
   try{
@@ -34,6 +34,7 @@ module.exports=async function(browser,browserName,base){
     assert.equal(await page.locator('#map-exploring').innerText(),'0');
    }else{
     assert.equal(await page.locator('.module-node').count(),0,'Keep existing limited English Atlas orientation');
+    assert.equal(await page.locator('script[src^="musikkart.js"]').count(),0,'No NB-only runtime on the English orientation');
     assert(await page.getByRole('link',{name:'Open the Norwegian music map'}).isVisible());
    }
    assert.deepEqual(errors,[]);
