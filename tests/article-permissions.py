@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from publication import article_text_version, public_articles, load_policy
+from publication import article_text_version, public_articles, load_policy, preview_catalog_cards
 
 source = ROOT / 'content/articles.json'
 articles = json.loads(source.read_text())
@@ -28,7 +28,8 @@ for prefix, locale in (('', 'nb'), ('en/', 'en')):
     assert not public_articles(ROOT, locale), 'No owner permission exists in the current evidence matrix'
     page = (ROOT / 'dist' / prefix / 'artikler.html').read_text()
     assert 'data-source-count="16"' in page and 'data-published-count="0"' in page
-    assert ('The library is preserved' if locale == 'en' else 'Biblioteket er bevart') in page
+    title = ('Article library · in progress' if locale == 'en' else 'Artikkelbibliotek · under arbeid') if preview_catalog_cards(ROOT,locale) else ('The library is preserved' if locale == 'en' else 'Biblioteket er bevart')
+    assert title in page
     assert ('The articles have not been deleted.' if locale == 'en' else 'Artiklene er ikke slettet.') in page
     assert 'article-publication-review' not in page
 assert not (ROOT / 'dist/editorial').exists()

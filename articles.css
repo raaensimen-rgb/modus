@@ -223,3 +223,14 @@
   /* Keep the last row of cards reachable above the fixed contact control. */
   .articles-page { padding-bottom: max(100px, env(safe-area-inset-bottom)); }
 }
+
+/* PL-103B: metadata-only Preview cards; static and without illustration/teaser. */
+.catalog-preview-card{cursor:default;min-width:0;transition:none}
+.catalog-preview-card:hover{transform:none;box-shadow:none}
+.catalog-preview-card .card-level-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:16px 20px;border-bottom:1px solid var(--modus-b-3a4d2a,#3a4d2a)}
+.catalog-preview-card .level-badge{position:static;white-space:normal;line-height:1.5;max-width:100%}
+.catalog-preview-card .upcoming-status{position:static;font-size:12px;line-height:1.5;white-space:nowrap}
+.catalog-preview-card .card-copy{padding:24px;min-width:0}
+.catalog-preview-card h2{font-size:clamp(21px,2vw,25px);line-height:1.45;letter-spacing:-.025em;overflow-wrap:break-word;margin:14px 0 0}
+.catalog-preview-card .card-meta{font-size:13px;line-height:1.5}
+.catalog-preview-card[hidden]{display:none}
