@@ -33,12 +33,23 @@ module.exports=async function(browser,browserName,base){
     page.once('dialog',d=>d.accept());await page.locator('#map-clear').click();
     assert.equal(await page.locator('#map-exploring').innerText(),'0');
    }else{
-    assert.equal(await page.locator('.module-node').count(),0,'Keep existing limited English Atlas orientation');
-    assert.equal(await page.locator('script[src^="musikkart.js"]').count(),0,'No NB-only runtime on the English orientation');
-    assert(await page.getByRole('link',{name:'Open the Norwegian music map'}).isVisible());
+    const nodes=page.locator('.module-node');
+    assert.equal(await nodes.count(),24,'English Atlas must render all 24 interactive modules');
+    assert.equal(await page.locator('script[src^="musikkart.js"]').count(),1,'English Atlas loads the shared runtime');
+    await nodes.first().focus();await page.keyboard.press('Enter');
+    assert(await page.locator('#inspector-module').isVisible(),'English inspector opens by keyboard');
+    await page.locator('[data-state="exploring"]').click();
+    await page.locator('#map-personal-note').fill('English Atlas parity QA');
+    await page.reload();await acknowledge();
+    await page.locator('.module-node').first().focus();await page.keyboard.press('Enter');
+    assert.equal(await page.locator('#map-personal-note').inputValue(),'English Atlas parity QA');
+    page.once('dialog',d=>d.dismiss());await page.locator('#map-clear').click();
+    assert.equal(await page.locator('#map-exploring').innerText(),'1','Cancelled reset retains state');
+    page.once('dialog',d=>d.accept());await page.locator('#map-clear').click();
+    assert.equal(await page.locator('#map-exploring').innerText(),'0','Confirmed reset clears state');
    }
    assert.deepEqual(errors,[]);
-   results.push({browser:browserName,width,locale:locale||'nb',pages:8,atlas:locale?'existing English orientation':'24 modules, keyboard, persistence, cancelled/confirmed reset',status:'passed'});
+   results.push({browser:browserName,width,locale:locale||'nb',pages:8,atlas:'24 modules, keyboard, persistence, cancelled/confirmed reset',status:'passed'});
   }finally{await context.close();}
  }
  return results;
