@@ -1,4 +1,5 @@
 """Fail-closed publication policy. Source/editorial data never implies permission."""
+import os
 import hashlib
 import json
 import re
@@ -75,6 +76,62 @@ def article_permission(record, article, locale='nb', root=ROOT):
             and isinstance(proof.get('reference'), str) and bool(proof['reference'].strip())
             and proof.get('reviewed_version_sha256') == article_text_version(article, locale, root))
 
+
+CARD_LEVELS = {'beginner': 'Grunnleggende musikkteori', 'intermediate': 'Videregående musikkteori', 'advanced': 'Faglig fordypning'}
+
+def catalog_card_metadata(article, locale='nb', root=ROOT):
+    """Only approved title/taxonomy inputs; never copy article prose into a card."""
+    from article_library import TOPICS
+    translations = {}
+    if locale == 'en':
+        translations = json.loads((root / 'content/i18n/en.json').read_text())
+        for line in (root / 'content/i18n/dynamic.tsv').read_text().splitlines():
+            if line:
+                source, target = line.split('\t', 1)
+                translations[source] = target
+    def label(value):
+        if locale == 'en' and value not in translations:
+            raise ValueError('Missing existing English catalog metadata')
+        return translations.get(value, value)
+    return {'slug': article['slug'], 'title': label(article['title']),
+            'level': article['level'], 'category': article['category'],
+            'level_label': label(CARD_LEVELS[article['level']]),
+            'category_label': label(TOPICS[article['category']][0])}
+
+def catalog_card_version(metadata):
+    return hashlib.sha256(json.dumps(metadata, ensure_ascii=False, sort_keys=True,
+                                    separators=(',', ':')).encode()).hexdigest()
+
+def preview_catalog_cards(root=ROOT, locale='nb'):
+    """Preview-only metadata permission, independent of all full-text approvals."""
+    path = root / 'content/article-card-permissions.json'
+    if not path.is_file():
+        return []
+    policy = json.loads(path.read_text())
+    if policy.get('schema_version') != 1:
+        raise ValueError('Invalid catalog-card policy')
+    branch = os.environ.get('CF_PAGES_BRANCH', '')
+    # Explicit main/production always wins over a local/CI opt-in.
+    if branch == 'main' or os.environ.get('CONTEXT') == 'production':
+        return []
+    enabled = os.environ.get('MODUS_CATALOG_PREVIEW') == '1' or (
+        os.environ.get('CF_PAGES') == '1' and branch in policy.get('preview_branches', []))
+    if not enabled:
+        return []
+    result = []
+    for article in json.loads((root / 'content/articles.json').read_text()):
+        record = policy.get('cards', {}).get(article['slug'], {})
+        try:
+            metadata = catalog_card_metadata(article, locale, root)
+        except (ValueError, KeyError):
+            continue
+        if (record.get('visibility') == 'preview'
+                and record.get('reference') == policy.get('approval_reference')
+                and record.get('reference') == 'https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070'
+                and record.get('versions', {}).get(locale) == catalog_card_version(metadata)):
+            result.append(metadata)
+    return result
+
 def holding_page(prefix='', active='lesson', english=False):
     from site_navigation import render_header, with_navigation_css
     title = 'In progress' if english else 'Under arbeid'
@@ -92,6 +149,10 @@ def public_catalog(root=ROOT, locale='nb'):
 
 
 EN_TRANSLATIONS = {
+    'Artikkelbibliotek · under arbeid': 'Article library · in progress',
+    '16 artikkelkort · fulltekst ikke tilgjengelig': '16 article cards · full text unavailable',
+    'Forhåndsvisning: kun titler, nivå og kategori. Artiklene er under arbeid og kan ikke åpnes.': 'Preview: titles, level and category only. The articles are in progress and cannot be opened.',
+    'Titler og artikkeltekst vises først når publiseringstillatelsen er avklart.': 'Titles and article text are shown only after publication permission has been confirmed.',
     'Biblioteket er bevart': 'The library is preserved',
     'Artiklene er ikke slettet. Tekstene er bevart i redaksjonell kilde og avventer dokumentert publiseringstillatelse.': 'The articles have not been deleted. Their texts are preserved in editorial sources and await documented publication permission.',
     'Bevart i redaksjonell kilde:': 'Preserved in editorial sources:',

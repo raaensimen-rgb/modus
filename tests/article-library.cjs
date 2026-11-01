@@ -36,7 +36,7 @@ const readingHeadings=[...html.matchAll(/<section class="article-category" data-
 assert.deepEqual(readingHeadings.slice(0,3),['Grunnleggende musikkteori','Videregående musikkteori','Faglig fordypning']);
 assert(progression.indexOf('din-forste-improvisasjon')<progression.indexOf('septimakkorder'),'Beginner block must precede intermediate block');
 
-assert.equal((html.match(/class="card-level-row"/g)||[]).length,publicIds.length+require('./publication-helper.cjs')('catalog').length,'All published and upcoming card badges must occupy their own row');
+assert.equal((html.match(/class="card-level-row"/g)||[]).length,publicIds.length+require('./publication-helper.cjs')('catalog').length+(html.match(/class="upcoming-card catalog-preview-card"/g)||[]).length,'All published and upcoming card badges must occupy their own row');
 for(const art of html.match(/<div class="card-art">[^]*?<\/div>/g)||[]) assert(!art.includes('level-badge'),'Badges must not overlay diagrams');
 assert(html.includes('data-group-by="topic"'),'Topic grouping must remain available');
 assert(html.includes('data-group-by="level"'),'Level grouping must remain available');
