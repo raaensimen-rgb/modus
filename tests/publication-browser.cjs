@@ -15,6 +15,11 @@ module.exports=async(browser,browserName,base)=>{
   try{
    await open('artikler.html');
    assert.equal(await page.locator('.article-card').count(),publicIds(locale?'en':'nb').length);
+   const pending=page.locator('#publicationPending');
+   assert.equal(await pending.getAttribute('data-source-count'),'16');
+   assert.equal(await pending.getAttribute('data-published-count'),'0');
+   assert((await pending.innerText()).includes(locale?'The library is preserved':'Biblioteket er bevart'));
+   assert.equal(await pending.locator('img,script,[data-article-id],a[href*="artikler/"]').count(),0,'Notice must not link to or embed private articles');
    await page.locator('#articleSearch').fill('unpublished-check');
    assert.equal(await page.locator('.article-card:visible').count(),0);
    await page.locator('#articleSearch').fill('');
