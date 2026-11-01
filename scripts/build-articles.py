@@ -2,7 +2,8 @@ from pathlib import Path
 import json,math,re,html
 from site_navigation import render_header, with_navigation_css
 from article_library import TOPICS, ORDER, render_library
-ROOT=Path(__file__).resolve().parents[1];DIST=ROOT/'dist';ARTICLES=json.loads((ROOT/'content/articles.json').read_text())
+from publication import public_articles, public_catalog, holding_page, preview_catalog_cards, preview_illustrations
+ROOT=Path(__file__).resolve().parents[1];DIST=ROOT/'dist';SOURCE_ARTICLES=json.loads((ROOT/'content/articles.json').read_text());ARTICLES=public_articles(ROOT)
 QUIZZES=json.loads((ROOT/'content/article-quizzes.json').read_text())
 LEVELS={'beginner':('Grunnleggende musikkteori','Start med byggesteinene.'),'intermediate':('Videregående musikkteori','Se de større sammenhengene.'),'advanced':('Faglig fordypning','Utforsk flere nyanser.')}
 ALT={'circle':'Kvintsirkelen med durtonearter ytterst, relativ moll innenfor og antall faste fortegn. Med klokken: C, G, D, A, E, B, F♯ eller G♭, D♭, A♭, E♭, B♭, F.', 'intervals':'C og G, en ren kvint med sju halvtoners avstand','triads':'C-dur med C E G sammenlignet med C-moll med C E♭ G', 'triadfamily':'Treklangstyper fra C: C E G, C E♭ G, C E♭ G♭ og C E G♯ med formler og intervallkvaliteter','melody':'En enkel melodisk frase med E G B og en pause','modes':'E dorisk med stor sekst C♯ fremhevet', 'sevenmodes':'De sju diatoniske modusene fra ett C-dur-tonemateriale: C ionisk, D dorisk, E frygisk, F lydisk, G miksolydisk, A eolisk og B lokrisk','romans':'Romertallene I, ii, iii, IV, V, vi og vii° under de sju akkordene C, Dm, Em, F, G, Am og Bdim i C-dur','cadence':'Dm7 G7 Cmaj7 med romertall ii7 V7 Imaj7','sevenths':'Cmaj7 bygget av C E G B, trinnene 1 3 5 7','harmonic':'A harmonisk moll og E frygisk dominant med samme toner og ulikt sentrum','voices':'C E G beholdes mens B går til A, fra Cmaj7 til Am7/C','rhythm':'Sju åttendedeler gruppert som to pluss to pluss tre'}
@@ -133,6 +134,10 @@ def quiz(a):
 def card(a,prefix=''):
  label=LEVELS[a['level']][0]
  return f'<article class="article-card {"circle-article" if a["art"]=="circle" else ""}" data-article-id="{a["slug"]}" data-level="{a["level"]}" data-topic="{a["category"]}" data-search="{esc(a["title"]+" "+a["topic"]+" "+a["intro"])}"><a class="card-main" href="{prefix}artikler/{a["slug"]}.html"><div class="card-level-row"><span class="level-badge {a["level"]}">{label}</span></div><div class="card-art"><img src="{prefix}images/articles/{a["slug"]}.svg?v=content2" width="{500 if a["art"]=="circle" else 800}" height="{500 if a["art"]=="circle" else 430}" alt="{esc(ALT[a["art"]])}" loading="lazy"></div><div class="card-copy"><div class="card-meta"><span>{esc(a["topic"])}</span><span>{minutes(a)} min lesing</span></div><h2>{esc(a["title"])}</h2><p>{esc(a["intro"])}</p><span class="read-more">Les artikkelen <span aria-hidden="true">↗</span></span></div></a><div class="card-quiz"><span class="card-quiz-status">3 spørsmål</span><a href="{prefix}artikler/{a["slug"]}.html#quiz" class="card-quiz-link">Ta quizen ↗</a></div></article>'
+def preview_card(a, image=None):
+ visual=(f'<div class="card-art catalog-preview-art" aria-hidden="true"><img src="{esc(image["src"])}" width="{esc(image["width"])}" height="{esc(image["height"])}" alt="" loading="lazy"></div>' if image else '')
+ return f'<article class="upcoming-card catalog-preview-card" data-catalog-id="{esc(a["slug"])}" data-level="{esc(a["level"])}" data-topic="{esc(a["category"])}" data-search="{esc(a["title"]+" "+a["level_label"]+" "+a["category_label"])}" aria-labelledby="catalog-{esc(a["slug"])}"><div class="card-level-row"><span class="level-badge {esc(a["level"])}">{esc(a["level_label"])}</span><span class="upcoming-status">Under arbeid</span></div>{visual}<div class="card-copy"><div class="card-meta"><span>{esc(a["category_label"])}</span></div><h2 id="catalog-{esc(a["slug"])}">{esc(a["title"])}</h2></div></article>'
+
 def learning_intro(a):
  if not a.get('learning'):return ''
  data=a['learning'];goals=''.join(f'<li>{esc(goal)}</li>' for goal in data['goals'])
@@ -142,26 +147,61 @@ def practice_steps(a):
  return '<ol class="practice-steps">'+''.join(f'<li>{esc(step)}</li>' for step in a['practice_steps'])+'</ol>' if a.get('practice_steps') else ''
 def next_step(a):
  if not a.get('next_step'):return ''
- data=a['next_step'];target=next(item for item in ARTICLES if item['slug']==data['slug'])
+ data=a['next_step'];target=next((item for item in ARTICLES if item['slug']==data['slug']),None)
+ if target is None:return ''
  return f'<section class="article-next" aria-labelledby="nextStepTitle"><p class="eyebrow">ANBEFALT NESTE STEG</p><h2 id="nextStepTitle">{esc(target["title"])}</h2><p>{esc(data["reason"])}</p><a class="button" href="{esc(target["slug"])}.html">{esc(target["title"])} ↗</a></section>'
-UPCOMING=json.loads((ROOT/'content/upcoming-articles.json').read_text(encoding='utf-8'))
-assert len(UPCOMING)==5 and not ({a['slug'] for a in UPCOMING} & {a['slug'] for a in ARTICLES})
+UPCOMING=public_catalog(ROOT)
+assert not ({a['slug'] for a in UPCOMING} & {a['slug'] for a in SOURCE_ARTICLES})
 UPCOMING_TOPICS={'Intervaller':'basics','Harmonikk':'harmony','Akkorder':'chords','Modalitet':'modes'}
 def upcoming_card(a):
  level=a['level'];topic=UPCOMING_TOPICS[a['topic']]
  return f'<article class="upcoming-card" data-level="{level}" data-topic="{topic}" data-search="{esc(a["title"]+" "+a["topic"]+" "+a["description"])}"><div class="card-level-row"><span class="level-badge {level}">{LEVELS[level][0]}</span><span class="upcoming-status">Kommer</span></div><div class="upcoming-illustration" aria-hidden="true">MODUS · KOMMER</div><div class="card-copy"><div class="card-meta"><span>{esc(a["topic"])}</span><span>Planlagt</span></div><h2>{esc(a["title"])}</h2><p>{esc(a["description"])}</p><span class="upcoming-footer">Ikke publisert ennå</span></div></article>'
 
-for a in ARTICLES:
- (DIST/'images/articles'/f'{a["slug"]}.svg').write_text(illustration(a['art']))
- label=LEVELS[a['level']][0];toc=''.join(f'<a href="#del-{i}">{esc(sec[0])}</a>' for i,sec in enumerate(a['sections'],1))+'<a href="#quiz">Ta quizen ↗</a>'
- body=''.join(f'<section id="del-{i}"><h2>{esc(sec[0])}</h2>{sec[1]}</section>' for i,sec in enumerate(a['sections'],1))
- related=sorted([b for b in ARTICLES if b['slug']!=a['slug']], key=lambda b:(b['category']!=a['category'],b['level']!=a['level'],ORDER.index(b['slug'])))[:2]
- related_html=''.join(f'<a href="{b["slug"]}.html"><span>{esc(b["topic"])}</span><strong>{esc(b["title"])}</strong><b aria-hidden="true">↗</b></a>' for b in related)
- page=f'''<!DOCTYPE html><html lang="nb"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111310"><title>{esc(a['title'])} · MODUS</title><meta name="description" content="{esc(a['intro'])}"><link rel="stylesheet" href="../home.css"><link rel="stylesheet" href="../articles.css?v=content2"></head><body>{header('../')}<main class="reading-page"><nav class="breadcrumbs" aria-label="Brødsmuler"><a href="../">Forsiden</a><span>/</span><a href="../artikler.html">Artikler</a><span>/</span><span>{label}</span></nav><article><header class="reading-header"><div class="reading-meta"><span class="level-badge {a['level']}">{label}</span><span>{esc(a['topic'])}</span><span>{minutes(a)} min lesing</span></div><h1>{esc(a['title'])}</h1><p class="reading-intro">{esc(a['intro'])}</p></header>{learning_intro(a)}<figure class="reading-illustration"><img src="../images/articles/{a['slug']}.svg?v=content2" width="{500 if a['art']=='circle' else 800}" height="{500 if a['art']=='circle' else 430}" alt="{esc(ALT[a['art']])}"></figure><div class="reading-layout"><aside class="contents"><span>I DENNE ARTIKKELEN</span>{toc}</aside><div class="reading-body">{body}<section class="article-practice"><p class="eyebrow">FRA LESING TIL SPILLING</p><h2>Prøv det selv.</h2><p>{esc(a['exercise'])}</p>{practice_steps(a)}<a class="button" href="../{a['practice']}">{esc(a['practice_label'])} <span aria-hidden="true">↗</span></a></section>{quiz(a)}{next_step(a)}</div></div></article><section class="related"><p class="eyebrow">LES VIDERE</p><div>{related_html}</div><a class="all-articles" href="../artikler.html">← Til alle artiklene</a></section></main>{footer('../')}<script src="../article-quiz.js?v=atlas-progress1" defer></script></body></html>'''
- page=page.replace('</head><body>', '<link rel="stylesheet" href="../learning-premises.css?v=20261029-confirm"><script src="../learning-premises.js?v=20261029-flow2" defer></script></head><body>')
- (DIST/'artikler'/f'{a["slug"]}.html').write_text(with_navigation_css(page, '../'))
-journey,library=render_library(ARTICLES, LEVELS, card, UPCOMING, upcoming_card)
-listing=f'''<!DOCTYPE html><html lang="nb"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111310"><title>MODUS · Artikler om musikkteori</title><meta name="description" content="Illustrerte artikler om musikkteori, fra grunnleggende musikkteori til faglig fordypning. Les om intervaller, akkorder, improvisasjon, moduser, harmonikk og rytme."><link rel="stylesheet" href="home.css"><link rel="stylesheet" href="articles.css?v=content2"></head><body>{header()}<main class="articles-page"><section class="articles-hero"><div><p class="eyebrow">ARTIKKELBIBLIOTEKET</p><h1>Små innsikter.<br><em>Større spillerom.</em></h1><p>Musikkteori du kan ta med til instrumentet.<br>Finn et tema som vekker nysgjerrigheten – og les i ditt eget tempo.</p></div><div class="articles-landscape" aria-hidden="true"></div></section>{journey}<section class="learning-callout"><div><span>LÆRINGSSTI · SEKS STEG</span><strong>Forstå og bruk dorisk</strong></div><a href="laer-dorisk.html">Start med å lytte ↗</a></section>{library}<section class="plus-teaser"><div><span>MODUS+ · KONSEPT</span><h2>Et mulig neste kapittel.</h2><p>Se hvordan et fremtidig medlemskap kan gi mer rom for fordypning. Alle dagens artikler er fortsatt åpne.</p></div><a href="modus-plus.html">Forhåndsvis Modus+ ↗</a></section><section class="library-bottom"><div><p class="eyebrow">LÆR MED ØRET</p><h2>Les litt. Lytt litt. <em>Spill selv.</em></h2><p>Ta ideen videre med pianokart, lydeksempler og praktiske akkordgrep.</p></div><a class="button" href="teori.html">Åpne teorirommet <span aria-hidden="true">↗</span></a></section></main>{footer()}<script src="articles.js?v=content2" defer></script><script src="article-quiz.js?v=atlas-progress1" defer></script></body></html>'''
-listing=listing.replace('</head><body>', '<link rel="stylesheet" href="learning-premises.css?v=20261029-confirm"><script src="learning-premises.js?v=20261029-flow2" defer></script></head><body>')
-(DIST/'artikler.html').write_text(with_navigation_css(listing))
+for a in SOURCE_ARTICLES:
+ if a not in ARTICLES:(DIST/'artikler'/f'{a["slug"]}.html').write_text(holding_page('../',active='articles'))
+
+def generate_articles(items, output):
+ global ARTICLES
+ ARTICLES=items
+ (output/'artikler').mkdir(parents=True,exist_ok=True)
+ for a in ARTICLES:
+  (DIST/'images/articles'/f'{a["slug"]}.svg').write_text(illustration(a['art']))
+  label=LEVELS[a['level']][0];toc=''.join(f'<a href="#del-{i}">{esc(sec[0])}</a>' for i,sec in enumerate(a['sections'],1))+'<a href="#quiz">Ta quizen ↗</a>'
+  body=''.join(f'<section id="del-{i}"><h2>{esc(sec[0])}</h2>{sec[1]}</section>' for i,sec in enumerate(a['sections'],1))
+  related=sorted([b for b in ARTICLES if b['slug']!=a['slug']], key=lambda b:(b['category']!=a['category'],b['level']!=a['level'],ORDER.index(b['slug'])))[:2]
+  related_html=''.join(f'<a href="{b["slug"]}.html"><span>{esc(b["topic"])}</span><strong>{esc(b["title"])}</strong><b aria-hidden="true">↗</b></a>' for b in related)
+  page=f'''<!DOCTYPE html><html lang="nb"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111310"><title>{esc(a['title'])} · MODUS</title><meta name="description" content="{esc(a['intro'])}"><link rel="stylesheet" href="../home.css"><link rel="stylesheet" href="../articles.css?v=content2"></head><body>{header('../')}<main class="reading-page"><nav class="breadcrumbs" aria-label="Brødsmuler"><a href="../">Forsiden</a><span>/</span><a href="../artikler.html">Artikler</a><span>/</span><span>{label}</span></nav><article><header class="reading-header"><div class="reading-meta"><span class="level-badge {a['level']}">{label}</span><span>{esc(a['topic'])}</span><span>{minutes(a)} min lesing</span></div><h1>{esc(a['title'])}</h1><p class="reading-intro">{esc(a['intro'])}</p></header>{learning_intro(a)}<figure class="reading-illustration"><img src="../images/articles/{a['slug']}.svg?v=content2" width="{500 if a['art']=='circle' else 800}" height="{500 if a['art']=='circle' else 430}" alt="{esc(ALT[a['art']])}"></figure><div class="reading-layout"><aside class="contents"><span>I DENNE ARTIKKELEN</span>{toc}</aside><div class="reading-body">{body}<section class="article-practice"><p class="eyebrow">FRA LESING TIL SPILLING</p><h2>Prøv det selv.</h2><p>{esc(a['exercise'])}</p>{practice_steps(a)}<a class="button" href="../{a['practice']}">{esc(a['practice_label'])} <span aria-hidden="true">↗</span></a></section>{quiz(a)}{next_step(a)}</div></div></article><section class="related"><p class="eyebrow">LES VIDERE</p><div>{related_html}</div><a class="all-articles" href="../artikler.html">← Til alle artiklene</a></section></main>{footer('../')}<script src="../article-quiz.js?v=atlas-progress1" defer></script></body></html>'''
+  page=page.replace('</head><body>', '<link rel="stylesheet" href="../learning-premises.css?v=20261029-confirm"><script src="../learning-premises.js?v=20261029-flow2" defer></script></head><body>')
+  (output/'artikler'/f'{a["slug"]}.html').write_text(with_navigation_css(page, '../'))
+def build_listing(ARTICLES, UPCOMING, locale='nb'):
+ previews=[a for a in preview_catalog_cards(ROOT,locale) if a['slug'] not in {x['slug'] for x in ARTICLES}]
+ items=ARTICLES+previews
+ images=preview_illustrations(ROOT,locale)
+ def render_item(a):return preview_card(a,images.get(a['slug'])) if a in previews else card(a)
+ journey,library=render_library(items, LEVELS, render_item, UPCOMING, upcoming_card)
+ if previews and not ARTICLES:
+  library=re.sub(r'<div class="library-progress">.*?</div>', f'<div class="library-progress catalog-preview-note"><strong>{len(previews)} <span>artikkelkort · fulltekst ikke tilgjengelig</span></strong></div>', library, count=1)
+
+ listing=f'''<!DOCTYPE html><html lang="nb"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111310"><title>MODUS · Artikler om musikkteori</title><meta name="description" content="Illustrerte artikler om musikkteori, fra grunnleggende musikkteori til faglig fordypning. Les om intervaller, akkorder, improvisasjon, moduser, harmonikk og rytme."><link rel="stylesheet" href="home.css"><link rel="stylesheet" href="articles.css?v=content2"></head><body>{header()}<main class="articles-page"><section class="articles-hero"><div><p class="eyebrow">ARTIKKELBIBLIOTEKET</p><h1>Små innsikter.<br><em>Større spillerom.</em></h1><p>Musikkteori du kan ta med til instrumentet.<br>Finn et tema som vekker nysgjerrigheten – og les i ditt eget tempo.</p></div><div class="articles-landscape" aria-hidden="true"></div></section>{journey}<section class="learning-callout"><div><span>LÆRINGSSTI · SEKS STEG</span><strong>Forstå og bruk dorisk</strong></div><a href="laer-dorisk.html">Start med å lytte ↗</a></section>{library}<section class="plus-teaser"><div><span>MODUS+ · KONSEPT</span><h2>Et mulig neste kapittel.</h2><p>Se hvordan et fremtidig medlemskap kan gi mer rom for fordypning. Alle dagens artikler er fortsatt åpne.</p></div><a href="modus-plus.html">Forhåndsvis Modus+ ↗</a></section><section class="library-bottom"><div><p class="eyebrow">LÆR MED ØRET</p><h2>Les litt. Lytt litt. <em>Spill selv.</em></h2><p>Ta ideen videre med pianokart, lydeksempler og praktiske akkordgrep.</p></div><a class="button" href="teori.html">Åpne teorirommet <span aria-hidden="true">↗</span></a></section></main>{footer()}<script src="articles.js?v=content2" defer></script><script src="article-quiz.js?v=atlas-progress1" defer></script></body></html>'''
+ listing=listing.replace('</head><body>', '<link rel="stylesheet" href="learning-premises.css?v=20261029-confirm"><script src="learning-premises.js?v=20261029-flow2" defer></script></head><body>')
+ if not ARTICLES:
+  listing=listing.replace(journey, '<section class="learning-overview"><h2>Under arbeid</h2><p>Artiklene venter på redaksjonell publiseringsgodkjenning.</p></section>')
+  listing=listing.replace('Alle dagens artikler er fortsatt åpne.','Artikler åpnes etter publiseringsgodkjenning.')
+ if len(ARTICLES) < len(SOURCE_ARTICLES):
+  # Counts and generic platform copy only: never derive public teasers from private text.
+  notice=f'<section class="learning-overview" id="publicationPending" aria-labelledby="publicationPendingTitle" data-source-count="{len(SOURCE_ARTICLES)}" data-published-count="{len(ARTICLES)}"><h2 id="publicationPendingTitle">Biblioteket er bevart</h2><p>Artiklene er ikke slettet. Tekstene er bevart i redaksjonell kilde og avventer dokumentert publiseringstillatelse.</p><p><span>Bevart i redaksjonell kilde:</span> <strong>{len(SOURCE_ARTICLES)}</strong> · <span>Tilgjengelig for lesing her:</span> <strong>{len(ARTICLES)}</strong></p><p>Titler og artikkeltekst vises først når publiseringstillatelsen er avklart.</p><a href="grunnstudier.html">MODUS Grunnstudier ↗</a></section>'
+  listing=listing.replace(journey,notice+journey) if ARTICLES else listing.replace('<section class="learning-overview"><h2>Under arbeid</h2><p>Artiklene venter på redaksjonell publiseringsgodkjenning.</p></section>',notice)
+  listing=listing.replace('Alle dagens artikler er fortsatt åpne.','Artikler åpnes etter publiseringsgodkjenning.')
+ if previews:
+  listing=listing.replace('Biblioteket er bevart','Artikkelbibliotek · under arbeid').replace('Titler og artikkeltekst vises først når publiseringstillatelsen er avklart.','Forhåndsvisning: eksisterende illustrasjoner, titler, nivå og kategori. Artiklene er under arbeid og kan ikke åpnes.')
+ return with_navigation_css(listing)
+
+nb=public_articles(ROOT);en=public_articles(ROOT,'en')
+private=ROOT/'.build-private/en';private.mkdir(parents=True,exist_ok=True)
+generate_articles(nb,DIST)
+generate_articles(en,private)
+for image in preview_illustrations(ROOT).values():
+ target=DIST/image['src'];target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(image['source'].read_bytes())
+(DIST/'artikler.html').write_text(build_listing(nb,public_catalog(ROOT)))
+(private/'artikler.html').write_text(build_listing(en,public_catalog(ROOT,'en'),'en'))
 print(f'Generated {len(ARTICLES)} complete articles, {len(ARTICLES)} illustrations and article index')

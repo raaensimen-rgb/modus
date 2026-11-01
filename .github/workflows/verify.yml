@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [main, fix/pl102-publication-visibility-gate, fix/pl103-article-permissions, fix/pl103b-preview-cards]
   workflow_dispatch:
 
 permissions:
@@ -14,6 +14,8 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      MODUS_CATALOG_PREVIEW: ${{ github.event_name == 'pull_request' && '1' || '0' }}
     steps:
       - name: Check out source
         uses: actions/checkout@v4
@@ -33,10 +35,34 @@ jobs:
       - name: Validate site and music features
         run: npm test
 
+      - name: Package and audit explicit production catalog without deploying
+        env:
+          MODUS_CATALOG_PREVIEW: '0'
+          MODUS_PLATFORM_RELEASE: '1'
+          CF_PAGES_BRANCH: main
+          CONTEXT: production
+        run: |
+          npm run build
+          python3 tests/publication-audit.py
+          cp test-results/publication-audit.json test-results/publication-production-audit.json
+
+      - name: Upload audited production package for later approved distribution
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-production-dist
+          path: dist/
+          if-no-files-found: error
+
+      - name: Restore isolated Preview build for browser checks
+        run: npm run build && python3 tests/publication-audit.py
+
       - name: Install browser engines
         run: npx playwright install --with-deps chromium webkit
       - name: Verify release in desktop and mobile browsers
         run: node tests/release-browser.cjs
+
+      - name: Verify approved navigation v1.1 and publication layout
+        run: node tests/navigation-controls-browser.cjs
 
       - name: Verify piano interaction in desktop and mobile browsers
         run: node tests/piano-browser.cjs
@@ -55,4 +81,18 @@ jobs:
             test-results/browser-results.json
             test-results/piano-browser-results.json
             test-results/audio-*-results.json
+            test-results/publication-*.json
+            test-results/publication-*.png
+            test-results/journey-*-results.json
+            test-results/pl101-*.png
+            test-results/navigation-v11-*.png
+            test-results/navigation-v11-results.json
+            test-results/platform-*-results.json
           if-no-files-found: warn
+
+      - name: Upload audited public build for isolated QA
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-site-dist
+          path: dist/
+          if-no-files-found: error

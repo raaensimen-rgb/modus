@@ -1,8 +1,9 @@
 """Build a public search index from published article source and navigation routes."""
 from pathlib import Path
 import json
+from publication import public_articles
 ROOT = Path(__file__).resolve().parents[1]
-articles = json.loads((ROOT / "content/articles.json").read_text())
+articles = public_articles(ROOT)
 items = [
  {"title":"MODUS JAM","description":"Backingtracks, tonearter og moduser","url":"backingtracks.html","type":"tool","keywords":"jam backingtracks improvisasjon backing track"},
  {"title":"MODUS HARMONI","description":"Akkorder, omvendinger og progresjoner","url":"akkorder.html","type":"tool","keywords":"akkorder harmoni chord progression"},
@@ -35,7 +36,9 @@ class PageMetadata(HTMLParser):
  def handle_data(self,data):
   if self.in_h1:self.title.append(data)
 english=[]
+english_slugs = {a['slug'] for a in public_articles(ROOT, 'en')}
 for item in items:
+ if item['type'] == 'article' and Path(item['url']).stem not in english_slugs: continue
  target=ROOT/"dist/en"/item["url"]
  page=PageMetadata()
  if target.is_file():page.feed(target.read_text(encoding="utf-8"))

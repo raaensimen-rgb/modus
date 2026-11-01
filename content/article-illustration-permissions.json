@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "scope": "isolated-preview-existing-illustrations-only",
+  "approval_reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+  "source_reference": "Existing illustration generator and compiled NB/EN assets at PL-101 baseline e6097fc9b2786a32ece532d208dc1f47670dbb03; no new illustration content.",
+  "images": {
+    "toner-og-intervaller": {
+      "nb": {
+        "sha256": "26e4b0908d7fbb9ea768d026c5b45f7d753d7e58d116b6a492120c95fb8bf163",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "193994eeead5316a5ae53e8797d483147597e6f3458d7612b11212e5a8848221",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "dur-og-moll": {
+      "nb": {
+        "sha256": "8690a02b0a8f650b3cdc11af91ed6e7c0809f48bbaefc729e76dd1c58a31dbc6",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "2ba0cae79de8f957a646ff2793dc0d5708bd41b7de7b4efc2140ea52b77069c7",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "kvintsirkelen": {
+      "nb": {
+        "sha256": "61b99e3332bc3e4ec7134e1488849075bf484640ba108b5612b1d353ba03f4a9",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "f22bc99929a6024a9cc3658911bb8e229742907d701b969078b8089ae3957bf9",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "din-forste-improvisasjon": {
+      "nb": {
+        "sha256": "0ac0e4d02786dd4f2ef12a4207ce82c27cbd0c4a1932c9cc6f2c05327c583261",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "a6e83e05fc2a82a89d3dd37581915cd0b87476b7f67e9f55861c703bdd2c6dcc",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "moduser-og-tonalt-sentrum": {
+      "nb": {
+        "sha256": "21b4baa8a4d55f05cca41bc8442ac5b5599ebc4dc73ae57d982abe81d22e4f43",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "f6c187a417a9d5c5fc5cb0eb3e0010e85989384b3eddac8b54a4d1969a098953",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "kirketonearter-ett-system-sju-uttrykk": {
+      "nb": {
+        "sha256": "188a7c44d149c1ad9507aa8e0f9135da6011a669fec754436cf50637a370f7a0",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "2f92a504acb5d25b4ad862a5fbc4921e38da26017ae9c828a44228eab6f7da98",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "romertall-i-musikk": {
+      "nb": {
+        "sha256": "fe073c29064c6ff246afaa3297978b85e66581fc4f4acbcedc4b6332abc75442",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "b226fd458b742e709440b71ea33b464b43ed2fece0631df3b1d8960213c7a84a",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "ii-v-i-kadensen": {
+      "nb": {
+        "sha256": "82a8928e8c843d255ba1f62adf4968c97497fb5730130aa34d5fa001735a7968",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "bd4cebf92e42b29ef9699b7250978a0ae9e363bc6b74074785832cc45cc0e8fd",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "treklanger-fra-grunnform-til-omvending": {
+      "nb": {
+        "sha256": "eb30d46f73515b5105e8250ad14d5ce95dc35100ffecefc389f6e98cb416ef7f",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "82d8e338998993d558eac1ac2edebf0412c8c0d1e63304bb6db1f83deda36d3b",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "septimakkorder": {
+      "nb": {
+        "sha256": "dc88fb8139b6e06a5c5daa9f49ebf9328bb3220d460d46fee9119a27184eea63",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "eac757a0ea1c369170927507ce49c32ddb596f0b50526c0733b8dc930bfc32d5",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "harmonisk-moll-og-frygisk-dominant": {
+      "nb": {
+        "sha256": "cfa32105bc2745ddf932a37302ff61efdf0be8efafaba8e48a8235dd6f364bf6",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "8eef9e382fd21b238eec73f422ff81c08d7108b5893ea5335ffefbd543398265",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "stemmeforing": {
+      "nb": {
+        "sha256": "1acf7ed81a350462e5db2ead8bc42193458ec68669014f8851c4015b08ed60dd",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "f4a3cef794e1ca1ee2faa9805034a27dbe34ffa163a8220fa99753137e416530",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "rytme-i-sju-aatte": {
+      "nb": {
+        "sha256": "09d0faca0cc6ae485c79ceff06130c665c16bb09b5ee70a8a41f03b473945860",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "525c8a6362ab4970e4be9ff2e80e94e6684953dc6c4d63d2398dc67286b1ca65",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "bygg-akkorder-i-en-toneart": {
+      "nb": {
+        "sha256": "1d7980eea950bce8e281eadc6152094e7e425075a6347004f0d7e75d5bfafa43",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "1ffeea0aa5dbf9c8324ee8a938ecb2080ec055a470f22be3b42232612120b7bc",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "ett-skalakart-nye-maltoner": {
+      "nb": {
+        "sha256": "cfda896195ceb86ce27555b87b6cdb30cca234d065957457dba1fb2e08b4fba5",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "7e4fe2f0a52edfdf6c964497a103450127854b09c3acf021b623eeea2ebe359c",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    },
+    "dorisk-og-eolisk": {
+      "nb": {
+        "sha256": "1a648c51be2b4ed782e7a42063c4e96646d53d85da279c482877c6c4b4faba2e",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      },
+      "en": {
+        "sha256": "f05c516cba0254016de98fbade17762f8d0668beb53a558ec3ed5de88c1526a6",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639"
+      }
+    }
+  }
+}

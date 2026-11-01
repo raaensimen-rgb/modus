@@ -1,8 +1,10 @@
 'use strict';
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const {grade, progress, IDS} = require('../dist/article-quiz.js');
+const {grade, progress, IDS} = require('../article-quiz.js');
 const articles = require('../content/articles.json');
+const publicIds=require('./publication-helper.cjs')();
+assert.deepEqual(require('../dist/article-quiz.js').IDS.slice().sort(),publicIds.slice().sort());
 const quizzes = require('../content/article-quizzes.json');
 assert.deepEqual(IDS.slice().sort(), articles.map(a=>a.slug).sort());
 for (const article of articles) {
@@ -20,19 +22,20 @@ for (const article of articles) {
   assert.equal(grade([null,...key.slice(1)],key).passed,false);
   for (const lang of (['kirketonearter-ett-system-sju-uttrykk','romertall-i-musikk','treklanger-fra-grunnform-til-omvending'].includes(article.slug) ? [''] : ['', 'en/'])) {
     const page=fs.readFileSync(`dist/${lang}artikler/${article.slug}.html`,'utf8');
+    if(!publicIds.includes(article.slug)){assert(page.includes('data-publication-hold'));assert(!page.includes('data-quiz-id'));continue;}
     assert.equal((page.match(/<fieldset data-answer=/g)||[]).length,3);
     assert.equal((page.match(/type="radio" name="q[0-2]"/g)||[]).length,9);
     assert(page.includes(`data-quiz-id="${article.slug}"`));
   }
 }
 const englishPreview=fs.readFileSync('dist/en/artikler/kirketonearter-ett-system-sju-uttrykk.html','utf8');
-assert(englishPreview.includes('Full lesson available in Norwegian'));
-assert(englishPreview.includes('../../artikler/kirketonearter-ett-system-sju-uttrykk.html'));
+assert(englishPreview.includes('data-publication-hold'));
+assert(!englishPreview.includes('data-quiz-id'));
 const romanPreview=fs.readFileSync('dist/en/artikler/romertall-i-musikk.html','utf8');
-assert(romanPreview.includes('Full lesson available in Norwegian'));
-assert(romanPreview.includes('../../artikler/romertall-i-musikk.html'));
+assert(romanPreview.includes('data-publication-hold'));
+assert(!romanPreview.includes('data-quiz-id'));
 const triadEnglishPreview=fs.readFileSync('dist/en/artikler/treklanger-fra-grunnform-til-omvending.html','utf8');
-assert(triadEnglishPreview.includes('Full lesson available in Norwegian'));
+assert(triadEnglishPreview.includes('data-publication-hold'));
 const data=new Map(), storage={getItem:k=>data.get(k),setItem:(k,v)=>data.set(k,v)};
 const a=progress(storage), b=progress(storage);
 assert.equal(a.has(IDS[0]),false); assert.equal(a.pass(IDS[0]),true);

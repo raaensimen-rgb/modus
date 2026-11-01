@@ -10,6 +10,7 @@
  if(typeof document==='undefined')return;
  const en=document.documentElement.lang==='en',t=(nb,english)=>en?english:nb;
  const cards=[...document.querySelectorAll('.article-card')];
+ const metadataOnly=document.querySelector('.catalog-preview-card')&&!cards.length;
  const upcomingCards=[...document.querySelectorAll('.upcoming-card')];
  const orderedIds=["toner-og-intervaller","dur-og-moll","bygg-akkorder-i-en-toneart","kvintsirkelen","romertall-i-musikk","treklanger-fra-grunnform-til-omvending","din-forste-improvisasjon","septimakkorder","ii-v-i-kadensen","ett-skalakart-nye-maltoner","moduser-og-tonalt-sentrum","kirketonearter-ett-system-sju-uttrykk","dorisk-og-eolisk","stemmeforing","harmonisk-moll-og-frygisk-dominant","rytme-i-sju-aatte"];
  cards.sort((a,b)=>(orderedIds.includes(a.dataset.articleId)?orderedIds.indexOf(a.dataset.articleId):999)-(orderedIds.includes(b.dataset.articleId)?orderedIds.indexOf(b.dataset.articleId):999));
@@ -33,7 +34,7 @@
    label.closest('.journey-stage').classList.toggle('stage-complete',done===stage.length);
   });
   const next=nextArticle(published,completed),link=document.getElementById('nextArticle');
-  const item=next||published[0];link.href=item.card.querySelector('.card-main').getAttribute('href');
+  const item=next||published[0];if(!link||!item){if(link)link.hidden=true;updateGroupCounts();return;}link.href=item.card.querySelector('.card-main').getAttribute('href');
   link.querySelector('[data-next-label]').textContent=next?t('DITT NESTE STEG','YOUR NEXT STEP'):t('ALLE QUIZER FULLFØRT','ALL QUIZZES COMPLETED');
   link.querySelector('[data-next-title]').textContent=next?item.card.querySelector('h2').textContent:t('Ta ideene videre til instrumentet.','Take these ideas to your instrument.');
   link.querySelector('[data-next-note]').textContent=next?t('Første artikkel uten fullført quiz. Rekkefølgen er et forslag, ikke et krav.','The first article without a completed quiz. This order is a suggestion, not a requirement.'):t('Du kan åpne og repetere artiklene når du vil. Begynn med byggesteinene igjen ↗','You can revisit any article whenever you like. Review the building blocks ↗');
@@ -43,6 +44,7 @@
   container.querySelectorAll('.article-category').forEach(group=>{
    const visible=[...group.querySelectorAll('.article-card,.upcoming-card')].filter(c=>!c.hidden),done=visible.filter(c=>c.classList.contains('article-card')&&completed(c.dataset.articleId)).length;
    group.hidden=visible.length===0;
+   if(metadataOnly){group.querySelector('[data-category-count]').textContent=en?`${visible.length} article cards · In progress`:`${visible.length} artikkelkort · Under arbeid`;return;}
    group.querySelector('[data-category-count]').textContent=en?`${visible.length} ${visible.length===1?'article':'articles'} · ${done} ${done===1?'quiz':'quizzes'} completed`:`${visible.length} ${visible.length===1?'artikkel':'artikler'} · ${done} ${done===1?'quiz':'quizer'} fullført`;
   });
  }
@@ -59,7 +61,8 @@
   levelButtons.forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.filter===state.level));const count=b.querySelector('span');if(count)count.textContent=b.dataset.filter==='all'?items.length:items.filter(a=>a.level===b.dataset.filter).length;});
   topicButtons.forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.topicFilter===state.topic));const count=b.querySelector('span');if(count)count.textContent=items.filter(a=>a.topic===b.dataset.topicFilter).length;});
   views.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.groupBy===state.view)));
-  document.getElementById('resultCount').textContent=en?`${count} ${count===1?'article':'articles'}`:`${count} ${count===1?'artikkel':'artikler'}`;
+  if(metadataOnly)document.getElementById('resultCount').textContent=en?`${count} article cards`:`${count} artikkelkort`;
+  else document.getElementById('resultCount').textContent=en?`${count} ${count===1?'article':'articles'}`:`${count} ${count===1?'artikkel':'artikler'}`;
   document.getElementById('levelHint').textContent=hints[state.level];
   document.getElementById('noResults').hidden=count!==0;
   updateGroupCounts();if(write)saveUrl();
