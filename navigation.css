@@ -113,8 +113,8 @@ html[data-theme=contrast] .site-header .nav-tooltip{background:#fff;color:#000;b
 .site-header .site-nav > a,
 .site-header .nav-trigger {
   font-family:Manrope,sans-serif;
-  font: size 19 px;px;
-  font: weight 600px;
+ font-size: 19px;
+font-weight: 600;
   letter-spacing:.035em;
   text-transform:uppercase;
 }
