@@ -5,10 +5,13 @@ from pathlib import Path
 from html.parser import HTMLParser
 import html, json, re, shutil
 import xml.etree.ElementTree as ET
+from publication import load_policy, is_public, holding_page, EN_TRANSLATIONS
+policy=load_policy()
 ROOT=Path(__file__).resolve().parents[1]
 DIST=ROOT/'dist'
 EN=DIST/'en'
 translations=json.loads((ROOT/'content/i18n/en.json').read_text())
+translations.update(EN_TRANSLATIONS)
 for line in (ROOT/'content/i18n/dynamic.tsv').read_text().splitlines():
     if line:
         source, target=line.split('\t',1)
@@ -68,10 +71,17 @@ if EN.exists():shutil.rmtree(EN)
 EN.mkdir()
 for source in list(DIST.rglob('*')):
     if not source.is_file() or EN in source.parents or 'media' in source.relative_to(DIST).parts or source.name in ('redaktor.html','editor.js','editor.css','cms-seed.json','_routes.json','_headers','_worker.js'):continue
-    rel=source.relative_to(DIST);target=EN/rel;target.parent.mkdir(parents=True,exist_ok=True)
+    rel=source.relative_to(DIST)
+    if rel.parts[:2]==('images','articles') and not is_public(policy['articles'].get(rel.stem),'en'):continue
+    target=EN/rel;target.parent.mkdir(parents=True,exist_ok=True)
     if source.suffix=='.html':
-        page=language_assets(source.read_text(),'../' if rel.parts[0]=='artikler' else '')
-        source.write_text(page)
+        localized_source=ROOT/'.build-private/en'/rel
+        text=localized_source.read_text() if (rel.name=='artikler.html' or rel.parts[0]=='artikler') and localized_source.is_file() else source.read_text()
+        page=language_assets(text,'../' if rel.parts[0]=='artikler' else '')
+        source.write_text(language_assets(source.read_text(),'../' if rel.parts[0]=='artikler' else ''))
+        if localized_source.is_file() and 'design-system.css' not in page:
+            prefix='../' if rel.parts[0]=='artikler' else ''
+            page=page.replace('</head>',f'<link rel="stylesheet" href="{prefix}design-system.css"></head>',1)
         if rel.as_posix() == 'artikler/kirketonearter-ett-system-sju-uttrykk.html':
             # This in-depth Norwegian pedagogy has not yet received a reviewed English translation.
             # Offer a faithful English summary rather than implying an automated translation is approved.
@@ -103,6 +113,13 @@ for source in list(DIST.rglob('*')):
             page = page.replace('<script src="undervisning.js" defer></script>', '')
         p=EnglishHTML();p.feed(page);result=''.join(p.out)
         result=result.replace('<html lang="en">','<html lang="en">',1)
+        if rel.as_posix() in policy['learning_pages'] and not is_public(policy['learning_pages'][rel.as_posix()], 'en'):
+            result=language_assets(holding_page(active='course' if rel.name=='laer-dorisk.html' else 'path' if rel.name=='grunnstudier.html' else 'lesson',english=True))
+        if rel.parts[0]=='artikler' and not is_public(policy['articles'].get(rel.stem), 'en'):
+            result=language_assets(holding_page('../',active='articles',english=True),'../')
+        # Re-run translation for generated holding pages, including shared navigation.
+        if 'data-publication-hold' in result:
+            translated=EnglishHTML();translated.feed(result);result=''.join(translated.out)
         target.write_text(result)
     elif source.suffix=='.js' and source.name not in ('language-init.js','language.js','account.js') and not source.name.startswith('account.'):
         target.write_text(script(source.read_text()))

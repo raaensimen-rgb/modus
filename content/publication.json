@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "migration": {
+    "from": "legacy-unqualified-content",
+    "decision": "No explicit public permission found; preserve sources, default private.",
+    "order": "GitHub #28 comment 6551064272"
+  },
+  "articles": {
+    "toner-og-intervaller": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "dur-og-moll": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "kvintsirkelen": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "din-forste-improvisasjon": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "moduser-og-tonalt-sentrum": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "kirketonearter-ett-system-sju-uttrykk": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "romertall-i-musikk": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "ii-v-i-kadensen": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "treklanger-fra-grunnform-til-omvending": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "septimakkorder": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "harmonisk-moll-og-frygisk-dominant": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "stemmeforing": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "rytme-i-sju-aatte": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "bygg-akkorder-i-en-toneart": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "ett-skalakart-nye-maltoner": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "dorisk-og-eolisk": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    }
+  },
+  "learning_pages": {
+    "undervisning.html": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "laer-dorisk.html": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "grunnstudier.html": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    }
+  },
+  "platform_pages": [
+    "index.html",
+    "konto.html",
+    "backingtracks.html",
+    "teori.html",
+    "laereplan.html",
+    "akkorder.html",
+    "artikler.html",
+    "laeringssti.html",
+    "musikkart.html",
+    "modus-plus.html",
+    "betaling-test.html",
+    "om-modus.html",
+    "f03-laeringsreise.html"
+  ],
+  "platform_assets": [
+    "about.css",
+    "account.css",
+    "account.js",
+    "app.js",
+    "apple-touch-icon.png",
+    "article-quiz.js",
+    "articles.css",
+    "articles.js",
+    "audio/LICENSE.txt",
+    "audio/SALAMANDER-README.txt",
+    "audio/bass-28.mp3",
+    "audio/bass-31.mp3",
+    "audio/bass-34.mp3",
+    "audio/bass-37.mp3",
+    "audio/bass-40.mp3",
+    "audio/bass-43.mp3",
+    "audio/bass-46.mp3",
+    "audio/bass-49.mp3",
+    "audio/bass-52.mp3",
+    "audio/bass-55.mp3",
+    "audio/bass-58.mp3",
+    "audio/bass-61.mp3",
+    "audio/bass-64.mp3",
+    "audio/grand-48.mp3",
+    "audio/grand-51.mp3",
+    "audio/grand-54.mp3",
+    "audio/grand-57.mp3",
+    "audio/grand-60.mp3",
+    "audio/grand-63.mp3",
+    "audio/grand-66.mp3",
+    "audio/grand-69.mp3",
+    "audio/grand-72.mp3",
+    "audio/grand-75.mp3",
+    "audio/grand-78.mp3",
+    "audio/grand-81.mp3",
+    "audio/grand-84.mp3",
+    "audio/hihat.mp3",
+    "audio/jazz-bass-28.mp3",
+    "audio/jazz-bass-31.mp3",
+    "audio/jazz-bass-34.mp3",
+    "audio/jazz-bass-37.mp3",
+    "audio/jazz-bass-40.mp3",
+    "audio/jazz-bass-43.mp3",
+    "audio/jazz-bass-46.mp3",
+    "audio/jazz-bass-49.mp3",
+    "audio/jazz-bass-52.mp3",
+    "audio/jazz-bass-55.mp3",
+    "audio/jazz-bass-58.mp3",
+    "audio/jazz-bass-61.mp3",
+    "audio/jazz-bass-64.mp3",
+    "audio/kick.mp3",
+    "audio/piano-48.mp3",
+    "audio/piano-51.mp3",
+    "audio/piano-54.mp3",
+    "audio/piano-57.mp3",
+    "audio/piano-60.mp3",
+    "audio/piano-63.mp3",
+    "audio/piano-66.mp3",
+    "audio/piano-69.mp3",
+    "audio/piano-72.mp3",
+    "audio/piano-75.mp3",
+    "audio/piano-78.mp3",
+    "audio/piano-81.mp3",
+    "audio/piano-84.mp3",
+    "audio/snare.mp3",
+    "chord-tool.css",
+    "chord-tool.js",
+    "design-system.css",
+    "editor.css",
+    "feedback.css",
+    "feedback.js",
+    "global-search.css",
+    "global-search.js",
+    "grunnstudier.css",
+    "home.css",
+    "images/earth-atlas.svg",
+    "images/earth-atlas.webp",
+    "images/mountain-lake.webp",
+    "intro-film.css",
+    "intro-film.js",
+    "language-init.js",
+    "language.js",
+    "learning-journey-model.js",
+    "learning-journey.css",
+    "learning-journey.js",
+    "learning-premises.css",
+    "learning-premises.js",
+    "media/modus-introduksjon.mp4",
+    "membership-config.js",
+    "membership-model.js",
+    "membership.css",
+    "membership.js",
+    "midi.js",
+    "modus-app-concept.svg",
+    "modus-arch.svg",
+    "modus-identity-icon.svg",
+    "modus-mark.svg",
+    "musikkart.css",
+    "musikkart.js",
+    "navigation.css",
+    "navigation.js",
+    "piano-interaction.css",
+    "piano-interaction.js",
+    "progressions.js",
+    "style.css",
+    "theme-init.js",
+    "theme-palette.css",
+    "theme.js",
+    "themes.css",
+    "theory-data.js",
+    "theory.css",
+    "theory.js"
+  ],
+  "catalog_previews": {
+    "intervallomvendinger": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "kadens-og-tonale-funksjoner": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "sekundaerdominanter": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "akkordutvidelser": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "modal-harmonikk-i-praksis": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    }
+  }
+}

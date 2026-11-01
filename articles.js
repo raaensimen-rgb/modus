@@ -33,7 +33,7 @@
    label.closest('.journey-stage').classList.toggle('stage-complete',done===stage.length);
   });
   const next=nextArticle(published,completed),link=document.getElementById('nextArticle');
-  const item=next||published[0];link.href=item.card.querySelector('.card-main').getAttribute('href');
+  const item=next||published[0];if(!link||!item){if(link)link.hidden=true;updateGroupCounts();return;}link.href=item.card.querySelector('.card-main').getAttribute('href');
   link.querySelector('[data-next-label]').textContent=next?t('DITT NESTE STEG','YOUR NEXT STEP'):t('ALLE QUIZER FULLFØRT','ALL QUIZZES COMPLETED');
   link.querySelector('[data-next-title]').textContent=next?item.card.querySelector('h2').textContent:t('Ta ideene videre til instrumentet.','Take these ideas to your instrument.');
   link.querySelector('[data-next-note]').textContent=next?t('Første artikkel uten fullført quiz. Rekkefølgen er et forslag, ikke et krav.','The first article without a completed quiz. This order is a suggestion, not a requirement.'):t('Du kan åpne og repetere artiklene når du vil. Begynn med byggesteinene igjen ↗','You can revisit any article whenever you like. Review the building blocks ↗');
