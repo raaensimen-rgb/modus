@@ -28,7 +28,7 @@ html[data-theme=contrast] :is(input,textarea,select){background:#fff;color:#000;
 html[data-theme=contrast] :is(input,textarea)::placeholder{color:#333;opacity:1}
 html[data-theme=contrast] :is(svg,.card-art img,.reading-illustration img){filter:grayscale(1) contrast(1.15)}
 html[data-theme=contrast] :is(a,summary){text-decoration:underline;text-underline-offset:4px}
-html[data-theme=contrast] .site-header .site-nav>a[aria-current=page]{outline:2px solid #000;outline-offset:3px;font-weight:700}
+html[data-theme=contrast] .site-header .site-nav>a[aria-current=page]{outline:2px solid #000;outline-offset:3px}
 html[data-theme=contrast] :is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #000!important;outline-offset:4px}
 html[data-theme=contrast] :is(.button,.plan-action,.play,.listen-button){background:#000;color:#fff;border:2px solid #000}
 html[data-theme=contrast] :is(.button,.plan-action,.play,.listen-button) :is(span,em){color:inherit}
@@ -39,7 +39,7 @@ html[data-theme=contrast] .theme-picker{font-family:Arial,sans-serif}
 
 html[data-theme=contrast] :is(p,li,label,select,input,textarea,button,summary,small,output){font-size:14px}
 html[data-theme=contrast] :is(.section-label,.eyebrow,.aside-label,.card-meta,.reading-meta,.draft,.hero-note,.quote-credit){font-size:13px}
-html[data-theme=contrast] .site-header .site-nav>a{font-size:14px;min-height:44px}
+html[data-theme=contrast] .site-header .site-nav>a{min-height:44px}
 html[data-theme=contrast] :is(.fret-footer,.tiny){font-size:12px}
 html[data-theme=contrast] #bpm{font-size:28px}
 html[data-theme=readable] .chord-type-row,html[data-theme=contrast] .chord-type-row{flex-direction:column;align-items:stretch;gap:10px}
