@@ -6,7 +6,8 @@
   "preview_branches": [
     "fix/pl103b-preview-cards",
     "test/pl101-visibility-integration",
-    "fix/pl103c-illustrated-cards"
+    "fix/pl103c-illustrated-cards",
+    "integration/pl-vsc01-platform"
   ],
   "fields": [
     "slug",

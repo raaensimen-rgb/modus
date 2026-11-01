@@ -40,6 +40,9 @@ jobs:
       - name: Verify release in desktop and mobile browsers
         run: node tests/release-browser.cjs
 
+      - name: Verify approved navigation v1.1 and publication layout
+        run: node tests/navigation-controls-browser.cjs
+
       - name: Verify piano interaction in desktop and mobile browsers
         run: node tests/piano-browser.cjs
 
@@ -61,6 +64,8 @@ jobs:
             test-results/publication-*.png
             test-results/journey-*-results.json
             test-results/pl101-*.png
+            test-results/navigation-v11-*.png
+            test-results/navigation-v11-results.json
           if-no-files-found: warn
 
       - name: Upload audited public build for isolated QA
