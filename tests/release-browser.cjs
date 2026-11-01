@@ -51,6 +51,10 @@ const server = http.createServer((req,res)=>{
         const result={browser:name,width,locale:locale||'nb',status:'passed'};results.push(result);console.log(JSON.stringify(result));
         await context.close();
       }
+      const platformResults=await require('./platform-browser.cjs')(browser,name,base);
+      fs.mkdirSync('test-results',{recursive:true});
+      fs.writeFileSync(`test-results/platform-${name}-results.json`,JSON.stringify(platformResults,null,2));
+      for(const result of platformResults)console.log('Platform '+JSON.stringify(result));
       const journeyResults=await require('./learning-journey-browser.cjs')(browser,name,base);
       fs.mkdirSync('test-results',{recursive:true});
       fs.writeFileSync(`test-results/journey-${name}-results.json`,JSON.stringify(journeyResults,null,2));

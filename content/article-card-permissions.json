@@ -146,5 +146,11 @@
         "en": "9cf4c46bd6d33545b59b1ef0785fe40b857a9bbd6774c94119feb054a2b933a6"
       }
     }
+  },
+  "release_authorization": {
+    "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6563038330",
+    "scope": "existing-version-pinned-passive-catalog-only",
+    "requires_explicit_build_flag": "MODUS_PLATFORM_RELEASE=1",
+    "full_texts": false
   }
 }

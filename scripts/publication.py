@@ -111,10 +111,15 @@ def preview_catalog_cards(root=ROOT, locale='nb'):
     if policy.get('schema_version') != 1:
         raise ValueError('Invalid catalog-card policy')
     branch = os.environ.get('CF_PAGES_BRANCH', '')
-    # Explicit main/production always wins over a local/CI opt-in.
-    if branch == 'main' or os.environ.get('CONTEXT') == 'production':
+    # A release needs an explicit flag and a separate, exact catalog-only decision.
+    release = (os.environ.get('MODUS_PLATFORM_RELEASE') == '1'
+        and policy.get('release_authorization') == {
+            'reference': 'https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6563038330',
+            'scope': 'existing-version-pinned-passive-catalog-only',
+            'requires_explicit_build_flag': 'MODUS_PLATFORM_RELEASE=1', 'full_texts': False})
+    if not release and (branch == 'main' or os.environ.get('CONTEXT') == 'production'):
         return []
-    enabled = os.environ.get('MODUS_CATALOG_PREVIEW') == '1' or (
+    enabled = release or os.environ.get('MODUS_CATALOG_PREVIEW') == '1' or (
         os.environ.get('CF_PAGES') == '1' and branch in policy.get('preview_branches', []))
     if not enabled:
         return []

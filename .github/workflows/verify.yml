@@ -35,6 +35,27 @@ jobs:
       - name: Validate site and music features
         run: npm test
 
+      - name: Package and audit explicit production catalog without deploying
+        env:
+          MODUS_CATALOG_PREVIEW: '0'
+          MODUS_PLATFORM_RELEASE: '1'
+          CF_PAGES_BRANCH: main
+          CONTEXT: production
+        run: |
+          npm run build
+          python3 tests/publication-audit.py
+          cp test-results/publication-audit.json test-results/publication-production-audit.json
+
+      - name: Upload audited production package for later approved distribution
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-production-dist
+          path: dist/
+          if-no-files-found: error
+
+      - name: Restore isolated Preview build for browser checks
+        run: npm run build && python3 tests/publication-audit.py
+
       - name: Install browser engines
         run: npx playwright install --with-deps chromium webkit
       - name: Verify release in desktop and mobile browsers
@@ -66,6 +87,7 @@ jobs:
             test-results/pl101-*.png
             test-results/navigation-v11-*.png
             test-results/navigation-v11-results.json
+            test-results/platform-*-results.json
           if-no-files-found: warn
 
       - name: Upload audited public build for isolated QA

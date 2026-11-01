@@ -14,7 +14,7 @@ Arbeidsordre: Issue #42, kommentar 6563038330. Dette er én ny isolert integrasj
 
 Samme 16 Under arbeid / In progress-kort per språk med versjonsbundne eksisterende SVG-er, passive kort og sperrede fulltekster. PL-101s tekniske læringsramme, Jam, Harmoni, Teorirommet og Musikkatlas beholdes fra plattformkandidaten. PR #43 er ikke inkludert eller endret.
 
-Fulltekstpolicy, kilde-/mestringsvurderinger og articles.json endres ikke. Standard/main/production har fortsatt den eksisterende strengere kortporten; ved senere produksjonsbygg må eksakt godkjent katalogomfang følge distribusjonsbeslutningen. En Preview må ikke forveksles med produksjon eller gis en release-GO av 08 alene.
+Fulltekstpolicy, kilde-/mestringsvurderinger og articles.json endres ikke. Standard/main/production forblir stengt uten eksplisitt releasevalg. MODUS_PLATFORM_RELEASE=1 og en separat eksakt katalogbeslutning fra denne arbeidsordren pakker kun de samme versjonsbundne passive kortene/bildene for senere godkjent distribusjon. Flagget gir aldri fullteksttillatelse. CI bygger og auditerer denne produksjonspakken separat før Preview-bygg gjenopprettes. En Preview må ikke forveksles med produksjon eller gis en release-GO av 08 alene.
 
 ## Kontrollgrunnlag
 

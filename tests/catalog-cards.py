@@ -86,3 +86,18 @@ with tempfile.TemporaryDirectory(prefix='modus-illustration-policy-') as tmp:
   proof=target/'content/article-illustration-permissions.json';data=json.loads(proof.read_text());data['images'][first]['en']['reference']='unapproved';proof.write_text(json.dumps(data))
   assert first not in preview_illustrations(target,'en')
 print('32 exact existing SVG versions approved only in isolated Preview; changed images and wrong locale proofs rejected; full text remains private.')
+
+# Production remains closed by default, but the authorized static catalog can
+# be packaged explicitly without granting any full-text permission.
+with patch.dict(os.environ,{'MODUS_PLATFORM_RELEASE':'1','MODUS_CATALOG_PREVIEW':'0','CF_PAGES_BRANCH':'main','CONTEXT':'production'}):
+ for locale in ('nb','en'):
+  assert len(preview_catalog_cards(ROOT,locale))==16
+  assert len(preview_illustrations(ROOT,locale))==16
+  assert not public_articles(ROOT,locale)
+ with tempfile.TemporaryDirectory(prefix='modus-release-proof-') as tmp:
+  target=Path(tmp)
+  for name in ('content','scripts','editorial'):shutil.copytree(ROOT/name,target/name)
+  policy=target/'content/article-card-permissions.json';data=json.loads(policy.read_text())
+  data['release_authorization']['reference']='unapproved';policy.write_text(json.dumps(data))
+  assert not preview_catalog_cards(target),'Release flag alone cannot grant permission'
+print('Explicit authorized production catalog: 16 passive cards/images per language, 0 full texts; missing release evidence remains closed.')
