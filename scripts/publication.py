@@ -1,4 +1,5 @@
 """Fail-closed publication policy. Source/editorial data never implies permission."""
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -47,8 +48,32 @@ def public_articles(root=ROOT, locale='nb'):
     if any(not isinstance(x, str) or not re.fullmatch(r'[a-z0-9][a-z0-9-]*', x) for x in ids) or len(set(ids)) != len(ids):
         raise ValueError('Invalid or duplicate article identifier')
     return [a for a in articles
-            if is_public(policy['articles'].get(a['slug']), locale)
-            and (locale == 'nb' or is_public(policy['articles'].get(a['slug']), 'nb'))]
+            if article_permission(policy['articles'].get(a['slug']), a, locale, root)
+            and (locale == 'nb' or article_permission(policy['articles'].get(a['slug']), a, 'nb', root))]
+
+def article_text_version(article, locale='nb', root=ROOT):
+    """Pin the actual article/quiz source, and the EN translation inputs separately."""
+    quizzes = json.loads((root / 'content/article-quizzes.json').read_text())
+    data = {'article': article, 'quiz': quizzes.get(article['slug']), 'locale': locale}
+    if locale == 'en':
+        # Conservative: any translation/override change requires a fresh EN decision.
+        data['translation_inputs'] = {name: hashlib.sha256((root / name).read_bytes()).hexdigest()
+            for name in ('content/i18n/en.json', 'content/i18n/dynamic.tsv')}
+        overrides = (root / 'scripts/build-languages.py').read_text()
+        block = re.search(r"(?ms)^        if rel\.as_posix\(\) == 'artikler/" + re.escape(article['slug'])
+                          + r"\.html':\n(.*?)(?=^        if |\Z)", overrides)
+        data['article_translation_override'] = block[1] if block else None
+    return hashlib.sha256(json.dumps(data, ensure_ascii=False, sort_keys=True,
+                                    separators=(',', ':')).encode()).hexdigest()
+
+def article_permission(record, article, locale='nb', root=ROOT):
+    if not is_public(record, locale):
+        return False
+    evidence = record.get('publication_evidence', {})
+    proof = evidence.get(locale) if isinstance(evidence, dict) else None
+    return (isinstance(proof, dict)
+            and isinstance(proof.get('reference'), str) and bool(proof['reference'].strip())
+            and proof.get('reviewed_version_sha256') == article_text_version(article, locale, root))
 
 def holding_page(prefix='', active='lesson', english=False):
     from site_navigation import render_header, with_navigation_css
@@ -67,6 +92,11 @@ def public_catalog(root=ROOT, locale='nb'):
 
 
 EN_TRANSLATIONS = {
+    'Biblioteket er bevart': 'The library is preserved',
+    'Artiklene er ikke slettet. Tekstene er bevart i redaksjonell kilde og avventer dokumentert publiseringstillatelse.': 'The articles have not been deleted. Their texts are preserved in editorial sources and await documented publication permission.',
+    'Bevart i redaksjonell kilde:': 'Preserved in editorial sources:',
+    'Tilgjengelig for lesing her:': 'Available to read here:',
+    'Titler og artikkeltekst vises først når publiseringstillatelsen er avklart.': 'Titles and article text are shown only after publication permission has been confirmed.',
     'Under arbeid': 'In progress',
     'Dette undervisningsinnholdet er ikke publisert. Fremdriften din i tilgjengelige verktøy er uendret.': 'This teaching content has not been published. Your progress in available tools is unchanged.',
     'Tilbake til Lær': 'Back to Learn',
