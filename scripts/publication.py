@@ -150,7 +150,7 @@ def public_catalog(root=ROOT, locale='nb'):
 
 EN_TRANSLATIONS = {
     'Artikkelbibliotek · under arbeid': 'Article library · in progress',
-    '16 artikkelkort · fulltekst ikke tilgjengelig': '16 article cards · full text unavailable',
+    'artikkelkort · fulltekst ikke tilgjengelig': 'article cards · full text unavailable',
     'Forhåndsvisning: kun titler, nivå og kategori. Artiklene er under arbeid og kan ikke åpnes.': 'Preview: titles, level and category only. The articles are in progress and cannot be opened.',
     'Titler og artikkeltekst vises først når publiseringstillatelsen er avklart.': 'Titles and article text are shown only after publication permission has been confirmed.',
     'Biblioteket er bevart': 'The library is preserved',
