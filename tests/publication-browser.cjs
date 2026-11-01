@@ -29,10 +29,18 @@ module.exports=async(browser,browserName,base)=>{
     assert.equal(await c.getByRole('heading').innerText(),item.title);
     assert((await c.innerText()).includes(item.category_label));
     assert((await c.innerText()).includes(locale?'In progress':'Under arbeid'));
-    assert.equal(await c.locator('a,button,input,img,script,[tabindex],[onclick]').count(),0);
+    assert.equal(await c.locator('a,button,input,script,[tabindex],[onclick]').count(),0);
+    const image=c.locator('.catalog-preview-art img');assert.equal(await image.count(),1);
+    assert.equal(await image.getAttribute('alt'),'');
+    assert.equal(await image.getAttribute('src'),'images/articles/'+item.slug+'.svg');
+    await image.scrollIntoViewIfNeeded();
+    await page.waitForFunction(slug=>{const img=document.querySelector(`[data-catalog-id="${slug}"] img`);return img.complete&&img.naturalWidth>0;},item.slug);
+    const bounds=await c.evaluate(e=>{const r=e.getBoundingClientRect(),a=e.querySelector('.catalog-preview-art').getBoundingClientRect(),copy=e.querySelector('.card-copy').getBoundingClientRect(),image=e.querySelector('img').getBoundingClientRect();return {card:r.width,art:a.width,height:a.height,imageWidth:image.width,imageHeight:image.height,copyTop:copy.top,artBottom:a.bottom};});
+    assert(bounds.art<=bounds.card+1&&bounds.height>80&&bounds.imageWidth<=bounds.art+1&&bounds.imageHeight<=bounds.height+1&&bounds.copyTop>=bounds.artBottom-1,'Illustration fits above title');
    }
    if(metadata.length){
     const location=page.url();await cards.first().getByRole('heading').click();assert.equal(page.url(),location);
+    await cards.first().locator('img').click();assert.equal(page.url(),location);
     await page.locator('#articleSearch').fill(locale?'circle of fifths':'kvintsirkelen');
     assert.equal(await page.locator('.catalog-preview-card:visible').count(),1);
     await page.locator('#articleSearch').fill('');
@@ -57,6 +65,7 @@ module.exports=async(browser,browserName,base)=>{
    await page.evaluate(()=>{document.documentElement.style.zoom='';});
    assert(await page.evaluate(w=>innerWidth===w&&document.documentElement.scrollWidth<=w+1,width));
    fs.mkdirSync('test-results',{recursive:true});
+   if(metadata.length)await cards.first().screenshot({path:`test-results/publication-card-${browserName}-${width}-${locale?'en':'nb'}.png`});
    await page.screenshot({path:`test-results/publication-${browserName}-${width}-${locale?'en':'nb'}.png`,fullPage:true,
     style:'.site-header .nav-tooltip { display:none!important }'});
    for(const path of ['undervisning.html?modul=F03','laer-dorisk.html','grunnstudier.html','artikler/toner-og-intervaller.html']){

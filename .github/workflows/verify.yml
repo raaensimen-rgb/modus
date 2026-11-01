@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, fix/pl102-publication-visibility-gate, fix/pl103-article-permissions]
+    branches: [main, fix/pl102-publication-visibility-gate, fix/pl103-article-permissions, fix/pl103b-preview-cards]
   workflow_dispatch:
 
 permissions:
