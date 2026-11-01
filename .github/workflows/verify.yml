@@ -57,6 +57,8 @@ jobs:
             test-results/audio-*-results.json
             test-results/publication-*.json
             test-results/publication-*.png
+            test-results/journey-*-results.json
+            test-results/pl101-*.png
           if-no-files-found: warn
 
       - name: Upload audited public build for isolated QA

@@ -35,7 +35,7 @@ async function manual(page,id){
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base=process.env.MODUS_TEST_URL||`http://127.0.0.1:${server.address().port}`,results=[];
  try{for(const [browserName,type] of Object.entries({chromium,webkit})){
   const browser=await type.launch({headless:true});
-  try{const publication=await require('./publication-browser.cjs')(browser,browserName,base);fs.writeFileSync('test-results/publication-'+browserName+'-results.json',JSON.stringify(publication,null,2));for(const width of [1440,375])for(const locale of ['', 'en/']){
+  try{const journey=await require('./learning-journey-browser.cjs')(browser,browserName,base);fs.writeFileSync('test-results/journey-'+browserName+'-results.json',JSON.stringify(journey,null,2));const publication=await require('./publication-browser.cjs')(browser,browserName,base);fs.writeFileSync('test-results/publication-'+browserName+'-results.json',JSON.stringify(publication,null,2));for(const width of [1440,375])for(const locale of ['', 'en/']){
    const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
    for(const test of cases){
     await openPage(page,`${base}/${locale}${test.url}`);
