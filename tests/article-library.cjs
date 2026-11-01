@@ -1,6 +1,7 @@
 const assert=require('node:assert/strict');
 const {matches,nextArticle}=require('../dist/articles.js');
 const articles=require('../content/articles.json');
+const publicIds=require('./publication-helper.cjs')();
 const filters={level:'all',topic:'all',q:''};
 const items=articles.map(a=>({id:a.slug,level:a.level,topic:a.category,search:a.title+' '+a.intro}));
 const result=extra=>items.filter(a=>matches(a,{...filters,...extra})).map(a=>a.id);
@@ -22,8 +23,8 @@ const py=fs.readFileSync('scripts/article_library.py','utf8');
 const front=fs.readFileSync('dist/articles.js','utf8');
 const html=fs.readFileSync('dist/artikler.html','utf8');
 const progression=[...py.match(/ORDER = \[([^\]]+)\]/)[1].matchAll(/'([^']+)'/g)].map(m=>m[1]);
-const browserProgression=JSON.parse(front.match(/const orderedIds=(\[[^\]]+\])/)[1]);
-assert.deepEqual(browserProgression,progression,'Client and article generator must use the same learning order');
+const browserProgression=JSON.parse(front.match(/const orderedIds=(\[[^\]]*\])/)[1]);
+assert.deepEqual(browserProgression,progression.filter(id=>publicIds.includes(id)),'Client and article generator must use the same learning order');
 assert.deepEqual([...progression].sort(),articles.map(a=>a.slug).sort(),'Every article should appear exactly once');
 assert.deepEqual(progression.slice(0,5),['toner-og-intervaller','dur-og-moll','bygg-akkorder-i-en-toneart','kvintsirkelen','romertall-i-musikk']);
 assert(html.includes('data-group-by="order" aria-pressed="true"'),'Reading order must be selected by default');
@@ -35,10 +36,10 @@ const readingHeadings=[...html.matchAll(/<section class="article-category" data-
 assert.deepEqual(readingHeadings.slice(0,3),['Grunnleggende musikkteori','Videregående musikkteori','Faglig fordypning']);
 assert(progression.indexOf('din-forste-improvisasjon')<progression.indexOf('septimakkorder'),'Beginner block must precede intermediate block');
 
-assert.equal((html.match(/class="card-level-row"/g)||[]).length,21,'All published and upcoming card badges must occupy their own row');
+assert.equal((html.match(/class="card-level-row"/g)||[]).length,publicIds.length+require('./publication-helper.cjs')('catalog').length+(html.match(/class="upcoming-card catalog-preview-card"/g)||[]).length,'All published and upcoming card badges must occupy their own row');
 for(const art of html.match(/<div class="card-art">[^]*?<\/div>/g)||[]) assert(!art.includes('level-badge'),'Badges must not overlay diagrams');
 assert(html.includes('data-group-by="topic"'),'Topic grouping must remain available');
 assert(html.includes('data-group-by="level"'),'Level grouping must remain available');
 const mainCards=[...html.matchAll(/data-article-id="([^"]+)"/g)].map(m=>m[1]);
-assert.deepEqual(mainCards.slice(0,progression.length),progression,'First rendered article group must follow pedagogical order');
+assert.deepEqual(mainCards,progression.filter(id=>publicIds.includes(id)),'First rendered article group must follow pedagogical order');
 console.log('Passed: combined level/topic/search filters, case folding, empty results and next-unfinished recommendations.');

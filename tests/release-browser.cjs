@@ -30,7 +30,7 @@ const server = http.createServer((req,res)=>{
         const trigger=page.locator('[data-global-search-open]'),input=page.locator('[data-global-search-input]');
         assert(await trigger.isVisible());await trigger.click();await input.waitFor({state:'visible'});
         await input.press('Escape');assert(await trigger.evaluate(e=>document.activeElement===e));
-        await trigger.click();await input.fill('dorisk');await page.locator('.global-search-result').first().waitFor();
+        await trigger.click();await input.fill('atlas');await page.locator('.global-search-result').first().waitFor();
         assert((await page.locator('.global-search-result').count())>0);
         await input.press('Escape');assert(await trigger.evaluate(e=>document.activeElement===e));
         await trigger.click();await input.fill('zzzzmissingtest');await page.waitForFunction(()=>document.querySelector('[data-global-search-status]').textContent.match(/Ingen treff|No matches/));
@@ -50,7 +50,12 @@ const server = http.createServer((req,res)=>{
         assert.deepEqual(errors,[]);
         const result={browser:name,width,locale:locale||'nb',status:'passed'};results.push(result);console.log(JSON.stringify(result));
         await context.close();
-      }} finally {await browser.close()}
+      }
+      const journeyResults=await require('./learning-journey-browser.cjs')(browser,name,base);
+      fs.mkdirSync('test-results',{recursive:true});
+      fs.writeFileSync(`test-results/journey-${name}-results.json`,JSON.stringify(journeyResults,null,2));
+      for(const result of journeyResults) console.log('PL101 journey '+JSON.stringify(result));
+      } finally {await browser.close()}
     }
   } finally {
     fs.mkdirSync('test-results',{recursive:true});fs.writeFileSync('test-results/browser-results.json',JSON.stringify(results,null,2));server.close();

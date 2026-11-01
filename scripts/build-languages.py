@@ -5,10 +5,15 @@ from pathlib import Path
 from html.parser import HTMLParser
 import html, json, re, shutil
 import xml.etree.ElementTree as ET
+from publication import load_policy, is_public, public_articles, holding_page, EN_TRANSLATIONS, preview_illustrations
+policy=load_policy()
 ROOT=Path(__file__).resolve().parents[1]
 DIST=ROOT/'dist'
 EN=DIST/'en'
+english_articles={a['slug'] for a in public_articles(ROOT,'en')}
+english_card_images=preview_illustrations(ROOT,'en')
 translations=json.loads((ROOT/'content/i18n/en.json').read_text())
+translations.update(EN_TRANSLATIONS)
 for line in (ROOT/'content/i18n/dynamic.tsv').read_text().splitlines():
     if line:
         source, target=line.split('\t',1)
@@ -68,10 +73,17 @@ if EN.exists():shutil.rmtree(EN)
 EN.mkdir()
 for source in list(DIST.rglob('*')):
     if not source.is_file() or EN in source.parents or 'media' in source.relative_to(DIST).parts or source.name in ('redaktor.html','editor.js','editor.css','cms-seed.json','_routes.json','_headers','_worker.js'):continue
-    rel=source.relative_to(DIST);target=EN/rel;target.parent.mkdir(parents=True,exist_ok=True)
+    rel=source.relative_to(DIST)
+    if rel.parts[:2]==('images','articles') and rel.stem not in english_articles and rel.stem not in english_card_images:continue
+    target=EN/rel;target.parent.mkdir(parents=True,exist_ok=True)
     if source.suffix=='.html':
-        page=language_assets(source.read_text(),'../' if rel.parts[0]=='artikler' else '')
-        source.write_text(page)
+        localized_source=ROOT/'.build-private/en'/rel
+        text=localized_source.read_text() if (rel.name=='artikler.html' or rel.parts[0]=='artikler') and localized_source.is_file() else source.read_text()
+        page=language_assets(text,'../' if rel.parts[0]=='artikler' else '')
+        source.write_text(language_assets(source.read_text(),'../' if rel.parts[0]=='artikler' else ''))
+        if localized_source.is_file() and 'design-system.css' not in page:
+            prefix='../' if rel.parts[0]=='artikler' else ''
+            page=page.replace('</head>',f'<link rel="stylesheet" href="{prefix}design-system.css"></head>',1)
         if rel.as_posix() == 'artikler/kirketonearter-ett-system-sju-uttrykk.html':
             # This in-depth Norwegian pedagogy has not yet received a reviewed English translation.
             # Offer a faithful English summary rather than implying an automated translation is approved.
@@ -94,6 +106,8 @@ for source in list(DIST.rglob('*')):
         if rel.as_posix() == 'laeringssti.html':
             # Separate reviewed English summary: no automatic translation of unapproved lessons.
             page = re.sub(r'<main\b[^>]*>[\s\S]*?</main>', '<main class="path-shell"><section class="path-hero"><p class="path-eyebrow">MODUS / LEARN</p><h1>Your path through <em>music.</em></h1><p class="path-lead">Explore our six-level curriculum, open interactive lesson demonstrations, and connect theory with practical music making.</p><div class="path-actions"><a class="path-action" href="laereplan.html">Explore the curriculum</a><a class="path-action secondary" href="laer-dorisk.html">Explore the Dorian lesson</a></div></section><section class="path-section"><p class="path-eyebrow">LEARNING SPACES</p><h2>One learning path. Different ways to explore.</h2><p class="path-intro">The curriculum outlines the planned modules. The interval exercise is an editorial draft, not an approved course. The Dorian lesson is a separate interactive learning experience.</p><div class="path-grid"><article class="path-card"><h3>Curriculum</h3><p>Six levels and 24 planned modules.</p><a href="laereplan.html">Browse the levels</a></article><article class="path-card"><h3>Dorian mode</h3><p>Explore a six-step interactive lesson.</p><a href="laer-dorisk.html">Open the lesson</a></article><article class="path-card"><h3>Intervals</h3><p>Hear notes on acoustic grand piano and explore an interactive work-in-progress.</p><a href="undervisning.html?modul=F03">Open the demonstration</a></article><article class="path-card"><h3>Music theory tools</h3><p>Explore connections between harmony, listening and playing.</p><a href="teori.html">Open the theory room</a></article></div></section></main>', page, count=1)
+        if rel.as_posix() == 'laeringssti.html':
+            page = page.replace('<main class="path-shell">', '<main class="path-shell"><section class="journey-resume" id="f03-resume" aria-label="F03"></section>', 1)
         if rel.as_posix() == 'grunnstudier.html':
             # A reviewed, limited English orientation; the detailed exercises remain Norwegian pending editorial review.
             page = re.sub(r'<main\b[^>]*>[\s\S]*?</main>', """<main class="foundation-main"><section class="foundation-hero"><p class="eyebrow">MODUS / FOUNDATION STUDIES</p><h1>Understand the <em>foundations of music.</em></h1><p class="foundation-lead">A six-part guided study route connecting music theory with listening, playing and explaining. The complete practical exercises are currently available in Norwegian while the English version awaits editorial review.</p><div class="foundation-hero-links"><a class="button" href="../grunnstudier.html">Open the Norwegian study route ↗</a><a class="foundation-subtle-link" href="artikler.html">Browse English articles ↗</a></div><p class="foundation-status"><strong>Editorial status:</strong> This is a developing learning route, not an accredited course or qualification.</p></section><section class="foundation-overview"><div><p class="eyebrow">SIX CONNECTED TOPICS</p><h2>Read. Listen. Play. Explain.</h2><p>1. Notes and intervals<br>2. Major, minor and triads<br>3. Keys and diatonic chords<br>4. Roman numerals and harmonic function<br>5. From a scale to a musical phrase<br>6. Your own musical idea</p></div><div class="foundation-route"><a href="artikler/toner-og-intervaller.html">01 · Notes and intervals ↗</a><a href="artikler/dur-og-moll.html">02 · Major and minor ↗</a><a href="artikler/bygg-akkorder-i-en-toneart.html">03 · Diatonic chords ↗</a><a href="artikler/romertall-i-musikk.html">04 · Roman numerals ↗</a><a href="artikler/din-forste-improvisasjon.html">05 · Improvisation ↗</a><a href="artikler/ett-skalakart-nye-maltoner.html">06 · Chord-tone targets ↗</a></div></section></main>""", page, count=1)
@@ -103,9 +117,19 @@ for source in list(DIST.rglob('*')):
             page = page.replace('<script src="undervisning.js" defer></script>', '')
         p=EnglishHTML();p.feed(page);result=''.join(p.out)
         result=result.replace('<html lang="en">','<html lang="en">',1)
+        if rel.as_posix() in policy['learning_pages'] and not is_public(policy['learning_pages'][rel.as_posix()], 'en'):
+            result=language_assets(holding_page(active='course' if rel.name=='laer-dorisk.html' else 'path' if rel.name=='grunnstudier.html' else 'lesson',english=True))
+        if rel.parts[0]=='artikler' and rel.stem not in english_articles:
+            result=language_assets(holding_page('../',active='articles',english=True),'../')
+        # Re-run translation for generated holding pages, including shared navigation.
+        if 'data-publication-hold' in result:
+            translated=EnglishHTML();translated.feed(result);result=''.join(translated.out)
         target.write_text(result)
     elif source.suffix=='.js' and source.name not in ('language-init.js','language.js','account.js') and not source.name.startswith('account.'):
         target.write_text(script(source.read_text()))
+    elif rel.parts[:2]==('images','articles') and rel.stem in english_card_images:
+        # Exact previously used EN bytes; illustration permission does not open text.
+        target.write_bytes(english_card_images[rel.stem]['source'].read_bytes())
     elif source.suffix=='.svg':
         ET.register_namespace('', 'http://www.w3.org/2000/svg')
         svg=ET.fromstring(source.read_text())

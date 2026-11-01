@@ -1,0 +1,765 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-01",
+  "source_commit": "cda616a31a57f7157ab2427b15f8c3e6f362a687",
+  "source_file_sha256": "7a56d5fe2ca3100142c888b7ecf4e4102aef27c0c03edcfdac2a08a259d39d11",
+  "authority": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+  "articles": [
+    {
+      "slug": "toner-og-intervaller",
+      "title": "Toner og intervaller: musikkens byggesteiner",
+      "level": "beginner",
+      "category": "basics",
+      "source_versions_sha256": {
+        "nb": "89cda11913aeaedae9523fe3f8f50d91b25d5b131e732d5e04dd3d3d08d45c03",
+        "en": "a0b4d20e0bc6b4a60515dab3e4bbee6ca840ae42c49eda55524e8c9593008c47"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": true,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/pull/5",
+          "date": "2026-10-29",
+          "scope": "Approved terminology patch only; not full current article/EN publication"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/41#issuecomment-6548112663",
+          "date": "2026-10-31",
+          "scope": "Locked ART-001 subsection referenced, authoritative master not independently identified; no complete-manuscript release"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/41",
+          "date": "2026-10-31",
+          "scope": "New ART-002 manuscript version is a separate private draft; does not grant permission to this legacy record"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "dur-og-moll",
+      "title": "Dur og moll: en tone gjør forskjellen",
+      "level": "beginner",
+      "category": "chords",
+      "source_versions_sha256": {
+        "nb": "6ffd7632b49389f7d5debdfcd2b66ef02a3372a1edbe9ddaa6bc76586e1716cd",
+        "en": "db8120c8c4175b960ab2e5d022c02e0840ee678eae5916ebd748287164edd904"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": true,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/41",
+          "date": "2026-10-31",
+          "scope": "New ART-002 manuscript version is a separate private draft; does not grant permission to this legacy record"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "kvintsirkelen",
+      "title": "Kvintsirkelen: et kart over toneartenes slektskap",
+      "level": "beginner",
+      "category": "harmony",
+      "source_versions_sha256": {
+        "nb": "17bed195e2eb8ae55ec9c2a26726647fe6744e60bd52cc7b5923515b967650ee",
+        "en": "41b3bcd6541db5cd4d4e07a88daed43a897e0302ca7a841e7d711ca92ee42061"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": true,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/41",
+          "date": "2026-10-31",
+          "scope": "New ART-002 manuscript version is a separate private draft; does not grant permission to this legacy record"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "din-forste-improvisasjon",
+      "title": "Fra skala til din første improvisasjon",
+      "level": "beginner",
+      "category": "improvisation",
+      "source_versions_sha256": {
+        "nb": "e570c98cdf603f31286320f4258da8877adc193361fb095fc917e973bd36fb1d",
+        "en": "5a95a46f4376e7616437c60cc9da5b230d3d659036c85e2b740bc66cbf7883f4"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": true,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "moduser-og-tonalt-sentrum",
+      "title": "Moduser: sentrum er viktigere enn starttonen",
+      "level": "intermediate",
+      "category": "modes",
+      "source_versions_sha256": {
+        "nb": "bba7f3f3367de5f0eb1db696d1b699f7506e8f95e9167e1aabbdd1416c04e698",
+        "en": "c5be8c326c952cec0bd4da145a9ac1c3415474044b571f1f0afa0c8666576ea2"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": true,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "kirketonearter-ett-system-sju-uttrykk",
+      "title": "Kirketonearter: ett tonesystem, sju musikalske uttrykk",
+      "level": "intermediate",
+      "category": "modes",
+      "source_versions_sha256": {
+        "nb": "08bb59d709414c3f0a818a5241f9264b88dd47c961bc97d57218929c45ce65dd",
+        "en": "104ade5d78a6e87e2b4970e6715c7c5330957e3e895ec12f2e6035a8762b9ebf"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": false,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "romertall-i-musikk",
+      "title": "Romertall i musikk: forstå akkordene bak tallene",
+      "level": "beginner",
+      "category": "harmony",
+      "source_versions_sha256": {
+        "nb": "25da746d1ddcd240bad8a9517cce174960ede2ff62fd98d673d02e359178009d",
+        "en": "9381cc9fb89998346fb69717d16937b68ab1f9ba6c80ae1c665e59c88a9d144e"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": false,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "ii-v-i-kadensen",
+      "title": "ii–V–I: hvorfor akkorder vil hjem",
+      "level": "intermediate",
+      "category": "harmony",
+      "source_versions_sha256": {
+        "nb": "a4704514d7cc9d3d61be17335c137760e0ade145988647191c216c28c0df7e80",
+        "en": "1a2a93482a7d2249362ee0262d166f877e56c67184e60892544e5ec5420dd324"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": true,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "treklanger-fra-grunnform-til-omvending",
+      "title": "Treklanger: fra grunntone til akkordens tre toner",
+      "level": "beginner",
+      "category": "chords",
+      "source_versions_sha256": {
+        "nb": "87a62207ea9d8e1c121eeefda2e6f6f133e744bbc5441f22195c4aeb87d78977",
+        "en": "1d1bc8fc3894af41330382392dea1b42de77a9806ca2158186ebbbbde6eba0f8"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": false,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/41",
+          "date": "2026-10-31",
+          "scope": "New ART-002 manuscript version is a separate private draft; does not grant permission to this legacy record"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "septimakkorder",
+      "title": "Septimakkorder: mer farge, samme grunnmur",
+      "level": "intermediate",
+      "category": "chords",
+      "source_versions_sha256": {
+        "nb": "77ca6b7709a4e16e202816d1dc243d02f836ebef823bf9cbeb548814d4ecead8",
+        "en": "9f32a84abb6d4fb9544fbaf53b63d04bbe176f2798c5c0cd2d51cdab686efcd1"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": true,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "harmonisk-moll-og-frygisk-dominant",
+      "title": "Harmonisk moll og frygisk dominant",
+      "level": "advanced",
+      "category": "modes",
+      "source_versions_sha256": {
+        "nb": "9ac7db771ed6b12ee9aae87932d22ba95c65ccc6cebf4bc5237d2c0b7005eab6",
+        "en": "12651bfc5c90828b16963a24c065c65495d289cc8e2527080c387d3687539bf6"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": true,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "stemmeforing",
+      "title": "Stemmeføring: den korteste veien mellom akkorder",
+      "level": "advanced",
+      "category": "harmony",
+      "source_versions_sha256": {
+        "nb": "579165fbeb5a3d8b08e1c0a5c7fb0e1a07c19de0ee590f8a4eebee7fc3a6e5f9",
+        "en": "4e5d83612208a99e9461837707a458b5bd956c285a41993459d27680d0a7bafe"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": true,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "rytme-i-sju-aatte",
+      "title": "Rytme i 7/8: grupper som føles naturlige",
+      "level": "advanced",
+      "category": "rhythm",
+      "source_versions_sha256": {
+        "nb": "4ab62d3fdf66c6a69aac804ef15013b6947ad5683220e3ee763456ed8f423ff2",
+        "en": "4b8ebaf7abd79f8f647ffe4e5375acf6aaa00554dfb8222bb2c8bf742f4fdaf7"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": true,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "bygg-akkorder-i-en-toneart",
+      "title": "Bygg akkordene i en toneart",
+      "level": "beginner",
+      "category": "chords",
+      "source_versions_sha256": {
+        "nb": "34a5eba4064076d7a4c13ed15e8e10c32edd1af63934c20e503a19513d607fe4",
+        "en": "adae9fdb32c8986015c85b01dbfa5ae295c29cd2e958541b420516ad1e30c1f9"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": true,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "ett-skalakart-nye-maltoner",
+      "title": "Ett skalakart, nye måltoner",
+      "level": "intermediate",
+      "category": "improvisation",
+      "source_versions_sha256": {
+        "nb": "33efab7990438e2498ec7d6f2a965cb926f8173d408918dfcb1096a2f98c9260",
+        "en": "bad51fca9255a55f8bf0b0c0189502297d2c81f61a7208e7539a4cf0ff9be9c0"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": true,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    },
+    {
+      "slug": "dorisk-og-eolisk",
+      "title": "Dorisk og eolisk: samme grunntone, ny farge",
+      "level": "intermediate",
+      "category": "modes",
+      "source_versions_sha256": {
+        "nb": "da63b02cae05a62d1c7a3717eea7d4616363b9be04978c97f9ad869e05045898",
+        "en": "637adbbbc7bc5c540e2e9a40862c36d3bbede831ac7c3c043f7a44b0211cdb3b"
+      },
+      "historical_exposure": {
+        "baseline_report": "https://github.com/raaensimen-rgb/modus/issues/28#issuecomment-6550992337",
+        "unfiltered_main_build": true,
+        "tracked_root_html": true,
+        "publication_approval_implied": false
+      },
+      "evidence_reviewed": [
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6542949550",
+          "date": "2026-10-31",
+          "scope": "16 source records and incomplete source/permission audit; not publication approval"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/34#issuecomment-6543043637",
+          "date": "2026-10-31",
+          "scope": "00 requires separate per-article publication decision"
+        },
+        {
+          "url": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+          "date": "2026-11-01",
+          "scope": "Current classification order; no blanket permission"
+        }
+      ],
+      "complete_publication_evidence": {
+        "nb": null,
+        "en": null
+      },
+      "editorial_status": "draft",
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "visibility": "private",
+      "catalog_metadata_visibility": "private",
+      "recommendation": "private; under-work metadata card only after explicit metadata permission",
+      "decision_needed": "Avventer prosjekteiers publiseringsbeslutning for konkret tekstversjon og språk. Tittel/kategori krever separat tillatelse dersom fulltekst ikke åpnes.",
+      "rights_and_subject_gates": "#34 kilde-/tekstlikhetskontroll og illustrasjonsrettigheter ikke sluttgodkjent; læreplanens modulstatus er ikke artikkelgodkjenning."
+    }
+  ],
+  "counts": {
+    "preserved": 16,
+    "approved_public_nb": 0,
+    "approved_public_en": 0,
+    "awaiting_owner": 16
+  }
+}

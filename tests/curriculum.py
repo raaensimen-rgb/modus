@@ -9,9 +9,9 @@ page = (ROOT / "dist/laereplan.html").read_text(encoding="utf-8")
 navigation = (ROOT / "scripts/site_navigation.py").read_text(encoding="utf-8")
 learning_path = (ROOT / "dist/laeringssti.html").read_text(encoding="utf-8")
 frontpage = (ROOT / "dist/index.html").read_text(encoding="utf-8")
-lesson = (ROOT / "dist/undervisning.html").read_text(encoding="utf-8")
-lesson_js = (ROOT / "dist/undervisning.js").read_text(encoding="utf-8")
-atelier_js = (ROOT / "dist/f03-atelier.js").read_text(encoding="utf-8")
+lesson = (ROOT / "editorial/legacy/undervisning.html").read_text(encoding="utf-8")
+lesson_js = (ROOT / "editorial/legacy/undervisning.js").read_text(encoding="utf-8")
+atelier_js = (ROOT / "editorial/legacy/f03-atelier.js").read_text(encoding="utf-8")
 modules = register["modules"]
 allowed = set(register["policy"]["status_values"])
 assert len(modules) == 24, "Expected 24 initial planned modules"

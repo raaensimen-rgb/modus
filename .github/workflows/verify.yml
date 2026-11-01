@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [main, fix/pl102-publication-visibility-gate, fix/pl103-article-permissions, fix/pl103b-preview-cards]
   workflow_dispatch:
 
 permissions:
@@ -14,6 +14,8 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      MODUS_CATALOG_PREVIEW: ${{ github.event_name == 'pull_request' && '1' || '0' }}
     steps:
       - name: Check out source
         uses: actions/checkout@v4
@@ -55,4 +57,15 @@ jobs:
             test-results/browser-results.json
             test-results/piano-browser-results.json
             test-results/audio-*-results.json
+            test-results/publication-*.json
+            test-results/publication-*.png
+            test-results/journey-*-results.json
+            test-results/pl101-*.png
           if-no-files-found: warn
+
+      - name: Upload audited public build for isolated QA
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-site-dist
+          path: dist/
+          if-no-files-found: error

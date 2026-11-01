@@ -1,6 +1,8 @@
 from pathlib import Path
 from html.parser import HTMLParser
-import json,re
+import json,re,sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"scripts"))
+from publication import public_catalog
 ROOT=Path(__file__).resolve().parents[1]
 upcoming=json.loads((ROOT/'content/upcoming-articles.json').read_text(encoding='utf-8'))
 articles=json.loads((ROOT/'content/articles.json').read_text(encoding='utf-8'))
@@ -49,10 +51,11 @@ for line in (ROOT/'content/i18n/dynamic.tsv').read_text(encoding='utf-8').splitl
 for locale,status in [('', 'Kommer'),('en/', 'Coming soon')]:
  page=(ROOT/'dist'/locale/'artikler.html').read_text(encoding='utf-8')
  assert 'class="upcoming-library"' not in page
- cards=Cards(page).nodes
- assert len(cards)==5, f'{locale}: expected five planned cards'
+ cards=[c for c in Cards(page).nodes if 'catalog-preview-card' not in c['elements'][0][1].get('class','').split()]
+ visible=public_catalog(ROOT,'en' if locale else 'nb')
+ assert len(cards)==len(visible), f'{locale}: only explicitly permitted catalog metadata may be public'
  for card in cards:validate_card(card,status)
- expected=[translations[a['title']] if locale else a['title'] for a in upcoming]
+ expected=[translations[a['title']] if locale else a['title'] for a in visible]
  actual=[card['titles'][0].strip() for card in cards]
  assert sorted(actual)==sorted(expected), f'{locale}: planned titles missing, duplicated or incorrect'
 

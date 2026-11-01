@@ -65,11 +65,12 @@ function render(){
  root.querySelector('#accountEmail').textContent=user.email;
  root.querySelector('#accountProfileEmail').textContent=user.email||'—';
  root.querySelector('#accountSync').textContent=cloudError?t('Fremdriften kunne ikke synkroniseres. Prøv igjen når du er på nett.','Progress could not be synced. Try again when you are online.'):t('Fremdriften er synkronisert med kontoen din.','Your progress is synced with your account.');
- const count=local.list().length;root.querySelector('#accountCount').textContent=en?`${count} of ${IDS.length} quizzes completed`:`${count} av ${IDS.length} quizer fullført`;
- const progress=root.querySelector('progress');progress.value=count;progress.max=IDS.length;
- const list=root.querySelector('#accountArticles');list.replaceChildren();
  const titles=JSON.parse(document.querySelector('#articleTitles').textContent)[en?'en':'nb'];
- IDS.forEach(id=>{const li=document.createElement('li'),a=document.createElement('a'),status=document.createElement('span');a.href='artikler/'+id+'.html';a.textContent=titles[id];status.textContent=local.has(id)?t('✓ Fullført','✓ Completed'):t('Ikke fullført','Not completed');li.append(a,status);list.append(li);});
+ const visibleIds=IDS.filter(id=>Object.hasOwn(titles,id));
+ const count=visibleIds.filter(id=>local.has(id)).length;root.querySelector('#accountCount').textContent=en?`${count} of ${visibleIds.length} quizzes completed`:`${count} av ${visibleIds.length} quizer fullført`;
+ const progress=root.querySelector('progress');progress.value=count;progress.max=Math.max(1,visibleIds.length);
+ const list=root.querySelector('#accountArticles');list.replaceChildren();
+ visibleIds.forEach(id=>{const li=document.createElement('li'),a=document.createElement('a'),status=document.createElement('span');a.href='artikler/'+id+'.html';a.textContent=titles[id];status.textContent=local.has(id)?t('✓ Fullført','✓ Completed'):t('Ikke fullført','Not completed');li.append(a,status);list.append(li);});
  const imports=guest.list().filter(id=>!local.has(id));root.querySelector('#accountImport').hidden=!imports.length;
  root.querySelector('#importCount').textContent=en?`${imports.length} quizzes are completed in this browser but are not on your account.`:`${imports.length} quizer er fullført i denne nettleseren, men ligger ikke på kontoen din.`;
  root.querySelector('#passwordUpdate').hidden=!recovery;
