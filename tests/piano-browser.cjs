@@ -35,7 +35,7 @@ async function manual(page,id){
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base=process.env.MODUS_TEST_URL||`http://127.0.0.1:${server.address().port}`,results=[];
  try{for(const [browserName,type] of Object.entries({chromium,webkit})){
   const browser=await type.launch({headless:true});
-  try{for(const width of [1440,375])for(const locale of ['', 'en/']){
+  try{const publication=await require('./publication-browser.cjs')(browser,browserName,base);fs.writeFileSync('test-results/publication-'+browserName+'-results.json',JSON.stringify(publication,null,2));for(const width of [1440,375])for(const locale of ['', 'en/']){
    const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
    for(const test of cases){
     await openPage(page,`${base}/${locale}${test.url}`);
@@ -54,11 +54,11 @@ async function manual(page,id){
     results.push({browser:browserName,width,locale:locale||'nb',page:test.url,status:'passed'});console.log(JSON.stringify(results.at(-1)));
    }
    if(!locale){
-    await openPage(page,base+'/undervisning.html?modul=F03');await manual(page,'f03-piano');
-    await page.locator('#f03-listen').click();await page.waitForTimeout(700);
-    assert.equal(await page.locator('#f03-piano .piano-playing').count(),0,'Hidden ear-training answer is not disclosed');
-    await openPage(page,base+'/undervisning.html');await page.locator('.mini-keys [data-midi="65"]').focus();await page.keyboard.down('Enter');await page.waitForFunction(()=>document.querySelector('.mini-keys [data-midi="65"]').dataset.playing==='true');await page.keyboard.up('Enter');
-    results.push({browser:browserName,width,locale:'nb',page:'F03 and generic demonstration',status:'passed'});
+    await openPage(page,base+'/undervisning.html?modul=F03');
+    assert.equal(await page.locator('[data-publication-hold]').count(),1,'Legacy F03 is a public holding page');
+    assert.equal(await page.locator('#f03-piano').count(),0,'No private teaching controls in public build');
+    const privateFile=await page.request.get(base+'/f03-atelier.js');assert.equal(privateFile.status(),404,'Private F03 runtime is absent');
+    results.push({browser:browserName,width,locale:'nb',page:'F03 publication boundary',status:'passed'});
    }
    assert.deepEqual(errors,[],'No JavaScript runtime errors');await context.close();
   }}finally{await browser.close();}

@@ -7,6 +7,8 @@ pages have been written and before English translations are built.
 from pathlib import Path
 import shutil
 import sys
+import json
+from publication import load_policy, is_public, holding_page
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
@@ -33,11 +35,25 @@ if "--finish" in sys.argv:
     add_design_link(DIST / "artikler.html")
     print("MODUS shared design system applied to generated article index.")
 else:
-    for source in ROOT.iterdir():
-        if source.is_file() and source.suffix.lower() in PUBLIC_EXTENSIONS:
-            shutil.copy2(source, DIST / source.name)
-    for name in PUBLIC_ASSET_DIRS:
+    # dist is generated, never a source of permission. Remove stale HTML/JSON/JS,
+    # including files pre-copied by an older Cloudflare build command.
+    policy = load_policy(ROOT)
+    shutil.rmtree(DIST)
+    DIST.mkdir()
+    (DIST / 'artikler').mkdir()
+    (DIST / 'images/articles').mkdir(parents=True)
+    for name in policy.get('platform_pages', []) + policy.get('platform_assets', []):
+        if name in ('account.js', 'editor.js'):
+            continue  # Rebuilt from current client source; never retain an old bundle.
         source = ROOT / name
-        if source.is_dir():
-            shutil.copytree(source, DIST / name, dirs_exist_ok=True)
+        if source.is_file():
+            target = DIST / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, target)
+    for name, record in policy['learning_pages'].items():
+        source = ROOT / name
+        if is_public(record) and source.is_file():
+            shutil.copy2(source, DIST / name)
+        else:
+            (DIST / name).write_text(holding_page(active='course' if name == 'laer-dorisk.html' else 'path' if name == 'grunnstudier.html' else 'lesson'))
     print("MODUS public frontend pages, styles, scripts, images and audio synced to dist.")

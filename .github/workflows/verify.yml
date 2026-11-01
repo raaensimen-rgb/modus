@@ -55,4 +55,13 @@ jobs:
             test-results/browser-results.json
             test-results/piano-browser-results.json
             test-results/audio-*-results.json
+            test-results/publication-*.json
+            test-results/publication-*.png
           if-no-files-found: warn
+
+      - name: Upload audited public build for isolated QA
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-site-dist
+          path: dist/
+          if-no-files-found: error

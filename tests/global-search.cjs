@@ -5,7 +5,7 @@ const vm = require('node:vm');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const index = JSON.parse(fs.readFileSync(path.join(root,'dist/search-index.json'),'utf8'));
-assert(index.length >= 10, 'Expected articles and main navigation entries');
+assert(index.length >= 8, 'Expected articles and main navigation entries');
 const urls = new Set();
 for (const entry of index) {
   assert(entry.title && entry.url && entry.type, 'Required search fields missing');
@@ -14,7 +14,7 @@ for (const entry of index) {
   assert(fs.existsSync(path.join(root,'dist',entry.url)), 'Missing Norwegian target: ' + entry.url);
   assert(fs.existsSync(path.join(root,'dist/en',entry.url)), 'Missing English target: ' + entry.url);
 }
-assert(index.some(x=>x.type==='article'),'Article search missing');
+assert.equal(index.filter(x=>x.type==='article').length,require('./publication-helper.cjs')().length,'Only explicitly public articles may be indexed');
 assert(index.some(x=>x.type==='atlas'),'Atlas search missing');
 const englishIndex = JSON.parse(fs.readFileSync(path.join(root,'dist/en/search-index.json'),'utf8'));
 assert.equal(englishIndex.length,index.length,'Both locales must index the same public URLs');
@@ -70,9 +70,9 @@ async function exercise(pathname) {
  assert.equal(activeElement,input,'Search input must receive focus');
  assert.equal(fetched,english?'/en/search-index.json':'/search-index.json','Wrong localized search index');
  assert(status.textContent.includes(english?'Type':'Skriv'),'Initial empty search state missing');
- input.value='dorisk'; emit(input,'input');
+ input.value='atlas'; emit(input,'input');
  assert(results.children.length>0,'Dorian query should return matches');
- assert(results.children.some(x=>x.href.includes('dorisk')),'Dorian article/lesson must be reachable');
+ assert(results.children.some(x=>x.href.includes('musikkart')),'Dorian article/lesson must be reachable');
  assert(results.children.every(x=>x.href.startsWith(pathname.startsWith('/en/')?'/en/':'/')),'Wrong locale prefix');
  input.value='xyzz_not_a_topic';emit(input,'input');assert.equal(results.children.length,0,'No match must yield empty list');
  for (const term of ['akkorder','intervaller','atlas']) {input.value=term;emit(input,'input');assert(results.children.length>0,'Required term missing: '+term)}

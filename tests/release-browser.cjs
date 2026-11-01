@@ -30,7 +30,7 @@ const server = http.createServer((req,res)=>{
         const trigger=page.locator('[data-global-search-open]'),input=page.locator('[data-global-search-input]');
         assert(await trigger.isVisible());await trigger.click();await input.waitFor({state:'visible'});
         await input.press('Escape');assert(await trigger.evaluate(e=>document.activeElement===e));
-        await trigger.click();await input.fill('dorisk');await page.locator('.global-search-result').first().waitFor();
+        await trigger.click();await input.fill('atlas');await page.locator('.global-search-result').first().waitFor();
         assert((await page.locator('.global-search-result').count())>0);
         await input.press('Escape');assert(await trigger.evaluate(e=>document.activeElement===e));
         await trigger.click();await input.fill('zzzzmissingtest');await page.waitForFunction(()=>document.querySelector('[data-global-search-status]').textContent.match(/Ingen treff|No matches/));

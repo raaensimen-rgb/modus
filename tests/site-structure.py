@@ -65,11 +65,8 @@ assert 'my own independent studies' in home_en and 'From the founder of MODUS' i
 assert 'class="founder-welcome-link"' in home and 'om-modus.html' in home
 foundation=(ROOT/'grunnstudier.html').read_text(encoding='utf-8')
 foundation_en=(ROOT/'en'/'grunnstudier.html').read_text(encoding='utf-8')
-assert foundation.count('class="foundation-step"') == 6, 'Foundation course needs six study units'
-assert foundation.count('class="foundation-exercise"') == 6, 'Each unit needs an applied exercise'
-assert foundation.count('class="foundation-goal"') == 6, 'Each unit needs a measurable goal'
-assert foundation.count('class="foundation-check"') == 6, 'Each unit needs a comprehension check'
-assert 'not an accredited course' in foundation_en, 'English course must honestly disclose editorial status'
+assert 'data-publication-hold' in foundation and 'data-publication-hold' in foundation_en
+assert 'foundation-exercise' not in foundation and 'foundation-exercise' not in foundation_en
 assert 'grunnstudier.html' in (ROOT/'laeringssti.html').read_text(), 'Learning hub must link to course'
 assert 'grunnstudier.html' in (ROOT/'artikler.html').read_text(), 'Article library must link to course'
 for stem,lo,hi in [('piano',48,84),('grand',48,84),('bass',28,64),('jazz-bass',28,64)]:
