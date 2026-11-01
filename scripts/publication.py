@@ -132,6 +132,38 @@ def preview_catalog_cards(root=ROOT, locale='nb'):
             result.append(metadata)
     return result
 
+def preview_illustrations(root=ROOT, locale='nb'):
+    """Existing illustration bytes have their own Preview-only permission."""
+    import xml.etree.ElementTree as ET
+    policy_path = root / 'content/article-illustration-permissions.json'
+    if not policy_path.is_file():
+        return {}
+    policy = json.loads(policy_path.read_text())
+    if policy.get('schema_version') != 1:
+        raise ValueError('Invalid illustration permission schema')
+    reference = 'https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639'
+    if policy.get('approval_reference') != reference:
+        return {}
+    result = {}
+    for card in preview_catalog_cards(root, locale):
+        slug = card['slug']
+        proof = policy.get('images', {}).get(slug, {}).get(locale, {})
+        source = root / 'editorial/catalog-illustrations' / locale / (slug + '.svg')
+        if proof.get('reference') != reference or not source.is_file():
+            continue
+        data = source.read_bytes()
+        if hashlib.sha256(data).hexdigest() != proof.get('sha256'):
+            continue
+        svg = ET.fromstring(data)
+        if any(element.tag.split('}')[-1] in ('script', 'foreignObject', 'image', 'a')
+               or any(key.lower().startswith('on') or key.split('}')[-1] in ('href', 'src')
+                      for key in element.attrib) for element in svg.iter()):
+            raise ValueError('Active content is not an approved static illustration')
+        width, height = svg.attrib['viewBox'].split()[2:]
+        result[slug] = {'source': source, 'src': 'images/articles/' + slug + '.svg',
+                        'width': width, 'height': height, 'sha256': proof['sha256']}
+    return result
+
 def holding_page(prefix='', active='lesson', english=False):
     from site_navigation import render_header, with_navigation_css
     title = 'In progress' if english else 'Under arbeid'
@@ -151,7 +183,7 @@ def public_catalog(root=ROOT, locale='nb'):
 EN_TRANSLATIONS = {
     'Artikkelbibliotek · under arbeid': 'Article library · in progress',
     'artikkelkort · fulltekst ikke tilgjengelig': 'article cards · full text unavailable',
-    'Forhåndsvisning: kun titler, nivå og kategori. Artiklene er under arbeid og kan ikke åpnes.': 'Preview: titles, level and category only. The articles are in progress and cannot be opened.',
+    'Forhåndsvisning: eksisterende illustrasjoner, titler, nivå og kategori. Artiklene er under arbeid og kan ikke åpnes.': 'Preview: existing illustrations, titles, level and category. The articles are in progress and cannot be opened.',
     'Titler og artikkeltekst vises først når publiseringstillatelsen er avklart.': 'Titles and article text are shown only after publication permission has been confirmed.',
     'Biblioteket er bevart': 'The library is preserved',
     'Artiklene er ikke slettet. Tekstene er bevart i redaksjonell kilde og avventer dokumentert publiseringstillatelse.': 'The articles have not been deleted. Their texts are preserved in editorial sources and await documented publication permission.',

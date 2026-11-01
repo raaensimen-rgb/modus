@@ -2,7 +2,7 @@ from pathlib import Path
 import json,math,re,html
 from site_navigation import render_header, with_navigation_css
 from article_library import TOPICS, ORDER, render_library
-from publication import public_articles, public_catalog, holding_page, preview_catalog_cards
+from publication import public_articles, public_catalog, holding_page, preview_catalog_cards, preview_illustrations
 ROOT=Path(__file__).resolve().parents[1];DIST=ROOT/'dist';SOURCE_ARTICLES=json.loads((ROOT/'content/articles.json').read_text());ARTICLES=public_articles(ROOT)
 QUIZZES=json.loads((ROOT/'content/article-quizzes.json').read_text())
 LEVELS={'beginner':('Grunnleggende musikkteori','Start med byggesteinene.'),'intermediate':('Videregående musikkteori','Se de større sammenhengene.'),'advanced':('Faglig fordypning','Utforsk flere nyanser.')}
@@ -134,8 +134,9 @@ def quiz(a):
 def card(a,prefix=''):
  label=LEVELS[a['level']][0]
  return f'<article class="article-card {"circle-article" if a["art"]=="circle" else ""}" data-article-id="{a["slug"]}" data-level="{a["level"]}" data-topic="{a["category"]}" data-search="{esc(a["title"]+" "+a["topic"]+" "+a["intro"])}"><a class="card-main" href="{prefix}artikler/{a["slug"]}.html"><div class="card-level-row"><span class="level-badge {a["level"]}">{label}</span></div><div class="card-art"><img src="{prefix}images/articles/{a["slug"]}.svg?v=content2" width="{500 if a["art"]=="circle" else 800}" height="{500 if a["art"]=="circle" else 430}" alt="{esc(ALT[a["art"]])}" loading="lazy"></div><div class="card-copy"><div class="card-meta"><span>{esc(a["topic"])}</span><span>{minutes(a)} min lesing</span></div><h2>{esc(a["title"])}</h2><p>{esc(a["intro"])}</p><span class="read-more">Les artikkelen <span aria-hidden="true">↗</span></span></div></a><div class="card-quiz"><span class="card-quiz-status">3 spørsmål</span><a href="{prefix}artikler/{a["slug"]}.html#quiz" class="card-quiz-link">Ta quizen ↗</a></div></article>'
-def preview_card(a):
- return f'<article class="upcoming-card catalog-preview-card" data-catalog-id="{esc(a["slug"])}" data-level="{esc(a["level"])}" data-topic="{esc(a["category"])}" data-search="{esc(a["title"]+" "+a["level_label"]+" "+a["category_label"])}" aria-labelledby="catalog-{esc(a["slug"])}"><div class="card-level-row"><span class="level-badge {esc(a["level"])}">{esc(a["level_label"])}</span><span class="upcoming-status">Under arbeid</span></div><div class="card-copy"><div class="card-meta"><span>{esc(a["category_label"])}</span></div><h2 id="catalog-{esc(a["slug"])}">{esc(a["title"])}</h2></div></article>'
+def preview_card(a, image=None):
+ visual=(f'<div class="card-art catalog-preview-art" aria-hidden="true"><img src="{esc(image["src"])}" width="{esc(image["width"])}" height="{esc(image["height"])}" alt="" loading="lazy"></div>' if image else '')
+ return f'<article class="upcoming-card catalog-preview-card" data-catalog-id="{esc(a["slug"])}" data-level="{esc(a["level"])}" data-topic="{esc(a["category"])}" data-search="{esc(a["title"]+" "+a["level_label"]+" "+a["category_label"])}" aria-labelledby="catalog-{esc(a["slug"])}"><div class="card-level-row"><span class="level-badge {esc(a["level"])}">{esc(a["level_label"])}</span><span class="upcoming-status">Under arbeid</span></div>{visual}<div class="card-copy"><div class="card-meta"><span>{esc(a["category_label"])}</span></div><h2 id="catalog-{esc(a["slug"])}">{esc(a["title"])}</h2></div></article>'
 
 def learning_intro(a):
  if not a.get('learning'):return ''
@@ -175,7 +176,8 @@ def generate_articles(items, output):
 def build_listing(ARTICLES, UPCOMING, locale='nb'):
  previews=[a for a in preview_catalog_cards(ROOT,locale) if a['slug'] not in {x['slug'] for x in ARTICLES}]
  items=ARTICLES+previews
- def render_item(a):return preview_card(a) if a in previews else card(a)
+ images=preview_illustrations(ROOT,locale)
+ def render_item(a):return preview_card(a,images.get(a['slug'])) if a in previews else card(a)
  journey,library=render_library(items, LEVELS, render_item, UPCOMING, upcoming_card)
  if previews and not ARTICLES:
   library=re.sub(r'<div class="library-progress">.*?</div>', f'<div class="library-progress catalog-preview-note"><strong>{len(previews)} <span>artikkelkort · fulltekst ikke tilgjengelig</span></strong></div>', library, count=1)
@@ -191,13 +193,15 @@ def build_listing(ARTICLES, UPCOMING, locale='nb'):
   listing=listing.replace(journey,notice+journey) if ARTICLES else listing.replace('<section class="learning-overview"><h2>Under arbeid</h2><p>Artiklene venter på redaksjonell publiseringsgodkjenning.</p></section>',notice)
   listing=listing.replace('Alle dagens artikler er fortsatt åpne.','Artikler åpnes etter publiseringsgodkjenning.')
  if previews:
-  listing=listing.replace('Biblioteket er bevart','Artikkelbibliotek · under arbeid').replace('Titler og artikkeltekst vises først når publiseringstillatelsen er avklart.','Forhåndsvisning: kun titler, nivå og kategori. Artiklene er under arbeid og kan ikke åpnes.')
+  listing=listing.replace('Biblioteket er bevart','Artikkelbibliotek · under arbeid').replace('Titler og artikkeltekst vises først når publiseringstillatelsen er avklart.','Forhåndsvisning: eksisterende illustrasjoner, titler, nivå og kategori. Artiklene er under arbeid og kan ikke åpnes.')
  return with_navigation_css(listing)
 
 nb=public_articles(ROOT);en=public_articles(ROOT,'en')
 private=ROOT/'.build-private/en';private.mkdir(parents=True,exist_ok=True)
 generate_articles(nb,DIST)
 generate_articles(en,private)
+for image in preview_illustrations(ROOT).values():
+ target=DIST/image['src'];target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(image['source'].read_bytes())
 (DIST/'artikler.html').write_text(build_listing(nb,public_catalog(ROOT)))
 (private/'artikler.html').write_text(build_listing(en,public_catalog(ROOT,'en'),'en'))
 print(f'Generated {len(ARTICLES)} complete articles, {len(ARTICLES)} illustrations and article index')
