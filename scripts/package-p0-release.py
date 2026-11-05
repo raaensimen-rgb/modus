@@ -28,14 +28,14 @@ for pre in ['', 'en/']:
   shutil.copy2(I/'audio'/(name+'.wav'),O/(pre+'audio/'+name+'.wav'))
   (O/(pre+'audio/'+name+'.mp3')).unlink(missing_ok=True)
  credits=O/(pre+'audio/LICENSE.txt');s=credits.read_text();s=re.sub(r'ACOUSTIC DRUM KIT[\s\S]*?(?=ACOUSTIC GRAND PIANO)','SYNTHETIC DRUM KIT\nOriginal oscillator and seeded-noise synthesis made for MODUS, 2026-11-05.\nNo external recordings. Source: scripts/generate-release-assets.py in the release source archive.\n\n',s);credits.write_text(s)
- for name in ['images/mountain-lake.webp','images/earth-atlas.webp','images/earth-atlas.svg','apple-touch-icon.png','media/modus-introduksjon.mp4']:(O/(pre+name)).unlink(missing_ok=True)
+ for name in ['media/modus-introduksjon.mp4']:(O/(pre+name)).unlink(missing_ok=True)
  for p in (O/pre).glob('app*.js'):
   p.write_text(p.read_text().replace('audio/${name}.mp3','audio/${name}.wav').replace('akustiske trommer','syntetiske trommer').replace('acoustic drums','synthetic drums'))
 # Apply to all generated language/style copies, including hashed ones.
 for p in O.rglob('*'):
  if not p.is_file() or p.suffix not in ['.html','.css','.js','.json']:continue
  if p.name in ['public-library-release.json','preview-isolation.json']:continue
- s=p.read_text();s=s.replace('images/mountain-lake.webp','images/mountain-original.svg').replace('images/earth-atlas.webp','images/atlas-original.svg').replace('images/earth-atlas.svg','images/atlas-original.svg').replace('apple-touch-icon.png','modus-identity-icon.svg')
+ s=p.read_text()  # Preserve the owner's original generated images and touch icon.
  if p.suffix=='.html':
   s=re.sub(r'<button\b[^>]*data-intro-film-open[\s\S]*?</button>','',s)
   s=s.replace('Trommer: Tone.js audio, acoustic-kit.','Trommer: egen syntese for MODUS.').replace('Drums: Tone.js audio, acoustic-kit.','Drums: original synthesis for MODUS.')
@@ -49,11 +49,11 @@ for pre,n in [('',52),('en/',16)]:
 assert len(list((O/'artikler').glob('*.html')))==52
 assert not any(p.name in ['admin-app.js','editor.js','editor-admin.js','library-draft-backup.json','_worker.js'] for p in O.rglob('*'))
 # Pages retains removed assets in its CDN; explicit retirement routes override old cache.
-retired=['media/modus-introduksjon.mp4','apple-touch-icon.png','images/mountain-lake.webp','images/earth-atlas.webp','images/earth-atlas.svg','audio/kick.mp3','audio/snare.mp3','audio/hihat.mp3']
+retired=['media/modus-introduksjon.mp4','audio/kick.mp3','audio/snare.mp3','audio/hihat.mp3']
 (O/'_redirects').write_text(''.join('/'+prefix+name+' /retired-media-resource 302\n' for prefix in ['', 'en/'] for name in retired))
 # Candidate-only illustration integration; no publication or permission mutation.
 subprocess.run(['python3',str(R/'scripts/integrate-teaching-diagrams.py'),str(O)],check=True)
 sha=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip()
-manifest={'schema_version':1,'kind':'modus-p0-illustration-candidate','deployment_authorized':False,'project':'modus-2-preview','source_sha':sha,'baseline_sha':m['source_sha'],'articles_nb':52,'articles_en':16,'academic_status':'not_finally_approved','backend':'disabled','cms_seed_records':0,'private_admin':'separate Access-protected branch','rights_replacements':json.loads((I/'original-assets.json').read_text()),'withheld_media':['media/modus-introduksjon.mp4','apple-touch-icon.png','images/mountain-lake.webp','images/earth-atlas.webp','images/earth-atlas.svg','audio/kick.mp3','audio/snare.mp3','audio/hihat.mp3']}
+manifest={'schema_version':1,'kind':'modus-owner-authorized-original-image-restoration','deployment_authorized':True,'project':'modus-2-preview','source_sha':sha,'baseline_sha':m['source_sha'],'articles_nb':52,'articles_en':16,'academic_status':'not_finally_approved','backend':'disabled','cms_seed_records':0,'private_admin':'separate Access-protected branch','rights_replacements':[x for x in json.loads((I/'original-assets.json').read_text()) if x['path'].startswith('audio/')],'restored_images':['images/mountain-lake.webp','images/earth-atlas.webp','images/earth-atlas.svg','apple-touch-icon.png'],'owner_authorization':'docs/original-image-restoration-20261105.md','withheld_media':['media/modus-introduksjon.mp4','audio/kick.mp3','audio/snare.mp3','audio/hihat.mp3']}
 manifest['files']=[{'path':p.relative_to(O).as_posix(),'bytes':p.stat().st_size,'sha256':hash(p)} for p in sorted(O.rglob('*')) if p.is_file()]
 (O/'release-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n');print(json.dumps({k:v for k,v in manifest.items() if k not in ['files','rights_replacements']}))
