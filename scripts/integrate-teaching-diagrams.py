@@ -49,6 +49,14 @@ def integrate(out):
    marker='<section id="del-2">';assert marker in s,slug;s=s.replace(marker,figure+marker,1)
    if 'href="../teaching-diagrams.css"' not in s:s=s.replace('</head>','<link rel="stylesheet" href="../teaching-diagrams.css"></head>',1)
    page.write_text(s);rows.append({'slug':slug,'locale':locale,'diagram_sha256':full['sha256'],'reused_approved_hero':entry['reuse_existing_approved']})
+  listing=target/'artikler.html';catalog=listing.read_text()
+  for entry in manifest['articles']:
+   if entry['slug'] not in allowed or entry['reuse_existing_approved']:continue
+   slug=entry['slug'];title=html.escape(entry['locales'][locale]['title'],quote=True)
+   pattern=r'(<article\b[^>]*data-article-id="'+re.escape(slug)+r'"[\s\S]*?<img\b[^>]*alt=")[^"]*(")'
+   catalog,n=re.subn(pattern,lambda m:m[1]+title+m[2],catalog,count=1)
+   assert n==1,slug+' catalog illustration'
+  listing.write_text(catalog)
   assert {p.stem.removesuffix('-card') for p in assets.glob('*.svg')}==allowed
  report={'readers':len(rows),'norwegian':sum(r['locale']=='nb' for r in rows),'english':sum(r['locale']=='en' for r in rows),'private_english_diagrams':36,'rows':rows}
  (ROOT/'test-results').mkdir(exist_ok=True);(ROOT/'test-results/diagram-integration.json').write_text(json.dumps(report,indent=2)+'\n')

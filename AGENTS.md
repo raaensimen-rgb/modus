@@ -15,3 +15,7 @@ Gjeldende komplette lokale 08-implementering og kandidat ligger i `.local-develo
 ## Nyere P0-illustrasjonskandidat
 
 Denne isolerte kopien bygger på 52-artikkelutgaven cf1258793e8eb28cf49683cf9a020948a48ed764. Se docs/p0-illustration-candidate.md. Ikke erstatt dette innholdet med eldre 16-artikkelkopier. Den aktuelle ordren tillater lokal illustrasjonsproduksjon og testing; ingen publisering uten separat GO.
+
+## Samordnet P0/P1 – lokal kandidat 2026-11-05
+
+Denne arbeidskopien bygger videre på nyeste eksisterende designkode 1a781fe etter publisert 2ec2ce5, med 52 norske/16 engelske fulltekster og P0-diagrammene bevart. Se docs/article-library-p0-p1-20261105.md. Den godkjente forsiden og øvrige lokale designforbedringer skal videreføres. Oppdraget tillater kun lokal implementering, bygging og testing; ingen push, merge eller deploy uten separat GO.
