@@ -1,0 +1,9 @@
+MODUS – lokal knappretting 5. november 2026
+
+Brukeren meldte lydproblem og ba om større og bedre plassert «Se filmen». Brukeren avklarte senere at lydfeilen lå på hans maskin, at den er rettet, og at musikken høres. Ingen lydretting gjøres derfor i denne kandidaten.
+
+Publisert grunnlag: cefe31cec77b35138e43b24c124da148864c583c, deployment f1880d1c. Den publiserte filmfilen og intro-film.js er byte-identiske. Den separate modale musikkandidaten i intro-modal-classical-20261105 er fortsatt lokal og legges ikke automatisk til denne knapprettingen.
+
+Endring: Gulgrønn fylt tekstknapp rett under introduksjonsteksten, 60 px høy og minst 230 px bred på desktop. Full tilgjengelig bredde på mobil. Poster med stort avspillingssymbol er også klikkbar, med egen tilgjengelig etikett og tastaturfokus. Introblokken er begrenset til 1180 px og posteren forstørret på desktop. Høy kontrast får svart/hvit knapp. Ingen generell header- eller innholdsendring.
+
+Kun lokal ferdigstilling og testing. Separat uttrykkelig GO kreves før deploy, push eller merge. Tidligere GO gjelder den tidligere publiserte filmleveransen.

@@ -11,6 +11,7 @@ def apply(target):
  for prefix in ['', 'en/']:
   page=target/prefix/'index.html';s=page.read_text();en=bool(prefix)
   # Retain the retired film's route and all unrelated network policy.
+  s=re.sub(r'<button type="button" class="introduction-poster"[^>]*>([\s\S]*?)</button>',lambda m:'<div class="introduction-poster">'+re.sub(r'<span class="poster-play"[\s\S]*?</span></span>','',m[1])+'</div>',s)
   s=re.sub(r'<button\b[^>]*data-intro-film-open[\s\S]*?</button>','',s)
   s=re.sub(r'<p class="introduction-unavailable"[^>]*>[\s\S]*?</p>','',s)
   button='<button type="button" class="intro-film-button" data-intro-film-open aria-haspopup="dialog"><span data-intro-film-label>'+('Watch the film ▷' if en else 'Se filmen ▷')+'</span></button>'
@@ -18,13 +19,17 @@ def apply(target):
   # Idempotent rebuild: the canonical source is still the maintained homepage.
   if 'data-intro-film-open' not in s:
    s=s.replace('</div></section>\n<details class="home-legacy-details">',button+'</div></section>\n<details class="home-legacy-details">',1)
-  assert s.count('data-intro-film-open')==1,'Expected exactly one film-field trigger'
+  assert s.count('data-intro-film-open')==1,'Expected film-field text trigger'
   s=s.replace('src="images/modus-design-landscape.png" width="1536" height="1024" alt="" loading="lazy"><img class="introduction-mark"','src="/media/modus-intro-poster.jpg" width="1920" height="1080" alt="" loading="lazy"><img class="introduction-mark"')
   s=s.replace('A short introduction to the idea, the content and the learning journey.','82 seconds with Norwegian text and original music. An English text alternative is available in the player.').replace('En kort introduksjon til ideen, innholdet og læringsreisen.','82 sekunder om ideen, innholdet og læringsreisen – med norsk tekst og original musikk.')
   s=s.replace('src="/media/modus-intro-poster.jpg"', 'src="'+('../' if en else '')+'media/modus-intro-poster.jpg"')
   # The released poster contains the logo already; remove the old second logo/label.
   s=re.sub(r'<img class="introduction-mark"[^>]*><span class="introduction-label">[\s\S]*?</span>','',s)
   if 'intro-film.css' not in s:s=s.replace('</head>','<link rel="stylesheet" href="intro-film.css"><script defer src="intro-film.js"></script></head>',1)
+  # Make the poster a second, accessible play target; the text action stays directly below the copy.
+  s=s.replace('<div class="introduction-poster">','<button type="button" class="introduction-poster" data-intro-film-open aria-haspopup="dialog" aria-label="'+('Play the introduction film' if en else 'Spill introduksjonsfilmen')+'">',1)
+  s=s.replace('alt="" loading="lazy"></div><div class="introduction-copy">','alt="" loading="lazy"><span class="poster-play" aria-hidden="true"><span>▶</span></span></button><div class="introduction-copy">',1)
+  assert s.count('data-intro-film-open')==2,'Poster and text action should both open the film'
   page.write_text(s)
   (target/prefix/'intro-film.js').write_bytes((A/'player.js').read_bytes())
   css=(R/'intro-film.css').read_text()+'\n'+(A/'player.css').read_text();(target/prefix/'intro-film.css').write_text(css)

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "kind": "modus-theory-library",
-  "public_baseline_sha": "9c83c6fbdb915ecc5694b76318ea7406ff698a51",
+  "kind": "modus-approved-introduction-film",
+  "public_baseline_sha": "35e0a8db4b9f4266a50c6a4880f056361b43ed40",
   "requires_owner_deploy_approval": true,
   "project": "modus-2-preview",
-  "source_sha": "35e0a8db4b9f4266a50c6a4880f056361b43ed40",
+  "source_sha": "cefe31cec77b35138e43b24c124da148864c583c",
   "baseline_sha": "f64e25b74bebc8868f3438cf57937b1f11fe5c1f",
   "integration_base_sha": "1a781fe23e60f8d6225cc976b33e9be3d220e7f4",
   "published_design_base_sha": "2ec2ce517fabbc8c691703868b73115241d330fb",
@@ -43,13 +43,17 @@
     "images/earth-atlas.svg",
     "apple-touch-icon.png"
   ],
-  "owner_authorization": "Explicit current user order: compact approved Teoriartikler library and deploy to existing modus-2-preview",
+  "owner_authorization": "docs/approved-intro-film-20261105.txt",
   "withheld_media": [
     "media/modus-introduksjon.mp4",
     "audio/kick.mp3",
     "audio/snare.mp3",
     "audio/hihat.mp3"
   ],
+  "approved_film_sha256": "81eed15e5f0fa3c43ef0ba3130162bed23564621d68a9c96cf8f2fefcf4359b4",
+  "film_language": "nb",
+  "english_text_alternative": true,
+  "deploy_authorized": true,
   "files": [
     {
       "path": "404.html",
@@ -1753,8 +1757,8 @@
     },
     {
       "path": "en/index.html",
-      "bytes": 22127,
-      "sha256": "92d9fff198ff3eff22008c0b6e537cce93722ee85e2040d5a3a691567f283e53"
+      "bytes": 21896,
+      "sha256": "0bb5467348275ce5d1dd13f23d526b5b99590636da298cef598a6e42fc3d44d8"
     },
     {
       "path": "en/interior-2.26009b8a5c.css",
@@ -1778,13 +1782,13 @@
     },
     {
       "path": "en/intro-film.css",
-      "bytes": 2166,
-      "sha256": "3d3107986cd1233d0e4dfc0479a38a713bd5d6fe33317b2641509259ea02b4b2"
+      "bytes": 3072,
+      "sha256": "870429ceda037596fb81326c33321dd485b3d385e4b4048a7571a74719dfffe0"
     },
     {
       "path": "en/intro-film.js",
-      "bytes": 66,
-      "sha256": "935de774683c04fa5a77c3d3fdb498e2a6036f33a26486918cb9fe360a558698"
+      "bytes": 5538,
+      "sha256": "180ba4df5dbe4a6623345767ca971c7bab5ec952f21ca491e271157e2e45c7a5"
     },
     {
       "path": "en/konto.html",
@@ -2933,8 +2937,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 22012,
-      "sha256": "9170e9a842aa4a960027c64d230cde101ac2500a48d81e29c0a6058884f71aaf"
+      "bytes": 21769,
+      "sha256": "e5e553054083d0d4d6757146fc0eb8c8412847e807cba90c05da385a535d9817"
     },
     {
       "path": "interior-2.26009b8a5c.css",
@@ -2958,13 +2962,13 @@
     },
     {
       "path": "intro-film.css",
-      "bytes": 2166,
-      "sha256": "3d3107986cd1233d0e4dfc0479a38a713bd5d6fe33317b2641509259ea02b4b2"
+      "bytes": 3072,
+      "sha256": "870429ceda037596fb81326c33321dd485b3d385e4b4048a7571a74719dfffe0"
     },
     {
       "path": "intro-film.js",
-      "bytes": 66,
-      "sha256": "935de774683c04fa5a77c3d3fdb498e2a6036f33a26486918cb9fe360a558698"
+      "bytes": 5538,
+      "sha256": "180ba4df5dbe4a6623345767ca971c7bab5ec952f21ca491e271157e2e45c7a5"
     },
     {
       "path": "konto.html",
@@ -3035,6 +3039,16 @@
       "path": "library-ids.js",
       "bytes": 1681,
       "sha256": "0ee20196af9afd84722054fc942f1535ad3c505b3a6dadff78949f52ea80d64a"
+    },
+    {
+      "path": "media/modus-intro-81eed15e5f0f.mp4",
+      "bytes": 12609916,
+      "sha256": "81eed15e5f0fa3c43ef0ba3130162bed23564621d68a9c96cf8f2fefcf4359b4"
+    },
+    {
+      "path": "media/modus-intro-poster.jpg",
+      "bytes": 438111,
+      "sha256": "963eeaf77ee9b0c0d28ddd795d78f73f03e5f4a68efb1b63d3ba149098794db8"
     },
     {
       "path": "membership-config.js",
@@ -3231,11 +3245,5 @@
       "bytes": 10073,
       "sha256": "993f17742834cfc037ec0c84919a2e880cbe5d3000d59f87373be24267dfb94c"
     }
-  ],
-  "changed_existing_files": [
-    "artikler.html",
-    "en/artikler.html"
-  ],
-  "unchanged_existing_files": 495,
-  "shared_header_pages": 137
+  ]
 }

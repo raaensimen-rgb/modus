@@ -23,3 +23,7 @@ Denne arbeidskopien bygger videre på nyeste eksisterende designkode 1a781fe ett
 ## Lokal godkjent introduksjonsfilm – 2026-11-05
 
 Prosjekteier har sett og godkjent den nye filmen med SHA-256 `81eed15e5f0fa3c43ef0ba3130162bed23564621d68a9c96cf8f2fefcf4359b4`. Se `docs/approved-intro-film-20261105.txt`. Denne isolerte kopien klargjør kun integrasjon i eksisterende filmfelt på NB/EN. Den tidligere filmen `media/modus-introduksjon.mp4` forblir pensjonert. Ikke la eldre generell mediesperre deaktivere den eksakte godkjente erstatningen på nytt. Godkjenningen av filmen er ikke et eget GO til deploy, push eller merge; slik autorisasjon gjenstår.
+
+## Lokal større filmknapp – 2026-11-05
+
+Se docs/intro-film-button-visibility-20261105.txt. Brukerens lydproblem ble avklart av brukeren som en feil på hans egen maskin og er rettet. Denne kandidaten endrer bare filmfeltets plassering/utseende og gjør posteren klikkbar. Publisert MP4 og spiller-JS er uendret fra cefe31c. Den separate modale musikkandidaten er ikke publisert her. Ingen ny deploy-fullmakt foreligger; separat GO kreves for denne knapprettingen.
