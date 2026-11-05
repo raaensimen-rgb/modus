@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "kind": "modus-approved-introduction-film",
-  "public_baseline_sha": "35e0a8db4b9f4266a50c6a4880f056361b43ed40",
+  "kind": "modus-introduction-button-visibility",
+  "public_baseline_sha": "cefe31cec77b35138e43b24c124da148864c583c",
   "requires_owner_deploy_approval": true,
   "project": "modus-2-preview",
-  "source_sha": "cefe31cec77b35138e43b24c124da148864c583c",
+  "source_sha": "57ceefba809d733a76ef349d7cc473b99602315f",
   "baseline_sha": "f64e25b74bebc8868f3438cf57937b1f11fe5c1f",
   "integration_base_sha": "1a781fe23e60f8d6225cc976b33e9be3d220e7f4",
   "published_design_base_sha": "2ec2ce517fabbc8c691703868b73115241d330fb",
@@ -53,7 +53,7 @@
   "approved_film_sha256": "81eed15e5f0fa3c43ef0ba3130162bed23564621d68a9c96cf8f2fefcf4359b4",
   "film_language": "nb",
   "english_text_alternative": true,
-  "deploy_authorized": true,
+  "deploy_authorized": false,
   "files": [
     {
       "path": "404.html",
@@ -1757,8 +1757,8 @@
     },
     {
       "path": "en/index.html",
-      "bytes": 21896,
-      "sha256": "0bb5467348275ce5d1dd13f23d526b5b99590636da298cef598a6e42fc3d44d8"
+      "bytes": 22068,
+      "sha256": "eef7906ee810ac47334750cc26829ffb7b2780a84b7d5bd6a835208ae13ef8db"
     },
     {
       "path": "en/interior-2.26009b8a5c.css",
@@ -1782,8 +1782,8 @@
     },
     {
       "path": "en/intro-film.css",
-      "bytes": 3072,
-      "sha256": "870429ceda037596fb81326c33321dd485b3d385e4b4048a7571a74719dfffe0"
+      "bytes": 5852,
+      "sha256": "4e39ea18ad4a934ed467f4e89298f2b0e28033dc58d1d924ba31d347b29bc781"
     },
     {
       "path": "en/intro-film.js",
@@ -2937,8 +2937,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 21769,
-      "sha256": "e5e553054083d0d4d6757146fc0eb8c8412847e807cba90c05da385a535d9817"
+      "bytes": 21940,
+      "sha256": "f1d14fa1a5ec236d51761f507f20c61fa7cec12d215cc8cb4a7a9cd38e943ee7"
     },
     {
       "path": "interior-2.26009b8a5c.css",
@@ -2962,8 +2962,8 @@
     },
     {
       "path": "intro-film.css",
-      "bytes": 3072,
-      "sha256": "870429ceda037596fb81326c33321dd485b3d385e4b4048a7571a74719dfffe0"
+      "bytes": 5852,
+      "sha256": "4e39ea18ad4a934ed467f4e89298f2b0e28033dc58d1d924ba31d347b29bc781"
     },
     {
       "path": "intro-film.js",

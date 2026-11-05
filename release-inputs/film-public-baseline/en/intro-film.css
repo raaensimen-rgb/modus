@@ -27,3 +27,20 @@
 .intro-film-dialog summary{cursor:pointer;min-height:44px;padding:10px 0}
 .intro-film-dialog .intro-film-transcript p{max-width:75ch}
 .intro-film-dialog a:focus-visible,.intro-film-dialog summary:focus-visible{outline:3px solid #d7f48c;outline-offset:3px}
+/* Film entry: put the main action beside the explanation, never at the far edge. */
+.modus-home .home-introduction{max-width:1180px;box-sizing:border-box;gap:32px;padding:28px!important;margin:24px auto 36px!important;align-items:center}
+.modus-home .home-introduction .introduction-copy{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.modus-home .home-introduction .introduction-copy>p{margin:0}
+.modus-home .home-introduction .intro-film-button{display:inline-flex;align-items:center;justify-content:center!important;gap:12px;min-width:230px;min-height:60px;width:auto;grid-column:auto;grid-row:auto;margin:6px 0 0!important;padding:16px 28px!important;border:2px solid #d9ed8a!important;border-radius:12px;background:#d9ed8a!important;color:#08201c!important;font:700 18px/1.3 Arial,sans-serif!important;box-shadow:0 4px 20px #0002;cursor:pointer}
+.modus-home .home-introduction .intro-film-button [data-intro-film-label]{font:inherit;white-space:normal}
+.modus-home .home-introduction .intro-film-button:hover{background:#edf7bd!important;border-color:#edf7bd!important}
+.modus-home .home-introduction .intro-film-button:focus-visible,.modus-home .home-introduction .introduction-poster:focus-visible{outline:3px solid #67ddd6;outline-offset:5px}
+.modus-home .home-introduction .introduction-poster{display:block;position:relative;flex:0 0 340px;width:340px;height:auto;aspect-ratio:16/9;padding:0;border:1px solid #6ccfc77a;border-radius:12px;background:#062522;overflow:hidden;cursor:pointer}
+.modus-home .home-introduction .introduction-poster>img:first-child{width:100%;height:100%;object-fit:cover;display:block}
+.modus-home .home-introduction .poster-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#00181635;color:white}
+.modus-home .home-introduction .poster-play>span{display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:#d9ed8a;color:#08201c;font-size:28px;box-shadow:0 3px 20px #0006}
+@media(max-width:1250px){.modus-home .home-introduction{margin-left:5%!important;margin-right:5%!important}}
+@media(max-width:850px){.modus-home .home-introduction{gap:24px;padding:24px!important}.modus-home .home-introduction .introduction-poster{flex-basis:260px;width:260px}}
+@media(max-width:760px){.modus-home .home-introduction{align-items:stretch;gap:20px}.modus-home .home-introduction .introduction-poster{width:100%;flex-basis:auto;max-width:440px;align-self:center}.modus-home .home-introduction .intro-film-button{width:100%!important;min-width:0;min-height:60px;margin-top:8px!important}}
+
+html[data-theme=contrast] .modus-home .home-introduction .intro-film-button{background:#fff!important;color:#000!important;border-color:#000!important}
