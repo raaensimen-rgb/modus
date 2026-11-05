@@ -19,3 +19,7 @@ Denne isolerte kopien bygger på 52-artikkelutgaven cf1258793e8eb28cf49683cf9a02
 ## Samordnet P0/P1 – lokal kandidat 2026-11-05
 
 Denne arbeidskopien bygger videre på nyeste eksisterende designkode 1a781fe etter publisert 2ec2ce5, med 52 norske/16 engelske fulltekster og P0-diagrammene bevart. Se docs/article-library-p0-p1-20261105.md. Den godkjente forsiden og øvrige lokale designforbedringer skal videreføres. Oppdraget tillater kun lokal implementering, bygging og testing; ingen push, merge eller deploy uten separat GO.
+
+## Lokal godkjent introduksjonsfilm – 2026-11-05
+
+Prosjekteier har sett og godkjent den nye filmen med SHA-256 `81eed15e5f0fa3c43ef0ba3130162bed23564621d68a9c96cf8f2fefcf4359b4`. Se `docs/approved-intro-film-20261105.txt`. Denne isolerte kopien klargjør kun integrasjon i eksisterende filmfelt på NB/EN. Den tidligere filmen `media/modus-introduksjon.mp4` forblir pensjonert. Ikke la eldre generell mediesperre deaktivere den eksakte godkjente erstatningen på nytt. Godkjenningen av filmen er ikke et eget GO til deploy, push eller merge; slik autorisasjon gjenstår.

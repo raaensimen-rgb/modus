@@ -1,0 +1,51 @@
+MODUS 2.0 – Fra forståelse til eget uttrykk
+Produksjonskandidat 2 · 5. november 2026 · 82 sekunder
+
+KONSEPT
+En tekstbåret introduksjonsfilm med autentiske nettleseropptak. Det realistiske naturmotivet rammer inn reisen; den konkrete plattformen bærer hoveddelen. Ingen tegneseriefigurer, oppdiktede instrumentgrensesnitt eller stockvideo. Norsk tekst erstatter fortellerstemme i denne leveransen. Filmen kan forstås uten lyd.
+
+00:00–00:10 · ÅPNING
+Bilde: Prosjektets eksisterende fjell-/innsjøbilde, langsom sideveis kamerabevegelse. Originalt diamantsymbol og sammenhengende bølgemotiv fra nettstedets SVG-filer.
+Tekst: MODUS / FORSTÅ · UTVIKLE · SKAP / Et sted der musikkteori blir levende. / Musikk, nysgjerrighet og skaperglede.
+Lyd: En myk pianolignende klang, deretter en åpen septimklang.
+
+00:10–00:19 · FORSTÅ – ARTIKLENE
+Bilde: Faktisk skjermopptak av artikkelbibliotekets kort og nivåoversikt. Rolig rulling.
+Tekst: 52 artikler. / Fra toner og intervaller til akkorder og harmonikk. / Les. Lytt. Prøv selv.
+Formål: Vise det konkrete innholdet som finnes, fremfor generell reklame.
+
+00:19–00:28 · FORSTÅ – MUSIKKATLAS
+Bilde: Det faktiske forgrenede fagkartet; en node velges. Privat, ny nettleserprofil, ingen eksisterende persondata.
+Tekst: Se helheten. / Musikkatlas knytter fagområdene sammen. / Finn det du vil utforske.
+
+00:28–00:37 · FORSTÅ – LÆRINGSSTI
+Bilde: Læringsstiens introduksjon og videre navigasjon, langsom rulling.
+Tekst: Finn din vei. / Velg et utgangspunkt og ditt neste steg. / Læringsløpet utvikles videre.
+Presisering: Dette er en vei inn i innholdet, ikke et løfte om ferdige kurs eller faglig attestert progresjon.
+
+00:37–00:46 · UTVIKLE – PIANO
+Bilde: Teorirommets intervallvisning, E–B, pianokart og lytt-knapp. Bytte til akkorder.
+Tekst: Hør teorien. / Utforsk intervaller, skalaer og akkorder på piano. / Fra avstand til klang.
+Lyd: Den originale filmmusikken får et rolig arpeggio. Nettstedets egen lyd er ikke tatt med og er ikke demonstrert som synkron lyd.
+
+00:46–00:55 · UTVIKLE – HARMONIKK
+Bilde: MODUS HARMONI. En eksisterende progresjon velges og avspilling startes.
+Tekst: Bygg harmonikk. / Sett akkorder sammen. Lytt til forbindelsene. / MODUS HARMONI · arbeidsutkast.
+
+00:55–01:04 · SKAP – GITAR OG PIANO
+Bilde: Faktiske gitargrep for Cmaj7 og pianovisning i akkordverktøyet. Bytte fra åpent grep til A-form med barré.
+Tekst: Fra klang til grep. / Se akkordtonene på piano og finn grep på gitar. / Ta ideen med til instrumentet.
+Lyd: Et enkelt melodisk motiv kommer inn over harmonikken.
+
+01:04–01:13 · SKAP – IMPROVISASJON
+Bilde: MODUS JAM, med toneart, modus og akkordloop. Start jam aktiveres.
+Tekst: Gi ideen liv. / Utforsk improvisasjon med bass, trommer og piano. / La teorien bli ditt eget uttrykk.
+Presisering: Komposisjon er kreativ anvendelse av verktøyene, ikke et løfte om en ny komposisjonseditor.
+
+01:13–01:22 · AVSLUTNING
+Bilde: Tilbake til det eksisterende naturmotivet, originalt diamantsymbol og sammenhengende bølge. Rolig uttoning.
+Tekst: MODUS / FORSTÅ · UTVIKLE · SKAP / Fra forståelse til ditt eget musikalske uttrykk. / Utforsk MODUS 2.0.
+Lyd: Oppløsning og fire sekunders uttoning.
+
+VISUELL PLAN
+1920 × 1080, 24 b/s. Mørk grønnsvart bakgrunn, hvit tekst, turkis kapittelmarkør og gulgrønn sekundærtekst. Nettleseropptak i et stort felt til høyre, korte budskap til venstre. Arial Regular/Bold. Sakte naturbevegelse; dempede overganger gjennom mørkt. Ingen prikkebølger. Prosjektets originale M-bølge brukes i natursekvensene. Nettstedet er ikke visuelt eller funksjonelt endret.

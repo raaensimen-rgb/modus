@@ -21,7 +21,7 @@ assert 'stroke-dasharray' not in (P/'images/modus-continuous-wave.svg').read_tex
 for pre in ['','en/']:
  html=(P/(pre+'index.html')).read_text();assert 'data-modus-preview="isolated"' in html;assert 'Content-Security-Policy' in html
  assert 'preview-guard.js' in html and 'global-search' in html
- assert 'disabled aria-describedby="film-unavailable"' in html
+ assert 'data-intro-film-open' in html and 'film-unavailable' not in html
  assert html.count('class="home-portal"')==4
  assert re.search(r'design-refresh\.[a-f0-9]{10}\.css',html)
 # No secrets, source maps or backend-enabled transport in final public resources.
@@ -30,4 +30,4 @@ for p in P.rglob('*'):
  assert not p.is_symlink()
  if p.suffix in ('.js','.html','.json','.css'):
   text=p.read_text();assert not re.search(r'sb_secret_[A-Za-z0-9_-]{12,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|cms_save_draft|cms_publish_article',text),str(p)
-print('Final artifact: 52 NB / 16 EN retained; all 104 existing reader bodies, learning/audio/storage runtime and article illustrations unchanged; public CMS empty, admin absent, film remains withheld, no dotted waves or private reference image.')
+print('Final artifact: 52 NB / 16 EN retained; all 104 existing reader bodies, learning/audio/storage runtime and article illustrations unchanged; public CMS empty, admin absent, retired film remains withheld; approved replacement is enabled, no dotted waves or private reference image.')

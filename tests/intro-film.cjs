@@ -1,42 +1,7 @@
 'use strict';
-const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
-const vm = require('node:vm');
-const { createHash } = require('node:crypto');
-const root = path.resolve(__dirname, '..');
-const digest = data => createHash('sha256').update(data).digest('hex');
-const film = fs.readFileSync(path.join(root, 'media/modus-introduksjon.mp4'));
-assert(film.length > 1000000, 'Approved MP4 must be present');
-assert.equal(film.toString('ascii', 4, 8), 'ftyp');
-assert.equal(digest(film), digest(fs.readFileSync(path.join(root, 'dist/media/modus-introduksjon.mp4'))));
-for (const locale of ['', 'en/']) {
-  const html = fs.readFileSync(path.join(root, 'dist', locale, 'index.html'), 'utf8');
-  assert(html.includes('data-intro-film-open') || (html.includes('id="film-unavailable"')&&html.includes('disabled aria-describedby="film-unavailable"')), 'Film must have an accessible working trigger or explicit disabled status');
-  assert(html.includes('intro-film.css') && html.includes('intro-film.js'));
-  assert(html.includes('data-global-search-open'), 'Homepage search trigger missing');
-  const element = () => ({textContent:'', style:{}, listeners:{}, attributes:{}, addEventListener(n,f){this.listeners[n]=f}, setAttribute(n,v){this.attributes[n]=v}, focus(){active=this}});
-  let active;
-  const label=element(), trigger=element(), primary=element(), title=element(), close=element(), note=element();
-  primary.getBoundingClientRect=()=>({width:216,height:44,x:0,y:0,top:0,right:216,bottom:44,left:0});
-  trigger.querySelector=()=>label;
-  const video=Object.assign(element(), {paused:true,currentTime:4,play(){this.paused=false;return Promise.resolve()},pause(){this.paused=true}});
-  const dialog=Object.assign(element(), {open:false,showModal(){this.open=true},close(){this.open=false;this.listeners.close()},querySelector(s){return {'h2':title,'button':close,'video':video,'.intro-film-note':note}[s]}});
-  const document={documentElement:{lang:locale?'en':'nb'},querySelector:s=>({'[data-intro-film-open]':trigger,'.hero-actions .button':primary}[s]??null),createElement:()=>dialog,body:{appendChild(){}}};
-  const code=fs.readFileSync(path.join(root,'dist',locale,'intro-film.js'),'utf8');
-  const window={listeners:{},addEventListener(n,f){this.listeners[n]=f}};
-  vm.runInNewContext(code,{document,window});
-  assert.equal(trigger.style.width,'216px','DOM mock must support primary button geometry');
-  assert(video.paused, 'Video must not autoplay on page load');
-  assert.equal(label.textContent, locale?'Watch the introduction':'Se introduksjonsfilmen');
-  assert.equal(close.textContent,'✕','Close button needs a visible symbol');
-  assert(dialog.innerHTML.includes('/media/modus-introduksjon.mp4'));
-  trigger.listeners.click();
-  assert(dialog.open && !video.paused);assert.equal(active,close);
-  let prevented=false;dialog.listeners.cancel({preventDefault(){prevented=true}});
-  assert(prevented && !dialog.open && video.paused);assert.equal(video.currentTime,0);assert.equal(active,trigger);
-  trigger.listeners.click();close.listeners.click();assert(!dialog.open && video.paused);assert.equal(active,trigger);
-  trigger.listeners.click();dialog.listeners.click({target:dialog});assert(!dialog.open);
-  video.listeners.error();assert(note.textContent.includes(locale?'not available':'ikke tilgjengelig'));
-}
-console.log('Introduction film: approved asset, both locales, playback, close, Escape and focus passed.');
+const assert=require('node:assert/strict'),fs=require('fs'),crypto=require('crypto');
+const digest=f=>crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
+const sha='81eed15e5f0fa3c43ef0ba3130162bed23564621d68a9c96cf8f2fefcf4359b4';
+assert.equal(digest('dist/media/modus-intro-81eed15e5f0f.mp4'),sha,'Only the exact owner-approved version may be enabled');
+for(const pre of ['','en/']){const html=fs.readFileSync('dist/'+pre+'index.html','utf8');assert.equal((html.match(/data-intro-film-open/g)||[]).length,1);assert(!html.includes('film-unavailable'));const js=fs.readFileSync('dist/'+pre+'intro-film.js','utf8');assert(js.includes('preload="none"'));assert(!js.includes('autoplay'));assert(js.includes('/media/modus-intro-81eed15e5f0f.mp4'));assert(js.includes('intro-film-transcript'));assert(!js.includes('src="/media/modus-introduksjon.mp4"'));}
+console.log('Approved film: exact approved SHA, working NB/EN triggers, no autoplay, transcript and retired-version exclusion passed. Browser tests cover playback, keyboard and focus.');

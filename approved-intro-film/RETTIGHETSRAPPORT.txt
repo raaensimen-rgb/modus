@@ -1,0 +1,25 @@
+MODUS 2.0 – RETTIGHETS- OG KILDERAPPORT
+5. november 2026
+
+1. Skjermopptak
+Egne opptak gjort for denne produksjonen fra https://modus-2-preview.pages.dev/.
+Ruter: artikler.html, musikkart.html, laeringssti.html, teori.html, akkorder.html og backingtracks.html. HTTP 200 dokumentert for alle opptakssekvensene i opptaksmanifestet. Gjort på prosjekteiers uttrykkelige oppdrag, i ny nettleserprofil. Ingen innlogging, administrator, eksisterende personlige notater eller private utkast er åpnet. Ingen andre nettsteder, merker eller mennesker er filmet.
+Skjermopptakene viderefører synlig MODUS-innhold og dets eksisterende rettighetsgrunnlag; dette er ikke en ny uavhengig rettighetsrevisjon av hver enkelt artikkelillustrasjon.
+
+2. Naturmotiv
+Eksisterende prosjektfil: navigation-slim-20261105/package/images/modus-design-landscape.png.
+Fotorealistisk eksisterende prosjektillustrasjon med animert kamerabevegelse. Det er ikke dokumentarisk naturvideo eller et nytt lokasjonsopptak. Prosjekteiers AGENTS.md opplyser at originalbildene ble laget av assistenten for ham, og at de uttrykkelig ble valgt for gjenoppretting og publisering. Denne produksjonen bygger på det dokumenterte eiergrunnlaget. Ingen nye stockbilder er hentet.
+
+3. Merkevare
+Originale prosjektfiler modus-design-diamond.svg og modus-continuous-wave.svg, hentet fra den nyeste publiserte lokale pakken. Gjengitt i intro/outro og poster. Ingen tredjepartslogoer lagt til.
+Den navngitte PNG-referansen MODUS_2_0_GODKJENT_DESIGN_UTEN_PRIKKBOLGER.png ble ikke funnet som lokal fil. Filmen bygger derfor på de faktiske ressursene og det nyeste offentlige designet; den påstår ikke en selvstendig pikselkontroll mot den manglende referansefilen.
+
+4. Musikk
+Ny original generativ instrumentalproduksjon laget spesifikt til denne filmen, med melodisk motiv, arpeggio og Cmaj7–Am7–Fmaj7–G-basert harmonisk ramme. Syntetisert direkte fra sinusbaserte oscillatorer og egne amplitudekurver. Ingen samples, eksisterende musikkopptak, siterte melodier, tredjepartsloop eller eksterne musikktjenester er brukt. Harmoniske grunnmønstre er generiske. Ingen kjent referanselåt er brukt som forelegg. WAV-master følger med.
+Dette er en beskrivelse av produksjonsgrunnlaget, ikke en garanti for opphavsrettslig vern eller en juridisk likhetsgranskning.
+
+5. Typografi og tale
+Arial Regular/Bold fra systemets fontinstallasjon er rasterisert til filmgrafikk. Fontfilene distribueres ikke. Ingen fortellerstemme, stemmekloning eller personidentifiserbart opptak er brukt.
+
+6. Leveranse og avgrensning
+Kandidat til kreativ vurdering. Ingen integrasjon, publisering, git push, merge, Cloudflare-deploy, administrator- eller databaseendring er gjort. Rettighetsrapporten gir ingen deploy-fullmakt. Ingen nytt uavklart tredjepartsmateriale er lagt til.

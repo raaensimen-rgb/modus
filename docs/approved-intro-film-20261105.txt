@@ -1,0 +1,12 @@
+MODUS 2.0 – Godkjent film, lokal integrasjonskandidat
+5. november 2026
+
+Prosjekteier svarte «Sett og godkjent» etter å ha mottatt den ferdige 82-sekunders filmen. Godkjenningen gjelder den eksakte MP4-filen med SHA-256 81eed15e5f0fa3c43ef0ba3130162bed23564621d68a9c96cf8f2fefcf4359b4. Den erstatter ikke et eget GO til Cloudflare-deploy.
+
+Denne lokale kandidaten bygger på siste publiserte 9c83c6fbdb915ecc5694b76318ea7406ff698a51 og beholder den slanke menyen. Bare NB/EN-forsidens eksisterende filmfelt, intro-film.css/js og to nye mediefiler endres i den offentlige pakken, i tillegg til leveransemanifestet. Alle andre 628 filer er byte-identiske.
+
+Filmens godkjenning gjelder ikke den tidligere filmen media/modus-introduksjon.mp4. Dens eksisterende retirement-ruter beholdes. Det gis ingen generell fullmakt til nye medier, utkast, push, merge eller deploy. Private utkast, Access og administrator er bevart.
+
+Ordinær bygging: npm run build; npm run build:candidate. Det vanlige artikkel-/CMS-bygget kjøres. Sluttpakken låses til den tidligere publiserte pakken før den eksakte filmen legges på. Dette unngår utilsiktet endring av eldre EN-holdesider, studierute eller arkiverte stilark under en ren filmleveranse. Baselinekopien kontrolleres mot filhashregisteret i approved-intro-film/baseline-files.json før bruk.
+
+Norsk film og norsk tekstalternativ på NB; samme norske film tydelig merket på EN, med engelsk tekstalternativ. Ingen autoplay eller MP4-nedlasting før brukeren aktiverer spilleren. Native controls, playsinline, tekstalternativ, nedlastingslenke, synlig lukkeknapp, Escape og fokusretur. Ingen ekstern videotjeneste eller nye nettverksrettigheter.

@@ -24,7 +24,7 @@ const path = require('node:path');
     assert.equal(text(nodes.find(n=>attr(n,'id')==='why-modus')).replace(/\s/g,''),locale?'Understand·Develop·Create':'Forstå·Utvikle·Skap');
     assert(text(nodes.find(n=>n.tagName==='h1')).includes(locale?'creative joy':'skaperglede'));
     assert(nodes.some(n=>attr(n,'class')==='home-introduction'));
-    assert(nodes.some(n=>n.tagName==='button'&&attr(n,'aria-describedby')==='film-unavailable'&&attr(n,'disabled')!==undefined),'Uncleared film must stay disabled');
+    assert(nodes.some(n=>n.tagName==='button'&&attr(n,'data-intro-film-open')!==undefined&&attr(n,'disabled')===undefined),'Owner-approved film needs a working trigger');
     // Production imagery is original vector geometry and the existing landscape.
     for (const img of nodes.filter(n=>n.tagName==='img')) {
       assert(attr(img,'alt')!==undefined, 'Every image needs alternative text or explicit decorative alt');

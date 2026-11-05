@@ -1,0 +1,11 @@
+/* Only the existing introduction field and its video dialog. */
+.home-introduction .intro-film-button{width:auto;margin:0;min-height:44px;border-radius:99px;padding:10px 25px}
+.intro-film-dialog{box-sizing:border-box;height:100dvh;max-height:100dvh}
+.intro-film-dialog *{box-sizing:border-box}
+.intro-film-dialog .intro-film-player{max-height:62dvh;object-fit:contain}
+.intro-film-dialog .intro-film-download,.intro-film-dialog summary{color:#d7f48c;font-size:14px;line-height:1.6}
+.intro-film-dialog .intro-film-download{display:inline-block;margin:12px 0}
+.intro-film-dialog .intro-film-transcript{margin-top:10px;font-size:15px;line-height:1.6}
+.intro-film-dialog summary{cursor:pointer;min-height:44px;padding:10px 0}
+.intro-film-dialog .intro-film-transcript p{max-width:75ch}
+.intro-film-dialog a:focus-visible,.intro-film-dialog summary:focus-visible{outline:3px solid #d7f48c;outline-offset:3px}

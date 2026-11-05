@@ -1,0 +1,21 @@
+{
+  "full_decode": "PASS",
+  "duration_seconds": 82,
+  "resolution": "1920x1080",
+  "fps": 24,
+  "video_codec": "H.264",
+  "pixel_format": "yuv420p",
+  "audio": "AAC stereo 48 kHz",
+  "voiceover": false,
+  "screen_capture_http_statuses": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+  ],
+  "sha256": "81eed15e5f0fa3c43ef0ba3130162bed23564621d68a9c96cf8f2fefcf4359b4",
+  "bytes": 12609916
+}
