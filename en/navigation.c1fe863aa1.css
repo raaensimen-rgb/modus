@@ -1,0 +1,46 @@
+/* Shared navigation, grouped by what visitors want to do. */
+.site-header{position:relative;z-index:200;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 26px;height:auto;min-height:90px;padding:19px 5%;max-width:1440px;width:100%;margin:0 auto;border-bottom:1px solid var(--modus-b-30372a,#30372a);box-sizing:border-box;overflow:visible}
+.site-header .brand{flex-shrink:0}
+.site-header .site-nav{position:relative;display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 22px;margin-left:auto;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:0}
+.site-header .site-nav>a,.site-header .nav-group>.nav-trigger{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:8px 0;border:0;border-bottom:2px solid transparent;border-radius:0;color:var(--modus-c-aebaa1,#aebaa1);background:transparent;font:400 12px/1.4 'DM Sans',sans-serif;letter-spacing:0;text-decoration:none;white-space:nowrap;box-sizing:border-box;cursor:pointer}
+.site-header .nav-group{position:relative}.nav-group>.nav-trigger{list-style:none}.nav-group>.nav-trigger::-webkit-details-marker{display:none}
+.site-header .site-nav>a:hover,.site-header .nav-group>.nav-trigger:hover{color:var(--modus-c-e5f4d1,#e5f4d1);border-bottom-color:var(--modus-b-718b52,#718b52)}
+.site-header .site-nav>a[aria-current=page],.site-header .nav-group.is-active>summary,.site-header .nav-group.is-open>summary{color:var(--modus-c-d7f48c,#d7f48c);font-weight:700;border-bottom-color:var(--modus-b-d7f48c,#d7f48c)}
+.nav-chevron{font-size:14px;line-height:1;transition:transform .15s}.nav-group.is-open .nav-chevron{transform:rotate(180deg)}
+.site-header :is(a,summary,.nav-trigger):focus-visible{outline:2px solid var(--modus-b-d7f48c,#d7f48c);outline-offset:4px}
+.site-header .nav-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:220;box-sizing:border-box;width:max-content;min-width:100%;max-width:calc(100vw - 40px);padding:5px;border:1px solid #b5cf8e;border-radius:10px;background:#e2efca;color:#20301c;box-shadow:0 10px 28px #0003}
+.site-header .nav-panel>a{position:relative;display:block;padding:9px 11px;border:1px solid transparent;border-radius:6px;text-decoration:none;color:#20301c;font:12px/1.5 'DM Sans',sans-serif;white-space:nowrap}
+.site-header .nav-panel strong{display:block;font-size:13px;font-weight:700;color:#20301c}
+.site-header .nav-panel small{display:none}
+.site-header .nav-panel>a>span{display:none}
+.site-header .nav-panel>a:hover,.site-header .nav-panel>a:focus-visible{background:#cdddaf;border-color:#7c985b;color:#20301c;outline-color:#405e27;outline-offset:0}
+.site-header .nav-panel>a[aria-current=page]{background:#cdddaf;border-color:#7c985b}
+.header-tools{display:flex;align-items:center;gap:15px;font-family:'DM Sans',sans-serif}
+.site-header .nav-membership{font-size:11px;line-height:1.4;color:var(--modus-c-aebaa1,#aebaa1);text-decoration:none;padding:9px 0;white-space:nowrap}
+.site-header .nav-membership:hover,.site-header .nav-membership[aria-current=page]{color:var(--modus-c-d7f48c,#d7f48c);text-decoration:underline;text-underline-offset:5px}.nav-membership[aria-current=page]{font-weight:700}
+.site-header .language-picker{display:flex;align-items:center;gap:2px;flex-shrink:0;border:1px solid var(--modus-b-30372a,#30372a);border-radius:6px;padding:2px;font-family:'DM Sans',sans-serif}
+.site-header .language-picker a{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:28px;padding:3px 6px;color:var(--modus-c-aebaa1,#aebaa1);font-size:10px;line-height:1.3;text-decoration:none;border-radius:3px}
+.site-header .language-picker a span{font-size:13px}
+.site-header .language-picker a[aria-current=true]{font-weight:700;color:var(--modus-c-d7f48c,#d7f48c);background:var(--modus-b-30372a,#30372a)}
+html[data-theme=readable] .site-header .language-picker a[aria-current=true]{background:#dce6cf;color:#203719}
+html[data-theme=contrast] .site-header .language-picker{border-color:#000}
+html[data-theme=contrast] .site-header .language-picker a{color:#000}
+html[data-theme=contrast] .site-header .language-picker a[aria-current=true]{color:#fff;background:#000}
+html[data-theme=contrast] .site-header .nav-panel{background:#fff;color:#000;border:2px solid #000}
+html[data-theme=contrast] .site-header .nav-panel :is(strong,small,a,a>span){color:#000}
+html[data-theme=contrast] .site-header .nav-panel>a:is(:hover,:focus-visible,[aria-current=page]){background:#000;border-color:#000;color:#fff;outline-color:#000}
+html[data-theme=contrast] .site-header .nav-panel>a:is(:hover,:focus-visible,[aria-current=page]) :is(strong,small,span){color:#fff}
+html[data-theme=contrast] .site-header .nav-group>.nav-trigger{color:#000;font-size:14px;min-height:44px}
+html[data-theme=contrast] .site-header .nav-group.is-active>summary{border-color:#000}
+@media(max-width:1150px){.site-header{gap:12px 20px}.site-header .brand{order:0}.site-header .header-tools{order:1;margin-left:auto}.site-header .site-nav{order:2;width:100%;margin-left:0;justify-content:flex-start}.site-header .nav-group{position:relative}.site-header .nav-panel{top:calc(100% + 8px);left:0}}
+@media(max-width:700px){.site-header{padding:15px 20px;gap:9px 16px}.site-header .site-nav{gap:2px 18px}.site-header .site-nav>a,.site-header .nav-group>.nav-trigger{font-size:11px;min-height:38px}.site-header .brand{font-size:20px}.site-header .header-tools{gap:12px;flex-wrap:wrap}.site-header .nav-panel{width:max-content;max-width:calc(100vw - 40px)}.site-header .nav-panel>a{padding:10px 11px}.site-header .nav-panel strong{font-size:14px}.site-header .header-tools .theme-picker{margin-left:0}.site-header .nav-membership{font-size:10px}}
+
+/* A lightly translucent surface; heavy blur keeps content behind it unreadable. */
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+ .site-header .nav-panel{background:#e2efca;backdrop-filter:blur(20px) saturate(110%);-webkit-backdrop-filter:blur(20px) saturate(110%)}
+ html[data-theme=readable] .site-header .nav-panel{background:#eaf3da}
+}
+html[data-theme=contrast] .site-header .nav-panel{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}
+
+.site-header .nav-panel[hidden]{display:none!important}
+.site-header .nav-panel:not([hidden]){display:block;pointer-events:auto}

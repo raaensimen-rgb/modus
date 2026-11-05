@@ -1,0 +1,343 @@
+{
+  "contract": "RED-005A v1.1",
+  "contract_sha256": "5efc6daad5a5d19a462071fe086b25ab9f30a7d497d40f8fb8c2f831f783d750",
+  "source_head": "e54572dda08b425301f6943fae54af56f38316eb",
+  "cases": [
+    {
+      "id": "OA-01",
+      "stimulus": "Bekreftet syntetisk eier, fersk step-up, gyldig sesjon, komplett kontrollpakke og eksakt mål",
+      "expected": "Én privat, sporbar godkjenningshendelse; ingen publikasjonsrad eller Git-endring.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA01_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-02",
+      "stimulus": "Anonym, anonym Auth, vanlig bruker, redaktør, servicekonto, riktig e-post men feil UUID",
+      "expected": "Avvist, ingen beslutning og ingen privat datalekkasje.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA02_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-03",
+      "stimulus": "Endre `user_metadata`, sende actor/approved/timestamp/hash eller rolle som parametre",
+      "expected": "Ingen økte rettigheter; ukjente autoritetsparametre avvises.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA03_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-04",
+      "stimulus": "Ugyldig signatur, feil issuer/prosjekt/audience, utløpt token, manglende/revokert sesjon",
+      "expected": "Avvist før beslutning. Ekte tokenvalidasjon testes gjennom API, ikke bare simulerte claims.",
+      "local_scope": "syntetiske token-/sesjonsflagg, ingen kryptografisk verifikasjon",
+      "local_test": "test_OA04_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-05",
+      "stimulus": "AAL1, gammel MFA, ny JWT-iat uten ny step-up",
+      "expected": "Avvist. Manglende verifiserbar step-up-kilde holder funksjonen deaktivert.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA05_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-06",
+      "stimulus": "Direkte INSERT/UPDATE/DELETE/UPSERT/COPY, masseoperasjon, view, GraphQL, gammel/overlastet RPC",
+      "expected": "Avvist i hver tilgjengelig appvei. Test ACL, default privileges, sekvenser, schema-USAGE og SET ROLE-arv.",
+      "local_scope": "statisk påvisning av eksisterende DML-hull og inaktive SQL-vakter",
+      "local_test": "test_OA06_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-07",
+      "stimulus": "Vanlig konto forsøker å aktivere seg som redaktør/eier eller endre epoke",
+      "expected": "Avvist. Reaktivering av eier gir ikke gamle beslutninger ny gyldighet.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA07_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-08",
+      "stimulus": "Manipulert slug, locale, revisjon, hash, evidence-/media-digest eller algoritme",
+      "expected": "Avvist. NB-beslutning kan ikke brukes for EN.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA08_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-09",
+      "stimulus": "To klienter: save før/under approve, to approve-forsøk, samtidig revoke, endret kontrollpakke",
+      "expected": "Serialiserbart, dokumentert utfall uten stale godkjenning eller delvis historikk. Ingen klient-rebase.",
+      "local_scope": "sekvensielle interleaving-fixtures, ingen SQL-samtidighet",
+      "local_test": "test_OA09_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-10",
+      "stimulus": "Endre tekst, quiz, læringsmetadata, bilde-URL, alt eller faktiske bytes",
+      "expected": "Tidligere bevis gjelder ikke den nye versjonen; opprinnelig hendelse beholdes.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA10_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-11",
+      "stimulus": "Endre bare UI-panel, local savedAt, visuell CSS eller klientstatus",
+      "expected": "Ingen annen innholdshash; heller ingen ny godkjenning gjennom slike felter.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA11_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-12",
+      "stimulus": "Samme hash i ny revisjon / revert til tidligere innhold",
+      "expected": "Ingen arvet godkjenning. Hvis no-op-optimalisering foreslås, må stale expected_revision likevel avvises.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA12_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-13",
+      "stimulus": "Gjenbruk nonce, annen sesjon, utløpt challenge, gjenbruk request-ID med annet mål",
+      "expected": "Avvist; identisk nettverksretry returnerer bare samme operasjonsreferanse og nåværende gyldighet.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA13_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-14",
+      "stimulus": "Tilbakekall etter innholdsendring eller utløpt rettighet; logout etter allerede committet godkjenning",
+      "expected": "Tilbakekalling kan gjennomføres autorisert uten krav om gyldig gammelt innhold. Logout alene sletter ikke en gyldig historisk beslutning, men token kan ikke gjøre en ny.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA14_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-15",
+      "stimulus": "F01 rettighetshaver/omfang mangler, F02 påstand ikke koblet, F03 bare checked, F04 åpent/gjenåpnet avvik",
+      "expected": "Ingen fullstendig kontrollgate eller eiergodkjenning. Ingen manuell lokal flagging kan omgå sperren.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA15_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-16",
+      "stimulus": "Kilde-/server-/lokalhash blandes, ukjent canonicaliseringsversjon eller Unicode-/escaping-forskjell",
+      "expected": "Ingen likhet antas. Felles server-/JS-golden vectors må passe eksakt.",
+      "local_scope": "uavhengige Python/JS-kandidatbytes; SQL mangler",
+      "local_test": "test_OA16_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-17",
+      "stimulus": "Bekreftet DB-eierbeslutning med Git draft/private, feil legacyhash, feil locale eller feil commit",
+      "expected": "Ingen publisering. Eksisterende Git-regel må fortsatt bestås.",
+      "local_scope": "eksisterende Python Git-policy + modell",
+      "local_test": "test_OA17_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-18",
+      "stimulus": "Manglende fersk revokasjonskontroll eller registry/asset/Auth-avhengighet nede",
+      "expected": "Fail closed; ingen ny beslutning/utgivelse på cachet eller uavklart grunnlag.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA18_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-19",
+      "stimulus": "Timeout etter commit / audit-feil før commit / transaksjonsrollback",
+      "expected": "Les operasjonsstatus uten ny beslutning. Atomicitet bevises. Avvist forespørsel skal ikke hevdes varig logget av en rollbacket transaksjon.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA19_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-20",
+      "stimulus": "Forsøk å lese private godkjenner-/kontrollrader anonymt eller få dem i seed, søk, logging, dist og isolert Preview",
+      "expected": "Ingen private data eller writer-/godkjenningsflate lekkes. Eksisterende publiserings-/canary-/M3.3-tester består.",
+      "local_scope": "statisk finalizer-/importkontroll og separat artefaktaudit",
+      "local_test": "test_OA20_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-21",
+      "stimulus": "K01: autentisert kontrollør uten gyldig/relevant mandat, eller manglende faktisk kontroll/avgrensning",
+      "expected": "Ingen autoritativ attestasjon. API/DB-avslag og manuell mandat-/fagkontroll dokumenteres separat.",
+      "local_scope": "simulert mandatutfall, ikke faglig vurdering",
+      "local_test": "test_OA21_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-22",
+      "stimulus": "K02: gyldig formatert, men oppdiktet, irrelevant, feilversjonert eller motstridende kilde",
+      "expected": "Ingen fullstendig kildeattestasjon fra referansens form alene. Maskinell gatekontroll og 03s manuelle test av faktisk støtteforhold må begge dokumenteres.",
+      "local_scope": "simulert kildestøtte, ikke sannhetsverifikasjon",
+      "local_test": "test_OA22_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-23",
+      "stimulus": "K03/F01: ressurs med riktig filhash, men manglende rettighetshaver, ukjent rett, manglende oversettelses-/bearbeidings-/redistribusjons- eller EN-tillatelse",
+      "expected": "Full rettighetsattestasjon avvises. Relevant bruks-/språkomfang må ha eget dokumentert bevis.",
+      "local_scope": "simulert språkrettighet, ikke juridisk attestasjon",
+      "local_test": "test_OA23_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-24",
+      "stimulus": "K04: tilbakekall fagbevis ved dokumentert feil mens tekst, quiz, media og artikkelrevisjon er uendret",
+      "expected": "Kontrollpakke og avhengig effektiv eiergodkjenning blir ubrukbare; historikken står, ny utgivelse blokkeres. Nytt fagbevis gjenoppliver ikke gammel eierbeslutning.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA24_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-25",
+      "stimulus": "05-S02: gammel AAL2-token, klientpåstått step-up-tid, verifikasjon for annen utfordring/sesjon, dobbelt eller utløpt receipt",
+      "expected": "Ingen beslutning. Reell isolert Auth/gate/RPC må bevise at kvittering bare oppstår fra ny leverandørverifikasjon og forbrukes én gang.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA25_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-26",
+      "stimulus": "05-S01: rettighetsstramming eller feil i privat skrivefunksjon",
+      "expected": "Alle alternative skriveveier avvises, mens legitim utkastlagring, optimistisk konflikt og historikk fortsatt fungerer. Ingen midlertidig gjenåpning av direkte DML godtas.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA26_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-27",
+      "stimulus": "04: normalbruker kan ikke JSON/hash/RPC; eier avbryter, har ulagret arbeid eller får timeout",
+      "expected": "Forståelig, tastatur-/mobiltilgjengelig flyt med serverstyrte tekniske detaljer. Ingen manuell JSON kreves, ingen automatisk godkjenning/revisjonsskifte/publisering.",
+      "local_scope": "avbrudd/utløp i modell + klientplan, ikke ny UI",
+      "local_test": "test_OA27_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    },
+    {
+      "id": "OA-28",
+      "stimulus": "05-S07: alle roller, inkludert eier og tekniske roller, prøver gammel publish-RPC, publikasjonstabell, Worker eller utgivelsesjobb",
+      "expected": "Ingen ny offentlig rad eller utgivelse. Serverstengt publisering og M3.3-isolasjon gjelder hele første fase.",
+      "local_scope": "syntetisk tilstandsmaskin med eksplisitte tillitsfixturer",
+      "local_test": "test_OA28_* i test_preparation.py",
+      "isolated_acceptance_status": "NOT RUN / separate approval required",
+      "required_later": [
+        "actual isolated API/Auth/ACL/RLS verification",
+        "manual 03 assessment of mandate/source/rights where applicable"
+      ]
+    }
+  ]
+}

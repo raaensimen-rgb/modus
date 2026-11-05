@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "scope": "isolated-preview-metadata-only",
+  "matrix_commit": "a80851bab91359ba9e1f79b5c3d27a0e79c1a5e9",
+  "approval_reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+  "preview_branches": [
+    "fix/pl103b-preview-cards",
+    "test/pl101-visibility-integration",
+    "fix/pl103c-illustrated-cards",
+    "integration/pl-vsc01-platform"
+  ],
+  "fields": [
+    "slug",
+    "title",
+    "level",
+    "category",
+    "level_label",
+    "category_label"
+  ],
+  "cards": {
+    "toner-og-intervaller": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "115e5ab946edc7e8183cbdcec8e3f4724051e30865380dcd724ea0f5bea2aff9",
+        "en": "80530e8735565ab6b52c844b189675c5e160bb91ba5401ad9ea75e407bbacdcd"
+      }
+    },
+    "dur-og-moll": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "5063357d6d7be02e85b0a935bd566ea6d210d7ce208cfc3b68fc48fd78ca0b67",
+        "en": "04b81c17c0f82d82235aa7ec2a54b5611ce5f489fe6a6a357c95a8807d02b53b"
+      }
+    },
+    "kvintsirkelen": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "68c6d933954e8fbb2594d3ad52144d187d5c32950a6d79502533b74781447af3",
+        "en": "d000f30ff1031ecba0ec18c56db21fc86827483684b4a4b741d97b64c019b9fd"
+      }
+    },
+    "din-forste-improvisasjon": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "1caaf386797e38d45ac4482421907653f3c8bb7e5307e035f1ad5d702ea0207d",
+        "en": "5a68c49761763f8e64e404fd68db5ef62ff183ca3ad2b77c51aa40adf21062d5"
+      }
+    },
+    "moduser-og-tonalt-sentrum": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "9594518b5ef315d8e70d9ae9c60ee4ee5272f92757488827da46652f4d731d67",
+        "en": "7e2054a0cb9d42c6d827a57c410408460b35c9b814726b4b4d3556800b5ae57d"
+      }
+    },
+    "kirketonearter-ett-system-sju-uttrykk": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "faf9cf21ec030e497b5459386897249812911138df58c78aa3a05c9888d9d46d",
+        "en": "39dba4520908ce5e06184331874166a4cc63af72ace2ebdf2c50ad65f9880ed0"
+      }
+    },
+    "romertall-i-musikk": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "2121b6f0f75e885fef084ffebb70592eeff4624f6285478f2741b0ff2d696004",
+        "en": "270c36e96a994996884fe84a9bc5093adc6c3cf4063a6b54b7de1255ae654d5e"
+      }
+    },
+    "ii-v-i-kadensen": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "acec177b7f4dc7829a92058f982f1dcce9d61db69fde1b8db6e5cd1b6c5b3398",
+        "en": "ea87a6ea51db9bc7bc8029ba8bb29911ac32dd3a9e1fe5eb519667d6ee6c7841"
+      }
+    },
+    "treklanger-fra-grunnform-til-omvending": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "d96c2348f135d7297911ec7eaa6ae2e0442a408ffb4fc89415f429fbd74fe39b",
+        "en": "8792d04417b33124e2046a70d3ef462f1e851c4d3d77c1d8281dc12e2762dd85"
+      }
+    },
+    "septimakkorder": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "039f485a6d76baa603fe227e28fc0ef2f705430ea2a903649ff8dfbd7721b370",
+        "en": "f7c522379e771cbcdce7a87a3c9473d16575a892dce463c3cce86cd6ddf0da5c"
+      }
+    },
+    "harmonisk-moll-og-frygisk-dominant": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "c7604e0dff878b9c1bc9f8094590e87c07cf27f85aa1cc31b354b64b48e669ef",
+        "en": "eb28834df5eb8e7d65ac53101711304b8c8550fa41185ffb9355c900fd8389bb"
+      }
+    },
+    "stemmeforing": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "bafbfc990dfb8683887f5b44bf3a0ee4c7b66238481f0f584fe3292f9778f08d",
+        "en": "82d0ef140caa3d8a282804b4fe64c33970f37bd9188c0bf45320df095d28812f"
+      }
+    },
+    "rytme-i-sju-aatte": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "ef43417b6aba7659bb9fe12b9f6273fd7ee6a36adf26a6110659ac3d478fa665",
+        "en": "38106cb68de5a6b812755ff80884601536e2fe2a4b17cd5bbfbf5d16e6c6ded3"
+      }
+    },
+    "bygg-akkorder-i-en-toneart": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "7d02e70c78be99c4b89c0db0e11fe73ba4ff7347e37b6d9b2e86d98c6cfb0a9b",
+        "en": "abd6097d8008f4085c4cbc55ea7b2fb678f2fe9c430840999c59ff3de53665de"
+      }
+    },
+    "ett-skalakart-nye-maltoner": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "2b811345179910125bce2262db85ef4c502283418df4826b90afe1b5b78bc8a8",
+        "en": "e9decec13d5cd5920a2a14d12b87d0fe90e43b3751b24ea7e71c6f49be7a55dc"
+      }
+    },
+    "dorisk-og-eolisk": {
+      "visibility": "preview",
+      "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557889070",
+      "versions": {
+        "nb": "94620a68dba496030f342fe6ed11f06c41ebd4347a4157a2bc2d406547d2e4ba",
+        "en": "9cf4c46bd6d33545b59b1ef0785fe40b857a9bbd6774c94119feb054a2b933a6"
+      }
+    }
+  },
+  "release_authorization": {
+    "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6563038330",
+    "scope": "existing-version-pinned-passive-catalog-only",
+    "requires_explicit_build_flag": "MODUS_PLATFORM_RELEASE=1",
+    "full_texts": false
+  }
+}

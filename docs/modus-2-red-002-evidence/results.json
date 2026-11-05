@@ -1,0 +1,61 @@
+{
+  "head": "2f2a2c2787af9f680731dc6ed09434c1d78857ac",
+  "utc": "2026-11-02T21:04:39.580619+00:00",
+  "environment": {
+    "MODUS_ISOLATED_PREVIEW": "1",
+    "MODUS_PREVIEW_PROJECT": "modus-2-preview",
+    "MODUS_CATALOG_PREVIEW": "1",
+    "CF_PAGES_BRANCH": "dev/modus-2-pr52"
+  },
+  "tests": [
+    {
+      "id": "model-routing",
+      "command": "node tests/article-editor.mjs",
+      "exit_code": 0
+    },
+    {
+      "id": "permissions",
+      "command": "python3 tests/article-permissions.py",
+      "exit_code": 0
+    },
+    {
+      "id": "publication-audit",
+      "command": "python3 tests/publication-audit.py",
+      "exit_code": 0
+    },
+    {
+      "id": "isolation",
+      "command": "python3 tests/preview-isolation.py",
+      "exit_code": 0
+    },
+    {
+      "id": "publication-builds",
+      "command": "python3 tests/publication.py",
+      "exit_code": 0
+    }
+  ],
+  "additional_tests": [
+    {
+      "id": "RED2-M01–M06",
+      "command": "node test-results/red-002/model-roundtrip.mjs",
+      "exit_code": 0,
+      "scenarios": 6
+    },
+    {
+      "id": "RED2-V01–V02",
+      "command": "python3 test-results/red-002/approval-version.py",
+      "exit_code": 0,
+      "scenarios": 2
+    },
+    {
+      "id": "RED2-B01–B08",
+      "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/modus-2-playwright-browsers node test-results/red-002/editor-offline.cjs",
+      "exit_code": 0,
+      "scenarios": 8,
+      "external_requests": 0,
+      "page_errors": 0,
+      "first_attempt": "Harness init script accessed sandboxed iframe storage; scoped to top window and rerun successfully."
+    }
+  ],
+  "claim_limit": "Characterization passes document existing gaps; mocks do not verify live database RLS or transactions. No app changes."
+}

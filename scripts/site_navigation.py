@@ -1,0 +1,227 @@
+"""Shared, build-time navigation. No JavaScript is required to find another page."""
+import re
+import hashlib
+from pathlib import Path
+from html import escape
+
+NAV_ITEMS = (
+    ('home', './', 'Hjem'),
+    ('jam', 'backingtracks.html', 'MODUS JAM'),
+    ('theory', 'teori.html', 'Teorirommet'),
+    ('chords', 'akkorder.html', 'MODUS HARMONI'),
+    ('articles', 'artikler.html', 'Artikler'),
+    ('path', 'laeringssti.html', 'Læringssti'),
+    ('mindmap', 'musikkart.html', 'Mitt musikkatlas'),
+    ('course', 'laer-dorisk.html', 'Dorisk leksjon'),
+    ('curriculum', 'laereplan.html', 'Læreplan'),
+    ('lesson', 'undervisning.html', 'Undervisningsrom'),
+    ('membership', 'modus-plus.html', 'MODUS+'),
+    ('about', 'om-modus.html', 'Om MODUS'),
+)
+
+
+def render_header(prefix='', active='home'):
+    home = prefix or './'
+    def link(key, path, label, description=None, css=''):
+        target = home if key == 'home' else prefix + path
+        current = ' aria-current="page"' if key == active else ''
+        body = f'<strong>{label}</strong><small id="nav-hint-{key}">{description}</small><span aria-hidden="true">↗</span>' if description else label
+        accessible = f' aria-label="{label}" aria-describedby="nav-hint-{key}"' if description else ''
+        hints = {
+            'home': 'Tilbake til MODUS-forsiden og oversikten over mulighetene.',
+            'mindmap': 'Se hele musikklandskapet og hva du har lært.',
+            'articles': 'Les fagartikler om musikk, teori og praksis.',
+            'about': 'Les om tanken bak MODUS og hvem som står bak.',
+            'membership': 'Forhåndsvis planlagte medlemskap og funksjoner. Kjøp er ikke åpnet.',
+            'account': 'Logg inn for å administrere kontoen din.',
+        }
+        if key == 'membership':
+            body += '<span class="nav-coming" aria-hidden="true">Kommer</span>'
+        hint = hints.get(key) if description is None else None
+        if hint:
+            accessible += f' aria-description="{escape(hint, quote=True)}"'
+            body += f'<span class="nav-tooltip" aria-hidden="true">{escape(hint)}</span>'
+        return f'<a href="{escape(target, quote=True)}" class="{css}"{current}{accessible}>{body}</a>'
+    def group(key, label, destinations):
+        selected = any(item[0] == active for item in destinations)
+        links = ''.join(link(*item) for item in destinations)
+        return (f'<div class="nav-group{ " is-active" if selected else ""}">'
+                f'<button type="button" class="nav-trigger" id="nav-{key}" aria-expanded="false" aria-controls="nav-panel-{key}">{label}<span class="nav-chevron" aria-hidden="true"></span></button>'
+                f'<div class="nav-panel" id="nav-panel-{key}" aria-labelledby="nav-{key}" hidden>{links}</div></div>')
+    play = group('play', 'Spill', (
+        ('jam', 'backingtracks.html', 'MODUS JAM', 'Spill med trommer, bass og piano.'),
+        ('chords', 'akkorder.html', 'MODUS HARMONI', 'Bygg akkordrekker og utforsk grep.'),
+    ))
+    learn = group('learn', 'Studier', (
+        ('path', 'laeringssti.html', 'Start å lære', 'Finn ditt utgangspunkt og neste steg.'),
+        ('curriculum', 'laereplan.html', 'Læringsløpet', 'Se nivåene, fagområdene og progresjonen.'),
+        ('lesson', 'undervisning.html', 'Leksjoner og øvelser', 'Prøv undervisningsmoduler under utvikling.'),
+        ('theory', 'teori.html', 'Utforsk musikkteori', 'Interaktive verktøy for harmoni og teori.'),
+    ))
+    return (
+        f'<header class="site-header"><a class="brand" href="{home}" aria-label="MODUS – forsiden">'
+        '<svg class="brand-arch" viewBox="0 0 72 64" width="30" height="28" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="modusArchGradient" gradientUnits="userSpaceOnUse" x1="7" y1="32" x2="67" y2="32"><stop offset="0" stop-color="#d7f48c"/><stop offset=".35" stop-color="#d0eb91" stop-opacity=".86"/><stop offset=".7" stop-color="#a5c783" stop-opacity=".5"/><stop offset="1" stop-color="#7c9f70" stop-opacity=".18"/></linearGradient></defs><path d="M7 49C12 30 14 16 23 16C32 16 33 31 36 49C40 30 42 16 51 16C60 16 62 30 67 49" stroke="url(#modusArchGradient)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>MODUS<svg class="brand-arch-end" viewBox="0 0 72 64" width="30" height="28" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="modusArchEndGradient" gradientUnits="userSpaceOnUse" x1="7" y1="32" x2="67" y2="32"><stop offset="0" stop-color="#7c9f70" stop-opacity=".18"/><stop offset=".3" stop-color="#a5c783" stop-opacity=".5"/><stop offset=".65" stop-color="#d0eb91" stop-opacity=".86"/><stop offset="1" stop-color="#d7f48c"/></linearGradient></defs><path d="M7 49C12 30 14 16 23 16C32 16 33 31 36 49C40 30 42 16 51 16C60 16 62 30 67 49" stroke="url(#modusArchEndGradient)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>'
+        '<nav class="site-nav" aria-label="Hovedmeny">' + link('home', './', 'Hjem') + learn + play + link('mindmap', 'musikkart.html', 'Mitt musikkatlas') + link('articles', 'artikler.html', 'Artikler')
+        + link('about', 'om-modus.html', 'Om MODUS') + '</nav><div class="header-tools">'
+        + link('membership', 'modus-plus.html', 'MODUS+', css='nav-membership')
+        + link('account', 'konto.html', 'Logg inn', css='nav-account')
+        + render_search_widget() + render_language_picker() + render_theme_picker() + '</div></header>'
+    )
+
+
+def render_search_widget():
+    return ('<button type="button" class="global-search-trigger" data-global-search-open aria-label="Søk i MODUS / Search MODUS" title="Søk (Ctrl/⌘ K)">⌕ Søk</button>'
+            '<dialog class="global-search-dialog" data-global-search-dialog aria-label="Søk i MODUS">'
+            '<div class="global-search-top"><strong>Søk i MODUS</strong><button type="button" data-global-search-close aria-label="Lukk søk">✕</button></div>'
+            '<label for="global-search-input">Finn artikler, verktøy og undervisning</label>'
+            '<input id="global-search-input" class="global-search-input" type="text" role="searchbox" inputmode="search" enterkeyhint="search" data-global-search-input autocomplete="off" placeholder="Moduser, akkorder, intervaller …">'
+            '<p class="global-search-status" data-global-search-status role="status" aria-live="polite"></p>'
+            '<div class="global-search-results" data-global-search-results></div></dialog>')
+
+
+def render_language_picker():
+    return (
+        '<nav class="language-picker" aria-label="Språk / Language">'
+        '<a href="?lang=nb" data-language="nb" lang="nb" hreflang="nb" aria-label="Norsk" title="Norsk" aria-current="true">'
+        '<span aria-hidden="true">🇳🇴</span> NO</a>'
+        '<a href="?lang=en" data-language="en" lang="en" hreflang="en" aria-label="English" title="English">'
+        '<span aria-hidden="true">🇬🇧</span> EN</a></nav>'
+    )
+
+
+def render_theme_picker():
+    return (        '<details class="theme-picker"><summary><span aria-hidden="true">◐</span> Visning'
+        '<span class="theme-current" data-theme-name>Original</span></summary>'
+        '<fieldset class="theme-options"><legend>Velg visning</legend>'
+        '<label><input type="radio" name="modus-theme" value="original" checked>'
+        '<span><strong>Original</strong><small>Mørke naturfarger, slik siden er nå.</small></span></label>'
+        '<label><input type="radio" name="modus-theme" value="readable">'
+        '<span><strong>Lesevennlig</strong><small>Lys bakgrunn, mørk tekst og større leseskrift.</small></span></label>'
+        '<label><input type="radio" name="modus-theme" value="contrast">'
+        '<span><strong>Høy kontrast</strong><small>Svart-hvitt, tydelige rammer og mindre dekor.</small></span></label>'
+        '<p>Valget huskes i denne nettleseren.</p></fieldset></details>'
+        '<span id="theme-status" class="theme-sr-only" role="status" aria-live="polite"></span>'
+    )
+
+
+def with_navigation_css(page, prefix=''):
+    root = Path(__file__).resolve().parents[1] / 'dist'
+    if f'href="{prefix}design-system.css"' not in page:
+        page = page.replace('</head>', f'<link rel="stylesheet" href="{prefix}design-system.css"></head>', 1)
+    # Update existing consumers and cover direct article/holding-page entry only.
+    if 'learning-premises' in page or re.search(r'href="(?:\.\./)?artikler\.html"[^>]*aria-current="page"', page):
+        for suffix in ('css', 'js'):
+            data = (root / ('learning-premises.' + suffix)).read_bytes()
+            filename = 'learning-premises.' + hashlib.sha256(data).hexdigest()[:10] + '.' + suffix
+            (root / filename).write_bytes(data)
+            if suffix == 'css':
+                page = re.sub(r'<link rel="stylesheet" href="(?:\.\./)?learning-premises(?:\.[a-f0-9]{10})?\.css(?:\?[^"]*)?">', '', page)
+                page = page.replace('</head>', f'<link rel="stylesheet" href="{prefix}{filename}"></head>', 1)
+            else:
+                page = re.sub(r'<script src="(?:\.\./)?learning-premises(?:\.[a-f0-9]{10})?\.js(?:\?[^"]*)?" defer></script>', '', page)
+                page = page.replace('</head>', f'<script src="{prefix}{filename}" defer></script></head>', 1)
+    paths = {}
+    for suffix in ('css', 'js'):
+        data = (root / ('navigation.' + suffix)).read_bytes()
+        filename = 'navigation.' + hashlib.sha256(data).hexdigest()[:10] + '.' + suffix
+        (root / filename).write_bytes(data)
+        paths[suffix] = prefix + filename
+    page = re.sub(r'<script src="(?:\.\./)?navigation(?:\.[a-f0-9]{10})?\.js" defer></script>', '', page)
+    page = re.sub(r'<link rel="stylesheet" href="(?:\.\./)?navigation(?:\.[a-f0-9]{10})?\.css">', '', page)
+    page = page.replace('</head>', f'<link rel="stylesheet" href="{paths["css"]}"><script src="{paths["js"]}" defer></script></head>', 1)
+    # Use the current icon even if a source page still references an earlier brand asset.
+    page = re.sub(r'href="(?:\\.\\./)?modus-mark\\.svg"', f'href="{prefix}modus-identity-icon.svg"', page)
+    if 'rel="icon"' not in page:
+        page = page.replace('</head>', f'<link rel="icon" type="image/svg+xml" href="{prefix}modus-identity-icon.svg"></head>', 1)
+    if 'rel="apple-touch-icon"' not in page:
+        page = page.replace('</head>', f'<link rel="apple-touch-icon" sizes="180x180" href="{prefix}apple-touch-icon.png"></head>', 1)
+    if 'language-init.js' not in page:
+        page = page.replace('<head>', f'<head><script src="{prefix}language-init.js"></script>', 1)
+    if 'language.js"' not in page:
+        page = page.replace('</head>', f'<script src="{prefix}language.js" defer></script></head>', 1)
+    if 'theme-init.js' not in page:
+        page = page.replace('<head>', f'<head><script src="{prefix}theme-init.js"></script>', 1)
+    if f'href="{prefix}theme-palette.css"' not in page:
+        page = page.replace('</head>', f'<link rel="stylesheet" href="{prefix}theme-palette.css"><link rel="stylesheet" href="{prefix}themes.css"><script src="{prefix}theme.js" defer></script></head>', 1)
+    if (root / 'account.js').exists():
+        digest = hashlib.sha256((root / 'account.js').read_bytes()).hexdigest()[:10]
+        filename = f'account.{digest}.js'
+        (root / filename).write_bytes((root / 'account.js').read_bytes())
+        page = re.sub(r'<script src="(?:\.\./)?account(?:\.[a-f0-9]{10})?\.js" defer></script>', '', page)
+        page = page.replace('</head>', f'<script src="{prefix}{filename}" defer></script></head>', 1)
+    if 'global-search.js' not in page:
+        page = page.replace('</head>', f'<link rel="stylesheet" href="{prefix}global-search.css"><script src="{prefix}global-search.js" defer></script></head>', 1)
+    # Shared visitor feedback is added at build time, including article and language pages.
+    if 'feedback.css' not in page:
+        page = page.replace('</head>', f'<link rel="stylesheet" href="{prefix}feedback.css"><script src="{prefix}feedback.js" defer></script></head>', 1)
+    page = page.replace('class="nav-account"', 'class="nav-account" data-account-link')
+    if 'class="footer-editor"' not in page:
+        page = page.replace('</footer>', '<a class="footer-editor" href="/redaktor.html">Redaktør <span aria-hidden="true">↗</span></a></footer>', 1)
+    # Explicitly request text glyphs on iOS Safari; otherwise ↗ may become a colored emoji.
+    # Apply during the shared build so arrows stay typographic across all public pages.
+    page = page.replace('↗', '↗\ufe0e').replace('↗\ufe0e\ufe0e', '↗\ufe0e')
+    # Load the homepage override last and address it by content, never a stale URL.
+    if 'class="modus-home"' in page:
+        data = (root / 'home-2.css').read_bytes()
+        filename = 'home-2.' + hashlib.sha256(data).hexdigest()[:10] + '.css'
+        (root / filename).write_bytes(data)
+        page = re.sub(r'<link rel="stylesheet" href="home-2(?:\.[a-f0-9]{10})?\.css">', '', page)
+        page = page.replace('</head>', f'<link rel="stylesheet" href="{filename}"></head>', 1)
+    if 'class="modus-home"' not in page and '<header class="site-header">' in page:
+        # Public shell only; the private editor keeps its separate guarded surface.
+        if 'class="home-geometric"' not in page:
+            page = decorate_modern_header(page, prefix)
+        if 'modus-interior' not in re.search(r'<body\b[^>]*>', page)[0]:
+            page = re.sub(r'<body(?: class="([^"]*)")?>', lambda m: '<body class="' + (m[1] + ' ' if m[1] else '') + 'modus-interior">', page, count=1)
+        if 'class="interior-skip"' not in page:
+            main = re.search(r'<main\b[^>]*>', page)
+            if main:
+                found = re.search(r'\bid="([^"]+)"', main[0])
+                target = found[1] if found else 'main-content'
+                if not found:
+                    page = page.replace(main[0], main[0].replace('<main', '<main id="main-content" tabindex="-1"', 1), 1)
+                elif 'tabindex=' not in main[0]:
+                    page = page.replace(main[0], main[0].replace('<main', '<main tabindex="-1"', 1), 1)
+                page = re.sub(r'(<body\b[^>]*>)', lambda m: m[0] + f'<a class="interior-skip" href="#{target}">Hopp til innhold</a>', page, count=1)
+        for name in ('interior-header', 'interior-2'):
+            data = (root / (name + '.css')).read_bytes()
+            filename = name + '.' + hashlib.sha256(data).hexdigest()[:10] + '.css'
+            (root / filename).write_bytes(data)
+            page = re.sub(r'<link rel="stylesheet" href="(?:\.\./)?' + name + r'(?:\.[a-f0-9]{10})?\.css">', '', page)
+            page = page.replace('</head>', f'<link rel="stylesheet" href="{prefix}{filename}"></head>', 1)
+    return page
+
+
+def decorate_modern_header(page, prefix=''):
+    brand = (f'<a class="brand" href="{prefix or "./"}" aria-label="MODUS – forsiden">'
+             f'<img class="home-geometric" src="{prefix}images/modus-geometric.svg" width="44" height="44" alt="">'
+             '<span class="home-wordmark">MODUS</span>'
+             '<span class="home-tagline">MUSIKKTEORI · SPILL · FORSTÅ · SKAP</span></a>')
+    page = re.sub(r'<a class="brand".*?</a>', lambda _: brand, page, count=1, flags=re.S)
+    # Shared identity decoration: functional labels, hrefs and listeners are unchanged.
+    def icon(paths):
+        return ('<svg class="home-control-icon" viewBox="0 0 24 24" width="16" height="16" '
+                'fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">'
+                + paths + '</svg>')
+    plus = icon('<path d="M12 6v12M6 12h12"/>')
+    account = icon('<circle cx="12" cy="8" r="3"/><path d="M5 20v-2a7 7 0 0 1 14 0v2"/>')
+    language_nb = icon('<circle cx="12" cy="12" r="7"/><path d="M5 12h14M12 5c-4 4-4 10 0 14M12 5c4 4 4 10 0 14"/>')
+    language_en = language_nb
+    search = icon('<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15 15 5 5"/>')
+    display = icon('<circle cx="12" cy="12" r="7"/><path d="M12 5a7 7 0 0 1 0 14Z" fill="currentColor" stroke="none"/>')
+    for cls, mark in [('nav-membership', plus), ('nav-account', account)]:
+        page = re.sub(r'(<a\b[^>]*class="'+cls+r'"[^>]*>)', lambda m: m[0]+mark, page, count=1)
+    page = page.replace('<span aria-hidden="true">🇳🇴</span>', language_nb, 1)
+    page = page.replace('<span aria-hidden="true">🇬🇧</span>', language_en, 1)
+    page = page.replace('>⌕ Søk</button>', '>'+search+' Søk</button>', 1)
+    page = page.replace('<summary><span aria-hidden="true">◐</span>', '<summary>'+display, 1)
+    return page
+
+
+def apply_navigation(page, active, prefix=''):
+    page, count = re.subn(r'<header\b[^>]*>.*?</header>', lambda _: render_header(prefix, active), page, count=1, flags=re.S)
+    if count != 1:
+        raise ValueError('Expected one site header')
+    if active == 'home':
+        page = decorate_modern_header(page, prefix)
+    return with_navigation_css(page, prefix)

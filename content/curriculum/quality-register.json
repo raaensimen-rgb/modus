@@ -1,0 +1,405 @@
+{
+  "schema_version": 1,
+  "title": "MODUS – faglig kvalitetsjournal",
+  "policy": {
+    "publication_gate": "Alle fire kontroller må være godkjent: ekstern faglig kildeverifikasjon, dokumentert egenmestring i Musikkutdannelse 3.0, redaksjonell kontroll og eksplisitt publiseringsgodkjenning.",
+    "status_values": [
+      "planned",
+      "in_review",
+      "approved"
+    ],
+    "approved_requires": [
+      "sources",
+      "competency_evidence",
+      "editorial_review",
+      "publication_approval"
+    ],
+    "note": "Planlagt læreplan betyr ikke at brukerens mestring er dokumentert. Ingen godkjenning antas."
+  },
+  "modules": [
+    {
+      "id": "F01",
+      "level": 1,
+      "title": "Lyd og tonehøyde",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "F02",
+      "level": 1,
+      "title": "Puls, takt og rytme",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "F03",
+      "level": 1,
+      "title": "Tonenavn og intervaller",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "F04",
+      "level": 1,
+      "title": "Durskalaen",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "E01",
+      "level": 2,
+      "title": "Tonearter og kvintsirkelen",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "E02",
+      "level": 2,
+      "title": "Moll og treklanger",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "E03",
+      "level": 2,
+      "title": "Diatoniske progresjoner",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "E04",
+      "level": 2,
+      "title": "Pentatonikk og gehør",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "I01",
+      "level": 3,
+      "title": "Funksjonsharmonikk",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "I02",
+      "level": 3,
+      "title": "Kadenser og ii–V–I",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "I03",
+      "level": 3,
+      "title": "Moduser",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "I04",
+      "level": 3,
+      "title": "Motivisk improvisasjon",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "A01",
+      "level": 4,
+      "title": "Sekundærdominanter",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "A02",
+      "level": 4,
+      "title": "Modal harmonikk",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "A03",
+      "level": 4,
+      "title": "Stemmeføring og reharmonisering",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "A04",
+      "level": 4,
+      "title": "Oddetakt og form",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "P01",
+      "level": 5,
+      "title": "Kromatisk harmonikk",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "P02",
+      "level": 5,
+      "title": "Jazzharmonikk",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "P03",
+      "level": 5,
+      "title": "Kontrapunkt",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "P04",
+      "level": 5,
+      "title": "Orkestrering og produksjon",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "X01",
+      "level": 6,
+      "title": "Strukturell analyse",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "X02",
+      "level": 6,
+      "title": "Eget harmonisk språk",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "X03",
+      "level": 6,
+      "title": "Original komposisjon",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    },
+    {
+      "id": "X04",
+      "level": 6,
+      "title": "Kunstnerisk portefølje",
+      "status": "planned",
+      "sources": [],
+      "competency_evidence": [],
+      "editorial_review": {
+        "approved": false,
+        "reviewed_at": null
+      },
+      "publication_approval": {
+        "approved": false,
+        "approved_at": null
+      }
+    }
+  ]
+}

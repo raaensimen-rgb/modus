@@ -1,0 +1,40 @@
+{
+  "name": "modus-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:account": "python3 scripts/build-client.py account",
+    "build": "python3 scripts/sync-design-system.py && npm run build:account && python3 scripts/build-account.py && python3 scripts/sync-navigation.py && python3 scripts/build-articles.py && python3 scripts/sync-design-system.py --finish && python3 scripts/build-languages.py && python3 scripts/build-search.py && npm run build:editor && python3 scripts/finalize-publication.py && python3 scripts/finalize-preview.py && python3 scripts/integrate-teaching-diagrams.py",
+    "test": "node scripts/run-tests.cjs",
+    "build:editor": "python3 scripts/build-editor.py && python3 scripts/build-client.py editor",
+    "build:cms-runtime": "python3 scripts/build-client.py cms",
+    "test:browser": "node tests/release-browser.cjs && node tests/piano-browser.cjs && node tests/audio-signal-browser.cjs",
+    "test:homepage": "node tests/homepage-browser.cjs",
+    "test:navigation": "node tests/des002-navigation-browser.cjs && node tests/navigation-controls-browser.cjs",
+    "test:visual": "node tests/visual-regression-browser.cjs",
+    "test:preview-isolation": "node tests/preview-isolation-browser.cjs",
+    "test:editor-storage": "node tests/editor-storage-browser.cjs",
+    "test:editor-status": "node tests/editor-status-browser.cjs",
+    "test:editor-review": "node tests/editor-review-browser.cjs",
+    "editor:review-context": "node scripts/export-editor-review.mjs",
+    "test:premises": "node tests/learning-premises-browser.cjs",
+    "admin:local": "node scripts/serve-admin-review.cjs",
+    "test:admin-model": "node tests/admin-model.mjs",
+    "test:admin-console": "node tests/admin-console-browser.cjs",
+    "build:admin-preview": "node scripts/build-admin-preview.cjs",
+    "test:admin-preview": "node tests/admin-preview-package.cjs && node tests/admin-preview-browser.cjs",
+    "preview:workflow": "python3 scripts/preview-workflow.py",
+    "test:preview-workflow": "python3 tests/preview-workflow.py",
+    "build:candidate": "python3 scripts/package-p0-release.py",
+    "test:diagrams": "python3 tests/teaching-diagrams.py && node tests/teaching-diagrams-browser.cjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.118.0",
+    "parse5": "8.0.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "esbuild": "0.25.12",
+    "playwright": "1.62.1"
+  }
+}

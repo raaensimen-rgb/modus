@@ -1,0 +1,423 @@
+{
+  "schema_version": 1,
+  "scope": "isolated-preview-existing-illustrations-only",
+  "approval_reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+  "source_reference": "Existing illustration generator and compiled NB/EN assets at PL-101 baseline e6097fc9b2786a32ece532d208dc1f47670dbb03; no new illustration content.",
+  "images": {
+    "toner-og-intervaller": {
+      "nb": {
+        "sha256": "26e4b0908d7fbb9ea768d026c5b45f7d753d7e58d116b6a492120c95fb8bf163",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "193994eeead5316a5ae53e8797d483147597e6f3458d7612b11212e5a8848221",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      }
+    },
+    "dur-og-moll": {
+      "nb": {
+        "sha256": "8690a02b0a8f650b3cdc11af91ed6e7c0809f48bbaefc729e76dd1c58a31dbc6",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "2ba0cae79de8f957a646ff2793dc0d5708bd41b7de7b4efc2140ea52b77069c7",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      }
+    },
+    "kvintsirkelen": {
+      "nb": {
+        "sha256": "61b99e3332bc3e4ec7134e1488849075bf484640ba108b5612b1d353ba03f4a9",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "f22bc99929a6024a9cc3658911bb8e229742907d701b969078b8089ae3957bf9",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      }
+    },
+    "din-forste-improvisasjon": {
+      "nb": {
+        "sha256": "0ac0e4d02786dd4f2ef12a4207ce82c27cbd0c4a1932c9cc6f2c05327c583261",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "a6e83e05fc2a82a89d3dd37581915cd0b87476b7f67e9f55861c703bdd2c6dcc",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      }
+    },
+    "moduser-og-tonalt-sentrum": {
+      "nb": {
+        "sha256": "21b4baa8a4d55f05cca41bc8442ac5b5599ebc4dc73ae57d982abe81d22e4f43",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "f6c187a417a9d5c5fc5cb0eb3e0010e85989384b3eddac8b54a4d1969a098953",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      }
+    },
+    "kirketonearter-ett-system-sju-uttrykk": {
+      "nb": {
+        "sha256": "188a7c44d149c1ad9507aa8e0f9135da6011a669fec754436cf50637a370f7a0",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "1429e7c38a22d031a32f0aecfaaba5bfa13d039c07601e20491f90fd4c16b352",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+        "previous_sha256": "2f92a504acb5d25b4ad862a5fbc4921e38da26017ae9c828a44228eab6f7da98",
+        "change_reason": "Complete English labels for existing illustration; drawing geometry unchanged; original archived under editorial/legacy."
+      }
+    },
+    "romertall-i-musikk": {
+      "nb": {
+        "sha256": "fe073c29064c6ff246afaa3297978b85e66581fc4f4acbcedc4b6332abc75442",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "b196f88cbaa3e40e5b79f383d607e669f014eda151312af97cad80ce72bb4eb4",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+        "previous_sha256": "b226fd458b742e709440b71ea33b464b43ed2fece0631df3b1d8960213c7a84a",
+        "change_reason": "Complete English labels for existing illustration; drawing geometry unchanged; original archived under editorial/legacy."
+      }
+    },
+    "ii-v-i-kadensen": {
+      "nb": {
+        "sha256": "82a8928e8c843d255ba1f62adf4968c97497fb5730130aa34d5fa001735a7968",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "bd4cebf92e42b29ef9699b7250978a0ae9e363bc6b74074785832cc45cc0e8fd",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      }
+    },
+    "treklanger-fra-grunnform-til-omvending": {
+      "nb": {
+        "sha256": "eb30d46f73515b5105e8250ad14d5ce95dc35100ffecefc389f6e98cb416ef7f",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "326deec91a2286046a7b3cdd7adf4bb731575d73027d9e585bfa3ed2c90745ed",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+        "previous_sha256": "82d8e338998993d558eac1ac2edebf0412c8c0d1e63304bb6db1f83deda36d3b",
+        "change_reason": "Complete English labels for existing illustration; drawing geometry unchanged; original archived under editorial/legacy."
+      }
+    },
+    "septimakkorder": {
+      "nb": {
+        "sha256": "dc88fb8139b6e06a5c5daa9f49ebf9328bb3220d460d46fee9119a27184eea63",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "eac757a0ea1c369170927507ce49c32ddb596f0b50526c0733b8dc930bfc32d5",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      }
+    },
+    "harmonisk-moll-og-frygisk-dominant": {
+      "nb": {
+        "sha256": "cfa32105bc2745ddf932a37302ff61efdf0be8efafaba8e48a8235dd6f364bf6",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "8eef9e382fd21b238eec73f422ff81c08d7108b5893ea5335ffefbd543398265",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      }
+    },
+    "stemmeforing": {
+      "nb": {
+        "sha256": "1acf7ed81a350462e5db2ead8bc42193458ec68669014f8851c4015b08ed60dd",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "f4a3cef794e1ca1ee2faa9805034a27dbe34ffa163a8220fa99753137e416530",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      }
+    },
+    "rytme-i-sju-aatte": {
+      "nb": {
+        "sha256": "09d0faca0cc6ae485c79ceff06130c665c16bb09b5ee70a8a41f03b473945860",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "525c8a6362ab4970e4be9ff2e80e94e6684953dc6c4d63d2398dc67286b1ca65",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      }
+    },
+    "bygg-akkorder-i-en-toneart": {
+      "nb": {
+        "sha256": "1d7980eea950bce8e281eadc6152094e7e425075a6347004f0d7e75d5bfafa43",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "1ffeea0aa5dbf9c8324ee8a938ecb2080ec055a470f22be3b42232612120b7bc",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      }
+    },
+    "ett-skalakart-nye-maltoner": {
+      "nb": {
+        "sha256": "cfda896195ceb86ce27555b87b6cdb30cca234d065957457dba1fb2e08b4fba5",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "7e4fe2f0a52edfdf6c964497a103450127854b09c3acf021b623eeea2ebe359c",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      }
+    },
+    "dorisk-og-eolisk": {
+      "nb": {
+        "sha256": "1a648c51be2b4ed782e7a42063c4e96646d53d85da279c482877c6c4b4faba2e",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      },
+      "en": {
+        "sha256": "f05c516cba0254016de98fbade17762f8d0668beb53a558ec3ed5de88c1526a6",
+        "reference": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6558266639",
+        "public_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+      }
+    },
+    "intervallomvendinger": {
+      "nb": {
+        "sha256": "dbdd0156ee0b0e02a3f446841c78c0bd6146c517c3e4362061c5a8f1c722a7a4",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "kadens-og-tonale-funksjoner": {
+      "nb": {
+        "sha256": "272343cdab0d7c5f3e063bd4058433f76c98ea360f694bd107b362b34a2295f4",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "sekundaerdominanter": {
+      "nb": {
+        "sha256": "2d918e54eddbb0a5b3c02e34c5dd494ba9bf566cce80f27a70c5ddf44724e5bb",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "akkordutvidelser": {
+      "nb": {
+        "sha256": "1f0dd44ae6ea81c636a67838c4d6ca2e0143fc10a3e5dd57fa36ce412956c69a",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "modal-harmonikk-i-praksis": {
+      "nb": {
+        "sha256": "c6c8ff160b0f09e689c07046588c292b437db03666a3a9a3def2ce962bf1cd87",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "tonikalisering-og-modulering": {
+      "nb": {
+        "sha256": "1a13b79447333ae9e83eac044daebaf4ca2fd8cb88214ff53ab05c966df523d8",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "sekstkvart-bass-og-kadens": {
+      "nb": {
+        "sha256": "967e064e4ff7141d3a077a27d2ab53869016dfd7059ec9ebafecfa4bd22d17ae",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "satb-tendenstoner-og-dobling": {
+      "nb": {
+        "sha256": "63417bd6037a1c30a12c5bc26af7707f479f0c2e4c696fb9e33434c55a093e3a",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "modal-interchange-og-kromatiske-medianter": {
+      "nb": {
+        "sha256": "3bc7c5c6d4d16bc60229c614854bec246ae1facb476945c0b85b537b98655066",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "napolitansk-og-forstorret-sekst": {
+      "nb": {
+        "sha256": "34f587731a502b977885fe31fd9658378fa265734859772840ba41f216971649",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "tritonussubstitusjon-og-reharmonisering": {
+      "nb": {
+        "sha256": "a7d14f3d8824a8738430fb43ed01f11727d136bf8b30e7ea904a550781b5a162",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "kontrapunkt-to-selvstendige-stemmer": {
+      "nb": {
+        "sha256": "a096b7740efe06b5c1315e8e07d06f7ab65f474cc2b5587e1df8ea97b55cb9cc",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "dissonans-gjennomgang-og-forholdning": {
+      "nb": {
+        "sha256": "e9b04bc4655d0833d6adfe0a15646377c4601eef3302feb206b8440dc2ec0228",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "imitasjon-kanon-og-partimento": {
+      "nb": {
+        "sha256": "044a3c5940427423b832f357c382737ed579244ead835562aee3ef55d2a642bf",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "melodisk-moll-og-akkordskala": {
+      "nb": {
+        "sha256": "558a951df63d6893ef9556a53643f07d4da30df20c603077455ed589c24e5281",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "altererte-dominanter-og-symmetriske-skalaer": {
+      "nb": {
+        "sha256": "89c9bfec02fcd0ff2dc4eea8139c7bad6bac3e08ab131cba1c8d0accc45c3145",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "kvartklanger-cluster-og-polykorder": {
+      "nb": {
+        "sha256": "5649f1c2048af6f3ae233b7940705208c45e55e115d2eba4713ddf41fbf91e9e",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "motiv-og-transformasjon": {
+      "nb": {
+        "sha256": "eca37f8b163c1c5a113d12df1eb5c13155d69926d0e071ae9fc1067a7c1175d7",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "frase-periode-og-harmonisk-rytme": {
+      "nb": {
+        "sha256": "0050c483f2dc89907c471e47cfdda63f4723e5168764a13ec174281a81924f3b",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "storform-rondo-sonatisk-og-dramaturgi": {
+      "nb": {
+        "sha256": "b38d2cde51ec0c1328a0af4e9b25c3a9a775b75b26cb883b6ab9febdd49d637b",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "komposisjon-fra-skisse-til-revisjon": {
+      "nb": {
+        "sha256": "9d8ad314ff825da6f456ac45f374145aba22d31837a14ae53728664a11f0df73",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "arrangering-for-lite-ensemble": {
+      "nb": {
+        "sha256": "7c39e8c72803e2887e82a4841e9ca4a8824e3cb837af1eaea2939d8e88f0515d",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "instrumentasjon-og-hybrid-metal": {
+      "nb": {
+        "sha256": "2e8d56f14b3085ad5da204403945d5d402a3430e0ae63db5b0009628695cf7c6",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "swing-bebop-og-jazzfrasering": {
+      "nb": {
+        "sha256": "f750b492ac40936c6d94fc0c30b2a7c32e0c776393668da68209f3ce6ad8800c",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "comping-og-akkordmelodi": {
+      "nb": {
+        "sha256": "175e1ce2735dabd4c02460dda98fb8cde41d0272af3442293ae6a8117d369530",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "gehor-og-transkripsjon": {
+      "nb": {
+        "sha256": "bc9a098b0b726154a463b60e854bb19412ca0da8f7833253cf5bdc5c9a29b764",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "rytmikk-oddetakt-og-metrisk-modulasjon": {
+      "nb": {
+        "sha256": "892b30c5bf7f1176fbfe1b748086218a1232ded6c4cca2579668f58f894b6474",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "gitarteknikk-metal-fusion-og-oving": {
+      "nb": {
+        "sha256": "bf5469493cdc5ac817f96d45eecec556b7d92f3ffc45ff12e05aa0c354936bf1",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "logic-midi-og-opptak": {
+      "nb": {
+        "sha256": "b5f29902d4946f41c207b5681d7df47909c9b3017c140e730ce1f201aedf23f1",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "miks-balanse-og-kritisk-lytting": {
+      "nb": {
+        "sha256": "614f538f502ce10b312277339d5dffeca1d78d302e8e5c2d901bbe894acb6ed1",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "portefolje-kunstnerisk-refleksjon-og-samspill": {
+      "nb": {
+        "sha256": "39d5c855d7564827724f9624fbf71bbe1b27c52781d44457a6154dfd513cd848",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "stilforstaelse-repertoar-og-lytteanalyse": {
+      "nb": {
+        "sha256": "1d4b878ffa206169b6e6b01c432d35ab1349bd5d92cef00eb213b68140c6ca24",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "auditiv-intervall-og-funksjonsprove": {
+      "nb": {
+        "sha256": "3c1f620bc92e4d345bf1c23546a2214e48e3127f0b1ea5b806b92ec5b892d47e",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "samspill-og-improvisatorisk-respons": {
+      "nb": {
+        "sha256": "087264ef68ccb3ececa105796076082f23f95cf01637c8b0a943fba974c473d2",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "formanalyse-av-hele-verk": {
+      "nb": {
+        "sha256": "10f2c252795b9c7657e7a97c3e5dffa4d3b9a11df2d5c4f8c477d4f105810957",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    },
+    "utovende-presentasjon-og-sluttprosjekt": {
+      "nb": {
+        "sha256": "63f74541e67e2ae27efe9ae18248b5d79bf67ae86a974574046013d3174db320",
+        "public_reference": "docs/p0-release-authority.md#52-public-readers"
+      }
+    }
+  },
+  "public_selection_reference": "docs/modus-08-owner-decision.md#2026-11-05"
+}

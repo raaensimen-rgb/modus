@@ -1,0 +1,95 @@
+{
+  "head": "2f2a2c2787af9f680731dc6ed09434c1d78857ac",
+  "files": [
+    {
+      "path": "cms/model.mjs",
+      "sha256": "4c07a5449fbb46d3f764a90660521689725eafce4a9f79902d1008248da36345",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "client/editor.js",
+      "sha256": "9a6fd64c8e82681cdf7246325d2a4bb913fc38b386b8583b970d6e16556d8859",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "cms/editor.html",
+      "sha256": "6031bb62130c2b1f4a9ec76449c9ccb680fbe09e4021e3d25c2fda890dc65ee8",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "cms/deployment-config.json",
+      "sha256": "c5e5bf9143be9b6a884ada7bbb5d25c2940d621786fa77f12946e045a89061cd",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "cms/middleware.mjs",
+      "sha256": "6d7f8372b611692e9c7f9afb0d0666840351e70c9f375231eac5ea08adf65f88",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "supabase/schema/article-editor.sql",
+      "sha256": "43b0ad43b9137201f18d9c341b3819d529692cb60eca74503fd8d4a2387887aa",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "content/articles.json",
+      "sha256": "7a56d5fe2ca3100142c888b7ecf4e4102aef27c0c03edcfdac2a08a259d39d11",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "content/article-quizzes.json",
+      "sha256": "0c1becd23934df33995c8159a854012d4dc824852121351bfa3e1786153c2f5a",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "content/i18n/en.json",
+      "sha256": "b4cf3fe9bb2c39e1eb447c425b514f3b7b8908e0c447676c47c2ca758ee63f98",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "content/i18n/dynamic.tsv",
+      "sha256": "5f4bca7d7adffe9cbb41b66774f3540a2b07114941484adf9d2cc0730d89f619",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "content/publication.json",
+      "sha256": "7e47f1af61b44a9de95cabec5164427120dd3ee9435756a44c303f674167c53f",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "editorial/article-publication-review.json",
+      "sha256": "16824980a0a424bfddcbaaf81075b11a2e72923e344623abcc1334def55459a2",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "scripts/publication.py",
+      "sha256": "39e34a8ff898bf3b89fa0acf8073d639bd7746f78f8fc5c70bd23374f86ffc14",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "scripts/build-editor.py",
+      "sha256": "a311652112c1d5f60ce6fb191f5280a2c255a3b522b71466eff54fef657e4a55",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "scripts/finalize-preview.py",
+      "sha256": "1fc21f0e707670643bee92414b313e423c7803bb76ef41ef9b4b8d252d09239a",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "scripts/preview_mode.py",
+      "sha256": "91989d86bf3dec063eee3c45825f9fa7e6966f667b95a3cf2145238d8ea0d326",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "package.json",
+      "sha256": "de388707afa64eae2308e8794063ea6c270c99dd8a32e9002522a507ba928b63",
+      "identical_to_HEAD": true
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "4efd5e40c9faa29f001d3efe22e90d1bbab3e4b3aafcc85a40eff2f6e5011ae4",
+      "identical_to_HEAD": true
+    }
+  ]
+}

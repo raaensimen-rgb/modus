@@ -1,0 +1,32 @@
+MODUS instrument audio credits
+
+ELECTRIC PIANO, FINGERED ELECTRIC BASS AND ACOUSTIC BASS
+FluidR3 General MIDI soundfont, Frank Wen and contributors.
+Rendered MP3 soundfont files distributed by gleitz / MIDI.js Soundfonts:
+https://github.com/gleitz/midi-js-soundfonts
+https://github.com/gleitz/midi-js-soundfonts/tree/gh-pages/FluidR3_GM
+License as documented by that distribution: Creative Commons Attribution 3.0 US
+https://creativecommons.org/licenses/by/3.0/us/
+Changes: selected notes extracted from the JavaScript data-URI distribution
+into individual MP3 files. Playback uses pitch transposition, envelopes,
+stereo positioning and room processing.
+
+ACOUSTIC DRUM KIT
+Kick, snare and hi-hat MP3 samples from Tone.js Audio:
+https://github.com/Tonejs/audio/tree/master/drum-samples/acoustic-kit
+The collection credits Chris Wilson's Web Audio Samples:
+https://github.com/cwilso/web-audio-samples
+Source collection README:
+https://github.com/Tonejs/audio/blob/master/drum-samples/README.md
+The MP3 files are redistributed without audio edits. Playback adds variable
+velocity, small pitch changes, stereo positioning and room processing.
+
+ACOUSTIC GRAND PIANO
+Salamander Grand Piano, Yamaha C5 stereo recordings by Alexander Holm.
+Distribution: https://github.com/Tonejs/audio/tree/master/salamander
+License: Creative Commons Attribution 3.0
+https://creativecommons.org/licenses/by/3.0/
+Original collection notes: SALAMANDER-README.txt
+Changes: 13 stereo notes extracted from the distributed MP3 set, limited
+to eight seconds with a 200 ms fade-out, and re-encoded as MP3. Playback
+adds transposition, mild equalization, note release and stereo room sound.

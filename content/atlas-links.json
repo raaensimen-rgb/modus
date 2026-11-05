@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "description": "Editorial atlas references only. No user progress or competency status is stored here.",
+  "modules": [
+    {
+      "id": "F01",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "F02",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "F03",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "F04",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "E01",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "E02",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "E03",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "E04",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "I01",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "I02",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "I03",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "I04",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "A01",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "A02",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "A03",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "A04",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "P01",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "P02",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "P03",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "P04",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "X01",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "X02",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "X03",
+      "topics": [],
+      "lessons": []
+    },
+    {
+      "id": "X04",
+      "topics": [],
+      "lessons": []
+    }
+  ],
+  "articles": [
+    {
+      "slug": "toner-og-intervaller",
+      "module_id": "F03",
+      "status": "published"
+    },
+    {
+      "slug": "dur-og-moll",
+      "module_id": "E02",
+      "status": "published"
+    },
+    {
+      "slug": "kvintsirkelen",
+      "module_id": "E01",
+      "status": "published"
+    },
+    {
+      "slug": "din-forste-improvisasjon",
+      "module_id": "I04",
+      "status": "published"
+    },
+    {
+      "slug": "moduser-og-tonalt-sentrum",
+      "module_id": "I03",
+      "status": "published"
+    },
+    {
+      "slug": "kirketonearter-ett-system-sju-uttrykk",
+      "module_id": "I03",
+      "status": "published"
+    },
+    {
+      "slug": "romertall-i-musikk",
+      "module_id": "I01",
+      "status": "published"
+    },
+    {
+      "slug": "ii-v-i-kadensen",
+      "module_id": "I02",
+      "status": "published"
+    },
+    {
+      "slug": "treklanger-fra-grunnform-til-omvending",
+      "module_id": "E02",
+      "status": "published"
+    },
+    {
+      "slug": "septimakkorder",
+      "module_id": "E02",
+      "status": "published"
+    },
+    {
+      "slug": "harmonisk-moll-og-frygisk-dominant",
+      "module_id": "I03",
+      "status": "published"
+    },
+    {
+      "slug": "stemmeforing",
+      "module_id": "A03",
+      "status": "published"
+    },
+    {
+      "slug": "rytme-i-sju-aatte",
+      "module_id": "A04",
+      "status": "published"
+    },
+    {
+      "slug": "bygg-akkorder-i-en-toneart",
+      "module_id": "E03",
+      "status": "published"
+    },
+    {
+      "slug": "ett-skalakart-nye-maltoner",
+      "module_id": "E04",
+      "status": "published"
+    },
+    {
+      "slug": "dorisk-og-eolisk",
+      "module_id": "I03",
+      "status": "published"
+    }
+  ],
+  "pending_articles": [
+    {
+      "slug": "intervallomvendinger",
+      "status": "planned",
+      "module_id": "F03",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "kadens-og-tonale-funksjoner",
+      "status": "planned",
+      "module_id": "I01",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "I02"
+      ]
+    },
+    {
+      "slug": "sekundaerdominanter",
+      "status": "planned",
+      "module_id": "A01",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "akkordutvidelser",
+      "status": "planned",
+      "module_id": "P02",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "E02"
+      ]
+    },
+    {
+      "slug": "modal-harmonikk-i-praksis",
+      "status": "planned",
+      "module_id": "A02",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "I03"
+      ]
+    }
+  ]
+}

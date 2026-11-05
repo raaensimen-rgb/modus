@@ -1,0 +1,49 @@
+{
+  "name": "modus-2-preview",
+  "production_branch": "main",
+  "build_config": {
+    "build_command": "npm run build",
+    "destination_dir": "dist",
+    "root_dir": ""
+  },
+  "source": {
+    "type": "github",
+    "config": {
+      "owner": "raaensimen-rgb",
+      "repo_name": "modus",
+      "production_branch": "main",
+      "production_deployments_enabled": false,
+      "preview_deployment_setting": "none",
+      "preview_branch_includes": [],
+      "preview_branch_excludes": [],
+      "pr_comments_enabled": false
+    }
+  },
+  "deployment_configs": {
+    "preview": {
+      "compatibility_date": "2026-10-27",
+      "env_vars": {
+        "MODUS_CATALOG_PREVIEW": {
+          "type": "plain_text",
+          "value": "1"
+        },
+        "NODE_VERSION": {
+          "type": "plain_text",
+          "value": "22"
+        },
+        "MODUS_ISOLATED_PREVIEW": {
+          "type": "plain_text",
+          "value": "1"
+        },
+        "MODUS_PREVIEW_PROJECT": {
+          "type": "plain_text",
+          "value": "modus-2-preview"
+        }
+      }
+    },
+    "production": {
+      "compatibility_date": "2026-10-27",
+      "env_vars": {}
+    }
+  }
+}

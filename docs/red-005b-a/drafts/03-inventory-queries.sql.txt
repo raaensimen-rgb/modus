@@ -1,0 +1,30 @@
+-- RED-005B-A: INACTIVE DESIGN DRAFT. NOT EXECUTED. NOT A DEPLOYABLE MIGRATION.
+-- Outside supabase/schema and migration discovery. No real identity/environment.
+-- STOP guard and final ROLLBACK are deliberate. Never remove them without new approval.
+BEGIN;
+DO $stop$ BEGIN
+ RAISE EXCEPTION 'RED-005B-A INACTIVE: isolated DB/Auth approval and implementation required';
+END $stop$;
+
+-- Future READ-ONLY catalog queries; NOT RUN even though they are SELECT statements.
+-- Use only after named isolated DB/Auth approval, never production credentials.
+SELECT n.nspname,c.relname,c.relkind,c.relrowsecurity,c.relforcerowsecurity,
+ pg_catalog.pg_get_userbyid(c.relowner) AS owner,c.relacl
+ FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+ WHERE n.nspname NOT IN ('pg_catalog','information_schema');
+SELECT schemaname,tablename,policyname,roles,cmd,qual,with_check FROM pg_catalog.pg_policies;
+SELECT n.nspname,p.proname,pg_catalog.pg_get_function_identity_arguments(p.oid) AS arguments,
+ p.prosecdef,p.proconfig,p.proacl,pg_catalog.pg_get_userbyid(p.proowner) AS owner,
+ pg_catalog.pg_get_functiondef(p.oid) AS body
+ FROM pg_catalog.pg_proc p JOIN pg_catalog.pg_namespace n ON n.oid=p.pronamespace
+ WHERE n.nspname IN ('public','modus_oa');
+SELECT rolname,rolsuper,rolinherit,rolcreaterole,rolcreatedb,rolcanlogin,rolbypassrls FROM pg_catalog.pg_roles;
+SELECT roleid::regrole,member::regrole,grantor::regrole,admin_option FROM pg_catalog.pg_auth_members;
+SELECT defaclrole::regrole,defaclnamespace::regnamespace,defaclobjtype,defaclacl FROM pg_catalog.pg_default_acl;
+SELECT table_schema,table_name,column_name,grantee,privilege_type FROM information_schema.column_privileges;
+SELECT event_object_schema,event_object_table,trigger_name,action_statement FROM information_schema.triggers;
+-- Add server-version-aware pg_auth_members inheritance/set flags, exposed-schema config,
+-- views/rules, extensions/GraphQL, pg_cron/jobs, hooks, storage policies and Auth session
+-- configuration. Do not SELECT secrets, tokens, password hashes or article payloads.
+-- 'Missing' in source does NOT prove these paths absent in live database.
+ROLLBACK;

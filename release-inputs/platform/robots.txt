@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /redaktor
+Disallow: /konto
+Disallow: /en/redaktor
+Disallow: /en/konto

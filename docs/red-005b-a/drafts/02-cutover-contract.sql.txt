@@ -1,0 +1,63 @@
+-- RED-005B-A: INACTIVE DESIGN DRAFT. NOT EXECUTED. NOT A DEPLOYABLE MIGRATION.
+-- Outside supabase/schema and migration discovery. No real identity/environment.
+-- STOP guard and final ROLLBACK are deliberate. Never remove them without new approval.
+BEGIN;
+DO $stop$ BEGIN
+ RAISE EXCEPTION 'RED-005B-A INACTIVE: isolated DB/Auth approval and implementation required';
+END $stop$;
+
+-- DESIGN ONLY: an atomic cutover outline, NOT a completed migration.
+-- Must inventory every actual overload/view/trigger/role/default before substituting names.
+-- This file intentionally cannot preserve save functionality as-is: guarded implementations,
+-- least-privilege ACL/RLS and tests must be completed BEFORE an atomic cutover is authorized.
+
+-- Proposed private capability signature: called directly OR via invoker wrapper;
+-- same verified actor/role/scope guards mandatory inside, never trust wrapper provenance.
+CREATE FUNCTION modus_oa.save_draft(p_slug text,p_locale text,p_payload jsonb,p_expected_revision integer)
+RETURNS integer LANGUAGE plpgsql SECURITY DEFINER SET search_path='' AS $body$
+BEGIN
+ RAISE EXCEPTION 'NOT IMPLEMENTED: verified editor/session, scope lock, optimistic save + immutable snapshot/event' USING ERRCODE='0A000';
+END $body$;
+ALTER FUNCTION modus_oa.save_draft(text,text,jsonb,integer) OWNER TO modus_oa_draft_executor;
+REVOKE ALL ON FUNCTION modus_oa.save_draft(text,text,jsonb,integer) FROM PUBLIC,anon,authenticated,service_role;
+-- No app EXECUTE grants: this fail-closed stub is NOT wired into cms_save_draft.
+
+CREATE FUNCTION modus_oa.decide(p_challenge_id uuid,p_receipt_id uuid,p_nonce text,p_request_id uuid)
+RETURNS jsonb LANGUAGE plpgsql SECURITY DEFINER SET search_path='' AS $body$
+BEGIN
+ RAISE EXCEPTION 'NOT IMPLEMENTED: owner/session/MFA receipt, exact target, atomic event and consumption' USING ERRCODE='0A000';
+END $body$;
+ALTER FUNCTION modus_oa.decide(uuid,uuid,text,uuid) OWNER TO modus_oa_decision_executor;
+REVOKE ALL ON FUNCTION modus_oa.decide(uuid,uuid,text,uuid) FROM PUBLIC,anon,authenticated,service_role;
+-- prepare/status/revoke/attest/receipt-issue/admin-freeze also remain UNIMPLEMENTED.
+-- No receipt issuance function/body/service-role permission is introduced here.
+
+-- Future transaction pseudocode (not active SQL; no approved isolated environment yet):
+-- 1 lock migration scope and fail if live inventory differs, objects absent or grants unknown.
+-- 2 implement & verify private guards and per-executor RLS WITH CHECK + least privilege grants.
+--   draft_executor: draft SELECT/INSERT/UPDATE, history INSERT, snapshots/events INSERT, scope lock;
+--   decision_executor: private input SELECT, challenge/receipt consumed_at only UPDATE,
+--     append events; NO draft/publication/history DML, NO bindings/mandates/evidence mutation;
+--   receipt_executor: verified challenge lookup and INSERT receipt only through narrow gate;
+--     no draft/owner/event DML. Gateway principal not member of any executor role.
+--   binding/attestation administration require separate scoped capabilities, append audit,
+--     no client DML or generic SQL API. No executor may own tables or inherit owner/admin.
+--   scope lock UPDATE privilege (for row locking) is NOT exposed to app roles.
+-- 3 replace cms_save_draft same signature/return integer with SECURITY INVOKER facade
+--   invoking guarded save; guard checks role (no service/anonymous), verified active actor,
+--   cms_editors enabled and immutable fixed repository scope on EVERY direct capability call.
+--   preserve exact expected_revision, 40001, atomic history, quota/restore client behavior;
+--   incomplete draft save allowed; no media fetch or MFA required just to save.
+-- 4 replace/revoke EVERY cms_publish_article overload; unconditional 42501 on app callers.
+--   revoke ALL publication writes, even editors/owner/service; park Worker, no new rows.
+--   existing public SELECT behavior requires assessment of existing isolated test rows only;
+--   do not drop or alter production publication data, quiz_progress or feedback behavior.
+-- 5 revoke direct draft/history writes, column grants, history sequence privileges from
+--   PUBLIC/anon/authenticated/service and any discovered app memberships; retain guarded
+--   editor SELECT with current shared repository-scope rules (not author-private storage).
+--   revoke old EXECUTE/default EXECUTE across overloads/views/GraphQL/writers; app SELECT
+--   policies do not authorize DML. Never add a generic client role or trusted caller GUC.
+-- 6 no grant is final until OA-06/26/28 and legitimate save pass in synthetic isolated DB.
+--   all steps 2-5 commit together AFTER acceptance; failure => rollback entire cutover.
+--   no broad-DML fallback. Finalizer asserts required grants/guards rather than guessing.
+ROLLBACK;

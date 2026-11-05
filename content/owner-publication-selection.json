@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "decision_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+  "date": "2026-11-05",
+  "selection": {
+    "toner-og-intervaller": {
+      "nb": "89cda11913aeaedae9523fe3f8f50d91b25d5b131e732d5e04dd3d3d08d45c03",
+      "en": "85cdac2d7d0c765f11e552e45fa27d0e0aec96d2841b74a4242b3949479cb6cd"
+    },
+    "dur-og-moll": {
+      "nb": "6ffd7632b49389f7d5debdfcd2b66ef02a3372a1edbe9ddaa6bc76586e1716cd",
+      "en": "a412cf47f32ce64d7d0737e972cd494389d3599c066975c641def9187cd8fbc7"
+    },
+    "kvintsirkelen": {
+      "nb": "17bed195e2eb8ae55ec9c2a26726647fe6744e60bd52cc7b5923515b967650ee",
+      "en": "d2abb8b93505e77a59d252cdbe23d7aea28c29a4d2abf401f41df766691deeda"
+    },
+    "din-forste-improvisasjon": {
+      "nb": "e570c98cdf603f31286320f4258da8877adc193361fb095fc917e973bd36fb1d",
+      "en": "a00d225e73e8b548b4e5ee8bcd79e2ccd81617edd060b95ad46f0acae59a9e61"
+    },
+    "moduser-og-tonalt-sentrum": {
+      "nb": "bba7f3f3367de5f0eb1db696d1b699f7506e8f95e9167e1aabbdd1416c04e698",
+      "en": "52d4f9ccaa1fe8439656b40a6e984bcea6f768d322836b969dc571f74c6710b3"
+    },
+    "kirketonearter-ett-system-sju-uttrykk": {
+      "nb": "08bb59d709414c3f0a818a5241f9264b88dd47c961bc97d57218929c45ce65dd",
+      "en": "3633c648c57050998e906dc30a82c7b4ac28d8cb82c6c80b6fc67292c55d1111"
+    },
+    "romertall-i-musikk": {
+      "nb": "25da746d1ddcd240bad8a9517cce174960ede2ff62fd98d673d02e359178009d",
+      "en": "14dcdb4c1759532850495c74218cef6c7266f78c7faea6b04e4912d23ef25738"
+    },
+    "ii-v-i-kadensen": {
+      "nb": "a4704514d7cc9d3d61be17335c137760e0ade145988647191c216c28c0df7e80",
+      "en": "ab2484949fde843aae785bcc0a555ddfb041fa8d968b4f884dba3bf1505c5bd1"
+    },
+    "treklanger-fra-grunnform-til-omvending": {
+      "nb": "87a62207ea9d8e1c121eeefda2e6f6f133e744bbc5441f22195c4aeb87d78977",
+      "en": "4f5e8ccfbac3111badd66ea54561b34d303c334c8c4c3d1a5c0f8b2a0488ec0b"
+    },
+    "septimakkorder": {
+      "nb": "77ca6b7709a4e16e202816d1dc243d02f836ebef823bf9cbeb548814d4ecead8",
+      "en": "4f69f7767466ae17d56b5558afbf73ed29b44605ccd0b456e4c114bf7f7117a3"
+    },
+    "harmonisk-moll-og-frygisk-dominant": {
+      "nb": "9ac7db771ed6b12ee9aae87932d22ba95c65ccc6cebf4bc5237d2c0b7005eab6",
+      "en": "bedf486b8e559d34fad850a3c2e215255f3154e03a18cf2b6752c83f1cfb0172"
+    },
+    "stemmeforing": {
+      "nb": "579165fbeb5a3d8b08e1c0a5c7fb0e1a07c19de0ee590f8a4eebee7fc3a6e5f9",
+      "en": "b297b209e3d2fb8a2dca4d3fd9aac2973dca42f0f59f2a8c58f9454bfa745287"
+    },
+    "rytme-i-sju-aatte": {
+      "nb": "4ab62d3fdf66c6a69aac804ef15013b6947ad5683220e3ee763456ed8f423ff2",
+      "en": "090ac63da0289a98546ee6f13c363f1f3221dd201f5d901ba794d5b860f54e84"
+    },
+    "bygg-akkorder-i-en-toneart": {
+      "nb": "34a5eba4064076d7a4c13ed15e8e10c32edd1af63934c20e503a19513d607fe4",
+      "en": "159f367ee310c1854156779ebb960068787865b304bcfbec9cb80a34106258b2"
+    },
+    "ett-skalakart-nye-maltoner": {
+      "nb": "33efab7990438e2498ec7d6f2a965cb926f8173d408918dfcb1096a2f98c9260",
+      "en": "5326b4c2c2b60e2718cd81cacc1a4972fc6ea91b56702ee4b7f5b2e5fefcd39e"
+    },
+    "dorisk-og-eolisk": {
+      "nb": "da63b02cae05a62d1c7a3717eea7d4616363b9be04978c97f9ad869e05045898",
+      "en": "10d6aef087357e16d0c11a4d1acf4de6c5db54717c29cebf6d4b9845a554eb6a"
+    }
+  },
+  "scope": "16 existing article identities, NB and EN, complete text and exact existing illustrations",
+  "academic_review": "not asserted",
+  "deployment_authorized": false
+}

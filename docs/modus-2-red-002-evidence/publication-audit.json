@@ -1,0 +1,1709 @@
+{
+  "status": "passed",
+  "scope": "Complete local public build, not a remote deployment attestation",
+  "files": 339,
+  "utf8_files": 222,
+  "private_paragraphs_checked": 95,
+  "public_article_locales": [],
+  "public_catalog_metadata": {
+    "nb": 0,
+    "en": 0
+  },
+  "manifest": [
+    {
+      "path": "_headers",
+      "bytes": 486,
+      "sha256": "1281b7ee31b23613fc842dd1e50fcc5fdac246c5e62f40b534ff780d17aedffd"
+    },
+    {
+      "path": "about.css",
+      "bytes": 4781,
+      "sha256": "35f035d1e0c3f146eed51b16a3c4cafc2f8387bc081905ac0d9b0fd6ded9ba32"
+    },
+    {
+      "path": "account.8f006baf62.js",
+      "bytes": 1404,
+      "sha256": "8f006baf62145998c28eec1260cb8a39db36338addee69b4b54f51826b9bd2a2"
+    },
+    {
+      "path": "account.css",
+      "bytes": 7689,
+      "sha256": "da4ca26df281febd425fd844faf6d0feb287dd9fe8b151358b209e1c78ab29f2"
+    },
+    {
+      "path": "account.js",
+      "bytes": 1404,
+      "sha256": "8f006baf62145998c28eec1260cb8a39db36338addee69b4b54f51826b9bd2a2"
+    },
+    {
+      "path": "akkorder.html",
+      "bytes": 15684,
+      "sha256": "900614b61399e86000fb1c849785478627dd76087cc80e29462132379ce90946"
+    },
+    {
+      "path": "app.js",
+      "bytes": 29684,
+      "sha256": "0d82a15ba75b7a208760e1279c2732bfac3e9bb9c0ac8e089f008a7dbdd44f82"
+    },
+    {
+      "path": "apple-touch-icon.png",
+      "bytes": 129853,
+      "sha256": "7b87262c5232fd3a14479b9626398ae963648f7ada385de0c3d777f080304ce8"
+    },
+    {
+      "path": "article-quiz.js",
+      "bytes": 6663,
+      "sha256": "0856290a8bab61726246e74e9c15dedf75588db7d622396f145e5c1b73cc2468"
+    },
+    {
+      "path": "articles.css",
+      "bytes": 35268,
+      "sha256": "b767bce948b0f2ebd019737ed7c56d33c85c1d1b3f0ec5f2ef5f158732132cbc"
+    },
+    {
+      "path": "articles.js",
+      "bytes": 8290,
+      "sha256": "7863a17f9c5fbb2cb31e19e53430a7eea73f5aca4a4fd2db9d4888d67f8e3c64"
+    },
+    {
+      "path": "artikler.html",
+      "bytes": 32106,
+      "sha256": "f9bcfd73cd08c2f8fccdf9e1cfc34ba6442ddec1428937df55df5c8061a8bbea"
+    },
+    {
+      "path": "artikler/bygg-akkorder-i-en-toneart.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/din-forste-improvisasjon.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/dorisk-og-eolisk.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/dur-og-moll.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/ett-skalakart-nye-maltoner.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/harmonisk-moll-og-frygisk-dominant.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/ii-v-i-kadensen.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/kirketonearter-ett-system-sju-uttrykk.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/kvintsirkelen.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/moduser-og-tonalt-sentrum.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/romertall-i-musikk.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/rytme-i-sju-aatte.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/septimakkorder.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/stemmeforing.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/toner-og-intervaller.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "artikler/treklanger-fra-grunnform-til-omvending.html",
+      "bytes": 9548,
+      "sha256": "1ee4ae63e4b19df8b9c274d77d4768e2d940c894f0ae42afa81115d9996d087f"
+    },
+    {
+      "path": "audio/LICENSE.txt",
+      "bytes": 1658,
+      "sha256": "579d501231b406cc32ff03d1f1bd04151d3173a3625a3f3eeb8d476b0c6bf285"
+    },
+    {
+      "path": "audio/SALAMANDER-README.txt",
+      "bytes": 1883,
+      "sha256": "04ddba91bcafcb4c53dee7b004479f79af47bb92574f06bbe741b00c3ca64e0e"
+    },
+    {
+      "path": "audio/bass-28.mp3",
+      "bytes": 14275,
+      "sha256": "b6c5c27fbcbf83ddfbf8e51bf07cc1474b84af0bed1383250e1301d6f3550a30"
+    },
+    {
+      "path": "audio/bass-31.mp3",
+      "bytes": 15393,
+      "sha256": "926812d3ce44bbaa81f826e3fad0c4a6885170ad6aeaf36d9796c711c6ebf003"
+    },
+    {
+      "path": "audio/bass-34.mp3",
+      "bytes": 15211,
+      "sha256": "a8602d3e61ff91dc187473e6df0b8dcfd13b8e11965b766ff71fedfb134d7fbd"
+    },
+    {
+      "path": "audio/bass-37.mp3",
+      "bytes": 15913,
+      "sha256": "1194be63dceafab97aea87005e0d4fd312bb0aaac6a539229ca9df324ae8e091"
+    },
+    {
+      "path": "audio/bass-40.mp3",
+      "bytes": 16095,
+      "sha256": "fb55c40f6e557fa47f5294fe535bc816c6b2d2e5067635d6d70d2f4e3b51aeb3"
+    },
+    {
+      "path": "audio/bass-43.mp3",
+      "bytes": 16849,
+      "sha256": "6a5e8ad64a123f715de09da31cbce2b69ca2a8635ebcc3ee22f1eb93b473a50b"
+    },
+    {
+      "path": "audio/bass-46.mp3",
+      "bytes": 17551,
+      "sha256": "b3ac2059de8bddfe3767b9c64e22af957262ba15b6ee1e1c6d594e742f8292c6"
+    },
+    {
+      "path": "audio/bass-49.mp3",
+      "bytes": 16069,
+      "sha256": "795580775042363e7338105a05a2a35a576a4ede82a6dea87c499dce70be2ec0"
+    },
+    {
+      "path": "audio/bass-52.mp3",
+      "bytes": 15861,
+      "sha256": "6d49fe9700d835683b918a3ddaa958b4ddb3e2a9f0db23dce28860018fc158ac"
+    },
+    {
+      "path": "audio/bass-55.mp3",
+      "bytes": 16693,
+      "sha256": "8554ed0559a50d6fd85efea072e0398a32e61098d1bad4cc8091859c98ae3ca9"
+    },
+    {
+      "path": "audio/bass-58.mp3",
+      "bytes": 17317,
+      "sha256": "f17bf323ecf3a8f8a937a654bdb1a53ee0457f96ec161f7277eab2711abb7f76"
+    },
+    {
+      "path": "audio/bass-61.mp3",
+      "bytes": 18877,
+      "sha256": "72ee50ff1db5bd5a99d82ad6a68454eb96ee86a05fe8038059e72290fa6528bd"
+    },
+    {
+      "path": "audio/bass-64.mp3",
+      "bytes": 19735,
+      "sha256": "460406fa476b7466cd4985b341001ad844d3ce018cd396d0fc610f723851e572"
+    },
+    {
+      "path": "audio/grand-48.mp3",
+      "bytes": 60934,
+      "sha256": "a9eeae92101d60470176fdda4a04eaf0743ebf8e12cd7aa9f79910e67596d47a"
+    },
+    {
+      "path": "audio/grand-51.mp3",
+      "bytes": 63564,
+      "sha256": "6c55dc532cfb25441a1a2ce440346a11ecb96b0d32847d5700a16c0cb0dc1417"
+    },
+    {
+      "path": "audio/grand-54.mp3",
+      "bytes": 60717,
+      "sha256": "1af596a66a0f220a706fd9bbe736fa54a403d00945c3c838d0dd0011851d5142"
+    },
+    {
+      "path": "audio/grand-57.mp3",
+      "bytes": 60545,
+      "sha256": "19ffae6c87bfbf3748ac8cf9a384876ea68681316364370e8fa96415455b01c4"
+    },
+    {
+      "path": "audio/grand-60.mp3",
+      "bytes": 63078,
+      "sha256": "2d3a2f15e5349f642e469f239d37a5bc26249ecbfc0ac7b3fb24e3bcf533e5ce"
+    },
+    {
+      "path": "audio/grand-63.mp3",
+      "bytes": 52835,
+      "sha256": "d016f521d5bbbc47e354f573d2357154a8986af8488eb27fbaccd5af6f9bd79f"
+    },
+    {
+      "path": "audio/grand-66.mp3",
+      "bytes": 53465,
+      "sha256": "74ffbd9ebc303f27187a80d4003b4b989be8af0d40b84343149d172b0ff3102b"
+    },
+    {
+      "path": "audio/grand-69.mp3",
+      "bytes": 48624,
+      "sha256": "2a9d6dd80f32ac68ebe6a49bf26e48f674f8a8803a906632bdf8eb1b5a27d541"
+    },
+    {
+      "path": "audio/grand-72.mp3",
+      "bytes": 48048,
+      "sha256": "c53e0828e9ed85926271f9c30a9f9b4c644f0afdbfb55295879f6e5ee69b465f"
+    },
+    {
+      "path": "audio/grand-75.mp3",
+      "bytes": 45540,
+      "sha256": "7f6356b8234e52e7dfd169c4bd56e2566ef756843244c4a7e5636d379ae47a18"
+    },
+    {
+      "path": "audio/grand-78.mp3",
+      "bytes": 40930,
+      "sha256": "c416615e40c3deb25e206e25a70b2818f0f0bf594287a90a8972592d8448a0f7"
+    },
+    {
+      "path": "audio/grand-81.mp3",
+      "bytes": 39393,
+      "sha256": "5d961b23577aa16232f490e1bff684cf4d233e4eff82a961ad5e2a566262202e"
+    },
+    {
+      "path": "audio/grand-84.mp3",
+      "bytes": 30886,
+      "sha256": "700a0466a77cbc8cc0bf2d3e706a1bb0dc81038fbf693564dccef8600ab1df3e"
+    },
+    {
+      "path": "audio/hihat.mp3",
+      "bytes": 5030,
+      "sha256": "e060632c97f0e272fe5c0805d76adbaf30f90d57dc661a2f5e2062533c77a15e"
+    },
+    {
+      "path": "audio/jazz-bass-28.mp3",
+      "bytes": 14821,
+      "sha256": "e0992776e6e789c6654406c78d49ee994cb9abb4a4592708f2a2a1c8e139cd34"
+    },
+    {
+      "path": "audio/jazz-bass-31.mp3",
+      "bytes": 14379,
+      "sha256": "03bbb958f050cf8351e3693963e15ab939c038876f1fbcaa45dc84d32b1aea3a"
+    },
+    {
+      "path": "audio/jazz-bass-34.mp3",
+      "bytes": 14171,
+      "sha256": "031d586d4223352db5bf269da8f0814f2248c165ec5b843cd13d9e7f8a935656"
+    },
+    {
+      "path": "audio/jazz-bass-37.mp3",
+      "bytes": 15315,
+      "sha256": "bf4db8c1ea49ed08b47e00a6ad7c62f12ab4b85f0234f55a946049d58a2e397b"
+    },
+    {
+      "path": "audio/jazz-bass-40.mp3",
+      "bytes": 15783,
+      "sha256": "d5e537a0b3d3b842561531bada52cd6fb229769dd0f9cf8a05343f88e24e7d1e"
+    },
+    {
+      "path": "audio/jazz-bass-43.mp3",
+      "bytes": 14509,
+      "sha256": "09f54a76e7c5804269b97b895ead2b8c2b5161f2ea95f26bbb833d8218358325"
+    },
+    {
+      "path": "audio/jazz-bass-46.mp3",
+      "bytes": 14431,
+      "sha256": "ce15f6aea8648c4b74b63fcdd19b1630bb7d9c30059f0c93f9c1d087195859e7"
+    },
+    {
+      "path": "audio/jazz-bass-49.mp3",
+      "bytes": 16771,
+      "sha256": "834c45ce19b528b85187f1bdb3ff8cce115fc0dc3afd7aecd795a7e061df8a49"
+    },
+    {
+      "path": "audio/jazz-bass-52.mp3",
+      "bytes": 16381,
+      "sha256": "5260e623c1757533a88eb6762f18b6835d416e978689f2397df3045c7796d603"
+    },
+    {
+      "path": "audio/jazz-bass-55.mp3",
+      "bytes": 15939,
+      "sha256": "9b381847ea48f82f2f247ec26d16180fa419db2a038e8287dfc823f2d01274bd"
+    },
+    {
+      "path": "audio/jazz-bass-58.mp3",
+      "bytes": 15965,
+      "sha256": "2b5dec47754e1fdaab03a67a33a50880fe3b5e0000348852815bec0d3c372257"
+    },
+    {
+      "path": "audio/jazz-bass-61.mp3",
+      "bytes": 16459,
+      "sha256": "bb6cc96f06ab2628959dcf3bc9e8914cc003e5e36f2a15f80f04249240377623"
+    },
+    {
+      "path": "audio/jazz-bass-64.mp3",
+      "bytes": 16901,
+      "sha256": "b1ec149da4298113789cef692876a9b45356d4483e924a1cb3057d89b300a41f"
+    },
+    {
+      "path": "audio/kick.mp3",
+      "bytes": 6720,
+      "sha256": "80e19b98ccccb9abf9279ea183c97de2cb7078456b40ca51211552c21b4d0ac6"
+    },
+    {
+      "path": "audio/piano-48.mp3",
+      "bytes": 20437,
+      "sha256": "3173362ab63be26db5ea64c35c171299e9836296b3023adb249e2809d20d8cd9"
+    },
+    {
+      "path": "audio/piano-51.mp3",
+      "bytes": 20333,
+      "sha256": "37548da76846d6c34e784470214956b582ad687aaff476331cc188ff775c8677"
+    },
+    {
+      "path": "audio/piano-54.mp3",
+      "bytes": 21893,
+      "sha256": "baeba58701c701eff069a79a4f6b15bd5d98e6bcaa909fd526dbc12f3ddd3e65"
+    },
+    {
+      "path": "audio/piano-57.mp3",
+      "bytes": 23765,
+      "sha256": "0dc407415e2f76e385eb4b1dda91a6defad0f19abb63882da2bfeefa7586dfd4"
+    },
+    {
+      "path": "audio/piano-60.mp3",
+      "bytes": 19553,
+      "sha256": "096c7cdb68e9a0cb645a932eea80562a5c7d43f17dd94d231135f883e860048d"
+    },
+    {
+      "path": "audio/piano-63.mp3",
+      "bytes": 20385,
+      "sha256": "013ed2db02a3de23c57b4062dfcc55d41a6e7326b365abdf9f5ce9b3d7361eb5"
+    },
+    {
+      "path": "audio/piano-66.mp3",
+      "bytes": 17083,
+      "sha256": "3c67f551169df15889408caf6c54e17f500787908cc857603d49965a7b0e750a"
+    },
+    {
+      "path": "audio/piano-69.mp3",
+      "bytes": 18539,
+      "sha256": "01a2dfb73f7b2a2d36400fbd30203eb5d2750c0e8006907bd16d6d25dbf9534f"
+    },
+    {
+      "path": "audio/piano-72.mp3",
+      "bytes": 19761,
+      "sha256": "a4f7ce39ade2b62dde4c4283ae202dd729433d54630e25b8d055afcfb9fda019"
+    },
+    {
+      "path": "audio/piano-75.mp3",
+      "bytes": 19943,
+      "sha256": "a39799194dd472b197b6240b980c1c878662588acb860f5203ae7f69c06d0183"
+    },
+    {
+      "path": "audio/piano-78.mp3",
+      "bytes": 19605,
+      "sha256": "514dbdd5f3a1106a9c4463ee564386ef625bbad623df05b589e9256d307b758b"
+    },
+    {
+      "path": "audio/piano-81.mp3",
+      "bytes": 17421,
+      "sha256": "cb240e65d7937fa15887e76c17e6a7dcbac5a8df50a30b33674028eee2855c07"
+    },
+    {
+      "path": "audio/piano-84.mp3",
+      "bytes": 17837,
+      "sha256": "a199829f5b6d6bbcd266fbd48a3309fd5ff42322e0ff001524a66550cace8384"
+    },
+    {
+      "path": "audio/snare.mp3",
+      "bytes": 6379,
+      "sha256": "77c64a0735d1affa29c649d95eeef82710616d2a0b933a100cfa0b92cf496028"
+    },
+    {
+      "path": "backingtracks.html",
+      "bytes": 15686,
+      "sha256": "724c6875318c2053e033bf878c2246809ab13b538d78e70ff6d3ba9b7d14adf2"
+    },
+    {
+      "path": "betaling-test.html",
+      "bytes": 11647,
+      "sha256": "c1254762347162dc443fb833fe698d409db7bcb46f267ac7b0c6fdaf69910768"
+    },
+    {
+      "path": "chord-tool.css",
+      "bytes": 24064,
+      "sha256": "a347ba8b6aea511e4cd77ce607fe287850d7258748c19749f4c920c8d22b6ca5"
+    },
+    {
+      "path": "chord-tool.js",
+      "bytes": 21863,
+      "sha256": "e5c6d61fc96855c16022dad93499a341e9bef2de66f84b6985f794d7e790b81b"
+    },
+    {
+      "path": "cms-seed.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "design-system.css",
+      "bytes": 7564,
+      "sha256": "0a8dc32be4b2a777f7060cc42732bb59b881830361611f2a7aae44d1ddc6235b"
+    },
+    {
+      "path": "editor.css",
+      "bytes": 13119,
+      "sha256": "e1fbfdf3b94f7a5fef4476a84f98503300f2842769c26ecc08372f8b8d918286"
+    },
+    {
+      "path": "en/about.css",
+      "bytes": 4781,
+      "sha256": "35f035d1e0c3f146eed51b16a3c4cafc2f8387bc081905ac0d9b0fd6ded9ba32"
+    },
+    {
+      "path": "en/account.8f006baf62.js",
+      "bytes": 1404,
+      "sha256": "8f006baf62145998c28eec1260cb8a39db36338addee69b4b54f51826b9bd2a2"
+    },
+    {
+      "path": "en/account.css",
+      "bytes": 7689,
+      "sha256": "da4ca26df281febd425fd844faf6d0feb287dd9fe8b151358b209e1c78ab29f2"
+    },
+    {
+      "path": "en/account.js",
+      "bytes": 1404,
+      "sha256": "8f006baf62145998c28eec1260cb8a39db36338addee69b4b54f51826b9bd2a2"
+    },
+    {
+      "path": "en/akkorder.html",
+      "bytes": 15807,
+      "sha256": "e360b971d0ccaea55953c4b38cf8926c69fa52b10c29bc9a6cc05478ea50b25b"
+    },
+    {
+      "path": "en/app.js",
+      "bytes": 29792,
+      "sha256": "75c885aee0bb1175f43b21bc1496b50c077b4bc67ec6430bf31148bbee238929"
+    },
+    {
+      "path": "en/apple-touch-icon.png",
+      "bytes": 129853,
+      "sha256": "7b87262c5232fd3a14479b9626398ae963648f7ada385de0c3d777f080304ce8"
+    },
+    {
+      "path": "en/article-quiz.js",
+      "bytes": 6665,
+      "sha256": "c182df0a1d279bbc36783be7fb4af009cdc5f417dded2b7b787b537d7eac5ec8"
+    },
+    {
+      "path": "en/articles.css",
+      "bytes": 35268,
+      "sha256": "b767bce948b0f2ebd019737ed7c56d33c85c1d1b3f0ec5f2ef5f158732132cbc"
+    },
+    {
+      "path": "en/articles.js",
+      "bytes": 8294,
+      "sha256": "2891b011648cc38c1385305110eacff75f5d0b1eeae8d47d257d382ed17ddb95"
+    },
+    {
+      "path": "en/artikler.html",
+      "bytes": 32191,
+      "sha256": "380978404a1e35c321f975c935e1c75865e69d438cda266659ed63c8b9b9b75f"
+    },
+    {
+      "path": "en/artikler/bygg-akkorder-i-en-toneart.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/din-forste-improvisasjon.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/dorisk-og-eolisk.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/dur-og-moll.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/ett-skalakart-nye-maltoner.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/harmonisk-moll-og-frygisk-dominant.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/ii-v-i-kadensen.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/kirketonearter-ett-system-sju-uttrykk.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/kvintsirkelen.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/moduser-og-tonalt-sentrum.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/romertall-i-musikk.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/rytme-i-sju-aatte.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/septimakkorder.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/stemmeforing.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/toner-og-intervaller.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/artikler/treklanger-fra-grunnform-til-omvending.html",
+      "bytes": 9567,
+      "sha256": "1b469d38c5566d1aa05f3c1a675a732d39ffa6ba5cf4580a6d394a4a4b6256b4"
+    },
+    {
+      "path": "en/audio/LICENSE.txt",
+      "bytes": 1658,
+      "sha256": "579d501231b406cc32ff03d1f1bd04151d3173a3625a3f3eeb8d476b0c6bf285"
+    },
+    {
+      "path": "en/audio/SALAMANDER-README.txt",
+      "bytes": 1883,
+      "sha256": "04ddba91bcafcb4c53dee7b004479f79af47bb92574f06bbe741b00c3ca64e0e"
+    },
+    {
+      "path": "en/audio/bass-28.mp3",
+      "bytes": 14275,
+      "sha256": "b6c5c27fbcbf83ddfbf8e51bf07cc1474b84af0bed1383250e1301d6f3550a30"
+    },
+    {
+      "path": "en/audio/bass-31.mp3",
+      "bytes": 15393,
+      "sha256": "926812d3ce44bbaa81f826e3fad0c4a6885170ad6aeaf36d9796c711c6ebf003"
+    },
+    {
+      "path": "en/audio/bass-34.mp3",
+      "bytes": 15211,
+      "sha256": "a8602d3e61ff91dc187473e6df0b8dcfd13b8e11965b766ff71fedfb134d7fbd"
+    },
+    {
+      "path": "en/audio/bass-37.mp3",
+      "bytes": 15913,
+      "sha256": "1194be63dceafab97aea87005e0d4fd312bb0aaac6a539229ca9df324ae8e091"
+    },
+    {
+      "path": "en/audio/bass-40.mp3",
+      "bytes": 16095,
+      "sha256": "fb55c40f6e557fa47f5294fe535bc816c6b2d2e5067635d6d70d2f4e3b51aeb3"
+    },
+    {
+      "path": "en/audio/bass-43.mp3",
+      "bytes": 16849,
+      "sha256": "6a5e8ad64a123f715de09da31cbce2b69ca2a8635ebcc3ee22f1eb93b473a50b"
+    },
+    {
+      "path": "en/audio/bass-46.mp3",
+      "bytes": 17551,
+      "sha256": "b3ac2059de8bddfe3767b9c64e22af957262ba15b6ee1e1c6d594e742f8292c6"
+    },
+    {
+      "path": "en/audio/bass-49.mp3",
+      "bytes": 16069,
+      "sha256": "795580775042363e7338105a05a2a35a576a4ede82a6dea87c499dce70be2ec0"
+    },
+    {
+      "path": "en/audio/bass-52.mp3",
+      "bytes": 15861,
+      "sha256": "6d49fe9700d835683b918a3ddaa958b4ddb3e2a9f0db23dce28860018fc158ac"
+    },
+    {
+      "path": "en/audio/bass-55.mp3",
+      "bytes": 16693,
+      "sha256": "8554ed0559a50d6fd85efea072e0398a32e61098d1bad4cc8091859c98ae3ca9"
+    },
+    {
+      "path": "en/audio/bass-58.mp3",
+      "bytes": 17317,
+      "sha256": "f17bf323ecf3a8f8a937a654bdb1a53ee0457f96ec161f7277eab2711abb7f76"
+    },
+    {
+      "path": "en/audio/bass-61.mp3",
+      "bytes": 18877,
+      "sha256": "72ee50ff1db5bd5a99d82ad6a68454eb96ee86a05fe8038059e72290fa6528bd"
+    },
+    {
+      "path": "en/audio/bass-64.mp3",
+      "bytes": 19735,
+      "sha256": "460406fa476b7466cd4985b341001ad844d3ce018cd396d0fc610f723851e572"
+    },
+    {
+      "path": "en/audio/grand-48.mp3",
+      "bytes": 60934,
+      "sha256": "a9eeae92101d60470176fdda4a04eaf0743ebf8e12cd7aa9f79910e67596d47a"
+    },
+    {
+      "path": "en/audio/grand-51.mp3",
+      "bytes": 63564,
+      "sha256": "6c55dc532cfb25441a1a2ce440346a11ecb96b0d32847d5700a16c0cb0dc1417"
+    },
+    {
+      "path": "en/audio/grand-54.mp3",
+      "bytes": 60717,
+      "sha256": "1af596a66a0f220a706fd9bbe736fa54a403d00945c3c838d0dd0011851d5142"
+    },
+    {
+      "path": "en/audio/grand-57.mp3",
+      "bytes": 60545,
+      "sha256": "19ffae6c87bfbf3748ac8cf9a384876ea68681316364370e8fa96415455b01c4"
+    },
+    {
+      "path": "en/audio/grand-60.mp3",
+      "bytes": 63078,
+      "sha256": "2d3a2f15e5349f642e469f239d37a5bc26249ecbfc0ac7b3fb24e3bcf533e5ce"
+    },
+    {
+      "path": "en/audio/grand-63.mp3",
+      "bytes": 52835,
+      "sha256": "d016f521d5bbbc47e354f573d2357154a8986af8488eb27fbaccd5af6f9bd79f"
+    },
+    {
+      "path": "en/audio/grand-66.mp3",
+      "bytes": 53465,
+      "sha256": "74ffbd9ebc303f27187a80d4003b4b989be8af0d40b84343149d172b0ff3102b"
+    },
+    {
+      "path": "en/audio/grand-69.mp3",
+      "bytes": 48624,
+      "sha256": "2a9d6dd80f32ac68ebe6a49bf26e48f674f8a8803a906632bdf8eb1b5a27d541"
+    },
+    {
+      "path": "en/audio/grand-72.mp3",
+      "bytes": 48048,
+      "sha256": "c53e0828e9ed85926271f9c30a9f9b4c644f0afdbfb55295879f6e5ee69b465f"
+    },
+    {
+      "path": "en/audio/grand-75.mp3",
+      "bytes": 45540,
+      "sha256": "7f6356b8234e52e7dfd169c4bd56e2566ef756843244c4a7e5636d379ae47a18"
+    },
+    {
+      "path": "en/audio/grand-78.mp3",
+      "bytes": 40930,
+      "sha256": "c416615e40c3deb25e206e25a70b2818f0f0bf594287a90a8972592d8448a0f7"
+    },
+    {
+      "path": "en/audio/grand-81.mp3",
+      "bytes": 39393,
+      "sha256": "5d961b23577aa16232f490e1bff684cf4d233e4eff82a961ad5e2a566262202e"
+    },
+    {
+      "path": "en/audio/grand-84.mp3",
+      "bytes": 30886,
+      "sha256": "700a0466a77cbc8cc0bf2d3e706a1bb0dc81038fbf693564dccef8600ab1df3e"
+    },
+    {
+      "path": "en/audio/hihat.mp3",
+      "bytes": 5030,
+      "sha256": "e060632c97f0e272fe5c0805d76adbaf30f90d57dc661a2f5e2062533c77a15e"
+    },
+    {
+      "path": "en/audio/jazz-bass-28.mp3",
+      "bytes": 14821,
+      "sha256": "e0992776e6e789c6654406c78d49ee994cb9abb4a4592708f2a2a1c8e139cd34"
+    },
+    {
+      "path": "en/audio/jazz-bass-31.mp3",
+      "bytes": 14379,
+      "sha256": "03bbb958f050cf8351e3693963e15ab939c038876f1fbcaa45dc84d32b1aea3a"
+    },
+    {
+      "path": "en/audio/jazz-bass-34.mp3",
+      "bytes": 14171,
+      "sha256": "031d586d4223352db5bf269da8f0814f2248c165ec5b843cd13d9e7f8a935656"
+    },
+    {
+      "path": "en/audio/jazz-bass-37.mp3",
+      "bytes": 15315,
+      "sha256": "bf4db8c1ea49ed08b47e00a6ad7c62f12ab4b85f0234f55a946049d58a2e397b"
+    },
+    {
+      "path": "en/audio/jazz-bass-40.mp3",
+      "bytes": 15783,
+      "sha256": "d5e537a0b3d3b842561531bada52cd6fb229769dd0f9cf8a05343f88e24e7d1e"
+    },
+    {
+      "path": "en/audio/jazz-bass-43.mp3",
+      "bytes": 14509,
+      "sha256": "09f54a76e7c5804269b97b895ead2b8c2b5161f2ea95f26bbb833d8218358325"
+    },
+    {
+      "path": "en/audio/jazz-bass-46.mp3",
+      "bytes": 14431,
+      "sha256": "ce15f6aea8648c4b74b63fcdd19b1630bb7d9c30059f0c93f9c1d087195859e7"
+    },
+    {
+      "path": "en/audio/jazz-bass-49.mp3",
+      "bytes": 16771,
+      "sha256": "834c45ce19b528b85187f1bdb3ff8cce115fc0dc3afd7aecd795a7e061df8a49"
+    },
+    {
+      "path": "en/audio/jazz-bass-52.mp3",
+      "bytes": 16381,
+      "sha256": "5260e623c1757533a88eb6762f18b6835d416e978689f2397df3045c7796d603"
+    },
+    {
+      "path": "en/audio/jazz-bass-55.mp3",
+      "bytes": 15939,
+      "sha256": "9b381847ea48f82f2f247ec26d16180fa419db2a038e8287dfc823f2d01274bd"
+    },
+    {
+      "path": "en/audio/jazz-bass-58.mp3",
+      "bytes": 15965,
+      "sha256": "2b5dec47754e1fdaab03a67a33a50880fe3b5e0000348852815bec0d3c372257"
+    },
+    {
+      "path": "en/audio/jazz-bass-61.mp3",
+      "bytes": 16459,
+      "sha256": "bb6cc96f06ab2628959dcf3bc9e8914cc003e5e36f2a15f80f04249240377623"
+    },
+    {
+      "path": "en/audio/jazz-bass-64.mp3",
+      "bytes": 16901,
+      "sha256": "b1ec149da4298113789cef692876a9b45356d4483e924a1cb3057d89b300a41f"
+    },
+    {
+      "path": "en/audio/kick.mp3",
+      "bytes": 6720,
+      "sha256": "80e19b98ccccb9abf9279ea183c97de2cb7078456b40ca51211552c21b4d0ac6"
+    },
+    {
+      "path": "en/audio/piano-48.mp3",
+      "bytes": 20437,
+      "sha256": "3173362ab63be26db5ea64c35c171299e9836296b3023adb249e2809d20d8cd9"
+    },
+    {
+      "path": "en/audio/piano-51.mp3",
+      "bytes": 20333,
+      "sha256": "37548da76846d6c34e784470214956b582ad687aaff476331cc188ff775c8677"
+    },
+    {
+      "path": "en/audio/piano-54.mp3",
+      "bytes": 21893,
+      "sha256": "baeba58701c701eff069a79a4f6b15bd5d98e6bcaa909fd526dbc12f3ddd3e65"
+    },
+    {
+      "path": "en/audio/piano-57.mp3",
+      "bytes": 23765,
+      "sha256": "0dc407415e2f76e385eb4b1dda91a6defad0f19abb63882da2bfeefa7586dfd4"
+    },
+    {
+      "path": "en/audio/piano-60.mp3",
+      "bytes": 19553,
+      "sha256": "096c7cdb68e9a0cb645a932eea80562a5c7d43f17dd94d231135f883e860048d"
+    },
+    {
+      "path": "en/audio/piano-63.mp3",
+      "bytes": 20385,
+      "sha256": "013ed2db02a3de23c57b4062dfcc55d41a6e7326b365abdf9f5ce9b3d7361eb5"
+    },
+    {
+      "path": "en/audio/piano-66.mp3",
+      "bytes": 17083,
+      "sha256": "3c67f551169df15889408caf6c54e17f500787908cc857603d49965a7b0e750a"
+    },
+    {
+      "path": "en/audio/piano-69.mp3",
+      "bytes": 18539,
+      "sha256": "01a2dfb73f7b2a2d36400fbd30203eb5d2750c0e8006907bd16d6d25dbf9534f"
+    },
+    {
+      "path": "en/audio/piano-72.mp3",
+      "bytes": 19761,
+      "sha256": "a4f7ce39ade2b62dde4c4283ae202dd729433d54630e25b8d055afcfb9fda019"
+    },
+    {
+      "path": "en/audio/piano-75.mp3",
+      "bytes": 19943,
+      "sha256": "a39799194dd472b197b6240b980c1c878662588acb860f5203ae7f69c06d0183"
+    },
+    {
+      "path": "en/audio/piano-78.mp3",
+      "bytes": 19605,
+      "sha256": "514dbdd5f3a1106a9c4463ee564386ef625bbad623df05b589e9256d307b758b"
+    },
+    {
+      "path": "en/audio/piano-81.mp3",
+      "bytes": 17421,
+      "sha256": "cb240e65d7937fa15887e76c17e6a7dcbac5a8df50a30b33674028eee2855c07"
+    },
+    {
+      "path": "en/audio/piano-84.mp3",
+      "bytes": 17837,
+      "sha256": "a199829f5b6d6bbcd266fbd48a3309fd5ff42322e0ff001524a66550cace8384"
+    },
+    {
+      "path": "en/audio/snare.mp3",
+      "bytes": 6379,
+      "sha256": "77c64a0735d1affa29c649d95eeef82710616d2a0b933a100cfa0b92cf496028"
+    },
+    {
+      "path": "en/backingtracks.html",
+      "bytes": 15764,
+      "sha256": "6057423da5f018167c6708082ec7bd693cc9bd97e7ea80d3869a3b5799aa74ef"
+    },
+    {
+      "path": "en/betaling-test.html",
+      "bytes": 11763,
+      "sha256": "8ba5fa03d1a47896a320ec3064715da156ec63b4e8974fcfc49a93bb72ba31ea"
+    },
+    {
+      "path": "en/chord-tool.css",
+      "bytes": 24064,
+      "sha256": "a347ba8b6aea511e4cd77ce607fe287850d7258748c19749f4c920c8d22b6ca5"
+    },
+    {
+      "path": "en/chord-tool.js",
+      "bytes": 21865,
+      "sha256": "effe7a46d8a0f18b09dfbad3da6f8ae8665abceaabf4409baa5e90e511147020"
+    },
+    {
+      "path": "en/design-system.css",
+      "bytes": 7564,
+      "sha256": "0a8dc32be4b2a777f7060cc42732bb59b881830361611f2a7aae44d1ddc6235b"
+    },
+    {
+      "path": "en/f03-laeringsreise.html",
+      "bytes": 13435,
+      "sha256": "5479a4fb5eb060615a935921395bf449c06e5ace71f6fe756828d613a12316a7"
+    },
+    {
+      "path": "en/feedback.css",
+      "bytes": 5501,
+      "sha256": "8040e8b98cced5087448d7cf6d46dc79d816f308a3a1865635c9cb58adb9162b"
+    },
+    {
+      "path": "en/feedback.js",
+      "bytes": 14453,
+      "sha256": "f0a16e9b253cd7b011bcae5751a3b0db34743be0197f8f108b4c201b5c3233a1"
+    },
+    {
+      "path": "en/global-search.css",
+      "bytes": 1410,
+      "sha256": "560048fe7df6343ac45d45130b989e2c7d51c2694a66198f9e0295c99cd063b8"
+    },
+    {
+      "path": "en/global-search.js",
+      "bytes": 3734,
+      "sha256": "9a05602d601d99cae8edf318bd5d2d579e20c7127aa4e05a4519ae6781c8c473"
+    },
+    {
+      "path": "en/grunnstudier.css",
+      "bytes": 4326,
+      "sha256": "98c35f7db6abb17a478482134c897b6d54f21002bbc27c764b576a7bc69dd712"
+    },
+    {
+      "path": "en/grunnstudier.html",
+      "bytes": 9484,
+      "sha256": "37c1019a3673836532b2e8c90f71b69c0d6514d6dbb1fa012e3ffce4d1e3519b"
+    },
+    {
+      "path": "en/home-2.css",
+      "bytes": 13132,
+      "sha256": "4a843d2c85f732b1023f6c1b73e108c68a03a570221e7853bdab95be20186c16"
+    },
+    {
+      "path": "en/home.css",
+      "bytes": 17730,
+      "sha256": "f8c3e32d65248968921755e48866f00049b42346777437697c86d73f1443c6e9"
+    },
+    {
+      "path": "en/images/articles/bygg-akkorder-i-en-toneart.svg",
+      "bytes": 4423,
+      "sha256": "1ffeea0aa5dbf9c8324ee8a938ecb2080ec055a470f22be3b42232612120b7bc"
+    },
+    {
+      "path": "en/images/articles/din-forste-improvisasjon.svg",
+      "bytes": 2271,
+      "sha256": "a6e83e05fc2a82a89d3dd37581915cd0b87476b7f67e9f55861c703bdd2c6dcc"
+    },
+    {
+      "path": "en/images/articles/dorisk-og-eolisk.svg",
+      "bytes": 4079,
+      "sha256": "f05c516cba0254016de98fbade17762f8d0668beb53a558ec3ed5de88c1526a6"
+    },
+    {
+      "path": "en/images/articles/dur-og-moll.svg",
+      "bytes": 2691,
+      "sha256": "2ba0cae79de8f957a646ff2793dc0d5708bd41b7de7b4efc2140ea52b77069c7"
+    },
+    {
+      "path": "en/images/articles/ett-skalakart-nye-maltoner.svg",
+      "bytes": 3125,
+      "sha256": "7e4fe2f0a52edfdf6c964497a103450127854b09c3acf021b623eeea2ebe359c"
+    },
+    {
+      "path": "en/images/articles/harmonisk-moll-og-frygisk-dominant.svg",
+      "bytes": 4256,
+      "sha256": "8eef9e382fd21b238eec73f422ff81c08d7108b5893ea5335ffefbd543398265"
+    },
+    {
+      "path": "en/images/articles/ii-v-i-kadensen.svg",
+      "bytes": 2406,
+      "sha256": "bd4cebf92e42b29ef9699b7250978a0ae9e363bc6b74074785832cc45cc0e8fd"
+    },
+    {
+      "path": "en/images/articles/kirketonearter-ett-system-sju-uttrykk.svg",
+      "bytes": 5671,
+      "sha256": "2f92a504acb5d25b4ad862a5fbc4921e38da26017ae9c828a44228eab6f7da98"
+    },
+    {
+      "path": "en/images/articles/kvintsirkelen.svg",
+      "bytes": 7537,
+      "sha256": "f22bc99929a6024a9cc3658911bb8e229742907d701b969078b8089ae3957bf9"
+    },
+    {
+      "path": "en/images/articles/moduser-og-tonalt-sentrum.svg",
+      "bytes": 2746,
+      "sha256": "f6c187a417a9d5c5fc5cb0eb3e0010e85989384b3eddac8b54a4d1969a098953"
+    },
+    {
+      "path": "en/images/articles/romertall-i-musikk.svg",
+      "bytes": 4436,
+      "sha256": "b226fd458b742e709440b71ea33b464b43ed2fece0631df3b1d8960213c7a84a"
+    },
+    {
+      "path": "en/images/articles/rytme-i-sju-aatte.svg",
+      "bytes": 2528,
+      "sha256": "525c8a6362ab4970e4be9ff2e80e94e6684953dc6c4d63d2398dc67286b1ca65"
+    },
+    {
+      "path": "en/images/articles/septimakkorder.svg",
+      "bytes": 2487,
+      "sha256": "eac757a0ea1c369170927507ce49c32ddb596f0b50526c0733b8dc930bfc32d5"
+    },
+    {
+      "path": "en/images/articles/stemmeforing.svg",
+      "bytes": 2961,
+      "sha256": "f4a3cef794e1ca1ee2faa9805034a27dbe34ffa163a8220fa99753137e416530"
+    },
+    {
+      "path": "en/images/articles/toner-og-intervaller.svg",
+      "bytes": 2165,
+      "sha256": "193994eeead5316a5ae53e8797d483147597e6f3458d7612b11212e5a8848221"
+    },
+    {
+      "path": "en/images/articles/treklanger-fra-grunnform-til-omvending.svg",
+      "bytes": 3093,
+      "sha256": "82d8e338998993d558eac1ac2edebf0412c8c0d1e63304bb6db1f83deda36d3b"
+    },
+    {
+      "path": "en/images/earth-atlas.svg",
+      "bytes": 6382,
+      "sha256": "6b3068107591a31e2416bec0cf2a133c66eca7bb2150ebc664e81a141706aaf8"
+    },
+    {
+      "path": "en/images/earth-atlas.webp",
+      "bytes": 202148,
+      "sha256": "5af6dd315c0a6ea7d2b515470b7a65d0961fa69b2ae93813229736530688ce36"
+    },
+    {
+      "path": "en/images/modus-geometric.svg",
+      "bytes": 353,
+      "sha256": "f95ecc67791d744209dc625d6960055cf08c31e9d1e5d166fbc63cff543bc7c1"
+    },
+    {
+      "path": "en/images/modus-waves.svg",
+      "bytes": 4700,
+      "sha256": "0db1c2f29987a3a396873e4d381e573c2949b874cded0728628b74616378ad4d"
+    },
+    {
+      "path": "en/images/mountain-lake.webp",
+      "bytes": 327190,
+      "sha256": "894069fc1dbf846f682ee3e2fbcab78a04fa6d663aa1b9f2f3e79b234ec51092"
+    },
+    {
+      "path": "en/index.html",
+      "bytes": 18974,
+      "sha256": "12650dbbea7dc22f3136ee27d6f7c91dfeded3d643b63d1b519931984980fb8f"
+    },
+    {
+      "path": "en/intro-film.css",
+      "bytes": 2166,
+      "sha256": "3d3107986cd1233d0e4dfc0479a38a713bd5d6fe33317b2641509259ea02b4b2"
+    },
+    {
+      "path": "en/intro-film.js",
+      "bytes": 2751,
+      "sha256": "2c64153ef2ada4aa73c9c7ef4b5be6dd7383fefdcd8264e963ffcf3d9273ba30"
+    },
+    {
+      "path": "en/konto.html",
+      "bytes": 14361,
+      "sha256": "5f185666345d21d5a44c0d041e4b9e186a3246cd18566cbdb15bb3988a959398"
+    },
+    {
+      "path": "en/laer-dorisk.html",
+      "bytes": 9454,
+      "sha256": "e48e9b06e90dbbf9a1358c4de2e030b61b0fa21dca110e51ade11281462b0dfe"
+    },
+    {
+      "path": "en/laereplan.html",
+      "bytes": 15843,
+      "sha256": "1629c057dea6a74a8689f48fbc97a0b171bca09c10c3bc2418084aed63a05ae3"
+    },
+    {
+      "path": "en/laeringssti.html",
+      "bytes": 15012,
+      "sha256": "ea28191d72d1b202c069f8a92eb1c52b96c112652ad2afc32a91223411a56a14"
+    },
+    {
+      "path": "en/language-init.js",
+      "bytes": 712,
+      "sha256": "be275fe91ea7c53af8fbfe3813128f09ef95939530459cee9aba290162a9514f"
+    },
+    {
+      "path": "en/language.js",
+      "bytes": 1002,
+      "sha256": "f878cca16deee9322ce1c809fbbf2104f51c8f41af2fe44cb5add10efd1fc49e"
+    },
+    {
+      "path": "en/learning-journey-model.js",
+      "bytes": 1162,
+      "sha256": "bf78e66b305b4d5d2409aaef117ce3254b28695d14f65a276e774f2e8ca9bb59"
+    },
+    {
+      "path": "en/learning-journey.css",
+      "bytes": 1773,
+      "sha256": "90e47407a5c69c4515bd394dbae8b3b6f3a0b063a713a463ef3cd085f5631ee0"
+    },
+    {
+      "path": "en/learning-journey.js",
+      "bytes": 6197,
+      "sha256": "cb930c2bb9a4c08a50bf3a95f79efad740d4728503e8154b756c832d5423a83a"
+    },
+    {
+      "path": "en/learning-premises.css",
+      "bytes": 4718,
+      "sha256": "dbc16d850da1bcb4c40555bc52d6709f73b43cf68679af17aa53e0c05e4128b6"
+    },
+    {
+      "path": "en/learning-premises.js",
+      "bytes": 3472,
+      "sha256": "b0e0264161ac67008298176125129dec09275df670f82bb35caae31ab9b4a384"
+    },
+    {
+      "path": "en/membership-config.js",
+      "bytes": 1002,
+      "sha256": "9045910aaf5a2ed841b21963ee0a3851cad192d060dfdde3409a3ebe8f894166"
+    },
+    {
+      "path": "en/membership-model.js",
+      "bytes": 1870,
+      "sha256": "5414f4e3305df6523fa8a0846def49d020cab637cff1af2c6577f352da76c50d"
+    },
+    {
+      "path": "en/membership.css",
+      "bytes": 28974,
+      "sha256": "32a054bdd725c6e6bb2f87d7c91b5f987271d0764463ce8c1d1b4ad70503833d"
+    },
+    {
+      "path": "en/membership.js",
+      "bytes": 5485,
+      "sha256": "1f7c7f0b08ecfe5c47cb1fffb1c0f8bc4837c289724724bb7fb8647386b2c2f1"
+    },
+    {
+      "path": "en/midi.js",
+      "bytes": 2008,
+      "sha256": "0f180b6fe04993d2ffe9d4a4b3ff1eee50f36f6c934e2afbe7792f2a8bfb3c77"
+    },
+    {
+      "path": "en/modus-app-concept.svg",
+      "bytes": 2987,
+      "sha256": "e2acc6c4149bf222373d855ecda8fee7128e09d6abb6807cd2af5aa6039bb6a9"
+    },
+    {
+      "path": "en/modus-arch.svg",
+      "bytes": 335,
+      "sha256": "8457c8c4c748398857504c080b49d3b9543d9b43bc10e1c68ad3f19724b3eff5"
+    },
+    {
+      "path": "en/modus-identity-icon.svg",
+      "bytes": 743,
+      "sha256": "184e27a2c272f1e5e5290c83d1b344a977d9bbda11937cf6a84298de1bd25cc4"
+    },
+    {
+      "path": "en/modus-mark.svg",
+      "bytes": 383,
+      "sha256": "cd74c226a90a76de2f402e38c38938c5492fa75c61aed394b3e5047f13c91024"
+    },
+    {
+      "path": "en/modus-plus.html",
+      "bytes": 28157,
+      "sha256": "f6a52c53e1e3120cff0b7976a5cd4eb9f276ff9c107156f0974dd56456123ae0"
+    },
+    {
+      "path": "en/musikkart.css",
+      "bytes": 13634,
+      "sha256": "854340f04ef21eadd3ffdb50f8edd8e0358b7cf81ba5a3b221836e3bd5021999"
+    },
+    {
+      "path": "en/musikkart.html",
+      "bytes": 15268,
+      "sha256": "1460f0db336f933e5b26afbdf1fce730ab860e0b51ea7c275e3b3e544a295849"
+    },
+    {
+      "path": "en/musikkart.js",
+      "bytes": 16332,
+      "sha256": "0f78b6bf584b9928509dcbfb209569f05fa9961f10f1995a7149b116b91a428e"
+    },
+    {
+      "path": "en/navigation.aa9258eda8.css",
+      "bytes": 14777,
+      "sha256": "aa9258eda898ca871eb54be640415d12b97015509991c3572696fe21e94720e1"
+    },
+    {
+      "path": "en/navigation.css",
+      "bytes": 14777,
+      "sha256": "aa9258eda898ca871eb54be640415d12b97015509991c3572696fe21e94720e1"
+    },
+    {
+      "path": "en/navigation.ef9941fe9f.js",
+      "bytes": 2453,
+      "sha256": "ef9941fe9f1665c7450a7e31e08b91cc8708a923f5795a18efe93c68b686c63b"
+    },
+    {
+      "path": "en/navigation.js",
+      "bytes": 2453,
+      "sha256": "ef9941fe9f1665c7450a7e31e08b91cc8708a923f5795a18efe93c68b686c63b"
+    },
+    {
+      "path": "en/om-modus.html",
+      "bytes": 13358,
+      "sha256": "e2e195b03914b6cb6a69433f325dde460cbc76ddd490c92dc1c67d9407784bef"
+    },
+    {
+      "path": "en/piano-interaction.css",
+      "bytes": 1339,
+      "sha256": "4a17aed309121dadd610068f527ace52ab0114af693ecc1147d172fe95c84051"
+    },
+    {
+      "path": "en/piano-interaction.js",
+      "bytes": 6207,
+      "sha256": "64db24e6721d32e8db2c86932a0cec0ea92be045678dff0f77380a0f3b9e5797"
+    },
+    {
+      "path": "en/preview-guard.js",
+      "bytes": 2320,
+      "sha256": "f32cb3a9c430f5f235b8ba2472cf0a9986284966173395c21871d67568cf5d39"
+    },
+    {
+      "path": "en/progressions.js",
+      "bytes": 4749,
+      "sha256": "f60d077064339dc85163da92d5c4cd0790ddea72cfe29cb1c2ec0eeb22dcada0"
+    },
+    {
+      "path": "en/redaktor.html",
+      "bytes": 2888,
+      "sha256": "f07687d94d178cb406f2b89fdc8a7d3fd49f4099633eca59c9ca9eeb33de823a"
+    },
+    {
+      "path": "en/search-index.json",
+      "bytes": 2602,
+      "sha256": "150e3305e7c1dbc15b1ac36809e8ba9be7bf55968f23365a59f585a76c0fff61"
+    },
+    {
+      "path": "en/style.css",
+      "bytes": 18822,
+      "sha256": "075e3e9d3b88bb78c8b88b986c23db950f96c4e2a71dadf3a7a72e7f04aba3cc"
+    },
+    {
+      "path": "en/teori.html",
+      "bytes": 12948,
+      "sha256": "8b929589c47a445aa54b6fcda925ed9d9b28c0e11c8ed0510a4a01c38293afd6"
+    },
+    {
+      "path": "en/theme-init.js",
+      "bytes": 498,
+      "sha256": "ff0a1b8e36e029cbb3b4834e5b7fd9738567f2a8c94d85a1e9d1375965f2721a"
+    },
+    {
+      "path": "en/theme-palette.css",
+      "bytes": 20928,
+      "sha256": "d22c63791248561f1ef1b390c07881c96ad6a9414cf9ea12a690ea46c6c9c357"
+    },
+    {
+      "path": "en/theme.js",
+      "bytes": 1186,
+      "sha256": "ee686955cf31f56b74a63ad2ea7cb24a9b1fab9e5a5b2c0b96db9a3f0bb97181"
+    },
+    {
+      "path": "en/themes.css",
+      "bytes": 7714,
+      "sha256": "7af83d9adafa662ec7c193d921bf1ad43b4c72ad98f4c36ad1661c9314e35587"
+    },
+    {
+      "path": "en/theory-data.js",
+      "bytes": 2217,
+      "sha256": "8c13e4b38c367c7ebe5b4d318172e3873c6666327221c5b2bc73aae07fb81457"
+    },
+    {
+      "path": "en/theory.css",
+      "bytes": 10900,
+      "sha256": "820921f29f103b40e833c8e5c523406ee503992fe30c8b793d6ce30388b201d8"
+    },
+    {
+      "path": "en/theory.js",
+      "bytes": 18216,
+      "sha256": "329431cec90d1ce62602c1724808bd20d03d35a4d8adde15eef052c431555111"
+    },
+    {
+      "path": "en/undervisning.html",
+      "bytes": 9484,
+      "sha256": "d779ef84df154871ce4766bbfbe5f257dc2628109cd82bf7a987b6ba4d066793"
+    },
+    {
+      "path": "f03-laeringsreise.html",
+      "bytes": 13402,
+      "sha256": "469472553a1d26be4ddac3a778eeda49b40148532478eca3642932ac9521c252"
+    },
+    {
+      "path": "feedback.css",
+      "bytes": 5501,
+      "sha256": "8040e8b98cced5087448d7cf6d46dc79d816f308a3a1865635c9cb58adb9162b"
+    },
+    {
+      "path": "feedback.js",
+      "bytes": 14452,
+      "sha256": "d5fe4332f6f642a7d249770692e0c682cffa353a1c0d694e8fcd936843a33ae3"
+    },
+    {
+      "path": "global-search.css",
+      "bytes": 1410,
+      "sha256": "560048fe7df6343ac45d45130b989e2c7d51c2694a66198f9e0295c99cd063b8"
+    },
+    {
+      "path": "global-search.js",
+      "bytes": 3734,
+      "sha256": "9a05602d601d99cae8edf318bd5d2d579e20c7127aa4e05a4519ae6781c8c473"
+    },
+    {
+      "path": "grunnstudier.css",
+      "bytes": 4326,
+      "sha256": "98c35f7db6abb17a478482134c897b6d54f21002bbc27c764b576a7bc69dd712"
+    },
+    {
+      "path": "grunnstudier.html",
+      "bytes": 9465,
+      "sha256": "062b7f36d610c2c0bbe0c5db9b06141e5bc0aa720622d601484e2d8b1928869a"
+    },
+    {
+      "path": "home-2.css",
+      "bytes": 13132,
+      "sha256": "4a843d2c85f732b1023f6c1b73e108c68a03a570221e7853bdab95be20186c16"
+    },
+    {
+      "path": "home.css",
+      "bytes": 17730,
+      "sha256": "f8c3e32d65248968921755e48866f00049b42346777437697c86d73f1443c6e9"
+    },
+    {
+      "path": "images/articles/bygg-akkorder-i-en-toneart.svg",
+      "bytes": 4410,
+      "sha256": "1d7980eea950bce8e281eadc6152094e7e425075a6347004f0d7e75d5bfafa43"
+    },
+    {
+      "path": "images/articles/din-forste-improvisasjon.svg",
+      "bytes": 2248,
+      "sha256": "0ac0e4d02786dd4f2ef12a4207ce82c27cbd0c4a1932c9cc6f2c05327c583261"
+    },
+    {
+      "path": "images/articles/dorisk-og-eolisk.svg",
+      "bytes": 4056,
+      "sha256": "1a648c51be2b4ed782e7a42063c4e96646d53d85da279c482877c6c4b4faba2e"
+    },
+    {
+      "path": "images/articles/dur-og-moll.svg",
+      "bytes": 2671,
+      "sha256": "8690a02b0a8f650b3cdc11af91ed6e7c0809f48bbaefc729e76dd1c58a31dbc6"
+    },
+    {
+      "path": "images/articles/ett-skalakart-nye-maltoner.svg",
+      "bytes": 3102,
+      "sha256": "cfda896195ceb86ce27555b87b6cdb30cca234d065957457dba1fb2e08b4fba5"
+    },
+    {
+      "path": "images/articles/harmonisk-moll-og-frygisk-dominant.svg",
+      "bytes": 4229,
+      "sha256": "cfa32105bc2745ddf932a37302ff61efdf0be8efafaba8e48a8235dd6f364bf6"
+    },
+    {
+      "path": "images/articles/ii-v-i-kadensen.svg",
+      "bytes": 2392,
+      "sha256": "82a8928e8c843d255ba1f62adf4968c97497fb5730130aa34d5fa001735a7968"
+    },
+    {
+      "path": "images/articles/kirketonearter-ett-system-sju-uttrykk.svg",
+      "bytes": 5648,
+      "sha256": "188a7c44d149c1ad9507aa8e0f9135da6011a669fec754436cf50637a370f7a0"
+    },
+    {
+      "path": "images/articles/kvintsirkelen.svg",
+      "bytes": 7336,
+      "sha256": "61b99e3332bc3e4ec7134e1488849075bf484640ba108b5612b1d353ba03f4a9"
+    },
+    {
+      "path": "images/articles/moduser-og-tonalt-sentrum.svg",
+      "bytes": 2728,
+      "sha256": "21b4baa8a4d55f05cca41bc8442ac5b5599ebc4dc73ae57d982abe81d22e4f43"
+    },
+    {
+      "path": "images/articles/romertall-i-musikk.svg",
+      "bytes": 4412,
+      "sha256": "fe073c29064c6ff246afaa3297978b85e66581fc4f4acbcedc4b6332abc75442"
+    },
+    {
+      "path": "images/articles/rytme-i-sju-aatte.svg",
+      "bytes": 2510,
+      "sha256": "09d0faca0cc6ae485c79ceff06130c665c16bb09b5ee70a8a41f03b473945860"
+    },
+    {
+      "path": "images/articles/septimakkorder.svg",
+      "bytes": 2470,
+      "sha256": "dc88fb8139b6e06a5c5daa9f49ebf9328bb3220d460d46fee9119a27184eea63"
+    },
+    {
+      "path": "images/articles/stemmeforing.svg",
+      "bytes": 2945,
+      "sha256": "1acf7ed81a350462e5db2ead8bc42193458ec68669014f8851c4015b08ed60dd"
+    },
+    {
+      "path": "images/articles/toner-og-intervaller.svg",
+      "bytes": 2141,
+      "sha256": "26e4b0908d7fbb9ea768d026c5b45f7d753d7e58d116b6a492120c95fb8bf163"
+    },
+    {
+      "path": "images/articles/treklanger-fra-grunnform-til-omvending.svg",
+      "bytes": 3078,
+      "sha256": "eb30d46f73515b5105e8250ad14d5ce95dc35100ffecefc389f6e98cb416ef7f"
+    },
+    {
+      "path": "images/earth-atlas.svg",
+      "bytes": 6381,
+      "sha256": "435b5c8717508e8f558ffe8af7b8fc99c6fc98e3488eb59e7ff7bf298332e52d"
+    },
+    {
+      "path": "images/earth-atlas.webp",
+      "bytes": 202148,
+      "sha256": "5af6dd315c0a6ea7d2b515470b7a65d0961fa69b2ae93813229736530688ce36"
+    },
+    {
+      "path": "images/modus-geometric.svg",
+      "bytes": 352,
+      "sha256": "1c3b601fb79a357f58e6b9a36a4b136d743a576b08ceacd9b94ad0bcd9d79901"
+    },
+    {
+      "path": "images/modus-waves.svg",
+      "bytes": 4674,
+      "sha256": "5decec0365a00f3574b4dffb172ab1b519e51432c5e4b238a7d958f6778a6dcb"
+    },
+    {
+      "path": "images/mountain-lake.webp",
+      "bytes": 327190,
+      "sha256": "894069fc1dbf846f682ee3e2fbcab78a04fa6d663aa1b9f2f3e79b234ec51092"
+    },
+    {
+      "path": "index.html",
+      "bytes": 18903,
+      "sha256": "e739e6061086c3d847a65d64fb3e4fc1b8ed83ddc5f5b15e7ff764e717158539"
+    },
+    {
+      "path": "intro-film.css",
+      "bytes": 2166,
+      "sha256": "3d3107986cd1233d0e4dfc0479a38a713bd5d6fe33317b2641509259ea02b4b2"
+    },
+    {
+      "path": "intro-film.js",
+      "bytes": 2751,
+      "sha256": "2c64153ef2ada4aa73c9c7ef4b5be6dd7383fefdcd8264e963ffcf3d9273ba30"
+    },
+    {
+      "path": "konto.html",
+      "bytes": 14290,
+      "sha256": "d1cd5b0ce923140b99e4d41e2d355314232bf7cb92b46a6c9d6e96f16e08a3bf"
+    },
+    {
+      "path": "laer-dorisk.html",
+      "bytes": 9435,
+      "sha256": "8ba4405857914afee234c3b79dc2b4b08ece6b2d4dc49b60950bc0d42c1fe40c"
+    },
+    {
+      "path": "laereplan.html",
+      "bytes": 27483,
+      "sha256": "5ebf498146d2b9c026b8c3d06c235d2cfe0c726307247ab64ef11af5721a652b"
+    },
+    {
+      "path": "laeringssti.html",
+      "bytes": 18700,
+      "sha256": "c6a32db6a16dd373b376aefcf0ce6633f06271d9d17a1b6c88a28be70c0a4ac9"
+    },
+    {
+      "path": "language-init.js",
+      "bytes": 712,
+      "sha256": "be275fe91ea7c53af8fbfe3813128f09ef95939530459cee9aba290162a9514f"
+    },
+    {
+      "path": "language.js",
+      "bytes": 1002,
+      "sha256": "f878cca16deee9322ce1c809fbbf2104f51c8f41af2fe44cb5add10efd1fc49e"
+    },
+    {
+      "path": "learning-journey-model.js",
+      "bytes": 1162,
+      "sha256": "bf78e66b305b4d5d2409aaef117ce3254b28695d14f65a276e774f2e8ca9bb59"
+    },
+    {
+      "path": "learning-journey.css",
+      "bytes": 1773,
+      "sha256": "90e47407a5c69c4515bd394dbae8b3b6f3a0b063a713a463ef3cd085f5631ee0"
+    },
+    {
+      "path": "learning-journey.js",
+      "bytes": 6203,
+      "sha256": "a3b473c8700d0d8aea394a325f28c36fdf325e4ef2dd6a3a28f3f42a3fc6bb5d"
+    },
+    {
+      "path": "learning-premises.css",
+      "bytes": 4718,
+      "sha256": "dbc16d850da1bcb4c40555bc52d6709f73b43cf68679af17aa53e0c05e4128b6"
+    },
+    {
+      "path": "learning-premises.js",
+      "bytes": 3472,
+      "sha256": "b0e0264161ac67008298176125129dec09275df670f82bb35caae31ab9b4a384"
+    },
+    {
+      "path": "media/modus-introduksjon.mp4",
+      "bytes": 6908934,
+      "sha256": "f93a0382534910819074579a77e88c43d26302ef254dc217a1f45ebf66c81ea9"
+    },
+    {
+      "path": "membership-config.js",
+      "bytes": 1002,
+      "sha256": "9045910aaf5a2ed841b21963ee0a3851cad192d060dfdde3409a3ebe8f894166"
+    },
+    {
+      "path": "membership-model.js",
+      "bytes": 1870,
+      "sha256": "80ae9b8523edc90995e603d6978e2c6cf8f2b08074220796925dc37cf65e6458"
+    },
+    {
+      "path": "membership.css",
+      "bytes": 28974,
+      "sha256": "32a054bdd725c6e6bb2f87d7c91b5f987271d0764463ce8c1d1b4ad70503833d"
+    },
+    {
+      "path": "membership.js",
+      "bytes": 5464,
+      "sha256": "bafdc77c18270cf31502b7e3eed90bb94375ec319a75e3152b693984c7ffa7a8"
+    },
+    {
+      "path": "midi.js",
+      "bytes": 2008,
+      "sha256": "0f180b6fe04993d2ffe9d4a4b3ff1eee50f36f6c934e2afbe7792f2a8bfb3c77"
+    },
+    {
+      "path": "modus-app-concept.svg",
+      "bytes": 2961,
+      "sha256": "a7b3f3697a31fef5733f06e75a4ca622f7ee69409ce811c3fc53c27ee4b9015a"
+    },
+    {
+      "path": "modus-arch.svg",
+      "bytes": 334,
+      "sha256": "22be9213839d3037358f457e8fb0eafd4b3d30edd159fd40abf016b559a43000"
+    },
+    {
+      "path": "modus-identity-icon.svg",
+      "bytes": 737,
+      "sha256": "2001c131db249abed89d8e41293978331e7fcad7f96cb4fa7f0dcf713f289ccc"
+    },
+    {
+      "path": "modus-mark.svg",
+      "bytes": 381,
+      "sha256": "4ef20ca180339d96ddacb3ba3dd5c7ac397e71132e22bd75d61326fde2eb953d"
+    },
+    {
+      "path": "modus-plus.html",
+      "bytes": 28431,
+      "sha256": "183d6dba1be1dc96a7d0128f515e030174c56e8c0dfb45c1e3f4c9c3b6232887"
+    },
+    {
+      "path": "musikkart.css",
+      "bytes": 13634,
+      "sha256": "854340f04ef21eadd3ffdb50f8edd8e0358b7cf81ba5a3b221836e3bd5021999"
+    },
+    {
+      "path": "musikkart.html",
+      "bytes": 15633,
+      "sha256": "871b52b14c41b64d6d420bcbb1fb3d42c08a88f7cf72d3509be5ecd49142fce9"
+    },
+    {
+      "path": "musikkart.js",
+      "bytes": 16384,
+      "sha256": "48a850bdf9f4344b10df7cbded9f6010b23bec9ff52f485dea4d53f410a2fa4d"
+    },
+    {
+      "path": "navigation.aa9258eda8.css",
+      "bytes": 14777,
+      "sha256": "aa9258eda898ca871eb54be640415d12b97015509991c3572696fe21e94720e1"
+    },
+    {
+      "path": "navigation.css",
+      "bytes": 14777,
+      "sha256": "aa9258eda898ca871eb54be640415d12b97015509991c3572696fe21e94720e1"
+    },
+    {
+      "path": "navigation.ef9941fe9f.js",
+      "bytes": 2453,
+      "sha256": "ef9941fe9f1665c7450a7e31e08b91cc8708a923f5795a18efe93c68b686c63b"
+    },
+    {
+      "path": "navigation.js",
+      "bytes": 2453,
+      "sha256": "ef9941fe9f1665c7450a7e31e08b91cc8708a923f5795a18efe93c68b686c63b"
+    },
+    {
+      "path": "om-modus.html",
+      "bytes": 13362,
+      "sha256": "e310b0009374f57650e4e48bb3c30c0139566b13c7f5be49ea00137090939f1e"
+    },
+    {
+      "path": "piano-interaction.css",
+      "bytes": 1339,
+      "sha256": "4a17aed309121dadd610068f527ace52ab0114af693ecc1147d172fe95c84051"
+    },
+    {
+      "path": "piano-interaction.js",
+      "bytes": 6207,
+      "sha256": "64db24e6721d32e8db2c86932a0cec0ea92be045678dff0f77380a0f3b9e5797"
+    },
+    {
+      "path": "preview-guard.js",
+      "bytes": 2320,
+      "sha256": "f32cb3a9c430f5f235b8ba2472cf0a9986284966173395c21871d67568cf5d39"
+    },
+    {
+      "path": "preview-isolation.json",
+      "bytes": 46798,
+      "sha256": "f04048f8cf2b7551ad028b4873da89667d44ecfdee4adbb61855471098861871"
+    },
+    {
+      "path": "progressions.js",
+      "bytes": 4758,
+      "sha256": "83c0444ddccb6005b49ee28c53948ae8f940c9d050d0b26a69b447a6b76a46b2"
+    },
+    {
+      "path": "redaktor.html",
+      "bytes": 2905,
+      "sha256": "e4ae3126957f67b326d0e7d616b4d8665d67f887d0e344631147c8bc5695011a"
+    },
+    {
+      "path": "search-index.json",
+      "bytes": 1308,
+      "sha256": "4c2265ba336128161eda55c287d860eed326dcf0d30655f71cd3b2adff88e505"
+    },
+    {
+      "path": "style.css",
+      "bytes": 18822,
+      "sha256": "075e3e9d3b88bb78c8b88b986c23db950f96c4e2a71dadf3a7a72e7f04aba3cc"
+    },
+    {
+      "path": "teori.html",
+      "bytes": 12867,
+      "sha256": "66ff5833c25502ea89af83a0f2cbad3d38bf011f438820018fb7fa5ae16cf361"
+    },
+    {
+      "path": "theme-init.js",
+      "bytes": 498,
+      "sha256": "ff0a1b8e36e029cbb3b4834e5b7fd9738567f2a8c94d85a1e9d1375965f2721a"
+    },
+    {
+      "path": "theme-palette.css",
+      "bytes": 20928,
+      "sha256": "d22c63791248561f1ef1b390c07881c96ad6a9414cf9ea12a690ea46c6c9c357"
+    },
+    {
+      "path": "theme.js",
+      "bytes": 1185,
+      "sha256": "fc62768582d9a98d05499f59753381edb4c83ba7e702d7b61c92d7371ba29726"
+    },
+    {
+      "path": "themes.css",
+      "bytes": 7714,
+      "sha256": "7af83d9adafa662ec7c193d921bf1ad43b4c72ad98f4c36ad1661c9314e35587"
+    },
+    {
+      "path": "theory-data.js",
+      "bytes": 2176,
+      "sha256": "db7989ecada23398f6a0d6ab1c79a48e2f5a045adaee06619c28bbe3465f5ca2"
+    },
+    {
+      "path": "theory.css",
+      "bytes": 10900,
+      "sha256": "820921f29f103b40e833c8e5c523406ee503992fe30c8b793d6ce30388b201d8"
+    },
+    {
+      "path": "theory.js",
+      "bytes": 18042,
+      "sha256": "1a5c266d227a5d3d5dae7711f1978d5899fab7efc4aa3d2fd60bab90fb93d6d3"
+    },
+    {
+      "path": "undervisning.html",
+      "bytes": 9465,
+      "sha256": "980fa09ec7d99faff94d45d70871fb4304e74f374fb500332d7d31f57d168f5c"
+    }
+  ]
+}

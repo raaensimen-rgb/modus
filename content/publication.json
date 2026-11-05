@@ -1,0 +1,1280 @@
+{
+  "schema_version": 1,
+  "migration": {
+    "from": "legacy-unqualified-content",
+    "decision": "The owner selected the 16 existing articles for publication preparation in NB and EN on 2026-11-05. Academic status is independent; historical awaiting-owner restrictions no longer apply to these versions.",
+    "order": "GitHub #28 comment 6551064272",
+    "article_review_order": "https://github.com/raaensimen-rgb/modus/issues/42#issuecomment-6557510074",
+    "superseded_by": "docs/modus-08-owner-decision.md#2026-11-05"
+  },
+  "articles": {
+    "toner-og-intervaller": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "89cda11913aeaedae9523fe3f8f50d91b25d5b131e732d5e04dd3d3d08d45c03",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "85cdac2d7d0c765f11e552e45fa27d0e0aec96d2841b74a4242b3949479cb6cd",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "dur-og-moll": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "6ffd7632b49389f7d5debdfcd2b66ef02a3372a1edbe9ddaa6bc76586e1716cd",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "a412cf47f32ce64d7d0737e972cd494389d3599c066975c641def9187cd8fbc7",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "kvintsirkelen": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "17bed195e2eb8ae55ec9c2a26726647fe6744e60bd52cc7b5923515b967650ee",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "d2abb8b93505e77a59d252cdbe23d7aea28c29a4d2abf401f41df766691deeda",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "din-forste-improvisasjon": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "e570c98cdf603f31286320f4258da8877adc193361fb095fc917e973bd36fb1d",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "a00d225e73e8b548b4e5ee8bcd79e2ccd81617edd060b95ad46f0acae59a9e61",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "moduser-og-tonalt-sentrum": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "bba7f3f3367de5f0eb1db696d1b699f7506e8f95e9167e1aabbdd1416c04e698",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "52d4f9ccaa1fe8439656b40a6e984bcea6f768d322836b969dc571f74c6710b3",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "kirketonearter-ett-system-sju-uttrykk": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "08bb59d709414c3f0a818a5241f9264b88dd47c961bc97d57218929c45ce65dd",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "3633c648c57050998e906dc30a82c7b4ac28d8cb82c6c80b6fc67292c55d1111",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "romertall-i-musikk": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "25da746d1ddcd240bad8a9517cce174960ede2ff62fd98d673d02e359178009d",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "14dcdb4c1759532850495c74218cef6c7266f78c7faea6b04e4912d23ef25738",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "ii-v-i-kadensen": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "a4704514d7cc9d3d61be17335c137760e0ade145988647191c216c28c0df7e80",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "ab2484949fde843aae785bcc0a555ddfb041fa8d968b4f884dba3bf1505c5bd1",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "treklanger-fra-grunnform-til-omvending": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "87a62207ea9d8e1c121eeefda2e6f6f133e744bbc5441f22195c4aeb87d78977",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "4f5e8ccfbac3111badd66ea54561b34d303c334c8c4c3d1a5c0f8b2a0488ec0b",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "septimakkorder": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "77ca6b7709a4e16e202816d1dc243d02f836ebef823bf9cbeb548814d4ecead8",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "4f69f7767466ae17d56b5558afbf73ed29b44605ccd0b456e4c114bf7f7117a3",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "harmonisk-moll-og-frygisk-dominant": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "9ac7db771ed6b12ee9aae87932d22ba95c65ccc6cebf4bc5237d2c0b7005eab6",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "bedf486b8e559d34fad850a3c2e215255f3154e03a18cf2b6752c83f1cfb0172",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "stemmeforing": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "579165fbeb5a3d8b08e1c0a5c7fb0e1a07c19de0ee590f8a4eebee7fc3a6e5f9",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "b297b209e3d2fb8a2dca4d3fd9aac2973dca42f0f59f2a8c58f9454bfa745287",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "rytme-i-sju-aatte": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "4ab62d3fdf66c6a69aac804ef15013b6947ad5683220e3ee763456ed8f423ff2",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "090ac63da0289a98546ee6f13c363f1f3221dd201f5d901ba794d5b860f54e84",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "bygg-akkorder-i-en-toneart": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "34a5eba4064076d7a4c13ed15e8e10c32edd1af63934c20e503a19513d607fe4",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "159f367ee310c1854156779ebb960068787865b304bcfbec9cb80a34106258b2",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "ett-skalakart-nye-maltoner": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "33efab7990438e2498ec7d6f2a965cb926f8173d408918dfcb1096a2f98c9260",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "5326b4c2c2b60e2718cd81cacc1a4972fc6ea91b56702ee4b7f5b2e5fefcd39e",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "dorisk-og-eolisk": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb",
+        "en"
+      ],
+      "approval_reference": "docs/modus-08-owner-decision.md#2026-11-05",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "da63b02cae05a62d1c7a3717eea7d4616363b9be04978c97f9ad869e05045898",
+          "scope": "owner-publication-selection-not-academic-review"
+        },
+        "en": {
+          "reference": "docs/modus-08-owner-decision.md#2026-11-05",
+          "reviewed_version_sha256": "10d6aef087357e16d0c11a4d1acf4de6c5db54717c29cebf6d4b9845a554eb6a",
+          "scope": "owner-publication-selection-not-academic-review"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "intervallomvendinger": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "929b54d630eaefd8e83d3d187114ec1dee8c7b741d5e0de5a04b3a18ef652841",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "kadens-og-tonale-funksjoner": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "834b3f5529ddd62187ca0c1c9b9052c7bddf740375ace13c52c982a23f512d10",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "sekundaerdominanter": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "f3f95321a8add4f7822cd9ad4aebf635695a7c59c1609ef7e9dd193ab0adcd86",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "akkordutvidelser": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "e0ad8eda14ebc4abf826bc526b848d243c6674cc9b2f48bd229456ab614f3e29",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "modal-harmonikk-i-praksis": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "f3e8bf8e22263faf18f5ad67d63e4c09e9b9f29db3b91443f7004102ce2dda7b",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "tonikalisering-og-modulering": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "843582117a03686e8cda030979c324902d83dae10aaeee29f9cc4fb20d0ffedc",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "sekstkvart-bass-og-kadens": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "7002541a0740377cb28706d029e665c680f3bed40cec07c2cdae12dfadeeb0ec",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "satb-tendenstoner-og-dobling": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "77f806f0f614b6b578d59c95f19d10f53fa1f5c0c83a86dd4354ecae72d6ad86",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "modal-interchange-og-kromatiske-medianter": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "b067e79613a6eb589b981615721c2b320bc73f87b3f94b6562b50cb0a954e51a",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "napolitansk-og-forstorret-sekst": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "955aa0f004bece4570879aa2d4b3f3e4adcc61409ffd0dd365d8bb5cc32bd248",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "tritonussubstitusjon-og-reharmonisering": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "8b81523e070419830fe6ac9596241d05d133ebaf5baf6f930c0c7a7bb3a21bac",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "kontrapunkt-to-selvstendige-stemmer": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "3433c5716e072b4294e92a0b5ef957139bcc007ed121604bf123121bb89345ac",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "dissonans-gjennomgang-og-forholdning": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "b6d9050864a7023eb990fe254cea27f0c5403f177bc542a2c35c6087904f8a3c",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "imitasjon-kanon-og-partimento": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "3c77ee54b97091b333c5db47da5b898b532a76726c61e91cca6692bcdcaf7502",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "melodisk-moll-og-akkordskala": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "e95eb25e497156c71a50f9bc43948fb4237c78a00effe4c966be21f128bec183",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "altererte-dominanter-og-symmetriske-skalaer": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "9c8c60a823b538b8f8da7aec89dd767a8023046be33937763c2c02c7352a7f12",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "kvartklanger-cluster-og-polykorder": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "2760e53eb1930d3fed7ee80082bcb1337094f18017431a0d9b0d1321da5aaeba",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "motiv-og-transformasjon": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "7b9721cb804fe3ac792f50610f60d55e5e9ee18beea599444c9d3176ea1bc48e",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "frase-periode-og-harmonisk-rytme": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "68be9923a894aca3e0b60f8ac917435a009cff13983a8da0401c7f71a39bc5fa",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "storform-rondo-sonatisk-og-dramaturgi": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "e2903730778d506cfee9d75df6386315d37712c6bd4ebb4d3234bbce7022d5ba",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "komposisjon-fra-skisse-til-revisjon": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "96a53672456bd6324e327074160602a1b06c683615102e462318da9fee4483dc",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "arrangering-for-lite-ensemble": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "25569af61f2d1557da957d3be24b1cc74048b25286cc1043d7cd3553cf4dca4e",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "instrumentasjon-og-hybrid-metal": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "d09a04ac9d8aa17a2032acc8d08f22c6e90283e14486db04bd7b7a91f1912457",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "swing-bebop-og-jazzfrasering": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "5e2689f3607798282c045133a10fcbb6c5f552442a0ddc62e8b27c8ca7fcddb7",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "comping-og-akkordmelodi": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "18929b1933597ec37f776463b81e2a61fc9a522e39e98e31628b86b5d4bff437",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "gehor-og-transkripsjon": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "90d3bb9e6403a6e6d2c21ad812c7d244dabc3cb2b75f8265a1583a096bc4b18f",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "rytmikk-oddetakt-og-metrisk-modulasjon": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "3ff337e0dcdb85289c746921f1203d67a5aea75da1abf512086808f540f4366f",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "gitarteknikk-metal-fusion-og-oving": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "b6c706e84b1343fbebde7c039ebf11d4531eafa5fe39783d872bfb394d82ff5a",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "logic-midi-og-opptak": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "f1347dfba4b8ad03f5eeffeba4cb603a5eb98f9f2968814a5263662c30299677",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "miks-balanse-og-kritisk-lytting": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "f9b0dbae18c4ac52eda8800d30ee064faf3306f08fb8a6715276b1ad7c66cdbe",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "portefolje-kunstnerisk-refleksjon-og-samspill": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "79005b2930053fd634e8eb27f66f728f7bb3c907d40b7f4cfe59a61e662f4058",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "stilforstaelse-repertoar-og-lytteanalyse": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "55ced2fe635f40bcb088eac026a39357e07b0b12f88c2f024bb58e4e2789122a",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "auditiv-intervall-og-funksjonsprove": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "ff1d9c77a01d6024148fbb3044fcdd1ff552d5c16be9bfe34b245d5905cacee5",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "samspill-og-improvisatorisk-respons": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "19ab5d2d32feb46648becbdfb2043740a2730ed06a7b574935991e1396a04a4d",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "formanalyse-av-hele-verk": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "229942d26e8d42f6edd0ff9c03314b0a96ce57eaae7cfe1282410787907faf7a",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    },
+    "utovende-presentasjon-og-sluttprosjekt": {
+      "editorial_status": "draft",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/p0-release-authority.md#52-public-readers",
+      "publication_decision": "owner_authorized",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/p0-release-authority.md#52-public-readers",
+          "reviewed_version_sha256": "219cb6d44b20852f45d8e714b182f2b90c600bf8a62cf8205cc9dc1a1e45d647",
+          "scope": "previously-public-exact-original"
+        }
+      },
+      "personal_mastery_status": "not_documented",
+      "source_control_status": "under_review",
+      "catalog_metadata_visibility": "public"
+    }
+  },
+  "learning_pages": {
+    "undervisning.html": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "laer-dorisk.html": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "grunnstudier.html": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    }
+  },
+  "platform_pages": [
+    "index.html",
+    "konto.html",
+    "backingtracks.html",
+    "teori.html",
+    "laereplan.html",
+    "akkorder.html",
+    "artikler.html",
+    "laeringssti.html",
+    "musikkart.html",
+    "modus-plus.html",
+    "betaling-test.html",
+    "om-modus.html",
+    "f03-laeringsreise.html"
+  ],
+  "platform_assets": [
+    "about.css",
+    "account.css",
+    "account.js",
+    "app.js",
+    "apple-touch-icon.png",
+    "article-quiz.js",
+    "articles.css",
+    "articles.js",
+    "audio/LICENSE.txt",
+    "audio/SALAMANDER-README.txt",
+    "audio/bass-28.mp3",
+    "audio/bass-31.mp3",
+    "audio/bass-34.mp3",
+    "audio/bass-37.mp3",
+    "audio/bass-40.mp3",
+    "audio/bass-43.mp3",
+    "audio/bass-46.mp3",
+    "audio/bass-49.mp3",
+    "audio/bass-52.mp3",
+    "audio/bass-55.mp3",
+    "audio/bass-58.mp3",
+    "audio/bass-61.mp3",
+    "audio/bass-64.mp3",
+    "audio/grand-48.mp3",
+    "audio/grand-51.mp3",
+    "audio/grand-54.mp3",
+    "audio/grand-57.mp3",
+    "audio/grand-60.mp3",
+    "audio/grand-63.mp3",
+    "audio/grand-66.mp3",
+    "audio/grand-69.mp3",
+    "audio/grand-72.mp3",
+    "audio/grand-75.mp3",
+    "audio/grand-78.mp3",
+    "audio/grand-81.mp3",
+    "audio/grand-84.mp3",
+    "audio/hihat.mp3",
+    "audio/jazz-bass-28.mp3",
+    "audio/jazz-bass-31.mp3",
+    "audio/jazz-bass-34.mp3",
+    "audio/jazz-bass-37.mp3",
+    "audio/jazz-bass-40.mp3",
+    "audio/jazz-bass-43.mp3",
+    "audio/jazz-bass-46.mp3",
+    "audio/jazz-bass-49.mp3",
+    "audio/jazz-bass-52.mp3",
+    "audio/jazz-bass-55.mp3",
+    "audio/jazz-bass-58.mp3",
+    "audio/jazz-bass-61.mp3",
+    "audio/jazz-bass-64.mp3",
+    "audio/kick.mp3",
+    "audio/piano-48.mp3",
+    "audio/piano-51.mp3",
+    "audio/piano-54.mp3",
+    "audio/piano-57.mp3",
+    "audio/piano-60.mp3",
+    "audio/piano-63.mp3",
+    "audio/piano-66.mp3",
+    "audio/piano-69.mp3",
+    "audio/piano-72.mp3",
+    "audio/piano-75.mp3",
+    "audio/piano-78.mp3",
+    "audio/piano-81.mp3",
+    "audio/piano-84.mp3",
+    "audio/snare.mp3",
+    "chord-tool.css",
+    "chord-tool.js",
+    "design-system.css",
+    "editor.css",
+    "feedback.css",
+    "feedback.js",
+    "global-search.css",
+    "global-search.js",
+    "grunnstudier.css",
+    "home.css",
+    "images/earth-atlas.svg",
+    "images/earth-atlas.webp",
+    "images/mountain-lake.webp",
+    "intro-film.css",
+    "intro-film.js",
+    "language-init.js",
+    "language.js",
+    "learning-journey-model.js",
+    "learning-journey.css",
+    "learning-journey.js",
+    "learning-premises.css",
+    "learning-premises.js",
+    "media/modus-introduksjon.mp4",
+    "membership-config.js",
+    "membership-model.js",
+    "membership.css",
+    "membership.js",
+    "midi.js",
+    "modus-app-concept.svg",
+    "modus-arch.svg",
+    "modus-identity-icon.svg",
+    "modus-mark.svg",
+    "musikkart.css",
+    "musikkart.js",
+    "navigation.css",
+    "navigation.js",
+    "piano-interaction.css",
+    "piano-interaction.js",
+    "progressions.js",
+    "style.css",
+    "theme-init.js",
+    "theme-palette.css",
+    "theme.js",
+    "themes.css",
+    "theory-data.js",
+    "theory.css",
+    "theory.js",
+    "home-2.css",
+    "images/modus-geometric.svg",
+    "images/modus-waves.svg"
+  ],
+  "catalog_previews": {
+    "intervallomvendinger": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "kadens-og-tonale-funksjoner": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "sekundaerdominanter": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "akkordutvidelser": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    },
+    "modal-harmonikk-i-praksis": {
+      "editorial_status": "draft",
+      "visibility": "private",
+      "approved_locales": [],
+      "approval_reference": null
+    }
+  }
+}

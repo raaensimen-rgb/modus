@@ -1,0 +1,135 @@
+-- RED-005B-A: INACTIVE DESIGN DRAFT. NOT EXECUTED. NOT A DEPLOYABLE MIGRATION.
+-- Outside supabase/schema and migration discovery. No real identity/environment.
+-- STOP guard and final ROLLBACK are deliberate. Never remove them without new approval.
+BEGIN;
+DO $stop$ BEGIN
+ RAISE EXCEPTION 'RED-005B-A INACTIVE: isolated DB/Auth approval and implementation required';
+END $stop$;
+
+-- Candidate names; role creation capability and existing names require isolated inventory.
+CREATE ROLE modus_oa_owner NOLOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOBYPASSRLS;
+CREATE ROLE modus_oa_draft_executor NOLOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOBYPASSRLS;
+CREATE ROLE modus_oa_decision_executor NOLOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOBYPASSRLS;
+CREATE ROLE modus_oa_receipt_executor NOLOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOBYPASSRLS;
+-- NO membership is granted to app roles or technical JWT roles here.
+CREATE SCHEMA modus_oa AUTHORIZATION modus_oa_owner;
+REVOKE ALL ON SCHEMA modus_oa FROM PUBLIC, anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES FOR ROLE modus_oa_owner IN SCHEMA modus_oa REVOKE ALL ON TABLES FROM PUBLIC, anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES FOR ROLE modus_oa_owner IN SCHEMA modus_oa REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC, anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES FOR ROLE modus_oa_owner IN SCHEMA modus_oa REVOKE ALL ON SEQUENCES FROM PUBLIC, anon, authenticated, service_role;
+-- Repeat defaults for each *actual* object creator from future pg_default_acl inventory.
+
+CREATE TABLE modus_oa.scope_guard (
+ repository_scope text PRIMARY KEY CHECK (repository_scope = 'raaensimen-rgb/modus')
+);
+-- One seeded guard row in a future approved transaction, no owner UUID seeded.
+-- SELECT ... FOR UPDATE on this row, then authorization/target reads, in EVERY mutation.
+CREATE TABLE modus_oa.owner_bindings (
+ repository_scope text PRIMARY KEY REFERENCES modus_oa.scope_guard,
+ actor_id uuid NOT NULL, enabled boolean NOT NULL DEFAULT false,
+ epoch bigint NOT NULL CHECK(epoch > 0), changed_at timestamptz NOT NULL,
+ changed_by uuid NOT NULL
+);
+-- Historical actors are opaque UUIDs: no cascade from auth.users and no fabricated actors.
+CREATE TABLE modus_oa.snapshots (
+ repository_scope text NOT NULL REFERENCES modus_oa.scope_guard,
+ slug text NOT NULL CHECK(length(slug)<=80 AND slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),
+ locale text NOT NULL CHECK(locale IN ('nb','en')), revision integer NOT NULL CHECK(revision>0),
+ payload jsonb NOT NULL CHECK(jsonb_typeof(payload)='object'),
+ saved_by uuid NOT NULL, saved_at timestamptz NOT NULL,
+ hash_algorithm text NOT NULL CHECK(hash_algorithm='modus-owner-snapshot-v1'),
+ content_schema_version text NOT NULL, render_contract_version text NOT NULL,
+ content_sha256 text CHECK(content_sha256 ~ '^[a-f0-9]{64}$'),
+ media_manifest_sha256 text CHECK(media_manifest_sha256 ~ '^[a-f0-9]{64}$'),
+ eligibility text NOT NULL CHECK(eligibility IN ('pending','ready','unsupported')),
+ PRIMARY KEY(repository_scope,slug,locale,revision),
+ CHECK(eligibility<>'ready' OR (content_sha256 IS NOT NULL AND media_manifest_sha256 IS NOT NULL))
+);
+-- Saving incomplete drafts remains possible. Missing media/hash => pending, never approvable.
+-- Server canonicalizer/immutable asset verification is NOT implemented by this DDL.
+CREATE TABLE modus_oa.reviewer_mandates (
+ mandate_id uuid PRIMARY KEY, actor_id uuid NOT NULL,
+ repository_scope text NOT NULL REFERENCES modus_oa.scope_guard,
+ version integer NOT NULL CHECK(version>0),
+ scope jsonb NOT NULL CHECK(jsonb_typeof(scope)='object'),
+ appointed_by uuid NOT NULL, valid_from timestamptz NOT NULL, valid_until timestamptz NOT NULL,
+ enabled boolean NOT NULL DEFAULT false, CHECK(valid_until>valid_from)
+);
+CREATE TABLE modus_oa.review_bundles (
+ bundle_id uuid PRIMARY KEY, repository_scope text NOT NULL,
+ slug text NOT NULL, locale text NOT NULL, revision integer NOT NULL,
+ bundle_sha256 text NOT NULL CHECK(bundle_sha256 ~ '^[a-f0-9]{64}$'),
+ content_sha256 text NOT NULL CHECK(content_sha256 ~ '^[a-f0-9]{64}$'),
+ media_manifest_sha256 text NOT NULL CHECK(media_manifest_sha256 ~ '^[a-f0-9]{64}$'),
+ evidence jsonb NOT NULL CHECK(jsonb_typeof(evidence)='object'),
+ attested_by uuid NOT NULL, mandate_id uuid NOT NULL REFERENCES modus_oa.reviewer_mandates,
+ attested_at timestamptz NOT NULL,
+ FOREIGN KEY(repository_scope,slug,locale,revision) REFERENCES modus_oa.snapshots
+);
+-- evidence: F01 holder/license/version/usage/credits, F02 claim+passage+source version,
+-- K01 mandate/actions/outcome/limits, K02 actual support/contradictions,
+-- K03 adaptation/translation/redistribution per locale, F04 findings lifecycle.
+-- Mandatory server validation and human assessment are NOT provided by jsonb_typeof().
+-- No client/local RED004 'checked' can produce this row.
+CREATE TABLE modus_oa.challenges (
+ challenge_id uuid PRIMARY KEY, repository_scope text NOT NULL REFERENCES modus_oa.scope_guard,
+ purpose text NOT NULL CHECK(purpose IN ('approve','revoke')),
+ actor_id uuid NOT NULL, session_id uuid NOT NULL, owner_epoch bigint NOT NULL CHECK(owner_epoch>0),
+ target jsonb NOT NULL CHECK(jsonb_typeof(target)='object'),
+ target_sha256 text NOT NULL CHECK(target_sha256 ~ '^[a-f0-9]{64}$'),
+ nonce_sha256 text NOT NULL UNIQUE CHECK(nonce_sha256 ~ '^[a-f0-9]{64}$'),
+ prepared_at timestamptz NOT NULL, expires_at timestamptz NOT NULL,
+ consumed_at timestamptz, CHECK(expires_at>prepared_at AND expires_at<=prepared_at+interval '5 minutes')
+);
+CREATE TABLE modus_oa.step_up_receipts (
+ receipt_id uuid PRIMARY KEY, challenge_id uuid NOT NULL UNIQUE REFERENCES modus_oa.challenges,
+ actor_id uuid NOT NULL, session_id uuid NOT NULL, owner_epoch bigint NOT NULL CHECK(owner_epoch>0),
+ provider_challenge_id uuid NOT NULL UNIQUE,
+ verified_at timestamptz NOT NULL, expires_at timestamptz NOT NULL, consumed_at timestamptz,
+ target_sha256 text NOT NULL CHECK(target_sha256 ~ '^[a-f0-9]{64}$'),
+ CHECK(expires_at>verified_at AND expires_at<=verified_at+interval '5 minutes')
+);
+CREATE TABLE modus_oa.events (
+ event_id uuid PRIMARY KEY, repository_scope text NOT NULL REFERENCES modus_oa.scope_guard,
+ actor_id uuid NOT NULL, session_id uuid, occurred_at timestamptz NOT NULL,
+ kind text NOT NULL CHECK(kind IN ('DRAFT_SAVED','OWNER_APPROVED','APPROVAL_INVALIDATED','OWNER_REVOKED',
+ 'OWNER_BINDING_DISABLED','REVIEW_ATTESTED','REVIEW_REVOKED','REVIEW_REPLACED','FINDING_REOPENED')),
+ request_id uuid NOT NULL, target jsonb NOT NULL CHECK(jsonb_typeof(target)='object'),
+ target_sha256 text NOT NULL CHECK(target_sha256 ~ '^[a-f0-9]{64}$'),
+ related_event_id uuid REFERENCES modus_oa.events,
+ reason_code text, UNIQUE(repository_scope,actor_id,request_id)
+);
+-- No mutable active=true column. Effective validity derived from current draft, epoch,
+-- unrevoked bundle/mandate/assets/findings and later events; evidence revocation does not need a save.
+
+-- Every table owner will be modus_oa_owner, never an executor; no executor has BYPASSRLS.
+ALTER TABLE modus_oa.scope_guard OWNER TO modus_oa_owner;
+ALTER TABLE modus_oa.owner_bindings OWNER TO modus_oa_owner;
+ALTER TABLE modus_oa.snapshots OWNER TO modus_oa_owner;
+ALTER TABLE modus_oa.reviewer_mandates OWNER TO modus_oa_owner;
+ALTER TABLE modus_oa.review_bundles OWNER TO modus_oa_owner;
+ALTER TABLE modus_oa.challenges OWNER TO modus_oa_owner;
+ALTER TABLE modus_oa.step_up_receipts OWNER TO modus_oa_owner;
+ALTER TABLE modus_oa.events OWNER TO modus_oa_owner;
+ALTER TABLE modus_oa.scope_guard ENABLE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.scope_guard FORCE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.owner_bindings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.owner_bindings FORCE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.snapshots ENABLE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.snapshots FORCE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.reviewer_mandates ENABLE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.reviewer_mandates FORCE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.review_bundles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.review_bundles FORCE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.challenges ENABLE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.challenges FORCE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.step_up_receipts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.step_up_receipts FORCE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.events ENABLE ROW LEVEL SECURITY;
+ALTER TABLE modus_oa.events FORCE ROW LEVEL SECURITY;
+REVOKE ALL ON ALL TABLES IN SCHEMA modus_oa FROM PUBLIC,anon,authenticated,service_role;
+REVOKE ALL ON ALL SEQUENCES IN SCHEMA modus_oa FROM PUBLIC,anon,authenticated,service_role;
+REVOKE ALL ON ALL FUNCTIONS IN SCHEMA modus_oa FROM PUBLIC,anon,authenticated,service_role;
+-- Deliberately NO executor policies or grants yet: deny-all until implementations reviewed.
+-- Publication tables and legacy application tables unchanged in this object-model draft.
+ROLLBACK;

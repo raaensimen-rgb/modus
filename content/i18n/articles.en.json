@@ -1,0 +1,216 @@
+{
+  "romertall-i-musikk": {
+    "slug": "romertall-i-musikk",
+    "level": "beginner",
+    "topic": "Harmony",
+    "category": "harmony",
+    "title": "Roman numerals: the chords behind the numbers",
+    "intro": "Roman numerals describe relationships rather than fixed chord names. Learn the numbers first, then use them to understand chords in a key, transpose progressions and hear where the music is heading, wherever you play.",
+    "art": "romans",
+    "practice": "teori.html#akkorder",
+    "practice_label": "Build the chords in the theory room",
+    "learning": {
+      "goals": [
+        "Read Roman numerals I to X and explain why IV means four.",
+        "Identify a chord’s scale degree and distinguish major, minor and diminished.",
+        "Turn a Roman-numeral progression into chords in different keys.",
+        "Distinguish Roman numerals, chord names and inversions."
+      ],
+      "prerequisites": "You should know what a key, a major scale and a major or minor triad are. Start with the articles on intervals and chords if needed.",
+      "links": [
+        {
+          "slug": "toner-og-intervaller",
+          "label": "Notes and intervals"
+        },
+        {
+          "slug": "bygg-akkorder-i-en-toneart",
+          "label": "Build chords in a key"
+        }
+      ]
+    },
+    "sections": [
+      [
+        "First: a short introduction to Roman numerals",
+        "<p>Roman numerals are an older number system also used in music theory. Before analysing any chords, learn three signs: <strong>I means 1, V means 5 and X means 10</strong>. Combine them to write other numbers.</p><table><thead><tr><th>Roman numeral</th><th>Number</th><th>How to remember it</th></tr></thead><tbody><tr><td>I</td><td>1</td><td>One unit</td></tr><tr><td>II</td><td>2</td><td>Two units</td></tr><tr><td>III</td><td>3</td><td>Three units</td></tr><tr><td>IV</td><td>4</td><td>One before five: 5 − 1</td></tr><tr><td>V</td><td>5</td><td>Five</td></tr><tr><td>VI</td><td>6</td><td>Five plus one</td></tr><tr><td>VII</td><td>7</td><td>Five plus two</td></tr><tr><td>VIII</td><td>8</td><td>Five plus three</td></tr><tr><td>IX</td><td>9</td><td>One before ten: 10 − 1</td></tr><tr><td>X</td><td>10</td><td>Ten</td></tr></tbody></table><p>A smaller sign <em>before</em> a larger one is subtracted: <strong>IV = 4</strong> and <strong>IX = 9</strong>. After it, the smaller sign is added: <strong>VI = 6</strong>. In ordinary functional harmony we mainly use I to VII, because we build chords on the seven scale degrees.</p>"
+      ],
+      [
+        "The chord name tells you what; the numeral tells you where",
+        "<p>Take C major: <strong>C–D–E–F–G–A–B</strong>. Build a triad on each degree by taking alternate notes. C–E–G gives C major, D–F–A gives D minor, and so on.</p><p>A chord name such as <strong>G</strong> identifies the notes forming the chord. A Roman numeral such as <strong>V</strong> locates the chord’s root <em>within the key being analysed</em>. G is V in C major but I in G major. That is why the system is useful.</p><table><thead><tr><th>Degree in C major</th><th>Chord</th><th>Roman numeral</th></tr></thead><tbody><tr><td>1 · C</td><td>C</td><td>I</td></tr><tr><td>2 · D</td><td>Dm</td><td>ii</td></tr><tr><td>3 · E</td><td>Em</td><td>iii</td></tr><tr><td>4 · F</td><td>F</td><td>IV</td></tr><tr><td>5 · G</td><td>G</td><td>V</td></tr><tr><td>6 · A</td><td>Am</td><td>vi</td></tr><tr><td>7 · B</td><td>Bdim (B–D–F)</td><td>vii°</td></tr></tbody></table><div class=\"reading-example\"><span>Chord progression in C major</span><strong>C → F → G → C</strong><span>The same progression as numerals</span><strong>I → IV → V → I</strong></div>"
+      ],
+      [
+        "Uppercase and lowercase matter",
+        "<p>We use an important convention: <strong>uppercase numerals</strong> indicate major triads (<strong>I, IV, V</strong>), while <strong>lowercase numerals</strong> indicate minor triads (<strong>ii, iii, vi</strong>). A small circle, <strong>°</strong>, means diminished: <strong>vii°</strong>. A plus sign, <strong>+</strong>, indicates an augmented triad, for example III+.</p><p>Thus <strong>II</strong> and <strong>ii</strong> are different. Both have their root on degree two, but II is major and ii is minor. In C major, Dm is the diatonic <strong>ii</strong>. D major may appear as <strong>II</strong>, but contains F♯ and lies outside the key’s usual diatonic triads. We would often investigate whether it has a particular harmonic function.</p><aside class=\"reading-note\"><strong>Remember:</strong> The numeral identifies <em>the scale degree of the chord’s root</em>. Letter case indicates <em>chord quality</em>. These are separate pieces of information.</aside>"
+      ],
+      [
+        "Move the progression; keep the relationship",
+        "<p>Take <strong>C–Am–F–G</strong>. In C major this is <strong>I–vi–IV–V</strong>. Now move it to G major, whose notes are G–A–B–C–D–E–F♯. The same degrees give <strong>G–Em–C–D</strong>. The chord names change, but the numerals remain.</p><table><thead><tr><th>Key</th><th>I</th><th>vi</th><th>IV</th><th>V</th></tr></thead><tbody><tr><td>C major</td><td>C</td><td>Am</td><td>F</td><td>G</td></tr><tr><td>G major</td><td>G</td><td>Em</td><td>C</td><td>D</td></tr><tr><td>D major</td><td>D</td><td>Bm</td><td>G</td><td>A</td></tr></tbody></table><p>This is transposition in practice. Instead of memorising a song as disconnected chord names, understand the relationships. On guitar choose new shapes; on piano find the new chord tones. Roman numerals provide a shared language.</p>"
+      ],
+      [
+        "What do i–iv–V and ii–V–I mean?",
+        "<p>Use the numerals to understand two common progressions. In C major, <strong>ii–V–I = Dm–G–C</strong>, or <strong>Dm7–G7–Cmaj7</strong> with sevenths. The roots are on degrees two, five and one. The final chord is home in this key. The numerals describe chord relationships; they do not automatically determine an improvisation mode.</p><p>In A minor, <strong>i–iv–V = Am–Dm–E</strong>. Notice that E is <strong>major</strong>. A natural minor contains G and would give Em as diatonic <strong>v</strong>. Raising G to G♯ gives E major a stronger dominant pull. That is why <strong>V</strong> is common in minor-key harmony. Analyse the actual chord and its musical context.</p><p>Play C–F–G–C slowly and notice G’s pull towards C. Then play Dm–G–C. You reach the same home from a different starting point.</p><p><a href=\"ii-v-i-kadensen.html\">Read on: ii–V–I and the pull towards home ↗</a></p>"
+      ],
+      [
+        "Sevenths, inversions and common misreadings",
+        "<p>Numerals can show more detail. <strong>V7</strong> is a seventh chord on degree five, such as G7 in C major. The 7 describes the chord’s added seventh, not a move to scale degree seven. <strong>vii°</strong> is a diminished triad on degree seven; the circle is not a zero.</p><p>In traditional figured-bass and Roman-numeral analysis, <strong>I6</strong> usually means a <em>first-inversion</em> tonic triad, such as C/E. It does <strong>not</strong> automatically mean a C6 chord with added A. <strong>I6/4</strong> means second inversion, C/G. Some modern pop and jazz charts use other systems; check the notation being used.</p><p>Similarly, <strong>I–IV–V</strong> does not tell you to play Ionian, Lydian and Mixolydian in turn. It identifies chords relative to a key. Mode labels and Roman numerals answer different musical questions.</p><aside class=\"reading-note\">Textbooks vary in notation, particularly for seventh chords and chromatic harmony. Here we use uppercase/lowercase for major/minor within ordinary functional analysis. Check the key first.</aside>"
+      ],
+      [
+        "Our method: hear → predict → play → explain → change",
+        "<p><strong>Hear:</strong> Play I–IV–V–I in C major and listen for the return home. <strong>Predict:</strong> Name I, IV and V in G major before playing. <strong>Play:</strong> Check on guitar or piano. <strong>Explain:</strong> Why is D major V in G major but II in C major? <strong>Change:</strong> Transpose I–vi–IV–V into another key and write a short melody landing on a chord tone at each change.</p><p>This takes you from <em>knowing the signs</em> to <em>using harmony</em>. Roman numerals are not music by themselves; they reveal patterns in what you hear and play.</p><p><strong>References:</strong> <a href=\"https://viva.pressbooks.pub/openmusictheory/chapter/roman-numerals/\">Open Music Theory – Roman Numerals</a> and <a href=\"https://www.musictheory.net/lessons/44\">musictheory.net – Roman Numeral Analysis: Triads</a>. The explanations and practice sequence are adapted for MODUS.</p>"
+      ]
+    ],
+    "exercise": "Analyse C–Am–F–G in C major as Roman numerals. Transpose it to G major without consulting the table. Check on guitar or piano and explain why Em is vi in G major.",
+    "practice_steps": [
+      "Read: Say I, II, III, IV, V, VI, VII and translate them into 1–7.",
+      "Build: Find C, Dm, Em, F, G, Am and Bdim on the instrument and label each correctly.",
+      "Move: Play I–vi–IV–V in C and G major. Listen and explain what stays the same."
+    ],
+    "next_step": {
+      "slug": "ii-v-i-kadensen",
+      "reason": "Use Roman numerals to hear and explain a functional cadence in different keys."
+    }
+  },
+  "treklanger-fra-grunnform-til-omvending": {
+    "slug": "treklanger-fra-grunnform-til-omvending",
+    "level": "beginner",
+    "topic": "Chords",
+    "category": "chords",
+    "title": "Triads: from the root to the chord’s three notes",
+    "intro": "Before adding a seventh, understand the triad. Build major, minor, diminished and augmented chords, locate the third and fifth, and play the same notes in different inversions.",
+    "art": "triadfamily",
+    "practice": "teori.html#akkorder",
+    "practice_label": "Build and hear triads in the theory room",
+    "learning": {
+      "goals": [
+        "Build the four basic triad types from intervals.",
+        "Distinguish root, third and fifth from the lowest note of a shape.",
+        "Understand root position and first and second inversion, including their effect on bass and voice leading.",
+        "Explain how seventh chords extend a triad."
+      ],
+      "prerequisites": "You should have read about notes and intervals and tried building chords in C major. Roman numerals help but are not required.",
+      "links": [
+        {
+          "slug": "toner-og-intervaller",
+          "label": "Review intervals"
+        },
+        {
+          "slug": "bygg-akkorder-i-en-toneart",
+          "label": "Build chords in C major"
+        }
+      ]
+    },
+    "sections": [
+      [
+        "What exactly is a triad?",
+        "<p>A <strong>triad</strong> is a chord class containing three different pitch classes that can be arranged as stacked thirds. In ordinary major/minor harmony, these are the <strong>root (1), third (3) and fifth (5)</strong>. A triad has three distinct chord tones even if the guitar plays six strings or the piano doubles notes in several octaves.</p><p>Take <strong>C–E–G</strong>. C is the root, E the third and G the fifth. C to E is four semitones, a major third; E to G is three, a minor third. C to G is seven, a perfect fifth.</p><p>Building triads by taking alternate scale notes helps find chords <em>within</em> a key. Remember that scale degrees determine the note letters selected, while intervals determine the resulting chord quality.</p>"
+      ],
+      [
+        "Four triad types: what changes?",
+        "<p>Keep C as root and change only the third or fifth. This makes each note’s contribution easier to hear.</p><table><thead><tr><th>Type</th><th>Formula</th><th>Notes from C</th><th>Stacked thirds</th></tr></thead><tbody><tr><td>Major</td><td>1–3–5</td><td>C–E–G</td><td>Major + minor</td></tr><tr><td>Minor</td><td>1–♭3–5</td><td>C–E♭–G</td><td>Minor + major</td></tr><tr><td>Diminished</td><td>1–♭3–♭5</td><td>C–E♭–G♭</td><td>Minor + minor</td></tr><tr><td>Augmented</td><td>1–3–♯5</td><td>C–E–G♯</td><td>Major + major</td></tr></tbody></table><p><strong>Major and minor</strong> have a perfect fifth and differ in the third. A <strong>diminished</strong> triad has a minor third and diminished fifth, six semitones above the root. An <strong>augmented</strong> triad has a major third and augmented fifth, eight semitones above the root.</p><aside class=\"reading-note\">Write <strong>Cdim</strong> or <strong>C°</strong> for diminished and <strong>Caug</strong> or <strong>C+</strong> for augmented. The formulas assume C is the root; ♭ and ♯ indicate changes relative to the major scale’s degrees.</aside>"
+      ],
+      [
+        "Find the triads in C major",
+        "<p>Use what you know from building chords in a key. Start with <strong>C–D–E–F–G–A–B</strong> and take alternate notes. This gives seven <em>diatonic</em> triads: three major, three minor and one diminished.</p><table><thead><tr><th>Degree</th><th>Notes</th><th>Chord</th><th>Numeral</th></tr></thead><tbody><tr><td>1</td><td>C–E–G</td><td>C</td><td>I</td></tr><tr><td>2</td><td>D–F–A</td><td>Dm</td><td>ii</td></tr><tr><td>3</td><td>E–G–B</td><td>Em</td><td>iii</td></tr><tr><td>4</td><td>F–A–C</td><td>F</td><td>IV</td></tr><tr><td>5</td><td>G–B–D</td><td>G</td><td>V</td></tr><tr><td>6</td><td>A–C–E</td><td>Am</td><td>vi</td></tr><tr><td>7</td><td>B–D–F</td><td>Bdim</td><td>vii°</td></tr></tbody></table><p><strong>Not every chord in the key of C major is a C-major chord.</strong> They share a key, but the intervals within each triad differ. Moving the system to G major keeps I–ii–iii–IV–V–vi–vii°, while the chord names change.</p>"
+      ],
+      [
+        "Root position and inversions: same chord, new bass",
+        "<p>The notes of C major are C, E and G. <strong>C–E–G</strong> with C lowest is <strong>root position</strong>. With E lowest, arrange them as <strong>E–G–C</strong>: <strong>first inversion</strong>, commonly <strong>C/E</strong>. With G lowest, <strong>G–C–E</strong> is <strong>second inversion</strong>, commonly <strong>C/G</strong>.</p><div class=\"reading-example\"><span>Root position</span><strong>C–E–G → C</strong><span>First inversion</span><strong>E–G–C → C/E</strong><span>Second inversion</span><strong>G–C–E → C/G</strong></div><p>The <em>chord’s root</em> remains C in all three. The root is not necessarily the lowest note. Inversions can make bass lines smoother and shorten voice movements without changing chord identity.</p><p>In Roman-numeral analysis, <strong>I6</strong> usually means first inversion and <strong>I6/4</strong> second inversion. This does not automatically mean a C6 chord with added A. The 6/4 figures refer to intervals above the bass in figured-bass practice.</p>"
+      ],
+      [
+        "Move one note and hear the change",
+        "<p>Spend time on this exercise. Play <strong>C–E–G</strong> slowly. Keep C and G while lowering E to E♭: <strong>C major → C minor</strong>. Keep C and E♭ and lower G to G♭ for <strong>Cdim</strong>. Return to C major and raise G to G♯ for <strong>Caug</strong>.</p><p>On piano, hold two notes and move the third. On guitar, first play individual notes on one or more strings, then find a shape containing the same three pitch classes. The finger pattern is not the explanation; you are investigating the <em>intervals</em>.</p><p>Describe what you actually hear. Major is not always happy, nor minor always sad. Timbre, register, tempo and context affect the result. Aim to recognise which note changed rather than memorising a fixed emotional description.</p>"
+      ],
+      [
+        "From triads to seventh chords",
+        "<p>Once you understand triads, add <strong>one more chord tone</strong> by continuing the stack of thirds. Add B to <strong>C–E–G</strong> for <strong>Cmaj7</strong>: C–E–G–B. B is a major seventh above C.</p><p>Add B♭ instead for <strong>C7</strong>: C–E–G–B♭, a dominant-seventh chord type. C7 need not be the actual dominant of the key; the name primarily describes its construction.</p><p>Add B♭ to C–E♭–G for <strong>Cm7</strong>: C–E♭–G–B♭. Root, third and fifth remain the foundation. That is why we learn triads first.</p><div class=\"reading-example\"><span>Triad</span><strong>C–E–G</strong><span>Add a major seventh</span><strong>C–E–G–B → Cmaj7</strong><span>Add a minor seventh</span><strong>C–E–G–B♭ → C7</strong></div><p><a href=\"septimakkorder.html\">Next: seventh chords, more colour on the same foundation ↗</a></p>"
+      ],
+      [
+        "The method: hear, predict, play, explain, change",
+        "<p><strong>Hear:</strong> Play C major, C minor and Cdim as arpeggios. <strong>Predict:</strong> Sing the note that must move to turn C major into minor. <strong>Play:</strong> Check on the instrument and try all three inversions of C major. <strong>Explain:</strong> Identify root, third, fifth and bass in C/E. <strong>Change:</strong> Write a progression using an inversion to give the bass stepwise motion.</p><p>For example: <strong>C → G/B → Am</strong>. The bass becomes <strong>C–B–A</strong>. G/B contains G–B–D with B in the bass. You have used an inversion to create musical movement, rather than merely learning a shape.</p><p>Move from knowing <em>which notes</em> form a chord to understanding <em>how</em> those notes can approach the next chord. That makes maj7, m7 and dominant-seventh chords easier to learn.</p>"
+      ]
+    ],
+    "exercise": "Play C–E–G. Locate the third and lower E to E♭ without changing the other notes. Play C/E and C/G and name the bass of each. Add B to C–E–G and explain why the result is Cmaj7.",
+    "practice_steps": [
+      "Build C, Cm, Cdim and Caug from the same root. Sing the third and fifth before playing.",
+      "Play C, C/E and C/G. Write the bass note and identify each inversion.",
+      "Play C–G/B–Am and hear C–B–A in the bass. Then add B to the C-major triad and compare C with Cmaj7."
+    ],
+    "next_step": {
+      "slug": "septimakkorder",
+      "reason": "Once you can hear and build triads, the seventh is the next note that extends the harmony."
+    }
+  },
+  "kirketonearter-ett-system-sju-uttrykk": {
+    "slug": "kirketonearter-ett-system-sju-uttrykk",
+    "level": "intermediate",
+    "topic": "Modality",
+    "category": "modes",
+    "title": "Diatonic modes: one note system, seven musical perspectives",
+    "intro": "Seven modes do not mean seven separate maps. Start with one collection of notes, learn to hear where the music feels at home, and use characteristic tones to create a distinctive sound.",
+    "art": "sevenmodes",
+    "practice": "teori.html#moduser",
+    "practice_label": "Explore modes in the theory room",
+    "learning": {
+      "goals": [
+        "Explain how the same seven notes can form seven different modes.",
+        "Distinguish relative modes from parallel comparisons.",
+        "Hear and use characteristic tones over a clear tonal centre.",
+        "Apply the idea to guitar, piano, improvisation and composition."
+      ],
+      "prerequisites": "Know the major scale and major/minor thirds, fourths, fifths, sixths and sevenths. You do not need to memorise seven guitar boxes.",
+      "links": [
+        {
+          "slug": "toner-og-intervaller",
+          "label": "Review intervals"
+        },
+        {
+          "slug": "moduser-og-tonalt-sentrum",
+          "label": "Understand the tonal centre"
+        }
+      ]
+    },
+    "sections": [
+      [
+        "One collection of notes, seven possible homes",
+        "<p>A scale map tells us <em>which notes</em> are available. It does not by itself tell us <em>which note feels like home</em>. That depends on bass, harmony, melodic resting points, rhythmic emphasis and repetition.</p><p>Take C major’s seven notes: <strong>C–D–E–F–G–A–B</strong>. Establish C as centre for C Ionian. With D as the actual tonal centre, the same material can sound like D Dorian; with E, like E Phrygian. No note has changed. The reference point against which we hear the notes has changed.</p><aside class=\"reading-note\"><strong>Important:</strong> Playing C-major notes from D to D <em>demonstrates</em> the Dorian interval sequence. It does not automatically make the music Dorian. If the accompaniment establishes C as home, the ear may still hear C major even when the phrase begins on D.</aside>"
+      ],
+      [
+        "The seven modes in one map",
+        "<p>Here is the family derived from C major. The final column describes characteristic degrees relative to <em>major</em> for major-type modes and <em>natural minor</em> for minor-type modes. Locrian is distinctive because of its diminished fifth.</p><table><thead><tr><th>Mode</th><th>Centre using C-major notes</th><th>Interval formula</th><th>Characteristic</th></tr></thead><tbody><tr><td>Ionian</td><td>C</td><td>1–2–3–4–5–6–7</td><td>Major, major seventh</td></tr><tr><td>Dorian</td><td>D</td><td>1–2–♭3–4–5–6–♭7</td><td>Minor with major sixth (6)</td></tr><tr><td>Phrygian</td><td>E</td><td>1–♭2–♭3–4–5–♭6–♭7</td><td>Minor with minor second (♭2)</td></tr><tr><td>Lydian</td><td>F</td><td>1–2–3–♯4–5–6–7</td><td>Major with augmented fourth (♯4)</td></tr><tr><td>Mixolydian</td><td>G</td><td>1–2–3–4–5–6–♭7</td><td>Major with minor seventh (♭7)</td></tr><tr><td>Aeolian</td><td>A</td><td>1–2–♭3–4–5–♭6–♭7</td><td>Natural minor, minor sixth</td></tr><tr><td>Locrian</td><td>B</td><td>1–♭2–♭3–4–♭5–♭6–♭7</td><td>Diminished fifth (♭5), unstable tonic</td></tr></tbody></table><p>Ionian is the ordinary major scale and Aeolian is natural minor. Locrian is theoretically important but harder to establish as a stable centre because its tonic triad is diminished. Hearing modal differences is more useful than ranking modes by fixed mood words.</p>"
+      ],
+      [
+        "Relative and parallel modes answer different questions",
+        "<p><strong>Relative modes</strong> share the same notes but have different centres. C Ionian, D Dorian and E Phrygian are relative in our example: one connected view of the material.</p><p><strong>Parallel modes</strong> keep the same centre but change the intervals. D Dorian has D–E–F–G–A–B–C; D Aeolian has D–E–F–G–A–B♭–C. The difference is <strong>B versus B♭</strong>: major versus minor sixth.</p><p>Do not confuse these perspectives. Relative thinking helps locate notes on an instrument. Parallel thinking isolates <em>what gives a mode its character</em>. Both help, but they solve different problems.</p><div class=\"reading-example\"><span>Same notes, new centre</span><strong>C Ionian → D Dorian</strong><span>Same centre, new interval colour</span><strong>D Dorian → D Aeolian</strong></div>"
+      ],
+      [
+        "Learn to hear the characteristic tone",
+        "<p>Take D Dorian. Play a quiet D bass or use Dm as the starting chord. Then play a short melody such as <strong>D–F–A–B–A–F–D</strong>. Notice B, the major sixth above D.</p><p>Repeat exactly the same phrase, changing only <strong>B to B♭</strong>. The collection now points towards D Aeolian. Keep rhythm and the remaining notes unchanged so you know you are investigating the sixth.</p><p>Harmony can help: use <strong>Dm–G</strong>, with D clearly home, for Dorian; G major contains B. Compare <strong>Dm–Gm</strong> for Aeolian; Gm contains B♭. These are examples, not guarantees. If you play them as a functional cadence towards another centre, the perceived tonality may change.</p><aside class=\"reading-note\">You do not need to hit the characteristic tone in every bar. First hear its effect, then use it as a <strong>musical choice</strong>.</aside>"
+      ],
+      [
+        "The fretboard: one connected map, not seven new boxes",
+        "<p>You do not need a new pattern at every chord. Start with one familiar diatonic map across the fretboard. It shows note locations; <strong>their meaning depends on the centre and surrounding harmony</strong>.</p><p>The G-major collection <strong>G–A–B–C–D–E–F♯</strong> can support G Ionian, A Dorian, B Phrygian, C Lydian, D Mixolydian, E Aeolian and F♯ Locrian. On the low E string, <strong>F♯ is at fret 2</strong> and <strong>G at fret 3</strong>. They are neighbours in one map. Moving from F♯ to G does not by itself change the music from Locrian to Ionian.</p><p>Play a G drone under the phrase and hear G as home. Then place an A drone under <em>the same notes</em> and try to make A feel settled. Only an actual change of centre gives a meaningful modal change. The same applies on piano: bass and phrase endings do the work while the notes stay the same.</p><p>Seven positions can help navigation. Connect them into <em>one system</em> rather than seven unrelated maps.</p>"
+      ],
+      [
+        "Do not change mode automatically at every chord",
+        "<p>In a diatonic progression such as <strong>Em–C–G–D</strong>, G-major/E-natural-minor notes can work throughout. That does not necessarily mean four separate tonal worlds labelled E Aeolian → C Lydian → G Ionian → D Mixolydian.</p><p><strong>Chord–scale labels</strong> describe intervals above a chord root. <strong>Perceived modality</strong> concerns the music’s centre. A progression may retain an overall centre while its chords change. In improvisation, following <strong>chord tones, voice-leading tendencies and melodic targets</strong> can be more useful than changing the whole map.</p><p>Ask at each change: <em>Which note will I land on, and why?</em> Keep the map and change the phrase. New scales become necessary when harmony or expressive intent actually calls for different notes.</p><p><a href=\"ett-skalakart-nye-maltoner.html\">Read on: one scale map, new target notes ↗</a></p>"
+      ],
+      [
+        "From theory to your own music",
+        "<p>Hold a D bass and write a four-bar Dorian melody in which B is clear but does not dominate. Write another ending using B♭, pointing towards D Aeolian. Changing one note changes the possibilities for harmony and melodic tension.</p><p>Compare <strong>C Lydian</strong> with C Ionian: F♯ versus F. Compare <strong>E Phrygian</strong> with E Aeolian: F versus F♯. Keep the root and change one characteristic tone at a time.</p><p>Modern rock, fusion and progressive metal can use this to choose melodic colours deliberately, even over a simple pedal bass. No mode guarantees one expression: phrasing, rhythm, timbre and harmony still matter.</p>"
+      ],
+      [
+        "The method: hear, predict, play, explain, change",
+        "<p><strong>Hear:</strong> Play the phrase with D as centre. <strong>Predict:</strong> Sing how the melody will change when B becomes B♭. <strong>Play:</strong> Check on guitar or piano. <strong>Explain:</strong> Describe how major and minor sixths produce different interval structures above D. <strong>Change:</strong> Use the difference for a new ending or chord colour.</p><p>The aim is more than reproducing a scale: it is to <em>hear, understand and use</em> the difference in your music.</p><p><strong>References:</strong> <a href=\"https://pressbooks.nebraska.edu/openmusictheory/chapter/diatonic-modes/\">Open Music Theory: Diatonic Modes</a> and <a href=\"https://online.berklee.edu/takenote/music-modes-major-and-minor/\">Berklee Online: Music Modes</a>. MODUS examples and the practice sequence are teaching applications, not reproductions of the sources. Here “church modes” refers to the modern seven-mode diatonic system; historical church modality also used other rules, finals and authentic/plagal forms.</p>"
+      ]
+    ],
+    "exercise": "Keep D as centre and play D–F–A–B–A–F–D, singing B before playing. Change only B to B♭, listen and explain. Then play two bars of Dm–G and two of Dm–Gm. Which modal colour do you hear, and what creates it?",
+    "practice_steps": [
+      "Hear: Play a D drone and sing major and minor sixths without looking at the instrument.",
+      "Predict and play: Repeat one phrase with B and B♭, keeping rhythm and register unchanged.",
+      "Explain and change: Describe the interval difference and write a modal phrase with two parts."
+    ],
+    "next_step": {
+      "slug": "dorisk-og-eolisk",
+      "reason": "Continue with a controlled parallel comparison using the same centre and just one altered degree."
+    }
+  }
+}

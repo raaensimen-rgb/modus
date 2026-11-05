@@ -1,0 +1,16 @@
+{
+  "head": "2f2a2c2787af9f680731dc6ed09434c1d78857ac",
+  "cases": [
+    "RED2-B01 local autosave/save, revision/timestamp, zero RPC",
+    "RED2-B02 actual JSON download: content preserved; revision envelope absent",
+    "RED2-B03 NB/EN distinct local keys",
+    "RED2-B04 characterized defect: quota failure overwritten by success message",
+    "RED2-B05 save RPC carries exact expected revision; returned revision adopted",
+    "RED2-B06 40001 keeps local draft and current revision; warns user",
+    "RED2-B07 characterized boundary: local account draft remains after signout",
+    "RED2-B08 characterized gap: restore rev1 content onto rev3 without base-revision conflict"
+  ],
+  "unexpectedExternalRequests": [],
+  "pageErrors": [],
+  "scope": "Actual client + synthetic SDK; NOT proof of live SQL/RLS/transaction behavior"
+}

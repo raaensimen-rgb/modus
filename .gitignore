@@ -1,0 +1,14 @@
+# Local dependencies and generated QA/private intermediate files
+node_modules
+.build-private/
+__pycache__/
+test-results/
+
+# Local build output and design inputs; existing tracked dist files stay tracked.
+/dist/
+/design-references/
+.DS_Store
+.env
+.env.*
+!.env.example
+/private/

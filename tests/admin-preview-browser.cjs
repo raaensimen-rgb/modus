@@ -1,0 +1,59 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict'),{chromium,webkit}=require('playwright'),AxeBuilder=require('@axe-core/playwright').default;
+const root=path.resolve(__dirname,'..'),arg=process.argv.find(v=>v.startsWith('--dir=')),dir=path.resolve(root,arg?arg.slice(6):'.build-private/admin-preview'),out=path.join(root,'test-results/admin-preview');
+(async()=>{fs.mkdirSync(out,{recursive:true});const manifest=JSON.parse(fs.readFileSync(path.join(dir,'admin-package.json'),'utf8')),allowed=new Set([...manifest.files.map(f=>f.path),'admin-package.json']);const server=http.createServer((req,res)=>{for(const line of fs.readFileSync(path.join(dir,'_headers'),'utf8').split('\n').slice(1)){const i=line.indexOf(':');if(i>0)res.setHeader(line.slice(0,i).trim(),line.slice(i+1).trim());}if(!['GET','HEAD'].includes(req.method)){res.writeHead(405);return res.end();}let name=new URL(req.url,'http://localhost').pathname.slice(1);if(!name)name='index.html';if(name==='redaktor')name='redaktor.html';if(!allowed.has(name)){res.writeHead(404);return res.end();}res.setHeader('Content-Type',name.endsWith('.js')?'text/javascript':name.endsWith('.css')?'text/css':name.endsWith('.html')?'text/html':name.endsWith('.json')?'application/json':name.endsWith('.svg')?'image/svg+xml':'image/png');res.end(req.method==='HEAD'?undefined:fs.readFileSync(path.join(dir,name)));});await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port;let browser;const records=[],errors=[],external=[],audits=[];
+try{for(const [engine,launcher] of Object.entries({chromium,webkit})){browser=await launcher.launch();for(const width of [320,375,1440])for(const locale of ['nb','en']){const c=await browser.newContext({viewport:{width,height:1000},acceptDownloads:true,reducedMotion:'reduce'}),p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));await c.route('**/*',r=>{if(new URL(r.request().url()).origin!==origin){external.push(r.request().url());return r.abort();}return r.continue();});await p.goto(origin+'/redaktor.html');await p.locator('#adminOverviewStats').waitFor();const go=async (view,page=p)=>{if(width<721)await page.locator('#mobileMenu').click();await page.locator('[data-console-view='+view+']').click();};await go('articles');if(locale==='en'){await p.locator('#editorLocale').selectOption('en');await p.locator('[data-admin-action=newArticle]').click();}assert.equal(await p.locator('#editorLogin').isVisible(),false);assert.equal(await p.locator('#exitPreview').isVisible(),false);assert(await p.locator('#publishArticle').isDisabled());assert.equal(await p.locator('#adminAccessLogout').getAttribute('href'),'/cdn-cgi/access/logout');
+await p.locator('#field-title').fill('Synthetic protected-package test '+locale);await p.locator('#field-slug').fill('protected-package-test');await p.locator('.rich-editor').first().fill('Only in this isolated browser profile.');assert.equal(await p.locator('.rich-editor').first().getAttribute('lang'),locale);await p.locator('[data-admin-action=saveDraft]').click();await p.waitForFunction(()=>document.querySelector('#editorStatus').textContent.includes('Lagret lokalt'));await p.locator('#previewArticle').click();await p.locator('#previewDialog').waitFor({state:'visible'});await p.locator('#closePreview').click();
+// Immediate suspension, version history and refresh use the real browser-only package.
+const draftKey='modus.editor.local.v1.preview.'+locale+':protected-package-test';
+const stored=()=>p.evaluate(k=>JSON.parse(localStorage.getItem(k)),draftKey);
+const firstLocalRevision=(await stored()).localRevision;
+await p.locator('#field-intro').fill('Synthetic pending before suspension');
+await p.evaluate(()=>window.dispatchEvent(new Event('pagehide')));
+assert.equal((await stored()).article.intro,'Synthetic pending before suspension');
+assert.equal((await stored()).localRevision,firstLocalRevision+1);
+await p.locator('#field-intro').fill('Synthetic latest version');await p.locator('#saveDraft').click();
+const latest=await stored();assert.equal(latest.history[0].article.intro,'Synthetic pending before suspension');
+assert.equal(latest.history[0].revision,0);assert(latest.history.length<=5);
+await p.locator('#saveDraft').click();assert.equal((await stored()).localRevision,latest.localRevision);
+await p.locator('#localHistory').selectOption('0');p.once('dialog',d=>d.accept());await p.locator('#restoreLocalVersion').click();
+assert.equal(await p.locator('#field-intro').inputValue(),'Synthetic pending before suspension');
+assert.equal((await stored()).history[0].article.intro,'Synthetic latest version');await p.locator('#saveDraft').click();
+assert.match(await p.locator('#localSaveDetails').textContent(),/local revision|lokal revisjon/);
+// A title change must not create a second article identity after first save.
+await p.locator('#field-title').fill('Synthetic protected-package test '+locale+' revised');await p.locator('#saveDraft').click();
+assert.equal(await p.locator('#field-slug').inputValue(),'protected-package-test');assert(await p.locator('#field-slug').isEditable()===false);
+await p.locator('#editorLocale').selectOption(locale==='nb'?'en':'nb');await p.locator('#editorLocale').selectOption(locale);
+await p.locator('#editorArticleList button[data-article-slug="protected-package-test"]').click();
+assert.equal(await p.locator('#field-intro').inputValue(),'Synthetic pending before suspension');
+// Reload before the debounce fires: the lifecycle flush must retain the edit.
+await p.locator('#field-intro').fill('Synthetic refresh before debounce');
+p.once('dialog',d=>d.accept());await p.reload();await p.locator('#adminOverviewStats').waitFor();await go('articles');
+await p.locator('#editorLocale').selectOption(locale);await p.locator('#editorArticleList button[data-article-slug="protected-package-test"]').click();
+assert.equal(await p.locator('#field-intro').inputValue(),'Synthetic refresh before debounce');await p.locator('#saveDraft').click();
+if(width===1440){
+ const q=await c.newPage();await q.goto(origin+'/redaktor.html');await q.locator('#adminOverviewStats').waitFor();await go('articles',q);
+ await q.locator('#editorLocale').selectOption(locale);await q.locator('#editorArticleList button[data-article-slug="protected-package-test"]').click();
+ await p.locator('#field-intro').fill('Synthetic winner in another tab');await p.locator('#saveDraft').click();
+ await q.locator('#field-intro').fill('Synthetic stale tab must not overwrite');await q.locator('#saveDraft').click();
+ assert.match(await q.locator('#editorStatus').textContent(),/Storage conflict/);assert.equal((await stored()).article.intro,'Synthetic winner in another tab');
+ const staleDownload=q.waitForEvent('download');await q.locator('#downloadDraft').click();assert.equal(JSON.parse(fs.readFileSync(await (await staleDownload).path(),'utf8')).intro,'Synthetic stale tab must not overwrite');
+ // Reusing an identity previously opened in this same tab is still a collision for a new draft.
+ q.once('dialog',d=>d.accept());await q.locator('#newArticle').click();
+ await q.locator('#field-title').fill('Synthetic collision must not replace');await q.locator('#field-slug').fill('protected-package-test');await q.locator('#saveDraft').click();
+ assert.match(await q.locator('#editorStatus').textContent(),/Storage conflict/);assert.equal((await stored()).article.intro,'Synthetic winner in another tab');
+ // A body-only, untitled draft needs a valid, recoverable identity before any title exists.
+ q.once('dialog',d=>d.accept());await q.locator('#newArticle').click();await q.locator('.rich-editor').first().fill('Synthetic body before a title');
+ await q.evaluate(()=>window.dispatchEvent(new Event('pagehide')));
+ const untitledSlug=await q.locator('#field-slug').inputValue();assert.match(untitledSlug,/^utkast-[a-f0-9-]+$/);
+ q.once('dialog',d=>d.accept());await q.reload();await q.locator('#adminOverviewStats').waitFor();await go('articles',q);await q.locator('#editorLocale').selectOption(locale);
+ await q.locator('#editorArticleList button[data-article-slug="'+untitledSlug+'"]').click();assert.match(await q.locator('.rich-editor').first().textContent(),/body before a title/);
+ await q.close({runBeforeUnload:false});
+}
+const download=p.waitForEvent('download');await p.locator('#downloadDraft').click();const article=JSON.parse(fs.readFileSync(await (await download).path(),'utf8'));assert.equal(article.locale,locale);assert.match(article.sections[0][1],/isolated browser profile/);
+for(const view of ['overview','analytics','studies','media','members','inbox','review','publication','health','tasks','history','backup','settings']){await go(view);assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),view+' overflow');if(view!=='overview')assert(await p.locator('#adminConsole').isVisible());}
+await go('backup');const backupDownload=p.waitForEvent('download');await p.locator('#adminConsole>button').first().click();const backup=JSON.parse(fs.readFileSync(await (await backupDownload).path(),'utf8'));assert.equal(backup.records.length,width===1440?2:1);const row=backup.records.find(v=>v.key.endsWith(':protected-package-test')),copy=JSON.parse(row.value);copy.article.slug='restored-only-in-browser';copy.article.title='Restored only in browser';for(const v of copy.history||[])v.article.slug=copy.article.slug;backup.records.push({key:row.key.replace('protected-package-test','restored-only-in-browser'),value:JSON.stringify(copy)});await p.locator('#adminConsole input[type=file]').setInputFiles({name:'private-backup-test.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup))});await p.waitForFunction(()=>document.querySelectorAll('#adminConsole>button').length===2);await p.locator('#adminConsole>button').last().click();assert.match(await p.locator('#adminConsoleMessage').textContent(),/Gjenopprettet: 1.*beholdt: [12]/);
+await p.reload();await p.locator('#adminOverviewStats').waitFor();await go('articles');await p.locator('#editorLocale').selectOption(locale);await p.locator('#editorArticleList button').filter({hasText:'Synthetic protected-package test '+locale}).click();assert.match(await p.locator('.rich-editor').first().textContent(),/isolated browser profile/);
+if(width===1440){await go('overview');const axe=await new AxeBuilder({page:p}).include('#adminOverview').withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();assert.deepEqual(axe.violations.map(v=>v.id),[]);audits.push({engine,locale,violations:0});}if(locale==='nb'){await go('overview');await p.screenshot({path:path.join(out,engine+'-'+width+'-overview.png')});}
+const other=await browser.newContext();const otherPage=await other.newPage();await otherPage.goto(origin);await otherPage.locator('#adminOverviewStats').waitFor();assert.equal(await otherPage.evaluate(()=>Object.keys(localStorage).filter(k=>k.startsWith('modus.editor.local.v1.preview.')).length),0);await other.close();assert.equal((await p.request.get(origin+'/admin-app.js.map')).status(),404);assert.equal((await p.request.get(origin+'/content/articles.json')).status(),404);assert.equal((await p.request.post(origin+'/cms-seed.json',{data:{test:true}})).status(),405);records.push({engine,width,locale,passed:true});await c.close();}await browser.close();browser=null;}
+assert.deepEqual(errors,[]);assert.deepEqual(external,[]);fs.writeFileSync(path.join(out,'results.json'),JSON.stringify({records,audits,errors,external,storage:'browser-only; other profiles have no drafts; existing copy preserved on restore'},null,2));console.log(records.length,'static admin package scenarios and',audits.length,'axe audits passed; no external requests or backend writes.');}finally{if(browser)await browser.close();await new Promise(r=>server.close(r));}})().catch(e=>{console.error(e);process.exitCode=1});

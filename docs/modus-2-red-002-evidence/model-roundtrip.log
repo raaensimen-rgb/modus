@@ -1,0 +1,6 @@
+RED2-M01 NB/EN normalized JSON content roundtrip is stable
+RED2-M02 characterized omission: pedagogical, editorial and revision metadata dropped
+RED2-M03 characterized coercion/truncation: unsupported language -> nb, 31 -> 30 sections
+RED2-M04 active markup/protocols blocked; arbitrary HTTPS remains allowed
+RED2-M05 32/32 current source-to-model combinations validate (locale labels, not translation accuracy)
+RED2-M06 no JSON upload/import control in current editor HTML; roundtrip test is model-only

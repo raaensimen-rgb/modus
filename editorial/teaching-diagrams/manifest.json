@@ -1,0 +1,2830 @@
+{
+  "schema_version": 1,
+  "source_article_count": 52,
+  "source_basis": "cf1258793e8eb28cf49683cf9a020948a48ed764",
+  "original_work": true,
+  "academic_status": "technical and bounded music checks; not final academic approval",
+  "articles": [
+    {
+      "slug": "toner-og-intervaller",
+      "title": "Toner og intervaller: musikkens byggesteiner",
+      "source_sections": [
+        "En tone er et utgangspunkt",
+        "Fra halve trinn til intervaller",
+        "Lytt før du pugger",
+        "Beskriv det du spiller"
+      ],
+      "existing_art": "intervals",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "Tell bokstaver og halvtoner",
+          "transcript": [
+            "Tell bokstaver og halvtoner",
+            "Stor ters · 4 halvtoner: C4 → E4",
+            "Liten ters · 3 halvtoner: C4 → E♭4",
+            "E–G–B på én streng: streng 6, bånd 0: E2; streng 6, bånd 3: G2; streng 6, bånd 7: B2"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/toner-og-intervaller.svg",
+              "sha256": "8fe26e990decf1c000968986b35edc4dd5371c1d926451519cd6b87ab5a7c824"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/toner-og-intervaller-card.svg",
+              "sha256": "25535fae0e2b1a81fabd1aa0106c2195f572e8c89e48bcf4a4ce5977d291dd5d"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Count letters and semitones",
+          "transcript": [
+            "Count letters and semitones",
+            "Major third · 4 semitones: C4 → E4",
+            "Minor third · 3 semitones: C4 → E♭4",
+            "E–G–B on one string: string 6, fret 0: E2; string 6, fret 3: G2; string 6, fret 7: B2"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/toner-og-intervaller.svg",
+              "sha256": "03742e09ea94b561034c93991d68b6facb813b98a9ff81757b27b0f55a365ffa"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/toner-og-intervaller-card.svg",
+              "sha256": "41323c78b0cd4f5812bf696c8acdba69dcf401bf0897a4e34bc88a63c536915a"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "dur-og-moll",
+      "title": "Dur og moll: en tone gjør forskjellen",
+      "source_sections": [
+        "Tre toner rundt en grunntone",
+        "Dur betyr ikke alltid glad",
+        "Samme akkord i forskjellige leier",
+        "Finn tersen i ditt eget grep"
+      ],
+      "existing_art": "triads",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "Behold C og G. Flytt tersen.",
+          "transcript": [
+            "Behold C og G. Flytt tersen.",
+            "C-dur · 1–3–5: C4 → E4 → G4",
+            "C-moll · 1–♭3–5: C4 → E♭4 → G4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/dur-og-moll.svg",
+              "sha256": "7a2bb58987bf81c5d91d2aded8fda4f7b5e0ecf53f736c0ca829b992fac634a7"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/dur-og-moll-card.svg",
+              "sha256": "d88bbc4cca5079fd4c8418a27c089026da4dbcdd3b0a25170025b205fca084b6"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Keep C and G. Move the third.",
+          "transcript": [
+            "Keep C and G. Move the third.",
+            "C major · 1–3–5: C4 → E4 → G4",
+            "C minor · 1–♭3–5: C4 → E♭4 → G4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/dur-og-moll.svg",
+              "sha256": "53657ba957adc08ad1cf62449e0413bde1623b8af7bab20e4a3a0b7b53431d46"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/dur-og-moll-card.svg",
+              "sha256": "b407adf6954b24fb3141575a5ab9f5f3a3a4fa8f93cbcd26e4aa818e56a3211a"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "kvintsirkelen",
+      "title": "Kvintsirkelen: et kart over toneartenes slektskap",
+      "source_sections": [
+        "Hva viser kvintsirkelen?",
+        "Fortegn: ett nytt tegn for hvert steg",
+        "Dur og relativ moll deler fortegn",
+        "Finn I, IV og V ved siden av hverandre",
+        "Hør kvintbevegelsen i ii–V–I",
+        "Hvor passer modusene inn?",
+        "En liten øverutine",
+        "Bruk kartet uten å bytte hele skalakartet"
+      ],
+      "existing_art": "circle",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "Nabotonearter og en kadens",
+          "transcript": [
+            "Nabotonearter og en kadens",
+            "Røtter og funksjoner i C-dur: F ← C → G; IV ← I → V; Dm7 → G7 → Cmaj7; Røtter: D → G → C",
+            "G-dur · én ny tone: F♯: G3 → A3 → B3 → C4 → D4 → E4 → F♯4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/kvintsirkelen.svg",
+              "sha256": "e6f1deb78292c875bc9eb7c475d099be63641d852d03fb5c923947802a10504d"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/kvintsirkelen-card.svg",
+              "sha256": "f82c4fb4c478abaab290397e20a03647f74087c5186f97ed5b9156f71083e6bb"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Neighbouring keys and a cadence",
+          "transcript": [
+            "Neighbouring keys and a cadence",
+            "Roots and functions in C major: F ← C → G; IV ← I → V; Dm7 → G7 → Cmaj7; Roots: D → G → C",
+            "G major · one new note: F♯: G3 → A3 → B3 → C4 → D4 → E4 → F♯4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/kvintsirkelen.svg",
+              "sha256": "ebbea78754ce4c64b054b2e0e2457a1bc5d42daccde7470939ffcc39470cdd00"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/kvintsirkelen-card.svg",
+              "sha256": "ecdc204d848dc1ceaae880af55499300216694f2b520fb1d4a0e6cf4736d2707"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "din-forste-improvisasjon",
+      "title": "Fra skala til din første improvisasjon",
+      "source_sections": [
+        "Begynn med et lite område",
+        "Gi en liten idé flere liv",
+        "Skalaen er et toneutvalg",
+        "Endre én ting og lytt til resultatet"
+      ],
+      "existing_art": "melody",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "En frase trenger også rom",
+          "transcript": [
+            "En frase trenger også rom",
+            "E–G–B · tre akkordtoner: E4 → G4 → B4",
+            "Spørsmål og svar: Spill: E–G–B; Vent og lytt; Svar: B–G–E"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/din-forste-improvisasjon.svg",
+              "sha256": "90dfd2a68fb37988f31677c9c888c8a72c45db40117975c2d9540c7e848d72c2"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/din-forste-improvisasjon-card.svg",
+              "sha256": "b148dfdf5c8a6adcacd15deb20bd98f96f8854d548fa0e6e158eadb784962afb"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "A phrase also needs space",
+          "transcript": [
+            "A phrase also needs space",
+            "E–G–B · three chord tones: E4 → G4 → B4",
+            "Call and response: Play: E–G–B; Wait and listen; Reply: B–G–E"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/din-forste-improvisasjon.svg",
+              "sha256": "b0c1161a68bbf65fbad9f341988f6e6365573a6a4779185c51e28b2d312ce0a8"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/din-forste-improvisasjon-card.svg",
+              "sha256": "8d6e9e5c2d5828e0794be2f4d98fccf02f1db79b4ff706475c37af8219f8e577"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "moduser-og-tonalt-sentrum",
+      "title": "Moduser: sentrum er viktigere enn starttonen",
+      "source_sections": [
+        "Et sentrum gir tonene roller",
+        "Sammenlign fra samme grunntone",
+        "La harmonien vise fargen",
+        "Ett halskart kan romme flere sentre"
+      ],
+      "existing_art": "modes",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "E er hjem. C♯ viser dorisk.",
+          "transcript": [
+            "E er hjem. C♯ viser dorisk.",
+            "E dorisk · stor sekst C♯: E3 → F♯3 → G3 → A3 → B3 → C♯4 → D4",
+            "Harmonien støtter sentrum: Em7 → A7 → Em7; E–G–B–D | A–C♯–E–G; La bass og frase vende til E"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/moduser-og-tonalt-sentrum.svg",
+              "sha256": "0c42bd0c1c04a81b12ef9f5356b4fc5f0740d21778b705b0639afbafe565f5f3"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/moduser-og-tonalt-sentrum-card.svg",
+              "sha256": "8204f2348403948d18989d39f0d78e3145e3448649275d52d46b29a47bd27ce8"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "E is home. C♯ reveals Dorian.",
+          "transcript": [
+            "E is home. C♯ reveals Dorian.",
+            "E Dorian · major sixth C♯: E3 → F♯3 → G3 → A3 → B3 → C♯4 → D4",
+            "Harmony supports the centre: Em7 → A7 → Em7; E–G–B–D | A–C♯–E–G; Let bass and phrase return to E"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/moduser-og-tonalt-sentrum.svg",
+              "sha256": "776bc9a6f19a08f1e4e405e9d36d62d6c846c3b486bc73d32fa7085bed6b3ddb"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/moduser-og-tonalt-sentrum-card.svg",
+              "sha256": "632a066cdec3301f393b7a4df02d4c26a6d954f8cb6346fb791fee730601d785"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "kirketonearter-ett-system-sju-uttrykk",
+      "title": "Kirketonearter: ett tonesystem, sju musikalske uttrykk",
+      "source_sections": [
+        "Én samling toner – sju mulige hjem",
+        "De sju modusene i ett kart",
+        "Relative og parallelle moduser svarer på ulike spørsmål",
+        "Slik lærer du å høre karaktertonen",
+        "Gitarhalsen: ett sammenhengende kart, ikke sju nye bokser",
+        "Ikke bytt modus automatisk ved hvert akkordskifte",
+        "Fra teori til egen musikk",
+        "Arbeidsmetoden: hør, forutsi, spill, forklar, endre"
+      ],
+      "existing_art": "sevenmodes",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "Samme toner, ulike referansepunkter",
+          "transcript": [
+            "Samme toner, ulike referansepunkter",
+            "C-durs toner · sju sentre: C ionisk · D dorisk · E frygisk; F lydisk · G miksolydisk; A eolisk · B lokrisk",
+            "D dorisk · seksten er B: D4 → E4 → F4 → G4 → A4 → B4 → C5",
+            "D eolisk · seksten er B♭: D4 → E4 → F4 → G4 → A4 → B♭4 → C5"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/kirketonearter-ett-system-sju-uttrykk.svg",
+              "sha256": "1ad92a889144270f5aaf89ff9f63c9f46265aef0b1e86306e84cbf767338b632"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/kirketonearter-ett-system-sju-uttrykk-card.svg",
+              "sha256": "33d4a73698dc4dace0fd3b675901e6647c5dc3050e4a8db935f6d70619e170a6"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Same notes, different reference points",
+          "transcript": [
+            "Same notes, different reference points",
+            "C major notes · seven centres: C Ionian · D Dorian · E Phrygian; F Lydian · G Mixolydian; A Aeolian · B Locrian",
+            "D Dorian · the sixth is B: D4 → E4 → F4 → G4 → A4 → B4 → C5",
+            "D Aeolian · the sixth is B♭: D4 → E4 → F4 → G4 → A4 → B♭4 → C5"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/kirketonearter-ett-system-sju-uttrykk.svg",
+              "sha256": "222d8a22cbe1b3152716401143a5f50ff1c916f596d2c89690053f89ee82cd1d"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/kirketonearter-ett-system-sju-uttrykk-card.svg",
+              "sha256": "481775e9974a99ed0d3fa29f199896b8553a0621db8985cdf5423b6508845dcf"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "romertall-i-musikk",
+      "title": "Romertall i musikk: forstå akkordene bak tallene",
+      "source_sections": [
+        "Først: en liten innføring i romertall",
+        "Akkordnavnet forteller hva – romertallet forteller hvor",
+        "Store og små bokstaver betyr noe",
+        "Flytt progresjonen – behold betydningen",
+        "Hva betyr i–iv–V og ii–V–I?",
+        "Videre: septimer, omvendinger og vanlige feiltolkninger",
+        "Arbeidsmetoden vår: hør → forutsi → spill → forklar → endre"
+      ],
+      "existing_art": "romans",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "Behold trinnene ved transponering",
+          "transcript": [
+            "Behold trinnene ved transponering",
+            "I–vi–IV–V: C-dur: C → Am → F → G; G-dur: G → Em → C → D; D-dur: D → Bm → G → A",
+            "G er V i C, men I i G: G3 → B3 → D4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/romertall-i-musikk.svg",
+              "sha256": "90ed63c9c2b92c6add0c39affa286f986c550b4f2a4bb9cf0dc5703e7d5f9eb0"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/romertall-i-musikk-card.svg",
+              "sha256": "6db880af70d5a35b7050cf5a2fa0695387130edca9832264e5c825ad7e281891"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Keep the degrees when transposing",
+          "transcript": [
+            "Keep the degrees when transposing",
+            "I–vi–IV–V: C major: C → Am → F → G; G major: G → Em → C → D; D major: D → Bm → G → A",
+            "G is V in C, but I in G: G3 → B3 → D4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/romertall-i-musikk.svg",
+              "sha256": "b18686e7f94a0653dea07feece976183753cbd2cd7f80167ba0323ab9ba7c480"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/romertall-i-musikk-card.svg",
+              "sha256": "70b7e230bec23686385efca69ab9fe47339b8d58c3982462279ef769dd5952b9"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "ii-v-i-kadensen",
+      "title": "ii–V–I: hvorfor akkorder vil hjem",
+      "source_sections": [
+        "Les trinnene i én toneart",
+        "Hør på tonene inni akkordene",
+        "Flytt ideen uten å miste sammenhengen",
+        "Følg akkordtoner innenfor ett toneutvalg"
+      ],
+      "existing_art": "cadence",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "Følg tonene inni kadensen",
+          "transcript": [
+            "Følg tonene inni kadensen",
+            "Dm7 → G7 → Cmaj7: Røtter: D → G → C; F → F → E; C → B → B",
+            "G7 · B og F viser retningen: G3 → B3 → D4 → F4",
+            "Cmaj7 · en mulig målklang: C4 → E4 → G4 → B4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/ii-v-i-kadensen.svg",
+              "sha256": "c45fa23efc3d4bb20f2faba4818a4a4d30a928ada9fc54937d5cfc33610adeaf"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/ii-v-i-kadensen-card.svg",
+              "sha256": "0a979efe8cd4aae8d6f53ec7e9274fc81158c03bce709204d2eba66c51441c44"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Follow the notes inside the cadence",
+          "transcript": [
+            "Follow the notes inside the cadence",
+            "Dm7 → G7 → Cmaj7: Roots: D → G → C; F → F → E; C → B → B",
+            "G7 · B and F show direction: G3 → B3 → D4 → F4",
+            "Cmaj7 · one possible destination: C4 → E4 → G4 → B4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/ii-v-i-kadensen.svg",
+              "sha256": "fe513a16d471248e960dd55cb53c7fdae51131f8dbf8a950b3fd3f27a48b289f"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/ii-v-i-kadensen-card.svg",
+              "sha256": "61e0eec30780f35a0617177b67fe58a43d34a06021535da31e13bea0d60c82d0"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "treklanger-fra-grunnform-til-omvending",
+      "title": "Treklanger: fra grunntone til akkordens tre toner",
+      "source_sections": [
+        "Hva er egentlig en treklang?",
+        "Fire treklangstyper – hva endrer seg?",
+        "Finn treklangene i C-dur",
+        "Grunnstilling og omvendinger: samme akkord, ny bass",
+        "Klangen endres når vi flytter én tone",
+        "Fra treklanger til septimakkorder",
+        "Arbeidsmetoden: hør, forutsi, spill, forklar, endre"
+      ],
+      "existing_art": "triadfamily",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "Grunntonen består. Bassen skifter.",
+          "transcript": [
+            "Grunntonen består. Bassen skifter.",
+            "C · grunnstilling: C4 → E4 → G4",
+            "C/E · første omvending: E4 → G4 → C5",
+            "C/G · andre omvending: G3 → C4 → E4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/treklanger-fra-grunnform-til-omvending.svg",
+              "sha256": "6fa4d6c5f3a524cdc2c2e5a6d6fa80abfad2b098fd037bef656f8087932bef78"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/treklanger-fra-grunnform-til-omvending-card.svg",
+              "sha256": "a1f086360037c2080c38fb5b60785936d6be6d0fa07acdd6e5f8d0aadb450586"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "The root stays. The bass changes.",
+          "transcript": [
+            "The root stays. The bass changes.",
+            "C · root position: C4 → E4 → G4",
+            "C/E · first inversion: E4 → G4 → C5",
+            "C/G · second inversion: G3 → C4 → E4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/treklanger-fra-grunnform-til-omvending.svg",
+              "sha256": "c0f4e4c5b2631f15ef3efffa66f5d6babb9d080b574ae0f21f4281523274828a"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/treklanger-fra-grunnform-til-omvending-card.svg",
+              "sha256": "ac0efa503c8dbad28abbc829a5f167bb6c33f343d528e1bfffc33114340c60cd"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "septimakkorder",
+      "title": "Septimakkorder: mer farge, samme grunnmur",
+      "source_sections": [
+        "Bygg videre på treklangen",
+        "To spørsmål gjør navnet tydelig",
+        "La én stemme vise forskjellen",
+        "Se treklangen inni firklangen"
+      ],
+      "existing_art": "sevenths",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "To uavhengige valg: ters og septim",
+          "transcript": [
+            "To uavhengige valg: ters og septim",
+            "Cmaj7 · stor ters og stor septim: C4 → E4 → G4 → B4",
+            "C7 · stor ters og liten septim: C4 → E4 → G4 → B♭4",
+            "Cm7 · liten ters og liten septim: C4 → E♭4 → G4 → B♭4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/septimakkorder.svg",
+              "sha256": "5fe13568736cb10beabeec75295ed79a8227df1f8c45d741f70cfa5e2f06ebce"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/septimakkorder-card.svg",
+              "sha256": "1d8ef1d7428d10a806c21238b54919272501d89bd7be0c27eae4400d2dbc27ae"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Two independent choices: third and seventh",
+          "transcript": [
+            "Two independent choices: third and seventh",
+            "Cmaj7 · major third and major seventh: C4 → E4 → G4 → B4",
+            "C7 · major third and minor seventh: C4 → E4 → G4 → B♭4",
+            "Cm7 · minor third and minor seventh: C4 → E♭4 → G4 → B♭4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/septimakkorder.svg",
+              "sha256": "4e256616f11787b0ebe87a5b3b9119cc28d2d44f2f0ee303623d6873662b5ebe"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/septimakkorder-card.svg",
+              "sha256": "83c2933b566a0d9ca567486fc328b6568f6651120c761034e8e98225deb22e11"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "harmonisk-moll-og-frygisk-dominant",
+      "title": "Harmonisk moll og frygisk dominant",
+      "source_sections": [
+        "Den hevede septimen i moll",
+        "Femte modus får et nytt sentrum",
+        "Skill funksjon fra modal klang",
+        "Avgrens utforskingen til to forskjeller"
+      ],
+      "existing_art": "harmonic",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "Én samling toner, to sentre",
+          "transcript": [
+            "Én samling toner, to sentre",
+            "A harmonisk moll · G♯ er ledetone: A3 → B3 → C4 → D4 → E4 → F4 → G♯4",
+            "E frygisk dominant · ♭2 og 3: E3 → F3 → G♯3 → A3 → B3 → C4 → D4",
+            "Samme toneklasser: E7 → Am: dominant til tonika; E som holdt sentrum: modal bruk"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/harmonisk-moll-og-frygisk-dominant.svg",
+              "sha256": "2ee86361bff89b89fdeb9f3154fe4c5001380eeeba8acee67e92f2d802e1679a"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/harmonisk-moll-og-frygisk-dominant-card.svg",
+              "sha256": "5242e10354850e67d2925a91906843518ee227107593d94cbfb0ff21c463f4eb"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "One collection, two centres",
+          "transcript": [
+            "One collection, two centres",
+            "A harmonic minor · G♯ is the leading tone: A3 → B3 → C4 → D4 → E4 → F4 → G♯4",
+            "E Phrygian dominant · ♭2 and 3: E3 → F3 → G♯3 → A3 → B3 → C4 → D4",
+            "The same pitch classes: E7 → Am: dominant to tonic; E as sustained centre: modal use"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/harmonisk-moll-og-frygisk-dominant.svg",
+              "sha256": "6e2e27a3088b6ad344d1485a36b3e0d9212d935aedab84650cef838677eb52db"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/harmonisk-moll-og-frygisk-dominant-card.svg",
+              "sha256": "81176e03c1174c05526ae789460d13042f9ce9dd6abe7608d766bf158180e8c9"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "stemmeforing",
+      "title": "Stemmeføring: den korteste veien mellom akkorder",
+      "source_sections": [
+        "Se akkorden som flere melodier",
+        "Behold det som allerede passer",
+        "Nærmeste vei er et valg",
+        "Følg den stemmen du faktisk hører"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "Tre fellestoner, én bevegelig stemme",
+          "transcript": [
+            "Tre fellestoner, én bevegelig stemme",
+            "Cmaj7 · C–E–G–B: C4 → E4 → G4 → B4",
+            "Am7/C · C–E–G–A: C4 → E4 → G4 → A4",
+            "Se hver stemme: C → C · E → E · G → G; B → A: ned én heltone"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/stemmeforing.svg",
+              "sha256": "422ebc23b03b9fe869ab467064a5cebb27150bf54b87883922b85eefd3663140"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/stemmeforing-card.svg",
+              "sha256": "8de7d59c15d4c1ea99b598e7d9da7aaf590e594219ee036a58e7913b700de4fc"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Three common tones, one moving voice",
+          "transcript": [
+            "Three common tones, one moving voice",
+            "Cmaj7 · C–E–G–B: C4 → E4 → G4 → B4",
+            "Am7/C · C–E–G–A: C4 → E4 → G4 → A4",
+            "Follow each voice: C → C · E → E · G → G; B → A: down one whole tone"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/stemmeforing.svg",
+              "sha256": "d12e4633f524164624be333823e55f8c0f6ce0dc98abd7d73d431d2e14e6ebdf"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/stemmeforing-card.svg",
+              "sha256": "a3ba9a0b5b99ee5b11da58e9e1180c1e37489328b7cece811008a0d4a2da7ad4"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "rytme-i-sju-aatte",
+      "title": "Rytme i 7/8: grupper som føles naturlige",
+      "source_sections": [
+        "Hva forteller 7/8?",
+        "Prøv 2 + 2 + 3",
+        "La en enkel frase lande",
+        "Behold pulsen når aksentene flytter seg"
+      ],
+      "existing_art": "rhythm",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "Samme sju åttendedeler, ny vekt",
+          "transcript": [
+            "Samme sju åttendedeler, ny vekt",
+            "7/8 · 2 + 2 + 3: 2+2+3 åttendedeler; aksent på 1, 3, 5",
+            "7/8 · 3 + 2 + 2: 3+2+2 åttendedeler; aksent på 1, 4, 6"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/rytme-i-sju-aatte.svg",
+              "sha256": "3ef8ce02c82cbb3467155cf0c227722f2cd054dda8a29e2fb5f5d00b8ffca5fc"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/rytme-i-sju-aatte-card.svg",
+              "sha256": "0de979d7329fa5ccb353deaeece3342adb6aea88a99814a98d00270c731837d7"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "The same seven eighths, a new emphasis",
+          "transcript": [
+            "The same seven eighths, a new emphasis",
+            "7/8 · 2 + 2 + 3: 2+2+3 eighths; accents on 1, 3, 5",
+            "7/8 · 3 + 2 + 2: 3+2+2 eighths; accents on 1, 4, 6"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/rytme-i-sju-aatte.svg",
+              "sha256": "4b40d3dff063b72cd704b612954ff7caf289711b0067dd838c55b58910e02a36"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/rytme-i-sju-aatte-card.svg",
+              "sha256": "eae5c0dd8c94902660320cae63f217f21a61e92a5d2bfaf5cc2e6e0252ed49ed"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "bygg-akkorder-i-en-toneart",
+      "title": "Bygg akkordene i en toneart",
+      "source_sections": [
+        "Begynn med tonene, ikke med grepene",
+        "De sju treklangene i G-dur",
+        "Romertall viser mønsteret",
+        "Samme toner kan få et annet hjem",
+        "Et lite steg videre: ii–V–I med septimer"
+      ],
+      "existing_art": "diatonic",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "Stable annenhver skalatone i G-dur",
+          "transcript": [
+            "Stable annenhver skalatone i G-dur",
+            "G-durs sju treklanger: I: G–B–D · ii: A–C–E; iii: B–D–F♯ · IV: C–E–G; V: D–F♯–A · vi: E–G–B; vii°: F♯–A–C",
+            "F♯dim · liten ters og dim. kvint: F♯3 → A3 → C4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/bygg-akkorder-i-en-toneart.svg",
+              "sha256": "ec33e336975738e0105a4576f1f0eb1a26a020360d6f20451afe4794960afb8f"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/bygg-akkorder-i-en-toneart-card.svg",
+              "sha256": "4ff009140ba071771aa7f3525bff10253f0c15d0c24e72b95173ec25213b9220"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Stack alternate scale notes in G major",
+          "transcript": [
+            "Stack alternate scale notes in G major",
+            "The seven triads of G major: I: G–B–D · ii: A–C–E; iii: B–D–F♯ · IV: C–E–G; V: D–F♯–A · vi: E–G–B; vii°: F♯–A–C",
+            "F♯dim · minor third, diminished fifth: F♯3 → A3 → C4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/bygg-akkorder-i-en-toneart.svg",
+              "sha256": "751dcd9cb04818b03b472eb090126a212d0c4c17b10b87c66a8c8ab68a0781ad"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/bygg-akkorder-i-en-toneart-card.svg",
+              "sha256": "a5092ed0d7633061ec99674e74e1b06e90fc7d0ce76afd1a645e6e72e1760121"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "ett-skalakart-nye-maltoner",
+      "title": "Ett skalakart, nye måltoner",
+      "source_sections": [
+        "Et felles toneutvalg",
+        "Akkorden fremhever andre toner",
+        "Velg én måltone per akkord",
+        "Ett kart er et utgangspunkt, ikke en regel"
+      ],
+      "existing_art": "targets",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "Ett toneutvalg. Nye terser.",
+          "transcript": [
+            "Ett toneutvalg. Nye terser.",
+            "Em → C → G → D: Ters: G → E → B → F♯; Røtter: E → C → G → D",
+            "Alle måltonene finnes i kartet: E3 → F♯3 → G3 → A3 → B3 → C4 → D4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/ett-skalakart-nye-maltoner.svg",
+              "sha256": "cc78c57c9fe75a550c90caf6963beef2bfc193050e1b1ec2a02314fab642d12a"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/ett-skalakart-nye-maltoner-card.svg",
+              "sha256": "256cc7b4b0f6c0b1eef9b8112dd8177a55d69c61d0e0015b47b75be3525e3ee5"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "One note collection. New thirds.",
+          "transcript": [
+            "One note collection. New thirds.",
+            "Em → C → G → D: Third: G → E → B → F♯; Roots: E → C → G → D",
+            "All target notes belong to the collection: E3 → F♯3 → G3 → A3 → B3 → C4 → D4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/ett-skalakart-nye-maltoner.svg",
+              "sha256": "48e201026402567848d506f929b9e9b622ebd1317815e98ae86eb94f371db6f6"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/ett-skalakart-nye-maltoner-card.svg",
+              "sha256": "2688546d5c9142ed8db3d2212037db433f4144aad5de79dd2895f097ba3d3d16"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "dorisk-og-eolisk",
+      "title": "Dorisk og eolisk: samme grunntone, ny farge",
+      "source_sections": [
+        "Hold grunntonen fast",
+        "Endre én tone i en kort frase",
+        "La akkordene støtte sammenligningen",
+        "Skill parallell og relativ sammenligning"
+      ],
+      "existing_art": "parallel",
+      "reuse_existing_approved": true,
+      "locales": {
+        "nb": {
+          "title": "Hold E. Endre bare seksten.",
+          "transcript": [
+            "Hold E. Endre bare seksten.",
+            "E eolisk · C er liten sekst: E3 → F♯3 → G3 → A3 → B3 → C4 → D4",
+            "E dorisk · C♯ er stor sekst: E3 → F♯3 → G3 → A3 → B3 → C♯4 → D4",
+            "Samme bass, to akkordfelt: Eolisk: Em → Am → Em; Dorisk: Em → A → Em"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/dorisk-og-eolisk.svg",
+              "sha256": "86d0c55709ed5aed00db8983ff2ebf497d26642899a313e00c82bd76d0004de4"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/dorisk-og-eolisk-card.svg",
+              "sha256": "4ebaa76866db5b0d4c17f8a2ebbbf00849144de5fda3fb57e3440b76ab9cead9"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Keep E. Change only the sixth.",
+          "transcript": [
+            "Keep E. Change only the sixth.",
+            "E Aeolian · C is the minor sixth: E3 → F♯3 → G3 → A3 → B3 → C4 → D4",
+            "E Dorian · C♯ is the major sixth: E3 → F♯3 → G3 → A3 → B3 → C♯4 → D4",
+            "Same bass, two harmonic fields: Aeolian: Em → Am → Em; Dorian: Em → A → Em"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/dorisk-og-eolisk.svg",
+              "sha256": "8c474ff974bb52b6f6ec8638840085bf18ed47917259d05f587e104fd0bfdc1e"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/dorisk-og-eolisk-card.svg",
+              "sha256": "c35204eb65faed98707901780cde98a6c7d55942ebb477f310f5367df457bef7"
+            }
+          },
+          "article_available": true
+        }
+      }
+    },
+    {
+      "slug": "intervallomvendinger",
+      "title": "Intervallomvendinger: hør samme toner fra en ny side",
+      "source_sections": [
+        "Flytt én tone, behold toneklassene",
+        "To regler som må brukes sammen",
+        "Regn ut før du spiller",
+        "Piano: hold igjen den øverste tonen",
+        "Gitar: flytt tone, ikke bare grep",
+        "Bruk omvendingen i en frase",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "intervals",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Stor ters blir liten sekst",
+          "transcript": [
+            "Stor ters blir liten sekst",
+            "C4–E4 · 4 halvtoner: C4 → E4",
+            "E4–C5 · 8 halvtoner: E4 → C5",
+            "Les parene: C4–E4, så E4–C5: C4 → E4 → E4 → C5",
+            "Flytt C over E · standard stemming: streng 3, bånd 5: C4; streng 2, bånd 5: E4; streng 1, bånd 8: C5"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/intervallomvendinger.svg",
+              "sha256": "5c50c8a2d1805c86b68ecb701db6bb4e7673499bbe05fe83321effbe4de8024f"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/intervallomvendinger-card.svg",
+              "sha256": "c926b293fce7af8fb14f8e05adb6c9c69404f204f3aba2f54812506f5a8eb7ba"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "A major third becomes a minor sixth",
+          "transcript": [
+            "A major third becomes a minor sixth",
+            "C4–E4 · 4 semitones: C4 → E4",
+            "E4–C5 · 8 semitones: E4 → C5",
+            "Read the pairs: C4–E4, then E4–C5: C4 → E4 → E4 → C5",
+            "Move C above E · standard tuning: string 3, fret 5: C4; string 2, fret 5: E4; string 1, fret 8: C5"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/intervallomvendinger.svg",
+              "sha256": "934d44132f30dfaf29051cdfba9923104358fd22122da8770592e7b1f725b7f3"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/intervallomvendinger-card.svg",
+              "sha256": "644c84f743f8dbcb5616f859c32bc6be79eb0701648509624301e1aacd0d8f72"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "kadens-og-tonale-funksjoner",
+      "title": "Kadens og tonale funksjoner: bygg en tydelig avslutning",
+      "source_sections": [
+        "Funksjon er en rolle i en sammenheng",
+        "En kadens trenger et frasepunkt",
+        "Fire avslutninger du kan sammenligne",
+        "Tendensene inne i dominanten",
+        "Piano og gitar: samme funksjon, ulik fordeling",
+        "Fra øvelse til en analyse med begrunnelse",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Et frasepunkt gjør kadensen tydelig",
+          "transcript": [
+            "Et frasepunkt gjør kadensen tydelig",
+            "Hjem → forberedelse → dominant → hjem: C → Dm → G7 → C; I → ii → V7 → I; Alternativ slutt: G7 → Am",
+            "Ledetone: B3 → C4: B3 → C4",
+            "Septim: F4 → E4: F4 → E4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/kadens-og-tonale-funksjoner.svg",
+              "sha256": "d604cb1c4e5470df20b26e193fbfa53bfd21273bd05d0269746381436ef47760"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/kadens-og-tonale-funksjoner-card.svg",
+              "sha256": "feba6cca3bf4282387e67111829fe89079d9f7ef9ccbd4374471b417386e703a"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "A phrase ending makes the cadence clear",
+          "transcript": [
+            "A phrase ending makes the cadence clear",
+            "Home → preparation → dominant → home: C → Dm → G7 → C; I → ii → V7 → I; Alternative ending: G7 → Am",
+            "Leading tone: B3 → C4: B3 → C4",
+            "Seventh: F4 → E4: F4 → E4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/kadens-og-tonale-funksjoner.svg",
+              "sha256": "f25708923813b53facf1647b9429abd4bd9ab54d0ecdc482294eec50d7e596ff"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/kadens-og-tonale-funksjoner-card.svg",
+              "sha256": "d61ab3d2e8007ec1ebe84a1952ea79e86964b6d7f78eeaf535697193c1424e21"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "sekundaerdominanter",
+      "title": "Sekundærdominanter: gi en akkord sin egen opptakt",
+      "source_sections": [
+        "Begynn med akkorden du vil fram til",
+        "Tre mål i samme toneart",
+        "Tonikalisering eller modulering?",
+        "Piano: en kromatisk stemme forklarer mye",
+        "Gitar: få fram tonen som gjør forskjellen",
+        "Reharmoniser uten å miste melodien",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Finn dominanten til det lokale målet",
+          "transcript": [
+            "Finn dominanten til det lokale målet",
+            "Tre mål i C-dur: A7 → Dm · V7/ii → ii; D7 → G · V7/V → V; E7 → Am · V7/vi → vi",
+            "A7 · C♯ leder til D: A3 → C♯4 → E4 → G4",
+            "C♯ → D på andre streng: streng 2, bånd 2: C♯4; streng 2, bånd 3: D4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/sekundaerdominanter.svg",
+              "sha256": "b43c6560980aea93bd9e8ac38533fdaa17f017275e946bd7246a0771c105a909"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/sekundaerdominanter-card.svg",
+              "sha256": "1a8246e0112adf17358b8132eecb34c1a916a10111be5b5206c4fe33b3fe8eb2"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Find the dominant of the local target",
+          "transcript": [
+            "Find the dominant of the local target",
+            "Three targets in C major: A7 → Dm · V7/ii → ii; D7 → G · V7/V → V; E7 → Am · V7/vi → vi",
+            "A7 · C♯ leads to D: A3 → C♯4 → E4 → G4",
+            "C♯ → D on the second string: string 2, fret 2: C♯4; string 2, fret 3: D4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/sekundaerdominanter.svg",
+              "sha256": "b370b8bd1a7b36f260568379cd7621d77f37b2c4abc07d1f0c0d091b2cb43135"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/sekundaerdominanter-card.svg",
+              "sha256": "bb1efb84cdf993379c2f1bc3faaffc8e8585dd71cc1dc44888a743045ea47b83"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "akkordutvidelser",
+      "title": "Akkordutvidelser: 9, 11 og 13 i spillbare klanger",
+      "source_sections": [
+        "Fra septim til none",
+        "Elleve og tretten trenger et registervalg",
+        "Klangens identitet og det som kan utelates",
+        "Piano: farg samme kadens på to måter",
+        "Gitar: et firetoners grep er nok",
+        "Arranger rundt en melodi",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "sevenths",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Les hele symbolet før du velger toner",
+          "transcript": [
+            "Les hele symbolet før du velger toner",
+            "Cmaj9 · med B: C4 → E4 → G4 → B4 → D5",
+            "C9 · med B♭: C4 → E4 → G4 → B♭4 → D5",
+            "Cadd9 · uten septim: C4 → E4 → G4 → D5",
+            "11 og 13 over C: 11 = F · ♯11 = F♯ · 13 = A; Velg register og utelatelser bevisst"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/akkordutvidelser.svg",
+              "sha256": "28d890aeb4cab4fd9cf5afb8ca7984ee8da6ccc2c94da92ca7715b2a14d07f15"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/akkordutvidelser-card.svg",
+              "sha256": "e66fdb766fc937788b7d994cbe0b8d7be1fc816c78932df660b8400255699cfb"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Read the complete symbol before choosing notes",
+          "transcript": [
+            "Read the complete symbol before choosing notes",
+            "Cmaj9 · with B: C4 → E4 → G4 → B4 → D5",
+            "C9 · with B♭: C4 → E4 → G4 → B♭4 → D5",
+            "Cadd9 · without a seventh: C4 → E4 → G4 → D5",
+            "11 and 13 above C: 11 = F · ♯11 = F♯ · 13 = A; Choose register and omissions deliberately"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/akkordutvidelser.svg",
+              "sha256": "07f3d95df2540527458bd84624da30198bd917b644477156e37618ffd12256f3"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/akkordutvidelser-card.svg",
+              "sha256": "bd091f50b3852baab3e8a7e31aa4a97399c1b3cfd216102eef371d1ba98a5366"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "modal-harmonikk-i-praksis",
+      "title": "Modal harmonikk i praksis: hold sentrum mens klangene skifter",
+      "source_sections": [
+        "Samme toner gir ikke samme hjem",
+        "Et dorisk akkordfelt",
+        "Lydisk som et annet rom",
+        "Piano: pedal og en bevegelig overflate",
+        "Gitar: bygg et riff som faktisk vender hjem",
+        "En modal komposisjonsstudie",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "modes",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "La D-pedalen binde akkordene sammen",
+          "transcript": [
+            "La D-pedalen binde akkordene sammen",
+            "Dm7 · D–F–A–C: D3 → F3 → A3 → C4",
+            "G/D · D–G–B–D: D3 → G3 → B3 → D4",
+            "Riffet: F–A–B–A: streng 3, bånd 10: F4; streng 2, bånd 10: A4; streng 2, bånd 12: B4; streng 2, bånd 10: A4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/modal-harmonikk-i-praksis.svg",
+              "sha256": "2e65f98f7241f5fc8f3580c4aec1eb22463dc3f209468d4c6fdd8b5b052959d7"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/modal-harmonikk-i-praksis-card.svg",
+              "sha256": "52db9c324dcb18eb7d20bd38fbc1d38e64a84f4c87e7cbb1134498882a45c854"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Let the D pedal connect the chords",
+          "transcript": [
+            "Let the D pedal connect the chords",
+            "Dm7 · D–F–A–C: D3 → F3 → A3 → C4",
+            "G/D · D–G–B–D: D3 → G3 → B3 → D4",
+            "The riff: F–A–B–A: string 3, fret 10: F4; string 2, fret 10: A4; string 2, fret 12: B4; string 2, fret 10: A4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/modal-harmonikk-i-praksis.svg",
+              "sha256": "27a44d301d456b202dc20cbc94fedf9299ca268d9730af8d36f9891e439a0951"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/modal-harmonikk-i-praksis-card.svg",
+              "sha256": "19b4c24ea1ee4d5626ea1c86f79495c7335c78d22e341840b76e33dea35f409b"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "tonikalisering-og-modulering",
+      "title": "Tonikalisering og modulering: følg lokal og global tonalitet",
+      "source_sections": [
+        "En hendelse eller et nytt hierarki?",
+        "Pivotakkorden får to lesemåter",
+        "Piano og gitar: vis selve skiftet",
+        "Et originalt 16-takters analyseforløp",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "En felles akkord får to lesemåter",
+          "transcript": [
+            "En felles akkord får to lesemåter",
+            "C → Am → D7 → G: I → vi i C-dur; Am = ii i G-dur; D7 → G = V7 → I i G; Ny frase: G → Em → Am → D7 → G",
+            "F♯ viser ny retning mot G: F♯4 → G4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/tonikalisering-og-modulering.svg",
+              "sha256": "3f74cc4e13d0e883209507b64b711eb2b93c3320849ae24b3c75faf751ed3360"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/tonikalisering-og-modulering-card.svg",
+              "sha256": "18a1f1a6aa7ff47eeb765950fa144cab2ee2f12a4467fdfbfabc6e09a8299587"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "A common chord gets two readings",
+          "transcript": [
+            "A common chord gets two readings",
+            "C → Am → D7 → G: I → vi in C major; Am = ii in G major; D7 → G = V7 → I in G; New phrase: G → Em → Am → D7 → G",
+            "F♯ shows a new direction towards G: F♯4 → G4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/tonikalisering-og-modulering.svg",
+              "sha256": "c887b4b82529e93af2c95e298b4ce2d69d13be4935e354345cbc7c38419b37b8"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/tonikalisering-og-modulering-card.svg",
+              "sha256": "24c39208bb7b3fa3081ae0b969cef9c58a084515b7446719a20a44fb569a448b"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "sekstkvart-bass-og-kadens",
+      "title": "Sekstkvartakkorder: hør hva bassen gjør",
+      "source_sections": [
+        "Tallene beskriver avstand fra bass",
+        "Kadensiell 6/4 forlenger dominanten",
+        "Gjennomgang og pedal gir andre roller",
+        "Realisering på to instrumenter",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Hold G. Løs 6–5 og 4–3.",
+          "transcript": [
+            "Hold G. Løs 6–5 og 4–3.",
+            "C/G · sekst og kvart over G: G3 → C4 → E4",
+            "G · kvint og ters over G: G3 → B3 → D4",
+            "Kadensiell sammenheng: Bass: G → G → C; E → D · 6 → 5; C → B · 4 → 3"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/sekstkvart-bass-og-kadens.svg",
+              "sha256": "117f658781637919380f3626fb3aa6f9e64adada38f2e088b2e77a0fd0cbec7b"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/sekstkvart-bass-og-kadens-card.svg",
+              "sha256": "d5068ac36364fb4bcfa151b52b853a82c1e54100eaf14576f52d329167b2ece2"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Hold G. Resolve 6–5 and 4–3.",
+          "transcript": [
+            "Hold G. Resolve 6–5 and 4–3.",
+            "C/G · sixth and fourth above G: G3 → C4 → E4",
+            "G · fifth and third above G: G3 → B3 → D4",
+            "Cadential context: Bass: G → G → C; E → D · 6 → 5; C → B · 4 → 3"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/sekstkvart-bass-og-kadens.svg",
+              "sha256": "3cd8053b0dec31b2316fda4896be881ce078afe807cff59207f34f14d4c11181"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/sekstkvart-bass-og-kadens-card.svg",
+              "sha256": "13bd4ed5f1edbd087590c6e75fd3a440119d4494b694fff04d14dcb611fbefe5"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "satb-tendenstoner-og-dobling",
+      "title": "SATB: fordel stemmer og løs tendensene",
+      "source_sections": [
+        "Velg en stil før du velger regler",
+        "En komplett V7–I du kan følge",
+        "Kontroller par av stemmer over tid",
+        "Piano, gitar og ny anvendelse",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Følg fire navngitte stemmer",
+          "transcript": [
+            "Følg fire navngitte stemmer",
+            "Komplett G7 → ufullstendig C: Sopran: B3 → C4 (+1); Alt: F3 → E3 (−1); Tenor: D3 → C3 (−2); Bass: G2 → C3 (+5)",
+            "Målklang · tredoblet C, ingen G: C3 → C3 → E3 → C4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/satb-tendenstoner-og-dobling.svg",
+              "sha256": "e6f592891739265f57e9c5b8e87d4a2b71f949dcdef00afb17a3b76d9f873a75"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/satb-tendenstoner-og-dobling-card.svg",
+              "sha256": "1ebe9d6d9c6dde943b3b7f951f0936d3f482bb04598e161b778e1a88e3909d3b"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Follow four named voices",
+          "transcript": [
+            "Follow four named voices",
+            "Complete G7 → incomplete C: Soprano: B3 → C4 (+1); Alto: F3 → E3 (−1); Tenor: D3 → C3 (−2); Bass: G2 → C3 (+5)",
+            "Destination · tripled C, no G: C3 → C3 → E3 → C4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/satb-tendenstoner-og-dobling.svg",
+              "sha256": "3869a45a5256dd1451243306a1b1e0e061172a69d61483996e25133338e157f2"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/satb-tendenstoner-og-dobling-card.svg",
+              "sha256": "cefd15f2836e41d9cb0c9179ed41149654df3fcfd0e6df43c486247126186006"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "modal-interchange-og-kromatiske-medianter",
+      "title": "Modal interchange og kromatiske medianter: lånt farge med retning",
+      "source_sections": [
+        "Lån beholder et felles sentrum",
+        "Kromatiske medianter deler ofte en tone",
+        "Piano og gitar: isoler den endrede stemmen",
+        "To reharmoniseringer av samme motiv",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Én kromatisk linje viser lånet",
+          "transcript": [
+            "Én kromatisk linje viser lånet",
+            "C → F → Fm → C: I → IV → iv → I; En stemme: A → A♭ → G",
+            "Fm · lånt fra parallell moll: F3 → A♭3 → C4",
+            "F → Fm · tredje streng: streng 3, bånd 2: A3; streng 3, bånd 1: A♭3"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/modal-interchange-og-kromatiske-medianter.svg",
+              "sha256": "fc35cbe1e7c58261d3508a6d909ff83490f17fe705c664bf67664e49b19b2a66"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/modal-interchange-og-kromatiske-medianter-card.svg",
+              "sha256": "ff92ae8746e307c82a21ec32be7df45184f60d2a15353359f21db465c7f1f86f"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "One chromatic line reveals the borrowing",
+          "transcript": [
+            "One chromatic line reveals the borrowing",
+            "C → F → Fm → C: I → IV → iv → I; One voice: A → A♭ → G",
+            "Fm · borrowed from parallel minor: F3 → A♭3 → C4",
+            "F → Fm · third string: string 3, fret 2: A3; string 3, fret 1: A♭3"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/modal-interchange-og-kromatiske-medianter.svg",
+              "sha256": "8d224e837debf6a1f01c5fdf48aee30958c06f619ad069bdd027dc2aa213bf94"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/modal-interchange-og-kromatiske-medianter-card.svg",
+              "sha256": "df80b121a76fa088d12508608068c5fcada972f7fe016d971f6d1623580bfcd9"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "napolitansk-og-forstorret-sekst",
+      "title": "Napolitansk akkord og forstørret sekst: to veier mot dominanten",
+      "source_sections": [
+        "Napolitansk som senket andretrinn",
+        "To toner utvider seg til dominantens grunntone",
+        "Hvorfor en mellomklang kan være nødvendig",
+        "Spill og anvend på piano og gitar",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Stavemåten viser oppløsningen",
+          "transcript": [
+            "Stavemåten viser oppløsningen",
+            "Napolitansk: D♭/F i C-moll: F3 → A♭3 → D♭4",
+            "Italiensk sekst: A♭–C–F♯: A♭3 → C4 → F♯4",
+            "Forstørret sekst → oktav: A♭3 → G3: ned en halvtone; F♯4 → G4: opp en halvtone; 10 halvtoner → 12 halvtoner"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/napolitansk-og-forstorret-sekst.svg",
+              "sha256": "26d4ece89fbc41b869d77636057fd25ad3c9e2ac4a39fc0aacc28129e7b8c0de"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/napolitansk-og-forstorret-sekst-card.svg",
+              "sha256": "01cbe1fa409ffd0d8bc4cd8096f48612738cded57e1c2bac0fc49ff74c112750"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Spelling reveals the resolution",
+          "transcript": [
+            "Spelling reveals the resolution",
+            "Neapolitan: D♭/F in C minor: F3 → A♭3 → D♭4",
+            "Italian sixth: A♭–C–F♯: A♭3 → C4 → F♯4",
+            "Augmented sixth → octave: A♭3 → G3: down a semitone; F♯4 → G4: up a semitone; 10 semitones → 12 semitones"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/napolitansk-og-forstorret-sekst.svg",
+              "sha256": "7a5506bf1d020150b66593182dfd163847c011b201041e49c8dafd6cb84d6fcc"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/napolitansk-og-forstorret-sekst-card.svg",
+              "sha256": "77dc3e8702c5d546dfb07bbf25c5a5022d81eb92c1b427bcaf5d213d7e5860ab"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "tritonussubstitusjon-og-reharmonisering",
+      "title": "Tritonussubstitusjon: samme guide-toner, ny bass",
+      "source_sections": [
+        "Hva klangene har felles",
+        "En ny linje i bassen",
+        "Piano og gitar: komp med få toner",
+        "Melodien må få siste ord",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Samme tritonus, ny basslinje",
+          "transcript": [
+            "Samme tritonus, ny basslinje",
+            "G7 · G–B–D–F: G3 → B3 → D4 → F4",
+            "D♭7 · D♭–F–A♭–C♭: D♭3 → F3 → A♭3 → C♭4",
+            "Dm7 → D♭7 → Cmaj7: Bass: D → D♭ → C; B = C♭ i likestemming; F er felles guide-tone"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/tritonussubstitusjon-og-reharmonisering.svg",
+              "sha256": "7407fee010d977539e6b754e247e31f110325737299b156328d8e617b4fdc93b"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/tritonussubstitusjon-og-reharmonisering-card.svg",
+              "sha256": "b8d3865f5f941b3b8b58fec88cffd03c3f7595c30003275b64d04e151e3188c7"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "The same tritone, a new bass line",
+          "transcript": [
+            "The same tritone, a new bass line",
+            "G7 · G–B–D–F: G3 → B3 → D4 → F4",
+            "D♭7 · D♭–F–A♭–C♭: D♭3 → F3 → A♭3 → C♭4",
+            "Dm7 → D♭7 → Cmaj7: Bass: D → D♭ → C; B = C♭ in equal temperament; F is a shared guide tone"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/tritonussubstitusjon-og-reharmonisering.svg",
+              "sha256": "1ffe2893380971b2b544e2aa3349022e2d58a4e71b698506bdefb8cbbd64f888"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/tritonussubstitusjon-og-reharmonisering-card.svg",
+              "sha256": "707bcafab50691a2bbbd3acfeb7911b6f9689604bc162ac54bce7b1319656060"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "kontrapunkt-to-selvstendige-stemmer",
+      "title": "Kontrapunkt: skriv to linjer som kan stå alene",
+      "source_sections": [
+        "Lytt vannrett og loddrett",
+        "Bevegelsene skaper uavhengighet",
+        "Syng, spill, revider",
+        "Fra artøvelse til musikk",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Motbevegelse binder selvstendige linjer",
+          "transcript": [
+            "Motbevegelse binder selvstendige linjer",
+            "Overstemme · én helnote per tone: C4 → B3 → G3 → B3 → C4",
+            "Understemme · én helnote per tone: C3 → D3 → E3 → D3 → C3",
+            "Samtidige intervaller: 8 · stor 6 · liten 3 · stor 6 · 8"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/kontrapunkt-to-selvstendige-stemmer.svg",
+              "sha256": "70f5fd9faa993218f19514aa01ebd1377e0348e4484218f92076e58092443351"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/kontrapunkt-to-selvstendige-stemmer-card.svg",
+              "sha256": "9a98a9b0436cccf3c9e0d74d575821f121437edcb9ca97707e0f461c32d4e271"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Contrary motion connects independent lines",
+          "transcript": [
+            "Contrary motion connects independent lines",
+            "Upper voice · one whole note per pitch: C4 → B3 → G3 → B3 → C4",
+            "Lower voice · one whole note per pitch: C3 → D3 → E3 → D3 → C3",
+            "Simultaneous intervals: 8 · major 6 · minor 3 · major 6 · 8"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/kontrapunkt-to-selvstendige-stemmer.svg",
+              "sha256": "38312d8b889920d694d587cbf37d851f25f6ab1365276ea2bfa782b2997103f4"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/kontrapunkt-to-selvstendige-stemmer-card.svg",
+              "sha256": "2f46cbee72d2d536da35e2f5835c3ea5191ccda6d008bc4365c9264954786f82"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "dissonans-gjennomgang-og-forholdning",
+      "title": "Dissonansbehandling: gjennomgangstoner og forholdninger",
+      "source_sections": [
+        "Gjennomgangstonen binder sammen",
+        "Forholdning holder igjen en tone",
+        "Piano og gitar: gjør tidsforløpet hørbart",
+        "Kontrollert frihet i egen sats",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Forbered → hold → løs",
+          "transcript": [
+            "Forbered → hold → løs",
+            "En 4–3-forholdning: Bass: F2 → G2 → G2; Overstemme: C4 — C4 → B3; Konsonans → dissonans → oppløsning",
+            "Gjennomgang: E–F–G over C: E4 → F4 → G4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/dissonans-gjennomgang-og-forholdning.svg",
+              "sha256": "bfe6cea749817f0bee04460a495269903f144d0acaecdfa51a926e640a82210a"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/dissonans-gjennomgang-og-forholdning-card.svg",
+              "sha256": "8b3a33141ee1f5e44d06fddde11b5357437af7055bc153bc20eb250168818052"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Prepare → hold → resolve",
+          "transcript": [
+            "Prepare → hold → resolve",
+            "A 4–3 suspension: Bass: F2 → G2 → G2; Upper voice: C4 — C4 → B3; Consonance → dissonance → resolution",
+            "Passing tone: E–F–G above C: E4 → F4 → G4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/dissonans-gjennomgang-og-forholdning.svg",
+              "sha256": "a67a5843b88f9c8a67a1c9e0ddf68838057bd4aabe7cf8c23cd4481e9897d042"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/dissonans-gjennomgang-og-forholdning-card.svg",
+              "sha256": "7476160d410a9bb3d5f77b9d309820253a5342ea70358da342c46e4e639139f4"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "imitasjon-kanon-og-partimento",
+      "title": "Imitasjon, kanon og partimento: la en idé skape sats",
+      "source_sections": [
+        "Imitasjon gjør et motiv gjenkjennelig",
+        "Kontroller overlappet",
+        "En bassmodell som komposisjonsverktøy",
+        "Fra piano til gitararrangement",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Forskyv motivet. Kontroller overlappet.",
+          "transcript": [
+            "Forskyv motivet. Kontroller overlappet.",
+            "Motiv · fire firedeler: C4 → D4 → E4 → G4",
+            "Svar én takt senere · en kvint opp: G4 → A4 → B4 → D5",
+            "Bassmodell for realisering: Bass: C → A → D → G → C; C → Am → Dm → G7 → C"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/imitasjon-kanon-og-partimento.svg",
+              "sha256": "8bf1fca4e76c620b06dd0e8d20d866a883b19a18811b04906da087abc399f8b8"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/imitasjon-kanon-og-partimento-card.svg",
+              "sha256": "66b48c14abd8e8f20099da94d9c510b3c167a3e8346b6136e186ced2237b9faa"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Delay the motif. Check the overlap.",
+          "transcript": [
+            "Delay the motif. Check the overlap.",
+            "Motif · four quarter notes: C4 → D4 → E4 → G4",
+            "Reply one bar later · a fifth higher: G4 → A4 → B4 → D5",
+            "Bass model for realisation: Bass: C → A → D → G → C; C → Am → Dm → G7 → C"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/imitasjon-kanon-og-partimento.svg",
+              "sha256": "caa63d453a6f2543754901070f54495e18034366b7f4ea2aef097529eba6a412"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/imitasjon-kanon-og-partimento-card.svg",
+              "sha256": "4b28b7303c7de081ef89b34aa43ae57b538d2f770d277f70699200cdccca480c"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "melodisk-moll-og-akkordskala",
+      "title": "Melodisk moll: fra tonesett til akkord–skala-valg",
+      "source_sections": [
+        "To bruksformer må ikke blandes",
+        "Bygg firklanger før du pugger modusnavn",
+        "Piano og gitar: én farge om gangen",
+        "Et system er et utvalg av muligheter",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "modes",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Fra A melodisk moll til D7(♯11)",
+          "transcript": [
+            "Fra A melodisk moll til D7(♯11)",
+            "A melodisk moll · stigende form: A3 → B3 → C4 → D4 → E4 → F♯4 → G♯4",
+            "D lydisk dominant · G♯ = ♯11: D3 → E3 → F♯3 → G♯3 → A3 → B3 → C4",
+            "A melodisk moll · femte streng: streng 5, bånd 0: A2; streng 5, bånd 2: B2; streng 5, bånd 3: C3; streng 5, bånd 5: D3; streng 5, bånd 7: E3; streng 5, bånd 9: F♯3; streng 5, bånd 11: G♯3; streng 5, bånd 12: A3"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/melodisk-moll-og-akkordskala.svg",
+              "sha256": "5db5d744f4921f22d59636c28069154bd35800f4d33107f2858dfc9b506d2ab6"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/melodisk-moll-og-akkordskala-card.svg",
+              "sha256": "a2fc3df1c709018cca9c8ad708629d47535ba3dbb2b189be3024ba3b300de5b5"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "From A melodic minor to D7(♯11)",
+          "transcript": [
+            "From A melodic minor to D7(♯11)",
+            "A melodic minor · ascending form: A3 → B3 → C4 → D4 → E4 → F♯4 → G♯4",
+            "D Lydian dominant · G♯ = ♯11: D3 → E3 → F♯3 → G♯3 → A3 → B3 → C4",
+            "A melodic minor · fifth string: string 5, fret 0: A2; string 5, fret 2: B2; string 5, fret 3: C3; string 5, fret 5: D3; string 5, fret 7: E3; string 5, fret 9: F♯3; string 5, fret 11: G♯3; string 5, fret 12: A3"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/melodisk-moll-og-akkordskala.svg",
+              "sha256": "dfe75abe99ceb31e4d8a006f804d67fcb42bd5dcb66c06e708f7d2576106706e"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/melodisk-moll-og-akkordskala-card.svg",
+              "sha256": "647d5a21882c10814cd397bb64f765b30a50efcf5ba7d4e4977517300511d90f"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "altererte-dominanter-og-symmetriske-skalaer",
+      "title": "Altered, heltoner og diminished: velg spenning med et mål",
+      "source_sections": [
+        "C altered krever enharmonisk lesning",
+        "Heltoner har bare to transposisjoner som tonesett",
+        "Halv–hel diminished gir åtte toner",
+        "En praktisk sammenligning",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "modes",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Tre forskjellige toneutvalg over C7",
+          "transcript": [
+            "Tre forskjellige toneutvalg over C7",
+            "C altered · ♭9 ♯9 ♭5 ♭13: C4 → D♭4 → D♯4 → E4 → G♭4 → A♭4 → B♭4",
+            "C heltoneskala · 2–2–2–2–2–2: C4 → D4 → E4 → F♯4 → G♯4 → B♭4",
+            "C halv–hel · 1–2–1–2–1–2–1–2: C4 → D♭4 → E♭4 → E4 → F♯4 → G4 → A4 → B♭4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/altererte-dominanter-og-symmetriske-skalaer.svg",
+              "sha256": "ce55a5393cd4711943a14bc9ce27e578291a5308519e05849ec5f7ff3fb70c0d"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/altererte-dominanter-og-symmetriske-skalaer-card.svg",
+              "sha256": "2c03fd2c906829cb752a4fb840e8ba84bcf2d118cc6dd6cf16699feaa208ebf5"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Three different collections above C7",
+          "transcript": [
+            "Three different collections above C7",
+            "C altered · ♭9 ♯9 ♭5 ♭13: C4 → D♭4 → D♯4 → E4 → G♭4 → A♭4 → B♭4",
+            "C whole tone · 2–2–2–2–2–2: C4 → D4 → E4 → F♯4 → G♯4 → B♭4",
+            "C half–whole · 1–2–1–2–1–2–1–2: C4 → D♭4 → E♭4 → E4 → F♯4 → G4 → A4 → B♭4"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/altererte-dominanter-og-symmetriske-skalaer.svg",
+              "sha256": "28b4116a80186f8a595d9fd2b40ea617441f6e274ca48575d72a64ad0d041143"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/altererte-dominanter-og-symmetriske-skalaer-card.svg",
+              "sha256": "2782e711cb88dd0f7b3ceb422bfbd0247eba78019f4309abc56f245e8f24bbf4"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "kvartklanger-cluster-og-polykorder",
+      "title": "Kvartklanger, cluster og polykorder: organiser en tett overflate",
+      "source_sections": [
+        "Kvartstabling endrer tyngdepunktet",
+        "Cluster samler naboer",
+        "Polykord og upper structure",
+        "Spillbar tekstur på gitar og piano",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "sevenths",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Samme instrument, ulik tetthet og struktur",
+          "transcript": [
+            "Samme instrument, ulik tetthet og struktur",
+            "Kvartstabel · 5 + 5 halvtoner: C4 → F4 → B♭4",
+            "Cluster · 2 + 2 halvtoner: C4 → D4 → E4",
+            "To treklanglag: Øvre lag: D–F♯–A; Nedre lag: C–E–G; Over C: 9 · ♯11 · 13"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/kvartklanger-cluster-og-polykorder.svg",
+              "sha256": "8e9f0e10b2f8f2f153c48353b80e93629bfea38896b7687e31bca931cbfac1c4"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/kvartklanger-cluster-og-polykorder-card.svg",
+              "sha256": "903617293b5aaed225496db6e6c154b3d90b1637e470806ac14210bc01c11f08"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "One instrument, different density and structure",
+          "transcript": [
+            "One instrument, different density and structure",
+            "Quartal stack · 5 + 5 semitones: C4 → F4 → B♭4",
+            "Cluster · 2 + 2 semitones: C4 → D4 → E4",
+            "Two triad layers: Upper layer: D–F♯–A; Lower layer: C–E–G; Above C: 9 · ♯11 · 13"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/kvartklanger-cluster-og-polykorder.svg",
+              "sha256": "3fecebc0907799a2b574fa5259aa14e5742ead9e2f349bd784041b3968fbc97c"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/kvartklanger-cluster-og-polykorder-card.svg",
+              "sha256": "19c002063ce6a8cf0a33fc33ad605569a4ddc40fb83381d6b33a425a590c951f"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "motiv-og-transformasjon",
+      "title": "Motivisk utvikling: få mer musikk ut av fire toner",
+      "source_sections": [
+        "Bestem hva lytteren skal kjenne igjen",
+        "Tre transformasjoner med ulike oppgaver",
+        "Piano og gitar: samme motiv, to stemmer",
+        "Bygg et 24-takters forløp",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "melody",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Bevar identiteten når motivet endres",
+          "transcript": [
+            "Bevar identiteten når motivet endres",
+            "Original · etterfulgt av firedelspause: E4 → G4 → A4 → G4",
+            "Transponert +2 halvtoner · samme rytme: F♯4 → A4 → B4 → A4",
+            "En 24-takters plan: 1–8: presentasjon; 9–16: sekvens og fragment; 17–24: tilbakekomst i nytt register"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/motiv-og-transformasjon.svg",
+              "sha256": "f55634e3e5e5ebb652410744fe0302db3c2c059f5b6ad5e02c396cd7bdc8d125"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/motiv-og-transformasjon-card.svg",
+              "sha256": "d82ec7d20a0b7283d8d8c4784bab7a4cd4af294ad5dc7b689aaab8f47d9f4697"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Preserve identity when transforming a motif",
+          "transcript": [
+            "Preserve identity when transforming a motif",
+            "Original · followed by a quarter rest: E4 → G4 → A4 → G4",
+            "Transposed +2 semitones · same rhythm: F♯4 → A4 → B4 → A4",
+            "A 24-bar plan: 1–8: presentation; 9–16: sequence and fragment; 17–24: return in a new register"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/motiv-og-transformasjon.svg",
+              "sha256": "c6cac960e9ae1f34fafbfe6d29c24ed3ede480abec4ffb97a859e9af0fa1ef03"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/motiv-og-transformasjon-card.svg",
+              "sha256": "4c00ae5445c8e0bd88a179b7d0b6737f468fa292daf508c90f9afc6c81ff3579"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "frase-periode-og-harmonisk-rytme",
+      "title": "Frase og periode: la kadensen forme musikken",
+      "source_sections": [
+        "Frasen har en retning",
+        "En original modell du kan spille",
+        "Harmonisk rytme er skiftetakten",
+        "Instrumentøvelse og asymmetrisk variant",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Lik åpning. Sterkere andre avslutning.",
+          "transcript": [
+            "Lik åpning. Sterkere andre avslutning.",
+            "Åtte takter · én akkord per takt: 1–4: C | F | Dm | G; Forledd: slutt på D over G; 5–8: C | F | G7 | C; Etterledd: slutt på C over C",
+            "Tettere harmonisk rytme ved slutt: Takt 7: Dm → G7; Takt 8: C → C"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/frase-periode-og-harmonisk-rytme.svg",
+              "sha256": "56789e1df5ee4d8d3b5952b65ae6bfbd11d47c7d7425ecad5644c54f851c3ced"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/frase-periode-og-harmonisk-rytme-card.svg",
+              "sha256": "5e77639d98cb6a012f628a8545e49271892bc26a57392820272607e8c2b6baff"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Similar opening. Stronger second ending.",
+          "transcript": [
+            "Similar opening. Stronger second ending.",
+            "Eight bars · one chord per bar: 1–4: C | F | Dm | G; Antecedent: end on D above G; 5–8: C | F | G7 | C; Consequent: end on C above C",
+            "Faster harmonic rhythm at the end: Bar 7: Dm → G7; Bar 8: C → C"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/frase-periode-og-harmonisk-rytme.svg",
+              "sha256": "610536770f503e2499033b8ec3a457cf396d4aaa7a1e65e3b3f09db60e69fef1"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/frase-periode-og-harmonisk-rytme-card.svg",
+              "sha256": "a51e0dfbaf6cc2de1e872aa4b70e0754747fe89927ac56b7d0300e55683ff188"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "storform-rondo-sonatisk-og-dramaturgi",
+      "title": "Storform: rondo, sonatisk tenkning og gjennomkomponering",
+      "source_sections": [
+        "Rondo organiserer tilbakekomst",
+        "Sonatisk tenkning er mer enn tre etiketter",
+        "Gjennomkomponert betyr ikke uten sammenheng",
+        "Et konkret 64-takters prosjekt",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "melody",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Tilbakekomst kan løse en tidligere kontrast",
+          "transcript": [
+            "Tilbakekomst kan løse en tidligere kontrast",
+            "Rondo · A–B–A–C–A: A: gjenkjennelig omdreiningspunkt; B og C: kontrasterende episoder",
+            "64-takters originalmodell: 1–16: A · E-mollriff; 17–32: B · G som lokalt sentrum; 33–48: utvikling · fragmentering; 49–64: A′ · motiv i to stemmer"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/storform-rondo-sonatisk-og-dramaturgi.svg",
+              "sha256": "a075c68ce90f0f41172e0f7dba8ae7f6ec8f36014c96a62010333a478f68be0c"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/storform-rondo-sonatisk-og-dramaturgi-card.svg",
+              "sha256": "ead3f8f8aa1742b4780e76cea54c9f7a7a1ce6c220c95989e7b381398521af84"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "A return can resolve an earlier contrast",
+          "transcript": [
+            "A return can resolve an earlier contrast",
+            "Rondo · A–B–A–C–A: A: recognisable point of return; B and C: contrasting episodes",
+            "Original 64-bar model: 1–16: A · E minor riff; 17–32: B · G as local centre; 33–48: development · fragmentation; 49–64: A′ · motif in two voices"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/storform-rondo-sonatisk-og-dramaturgi.svg",
+              "sha256": "fb9e9ec909ee7217ba6300776a2dfbc2674d94ef3b9ceef9124ac9ea1d742db5"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/storform-rondo-sonatisk-og-dramaturgi-card.svg",
+              "sha256": "b6504c362a1d2daf8a5705b5d2450ff91e02d8ebaa1e324374b9924da8bc5e57"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "komposisjon-fra-skisse-til-revisjon",
+      "title": "Komposisjon: fra første skisse til en begrunnet revisjon",
+      "source_sections": [
+        "Begynn med et spørsmål som kan høres",
+        "Lag en helhet før du polerer detaljene",
+        "Gitar og piano gir ulike kontroller",
+        "Bestem hva ferdig betyr for denne leveransen",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "melody",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Endre én hovedsak per revisjon",
+          "transcript": [
+            "Endre én hovedsak per revisjon",
+            "En hel 24-takters skisse: 1–8: presentasjon; 9–16: kontrast; 17–24: tilbakekomst",
+            "Et etterprøvbart revisjonsløp: A: behold førsteskissen; B: prøv ny opptakt ved takt 8; Lytt med likt tempo og nivå; Noter konkret hva som endret seg"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/komposisjon-fra-skisse-til-revisjon.svg",
+              "sha256": "524a032faade47968e3143b9f12220056e6339247304230a8ab2580147d7f5f9"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/komposisjon-fra-skisse-til-revisjon-card.svg",
+              "sha256": "8764db0b59fd1a5c4cf159f41336edd3cca71c87c4f8584cfd14bb5d5305ec13"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Change one main issue per revision",
+          "transcript": [
+            "Change one main issue per revision",
+            "A complete 24-bar sketch: 1–8: presentation; 9–16: contrast; 17–24: return",
+            "A traceable revision process: A: keep the first sketch; B: try a new pickup at bar 8; Listen at equal tempo and level; Note exactly what changed"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/komposisjon-fra-skisse-til-revisjon.svg",
+              "sha256": "362f8c79c912990d399b96c0fc80c2c85d7e03e3ab0fd05f14813d6d34b5fcb6"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/komposisjon-fra-skisse-til-revisjon-card.svg",
+              "sha256": "18279224afbd22593d4f04c9de8f680948a4bbbed16370e6748d997266571c1f"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "arrangering-for-lite-ensemble",
+      "title": "Arrangering: gi hvert instrument en tydelig oppgave",
+      "source_sections": [
+        "Fire roller er et nyttig startkart",
+        "Et konkret åttetakters materiale",
+        "Gitar og piano må få idiomatisk materiale",
+        "To versjoner med ulik tetthet",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Fordel rollene før du fyller registeret",
+          "transcript": [
+            "Fordel rollene før du fyller registeret",
+            "Åtte takter · to per akkord: Em | Cmaj7 | Am7 | B7; Gitar: melodi · bass: grunntoner; Piano: ters/septim · trommer: puls",
+            "B7 · D♯ og A er guide-toner: B2 → D♯3 → F♯3 → A3"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/arrangering-for-lite-ensemble.svg",
+              "sha256": "094bdea93923a2352ea72a9db962c76956a07c17346839783fece32310fbf202"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/arrangering-for-lite-ensemble-card.svg",
+              "sha256": "04af67e4f5bc96eb9c209ae07b705e328ab0907d0b1977649287c24fc6acd24a"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Assign roles before filling the register",
+          "transcript": [
+            "Assign roles before filling the register",
+            "Eight bars · two per chord: Em | Cmaj7 | Am7 | B7; Guitar: melody · bass: roots; Piano: third/seventh · drums: pulse",
+            "B7 · D♯ and A are guide tones: B2 → D♯3 → F♯3 → A3"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/arrangering-for-lite-ensemble.svg",
+              "sha256": "ef809713775d94ae3a76a17e15e1669b1170b16d07e9071d7d460c6bfcd498f1"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/arrangering-for-lite-ensemble-card.svg",
+              "sha256": "2ada8272ff3a226a85def4ea578e2da4043f12ce8874827225bb9b408c820cda"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "instrumentasjon-og-hybrid-metal",
+      "title": "Instrumentasjon: bygg balanse mellom metal og orkesterlag",
+      "source_sections": [
+        "Instrumentasjon er mer enn å bytte lyd",
+        "Notert og klingende må angis tydelig",
+        "Et hybridforløp med tydelig plass",
+        "Prøv med reduksjon og realistiske stemmer",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Skill notert og klingende tonehøyde",
+          "transcript": [
+            "Skill notert og klingende tonehøyde",
+            "Transponering av notert C4: B♭-klarinett: C4 → B♭3 (−2); Horn i F: C4 → F3 (−7); Gitar: C4 → C3 (−12)",
+            "Åtte takter med plass til lagene: 1–2: gitarostinat og bass; 3–4: lange strykertoner; 5–6: piano · gitaren har pause; 7–8: samlet ankomst"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/instrumentasjon-og-hybrid-metal.svg",
+              "sha256": "1ffef4e517201a25ebac2eafba9ca16a1d350686c9475936b0d22f94a0309fb4"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/instrumentasjon-og-hybrid-metal-card.svg",
+              "sha256": "9e80f34aa5228b09aabf68a71926ca08a12150fe38b8e3bd8dc2b501213ca6a0"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Distinguish written and sounding pitch",
+          "transcript": [
+            "Distinguish written and sounding pitch",
+            "Transposition of written C4: B♭ clarinet: C4 → B♭3 (−2); Horn in F: C4 → F3 (−7); Guitar: C4 → C3 (−12)",
+            "Eight bars with space for the layers: 1–2: guitar ostinato and bass; 3–4: sustained strings; 5–6: piano · guitar rests; 7–8: combined arrival"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/instrumentasjon-og-hybrid-metal.svg",
+              "sha256": "f6e9a6de9673d10aa94a14a8e006928428a8a3e452548f48f8970b9976708662"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/instrumentasjon-og-hybrid-metal-card.svg",
+              "sha256": "67f2db2548bbf2ba7f6a70e159878765abd78ca694cfed19794054630d53762e"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "swing-bebop-og-jazzfrasering",
+      "title": "Swing og bebop: rytmisk retning over akkordskifter",
+      "source_sections": [
+        "Swing er en praksis, ikke ett tall",
+        "En egen linje gjennom ii–V–I",
+        "Piano og gitar: komp, linje, respons",
+        "Bygg en liten språkstudie",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "melody",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Land på målet. Gi frasen en pause.",
+          "transcript": [
+            "Land på målet. Gi frasen en pause.",
+            "Dm7 · F–A–C–A som firedeler: F4 → A4 → C5 → A4",
+            "G7 · B–D, så fire åttendedeler: B3 → D4 → D♭4 → C4 → B3 → A3",
+            "Cmaj7 i takt 3–4: Land på G. La pausen svare.; Swingforhold varierer med stil/tempo"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/swing-bebop-og-jazzfrasering.svg",
+              "sha256": "96e11c12bb5ed9500448ee1da2ee7c311fd947424609ed0e1a8e060116fd8d3b"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/swing-bebop-og-jazzfrasering-card.svg",
+              "sha256": "bed79c71d76ea4c6205449d35a527adf824e79413304134bc4344799c3cf0ea2"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Reach the target. Give the phrase a rest.",
+          "transcript": [
+            "Reach the target. Give the phrase a rest.",
+            "Dm7 · F–A–C–A in quarter notes: F4 → A4 → C5 → A4",
+            "G7 · B–D, then four eighth notes: B3 → D4 → D♭4 → C4 → B3 → A3",
+            "Cmaj7 in bars 3–4: Land on G. Let the rest answer.; Swing ratio varies with style/tempo"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/swing-bebop-og-jazzfrasering.svg",
+              "sha256": "b5b3bdd815712987bd1f96c5e370be11ac78a3d80ed307cd276e4a8598cae1cb"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/swing-bebop-og-jazzfrasering-card.svg",
+              "sha256": "3ffac4a26772bfa36ef54a650f620245a2d952e2e895332af6f04ff8b70e0db7"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "comping-og-akkordmelodi",
+      "title": "Comping og akkordmelodi: støtt frasen med få toner",
+      "source_sections": [
+        "Comping er et samspillvalg",
+        "Guide-toner gir tydelig forbindelse",
+        "Akkordmelodi setter melodien øverst",
+        "Tre grader av tetthet",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "sevenths",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "To guide-toner kan binde tre akkorder",
+          "transcript": [
+            "To guide-toner kan binde tre akkorder",
+            "Dm7 → G7 → Cmaj7: Bass: D → G → C; Øvre linje: C4 → B3 → B3; Nedre linje: F3 → F3 → E3",
+            "Guide-toner · bare streng 4 og 3: streng 4, bånd 3: F3; streng 3, bånd 5: C4; streng 3, bånd 4: B3; streng 4, bånd 2: E3"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/comping-og-akkordmelodi.svg",
+              "sha256": "36ccb7db8ce176de945126cee8680abae65b50685768ac81fad3101fae9873da"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/comping-og-akkordmelodi-card.svg",
+              "sha256": "12102b4751a895b0aad84edb1953fe9578cae103d0cdb80f0b98c1a93088cd7a"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Two guide tones can connect three chords",
+          "transcript": [
+            "Two guide tones can connect three chords",
+            "Dm7 → G7 → Cmaj7: Bass: D → G → C; Upper line: C4 → B3 → B3; Lower line: F3 → F3 → E3",
+            "Guide tones · strings 4 and 3 only: string 4, fret 3: F3; string 3, fret 5: C4; string 3, fret 4: B3; string 4, fret 2: E3"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/comping-og-akkordmelodi.svg",
+              "sha256": "3cabf0c7baea172e2ca1018a9ac308125189157ba8aa297aeb46ade09cb4c609"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/comping-og-akkordmelodi-card.svg",
+              "sha256": "a6a0f432fe55d3266b89bf3793007f885d3be583eee6877b2dd39606d10010e8"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "gehor-og-transkripsjon",
+      "title": "Gehør og transkripsjon: fra lytting til etterprøvbar notasjon",
+      "source_sections": [
+        "Velg et håndterlig utdrag",
+        "Rytme før alle tonehøyder",
+        "En original kontrolløvelse",
+        "Sammenlign og dokumenter",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "melody",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Behold førsteforsøket før kontroll",
+          "transcript": [
+            "Behold førsteforsøket før kontroll",
+            "Original kontrollfrase · takt 1: E4 → G4 → F♯4 → E4",
+            "Takt 2 · to halvnoter: D4 → E4",
+            "Dokumenter fire ulike ledd: Lytt og syng → noter førstesvar; Kontroller mot lyd og instrument; Behold rettet versjon separat"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/gehor-og-transkripsjon.svg",
+              "sha256": "0df3f793bfee939157b32302a2b1e6ae1e7e9f8f32a8b9e9fc8a87aafd452e71"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/gehor-og-transkripsjon-card.svg",
+              "sha256": "fe18c4d194c22505c782521c613f269d88db227e56063f9aa9d92068c693ea4e"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Keep the first attempt before checking",
+          "transcript": [
+            "Keep the first attempt before checking",
+            "Original checking phrase · bar 1: E4 → G4 → F♯4 → E4",
+            "Bar 2 · two half notes: D4 → E4",
+            "Document four distinct stages: Listen and sing → record first response; Check against audio and instrument; Keep the corrected version separate"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/gehor-og-transkripsjon.svg",
+              "sha256": "672e75c561cf0923a589edee6adfdace1c76f8813c0b9f68ecac303417fea3d2"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/gehor-og-transkripsjon-card.svg",
+              "sha256": "0057a616e0f3fb4fdfb7a3d691cbc83dda6a644e1c8bbce63d41386c602e57c1"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "rytmikk-oddetakt-og-metrisk-modulasjon",
+      "title": "Rytmikk: oddetakt, forskyvning og metrisk modulasjon",
+      "source_sections": [
+        "Puls og gruppering er forskjellige lag",
+        "En kryssrytme trenger et felles tidsrom",
+        "Metrisk modulasjon angir hva som blir ny enhet",
+        "Fra telling til et spillbart riff",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "rhythm",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Et felles tidsrom binder lagene sammen",
+          "transcript": [
+            "Et felles tidsrom binder lagene sammen",
+            "3 mot 2 · seks underenheter: trelag på 1, 3, 5; tolag på 1, 4; seks like underenheter",
+            "Tre- og tolaget i samme omløp: Trelag: posisjon 1, 3, 5; Tolag: posisjon 1, 4",
+            "Gammel triolåttendel = ny åttendel: 90 × 3 = 270 anslag/min; 270 ÷ 2 = 135 nye firedeler/min"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/rytmikk-oddetakt-og-metrisk-modulasjon.svg",
+              "sha256": "522f08b325079ccf419c81bf534da00cbc17b1e117731041d78f6ce8d0fc7642"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/rytmikk-oddetakt-og-metrisk-modulasjon-card.svg",
+              "sha256": "1fc7ee530ced1843527c69b8def5a7db77022b6e99f46e08586da8461514924a"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "A shared time span connects the layers",
+          "transcript": [
+            "A shared time span connects the layers",
+            "3 against 2 · six subdivisions: three at 1, 3, 5; two at 1, 4; six equal subdivisions",
+            "Three and two in the same cycle: Three: positions 1, 3, 5; Two: positions 1, 4",
+            "Old triplet eighth = new eighth: 90 × 3 = 270 attacks/min; 270 ÷ 2 = 135 new quarters/min"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/rytmikk-oddetakt-og-metrisk-modulasjon.svg",
+              "sha256": "73e963019cba7e67c1133856492d2a3f47ad2a780bab263a105ebb60990031e4"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/rytmikk-oddetakt-og-metrisk-modulasjon-card.svg",
+              "sha256": "ed3e88884b71177d02cf21468337c7d9c738bd561022cc220fe3fc084351653a"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "gitarteknikk-metal-fusion-og-oving",
+      "title": "Gitarteknikk og metal/fusion: øv på det musikken krever",
+      "source_sections": [
+        "Velg en musikalsk flaskehals",
+        "En frase som tåler flere artikulasjoner",
+        "Intonasjon og harmonisk respons",
+        "En dokumenterbar øvingsuke",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "melody",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Behold frasen når teknikken endres",
+          "transcript": [
+            "Behold frasen når teknikken endres",
+            "E–G–A–B på andre streng: streng 2, bånd 5: E4; streng 2, bånd 8: G4; streng 2, bånd 10: A4; streng 2, bånd 12: B4",
+            "Bøy A mot B · sammenlign referansen: A4 på bånd 10 → B4 på bånd 12; Mål: +2 halvtoner; Kontroller rent før mer forvrengning"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/gitarteknikk-metal-fusion-og-oving.svg",
+              "sha256": "bd72ddfb152cb5433021e757375fb39cf9bb436ef9d6f20d958a45829be87b82"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/gitarteknikk-metal-fusion-og-oving-card.svg",
+              "sha256": "9fa84552ddf406090cd18658b7d97c9e535dffd5d79770eef0cff7e57aab57fc"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Keep the phrase when changing technique",
+          "transcript": [
+            "Keep the phrase when changing technique",
+            "E–G–A–B on the second string: string 2, fret 5: E4; string 2, fret 8: G4; string 2, fret 10: A4; string 2, fret 12: B4",
+            "Bend A towards B · compare the reference: A4 at fret 10 → B4 at fret 12; Target: +2 semitones; Check clean before adding distortion"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/gitarteknikk-metal-fusion-og-oving.svg",
+              "sha256": "e3787de3ed7bdfb3116c105c2dd5b4592bfe6626ef0643fec468d1e35d78f6d5"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/gitarteknikk-metal-fusion-og-oving-card.svg",
+              "sha256": "5b0fe54513d7ffdc917c32b6b3acf0142d8c5407149db3bd445900e63df70ea8"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "logic-midi-og-opptak",
+      "title": "Logic Pro: bygg en ryddig skisse med MIDI og gitaropptak",
+      "source_sections": [
+        "MIDI beskriver hendelser, audio bevarer lyd",
+        "En åttetakters produksjonsskisse",
+        "Opptak som tåler revisjon",
+        "Lagre slik at prosjektet kan åpnes igjen",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "melody",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "MIDI-hendelser og audio er ulike spor",
+          "transcript": [
+            "MIDI-hendelser og audio er ulike spor",
+            "Åttetakters produksjonsskisse: Piano-harmoni: MIDI → instrumentlyd; Gitar-melodi: audio → innspilt lyd; Em → C → Am → B7 → Em",
+            "Versjoner skal være etterprøvbare: Behold råtake → rediger kopi; Lagre prosjekt med lydfiler; Åpne igjen → kontroller siste takt"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/logic-midi-og-opptak.svg",
+              "sha256": "97a07d80a55f4e7dee42cb22fe6dd901a9bd31cc4e59fa45e5d39ba9fb07dab9"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/logic-midi-og-opptak-card.svg",
+              "sha256": "3838869b3cdfe6f07b72440d7072f5b52468833478fa661feba067a98b8f5268"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "MIDI events and audio are different tracks",
+          "transcript": [
+            "MIDI events and audio are different tracks",
+            "Eight-bar production sketch: Piano harmony: MIDI → instrument sound; Guitar melody: audio → recorded sound; Em → C → Am → B7 → Em",
+            "Versions should be traceable: Keep raw take → edit a copy; Save the project with its audio files; Reopen → check the final bar"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/logic-midi-og-opptak.svg",
+              "sha256": "6cac4f5bb95f55d8c3994cdedc13e9d379226ac159ca4a96b1467a02fa8a169a"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/logic-midi-og-opptak-card.svg",
+              "sha256": "5335f7761536a1acb085d8eef0acff23d498671bfabe341569dcce057204d218"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "miks-balanse-og-kritisk-lytting",
+      "title": "Miks og kritisk lytting: gjør arrangementets hensikt hørbar",
+      "source_sections": [
+        "En statisk miks er en musikalsk kontroll",
+        "Signalnivå og dynamikk",
+        "Rom og panorering som arrangement",
+        "Gitar, piano og en konkret lytterunde",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "voices",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Hør hva hvert lag gjør for helheten",
+          "transcript": [
+            "Hør hva hvert lag gjør for helheten",
+            "Fra statisk balanse til kontroll: Melodi → bass/puls → støttelag; Maskering? Prøv register og voicing; Effekter av/på ved likt lyttenivå",
+            "To sammenlignbare versjoner: A: tørr · B: romligere; Stereo → mono → annet system; Noter tre endringer med tidskode"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/miks-balanse-og-kritisk-lytting.svg",
+              "sha256": "12a65d7a186c5d99f8f71c7da063f81537337e1496adcae6fda8a51c674da780"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/miks-balanse-og-kritisk-lytting-card.svg",
+              "sha256": "87aa9df23b92888684c64509e386598ee6a1ae876473846b1c343168b2c7db3c"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Hear what each layer contributes",
+          "transcript": [
+            "Hear what each layer contributes",
+            "From static balance to checking: Melody → bass/pulse → support layers; Masking? Try register and voicing; Effects off/on at matched listening level",
+            "Two comparable versions: A: dry · B: more reverberant; Stereo → mono → another system; Note three changes with timecodes"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/miks-balanse-og-kritisk-lytting.svg",
+              "sha256": "5688866ca3f7b2511d157ea91d3b3630d32a1b06207e3828b784f224955fe133"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/miks-balanse-og-kritisk-lytting-card.svg",
+              "sha256": "6b36cffb7a9ec6edd56fc5dde5d2185e5ab43aa64a31e11e606d5f5704aa7d79"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "portefolje-kunstnerisk-refleksjon-og-samspill",
+      "title": "Portefølje og kunstnerisk refleksjon: vis sammenhengen i arbeidet",
+      "source_sections": [
+        "Velg arbeider med ulike oppgaver",
+        "En enkel dokumentasjonsstruktur",
+        "Samspill gir en egen type evidens",
+        "Refleksjon som åpner neste arbeid",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "melody",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Knytt påstand til konkret dokumentasjon",
+          "transcript": [
+            "Knytt påstand til konkret dokumentasjon",
+            "Fire arbeider, fire tydelige spor: Miniatyr → partitur og lyd; Tostemmig sats → separate stemmer; Improvisasjon → helt opptak; Produksjon → prosjekt og revisjoner",
+            "Refleksjon med henvisning: Hensikt → valg → hørbart resultat; Takt/tidskode → neste spørsmål; Komplett mappe ≠ formell godkjenning"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/portefolje-kunstnerisk-refleksjon-og-samspill.svg",
+              "sha256": "6e47154bad0edfc16bbebe2defeb9d64e012c54820d4f2d8246e9e9a03c63928"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/portefolje-kunstnerisk-refleksjon-og-samspill-card.svg",
+              "sha256": "0cafda32cdf2ac90926ac8908eee26316800b1a3233057dc7d4b16589258e356"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Connect a claim to concrete evidence",
+          "transcript": [
+            "Connect a claim to concrete evidence",
+            "Four works, four clear evidence trails: Miniature → score and audio; Two-part writing → separate voices; Improvisation → complete recording; Production → project and revisions",
+            "Reflection with a reference: Intention → choice → audible result; Bar/timecode → next question; Complete portfolio ≠ formal approval"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/portefolje-kunstnerisk-refleksjon-og-samspill.svg",
+              "sha256": "57ca4c1499e2e5a8ce2f6ba48e81c37f56c89eb3c61fe5f086f26f60f0800d65"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/portefolje-kunstnerisk-refleksjon-og-samspill-card.svg",
+              "sha256": "1c774f8fc95d4a86faa1f8ce4c3df3efdb827425bbbc58748eb1c98423a17b8b"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "stilforstaelse-repertoar-og-lytteanalyse",
+      "title": "Stilforståelse: sammenlign klassisk sats, jazz og metal",
+      "source_sections": [
+        "Velg en konkret sammenligning",
+        "Tre behandlinger av ett materiale",
+        "Piano og gitar som sammenligningsverktøy",
+        "Historie og egen identitet",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "melody",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Samme materiale, tre stilvalg",
+          "transcript": [
+            "Samme materiale, tre stilvalg",
+            "E–F–D–C over C–F–G–C: E4 → F4 → D4 → C4",
+            "Endre behandlingen av modellen: Klassisk: fire stemmer og tendenser; Jazz: septimer og rytmiske rom; Metal: røtter/kvinter og aksenter; Sammenlign ved samme tempo først"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/stilforstaelse-repertoar-og-lytteanalyse.svg",
+              "sha256": "f1a36883134a45d42e0bc464dd5e0420be65cde91faa761404536e64c543e37e"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/stilforstaelse-repertoar-og-lytteanalyse-card.svg",
+              "sha256": "ddb50699bf22136c8df25ff45e26544b2ae80d268eba849eab47d461011d30a4"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "The same material, three stylistic choices",
+          "transcript": [
+            "The same material, three stylistic choices",
+            "E–F–D–C above C–F–G–C: E4 → F4 → D4 → C4",
+            "Change how the model is treated: Classical: four voices and tendencies; Jazz: sevenths and rhythmic space; Metal: roots/fifths and accents; Compare at the same tempo first"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/stilforstaelse-repertoar-og-lytteanalyse.svg",
+              "sha256": "b3c75c83cc40a6a4f88bf5372b95132c7bebc5873e6553832a9e2b2b1b19df8c"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/stilforstaelse-repertoar-og-lytteanalyse-card.svg",
+              "sha256": "10ce717479f0075ec5bc880ae2e3bb9d8f1eeac35103015ffb85794c88703114"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "auditiv-intervall-og-funksjonsprove",
+      "title": "Auditiv kontroll: hør intervall og funksjon uten synlig fasit",
+      "source_sections": [
+        "Bestem hva prøven faktisk undersøker",
+        "Piano- og gitareksempler",
+        "Funksjon trenger en tonal ramme",
+        "Fra lytterunde til eget arbeid",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "intervals",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Skill høring fra beregning etterpå",
+          "transcript": [
+            "Skill høring fra beregning etterpå",
+            "Avgrens en blind lytterunde: 8 intervallklipp + 4 funksjonsklipp; Skjul noter, navn og håndstilling; Førstesvar → sikkerhet → kontroll",
+            "Funksjon i to tonearter: C → F → G → C; G → C → D → G; Samme I–IV–V–I, nye tonehøyder"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/auditiv-intervall-og-funksjonsprove.svg",
+              "sha256": "d68759287f2211e7c9119607eb097e0d5801f1c51a68c8e90c9555156dcb3b36"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/auditiv-intervall-og-funksjonsprove-card.svg",
+              "sha256": "b082c077463f084e5059427fa7b0c7b5513ab78a16fa263a30d775bbbd99e275"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Separate hearing from later calculation",
+          "transcript": [
+            "Separate hearing from later calculation",
+            "Define a blind listening round: 8 interval clips + 4 function clips; Hide notation, names and hand positions; First response → confidence → checking",
+            "Function in two keys: C → F → G → C; G → C → D → G; The same I–IV–V–I, new pitches"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/auditiv-intervall-og-funksjonsprove.svg",
+              "sha256": "a8b304b47d097bc90793a467a6c69d6d074eb65ac765b441208f37dc2cdbca92"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/auditiv-intervall-og-funksjonsprove-card.svg",
+              "sha256": "59744b8d573c055d7439376d2238df980f0bcb63252375f5c5f0f1fe01ef784c"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "samspill-og-improvisatorisk-respons",
+      "title": "Samspill: lytt, gi plass og svar på en medspiller",
+      "source_sections": [
+        "Avtal en ramme med rom for valg",
+        "Tre ting du kan svare på",
+        "Bytt roller mellom gitar og piano",
+        "Dokumenter respons, ikke bare samtidighet",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "melody",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Et svar kan endre det neste spørsmålet",
+          "transcript": [
+            "Et svar kan endre det neste spørsmålet",
+            "Dm7 → G → Dm7 → Dm7: Runde 1: 4 takter gitar + 4 piano; Runde 2: 2 takter gitar + 2 piano",
+            "Velg hva du svarer på: Rytme → nye toner; Kontur → ny rytme; Dynamikk → likhet eller kontrast; Bytt roller og noter tidskoder"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/samspill-og-improvisatorisk-respons.svg",
+              "sha256": "b1812b57cb6ccad773cbde5b8206e707f81e8cd49ec589df546b974f63dc852a"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/samspill-og-improvisatorisk-respons-card.svg",
+              "sha256": "72cd0bc55a68df82b06fd31ef8d524ae85a98cf06f23803f5d03bc3e5c5e00f7"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "A response can change the next question",
+          "transcript": [
+            "A response can change the next question",
+            "Dm7 → G → Dm7 → Dm7: Round 1: 4 bars guitar + 4 piano; Round 2: 2 bars guitar + 2 piano",
+            "Choose what to respond to: Rhythm → new notes; Contour → new rhythm; Dynamics → similarity or contrast; Swap roles and note timecodes"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/samspill-og-improvisatorisk-respons.svg",
+              "sha256": "29bf56644da15b02a015e36f724677d388f50b1478b540763f696602b1455ad6"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/samspill-og-improvisatorisk-respons-card.svg",
+              "sha256": "542034c3b096670e5b2b6556d6001e3a1d82720a36d3068badab1bc51a3c6908"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "formanalyse-av-hele-verk",
+      "title": "Formanalyse av hele verk: bind detaljene til et kart",
+      "source_sections": [
+        "Hør helheten før du navngir delene",
+        "Et originalt kart å prøve metoden på",
+        "Kontroller med instrumentene",
+        "Skriv en analyse med etterprøvbare påstander",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "melody",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Knytt lokale funn til et helt forløp",
+          "transcript": [
+            "Knytt lokale funn til et helt forløp",
+            "32-takters originalmodell: 1–8: A · motiv a i Em; 9–16: B · motiv b, C–D–G–G; 17–24: utvikling · a over Am–B7; 25–32: A′ · a tilbake i Em",
+            "Begrunn grensene: Motiv · bass · tekstur · tilbakekomst; Velg tre steder og én alternativ lesning"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/formanalyse-av-hele-verk.svg",
+              "sha256": "c37325369d7c8335fbf267651b0d20a663e215bd3c151aac1f4e7bcb9c86806c"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/formanalyse-av-hele-verk-card.svg",
+              "sha256": "1ede740a9f0045d4c1cc849eb6531f1843d9b1242456e0535e7903e907ae46a6"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Connect local findings to a whole piece",
+          "transcript": [
+            "Connect local findings to a whole piece",
+            "Original 32-bar model: 1–8: A · motif a in Em; 9–16: B · motif b, C–D–G–G; 17–24: development · a above Am–B7; 25–32: A′ · a returns in Em",
+            "Justify the boundaries: Motif · bass · texture · return; Choose three points and one alternative reading"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/formanalyse-av-hele-verk.svg",
+              "sha256": "a048ac935ae296134b20bc8748c7f438ef96cb4b17c945eb2d580330ec4f241b"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/formanalyse-av-hele-verk-card.svg",
+              "sha256": "07a03042e0e40801b46931f1bace09c7ff58fca27dfd5a5281f92d917462e342"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "utovende-presentasjon-og-sluttprosjekt",
+      "title": "Utøvende presentasjon: gjør et verk klart for gjennomspilling",
+      "source_sections": [
+        "Definer leveransen på forhånd",
+        "Øv overganger og tilbakekomst",
+        "Gitar og piano som støtte for sikkerhet",
+        "Presenter og vurder uten å omskrive opptaket",
+        "Kildegrunnlag og faglig status"
+      ],
+      "existing_art": "melody",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "Prøv kontinuiteten i én gjennomspilling",
+          "transcript": [
+            "Prøv kontinuiteten i én gjennomspilling",
+            "Forbered overgangene: Siste takt før delskiftet; → første to takter etter skiftet; → hele stykket uten stopp",
+            "Behold ulike leveranser separat: Helt råopptak → tre observasjoner; Redigert studioversjon merkes separat; Oppgi backing, roller og vilkår"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/utovende-presentasjon-og-sluttprosjekt.svg",
+              "sha256": "7a9f589ab45491ff4b16207d1f0ed4094b00acfb1231373d4af8322e5090643e"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/utovende-presentasjon-og-sluttprosjekt-card.svg",
+              "sha256": "c6298a5c91d3603f944d0f5513e914e29cc75ebeddfaefd53d5734cd37cde340"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "Test continuity in one complete performance",
+          "transcript": [
+            "Test continuity in one complete performance",
+            "Prepare the transitions: Last bar before the section change; → first two bars after the change; → the whole piece without stopping",
+            "Keep different deliverables separate: Complete raw take → three observations; Label an edited studio version separately; State backing, roles and conditions"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/utovende-presentasjon-og-sluttprosjekt.svg",
+              "sha256": "4ae5bc38ff55a88b9253f17c4c5e9a4f5e85cfa127d33f5d585a6e79ce9dd821"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/utovende-presentasjon-og-sluttprosjekt-card.svg",
+              "sha256": "7640b6f5e65343aa44e55d6d3f20de1cb57d6e37af653bc97da13ae21c310a19"
+            }
+          },
+          "article_available": false
+        }
+      }
+    }
+  ]
+}

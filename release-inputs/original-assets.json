@@ -1,0 +1,33 @@
+[
+  {
+    "path": "audio/kick.wav",
+    "sha256": "664c5804a7d911cb41bbc23c3be2b18661e62527ab52e6a871b13ab3efd9f0b9",
+    "origin": "Original deterministic oscillator and seeded noise synthesis; no recording input",
+    "duration_seconds": 0.45,
+    "peak": 0.7487411114841152
+  },
+  {
+    "path": "audio/snare.wav",
+    "sha256": "e0cc62254a99374649352599a3ea4d966d3d478d213fdf4912f2ad179ddd845c",
+    "origin": "Original deterministic oscillator and seeded noise synthesis; no recording input",
+    "duration_seconds": 0.28,
+    "peak": 0.6114993743705558
+  },
+  {
+    "path": "audio/hihat.wav",
+    "sha256": "1b02304ea899ffbae12a87b70097cff6f2e2a2224cb82d44542b50ef73fa1ca8",
+    "origin": "Original deterministic oscillator and seeded noise synthesis; no recording input",
+    "duration_seconds": 0.12,
+    "peak": 0.28403576769310585
+  },
+  {
+    "path": "images/mountain-original.svg",
+    "sha256": "f87e561240e2290e93cc064374587c01f12e2217df4a2e93f1a5ce12b9342bf7",
+    "origin": "Original SVG paths, gradients and geometric primitives authored for this release; no bitmap input"
+  },
+  {
+    "path": "images/atlas-original.svg",
+    "sha256": "384739b74743fef34025cf1e2e273ea46483c9a73e01d8ad53e49ac5881f06ea",
+    "origin": "Original SVG paths, gradients and geometric primitives authored for this release; no bitmap input"
+  }
+]

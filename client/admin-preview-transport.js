@@ -1,0 +1,3 @@
+// Browser-only administrator transport. No SDK, credential or server writes.
+const unavailable=async()=>({data:null,error:{code:'BROWSER_ONLY',message:'Denne Preview-versjonen lagrer bare i nettleseren. Ingen kontosynkronisering eller publisering er aktivert.'}});
+export function createClient(){return {auth:{getUser:async()=>({data:{user:null}}),getSession:async()=>({data:{session:null}}),onAuthStateChange:()=>({data:{subscription:{unsubscribe(){}}}}),signOut:async()=>({error:null}),signInWithPassword:unavailable,signUp:unavailable,verifyOtp:unavailable},from(){throw Error('Serverdata er deaktivert i denne administratorpakken.');},rpc:unavailable};}
