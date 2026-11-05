@@ -24,7 +24,7 @@ for p in B.rglob('*'):
  b=re.search(r'<section class="[^"]*subpage-hero"[^>]*>[\s\S]*?</section>',new)[0]
  content=re.search(r'<div class="subpage-hero-copy">([\s\S]*)</div></section>',b)[1]
  if kind:
-  expected=re.sub(r'<div class="(?:intro-art|theory-landscape)"[^>]*>[\s\S]*?</div>','',a[a.index('>')+1:-10])
+  expected=re.sub(r'<div class="(?:intro-art|theory-landscape|membership-landscape)"[^>]*>[\s\S]*?</div>','',a[a.index('>')+1:-10])
  else:expected=a
  assert content==expected,rel+' hero text/CTA'
  old=old.replace(a,'HERO',1);new=new.replace(b,'HERO',1)
@@ -33,7 +33,7 @@ for p in B.rglob('*'):
   assert re.search(pattern,old)[0]==re.search(pattern,new)[0]
   old=re.sub(pattern,'',old);new=re.sub(pattern,'',new)
  assert old==new,rel+' content below/around hero'
-assert len(changed)==18
+assert len(changed)==len(pages)*2
 assert len(list((P/'artikler').glob('*.html')))==52
 assert len(json.loads((P/'en/search-index.json').read_text()))>0
 assert json.loads((P/'cms-seed.json').read_text())==[]

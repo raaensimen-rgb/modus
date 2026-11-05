@@ -46,3 +46,9 @@ html:is([data-theme=readable],[data-theme=contrast]) .shared-hero-page :is(.subp
 html:is([data-theme=readable],[data-theme=contrast]) .shared-hero-page :is(.subpage-hero,.journey-shell>header) a {background:var(--bg)!important;color:var(--ink)!important;border-color:var(--ink)!important}
 html:is([data-theme=readable],[data-theme=contrast]) .shared-hero-page :is(.subpage-hero,.journey-shell>header) a:focus-visible {outline-color:var(--ink)!important}
 @media(forced-colors:active){.shared-hero-page :is(.subpage-hero,.journey-shell>header)::before,.shared-hero-page :is(.subpage-hero,.journey-shell>header)::after{display:none}}
+
+/* MODUS+ retains its own subtitle and planned-membership notice. */
+.shared-hero-page .subpage-hero .membership-hero-subtitle {color:#fff!important}
+.shared-hero-page .subpage-hero .membership-hero-subtitle em,
+.shared-hero-page .subpage-hero .membership-plus-mark {color:#ffe329!important}
+html:is([data-theme=readable],[data-theme=contrast]) .shared-hero-page .subpage-hero :is(.membership-hero-subtitle,.membership-hero-subtitle em,.membership-plus-mark) {color:var(--ink)!important}

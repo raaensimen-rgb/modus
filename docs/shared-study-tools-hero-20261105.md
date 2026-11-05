@@ -6,7 +6,7 @@ Begge vedlegg ble hentet fra chatvedlegg og visuelt kontrollert.
 
 Menyens faktiske sider: laeringssti, laereplan, undervisning, teori,
 backingtracks, akkorder. Relaterte studiesider: grunnstudier, laer-dorisk,
-f03-laeringsreise. Alle ni ruter får felles hero på NB og EN.
+f03-laeringsreise. MODUS+ er lagt til etter egen bestilling. Alle ti ruter får felles hero på NB og EN.
 Studierute.html tilhører artikkelbibliotekets separate leveranse og er urørt.
 
 Eksisterende modus-design-landscape.png og modus-continuous-wave.svg gjenbrukes.

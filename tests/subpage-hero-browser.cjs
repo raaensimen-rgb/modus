@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {chromium,webkit}=require('playwright'),{default:AxeBuilder}=require('@axe-core/playwright');
 const {startPublicPackageServer}=require('./public-package-server.cjs');
-const routes=['laeringssti','laereplan','undervisning','teori','backingtracks','akkorder','grunnstudier','laer-dorisk','f03-laeringsreise'];
+const routes=process.env.MODUS_HERO_ROUTES?process.env.MODUS_HERO_ROUTES.split(','):['laeringssti','laereplan','undervisning','teori','backingtracks','akkorder','grunnstudier','laer-dorisk','f03-laeringsreise','modus-plus'];
 (async()=>{const server=await startPublicPackageServer(path.resolve('../package')),out=path.resolve('../evidence');fs.mkdirSync(out,{recursive:true});let browser;const rows=[];
 try{for(const [engine,launcher] of Object.entries({chromium,webkit})){
  browser=await launcher.launch();
@@ -14,10 +14,10 @@ try{for(const [engine,launcher] of Object.entries({chromium,webkit})){
  for(const a of await hero.locator('a').all()){const b=await a.boundingBox();assert(b.height>=44,route+' target');await a.focus();assert(await a.evaluate(e=>document.activeElement===e));}
  if(width===375||width===1440){for(const mode of (engine==='chromium'?['original','readable','contrast']:['original'])){await p.evaluate(mode=>window.ModusTheme.apply(mode,true),mode);const audit=await new AxeBuilder({page:p}).include('.subpage-hero,.shared-hero-page .journey-shell>header').withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();assert.deepEqual(audit.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.failureSummary)})),[],`${engine} ${locale} ${width} ${route} ${mode}`);}
  await p.evaluate(()=>window.ModusTheme.apply('original',true));}
- if(engine==='chromium'&&['backingtracks','laeringssti','laereplan','akkorder','undervisning','f03-laeringsreise'].includes(route)&&[375,1440].includes(width)){
+ if(engine==='chromium'&&['backingtracks','laeringssti','laereplan','akkorder','undervisning','f03-laeringsreise','modus-plus'].includes(route)&&[375,1440].includes(width)){
  await p.evaluate(()=>scrollTo(0,0));await p.screenshot({path:path.join(out,`${route}-${locale}-${width}.png`)});await hero.screenshot({path:path.join(out,`${route}-${locale}-${width}-hero.png`)});}
  if(width===1440){await p.evaluate(()=>document.documentElement.style.zoom='2');assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),route+' zoom overflow');}
  assert.deepEqual(errors,[],route+' browser errors');rows.push({engine,locale,width,route,status:'passed'});await c.close();
  }await browser.close();browser=null;
-}fs.writeFileSync(path.join(out,'browser-results.json'),JSON.stringify(rows,null,2));console.log(`${rows.length} responsive scenarios passed`);
+}fs.writeFileSync(path.join(out,process.env.MODUS_HERO_RESULTS||'browser-results.json'),JSON.stringify(rows,null,2));console.log(`${rows.length} responsive scenarios passed`);
 }finally{if(browser)await browser.close();await server.stop();}})().catch(e=>{console.error(e);process.exitCode=1});
