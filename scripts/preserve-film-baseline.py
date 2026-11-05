@@ -1,4 +1,4 @@
-"""Keep the published 9c83c6f artifact byte-for-byte outside the film integration.
+"""Keep the published 35e0a8d artifact byte-for-byte outside the film integration.
 The ordinary article/CMS build and private boundary checks run before this step.
 """
 from pathlib import Path
