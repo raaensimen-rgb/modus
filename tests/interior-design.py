@@ -25,7 +25,7 @@ for page in (ROOT/'dist').rglob('*.html'):
     assert 'tabindex="-1"' in main, page
     assert len(re.findall(r'href="(?:\.\./)?interior-2\.[a-f0-9]{10}\.css"',html))==1, page
     if page.parent.name=='artikler':
-        assert 'src="../images/modus-geometric.svg"' in html, page
+        assert 'src="../images/modus-design-diamond.svg"' in html, page
 source=(ROOT/'teori.html').read_text()
 once=apply_navigation(source,'theory')
 twice=apply_navigation(once,'theory')

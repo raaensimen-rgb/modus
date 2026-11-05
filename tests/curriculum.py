@@ -20,7 +20,7 @@ assert re.search(r'<meta name="robots" content="noindex,nofollow">', page), "Pre
 assert "laereplan.html" in navigation, "Curriculum must appear in shared navigation"
 assert "('path', 'laeringssti.html', 'Læringssti')" in navigation
 assert "('course', 'laer-dorisk.html', 'Dorisk leksjon')" in navigation
-assert re.search(r'href="laeringssti.html" class="button button-secondary">[\s\S]*?</svg>Utforsk studier</a>', frontpage), 'Homepage must link to the existing learning hub'
+assert re.search(r'href="laeringssti.html" class="button">[\s\S]*?</svg>Start læringsreisen</a>', frontpage), 'Homepage must link to the existing learning hub'
 assert 'href="laer-dorisk.html"' in learning_path
 assert 'href="undervisning.html?modul=F03"' in learning_path
 assert 'href="laereplan.html"' in learning_path

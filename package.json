@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build:account": "python3 scripts/build-client.py account",
-    "build": "python3 scripts/sync-design-system.py && npm run build:account && python3 scripts/build-account.py && python3 scripts/sync-navigation.py && python3 scripts/build-articles.py && python3 scripts/sync-design-system.py --finish && python3 scripts/build-languages.py && python3 scripts/build-search.py && npm run build:editor && python3 scripts/finalize-publication.py && python3 scripts/finalize-preview.py && python3 scripts/integrate-teaching-diagrams.py",
+    "build": "python3 scripts/sync-design-system.py && npm run build:account && python3 scripts/build-account.py && python3 scripts/sync-navigation.py && python3 scripts/build-articles.py && python3 scripts/sync-design-system.py --finish && python3 scripts/build-languages.py && python3 scripts/build-search.py && npm run build:editor && python3 scripts/finalize-publication.py && python3 scripts/finalize-preview.py && python3 scripts/integrate-teaching-diagrams.py && python3 scripts/apply-design-refresh.py dist",
     "test": "node scripts/run-tests.cjs",
     "build:editor": "python3 scripts/build-editor.py && python3 scripts/build-client.py editor",
     "build:cms-runtime": "python3 scripts/build-client.py cms",

@@ -1,0 +1,27 @@
+{
+  "reference_path": "/Users/simenraaen/Downloads/MODUS_2_0_GODKJENT_DESIGN_UTEN_PRIKKBOLGER.png",
+  "reference_sha256": "50622f6a57036654b433cdc61030b872ed1e691164234006ecbca0584175f782",
+  "implementation": "Real HTML/navigation/shared CSS/SVG wave and geometry; not a screenshot used as page",
+  "generated_assets": [
+    {
+      "path": "images/modus-design-landscape.png",
+      "sha256": "0f36c4f793a06ca5e7b40b04edf666c360397fdc283b08624e7d2cee2ad6da53",
+      "method": "Built-in image_gen; approved reference as visual input",
+      "prompt_summary": "Norwegian dark teal alpine lake at sunrise; golden sun, forest and mist; no text, UI, logos or waves."
+    },
+    {
+      "path": "images/modus-design-tools.png",
+      "sha256": "ffd9556da753f2269e14711dc677119095b7d9482039b829af77b5166791b876",
+      "method": "Built-in image_gen; approved reference as visual input",
+      "prompt_summary": "Close-up warm wooden guitar fretboard on dark teal background, no UI or text."
+    },
+    {
+      "path": "images/modus-design-articles.png",
+      "sha256": "ee68b18aefbe179a349429876313888648868bdef0631a5acfd4476372c05a48",
+      "method": "Built-in image_gen; approved reference as visual input",
+      "prompt_summary": "Open book of musical notation on wooden table, warm light and dark teal shadows, no UI or text."
+    }
+  ],
+  "film": "Existing excluded video remains excluded; designed poster/status is implemented without enabling withheld media",
+  "content_and_rights": "No article, quiz, approval, rights status or storage key changed"
+}

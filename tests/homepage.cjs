@@ -20,10 +20,11 @@ const path = require('node:path');
     assert.deepEqual(portals.map(n=>attr(n,'href')),['laeringssti.html','backingtracks.html','musikkart.html','artikler.html']);
     for (const portal of portals) assert(fs.existsSync(path.join(base,attr(portal,'href'))));
     const hero = nodes.find(n=>hasClass(n,'hero-actions'));
-    assert.deepEqual(walk(hero).filter(n=>n.tagName==='a').map(n=>attr(n,'href')),['laer-dorisk.html','laeringssti.html']);
-    assert.equal(text(nodes.find(n=>attr(n,'id')==='why-modus')).replace(/\s/g,''),locale?'WhyMODUS?':'HvorforMODUS?');
-    assert(text(nodes.find(n=>n.tagName==='h1')).includes(locale?'creative joy.':'skaperglede.'));
-    assert(nodes.some(n=>attr(n,'data-intro-film-open')!==undefined));
+    assert.deepEqual(walk(hero).filter(n=>n.tagName==='a').map(n=>attr(n,'href')),['laeringssti.html','om-modus.html']);
+    assert.equal(text(nodes.find(n=>attr(n,'id')==='why-modus')).replace(/\s/g,''),locale?'Understand·Develop·Create':'Forstå·Utvikle·Skap');
+    assert(text(nodes.find(n=>n.tagName==='h1')).includes(locale?'creative joy':'skaperglede'));
+    assert(nodes.some(n=>attr(n,'class')==='home-introduction'));
+    assert(nodes.some(n=>n.tagName==='button'&&attr(n,'aria-describedby')==='film-unavailable'&&attr(n,'disabled')!==undefined),'Uncleared film must stay disabled');
     // Production imagery is original vector geometry and the existing landscape.
     for (const img of nodes.filter(n=>n.tagName==='img')) {
       assert(attr(img,'alt')!==undefined, 'Every image needs alternative text or explicit decorative alt');

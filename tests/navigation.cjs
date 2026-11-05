@@ -15,7 +15,7 @@ handlers.keydown({key:'Escape',preventDefault(){}});assert.equal(groups[1].panel
 g.events.click();handlers.focusin({target:outside});assert.equal(g.panel.hidden,true);
 g.events.click();handlers.click({target:outside});assert.equal(g.panel.hidden,true);
 const dropdownMarkup=fs.readFileSync('dist/index.html','utf8');
-assert(dropdownMarkup.includes('>Hjem<span class="nav-tooltip"'),'Home should be labeled Hjem');
+assert(dropdownMarkup.includes('>MODUS<span class="nav-tooltip"'),'Home should use the approved MODUS label');
 assert(dropdownMarkup.includes('>Studier<span class="nav-chevron"'),'Studies dropdown should be labeled Studier');
 for(const label of ['Start å lære','Læringsløpet','Leksjoner og øvelser','Utforsk musikkteori']) {
  assert(dropdownMarkup.includes(label),'missing descriptive label: '+label);

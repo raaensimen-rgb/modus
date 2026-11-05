@@ -29,13 +29,13 @@ class Page(HTMLParser):
 pages={p.resolve():Page(p.read_text()) for p in ROOT.rglob('*.html') if p.name!='redaktor.html'}
 article_count=len(json.loads((ROOT.parent/'content/articles.json').read_text()))
 assert len(pages)==2*(article_count+16), f'Unexpected page count: {len(pages)}'
-nav=['./','laeringssti.html','laereplan.html','undervisning.html','teori.html','backingtracks.html','akkorder.html','musikkart.html','artikler.html','om-modus.html']
+nav=['./','laeringssti.html','laereplan.html','undervisning.html','teori.html','backingtracks.html','akkorder.html','musikkart.html','artikler.html','modus-plus.html']
 for file,page in pages.items():
     assert page.links.count('/redaktor.html')==1, ('editor footer link',file)
     assert len(page.ids)==len(set(page.ids)), ('duplicate ID',file)
     expected=[('../' if link=='./' else '../'+link) for link in nav] if file.parent.name=='artikler' else nav
     assert page.nav==expected, ('navigation mismatch',file,page.nav)
-    expected_active=0 if file.name=='laer-dorisk.html' else 1
+    expected_active=0 if file.name in ('laer-dorisk.html','om-modus.html') else 1
     assert page.active==expected_active, ('active page count',file)
     for link in page.links:
         url=urlsplit(link)

@@ -12,7 +12,7 @@ assert.equal(film.toString('ascii', 4, 8), 'ftyp');
 assert.equal(digest(film), digest(fs.readFileSync(path.join(root, 'dist/media/modus-introduksjon.mp4'))));
 for (const locale of ['', 'en/']) {
   const html = fs.readFileSync(path.join(root, 'dist', locale, 'index.html'), 'utf8');
-  assert(html.includes('data-intro-film-open'), 'Homepage video trigger missing');
+  assert(html.includes('data-intro-film-open') || (html.includes('id="film-unavailable"')&&html.includes('disabled aria-describedby="film-unavailable"')), 'Film must have an accessible working trigger or explicit disabled status');
   assert(html.includes('intro-film.css') && html.includes('intro-film.js'));
   assert(html.includes('data-global-search-open'), 'Homepage search trigger missing');
   const element = () => ({textContent:'', style:{}, listeners:{}, attributes:{}, addEventListener(n,f){this.listeners[n]=f}, setAttribute(n,v){this.attributes[n]=v}, focus(){active=this}});

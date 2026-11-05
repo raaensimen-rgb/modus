@@ -24,7 +24,7 @@ def render_header(prefix='', active='home'):
     home = prefix or './'
     def link(key, path, label, description=None, css=''):
         target = home if key == 'home' else prefix + path
-        current = ' aria-current="page"' if key == active else ''
+        current = ' aria-current="page"' if key == active and css != 'nav-membership' else ''
         body = f'<strong>{label}</strong><small id="nav-hint-{key}">{description}</small><span aria-hidden="true">↗</span>' if description else label
         accessible = f' aria-label="{label}" aria-describedby="nav-hint-{key}"' if description else ''
         hints = {
@@ -48,7 +48,7 @@ def render_header(prefix='', active='home'):
         return (f'<div class="nav-group{ " is-active" if selected else ""}">'
                 f'<button type="button" class="nav-trigger" id="nav-{key}" aria-expanded="false" aria-controls="nav-panel-{key}">{label}<span class="nav-chevron" aria-hidden="true"></span></button>'
                 f'<div class="nav-panel" id="nav-panel-{key}" aria-labelledby="nav-{key}" hidden>{links}</div></div>')
-    play = group('play', 'Spill', (
+    play = group('play', 'Verktøy', (
         ('jam', 'backingtracks.html', 'MODUS JAM', 'Spill med trommer, bass og piano.'),
         ('chords', 'akkorder.html', 'MODUS HARMONI', 'Bygg akkordrekker og utforsk grep.'),
     ))
@@ -61,8 +61,8 @@ def render_header(prefix='', active='home'):
     return (
         f'<header class="site-header"><a class="brand" href="{home}" aria-label="MODUS – forsiden">'
         '<svg class="brand-arch" viewBox="0 0 72 64" width="30" height="28" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="modusArchGradient" gradientUnits="userSpaceOnUse" x1="7" y1="32" x2="67" y2="32"><stop offset="0" stop-color="#d7f48c"/><stop offset=".35" stop-color="#d0eb91" stop-opacity=".86"/><stop offset=".7" stop-color="#a5c783" stop-opacity=".5"/><stop offset="1" stop-color="#7c9f70" stop-opacity=".18"/></linearGradient></defs><path d="M7 49C12 30 14 16 23 16C32 16 33 31 36 49C40 30 42 16 51 16C60 16 62 30 67 49" stroke="url(#modusArchGradient)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>MODUS<svg class="brand-arch-end" viewBox="0 0 72 64" width="30" height="28" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="modusArchEndGradient" gradientUnits="userSpaceOnUse" x1="7" y1="32" x2="67" y2="32"><stop offset="0" stop-color="#7c9f70" stop-opacity=".18"/><stop offset=".3" stop-color="#a5c783" stop-opacity=".5"/><stop offset=".65" stop-color="#d0eb91" stop-opacity=".86"/><stop offset="1" stop-color="#d7f48c"/></linearGradient></defs><path d="M7 49C12 30 14 16 23 16C32 16 33 31 36 49C40 30 42 16 51 16C60 16 62 30 67 49" stroke="url(#modusArchEndGradient)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>'
-        '<nav class="site-nav" aria-label="Hovedmeny">' + link('home', './', 'Hjem') + learn + play + link('mindmap', 'musikkart.html', 'Mitt musikkatlas') + link('articles', 'artikler.html', 'Artikler')
-        + link('about', 'om-modus.html', 'Om MODUS') + '</nav><div class="header-tools">'
+        '<nav class="site-nav" aria-label="Hovedmeny">' + link('home', './', 'MODUS') + learn + play + link('mindmap', 'musikkart.html', 'Musikkatlas') + link('articles', 'artikler.html', 'Artikler')
+        + link('membership', 'modus-plus.html', 'MODUS+') + '</nav><div class="header-tools">'
         + link('membership', 'modus-plus.html', 'MODUS+', css='nav-membership')
         + link('account', 'konto.html', 'Logg inn', css='nav-account')
         + render_search_widget() + render_language_picker() + render_theme_picker() + '</div></header>'
@@ -194,9 +194,9 @@ def with_navigation_css(page, prefix=''):
 
 def decorate_modern_header(page, prefix=''):
     brand = (f'<a class="brand" href="{prefix or "./"}" aria-label="MODUS – forsiden">'
-             f'<img class="home-geometric" src="{prefix}images/modus-geometric.svg" width="44" height="44" alt="">'
+             f'<img class="home-geometric" src="{prefix}images/modus-design-diamond.svg" width="44" height="44" alt="">'
              '<span class="home-wordmark">MODUS</span>'
-             '<span class="home-tagline">MUSIKKTEORI · SPILL · FORSTÅ · SKAP</span></a>')
+             '<span class="home-tagline">MUSIKKTEORI · SPILL · VERKTØY · SKAP</span></a>')
     page = re.sub(r'<a class="brand".*?</a>', lambda _: brand, page, count=1, flags=re.S)
     # Shared identity decoration: functional labels, hrefs and listeners are unchanged.
     def icon(paths):

@@ -10,6 +10,17 @@ shutil.copytree(B,O)
 for pre in ['', 'en/']:
  for folder in ['artikler','images/articles']:shutil.copytree(D/(pre+folder),O/(pre+folder),dirs_exist_ok=True)
  for name in ['artikler.html','articles.js','article-quiz.js','search-index.json','app.js','chord-tool.js','redaktor.html']:shutil.copy2(D/(pre+name),O/(pre+name))
+# Homepage now comes from maintained source/build rather than the historic platform snapshot.
+for pre in ['', 'en/']:
+ baseline=(B/(pre+'index.html')).read_text();generated=(D/(pre+'index.html')).read_text()
+ # Keep the already audited public security/network head; replace the maintained DOM body.
+ page=baseline[:baseline.index('<body')]+generated[generated.index('<body'):]
+ (O/(pre+'index.html')).write_text(page)
+for target in O.rglob('*.html'):
+ generated=D/target.relative_to(O)
+ if generated.is_file():
+  current=target.read_text();header=re.search(r'<header class="site-header">[\s\S]*?</header>',generated.read_text())
+  if header:target.write_text(re.sub(r'<header class="site-header">[\s\S]*?</header>',lambda _:header[0],current,count=1))
 for name in ['studierute.html','library-ids.js']:shutil.copy2(I/name,O/name)
 for a in json.loads((R/'content/articles.json').read_text())[16:]:
  shutil.copy2(B/'en/artikler'/(a['slug']+'.html'),O/'en/artikler'/(a['slug']+'.html'))
@@ -53,7 +64,9 @@ retired=['media/modus-introduksjon.mp4','audio/kick.mp3','audio/snare.mp3','audi
 (O/'_redirects').write_text(''.join('/'+prefix+name+' /retired-media-resource 302\n' for prefix in ['', 'en/'] for name in retired))
 # Candidate-only illustration integration; no publication or permission mutation.
 subprocess.run(['python3',str(R/'scripts/integrate-teaching-diagrams.py'),str(O)],check=True)
+import runpy
+runpy.run_path(str(R/'scripts/apply-design-refresh.py'))['apply'](O)
 sha=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip()
-manifest={'schema_version':1,'kind':'modus-owner-authorized-original-image-restoration','deployment_authorized':True,'project':'modus-2-preview','source_sha':sha,'baseline_sha':m['source_sha'],'articles_nb':52,'articles_en':16,'academic_status':'not_finally_approved','backend':'disabled','cms_seed_records':0,'private_admin':'separate Access-protected branch','rights_replacements':[x for x in json.loads((I/'original-assets.json').read_text()) if x['path'].startswith('audio/')],'restored_images':['images/mountain-lake.webp','images/earth-atlas.webp','images/earth-atlas.svg','apple-touch-icon.png'],'owner_authorization':'docs/original-image-restoration-20261105.md','withheld_media':['media/modus-introduksjon.mp4','audio/kick.mp3','audio/snare.mp3','audio/hihat.mp3']}
+manifest={'schema_version':1,'kind':'modus-approved-design-integration','deployment_authorized':False,'project':'modus-2-preview','source_sha':sha,'baseline_sha':m['source_sha'],'articles_nb':52,'articles_en':16,'academic_status':'not_finally_approved','backend':'disabled','cms_seed_records':0,'private_admin':'separate Access-protected branch','rights_replacements':[x for x in json.loads((I/'original-assets.json').read_text()) if x['path'].startswith('audio/')],'restored_images':['images/mountain-lake.webp','images/earth-atlas.webp','images/earth-atlas.svg','apple-touch-icon.png'],'owner_authorization':'docs/original-image-restoration-20261105.md','withheld_media':['media/modus-introduksjon.mp4','audio/kick.mp3','audio/snare.mp3','audio/hihat.mp3']}
 manifest['files']=[{'path':p.relative_to(O).as_posix(),'bytes':p.stat().st_size,'sha256':hash(p)} for p in sorted(O.rglob('*')) if p.is_file()]
 (O/'release-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n');print(json.dumps({k:v for k,v in manifest.items() if k not in ['files','rights_replacements']}))
