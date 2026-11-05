@@ -21,9 +21,8 @@ module.exports=async function(browser,browserName,base){
     const metrics=await page.locator('.site-header').evaluate(e=>({width:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth+1,fonts:[...e.querySelectorAll('.site-nav>a,.nav-trigger')].map(x=>[getComputedStyle(x).fontSize,getComputedStyle(x).fontWeight])}));
     assert.equal(metrics.width,width);assert.equal(metrics.overflow,false,path);
     for(const [size,weight] of metrics.fonts){
-     assert.equal(weight,'600',path);
-     if(path==='index.html')assert(Number.parseFloat(size)>=12&&Number.parseFloat(size)<=24,'DES-002.2 responsive main menu: '+size);
-     else assert.equal(size,width>=1024?'18px':'13px',path);
+     assert.equal(weight,'500',path);
+     assert.equal(size,width>=1024?'14px':'11px','Approved shared reference navigation: '+path);
     }
    }
    if(!locale){

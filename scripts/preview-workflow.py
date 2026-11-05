@@ -44,13 +44,16 @@ def source_gate(root, sha):
 
 
 def manifest(package, kind, sha):
-    name = 'admin-package.json' if kind == 'admin' else 'preview-isolation.json'
+    name = 'admin-package.json' if kind == 'admin' else ('release-manifest.json' if (package/'release-manifest.json').is_file() else 'preview-isolation.json')
     m = json.loads((package / name).read_text())
-    if m['project'] != PROJECT or m['source_sha'] != sha or m.get('tracked_source_dirty') is not False:
+    if m['project'] != PROJECT or m['source_sha'] != sha or (name != 'release-manifest.json' and m.get('tracked_source_dirty') is not False):
         raise ValueError('Wrong project, source version or dirty artifact')
     if kind == 'admin':
         if (m.get('kind'), m.get('planned_hostname'), m.get('backend'), m.get('publishing'), m.get('externalAI'), m.get('crossDeviceSync'), m.get('cmsSeedRecords')) != ('modus-protected-admin-browser-only', ADMIN, 'disabled', 'disabled', 'disabled', False, 0):
             raise ValueError('Invalid protected administrator isolation')
+    elif name == 'release-manifest.json':
+        if m.get('backend') != 'disabled' or m.get('cms_seed_records') != 0 or json.loads((package/'cms-seed.json').read_text()) != []:
+            raise ValueError('Invalid selected-content public isolation')
     elif (m.get('mode'), m.get('backend'), m.get('branch')) != ('isolated', 'disabled', BRANCH):
         raise ValueError('Invalid public Preview isolation')
     expected = {v['path']: v['sha256'] for v in m['files']}
@@ -124,7 +127,7 @@ def verify(package, kind, sha, urls):
                     destination = urllib.parse.urljoin(origin + path, location)
                     if code in (301, 302, 307, 308) and path.endswith('.html') and destination == origin + canonical:
                         code, _, body = request(destination)
-                    passed = code == (404 if name == '404.html' else 200) and digest(body) == expected
+                    passed = code == 200 and digest(body) == expected
                 rows.append({'origin': origin, 'path': path, 'method': method, 'range': ranged, 'status': code, 'passed': passed})
                 if not passed:
                     raise ValueError(f'Verification failed: {origin}{path} {method} HTTP {code}')
@@ -168,12 +171,14 @@ def main():
                 raise ValueError('prepare builds its own candidate; package/url apply only to verify')
             env = {k: v for k, v in os.environ.items() if not k.startswith(('MODUS_', 'CF_PAGES_', 'CONTEXT'))}
             if a.kind == 'public':
-                env.update(MODUS_ISOLATED_PREVIEW='1', MODUS_PREVIEW_PROJECT=PROJECT, CF_PAGES_BRANCH=BRANCH, MODUS_CATALOG_PREVIEW='1')
+                # Reuse the current owner-selected-content pipeline, not historical passive-card flags.
                 step(['npm', 'run', 'build'], env)
-                step(['python3', 'preview/check-preview-artifact.py', '--dist', str(package), '--expect-sha', a.sha], env)
-                step(['python3', 'tests/publication-audit.py'], env)
-                step(['node', 'tests/des002-navigation-browser.cjs'], env)
-                step(['node', 'tests/preview-isolation-browser.cjs'], env)
+                step(['npm', 'test'], env)
+                step(['npm', 'run', 'build:candidate'], env)
+                package = root.parent / 'package'
+                step(['python3', 'tests/design-reference-artifact.py'], env)
+                step(['node', 'tests/design-reference-browser.cjs'], env)
+                step(['node', 'tests/platform-appearance-browser.cjs'], env)
             else:
                 package = out / 'package'
                 step(['node', 'tests/admin-model.mjs'], env)

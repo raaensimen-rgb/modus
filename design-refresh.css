@@ -97,3 +97,57 @@ html[data-theme=contrast] .illustrated-portals .home-portal{background:#000;bord
 .modus-home .home-legacy-details>summary{min-height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#c6dcd4;font-size:13px;border-top:1px solid var(--modus-edge);list-style:none}
 .modus-home .home-legacy-details>summary::after{content:' +';color:var(--modus-gold);margin-left:12px}
 .modus-home .home-legacy-details[open]>summary::after{content:' −'}
+/* Shared study/tool/reader surfaces: one palette, with the existing functional DOM. */
+:root{--modus-surface:#062824;--modus-text:#f4f8f4;--modus-muted:#c3d6cd;--modus-radius:14px}
+.modus-interior{--bg:var(--modus-forest);--panel:var(--modus-surface);--ink:var(--modus-text);--muted:var(--modus-muted);--accent:var(--modus-gold);--line:var(--modus-edge);background:var(--bg);color:var(--ink)}
+.modus-interior main :is(h1,h2,h3){font-family:Manrope,'DM Sans',sans-serif;letter-spacing:-.025em}
+.modus-interior main h2{font-weight:500}
+.modus-interior :is(.lesson,.builder-panel,.selected-panel,.path-card,.journey-stage,.price-card,.launch-notice,.account-panel,.catalog-preview-card,.learning-callout,.atlas-intro-step,.billing-panel,.study-card,.article-card,.section-card){background-color:var(--panel);border-color:var(--line);border-radius:var(--modus-radius)}
+.modus-interior main :is(.eyebrow,.map-eyebrow,.aside-label,.section-label){color:var(--accent)}
+.modus-interior :is(.builder-transport button,.topic-tabs button,.level-filters button,.map-controls button,.path-actions a){min-height:44px}
+.modus-interior :is(.reading-body,.theory-content,.lesson){color:var(--ink)}
+.modus-interior :is(a,button,input,textarea,select,summary):focus-visible{outline-color:var(--accent);outline-width:3px;outline-offset:4px}
+/* Appearance preferences remain real alternatives, not colors painted over dark panels. */
+html[data-theme=readable] :is(.modus-home,.modus-interior){--bg:#e8eeea;--panel:#f6faf7;--ink:#173a31;--muted:#405c50;--accent:#235d43;--line:#678c7d}
+html[data-theme=contrast] :is(.modus-home,.modus-interior){--bg:#fff;--panel:#fff;--ink:#000;--muted:#000;--accent:#000;--line:#000}
+html[data-theme=readable] .modus-interior :is(.section-card,.study-card,.article-card,.route-card){background-color:var(--panel);color:var(--ink);border-color:var(--line)}
+html[data-theme=contrast] .modus-interior :is(.section-card,.study-card,.article-card,.route-card){background-color:#fff;color:#000;border-color:#000}
+html[data-theme=readable] .site-header{background:#e8eeea!important;color:#173a31}
+html[data-theme=readable] .site-header::before{background:#e8eeea!important}
+html[data-theme=readable] .site-header .home-wordmark,html[data-theme=readable] .site-header :is(.nav-account,.global-search-trigger,.theme-picker>summary,.language-picker a){color:#173a31!important}
+html[data-theme=readable] .site-header .home-tagline,html[data-theme=readable] .site-header .language-picker a[aria-current]{color:#235d43!important}
+html[data-theme=readable] .site-header .nav-panel,html[data-theme=readable] .site-header .theme-options{background:#f6faf7!important;color:#173a31!important}
+html[data-theme=readable] .site-header .nav-panel a{color:#173a31!important}
+html[data-theme=contrast] .site-header,html[data-theme=contrast] .site-header::before{background:#fff!important;color:#000}
+html[data-theme=contrast] .site-header :is(.home-wordmark,.home-tagline,.site-nav>a,.nav-trigger,.nav-account,.global-search-trigger,.theme-picker>summary,.language-picker a){color:#000!important}
+html[data-theme=contrast] .site-header :is(.nav-panel,.theme-options){background:#fff!important;color:#000!important;border-color:#000!important}
+html[data-theme=contrast] .site-header .nav-panel a{color:#000!important}
+html[data-theme=contrast] .site-header .home-geometric{filter:brightness(0)}
+html[data-theme=contrast] .site-header .site-nav>a[aria-current=page]::after{background:#000;box-shadow:none}
+html[data-theme=contrast] .site-header .language-picker a[aria-current]{color:#000!important}
+@media(prefers-reduced-motion:reduce){.modus-interior *, .modus-home *{scroll-behavior:auto;animation:none!important;transition:none!important}}
+/* Observed appearance regressions: readable/contrast must not inherit dark photographic surfaces. */
+html:is([data-theme=readable],[data-theme=contrast]) .modus-home :is(.home-hero,.new-philosophy,.home-introduction){background:var(--bg)!important;color:var(--ink)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .modus-home :is(.home-hero h1,.home-hero h1 em,.home-lead,.philosophy-heading h2,.philosophy-stages h3,.philosophy-stages p,.introduction-copy h2,.introduction-copy p,.home-legacy-details>summary){color:var(--ink)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .modus-home :is(.eyebrow,.introduction-copy>.eyebrow,.philosophy-heading>.eyebrow){color:var(--accent)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .modus-home .hero-actions>.button:first-child{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .modus-home .button-secondary{background:transparent!important;color:var(--ink)!important;border-color:var(--ink)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .modus-home .home-portal{background:var(--panel)!important;color:var(--ink)!important;border-color:var(--line)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .modus-home .home-portal::before{background:var(--panel)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .modus-home .home-portal :is(h2,p){color:var(--ink)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .modus-home :is(.home-portal>svg,.philosophy-stages svg){color:var(--accent)!important;stroke:var(--accent)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .modus-home :is(.philosophy-heading>.eyebrow::before,.philosophy-heading>.eyebrow::after){background:var(--accent)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .modus-interior :is(.harmonic-context,.progression-presets,.chord-slot,.sequence-library){background:var(--panel)!important;color:var(--ink);border-color:var(--line)}
+html:is([data-theme=readable],[data-theme=contrast]) .modus-interior :is(.progression-presets select,.chord-slot .chord-main,.chord-slot button,.sequence-library summary){background:var(--panel)!important;color:var(--ink)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .modus-interior :is(.chord-name,.chord-roman,#romanReference,.progression-presets-eyebrow,#presetHeading,#progressionPresetPreview,#romanHelp,#theoryKeyControl,.harmonic-context-heading>span,.slot-head>span){color:var(--ink)!important}
+html:not([data-theme=readable]):not([data-theme=contrast]) .modus-interior #tab-modes small{color:var(--muted)}
+/* Paint the root canvas too: Safari overscroll and contrast sampling must not fall back to white. */
+html{background:var(--modus-forest)}
+html[data-theme=readable]{background:#e8eeea}
+html[data-theme=contrast]{background:#fff}
+html:is([data-theme=readable],[data-theme=contrast]) .modus-interior :is(.progression-presets,.harmonic-context,.slot-edit) label{color:var(--ink)}
+/* The reference uses one clear sans-serif heading family throughout the public platform. */
+.modus-interior main :is(h1,h2,h3) em{font-family:inherit;font-style:normal;letter-spacing:inherit;color:var(--accent)}
+/* WebKit native menu controls otherwise collapse to 26px despite min-height. */
+.modus-interior main select:not([multiple]){appearance:none;-webkit-appearance:none;box-sizing:border-box;height:44px!important;min-height:44px!important;min-width:44px;max-width:100%;padding:9px 34px 9px 12px;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+html[data-theme=contrast] .modus-interior main select:not([multiple]){background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%)!important}

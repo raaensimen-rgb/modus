@@ -20,6 +20,21 @@ class WorkflowTests(unittest.TestCase):
                  files=[dict(path='index.html', sha256=w.digest((root/'index.html').read_bytes()))])
         (root / 'preview-isolation.json').write_text(json.dumps(m))
 
+    def test_current_release_manifest_and_private_seed_gate(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root/'index.html').write_text('selected public content')
+            (root/'cms-seed.json').write_text('[]')
+            marker = dict(project=w.PROJECT, source_sha=SHA, backend='disabled', cms_seed_records=0,
+                          files=[dict(path=n, sha256=w.digest((root/n).read_bytes())) for n in ['index.html','cms-seed.json']])
+            (root/'release-manifest.json').write_text(json.dumps(marker))
+            self.assertEqual(len(w.manifest(root, 'public', SHA)), 3)
+            with self.assertRaises(ValueError): w.manifest(root, 'public', 'b'*40)
+            (root/'cms-seed.json').write_text('[{"private": true}]')
+            marker['files'][1]['sha256'] = w.digest((root/'cms-seed.json').read_bytes())
+            (root/'release-manifest.json').write_text(json.dumps(marker))
+            with self.assertRaises(ValueError): w.manifest(root, 'public', SHA)
+
     def test_targets_reject_production_and_public_admin(self):
         for kind, url in [('admin', 'https://modus-2-preview.pages.dev'), ('public', 'https://modus.pages.dev'), ('public', 'https://modus.no'), ('admin', 'https://dev-modus-2-pr52.modus-2-preview.pages.dev.evil.test'), ('public', 'https://modus-2-preview.pages.dev/?token=secret'), ('public', 'http://modus-2-preview.pages.dev')]:
             with self.subTest(url=url), self.assertRaises(ValueError):

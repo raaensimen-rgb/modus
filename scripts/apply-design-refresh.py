@@ -6,7 +6,7 @@ def apply(target):
  target=Path(target).resolve()
  if target==R or not (target/'index.html').is_file():raise ValueError('Expected built public artifact')
  css=(R/'design-refresh.css').read_bytes();name='design-refresh.'+hashlib.sha256(css).hexdigest()[:10]+'.css'
- assets=['modus-design-landscape.png','modus-design-tools.png','modus-design-articles.png','modus-design-diamond.svg','modus-continuous-wave.svg']
+ assets=['modus-design-landscape.png','modus-design-tools.png','modus-design-articles.png','modus-design-studies-v2.png','modus-design-diamond.svg','modus-continuous-wave.svg']
  for pre in ['', 'en/']:
   (target/pre/'images').mkdir(parents=True,exist_ok=True)
   (target/pre/name).write_bytes(css)

@@ -20,6 +20,12 @@
       "sha256": "ee68b18aefbe179a349429876313888648868bdef0631a5acfd4476372c05a48",
       "method": "Built-in image_gen; approved reference as visual input",
       "prompt_summary": "Open book of musical notation on wooden table, warm light and dark teal shadows, no UI or text."
+    },
+    {
+      "path": "images/modus-design-studies-v2.png",
+      "sha256": "0089a29fb02f61de82976744e08afc07154c3a5329755b3a16e21cfdacf27098",
+      "method": "Built-in image_gen; approved reference as visual input",
+      "prompt_summary": "Individual Studies card: wooden lakeside study table and closed notebook, Norwegian alpine valley, sunrise, deep teal shadows; no UI/text/logos/waves."
     }
   ],
   "film": "Existing excluded video remains excluded; designed poster/status is implemented without enabling withheld media",
