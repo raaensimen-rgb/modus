@@ -1,9 +1,9 @@
 """Scoped deployment: exact public baseline plus shared navigation only."""
 from pathlib import Path
 import json,hashlib,shutil,subprocess,runpy,re
-R=Path(__file__).resolve().parents[1];old=R.parents[1]/'article-hero-20261105/package';out=R.parent/'package'
+R=Path(__file__).resolve().parents[1];old=R.parents[1]/'top-navigation-20261105/package';out=R.parent/'package'
 hash=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-m=json.loads((old/'release-manifest.json').read_text());assert m['source_sha']=='e74369cc6074f7355e3e59bfa6bb0a3bb31e9ed2'
+m=json.loads((old/'release-manifest.json').read_text());assert m['source_sha']=='bc69a366af8ca99e700368bbc531adcf2147d667'
 for f in m['files']:assert hash(old/f['path'])==f['sha256'],f['path']
 if out.exists():shutil.rmtree(out)
 shutil.copytree(old,out)
