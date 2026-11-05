@@ -65,7 +65,7 @@ def render_header(prefix='', active='home'):
         + link('membership', 'modus-plus.html', 'MODUS+') + '</nav><div class="header-tools">'
         + link('membership', 'modus-plus.html', 'MODUS+', css='nav-membership')
         + link('account', 'konto.html', 'Logg inn', css='nav-account')
-        + render_search_widget() + render_language_picker() + render_theme_picker() + '</div></header>'
+        + render_language_picker() + render_search_widget() + render_theme_picker() + '</div></header>'
     )
 
 
