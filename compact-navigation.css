@@ -103,3 +103,34 @@ html body:is(.modus-home,.modus-interior) .site-header .header-tools .language-p
 .site-header .header-tools{height:46px!important;min-height:46px!important;box-sizing:border-box!important;align-items:center!important;grid-template-rows:44px!important}
 .site-header .header-tools>.theme-picker{height:44px!important;min-height:44px!important;align-self:center!important}
 .site-header .header-tools>.language-picker{height:44px!important;min-height:44px!important;box-sizing:border-box!important;align-self:center!important;margin:0!important;align-content:center!important}
+
+/* Slim visible toolbar with independent 44px interaction targets. */
+.site-header .header-tools{position:relative!important;isolation:isolate;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;margin:0!important;height:44px!important;min-height:44px!important;padding:0 7px!important}
+.site-header .header-tools::before{content:""!important;display:block!important;position:absolute!important;inset:8px 0!important;border:1px solid #719d83!important;border-radius:999px!important;background:#001918!important;z-index:-1!important;pointer-events:none!important}
+html body:is(.modus-home,.modus-interior) .site-header .header-tools>.nav-account,
+html body:is(.modus-home,.modus-interior) .site-header .header-tools>.global-search-trigger{border:0!important;background:none!important}
+.site-header .header-tools .home-control-icon{width:17px!important;height:17px!important;flex-basis:17px!important}
+.site-header .header-tools .language-picker .home-control-icon{width:13px!important;height:13px!important;flex-basis:13px!important}
+.site-header .header-tools .language-picker a{font-size:11px!important}
+html body:is(.modus-home,.modus-interior) .site-header .header-tools .language-picker a[aria-current]{text-underline-offset:3px!important;text-decoration-thickness:1px!important}
+.site-header .header-tools .language-picker a{gap:4px!important}
+@media(min-width:761px){
+.site-header .brand{height:114px!important}
+.site-header::before{height:114px!important}
+.site-header::after{height:95px!important;background-size:100% 126px!important;background-position:center -22px!important}
+.site-header .home-geometric{width:31px!important;height:31px!important;margin:0 0 3px!important}
+.site-header .home-wordmark{font-size:30px!important}
+.site-header .home-tagline{font-size:10px!important;margin-top:6px!important}
+.site-header .site-nav{min-height:44px!important;gap:0 clamp(22px,3vw,52px)!important}
+.site-header .site-nav>a,.site-header .nav-trigger{font-size:13px!important;min-height:44px!important}
+}
+@media(max-width:760px){
+.site-header .brand{height:96px!important}
+.site-header::after{height:85px!important;background-size:190% 100px!important;background-position:center -12px!important}
+.site-header .home-geometric{width:25px!important;height:25px!important}
+.site-header .home-wordmark{font-size:24px!important}
+.site-header .home-tagline{font-size:8px!important;margin-top:5px!important}
+.site-header .site-nav>a,.site-header .nav-trigger{font-size:10px!important}
+}
+html:is([data-theme=readable],[data-theme=contrast]) .site-header .header-tools{background:transparent!important;border:0!important}
+html:is([data-theme=readable],[data-theme=contrast]) .site-header .header-tools::before{background:var(--panel)!important;border-color:var(--ink)!important}
