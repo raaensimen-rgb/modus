@@ -164,7 +164,8 @@ class ProductionTests(unittest.TestCase):
         plan={'command':['wrangler','pages','deploy','/sealed/package','--project-name','modus','--branch','main'],'source_sha':SHA}
         c={'account_id':'synthetic','deployment_id':'old'}
         with tempfile.TemporaryDirectory() as temp:
-            out=Path(temp)
+            out=Path(temp);(out/'package').mkdir()
+            (out/'package/index.html').write_text('sealed synthetic package')
             for failure in [False,True]:
                 with patch.object(c06.w,'config',return_value=c),patch.object(c06.w,'candidate',return_value=({'source_sha':SHA},{})),patch.object(c06.w,'preflight',return_value=plan),patch.object(c06.shutil,'which',return_value='/installed/wrangler'),patch.object(c06.w,'run_stage') as run,patch.object(c06.w,'cloud_project',return_value={'canonical_deployment':{'id':'new'}}),patch.object(c06.w,'verify',side_effect=ValueError('public bytes wrong') if failure else None,return_value={'status':'PUBLIC_VERIFIED','deployed':False}) as verify:
                     result=c06.publish(out,out/'go.json',SHA,out)

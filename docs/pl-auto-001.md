@@ -81,7 +81,7 @@ Ved behov kan C06 kjøre etterkontrollen på nytt, uten opplasting:
 npm run production:workflow -- verify --candidate /mappe/kandidat --deployment ACTUAL_DEPLOYMENT_ID --out /ny/mappe/etterkontroll
 ```
 
-C06 avslutter med kort rapport om SHA, ZIP-hash, faktisk deployment, testresultater, avvik og lokal/offentlig status. Før neste pakke oppdateres autoritativt grunnlag fra denne faktiske leveransen. Ingen nye oppgaver eller generelle deployfullmakter opprettes.
+C06 avslutter med kort rapport om SHA, ZIP-hash, faktisk deployment, testresultater, avvik og lokal/offentlig status. Ved bestått etterkontroll lager C06-kommandoen automatisk en kopi av eksakt publisert pakke og `NEXT-BASELINE.json` med nytt deployment, SHA og filinventar. Før neste oppgave bruker C07 disse til å oppdatere låsen og den angitte release-inputs-mappen i en ny isolert kopi; den allerede gjennomgåtte kildecommiten omskrives aldri i stedet. Ingen nye oppgaver eller generelle deployfullmakter opprettes.
 
 ## Vern og kontrollgrenser
 

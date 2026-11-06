@@ -45,6 +45,16 @@ def publish(candidate, approval, confirmed_sha, out, wrangler_js=None):
         result.update(w.verify(w.ROOT,candidate,deployment,out,c))
         result['deployed']=True
         result['upload_attempted']=True
+        # Hand C07 the next exact baseline; never rewrite the reviewed source in place.
+        published=out/('public-package-'+confirmed_sha[:7])
+        shutil.copytree(candidate/'package',published)
+        next_baseline={**c,'source_sha':confirmed_sha,'deployment_id':deployment,
+                       'package':'release-inputs/production-'+confirmed_sha[:7],
+                       'files':w.inventory(published)}
+        next_baseline.pop('retired_redirects',None)  # derived from the pinned _redirects on read
+        w.write(out/'NEXT-BASELINE.json',next_baseline)
+        result['next_baseline']=str(out/'NEXT-BASELINE.json')
+        result['public_package']=str(published)
     except Exception as error:
         # An upload error is never reported as proof that production stayed unchanged.
         result.update(status='PUBLICATION_NOT_VERIFIED',error=str(error))
