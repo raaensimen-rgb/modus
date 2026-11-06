@@ -77,15 +77,25 @@ def apply(target):
      s=s[:task.start(2)]+E(href)+s[task.end(2):]
 
    s=re.sub(r'(<a class="start-practice"[^>]*><span>)[\s\S]*?</a>',lambda m:m[1]+t('Valgfritt verktøy</span><strong>Utforsk i teorirommet</strong></a>','Optional tool</span><strong>Explore in the theory room</strong></a>'),s,count=1)
+   # Explicit context is required by the preserved no-referrer policy, including menu and Jam links.
+   def tool_context(m):
+    raw=m[1];u=urlsplit(html.unescape(raw))
+    if u.path not in ('../teori.html','../backingtracks.html','../akkorder.html','../skalabibliotek.html'):return m[0]
+    params=dict(parse_qsl(u.query))
+    if 'fromArticle' in params:
+     assert params['fromArticle']==slug;return m[0]
+    parts=raw.split('#',1);parts[0]+=('&amp;' if '?' in parts[0] else '?')+'fromArticle='+slug
+    return 'href="'+'#'.join(parts)+'"'
+   s=re.sub(r'href="([^"]+)"',tool_context,s)
    p.write_text(s)
-  for n in ['teori.html','backingtracks.html','akkorder.html','skalabibliotek.html']:
+  for n in ['teori.html' ,'backingtracks.html','akkorder.html','skalabibliotek.html']:
    p=root/n;s=p.read_text();nav='<nav class="route-return" data-route-return hidden aria-label="'+t('Tilbake til artikkelen','Return to article')+'"><a data-route-return-link href="grunnstudier.html">'+t('Tilbake til artikkelen','Back to the article')+'</a> · <a href="grunnstudier.html">'+t('Studierute','Study route')+'</a></nav>'
    s=s.replace('</main>',nav+data+'</main>',1);p.write_text(s)
   # Preserve article context when the scale controls canonicalize their query string.
   scale=root/'scale-library.js';js=scale.read_text();old="const query=new URLSearchParams(state);if(document.body.classList.contains('scale-practicing'))";new="const query=new URLSearchParams(state);const fromArticle=params.get('fromArticle');if(/^[a-z0-9-]+$/.test(fromArticle||''))query.set('fromArticle',fromArticle);if(document.body.classList.contains('scale-practicing'))"
   assert js.count(old)==1,'Unexpected scale query implementation';scale.write_text(js.replace(old,new))
   # Route context for the retained approved local Jam exercise, without changing its music.
-  # Retain the reviewed Jam section byte for byte; tool return can also use same-origin article referrer.
+  # Jam musical configuration/prose remains unchanged; its link now explicitly carries context.
   route_paths=['laeringssti.html','grunnstudier.html','studierute.html','teori.html','backingtracks.html','akkorder.html','skalabibliotek.html']
   for ext in ['css','js']:
    src=R/('learning-route.'+ext);name='learning-route.'+hashlib.sha256(src.read_bytes()).hexdigest()[:10]+'.'+ext;(root/name).write_bytes(src.read_bytes())

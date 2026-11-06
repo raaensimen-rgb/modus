@@ -22,6 +22,15 @@ for pre,n in [('',52),('en/',16)]:
   assert f'../grunnstudier.html#route-{slug}' in reader
   assert f'data-quiz-id="{slug}"' in reader
   assert re.search(r'<section class="article-practice" id="route-practice">',reader)
+  for href in re.findall(r'href="([^"]+)"',reader):
+   u=urllib.parse.urlsplit(html.unescape(href))
+   if u.path in ('../teori.html','../backingtracks.html','../akkorder.html','../skalabibliotek.html'):
+    assert urllib.parse.parse_qs(u.query).get('fromArticle')==[slug],(slug,href)
+  if slug=='dorisk-og-eolisk':
+   pattern=r'<section class="related" data-article-jam="[^" ]+".*?</section>'
+   before=re.search(pattern,(B/pre/'artikler'/f'{slug}.html').read_text())[0]
+   after=re.search(pattern,reader)[0]
+   assert re.sub(r'&amp;fromArticle=[a-z0-9-]+','',after)==before,'Jam music/prose changed'
   for folder in ['images/articles','images/teaching-diagrams']:
    for p in (B/pre/folder).glob(slug+'*.svg'):assert p.read_bytes()==(root/folder/p.name).read_bytes()
  for name in ['article-quiz.js','account.js','articles.js','theory.js','app.js','scale-model.js','preview-guard.js']:
@@ -40,4 +49,4 @@ with tempfile.TemporaryDirectory() as temp:
  assert (out/'index.html').read_bytes()==(B/'index.html').read_bytes()
 for f in P.rglob('*'):
  if f.is_file():assert not f.relative_to(P).as_posix().startswith(('editorial/','content/','cms/','tests/','scripts/'))
-print('PASS: shared ORDER; 52 NB/16 EN real readers/activities; no private manuscript/storage/header/media changes; bounded scale URL-context repair; T1–T10 preserved.')
+print('PASS: shared ORDER; 52 NB/16 EN real readers/activities; no private manuscript/storage/security-header/media changes; bounded scale URL-context repair; T1–T10 preserved.')
