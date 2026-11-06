@@ -45,6 +45,8 @@ for p in O.rglob('*.html'):
 # C08 P2: translate the four inherited English footer labels only.
 for name in ('skalabibliotek.html','musikkart.html','laeringssti.html','f03-laeringsreise.html'):
  p=O/'en'/name;p.write_text(p.read_text().replace('Læringsstien','Learning path'))
+# Apply only the declared article-to-Jam pilot after reproducing the published product.
+subprocess.run(['node',str(R/'scripts/apply-article-jams.cjs'),str(O)],check=True)
 h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 old={p.relative_to(B).as_posix():h(p) for p in B.rglob('*') if p.is_file()};new={p.relative_to(O).as_posix():h(p) for p in O.rglob('*') if p.is_file()}
 changed=sorted(n for n in old if new.get(n)!=old[n]);added=sorted(set(new)-set(old))

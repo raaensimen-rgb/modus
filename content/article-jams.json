@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "exercises": [
+    {
+      "id": "e-dorian-em7-a7",
+      "article": "dorisk-og-eolisk",
+      "key": 4,
+      "mode": 1,
+      "tempo": 90,
+      "meter": "4/4",
+      "style": "fusion",
+      "chords": [
+        [
+          4,
+          4
+        ],
+        [
+          9,
+          2
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          9,
+          2
+        ]
+      ],
+      "locales": {
+        "nb": {
+          "title": "Læring i praksis · E dorisk",
+          "instruction": "Spill over Em7–A7, én takt per akkord. Behold E som hjem og lytt etter C♯, den store seksten. 90 BPM · 4/4 · fire takter.",
+          "button": "Åpne øvelsen i Jam",
+          "start": "Jam åpnes ferdig innstilt. Trykk Start jam når du vil spille."
+        },
+        "en": {
+          "title": "Learning in practice · E Dorian",
+          "instruction": "Play over Em7–A7, one bar per chord. Keep E as home and listen for C♯, the major sixth. 90 BPM · 4/4 · four bars.",
+          "button": "Open exercise in Jam",
+          "start": "Jam opens with the exercise configured. Press Start jam when you are ready to play."
+        }
+      }
+    }
+  ]
+}

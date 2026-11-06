@@ -18,6 +18,9 @@ def check(base,candidate):
   if n in ('navigation.js','en/navigation.js'):assert after==nav;continue
   if n in ('theory.js','en/theory.js'):
    s=before.decode();a=s.index('function spellFrom(');b=s.index('\nfunction scaleNames',a);assert after.decode()==s[:a]+'const spellFrom=window.ModusScales.spell;'+s[b:];continue
+  if n in ('artikler/dorisk-og-eolisk.html','en/artikler/dorisk-og-eolisk.html'):
+   # Remove only the separately verified additive exercise before baseline comparison.
+   after=re.sub(rb'<section class="related" data-article-jam="[^" ]+".*?</section>',b'',after)
   if n.endswith('.html'):
    s=re.sub(rb'navigation\.[a-f0-9]{10}\.js',asset.encode(),before).decode()
    if n in ('teori.html','en/teori.html'):s=s.replace('<script src="theory.js','<script src="scale-model.js"></script><script src="theory.js')

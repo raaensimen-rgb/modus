@@ -1,6 +1,9 @@
 {
-  "task": "A03 / PL-AUTO-001",
-  "allowed_changes": [],
+  "task": "Article \u2192 Jam vertical pilot",
+  "allowed_changes": [
+    "artikler/dorisk-og-eolisk.html",
+    "en/artikler/dorisk-og-eolisk.html"
+  ],
   "allowed_additions": [],
   "allowed_removals": []
 }

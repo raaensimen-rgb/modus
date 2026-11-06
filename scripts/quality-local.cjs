@@ -16,7 +16,8 @@ const stages=[
  ['navigation',['npm','run','test:navigation']],
  ['release',['node','tests/release-browser.cjs']],
  ['piano',['node','tests/piano-browser.cjs']],
- ['audio',['node','tests/audio-signal-browser.cjs']]
+ ['audio',['node','tests/audio-signal-browser.cjs']],
+ ['article-jam',['node','tests/article-jam-browser.cjs']]
 ];
 // Clear old evidence in the summary, without discarding historical log files.
 let blocked=false;
