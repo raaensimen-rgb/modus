@@ -3,7 +3,7 @@ from pathlib import Path
 import hashlib,json,subprocess,tempfile,shutil
 R=Path(__file__).resolve().parents[1];P=R.parent/'package';spec=json.loads((R/'release-inputs/ux-jam-integration.json').read_text())
 h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-def check(pkg):
+def check_legacy(pkg):
  actual={p.relative_to(pkg).as_posix():h(p) for p in pkg.rglob('*') if p.is_file() and p.name!='release-manifest.json'}
  assert actual==spec['files'],'Combined package differs from exact independently reviewed upstream union'
  m=json.loads((pkg/'release-manifest.json').read_text());assert m['files']==actual and m['deploy_authorized'] is False
@@ -12,6 +12,14 @@ def check(pkg):
  for n,section in spec['jam_sections'].items():
   text=(pkg/n).read_text();assert text.count(section)==1 and text.count('<nav class="start-reading"')==1
  return {'files':len(actual)+1,'matched_independent_upstream_union':True,'upstream_sources':spec['upstream_sources'],'public_fulltexts':{'nb':52,'en':16},'deploy_authorized':False}
+# Keep original upstream negative checks after exact verification of the new delta.
+def check(pkg):
+ import sys
+ sys.path.insert(0,str(R/'scripts'))
+ from learning_route import reverse_for_legacy_checks
+ with tempfile.TemporaryDirectory() as tmp:
+  restored=Path(tmp)/'restored';reverse_for_legacy_checks(pkg,restored)
+  return check_legacy(restored)
 result=check(P)
 with tempfile.TemporaryDirectory() as tmp:
  c=Path(tmp)/'package';shutil.copytree(P,c)

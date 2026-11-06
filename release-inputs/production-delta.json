@@ -1,6 +1,7 @@
 {
-  "task": "UX-001 + article to Jam pilot integrated candidate",
+  "task": "#53 guided learning route over reviewed UX001/Jam union",
   "allowed_changes": [
+    "akkorder.html",
     "artikler.html",
     "artikler/akkordutvidelser.html",
     "artikler/altererte-dominanter-og-symmetriske-skalaer.html",
@@ -54,6 +55,8 @@
     "artikler/treklanger-fra-grunnform-til-omvending.html",
     "artikler/tritonussubstitusjon-og-reharmonisering.html",
     "artikler/utovende-presentasjon-og-sluttprosjekt.html",
+    "backingtracks.html",
+    "en/akkorder.html",
     "en/artikler.html",
     "en/artikler/bygg-akkorder-i-en-toneart.html",
     "en/artikler/din-forste-improvisasjon.html",
@@ -71,12 +74,27 @@
     "en/artikler/stemmeforing.html",
     "en/artikler/toner-og-intervaller.html",
     "en/artikler/treklanger-fra-grunnform-til-omvending.html",
+    "en/backingtracks.html",
+    "en/grunnstudier.html",
     "en/index.html",
-    "index.html"
+    "en/laeringssti.html",
+    "en/skalabibliotek.html",
+    "en/teori.html",
+    "grunnstudier.html",
+    "index.html",
+    "laeringssti.html",
+    "skalabibliotek.html",
+    "studierute.html",
+    "teori.html"
   ],
   "allowed_additions": [
+    "en/learning-route.37ea15b5bf.css",
+    "en/learning-route.a850bd2b51.js",
     "en/start-here.6d912210c3.js",
     "en/start-here.c9047fcf12.css",
+    "en/studierute.html",
+    "learning-route.37ea15b5bf.css",
+    "learning-route.a850bd2b51.js",
     "start-here.6d912210c3.js",
     "start-here.c9047fcf12.css"
   ],

@@ -5,7 +5,7 @@ R=Path(__file__).resolve().parents[1];B=R/'release-inputs/ux001-production-1721e
 h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 expected=json.loads((R/'release-inputs/ux001-production-files.json').read_text())
 def inventory(root):return {p.relative_to(root).as_posix():h(p) for p in root.rglob('*') if p.is_file()}
-def check(base,pkg):
+def check_legacy(base,pkg):
  assert inventory(base)==expected,'Baseline altered'
  actual=inventory(pkg);added=set(actual)-set(expected)
  assert len(added)==4 and all(re.fullmatch(r'(en/)?start-here\.[a-f0-9]{10}\.(css|js)',n) for n in added)
@@ -49,6 +49,14 @@ def check(base,pkg):
  manifest=json.loads((pkg/'release-manifest.json').read_text());assert manifest['deploy_authorized'] is False and manifest['baseline_sha']=='1721e302a3880804073e0dcb0de6543f939ba0f6'
  assert manifest['files']=={n:v for n,v in actual.items() if n!='release-manifest.json'}
  return {'changedHtml':len(changed),'preservedExistingFiles':sum(actual[n]==v for n,v in expected.items()),'addedAssets':len(added),'readerProseQuizzesHeadersMediaAndStoragePreserved':True}
+# Keep original upstream negative checks after exact verification of the new delta.
+def check(base,pkg):
+ import sys
+ sys.path.insert(0,str(R/'scripts'))
+ from learning_route import reverse_for_legacy_checks
+ with tempfile.TemporaryDirectory() as tmp:
+  restored=Path(tmp)/'restored';reverse_for_legacy_checks(pkg,restored)
+  return check_legacy(base,restored)
 result=check(B,P)
 with tempfile.TemporaryDirectory() as tmp:
  c=Path(tmp)/'candidate';shutil.copytree(P,c)

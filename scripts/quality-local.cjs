@@ -18,6 +18,7 @@ const stages=[
  ['piano',['node','tests/piano-browser.cjs']],
  ['audio',['node','tests/audio-signal-browser.cjs']],
  ['article-jam',['node','tests/article-jam-browser.cjs']],
+ ['learning-route',['node','tests/learning-route-browser.cjs']],
  ['ux-flow',['node','tests/start-here-browser.cjs']],
  ['ux-accessibility',['node','tests/start-here-accessibility.cjs']],
  ['ux-no-js',['node','tests/start-here-no-js.cjs']],

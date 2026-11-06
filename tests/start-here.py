@@ -8,7 +8,7 @@ rows=[]
 for pre,en in [('',False),('en/',True)]:
  b=P/pre;catalog=(b/'artikler.html').read_text();available=set(re.findall(r'data-article-id="([^"]+)"',catalog));ids=[i for i in ORDER if i in available];assert len(ids)==(16 if en else 52)
  home=(b/'index.html').read_text();assert home.count('data-start-learning')==1
- assert re.search(r'<a href="artikler/toner-og-intervaller.html" data-start-learning[^>]*>[\s\S]*?'+('Start learning music theory' if en else 'Start å lære musikkteori')+r'</a>',home)
+ assert re.search(r'<a href="laeringssti.html" data-start-learning[^>]*>[\s\S]*?'+('Start learning music theory' if en else 'Start å lære musikkteori')+r'</a>',home)
  assert catalog.count('class="start-badge"')==1 and 'start-recommended' in catalog
  for i,slug in enumerate(ids):
   p=b/'artikler'/f'{slug}.html';s=p.read_text();nav=re.search(r'<nav class="start-reading"[\s\S]*?</nav>',s)[0]

@@ -39,7 +39,8 @@
     "test:production-workflow": "python3 tests/production-workflow.py",
     "c06:publish": "python3 scripts/c06-publish.py",
     "test:ux001": "python3 tests/start-here.py && python3 tests/start-here-preservation.py && node tests/start-here-browser.cjs && node tests/start-here-accessibility.cjs",
-    "preview:ux001": "node scripts/preview-start-here.cjs"
+    "preview:ux001": "node scripts/preview-start-here.cjs",
+    "test:learning-route": "node tests/learning-route-browser.cjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.118.0",

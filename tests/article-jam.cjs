@@ -1,6 +1,8 @@
 'use strict';
 const fs=require('fs'),path=require('path'),assert=require('assert/strict'),vm=require('vm');
-const root=path.resolve(__dirname,'..'),base=path.join(root,'release-inputs/production-1721e30'),pkg=path.resolve(root,'../package');
+const root=path.resolve(__dirname,'..'),base=path.join(root,'release-inputs/production-1721e30'),originalPkg=path.resolve(root,'../package');
+const os=require('os'),cp=require('child_process'),tmp=fs.mkdtempSync(path.join(os.tmpdir(),'route-jam-check-')),pkg=path.join(tmp,'before-route');
+const undo=cp.spawnSync('python3',['-c',"import sys;sys.path.insert(0,'scripts');from pathlib import Path;from learning_route import reverse_for_legacy_checks;reverse_for_legacy_checks(Path(sys.argv[1]),Path(sys.argv[2]))",originalPkg,pkg],{cwd:root,encoding:'utf8'});assert.equal(undo.status,0,undo.stderr);process.on('exit',()=>fs.rmSync(tmp,{recursive:true,force:true}));
 const changed=[];function walk(d,p=''){for(const e of fs.readdirSync(d,{withFileTypes:true})){const n=p+e.name;if(e.isDirectory())walk(path.join(d,e.name),n+'/');else if(n!=='release-manifest.json'&&!fs.readFileSync(path.join(base,n)).equals(fs.readFileSync(path.join(pkg,n))))changed.push(n);}}walk(base);
 const integration=JSON.parse(fs.readFileSync(path.join(root,'release-inputs/ux-jam-integration.json')));assert.deepEqual(changed.sort(),integration.changed_html);
 for(const prefix of ['','en/']){
