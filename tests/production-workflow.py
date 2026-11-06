@@ -113,10 +113,28 @@ class ProductionTests(unittest.TestCase):
             def request(url,*args):
                 if url.startswith(w.PUBLIC):return 404,{},b''
                 return 302,{'location':'https://'+c['access_host']+'/cdn-cgi/access/login/test'},b''
-            with patch.object(w,'request',side_effect=request):self.assertEqual(len(w.perimeter(c)),42)
+            with patch.object(w,'request',side_effect=request):self.assertEqual(len(w.perimeter(c)),48)
             for status,location in [(403,''),(200,''),(302,'https://evil.invalid/cdn-cgi/access/login/test')]:
                 def bad(url,*args):return (404,{},b'') if url.startswith(w.PUBLIC) else (status,{'location':location},b'')
                 with patch.object(w,'request',side_effect=bad),self.assertRaises(ValueError):w.perimeter(c)
+
+    def test_only_declared_retirement_redirect_to_404_is_accepted(self):
+        with tempfile.TemporaryDirectory() as temp:
+            c,_=self.fixture(Path(temp));c['retired_redirects']={'media/modus-introduksjon.mp4':'/retired-media-resource'}
+            def request(url,*args):
+                if url==w.PUBLIC+'/media/modus-introduksjon.mp4': return 302,{'location':'/retired-media-resource'},b''
+                if url.startswith(w.PUBLIC):return 404,{},b''
+                return 302,{'location':'https://'+c['access_host']+'/cdn-cgi/access/login/test'},b''
+            with patch.object(w,'request',side_effect=request):self.assertEqual(len(w.perimeter(c)),48)
+            for location in ['https://evil.invalid/retired-media-resource','/arbitrary-page']:
+                def bad(url,*args):
+                    if url==w.PUBLIC+'/media/modus-introduksjon.mp4':return 302,{'location':location},b''
+                    return request(url,*args)
+                with patch.object(w,'request',side_effect=bad),self.assertRaises(ValueError):w.perimeter(c)
+            def exposed(url,*args):
+                if url==w.PUBLIC+'/retired-media-resource':return 200,{},b'old film'
+                return request(url,*args)
+            with patch.object(w,'request',side_effect=exposed),self.assertRaises(ValueError):w.perimeter(c)
 
     def test_scope_does_not_silently_change_public_content(self):
         with tempfile.TemporaryDirectory() as temp:

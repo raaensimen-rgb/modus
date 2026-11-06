@@ -101,6 +101,11 @@ def config(root=ROOT):
         raise ValueError('Pinned production identity mismatch')
     if file_map(marker['files']) != {n:h for n,h in c['files'].items() if n != MANIFEST}:
         raise ValueError('Pinned production manifest mismatch')
+    c['retired_redirects'] = {}
+    for line in (base/'_redirects').read_text().splitlines():
+        parts = line.split()
+        if len(parts)==3 and parts[1]=='/retired-media-resource' and parts[2]=='302':
+            c['retired_redirects'][parts[0].lstrip('/')] = parts[1]
     return c
 
 
@@ -340,10 +345,17 @@ def verify_files(package,files,base):
 def perimeter(c):
     rows=[]
     for pre in ('','en/'):
-        for name in ('admin-app.js','admin-package.json','editor.js','editor-admin.js','library-draft-backup.json','content/articles.json','editorial/article-publication-review.json','_worker.js','media/modus-introduksjon.mp4'):
-            code,_,_=request(PUBLIC+'/'+pre+name)
-            if code!=404: raise ValueError('Private/retired public path responds: '+pre+name)
-            rows.append({'path':pre+name,'status':code})
+        for name in ('admin-app.js','admin-package.json','editor.js','editor-admin.js','library-draft-backup.json','content/articles.json','editorial/article-publication-review.json','_worker.js','media/modus-introduksjon.mp4','audio/kick.mp3','audio/snare.mp3','audio/hihat.mp3'):
+            code,headers,_=request(PUBLIC+'/'+pre+name)
+            redirected = False
+            declared = c.get('retired_redirects',{}).get(pre+name)
+            if code==302 and declared:
+                destination=urllib.parse.urljoin(PUBLIC+'/'+pre+name,headers.get('location',''))
+                if destination != PUBLIC+declared: raise ValueError('Unexpected retired-media redirect')
+                code,_,_=request(destination)
+                redirected = True
+            if code!=404: raise ValueError('Private/retired public path responds: '+pre+name+' HTTP '+str(code))
+            rows.append({'path':pre+name,'terminal_status':code,'declared_retirement_redirect':redirected})
     for base in c['admin_origins']:
         if base not in ('https://dev-modus-2-pr52.modus-2-preview.pages.dev','https://e785d3db.modus-2-preview.pages.dev'):
             raise ValueError('Unexpected admin origin in baseline')
