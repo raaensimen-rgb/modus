@@ -30,3 +30,7 @@ Den normale kildebyggingen bevarer de opprinnelige private kurs-/publiseringspor
 C01 eier kun learning-route.css og avgrenset UI-evidens. En reell mobilfeil fra gammel `nav>a:first-child` som skjulte første returanker er rettet bare innen `nav.route-return`. Felles header og designfiler er ikke endret. Et tidlig testløp manglet venting på eksisterende artikkelpremissdialog; testen håndterer dialogen, produktpremissene er ikke fjernet.
 
 Ingen faglig sluttgodkjenning, personlig mestring, fysisk Safari/iPhone, VoiceOver eller autentisert adminattest påstås. Administrator, Access, utkast og backup er urørt. Ingen GitHub-push/merge, Git-main-, DNS/MODUS.NO-, database-, tjeneste- eller autodeploy-endring er utført av C02.
+
+## Rettet returfeil etter C05-kontroll
+
+C05 fant at skalabibliotekets `render()` kanoniserte URL-en uten `fromArticle`. Etter retur til artikkelen og nettleserens Tilbake forsvant derfor den synlige returknappen. Den avgrensede rettingen bevarer kun en syntaktisk gyldig artikkel-ID i eksisterende URL-bygging. Returknappen bruker fortsatt bare den offentlige artikkelmodellens hviteliste; ukjente/private ID-er åpner ingen returadresse. Ingen skala-, lyd- eller lagringslogikk er endret. Den samme presise patchen legges på NB/EN gjennom ordinær produktbygger; alle andre runtimefiler er hashbevart. En regresjonstest kontrollerer kontrollendring, øvingsvisning, språklenke, artikkelretur, browser Tilbake og omlasting på NB/EN i Chromium/WebKit, samt negativ ukjent artikkel. Tidligere kandidat f428316 er erstattet og skal ikke publiseres.

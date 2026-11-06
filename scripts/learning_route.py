@@ -81,6 +81,9 @@ def apply(target):
   for n in ['teori.html','backingtracks.html','akkorder.html','skalabibliotek.html']:
    p=root/n;s=p.read_text();nav='<nav class="route-return" data-route-return hidden aria-label="'+t('Tilbake til artikkelen','Return to article')+'"><a data-route-return-link href="grunnstudier.html">'+t('Tilbake til artikkelen','Back to the article')+'</a> · <a href="grunnstudier.html">'+t('Studierute','Study route')+'</a></nav>'
    s=s.replace('</main>',nav+data+'</main>',1);p.write_text(s)
+  # Preserve article context when the scale controls canonicalize their query string.
+  scale=root/'scale-library.js';js=scale.read_text();old="const query=new URLSearchParams(state);if(document.body.classList.contains('scale-practicing'))";new="const query=new URLSearchParams(state);const fromArticle=params.get('fromArticle');if(/^[a-z0-9-]+$/.test(fromArticle||''))query.set('fromArticle',fromArticle);if(document.body.classList.contains('scale-practicing'))"
+  assert js.count(old)==1,'Unexpected scale query implementation';scale.write_text(js.replace(old,new))
   # Route context for the retained approved local Jam exercise, without changing its music.
   # Retain the reviewed Jam section byte for byte; tool return can also use same-origin article referrer.
   route_paths=['laeringssti.html','grunnstudier.html','studierute.html','teori.html','backingtracks.html','akkorder.html','skalabibliotek.html']
