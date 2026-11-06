@@ -9,10 +9,15 @@ $('scale-controls').innerHTML=controls.map(([id,label,options])=>`<label for="sc
 for(const [id,,options] of controls){const v=params.get(id)||({root:'E',mode:'dorian',range:'0-24'})[id];if(options.some(o=>o[0]===v))$('scale-'+id).value=v;}
 $('scale-controls').addEventListener('submit',e=>e.preventDefault());$('scale-controls').addEventListener('change',render);
 function render(){const state=Object.fromEntries(controls.map(([id])=>[id,$('scale-'+id).value])),notes=model.scale(state.root,state.mode),[lo,hi]=state.range.split('-').map(Number),board=model.board(state.root,state.mode);$('scale-summary').textContent=state.root+' '+names[ModusScales.ids.indexOf(state.mode)]+' · '+notes.map(n=>n.name).join(' – ')+' · '+notes.map(n=>n.degree).join(' – ');
-$('scale-name').textContent=state.root+' '+names[ModusScales.ids.indexOf(state.mode)];
-$('scale-formula-caption').textContent=en?'MODE FORMULA · relative to major':'MODUSFORMEL · relativt til dur';
+const modeIndex=ModusScales.ids.indexOf(state.mode),parent=notes[(7-modeIndex)%7].name;
+$('scale-name').textContent=state.root+' '+names[modeIndex];
+$('scale-formula-caption').textContent=en?'Formula':'Formel';
 $('scale-formula').textContent=notes.map(n=>n.degree).join(' – ');
-$('scale-note-chips').innerHTML=notes.map(n=>`<span class="${n.root?'is-root':''}">${n.name}</span>`).join('');
+$('scale-note-chips').innerHTML=`<span class="scale-row-label">${en?'Notes':'Toner'}</span><span>${notes.map(n=>n.name).join(' – ')}</span>`;
+const ordinal=en?['First','Second','Third','Fourth','Fifth','Sixth','Seventh']:['Første','Andre','Tredje','Fjerde','Femte','Sjette','Sjuende'];
+const colours=en?['An open major sound with a major seventh.','A minor sound with a bright major sixth.','A dark minor sound with a minor second.','A floating major sound with a raised fourth.','A major sound with a relaxed minor seventh.','A natural minor sound with a minor sixth.','A tense minor sound with a diminished fifth.']:['Åpen durklang med stor septim.','Mollklang med en lys, stor sekst.','Mørk mollklang med liten sekund.','Svevende durklang med hevet kvart.','Durklang med en avspent, liten septim.','Naturlig mollklang med liten sekst.','Spenningsfylt mollklang med forminsket kvint.'];
+const colour=modeIndex===1?(en?'A minor sound with a bright major sixth (':'Mollklang med en lys, stor sekst (')+notes[5].name+').':colours[modeIndex];
+$('scale-context').textContent=ordinal[modeIndex]+(en?' mode of ':' modus i ')+parent+(en?' major (Ionian). ':'-dur (ionisk). ')+colour+' '+state.root+(en?' is the tonal centre.':' er tonalt sentrum.');
 // Physical fret wires follow x = L * (1 - 2^(-f/12)). The open string is outside the nut.
 const width=1800,height=420,left=72,nut=150,right=1776,first=lo===0?0:lo-1;
 const start=1-2**(-first/12),end=1-2**(-hi/12),wire=f=>nut+(right-nut)*((1-2**(-f/12))-start)/(end-start);
@@ -27,5 +32,12 @@ $('scale-details-title').textContent=en?'Notes, intervals and tonal centre':'Ton
 const comparisons=en?['3 and 7 describe the major reference.','6 differs from natural minor (♭6).','♭2 differs from natural minor (2).','♯4 differs from major (4).','♭7 differs from major (7).','♭6 differs from Dorian (6).','♭2 and ♭5 differ from natural minor (2 and 5).']:['3 og 7 beskriver durreferansen.','6 skiller fra naturlig moll (♭6).','♭2 skiller fra naturlig moll (2).','♯4 skiller fra dur (4).','♭7 skiller fra dur (7).','♭6 skiller fra dorisk (6).','♭2 og ♭5 skiller fra naturlig moll (2 og 5).'];
 $('scale-explanation').textContent=comparisons[ModusScales.ids.indexOf(state.mode)]+' '+(en?'Character tones are teaching comparisons. A tonal centre also depends on harmony, melodic emphasis and context. International B and B♭ are used. Enharmonic roots retain their diatonic spelling, including double accidentals.':'Karaktertoner er pedagogiske sammenligninger. Tonalt sentrum avhenger også av harmonikk, melodisk vekt og sammenheng. Vi bruker internasjonalt B (= norsk H) og B♭ (= norsk B). Enharmoniske grunntoner beholder diatonisk stavemåte, også doble fortegn.');
 $('scale-table').innerHTML=`<table><caption>${en?'Scale degrees':'Skalatrinn'}</caption><thead><tr><th>${en?'Note':'Tone'}</th><th>${en?'Interval':'Intervall'}</th><th>${en?'Character tone':'Karaktertone'}</th></tr></thead><tbody>${notes.map(n=>`<tr><td>${n.name}</td><td>${n.degree} · ${intervalNames[n.degree][en?1:0]}</td><td>${n.character?(en?'Yes':'Ja'):'–'}</td></tr>`).join('')}</tbody></table>`;
-const query=new URLSearchParams(state);history.replaceState(null,'','?'+query);query.set('lang',en?'nb':'en');$('scale-language').href=(en?'../skalabibliotek.html':'en/skalabibliotek.html')+'?'+query;$('scale-language').textContent=en?'Norsk':'English';$('scale-language').lang=en?'nb':'en';}
-render();})();
+const query=new URLSearchParams(state);if(document.body.classList.contains('scale-practicing'))query.set('practice','1');history.replaceState(null,'','?'+query);query.set('lang',en?'nb':'en');$('scale-language').href=(en?'../skalabibliotek.html':'en/skalabibliotek.html')+'?'+query;$('scale-language').textContent=en?'Norsk':'English';$('scale-language').lang=en?'nb':'en';}
+if(params.get('practice')==='1')document.body.classList.add('scale-practicing');
+const practice=$('scale-practice'),full=$('scale-fullscreen'),main=$('main-content');
+function syncDisplay(){practice.textContent=en?'Practice view':'Øvingsvisning';practice.setAttribute('aria-pressed',String(document.body.classList.contains('scale-practicing')));const active=!!document.fullscreenElement||main.classList.contains('scale-fullscreen-fallback');full.textContent=active?(en?'Exit fullscreen':'Avslutt fullskjerm'):(en?'Fullscreen':'Fullskjerm');full.setAttribute('aria-pressed',String(active));}
+practice.addEventListener('click',()=>{document.body.classList.toggle('scale-practicing');syncDisplay();render();});
+full.addEventListener('click',async()=>{if(document.fullscreenElement){await document.exitFullscreen();}else if(main.classList.contains('scale-fullscreen-fallback')){main.classList.remove('scale-fullscreen-fallback');}else{try{if(!main.requestFullscreen)throw Error('Unavailable');await main.requestFullscreen();}catch{main.classList.add('scale-fullscreen-fallback');$('scale-display-status').textContent=en?'Expanded view. Press Escape to return.':'Utvidet visning. Trykk Escape for å gå tilbake.';}}syncDisplay();});
+document.addEventListener('fullscreenchange',syncDisplay);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&main.classList.contains('scale-fullscreen-fallback')){main.classList.remove('scale-fullscreen-fallback');$('scale-display-status').textContent='';syncDisplay();full.focus();}});
+syncDisplay();render();})();
