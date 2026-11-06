@@ -15,6 +15,7 @@ english_articles={a['slug'] for a in public_articles(ROOT,'en')}
 english_card_images=preview_illustrations(ROOT,'en')
 translations=json.loads((ROOT/'content/i18n/en.json').read_text())
 translations.update(EN_TRANSLATIONS)
+translations.update({'Skalabibliotek':'Scale library','Utforsk skalaer og intervaller på en 24-bånds gitarhals.':'Explore scales and intervals on a 24-fret guitar neck.'})
 for line in (ROOT/'content/i18n/dynamic.tsv').read_text().splitlines():
     if line:
         source, target=line.split('\t',1)

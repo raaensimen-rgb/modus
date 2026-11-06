@@ -8,7 +8,8 @@ assert {p.relative_to(B).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() f
 if O.exists():shutil.rmtree(O)
 shutil.copytree(B,O)
 # Carry forward the approved local Pakke A navigation correction.
-import re
+import re, os
+from site_navigation import add_scale_library_link
 nav=(R/'navigation.js').read_bytes();asset='navigation.'+hashlib.sha256(nav).hexdigest()[:10]+'.js'
 for pre in ('','en/'):
  (O/pre/'navigation.js').write_bytes(nav);(O/pre/asset).write_bytes(nav)
@@ -36,6 +37,10 @@ for pre in ('','en/'):
  shell=re.sub(r'<script src="musikkart.js[^\"]*" defer></script>','<script src="theory-data.js"></script><script src="scale-model.js"></script><script src="scale-library.js" defer></script>',shell)
  shell=re.sub(r'<title>.*?</title>','<title>MODUS · '+('Scale library' if pre else 'Skalabibliotek')+'</title>',shell)
  (O/pre/'skalabibliotek.html').write_text(shell)
+# Apply the shared destination on every existing public header, including article readers.
+for p in O.rglob('*.html'):
+ prefix=os.path.relpath(O,p.parent).replace(os.sep,'/');prefix='' if prefix=='.' else prefix+'/'
+ p.write_text(add_scale_library_link(p.read_text(),prefix,english=p.relative_to(O).parts[0]=='en',active=p.name=='skalabibliotek.html'))
 h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 old={p.relative_to(B).as_posix():h(p) for p in B.rglob('*') if p.is_file()};new={p.relative_to(O).as_posix():h(p) for p in O.rglob('*') if p.is_file()}
 changed=sorted(n for n in old if new.get(n)!=old[n]);added=sorted(set(new)-set(old))

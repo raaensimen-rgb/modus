@@ -1,6 +1,8 @@
 """Bounded local package audit with negative privacy/version checks."""
 from pathlib import Path
-import hashlib,json,re,subprocess,tempfile,shutil
+import hashlib,json,re,subprocess,tempfile,shutil,sys,os
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
+from site_navigation import add_scale_library_link
 R=Path(__file__).resolve().parents[1];B=R/'release-inputs/published-d809a7b';P=R.parent/'package'
 h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 new=['scale-model.js','scale-library.js','scale-library.css','skalabibliotek.html']
@@ -20,6 +22,8 @@ def check(base,candidate):
    s=re.sub(rb'navigation\.[a-f0-9]{10}\.js',asset.encode(),before).decode()
    if n in ('teori.html','en/teori.html'):s=s.replace('<script src="theory.js','<script src="scale-model.js"></script><script src="theory.js')
    if n in ('musikkart.html','en/musikkart.html'):s=s.replace('<section class="map-next">','<p><a href="skalabibliotek.html">'+('Interactive Scale Library' if n.startswith('en/') else 'Interaktivt Skalabibliotek')+' ↗</a></p><section class="map-next">')
+   prefix=os.path.relpath(candidate,(candidate/n).parent).replace(os.sep,'/');prefix='' if prefix=='.' else prefix+'/'
+   s=add_scale_library_link(s,prefix,english=n.startswith('en/'))
    assert after.decode()==s,n
   else:assert after==before,n
  for pre in ('','en/'):

@@ -16,7 +16,7 @@ active_pages = {
     'f03-laeringsreise.html': 'path',
     'grunnstudier.html': 'path',
     'musikkart.html': 'mindmap',
-    'skalabibliotek.html': 'mindmap',
+    'skalabibliotek.html': 'scales',
     'modus-plus.html': 'membership',
     'betaling-test.html': 'membership',
     'om-modus.html': 'about',

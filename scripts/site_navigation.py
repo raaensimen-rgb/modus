@@ -58,7 +58,7 @@ def render_header(prefix='', active='home'):
         ('lesson', 'undervisning.html', 'Leksjoner og øvelser', 'Prøv undervisningsmoduler under utvikling.'),
         ('theory', 'teori.html', 'Utforsk musikkteori', 'Interaktive verktøy for harmoni og teori.'),
     ))
-    return (
+    header = (
         f'<header class="site-header"><a class="brand" href="{home}" aria-label="MODUS – forsiden">'
         '<svg class="brand-arch" viewBox="0 0 72 64" width="30" height="28" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="modusArchGradient" gradientUnits="userSpaceOnUse" x1="7" y1="32" x2="67" y2="32"><stop offset="0" stop-color="#d7f48c"/><stop offset=".35" stop-color="#d0eb91" stop-opacity=".86"/><stop offset=".7" stop-color="#a5c783" stop-opacity=".5"/><stop offset="1" stop-color="#7c9f70" stop-opacity=".18"/></linearGradient></defs><path d="M7 49C12 30 14 16 23 16C32 16 33 31 36 49C40 30 42 16 51 16C60 16 62 30 67 49" stroke="url(#modusArchGradient)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>MODUS<svg class="brand-arch-end" viewBox="0 0 72 64" width="30" height="28" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="modusArchEndGradient" gradientUnits="userSpaceOnUse" x1="7" y1="32" x2="67" y2="32"><stop offset="0" stop-color="#7c9f70" stop-opacity=".18"/><stop offset=".3" stop-color="#a5c783" stop-opacity=".5"/><stop offset=".65" stop-color="#d0eb91" stop-opacity=".86"/><stop offset="1" stop-color="#d7f48c"/></linearGradient></defs><path d="M7 49C12 30 14 16 23 16C32 16 33 31 36 49C40 30 42 16 51 16C60 16 62 30 67 49" stroke="url(#modusArchEndGradient)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>'
         '<nav class="site-nav" aria-label="Hovedmeny">' + link('home', './', 'MODUS') + learn + play + link('mindmap', 'musikkart.html', 'Musikkatlas') + link('articles', 'artikler.html', 'Artikler')
@@ -67,6 +67,8 @@ def render_header(prefix='', active='home'):
         + link('account', 'konto.html', 'Logg inn', css='nav-account')
         + render_language_picker() + render_search_widget() + render_theme_picker() + '</div></header>'
     )
+
+    return add_scale_library_link(header, prefix, active=active == 'scales')
 
 
 def render_search_widget():
@@ -225,3 +227,20 @@ def apply_navigation(page, active, prefix=''):
     if active == 'home':
         page = decorate_modern_header(page, prefix)
     return with_navigation_css(page, prefix)
+
+
+def add_scale_library_link(page, prefix='', english=False, active=False):
+    """Add the scale destination to the existing tools panel without replacing its design."""
+    label = 'Scale library' if english else 'Skalabibliotek'
+    description = 'Explore scales and intervals on a 24-fret guitar neck.' if english else 'Utforsk skalaer og intervaller på en 24-bånds gitarhals.'
+    link = f'<a href="{escape(prefix + "skalabibliotek.html", quote=True)}" class=""'+(' aria-current="page"' if active else '')+f' aria-label="{label}" aria-describedby="nav-hint-scales"><strong>{label}</strong><small id="nav-hint-scales">{description}</small><span aria-hidden="true">↗</span></a>'
+    def update(match):
+        header = match[0]
+        if 'id="nav-panel-play"' not in header:
+            return header
+        if active:
+            header = header.replace(' aria-current="page"', '')
+            header = re.sub(r'(<div class="nav-group)(?: is-active)?("><button[^>]*id="nav-play")', r'\1 is-active\2', header)
+            header = re.sub(r'(<a[^>]*href="[^"]*musikkart.html"[^>]*class=")is-active', r'\1', header)
+        return re.sub(r'(<div[^>]*id="nav-panel-play"[^>]*>)([\s\S]*?)(</div>)', lambda m: m[1]+re.sub(r'<a\b[^>]*aria-describedby="nav-hint-scales"[\s\S]*?</a>', '', m[2])+link+m[3], header, count=1)
+    return re.sub(r'<header\b[\s\S]*?</header>', update, page, count=1)
