@@ -35,3 +35,7 @@ Denne isolerte kopien starter fra siste publiserte d809a7b / produksjonsdeployme
 ## Interaktivt Skalabibliotek – lokalt 2026-11-06
 
 Gjeldende oppdrag viderefører Pakke A med lokal implementering og QA av Skalabiblioteket etter 03-spesifikasjonen i ../delivery/03-fagspesifikasjon.md. Bruk npm run quality:local og lokal package. Nytt scope erstatter Pakke As menyavgrensning for denne isolerte grenen. Ingen push, merge eller deploy. Publiseringspolicy, artikler, privatinnhold, administrator og Access skal bevares. Selve designbildet er ikke tilgjengelig; eksakt bildesammenligning må dokumenteres separat.
+
+## A03 / PL-AUTO-001 – lokal arbeidsflyt 2026-11-06
+
+Denne kopien viderefører faktisk offentlig 1721e302a3880804073e0dcb0de6543f939ba0f6 / 2c46a5f1-fdca-4920-b233-cac50f34d7bf i modus. Kun automatisering, pakke-/versjonskontroll, tester og prosedyre endres. Ingen innholds-/designendring, push, merge eller deploy i A03. Bruk docs/pl-auto-001.md og npm run production:workflow. C06s publiseringskommando er implementert for fremtidig separat GO og skal ikke kjøres her. Historiske d809a7b-/Preview-referanser i eldre avsnitt gir ingen rett til å overstyre det nye grunnlaget. Baseline og eierutvalg skal ikke flyttes bakover.

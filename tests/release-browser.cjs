@@ -5,7 +5,9 @@ const {chromium,webkit}=require('playwright');
 const {startPublicPackageServer}=require('./public-package-server.cjs');
 const root=path.resolve(process.env.MODUS_TEST_DIST||'../package'),out=path.resolve('test-results');
 (async()=>{
- const server=await startPublicPackageServer(root),base=server.origin,rows=[];
+ const remote=process.env.MODUS_TEST_URL;
+ assert(!remote||remote==='https://modus-4ye.pages.dev','Only the current production origin may be tested remotely');
+ const server=remote?{stop:async()=>{}}:await startPublicPackageServer(root),base=remote||server.origin,rows=[];
  fs.mkdirSync(out,{recursive:true});
  try{
   for(const [name,engine] of Object.entries({chromium,webkit})){

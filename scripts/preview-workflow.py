@@ -14,6 +14,7 @@ import urllib.parse
 import urllib.request
 import zipfile
 
+# Private administrator only. Public delivery is routed to production_workflow above.
 PROJECT = 'modus-2-preview'
 BRANCH = 'dev/modus-2-pr52'
 PUBLIC = PROJECT + '.pages.dev'
@@ -44,6 +45,8 @@ def source_gate(root, sha):
 
 
 def manifest(package, kind, sha):
+    if kind == 'public':
+        raise ValueError('Use production_workflow.manifest for the current public production schema')
     name = 'admin-package.json' if kind == 'admin' else ('release-manifest.json' if (package/'release-manifest.json').is_file() else 'preview-isolation.json')
     m = json.loads((package / name).read_text())
     if m['project'] != PROJECT or m['source_sha'] != sha or (name != 'release-manifest.json' and m.get('tracked_source_dirty') is not False):
@@ -73,6 +76,10 @@ def manifest(package, kind, sha):
 
 
 def target(kind, url):
+    if kind == 'public':
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from production_workflow import origin
+        return origin(url)
     u = urllib.parse.urlsplit(url)
     if u.scheme != 'https' or u.username or u.password or u.port or u.path not in ('', '/') or u.query or u.fragment:
         raise ValueError('Use a clean HTTPS deployment origin')
@@ -137,6 +144,15 @@ def verify(package, kind, sha, urls):
 
 
 def main():
+    # Public delivery now uses production modus; the legacy code below is admin-only.
+    if '--kind' in sys.argv and sys.argv[sys.argv.index('--kind')+1:sys.argv.index('--kind')+2] == ['public']:
+        args = sys.argv[1:]
+        i = args.index('--kind')
+        del args[i:i+2]
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import production_workflow
+        sys.argv = [sys.argv[0]] + args
+        return production_workflow.main()
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('action', choices=['prepare', 'verify'])
     p.add_argument('--kind', choices=['public', 'admin'], required=True)

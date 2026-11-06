@@ -1,105 +1,40 @@
-name: MODUS build and tests
-
+name: MODUS local-equivalent checks (never deploy)
 on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, fix/pl102-publication-visibility-gate, fix/pl103-article-permissions, fix/pl103b-preview-cards]
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    env:
-      MODUS_CATALOG_PREVIEW: ${{ github.event_name == 'pull_request' && '1' || '0' }}
+    timeout-minutes: 30
     steps:
-      - name: Check out source
-        uses: actions/checkout@v4
-      - name: Set up Node.js 22
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref || github.ref_name }}
+      - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install locked dependencies
-        run: npm ci
-      - name: Verify local Preview workflow safety gates without deploying
-        run: npm run test:preview-workflow
-      - name: Build the public site
-        run: npm run build
-      - name: Validate site and music features
-        run: npm test
-
-      - name: Package and audit explicit production catalog without deploying
-        env:
-          MODUS_CATALOG_PREVIEW: '0'
-          MODUS_PLATFORM_RELEASE: '1'
-          CF_PAGES_BRANCH: main
-          CONTEXT: production
-        run: |
-          npm run build
-          python3 tests/publication-audit.py
-          cp test-results/publication-audit.json test-results/publication-production-audit.json
-
-      - name: Upload audited production package for later approved distribution
-        uses: actions/upload-artifact@v4
-        with:
-          name: public-production-dist
-          path: dist/
-          if-no-files-found: error
-
-      - name: Restore isolated Preview build for browser checks
-        run: npm run build && python3 tests/publication-audit.py
-
-      - name: Install browser engines
-        run: npx playwright install --with-deps chromium webkit
-      - name: Verify release in desktop and mobile browsers
-        run: node tests/release-browser.cjs
-
-      - name: Verify approved navigation v1.1 and publication layout
-        run: node tests/navigation-controls-browser.cjs
-
-      - name: Verify MODUS 2 homepage and accessibility
-        run: npm run test:homepage
-
-      - name: Verify piano interaction in desktop and mobile browsers
-        run: node tests/piano-browser.cjs
-
-      - name: Verify actual audio signal and visualization fallback
-        run: node tests/audio-signal-browser.cjs
-
-      - name: Upload individual test results
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - name: Prepare SHA-bound C07 candidate; main is intentionally refused
+        run: npm run production:workflow -- prepare --sha "$(git rev-parse HEAD)" --out "$RUNNER_TEMP/modus-candidate"
+      - name: Preserve checks and reports, never an implicit production dist
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: modus-test-results
+          name: modus-qa-evidence
           path: |
-            test-results/test-results.json
-            test-results/test-results.md
-            test-results/browser-results.json
-            test-results/piano-browser-results.json
-            test-results/audio-*-results.json
-            test-results/publication-*.json
-            test-results/publication-*.png
-            test-results/journey-*-results.json
-            test-results/pl101-*.png
-            test-results/navigation-v11-*.png
-            test-results/navigation-v11-results.json
-            test-results/platform-*-results.json
-            test-results/homepage-*.json
-            test-results/homepage-*.png
+            ${{ runner.temp }}/modus-candidate/report.*
+            ${{ runner.temp }}/modus-candidate/quality.log
+            ${{ runner.temp }}/modus-candidate/qa.json
           if-no-files-found: warn
-
-      - name: Upload audited public build for isolated QA
-        uses: actions/upload-artifact@v4
-        with:
-          name: public-site-dist
-          path: dist/
-          if-no-files-found: error
+# There is no Cloudflare credential, deploy, push or merge step.
+# Cloudflare Git autodeploy remains disabled; C06 uses a separately approved package.

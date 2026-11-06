@@ -13,66 +13,16 @@ SHA = 'a' * 40
 
 
 class WorkflowTests(unittest.TestCase):
-    def package(self, root):
-        (root / 'index.html').write_text('synthetic public page')
-        m = dict(project=w.PROJECT, source_sha=SHA, tracked_source_dirty=False,
-                 mode='isolated', backend='disabled', branch=w.BRANCH,
-                 files=[dict(path='index.html', sha256=w.digest((root/'index.html').read_bytes()))])
-        (root / 'preview-isolation.json').write_text(json.dumps(m))
+    def test_targets_separate_production_and_admin(self):
+        for kind, url in [('admin','https://modus-4ye.pages.dev'),('admin','https://modus-2-preview.pages.dev'),('public','https://modus-2-preview.pages.dev'),('public','https://modus.no'),('public','http://modus-4ye.pages.dev'),('admin','https://dev-modus-2-pr52.modus-2-preview.pages.dev.evil.test')]:
+            with self.subTest(url=url), self.assertRaises(ValueError): w.target(kind,url)
+        self.assertEqual(w.target('public','https://modus-4ye.pages.dev'),'https://modus-4ye.pages.dev')
+        self.assertEqual(w.target('admin','https://1234abcd.modus-2-preview.pages.dev'),'https://1234abcd.modus-2-preview.pages.dev')
 
-    def test_current_release_manifest_and_private_seed_gate(self):
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            (root/'index.html').write_text('selected public content')
-            (root/'cms-seed.json').write_text('[]')
-            marker = dict(project=w.PROJECT, source_sha=SHA, backend='disabled', cms_seed_records=0,
-                          files=[dict(path=n, sha256=w.digest((root/n).read_bytes())) for n in ['index.html','cms-seed.json']])
-            (root/'release-manifest.json').write_text(json.dumps(marker))
-            self.assertEqual(len(w.manifest(root, 'public', SHA)), 3)
-            with self.assertRaises(ValueError): w.manifest(root, 'public', 'b'*40)
-            (root/'cms-seed.json').write_text('[{"private": true}]')
-            marker['files'][1]['sha256'] = w.digest((root/'cms-seed.json').read_bytes())
-            (root/'release-manifest.json').write_text(json.dumps(marker))
-            with self.assertRaises(ValueError): w.manifest(root, 'public', SHA)
-
-    def test_targets_reject_production_and_public_admin(self):
-        for kind, url in [('admin', 'https://modus-2-preview.pages.dev'), ('public', 'https://modus.pages.dev'), ('public', 'https://modus.no'), ('admin', 'https://dev-modus-2-pr52.modus-2-preview.pages.dev.evil.test'), ('public', 'https://modus-2-preview.pages.dev/?token=secret'), ('public', 'http://modus-2-preview.pages.dev')]:
-            with self.subTest(url=url), self.assertRaises(ValueError):
-                w.target(kind, url)
-        self.assertEqual(w.target('admin', 'https://1234abcd.modus-2-preview.pages.dev'), 'https://1234abcd.modus-2-preview.pages.dev')
-
-    def test_manifest_tampering_extra_files_and_symlinks(self):
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            self.package(root)
-            self.assertEqual(len(w.manifest(root, 'public', SHA)), 2)
-            (root/'private.txt').write_text('synthetic')
-            with self.assertRaises(ValueError): w.manifest(root, 'public', SHA)
-            (root/'private.txt').unlink()
-            (root/'index.html').write_text('tampered')
-            with self.assertRaises(ValueError): w.manifest(root, 'public', SHA)
-            self.package(root)
-            (root/'linked').symlink_to(root/'index.html')
-            with self.assertRaises(ValueError): w.manifest(root, 'public', SHA)
-
-    def test_commit_branch_dirty_and_untracked_gate(self):
+    def test_admin_commit_branch_dirty_and_untracked_gate(self):
         for outputs in [[SHA, 'main', '', ''], [SHA, w.BRANCH, 'client/editor.js', ''], [SHA, w.BRANCH, '', 'private.txt'], ['b'*40, w.BRANCH, '', '']]:
-            with patch.object(w, 'run', side_effect=outputs), self.assertRaises(ValueError):
-                w.source_gate(Path('.'), SHA)
-        with patch.object(w, 'run', side_effect=[SHA, w.BRANCH, '', '']):
-            w.source_gate(Path('.'), SHA)
-
-    def test_public_actual_bytes_and_remote_mismatch(self):
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            self.package(root)
-            def get(url, *args):
-                name = 'index.html' if url.endswith('/') else 'preview-isolation.json'
-                return 200, '', (root/name).read_bytes()
-            with patch.object(w, 'request', side_effect=get):
-                self.assertEqual(w.verify(root, 'public', SHA, ['https://'+w.PUBLIC])['checks'], 2)
-            with patch.object(w, 'request', return_value=(200, '', b'old CSS or page')), self.assertRaises(ValueError):
-                w.verify(root, 'public', SHA, ['https://'+w.PUBLIC])
+            with patch.object(w, 'run', side_effect=outputs), self.assertRaises(ValueError): w.source_gate(Path('.'), SHA)
+        with patch.object(w, 'run', side_effect=[SHA, w.BRANCH, '', '']): w.source_gate(Path('.'), SHA)
 
     def test_admin_requires_real_access_redirect_not_generic_403(self):
         with tempfile.TemporaryDirectory() as directory:

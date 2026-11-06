@@ -34,7 +34,10 @@
     "quality:local": "node scripts/quality-local.cjs",
     "build:source": "python3 scripts/sync-design-system.py && npm run build:account && python3 scripts/build-account.py && python3 scripts/sync-navigation.py && python3 scripts/build-articles.py && python3 scripts/sync-design-system.py --finish && python3 scripts/build-languages.py && python3 scripts/build-search.py && npm run build:editor && python3 scripts/finalize-publication.py && python3 scripts/finalize-preview.py && python3 scripts/integrate-teaching-diagrams.py && python3 scripts/apply-design-refresh.py dist && python3 scripts/apply-article-library.py dist && python3 scripts/apply-library-hero.py dist && python3 scripts/apply-compact-navigation.py dist && python3 scripts/apply-approved-intro-film.py dist && python3 scripts/apply-subpage-hero.py dist",
     "preview:local": "node scripts/preview-local.cjs",
-    "test:scales": "node tests/scale-library.cjs && node tests/scale-library-browser.cjs"
+    "test:scales": "node tests/scale-library.cjs && node tests/scale-library-browser.cjs",
+    "production:workflow": "python3 scripts/production_workflow.py",
+    "test:production-workflow": "python3 tests/production-workflow.py",
+    "c06:publish": "python3 scripts/c06-publish.py"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.118.0",

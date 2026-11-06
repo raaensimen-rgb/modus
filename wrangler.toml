@@ -1,3 +1,5 @@
 name = "modus"
-pages_build_output_dir = "./dist"
+# Deliberately absent: C06 must pass the exact owner-approved package directory.
+# Raw dist and old Git main must never be an implicit upload source.
+pages_build_output_dir = "./.build-private/explicit-c06-package-required"
 compatibility_date = "2026-10-27"

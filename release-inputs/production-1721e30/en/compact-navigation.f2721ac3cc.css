@@ -1,0 +1,53 @@
+/* Owner-approved compact header; all page content and behavior remain native. */
+.site-header{grid-template-columns:minmax(0,1fr)!important;padding:0 3%!important}
+.site-header::after{height:120px!important;background-position:center -25px!important;background-size:100% 160px!important}
+.site-header .brand{height:145px!important}
+.site-header .home-geometric{width:44px!important;height:44px!important;margin-bottom:7px}
+.site-header .home-wordmark{font-size:36px!important;font-weight:500!important}
+.site-header .home-tagline{font-size:13px!important;margin-top:12px!important;text-align:center}
+.site-header .header-tools{grid-column:1!important;grid-row:2!important;justify-self:center!important;justify-content:center!important;gap:0!important;width:auto!important;min-height:44px!important;padding:0 10px!important;margin:8px 0 9px!important;border:1px solid #719d83!important;border-radius:999px!important;background:rgba(0,25,24,.75)!important;box-shadow:inset 0 0 3px #71d3b629!important}
+.site-header .header-tools :is(.nav-account,.global-search-trigger,.theme-picker>summary){color:#69e2df!important;padding:0!important;width:48px!important;height:44px!important;min-height:44px!important}
+.site-header .nav-account{order:0;border-right:1px solid #719d835e!important;border-radius:0!important}
+.site-header .language-picker{order:1;gap:0!important;padding:0 7px!important;border:0!important}
+.site-header .language-picker a{font-size:13px!important;min-width:44px!important;gap:6px!important;padding:0!important;position:relative}
+.site-header .language-picker a[data-language=nb]{min-width:65px!important}
+.site-header .language-picker a[data-language=en] svg{display:none!important}
+.site-header .language-picker a[aria-current]{text-decoration:none!important}
+.site-header .language-picker a[aria-current]::after{content:"";position:absolute;bottom:5px;right:11px;width:20px;height:2px;background:currentColor}
+.site-header .global-search-trigger{order:2;border-left:1px solid #719d835e!important;border-right:1px solid #719d835e!important;border-radius:0!important}
+.site-header .theme-picker{order:3;margin:0!important}
+.site-header .site-nav{grid-column:1!important;grid-row:3!important;width:100%!important;display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:0 clamp(24px,4vw,76px)!important;padding:0!important;min-height:50px!important}
+.site-header .site-nav>a,.site-header .nav-trigger{font-size:16px!important;min-height:50px!important}
+.site-header .site-nav>a[aria-current=page]::after,.site-header .nav-group.is-active>.nav-trigger::after{height:4px!important}
+.site-header .nav-chevron{display:inline-block!important;width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-left:9px;margin-top:-4px}
+html:is([data-theme=readable],[data-theme=contrast]) .site-header .header-tools{background:var(--panel)!important;border-color:var(--ink)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .site-header .header-tools :is(a,button,summary){color:var(--ink)!important}
+@media(max-width:760px){
+.site-header .brand{height:130px!important}
+.site-header::after{background-size:190% 125px!important;background-position:center -8px!important}
+.site-header .home-geometric{width:35px!important;height:35px!important}
+.site-header .home-wordmark{font-size:29px!important}
+.site-header .home-tagline{font-size:9px!important;letter-spacing:.15em!important;max-width:100%}
+.site-header .header-tools{margin:5px 0 10px!important;max-width:100%;box-sizing:border-box;padding:0 5px!important}
+.site-header .header-tools :is(.nav-account,.global-search-trigger,.theme-picker>summary){width:44px!important;min-width:44px!important}
+.site-header .language-picker{padding:0 3px!important}
+.site-header .language-picker a[data-language=nb]{min-width:60px!important}
+.site-header .site-nav{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0 5px!important}
+.site-header .site-nav>a,.site-header .nav-trigger{font-size:12px!important;min-height:48px!important;white-space:normal!important}
+.site-header .nav-panel{top:100%!important}
+}
+@media(min-width:761px){
+.site-header .brand{height:190px!important}
+.site-header::before{height:190px!important}
+.site-header::after{height:155px!important;background-size:100% 200px!important;background-position:center -25px!important}
+.site-header .home-geometric{width:55px!important;height:55px!important}
+.site-header .home-wordmark{font-size:46px!important}
+.site-header .home-tagline{font-size:16px!important;margin-top:14px!important}
+.site-header .header-tools{padding:0 14px!important;margin:8px 0 10px!important}
+.site-header .header-tools :is(.nav-account,.global-search-trigger,.theme-picker>summary){width:60px!important;height:48px!important}
+.site-header .home-control-icon{width:25px!important;height:25px!important}
+.site-header .language-picker a{min-width:52px!important;min-height:48px!important;font-size:16px!important}
+.site-header .language-picker a[data-language=nb]{min-width:78px!important}
+.site-header .language-picker .home-control-icon{width:20px!important;height:20px!important}
+.site-header .site-nav>a,.site-header .nav-trigger{font-size:19px!important;min-height:60px!important}
+}

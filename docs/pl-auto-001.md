@@ -1,28 +1,93 @@
-# PL-AUTO-001 – én lokal leveranseflyt
+# PL-AUTO-001 – én MODUS 2.0-arbeidsflyt
 
-Ingen nye tjenester, avhengigheter, betalte komponenter eller bakgrunnsjobber. Eksisterende bygg, tester, pakkekontroller og GitHub Actions gjenbrukes. Ingen automatisk deploy.
+Gjelder A03, 6. november 2026. C07 utvikler og ferdigstiller lokalt; C06 utfører bare separat eiergodkjent publisering. Automatiske tester og offentlig etterkontroll følger samme versjonsbundne pakke. Ingen oppgave trenger ekstra mellomstasjoner eller nye tjenester.
 
-## Anbefalt arbeidsflyt
+## Autoritativt grunnlag
 
-1. Gjør avgrensede kodeendringer i en isolert kopi på `dev/modus-2-pr52`. Bevar original arbeidsmappe og private data. Lag en lokal kildecommit; ingen push eller merge.
-2. Kjør `npm run preview:workflow -- prepare --kind admin --source /absolutt/ren/kilde --sha FULL_SHA --out /privat/ny/resultatmappe`. Bruk `--kind public` for offentlig visuell Preview. Kommandoen krever eksisterende låste avhengigheter og installerte testnettlesere, bygger, kjører relevante eksisterende tester og kontrollerer sluttpakken. Den installerer ingenting og sletter ingen eksisterende resultatmapper.
-3. Les `report.md` og `report.json`. Godkjenn eksakt kilde-SHA, `candidate.zip` sin SHA-256 og riktig mål før opplasting. Rapportstatus READY_FOR_OWNER_REVIEW betyr kun lokal kandidat, ikke skytilgang eller publiseringstillatelse. Bygg på nytt ved kildeendringer.
-4. Etter særskilt godkjenning: bruk eksisterende Wrangler-opplasting med eksplisitt `--project-name=modus-2-preview`, korrekt godkjent gren og kilde-SHA, fra separat stagingmappe med kontrollert config. Bruk aldri rotmappens produksjonskonfigurasjon. Offentlig rotadresse og beskyttet administratorgren har forskjellige formål; ingen felles opplasting. Kontroller Pages-prosjekt/deployment-metadata via etablert tilgang før og etter opplasting. Ingen opplasting håndteres av dette skriptet.
-5. Kjør `npm run preview:workflow -- verify --kind public --source /absolutt/ren/kilde --sha FULL_SHA --package /absolutt/pakke --url https://modus-2-preview.pages.dev --url https://HASH.modus-2-preview.pages.dev --out /privat/ny/verifiseringsmappe`. Hele det publiserte innholdet, inkludert versjonsmanifest, CSS og språkfiler, sammenlignes med lokale SHA-256. Pages-konfigurasjonsfiler `_headers`/`_redirects` serveres ikke som ressurser og unntas bytekontrollen. Bare forventet samme-origin `.html`-normalisering følges; ingen vilkårlige omdirigeringer.
-6. For administrator: bruk `--kind admin`, grenadressen `https://dev-modus-2-pr52.modus-2-preview.pages.dev` og faktisk hashadresse. Alle serverbare pakkefiler testes anonymt med GET, HEAD og Range. Bare omdirigering til eksisterende Access-team godtas; generisk 403 regnes ikke som verifisert Access. Dette beviser ikke eierpolicy eller innlogget funksjon. Kontroller eierinnlogging interaktivt og utfør en kort Safari-kontroll før private utkast brukes. Skriptet henter aldri cookies, OTP eller API-nøkler.
+- Offentlig prosjekt: `modus`, ID `befea306-6ef6-4282-9fbb-a754c93e6d1b`, https://modus-4ye.pages.dev/.
+- Produksjonskilde: `1721e302a3880804073e0dcb0de6543f939ba0f6`; deployment `2c46a5f1-fdca-4920-b233-cac50f34d7bf`.
+- C06s eksakte offentlige pakke er låst i `release-inputs/production-1721e30`, med alle 651 filhash i `production-baseline.json`. Dette er inngangsgrunnlaget, ikke en ny deployfullmakt.
+- 52 NB/16 EN-fulltekster, valgte illustrasjoner/medier og private grenser bevares. Nye utkast er private. Ingen opphevede passive kort eller generelle fulltekstsperrer gjeninnføres.
+- Privat administrator/Access er separat i `modus-2-preview`; prosjektet er ikke et offentlig utviklingsmål. Ikke flytt, slett eller deploy administrator fra den offentlige flyten.
 
-## Faktisk implementert
+## Enkel prosedyre for hver utviklingspakke
 
-- `scripts/preview-workflow.py`: lokal prepare/verify, rent kildegrunnlag, eksakt SHA, manifestkontroll, kandidat-ZIP med SHA-256, korte maskinlesbare og menneskelesbare rapporter også ved feil. Avviser MODUS.NO, `modus.pages.dev`, offentlig adminrot, feil SHA, ekstra/endret pakkefil og symlenker. To separate eksisterende byggeløp, ingen ny byggearkitektur.
-- Offentlig kontroll: eksisterende isolert bygg, artifact gate, publikasjonssjekk, DES-002-navigasjon og Preview-isolasjon i nettleser.
-- Administratorkontroll: eksisterende separat offline-bygg, streng pakkekontroll og Chromium/WebKit-testmatrise for NB/EN, mobil og desktop, lokal lagring, eksport, gjenoppretting og tilgjengelighet.
-- `tests/preview-workflow.py`: negative tester for mål, kildegrunnlag, pakkemanipulering, feil publiserte bytes og falske Access-svar. Gjenbrukes i eksisterende `npm test` og GitHub Actions; ingen ny CI eller skyhemmelighet.
-- CMS: eksisterende 500 ms automatisk lokal utkastslagring supplert med umiddelbar lagring ved `pagehide` og skjult fane, slik at mobilens suspendering ikke er avhengig av `beforeunload`. Eksisterende vern mot lagringsfeil, ødelagte kopier og revisjonskonflikter består. Nye NB/EN-regresjonstester bekrefter at ingen serverlagring utløses.
+### 1. C07 – utvikle fra faktisk nyeste produksjon
 
-## Bevisste grenser og gjenstående kontroll
+Les siste C06-rapport og AGENTS.md. Klon den aktuelle 2.0-kilden lokalt med full Git-historikk og opprett en isolert `codex/...`-gren. Ikke bruk rotkopien eller gammel GitHub main. Kjør `npm run production:workflow -- status --out /ny/mappe/status` for lesende kontroll av faktisk Cloudflare-prosjekt, canonical deployment, kilde-SHA, offentlig manifest og avslått Git-autodeploy.
 
-Utkast og RED-data ligger fortsatt i localStorage per nettleser og origin, uten enhetssynkronisering. Eksisterende sikkerhetskopieksport og gjenoppretting som bevarer eksisterende kopier gjenbrukes. Automatisk ekstern filbackup er ikke lagt til: lokal nettleserlagring er ikke en uavhengig sikkerhetskopi, og nedlastinger krever brukerhandling. Ta privat eksport før nettleserbytte eller tømming av nettleserdata.
+`production-baseline.json` og den låste pakken må vise samme siste faktiske leveranse. Hvis produksjon er nyere, skal C07 oppdatere grunnlaget fra C06s verifiserte kilde/pakke/rapport før videre arbeid. Ikke rediger baselinefiler for å få gamle byte til å passe, og ikke flytt baseline bakover. Både kilden og den nye baseline-SHA-en må være etterkommere av MODUS 2.0-ankeret `1721e302…`.
 
-Automatisk faglig godkjenning, artikkelpublisering, databaseaktivering, AI, produksjonsdeploy og Access-konfigurasjon er fortsatt deaktivert. Ingen rettighetsuavklarte medier legges til. Lokale pakkekontroller erstatter ikke prosjekteiers innholdsvurdering. Verifikatoren dokumenterer serverte bytes/anonym Access-grense; deployment-ID og Pages-prosjektmetadata må fortsatt kontrolleres med eksisterende autorisert skytilgang. Innlogget Access-kontroll kan ikke erstattes av en anonym test.
+Gjør bare bestilte kildeendringer. Oppgi eksakt forventet offentlig delta i `release-inputs/production-delta.json`: `allowed_changes`, `allowed_additions`, `allowed_removals`. Ingen jokertegn. A03 har tomt offentlig delta. Fremtidig innholdsutvidelse krever også korrekt eierutvalg/versjoner og oppdaterte forventede språk-/artikkeltall; dette er ikke en ny generell sperre for allerede valgt innhold.
 
-GitHub Actions-endringen er bare lokal inntil en separat godkjent push; eksisterende CI-utløsere er uendret. Ingen tidsstyrt Codex-automatisering er opprettet: arbeidet gjelder den kodeutløste leveranseflyten og trenger ingen løpende kvotebruk.
+Det ordinære kildebygget og eksisterende avgrensede produktbygger gjenbrukes. Et rått `dist/` er aldri en publiseringspakke. Dagens produktbygger viderefører historiske, hashbundne overlegg for å reprodusere godkjente bytes; den skal ikke automatisk synkronisere alle kildefiler til offentlig pakke. For en ny produktendring må C07 også overføre den bestilte endringen i produktbyggeren og la delta- og funksjonstestene bekrefte resultatet. Dette hindrer både mistede endringer og utilsiktet redesign.
+
+### 2. C07 – én automatisk ferdigstilling
+
+Commit gjennomgått lokal kilde, og kjør fra den rene isolerte kopien:
+
+```sh
+npm run production:workflow -- prepare --sha FULL_SOURCE_SHA --out /ny/mappe/kandidat
+```
+
+Kommandoen kjører eksisterende `quality:local`: komplett bygg, alle ordinære testgrupper, reproduserbarhet, skala/atlas, navigasjon, release/fulltekster/film, piano og faktisk lydsignal. Deretter kontrolleres det erklærte deltaet mot låst produksjon, privatgrenser, språk/fullteksttall og kildehistorikk. Ny pakke, deterministisk ZIP, QA-kopi og rapport skrives til den nye resultatmappen. Ingen tidligere evidens overskrives. Rent kildegrunnlag kreves både før og etter testene.
+
+`READY_FOR_OWNER_REVIEW` betyr ferdig lokal kandidat, aldri eier-GO eller publisert resultat. Rapporten binder SHA, Git-tre, manifest, QA-evidens og ZIP SHA-256. Pakken arver ingen gammel `deploy_authorized=true` fra historiske leveranser.
+
+### 3. Prosjekteier gir konkret GO; C06 publiserer
+
+C06 registrerer den faktisk mottatte separate eiergodkjenningen i en privat fil utenfor kilden. Filen dokumenterer en godkjenning; å opprette den gir ingen fullmakt i seg selv:
+
+```json
+{
+  "project": "modus",
+  "source_sha": "FULL_SOURCE_SHA",
+  "zip_sha256": "EXACT_CANDIDATE_ZIP_SHA256",
+  "baseline_deployment": "CURRENT_BASELINE_DEPLOYMENT_ID",
+  "owner_approved": true,
+  "approval_reference": "Referanse til prosjekteiers uttrykkelige GO for denne pakken"
+}
+```
+
+C06 kan kjøre lesende førkontroll separat:
+
+```sh
+npm run production:workflow -- preflight --candidate /mappe/kandidat --approval /privat/go.json --out /ny/mappe/forkontroll
+```
+
+Den avviser feil prosjekt, gammel canonical deployment, annen kilde/ZIP, endret QA/pakke, privatinnhold, endret kilde, gammel Git main eller aktivert Git-autodeploy. Anonym Access-grense prøves med GET/HEAD/Range. Et generisk 403 er ikke godkjent Access. Førkontroll er ikke publisering.
+
+Etter separat GO kan C06 bruke én kommando som automatisk etterkontrollerer etter opplastingen:
+
+```sh
+npm run c06:publish -- --candidate /mappe/kandidat --approval /privat/go.json --owner-go-source FULL_SOURCE_SHA --wrangler-js /eksisterende/wrangler/bin/wrangler.js --out /ny/mappe/publisering
+```
+
+Bruk eksisterende installert Wrangler. Ingen `npx`-installasjon kjøres automatisk. Hvis Wrangler finnes på PATH kan `--wrangler-js` utelates. Kommandoen gjentar førkontroll, laster kun den forseglede pakken direkte til `modus`, Cloudflare-gren `main`, og utfører etterkontrollen nedenfor. Dette er ikke Git-push/main-merge og ingen mellomliggende Preview. Sikkerhetskopiert baseline/deployment i førkontrollen er rollback-referanse; rollback krever egen avklart eierinstruks og skal ikke reaktivere Git-deploy.
+
+**A03 implementerer og tester denne C06-kommandoen med testdobler; den kjøres ikke mot Cloudflare i denne oppgaven.**
+
+### 4. Automatisk offentlig etterkontroll
+
+Etterkontrollen leser faktisk nytt deployment-ID fra Cloudflare, kontrollerer riktig prosjekt/canonical/SHA og alle serverbare filhash på den faste produksjonsadressen. `_headers` og `_redirects` er Pages-konfigurasjon og bytehentes ikke som vanlige ressurser; faktisk CSP/nosniff på HTML kontrolleres i stedet. Deployment-originens manifest bindes til samme pakke. Bare eksakt forventet samme-origin HTML-normalisering følges, ingen vilkårlige redirects.
+
+Private/utgåtte offentlige ruter skal være 404. Eksisterende admin-gren og admin-hashadresse skal fortsatt kreve riktig Access-team. Deretter gjenbrukes release-/skala-/lydtestene offentlig i Chromium/WebKit på NB/EN. Offentlig lydtest gjør feil til en hard testfeil, også i den historiske baseline-modusen. Kilde/ZIP og canonical kontrolleres igjen etter alle nettlesertestene. Først `PUBLIC_VERIFIED` er ferdig offentlig teknisk leveranse.
+
+En avbrutt/feilet opplasting eller etterkontroll rapporteres som `PUBLICATION_NOT_VERIFIED`, med `upload_attempted`, eventuell deployment og logger. Det skal ikke påstås at produksjon er uendret etter et opplastingsforsøk. Ikke utfør automatisk ny deploy eller rollback ved en testfeil.
+
+Ved behov kan C06 kjøre etterkontrollen på nytt, uten opplasting:
+
+```sh
+npm run production:workflow -- verify --candidate /mappe/kandidat --deployment ACTUAL_DEPLOYMENT_ID --out /ny/mappe/etterkontroll
+```
+
+C06 avslutter med kort rapport om SHA, ZIP-hash, faktisk deployment, testresultater, avvik og lokal/offentlig status. Før neste pakke oppdateres autoritativt grunnlag fra denne faktiske leveransen. Ingen nye oppgaver eller generelle deployfullmakter opprettes.
+
+## Vern og kontrollgrenser
+
+- Git-autodeploy skal være av på alle Cloudflare-grener; kontrollen stopper ved aktivert produksjon eller Preview. Ikke gjenaktiver Git-integrasjonens deployer.
+- GitHub-workflow inneholder bare tester/evidens, ingen skyhemmelighet eller deploysteg. `main` avvises som releasekilde. CI er bare klargjort lokalt inntil en separat godkjent push.
+- Wrangler-konfigurasjonens standardoutput peker bevisst til en fraværende sperremappe. C06 må oppgi eksakt godkjent pakkemappe; `dist/` er ingen implicit uploadkilde.
+- Metadata støtter både gjeldende dictionary-filmanifest og listeformat, men nye kandidater får ett normalisert versjonert manifest. Doble/nestede/uvalide filnavn, ekstra byte, private filer og symlenker avvises.
+- Ingen nye tjenester, avhengigheter, deployplanleggere eller betalte komponenter. Lokal og offentlig QA installerer ingenting automatisk.
+- Automatisk WebKit er ikke fysisk Safari-/iPhone-/VoiceOver-attest. Anonym Access-kontroll er ikke autentisert administrator-QA eller en policy-/rettighetsrevisjon. Ingen ekte utkast eller lagringsnøkler berøres.
