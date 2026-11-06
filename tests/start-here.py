@@ -20,6 +20,8 @@ for pre,en in [('',False),('en/',True)]:
   parsed=urllib.parse.urlsplit(practice);target=(p.parent/parsed.path).resolve();assert target.is_file() and target.is_relative_to(P.resolve())
   assert not any(x in target.read_text() for x in ['data-publication-hold','id="f03-journey"'])
   assert 'data-quiz-id="'+slug+'"' in s
+  if slug in ('romertall-i-musikk','treklanger-fra-grunnform-til-omvending','bygg-akkorder-i-en-toneart'):
+   assert ('RELATED READING' if en else 'RELATERT FORDYPNING') in s
   rows.append({'locale':'en' if en else 'nb','slug':slug,'practice':practice,'position':i+1})
  # No new links/nav on the 36 unavailable EN placeholders.
  if en:

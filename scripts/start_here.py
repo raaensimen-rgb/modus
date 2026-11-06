@@ -51,6 +51,10 @@ def apply(target):
     practice='../teori.html#moduser';practice_label='Explore scales and modes with a piano' if en else 'Utforsk skalaer og moduser med piano'
     old=m[0];new=old.replace(m[1],practice,1);new=new[:new.index('>',new.index('<a class="button"'))+1]+practice_label+'</a>'
     s=s.replace(old,new,1)
+   editorial=next(x for x in data if x['slug']==slug).get('next_step')
+   canonical=ids[i+1] if i+1<len(ids) else None
+   if editorial and editorial['slug']!=canonical:
+    s=re.sub(r'(<section class="article-next"[^>]*><p class="eyebrow">)[^<]+',lambda m:m[1]+('RELATED READING' if en else 'RELATERT FORDYPNING'),s,count=1)
    index=f'Article {i+1} of {len(ids)}' if en else f'Artikkel {i+1} av {len(ids)}'
    nav='<nav class="start-reading" aria-label="'+('Suggested reading order' if en else 'Anbefalt leserekkefølge')+'"><p class="start-reading-position">'+('Suggested order' if en else 'Anbefalt rekkefølge')+' · '+index+'</p><div class="start-reading-links">'
    if i:

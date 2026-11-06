@@ -27,6 +27,11 @@ def check(base,pkg):
    new=new.replace('article-card start-recommended','article-card').replace('<span class="start-badge">Recommended start</span>','').replace('<span class="start-badge">Anbefalt start</span>','')
   elif re.fullmatch(r'(en/)?artikler/[a-z0-9-]+\.html',n):
    new=re.sub(r'<nav class="start-reading"[\s\S]*?</nav>','',new)
+   # Three inherited editorial detours are labelled as related reading, not the main route.
+   if Path(n).stem in ('romertall-i-musikk','treklanger-fra-grunnform-til-omvending','bygg-akkorder-i-en-toneart'):
+    pattern=r'(<section class="article-next"[^>]*><p class="eyebrow">)[^<]+'
+    original_heading=re.search(pattern,old)[0]
+    new=re.sub(pattern,lambda m:original_heading,new,count=1)
    # Four inherited Dorian practice links point to a held course. Only the link changes.
    if Path(n).stem in ('moduser-og-tonalt-sentrum','dorisk-og-eolisk'):
     pattern=r'(<section class="article-practice">[\s\S]*?)(<a class="button"[^>]*>[\s\S]*?</a>)'
