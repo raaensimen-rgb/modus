@@ -35,3 +35,6 @@ Denne isolerte kopien starter fra siste publiserte d809a7b / produksjonsdeployme
 ## Interaktivt Skalabibliotek – lokalt 2026-11-06
 
 Gjeldende oppdrag viderefører Pakke A med lokal implementering og QA av Skalabiblioteket etter 03-spesifikasjonen i ../delivery/03-fagspesifikasjon.md. Bruk npm run quality:local og lokal package. Nytt scope erstatter Pakke As menyavgrensning for denne isolerte grenen. Ingen push, merge eller deploy. Publiseringspolicy, artikler, privatinnhold, administrator og Access skal bevares. Selve designbildet er ikke tilgjengelig; eksakt bildesammenligning må dokumenteres separat.
+
+## UX-001 – Start her, 2026-11-06
+Denne isolerte grenen bygger på publisert 1721e30/2c46a5f1, ikke eldre historiske kandidater. Oppdraget autoriserer lokal forsideinngang, anbefalt førstegangskort, leserekkefølge/praksisnavigasjon og gjenbruk av eksisterende progresjon. Ingen push, merge, deploy eller administratorendringer. Andre lokale kandidater beholdes separat.

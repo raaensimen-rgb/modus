@@ -8,8 +8,8 @@ const { performance } = require('node:perf_hooks');
 const tests = [
   ["node", "tests/scale-library.cjs"],
   ["node", "tests/navigation-hover.cjs"],
-  ["python3", "tests/scale-package.py"],
-  ["python3", "tests/article-library-coordination.py"],
+  ["python3", "tests/start-here-preservation.py"],
+  ["python3", "tests/start-here.py"],
   ["python3", "tests/teaching-diagrams.py"],
   ["python3", "tests/public-editor-boundary.py"],
   ["node", "tests/audio-load-retry.cjs"],
