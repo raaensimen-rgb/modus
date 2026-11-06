@@ -62,6 +62,6 @@ def apply(target):
    if i+1<len(ids):
     nav+=f'<a rel="next" class="start-reading-next" href="{ids[i+1]}.html"><span>'+('Next recommended article' if en else 'Neste anbefalte artikkel')+'</span><strong>'+titles[ids[i+1]]+'</strong><span aria-hidden="true">→</span></a>'
    nav+='</div><div class="start-reading-tools"><a class="start-practice" href="'+practice+'"><span>'+('Practical exercise' if en else 'Praktisk øvelse')+'</span><strong>'+practice_label+'</strong></a><a href="../artikler.html">'+('Browse all articles' if en else 'Se alle artiklene')+'</a></div></nav>'
-   assert '<section class="related">' in s,p
-   s=s.replace('<section class="related">',nav+'<section class="related">',1);p.write_text(assets(s,reader=True))
+   heading=re.search(r'<header class="reading-header">[\s\S]*?</header>',s);assert heading,p
+   s=s[:heading.end()]+nav+s[heading.end():];p.write_text(assets(s,reader=True))
  print('UX-001 integrated: 52 NB / 16 EN readers; existing practice and progress')

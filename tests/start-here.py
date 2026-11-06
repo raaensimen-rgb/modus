@@ -13,6 +13,7 @@ for pre,en in [('',False),('en/',True)]:
  for i,slug in enumerate(ids):
   p=b/'artikler'/f'{slug}.html';s=p.read_text();nav=re.search(r'<nav class="start-reading"[\s\S]*?</nav>',s)[0]
   prev=re.findall(r'rel="prev"[^>]*href="([^"]+)"',nav);nxt=re.findall(r'rel="next"[^>]*href="([^"]+)"',nav)
+  assert s.index(nav)<s.index('<figure class="reading-illustration">'),(pre,slug,'navigation must follow introduction')
   assert prev==([ids[i-1]+'.html'] if i else []),(pre,slug,'prev')
   assert nxt==([ids[i+1]+'.html'] if i+1<len(ids) else []),(pre,slug,'next')
   assert f'{i+1} '+('of' if en else 'av')+f' {len(ids)}' in nav
