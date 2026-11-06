@@ -144,6 +144,21 @@ class ProductionTests(unittest.TestCase):
             with self.assertRaises(ValueError):w.check_delta(root,c,empty)
             self.assertEqual(w.check_delta(root,c,{**empty,'allowed_changes':['index.html']})['changed'],['index.html'])
 
+    def test_candidate_seals_qa_manifest_zip_and_source_tree(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);directory=root/'candidate';package=directory/'package';package.mkdir(parents=True)
+            c,m=self.fixture(package);m['source_tree']='d'*40;w.write(package/w.MANIFEST,m)
+            (root/'release-inputs').mkdir();w.write(root/'release-inputs/production-delta.json',{'allowed_changes':[],'allowed_additions':[],'allowed_removals':[]})
+            qa={'status':'LOCAL_CANDIDATE_PASSED','sourceSha':SHA};w.write(directory/'qa.json',qa)
+            report={'status':'READY_FOR_OWNER_REVIEW','source_sha':SHA,'source_tree':'d'*40,'manifest_sha256':w.digest((package/w.MANIFEST).read_bytes()),'qa_sha256':w.digest((directory/'qa.json').read_bytes()),'zip_sha256':w.archive(package,directory/'candidate.zip')};w.write(directory/'report.json',report)
+            with patch.object(w,'source_gate',return_value={'source_tree':'d'*40}):
+                w.candidate(root,directory,c)
+                w.write(directory/'qa.json',{**qa,'status':'FAILED'})
+                with self.assertRaises(ValueError):w.candidate(root,directory,c)
+                w.write(directory/'qa.json',qa)
+                w.write(package/w.MANIFEST,{**m,'source_tree':'c'*40})
+                with self.assertRaises(ValueError):w.candidate(root,directory,c)
+
     def test_explicit_exact_owner_approval_required_and_stale_state_fails(self):
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp);a=root/'approval.json'
@@ -174,6 +189,9 @@ class ProductionTests(unittest.TestCase):
             with patch.object(c06.w,'config',return_value=c),patch.object(c06.w,'candidate',return_value=({'source_sha':SHA},{})),patch.object(c06.w,'run_stage') as run,self.assertRaises(ValueError):
                 c06.publish(out,out/'go.json','b'*40,out)
             run.assert_not_called()
+            with patch.object(c06.w,'config',return_value=c),patch.object(c06.w,'candidate',return_value=({'source_sha':SHA},{})),patch.object(c06.w,'preflight',return_value=plan),patch.object(c06.shutil,'which',return_value='/installed/wrangler'),patch.object(c06.w,'run_stage',side_effect=ValueError('upload interrupted')),patch.object(c06.w,'verify') as verify:
+                result=c06.publish(out,out/'go.json',SHA,out)
+                self.assertIsNone(result['deployed']);self.assertTrue(result['upload_attempted']);verify.assert_not_called()
 
     def test_qa_failure_or_timeout_never_becomes_candidate(self):
         with tempfile.TemporaryDirectory() as temp:

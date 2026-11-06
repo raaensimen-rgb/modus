@@ -34,6 +34,7 @@ def publish(candidate, approval, confirmed_sha, out, wrangler_js=None):
         w.candidate(w.ROOT,candidate,c)
         command=executable+plan['command'][1:]
         result['upload_attempted']=True
+        result['deployed']=None  # Unknown until Wrangler returns and the server is read back.
         env={k:v for k,v in os.environ.items() if not k.startswith(('MODUS_','CF_PAGES_','CONTEXT'))}
         env['CLOUDFLARE_ACCOUNT_ID']=c['account_id']
         w.run_stage(w.ROOT,command,out/'upload.log',env)
