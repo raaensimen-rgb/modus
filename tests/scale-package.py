@@ -25,6 +25,7 @@ def check(base,candidate):
    locale_root=candidate/'en' if n.startswith('en/') else candidate
    prefix=os.path.relpath(locale_root,(candidate/n).parent).replace(os.sep,'/');prefix='' if prefix=='.' else prefix+'/'
    s=add_scale_library_link(s,prefix,english=n.startswith('en/'))
+   if n in ('en/musikkart.html','en/laeringssti.html','en/f03-laeringsreise.html'):s=s.replace('Læringsstien','Learning path')
    assert after.decode()==s,n
   else:assert after==before,n
  for pre in ('','en/'):

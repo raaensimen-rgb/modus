@@ -128,6 +128,7 @@ ATLAS_EN = {
     "Utforsk intervallutkastet ↗": "Explore the intervals draft ↗",
     "Natur som inspirasjon. Musikk som uttrykk.": "Nature as inspiration. Music as expression.",
     "Læringsstien ↗": "Learning path ↗",
+    "Læringsstien": "Learning path",
     "Lyd og tonehøyde": "Sound and pitch", "Puls, takt og rytme": "Pulse, metre and rhythm",
     "Tonenavn og intervaller": "Note names and intervals", "Durskalaen": "The major scale",
     "Tonearter og kvintsirkelen": "Keys and the circle of fifths", "Moll og treklanger": "Minor and triads",
