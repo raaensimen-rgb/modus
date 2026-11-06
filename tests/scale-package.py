@@ -22,7 +22,8 @@ def check(base,candidate):
    s=re.sub(rb'navigation\.[a-f0-9]{10}\.js',asset.encode(),before).decode()
    if n in ('teori.html','en/teori.html'):s=s.replace('<script src="theory.js','<script src="scale-model.js"></script><script src="theory.js')
    if n in ('musikkart.html','en/musikkart.html'):s=s.replace('<section class="map-next">','<p><a href="skalabibliotek.html">'+('Interactive Scale Library' if n.startswith('en/') else 'Interaktivt Skalabibliotek')+' ↗</a></p><section class="map-next">')
-   prefix=os.path.relpath(candidate,(candidate/n).parent).replace(os.sep,'/');prefix='' if prefix=='.' else prefix+'/'
+   locale_root=candidate/'en' if n.startswith('en/') else candidate
+   prefix=os.path.relpath(locale_root,(candidate/n).parent).replace(os.sep,'/');prefix='' if prefix=='.' else prefix+'/'
    s=add_scale_library_link(s,prefix,english=n.startswith('en/'))
    assert after.decode()==s,n
   else:assert after==before,n

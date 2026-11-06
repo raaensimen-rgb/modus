@@ -39,7 +39,8 @@ for pre in ('','en/'):
  (O/pre/'skalabibliotek.html').write_text(shell)
 # Apply the shared destination on every existing public header, including article readers.
 for p in O.rglob('*.html'):
- prefix=os.path.relpath(O,p.parent).replace(os.sep,'/');prefix='' if prefix=='.' else prefix+'/'
+ locale_root=O/'en' if p.relative_to(O).parts[0]=='en' else O
+ prefix=os.path.relpath(locale_root,p.parent).replace(os.sep,'/');prefix='' if prefix=='.' else prefix+'/'
  p.write_text(add_scale_library_link(p.read_text(),prefix,english=p.relative_to(O).parts[0]=='en',active=p.name=='skalabibliotek.html'))
 h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 old={p.relative_to(B).as_posix():h(p) for p in B.rglob('*') if p.is_file()};new={p.relative_to(O).as_posix():h(p) for p in O.rglob('*') if p.is_file()}
