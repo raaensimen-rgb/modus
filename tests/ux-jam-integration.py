@@ -1,6 +1,6 @@
 """Lock combined product against independently reviewed upstream bytes, with negative cases."""
 from pathlib import Path
-import hashlib,json,subprocess,tempfile,shutil
+import hashlib,json,subprocess,tempfile,shutil,re
 R=Path(__file__).resolve().parents[1];P=R.parent/'package';spec=json.loads((R/'release-inputs/ux-jam-integration.json').read_text())
 h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 def check_legacy(pkg):
@@ -23,9 +23,9 @@ def check(pkg):
 result=check(P)
 with tempfile.TemporaryDirectory() as tmp:
  c=Path(tmp)/'package';shutil.copytree(P,c)
- mutations=[('index.html',(R/'release-inputs/production-1721e30/index.html').read_bytes()),('artikler/dorisk-og-eolisk.html',(P/'artikler/dorisk-og-eolisk.html').read_text().replace(spec['jam_sections']['artikler/dorisk-og-eolisk.html'],'').encode()),('content/private-draft.json',b'private'),('en/artikler/intervallomvendinger.html',b'unauthorized fulltext'),('article-quiz.js',b'changed'),(spec['added_assets'][0],b'changed')]
+ mutations=[('index.html',(R/'release-inputs/production-1721e30/index.html').read_bytes()),('artikler/dorisk-og-eolisk.html',re.sub(r'<section class="related" data-article-jam="[^" ]+".*?</section>','',(P/'artikler/dorisk-og-eolisk.html').read_text(),count=1).encode()),('content/private-draft.json',b'private'),('en/artikler/intervallomvendinger.html',b'unauthorized fulltext'),('article-quiz.js',b'changed'),(spec['added_assets'][0],b'changed')]
  for n,data in mutations:
-  p=c/n;old=p.read_bytes() if p.exists() else None;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(data)
+  p=c/n;old=p.read_bytes() if p.exists() else None;assert data!=old,'Negative test must actually mutate '+n;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(data)
   try:check(c)
   except AssertionError:pass
   else:raise AssertionError('Unsafe integrated mutation accepted: '+n)
