@@ -31,3 +31,7 @@ Se docs/intro-film-button-visibility-20261105.txt. Brukerens lydproblem ble avkl
 ## Pakke A – gjeldende lokale oppdrag 2026-11-06
 
 Denne isolerte kopien starter fra siste publiserte d809a7b / produksjonsdeployment 536b0e35 i prosjekt modus. Kun lokal menyretting, bygg-/testsamordning og kandidatleveranse er autorisert. Ingen push, merge, deploy, GitHub-endringer eller nye agenter. Baseline i release-inputs/published-d809a7b er låst og skal aldri redigeres. Gamle Preview-mål og kandidatbygg er historikk; bruk npm run quality:local som samlet kontroll. Ikke endre design, artikler, lyd, film, lagringsnøkler, Access eller private utkast.
+
+## Interaktivt Skalabibliotek – lokalt 2026-11-06
+
+Gjeldende oppdrag viderefører Pakke A med lokal implementering og QA av Skalabiblioteket etter 03-spesifikasjonen i ../delivery/03-fagspesifikasjon.md. Bruk npm run quality:local og lokal package. Nytt scope erstatter Pakke As menyavgrensning for denne isolerte grenen. Ingen push, merge eller deploy. Publiseringspolicy, artikler, privatinnhold, administrator og Access skal bevares. Selve designbildet er ikke tilgjengelig; eksakt bildesammenligning må dokumenteres separat.

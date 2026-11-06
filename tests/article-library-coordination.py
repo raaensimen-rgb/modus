@@ -22,7 +22,7 @@ for locale,pre,n in [('nb','',52),('en','en/',16)]:
   slug=a['slug'];p=P/pre/'images/articles'/(slug+'.svg');diagram=P/pre/'images/teaching-diagrams'/(slug+'.svg');assert p.exists() and diagram.exists();rows.append({'slug':slug,'locale':locale,'card_image_sha256':h(p),'teaching_diagram_sha256':h(diagram),'reader_body_unchanged':True})
  for a in articles[16:]:assert not (P/'en/images/teaching-diagrams'/(a['slug']+'.svg')).exists()
  assert 'data-preview-unavailable' in (P/pre/'redaktor.html').read_text()
- for f in ['app.js','chord-tool.js','piano-interaction.js','theory.js','midi.js','account.js','article-quiz.js','articles.js','musikkart.js','learning-journey.js','preview-guard.js']:
+ for f in ['app.js','chord-tool.js','piano-interaction.js','midi.js','account.js','article-quiz.js','articles.js','musikkart.js','learning-journey.js','preview-guard.js']:
   if (OLD/pre/f).exists():assert (OLD/pre/f).read_bytes()==(P/pre/f).read_bytes(),pre+f
 assert json.loads((P/'cms-seed.json').read_text())==[]
 for p in P.rglob('*'):

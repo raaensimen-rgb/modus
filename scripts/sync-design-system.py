@@ -64,4 +64,5 @@ else:
             shutil.copy2(source, DIST / name)
         else:
             (DIST / name).write_text(holding_page(active='course' if name == 'laer-dorisk.html' else 'path' if name == 'grunnstudier.html' else 'lesson'))
+    shutil.copy2(ROOT / 'scale-model.js', DIST / 'scale-model.js')
     print("MODUS public frontend pages, styles, scripts, images and audio synced to dist.")

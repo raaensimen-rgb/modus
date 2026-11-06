@@ -12,7 +12,7 @@ const theoryPiano=window.ModusPiano.create({element:T('theoryKeyboard'),name:m=>
 function initTheoryAudio(){if(!ta){ta=new(window.AudioContext||window.webkitAudioContext)();output=ta.createGain();output.gain.value=.38;const compressor=ta.createDynamicsCompressor();compressor.threshold.value=-16;compressor.ratio.value=3;output.connect(compressor);compressor.connect(ta.destination);}}
 T('theoryKey').innerHTML=TK.map((k,i)=>`<option value="${i}">${k[0]}</option>`).join('');T('theoryKey').value=ts.key;
 const rootName=()=>TK[ts.key][0],rootPC=()=>TK[ts.key][1];
-function spellFrom(name,pc,semitones,letterOffset){const letters=['C','D','E','F','G','A','B'],natural=[0,2,4,5,7,9,11],li=(letters.indexOf(name[0])+letterOffset)%7;let diff=(pc+semitones-natural[li]+120)%12;if(diff>6)diff-=12;return letters[li]+(diff>0?'♯'.repeat(diff):'♭'.repeat(-diff));}
+const spellFrom=window.ModusScales.spell;
 function scaleNames(mode){return TM[mode].steps.map((step,i)=>spellFrom(rootName(),rootPC(),step,i));}
 function chordData(pc,name,q){const quality=CQ[q];return {key:TK.findIndex(k=>k[1]===pc),q,rootName:name,name:name+quality.suffix,notes:quality.ints.map(n=>48+pc+n),labels:quality.ints.map((n,i)=>spellFrom(name,pc,n,i*2)),pcs:quality.ints.map(n=>(pc+n)%12),formula:quality.formula};}
 function noteCards(labels,formula){return `<div class="note-cards" style="grid-template-columns:repeat(${labels.length},minmax(0,1fr))">${labels.map((n,i)=>`<div><strong>${n}</strong><small>${formula[i]}</small></div>`).join('')}</div>`;}
