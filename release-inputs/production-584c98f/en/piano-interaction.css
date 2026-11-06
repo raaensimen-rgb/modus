@@ -1,0 +1,14 @@
+/* Active movement is independent of the permanent tonic/scale colours. */
+.interactive-piano [data-midi]{cursor:pointer;touch-action:none;}
+.interactive-piano [data-piano-key]{transition:transform 65ms ease;}
+.interactive-piano [data-piano-key]:has(.piano-playing){transform:translateY(2px);}
+.interactive-piano .piano-playing{filter:brightness(.86);stroke:#d7f48c;stroke-width:3;}
+.interactive-piano [data-midi]:focus-visible{outline:2px solid #d7f48c;outline-offset:-3px;}
+.interactive-piano [data-note-midi],.interactive-piano .piano-active-label{pointer-events:none;}
+.interactive-piano .piano-active-label{display:none;}
+.interactive-piano .piano-active-label circle{fill:#365027;stroke:#d7f48c;stroke-width:2;}
+.interactive-piano .piano-active-label text{fill:#fff;font:700 13px sans-serif;}
+.interactive-piano .piano-playing + .piano-active-label{display:block;}
+.interactive-piano [data-note-midi].piano-tone-active{visibility:hidden;}
+.interactive-piano button.piano-playing,.interactive-piano .mini-key.piano-playing{box-shadow:inset 0 0 0 3px #365027;transform:translateY(2px);}
+@media(prefers-reduced-motion:reduce){.interactive-piano [data-piano-key]{transition:none;}.interactive-piano [data-piano-key]:has(.piano-playing),.interactive-piano button.piano-playing,.interactive-piano .mini-key.piano-playing{transform:none;}}

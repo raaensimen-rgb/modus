@@ -1,12 +1,12 @@
 # PL-AUTO-001 – én MODUS 2.0-arbeidsflyt
 
-Gjelder A03, 6. november 2026. C07 utvikler og ferdigstiller lokalt; C06 utfører bare separat eiergodkjent publisering. Automatiske tester og offentlig etterkontroll følger samme versjonsbundne pakke. Ingen oppgave trenger ekstra mellomstasjoner eller nye tjenester.
+Gjelder A03/A04/T05, oppdatert av C10 7. november 2026. C07 utvikler og ferdigstiller lokalt; C06 utfører bare separat eiergodkjent publisering. Automatiske tester og offentlig etterkontroll følger samme versjonsbundne pakke. Ingen oppgave trenger ekstra mellomstasjoner eller nye tjenester.
 
 ## Autoritativt grunnlag
 
 - Offentlig prosjekt: `modus`, ID `befea306-6ef6-4282-9fbb-a754c93e6d1b`, https://modus-4ye.pages.dev/.
-- Produksjonskilde: `1721e302a3880804073e0dcb0de6543f939ba0f6`; deployment `2c46a5f1-fdca-4920-b233-cac50f34d7bf`.
-- C06s eksakte offentlige pakke er låst i `release-inputs/production-1721e30`, med alle 651 filhash i `production-baseline.json`. Dette er inngangsgrunnlaget, ikke en ny deployfullmakt.
+- Produksjonskilde: `584c98f06843e6981e3009cbfbb9bdda5ba34169`; deployment `73e46085-18ca-495a-9b3e-5ee120ba4283`.
+- C06s eksakte offentlige pakke er låst i `release-inputs/production-584c98f`, med alle 660 filhash i `production-baseline.json`. Dette er inngangsgrunnlaget, ikke en ny deployfullmakt.
 - 52 NB/16 EN-fulltekster, valgte illustrasjoner/medier og private grenser bevares. Nye utkast er private. Ingen opphevede passive kort eller generelle fulltekstsperrer gjeninnføres.
 - Privat administrator/Access er separat i `modus-2-preview`; prosjektet er ikke et offentlig utviklingsmål. Ikke flytt, slett eller deploy administrator fra den offentlige flyten.
 
@@ -16,9 +16,9 @@ Gjelder A03, 6. november 2026. C07 utvikler og ferdigstiller lokalt; C06 utføre
 
 Les siste C06-rapport og AGENTS.md. Klon den aktuelle 2.0-kilden lokalt med full Git-historikk og opprett en isolert `codex/...`-gren. Ikke bruk rotkopien eller gammel GitHub main. Kjør `npm run production:workflow -- status --out /ny/mappe/status` for lesende kontroll av faktisk Cloudflare-prosjekt, canonical deployment, kilde-SHA, offentlig manifest og avslått Git-autodeploy.
 
-`production-baseline.json` og den låste pakken må vise samme siste faktiske leveranse. Hvis produksjon er nyere, skal C07 oppdatere grunnlaget fra C06s verifiserte kilde/pakke/rapport før videre arbeid. Ikke rediger baselinefiler for å få gamle byte til å passe, og ikke flytt baseline bakover. Både kilden og den nye baseline-SHA-en må være etterkommere av MODUS 2.0-ankeret `1721e302…`.
+`production-baseline.json` og den låste pakken må vise samme siste faktiske leveranse. Hvis produksjon er nyere, skal C07 oppdatere grunnlaget fra C06s verifiserte kilde/pakke/rapport før videre arbeid. Ikke rediger baselinefiler for å få gamle byte til å passe, og ikke flytt baseline bakover. Både kilden og den nye baseline-SHA-en må være etterkommere av MODUS 2.0-ankeret `584c98f…`.
 
-Gjør bare bestilte kildeendringer. Oppgi eksakt forventet offentlig delta i `release-inputs/production-delta.json`: `allowed_changes`, `allowed_additions`, `allowed_removals`. Ingen jokertegn. A03 har tomt offentlig delta. Fremtidig innholdsutvidelse krever også korrekt eierutvalg/versjoner og oppdaterte forventede språk-/artikkeltall; dette er ikke en ny generell sperre for allerede valgt innhold.
+Gjør bare bestilte kildeendringer. Oppgi eksakt forventet offentlig delta i `release-inputs/production-delta.json`: `allowed_changes`, `allowed_additions`, `allowed_removals`. Ingen jokertegn. C10 har tomt offentlig produktdelta. Kun kandidatmanifestets kilde-, QA- og baselineopplysninger endres; ingen produktfil endres. Fremtidig innholdsutvidelse krever også korrekt eierutvalg/versjoner og oppdaterte forventede språk-/artikkeltall; dette er ikke en ny generell sperre for allerede valgt innhold.
 
 Det ordinære kildebygget og eksisterende avgrensede produktbygger gjenbrukes. Et rått `dist/` er aldri en publiseringspakke. Dagens produktbygger viderefører historiske, hashbundne overlegg for å reprodusere godkjente bytes; den skal ikke automatisk synkronisere alle kildefiler til offentlig pakke. For en ny produktendring må C07 også overføre den bestilte endringen i produktbyggeren og la delta- og funksjonstestene bekrefte resultatet. Dette hindrer både mistede endringer og utilsiktet redesign.
 
@@ -30,7 +30,9 @@ Commit gjennomgått lokal kilde, og kjør fra den rene isolerte kopien:
 npm run production:workflow -- prepare --sha FULL_SOURCE_SHA --out /ny/mappe/kandidat
 ```
 
-Kommandoen kjører eksisterende `quality:local`: komplett bygg, alle ordinære testgrupper, reproduserbarhet, skala/atlas, navigasjon, release/fulltekster/film, piano og faktisk lydsignal. Deretter kontrolleres det erklærte deltaet mot låst produksjon, privatgrenser, språk/fullteksttall og kildehistorikk. Ny pakke, deterministisk ZIP, QA-kopi og rapport skrives til den nye resultatmappen. Ingen tidligere evidens overskrives. Rent kildegrunnlag kreves både før og etter testene.
+Kommandoen kjører eksisterende `quality:local`: komplett bygg, alle ordinære testgrupper, to komplette byte-identiske bygg og deterministiske ZIP-er, skala/atlas, navigasjon, release/fulltekster/film, piano og faktisk lydsignal. Deretter kontrolleres det erklærte deltaet mot låst produksjon, privatgrenser, språk/fullteksttall og kildehistorikk. Låste release-inputs er sporet i samme kilde; det kreves ingen historiske søskenmapper. Node-avhengigheter installeres fra package-lock.json med npm ci og Chromium/WebKit må være tilgjengelige på forhånd. Arbeidsflyten installerer ingenting og deployer ingenting. `delivery/reproducibility.json` inneholder filkart, baseline og ZIP-bevis fra de to komplette produktbyggene.
+
+Ny pakke, deterministisk ZIP, QA-kopi og rapport skrives til den nye resultatmappen. Ingen tidligere evidens overskrives. Rent kildegrunnlag kreves både før og etter testene.
 
 `READY_FOR_OWNER_REVIEW` betyr ferdig lokal kandidat, aldri eier-GO eller publisert resultat. Rapporten binder SHA, Git-tre, manifest, QA-evidens og ZIP SHA-256. Pakken arver ingen gammel `deploy_authorized=true` fra historiske leveranser.
 
@@ -91,3 +93,10 @@ C06 avslutter med kort rapport om SHA, ZIP-hash, faktisk deployment, testresulta
 - Metadata støtter både gjeldende dictionary-filmanifest og listeformat, men nye kandidater får ett normalisert versjonert manifest. Doble/nestede/uvalide filnavn, ekstra byte, private filer og symlenker avvises.
 - Ingen nye tjenester, avhengigheter, deployplanleggere eller betalte komponenter. Lokal og offentlig QA installerer ingenting automatisk.
 - Automatisk WebKit er ikke fysisk Safari-/iPhone-/VoiceOver-attest. Anonym Access-kontroll er ikke autentisert administrator-QA eller en policy-/rettighetsrevisjon. Ingen ekte utkast eller lagringsnøkler berøres.
+
+
+## C10: gjenta lokal leveranse fra ren kopi
+
+Klon den leverte lokale kilden eller Git-bundlen med full historikk til en ny oppdragsmappe med `source` som undermappe, og bruk grenen `codex/c10-release-workflow`. Installer låste avhengigheter og eksisterende Playwright-nettlesere før kontrollen. Kjør kommandoen over med faktisk full `git rev-parse HEAD` og en ny resultatmappe utenfor source. Alle baselinefiler følger kildecommiten. `check --candidate /mappe/kandidat --out /ny/mappe/kontroll` kontrollerer SHA/tre, filkart, privatgrense, QA, manifest og ZIP på nytt lokalt.
+
+C10 oppdaterer og tester bare lokale utviklerverktøy. Den eksisterende C06-publiseringsfunksjonen er historisk kode og er urørt; ingen ny opplasting, deployfunksjon eller fullmakt inngår. Ikke kjør den som del av denne pakken. Offentlig `verify` brukes først etter en separat autorisert faktisk publisering; C10s lokale kandidat skal aldri omtales som publisert.

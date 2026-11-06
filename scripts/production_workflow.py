@@ -19,7 +19,7 @@ import urllib.request
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-ANCHOR = '1721e302a3880804073e0dcb0de6543f939ba0f6'
+ANCHOR = '584c98f06843e6981e3009cbfbb9bdda5ba34169'
 MANIFEST = 'release-manifest.json'
 PUBLIC = 'https://modus-4ye.pages.dev'
 PROJECT_ID = 'befea306-6ef6-4282-9fbb-a754c93e6d1b'
@@ -113,8 +113,8 @@ def source_gate(root, sha, c):
     if not SHA.fullmatch(sha) or git(root, 'rev-parse', 'HEAD') != sha:
         raise ValueError('Source must match exact reviewed SHA')
     branch = git(root, 'branch', '--show-current')
-    if not branch or branch in ('main', 'master'):
-        raise ValueError('Use an isolated development branch, never Git main')
+    if not re.fullmatch(r'codex/[A-Za-z0-9][A-Za-z0-9._/-]*', branch):
+        raise ValueError('Use an isolated codex/ development branch, never Git main')
     for ancestor in (ANCHOR, c['source_sha']):
         if subprocess.run(['git', 'merge-base', '--is-ancestor', ancestor, sha], cwd=root, capture_output=True).returncode:
             raise ValueError('Source does not descend from authoritative MODUS 2.0 production')
@@ -125,7 +125,7 @@ def source_gate(root, sha, c):
 
 def public_boundary(package, files, c):
     forbidden = re.compile(r'(^|/)(?:content|editorial|cms|docs|tests|functions|private|release-inputs|\.git)(?:/|$)|(^|/)(?:\.env[^/]*|admin-app\.js|admin-package\.json|editor(?:-admin)?\.js|_worker\.js|library-draft-backup\.json)$')
-    secrets = re.compile(r'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|sb_secret_[A-Za-z0-9_-]{12,}|sb_publishable_[A-Za-z0-9_-]{10,}|[a-z0-9-]+\.supabase\.(?:co|in)|cms_save_draft|cms_publish_article', re.I)
+    secrets = re.compile(r'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|sb_secret_[A-Za-z0-9_-]{12,}|sb_publishable_[A-Za-z0-9_-]{10,}|(?:sk_live_|ghp_|github_pat_)[A-Za-z0-9_]{16,}|[a-z0-9-]+\.supabase\.(?:co|in)|cms_save_draft|cms_publish_article', re.I)
     for name in files:
         if forbidden.search(name) or name.endswith('media/modus-introduksjon.mp4'):
             raise ValueError('Private/retired resource in public package: ' + name)

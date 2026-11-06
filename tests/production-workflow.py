@@ -30,7 +30,7 @@ class ProductionTests(unittest.TestCase):
 
     def test_real_published_baseline_and_legacy_dictionary(self):
         c=w.config();self.assertEqual(c['source_sha'],w.ANCHOR)
-        self.assertEqual(len(c['files']),651)
+        self.assertEqual(len(c['files']),660)
         m=w.read(w.ROOT/c['package']/w.MANIFEST)
         self.assertEqual(w.file_map(m['files']),{n:h for n,h in c['files'].items() if n!=w.MANIFEST})
         w.public_boundary(w.ROOT/c['package'],c['files'],c)
@@ -82,7 +82,7 @@ class ProductionTests(unittest.TestCase):
         clean=[SHA,'codex/c07','', 'tree']
         with patch.object(w,'git',side_effect=clean),patch.object(w.subprocess,'run',return_value=subprocess.CompletedProcess([],0)):
             self.assertEqual(w.source_gate(Path('.'),SHA,c)['source_tree'],'tree')
-        for values in [[SHA,'main'],[SHA,''],[SHA,'codex/c07',' M source.js']]:
+        for values in [[SHA,'main'],[SHA,''],[SHA,'feature/unreviewed'],[SHA,'codex/c07',' M source.js']]:
             with patch.object(w,'git',side_effect=values),patch.object(w.subprocess,'run',return_value=subprocess.CompletedProcess([],0)),self.assertRaises(ValueError):w.source_gate(Path('.'),SHA,c)
         with patch.object(w,'git',side_effect=[SHA,'codex/old']),patch.object(w.subprocess,'run',return_value=subprocess.CompletedProcess([],1)),self.assertRaises(ValueError):w.source_gate(Path('.'),SHA,c)
 
@@ -143,6 +143,32 @@ class ProductionTests(unittest.TestCase):
             (root/'index.html').write_text('unexpected redesign')
             with self.assertRaises(ValueError):w.check_delta(root,c,empty)
             self.assertEqual(w.check_delta(root,c,{**empty,'allowed_changes':['index.html']})['changed'],['index.html'])
+
+    def test_inventory_loss_and_rehashed_secrets_are_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);c,m=self.fixture(root)
+            empty={'allowed_changes':[],'allowed_additions':[],'allowed_removals':[]}
+            (root/'index.html').unlink()
+            with self.assertRaises(ValueError):w.check_delta(root,c,empty)
+            for secret in ['-----BEGIN PRIVATE KEY-----','sb_secret_'+'x'*24,'sk_live_'+'x'*24,'ghp_'+'x'*24]:
+                (root/'index.html').write_text(secret)
+                m['files']['index.html']=w.digest(secret.encode());w.write(root/w.MANIFEST,m)
+                with self.subTest(secret=secret[:12]),self.assertRaises(ValueError):w.manifest(root,SHA,c)
+
+    def test_baseline_tampering_and_wrong_identity_are_rejected(self):
+        # Copy only the baseline, not a historical sibling checkout.
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);original=w.read(w.ROOT/'release-inputs/production-baseline.json')
+            (root/'release-inputs').mkdir()
+            shutil.copytree(w.ROOT/original['package'],root/original['package'])
+            lock=root/'release-inputs/production-baseline.json'
+            with patch.object(w.subprocess,'run',return_value=subprocess.CompletedProcess([],0)):
+                for field,value in [('project','modus-2-preview'),('source_sha','short'),('origin','https://modus.no')]:
+                    w.write(lock,{**original,field:value})
+                    with self.subTest(field=field),self.assertRaises(ValueError):w.config(root)
+                w.write(lock,original)
+                (root/original['package']/'index.html').write_text('tampered baseline')
+                with self.assertRaises(ValueError):w.config(root)
 
     def test_candidate_seals_qa_manifest_zip_and_source_tree(self):
         with tempfile.TemporaryDirectory() as temp:
