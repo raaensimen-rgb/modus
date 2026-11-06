@@ -1,0 +1,54 @@
+/* Shared Study/Tools hero. Existing homepage assets, no navigation selectors. */
+.shared-hero-page :is(.subpage-hero,.journey-shell>header) {
+ position:relative!important;isolation:isolate;overflow:hidden;display:flex!important;align-items:center;
+ box-sizing:border-box;min-height:380px!important;height:auto!important;width:100%;max-width:none!important;
+ padding:42px 5% 48px!important;margin-block:0 28px!important;border:0!important;border-radius:0!important;
+ background:#001917!important;color:#fff!important;
+}
+.shared-hero-page :is(.subpage-hero,.journey-shell>header)::before {
+ content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
+ background:linear-gradient(90deg,#001817f5 0%,#001817de 34%,#00181788 58%,#00181700 80%),linear-gradient(0deg,#001917a6,transparent 35%),url('images/modus-design-landscape.png') center 48%/cover no-repeat;
+}
+.shared-hero-page :is(.subpage-hero,.journey-shell>header)::after {
+ content:"";position:absolute!important;inset:auto -3% 15px auto!important;width:70%!important;height:150px!important;
+ z-index:-1;pointer-events:none;border-radius:0!important;opacity:.8;
+ background:url('images/modus-continuous-wave.svg') center/100% 100% no-repeat!important;
+ mask-image:linear-gradient(90deg,transparent,#000 20%,#000 90%,transparent);
+}
+.shared-hero-page .subpage-hero-copy {width:min(100%,700px);min-width:0;position:relative;z-index:1}
+.shared-hero-page :is(.subpage-hero,.journey-shell>header) h1 {
+ font:300 clamp(34px,3.6vw,58px)/1.12 Manrope,'DM Sans',sans-serif!important;letter-spacing:-.025em!important;
+ color:#fff!important;max-width:24ch!important;margin:10px 0 20px!important;overflow-wrap:break-word;
+}
+.shared-hero-page :is(.subpage-hero,.journey-shell>header) h1 em {font:inherit!important;font-style:normal!important;color:#ffe329!important}
+.shared-hero-page :is(.subpage-hero,.journey-shell>header) p {max-width:60ch!important;font-size:16px!important;line-height:1.7!important;color:#fff!important;margin-block:0 20px!important}
+.shared-hero-page :is(.subpage-hero,.journey-shell>header) :is(.eyebrow,.path-eyebrow) {font-size:12px!important;letter-spacing:.17em;color:#ffe329!important;margin:0!important}
+.shared-hero-page :is(.subpage-hero,.journey-shell>header) :is(.draft,.hero-summary span) {color:#fff!important}
+.shared-hero-page :is(.subpage-hero,.journey-shell>header) .hero-summary strong {color:#ffe329!important}
+.shared-hero-page :is(.subpage-hero,.journey-shell>header) a {display:inline-flex;align-items:center;justify-content:center;min-height:44px;box-sizing:border-box;padding:10px 20px;border:1px solid #dbe5df;border-radius:99px;color:#fff!important;font-size:14px;line-height:1.5;text-decoration:none}
+.shared-hero-page :is(.subpage-hero,.journey-shell>header) a:is(.button,.path-action):not(.secondary) {background:#ffe329!important;border-color:#ffe329!important;color:#071a16!important}
+.shared-hero-page :is(.subpage-hero,.journey-shell>header) a.secondary {background:#00191780!important;color:#fff!important}
+.shared-hero-page :is(.subpage-hero,.journey-shell>header) a:focus-visible {outline:3px solid #ffe329!important;outline-offset:4px}
+.shared-hero-page main.publication-hold {padding:0;max-width:1536px;margin-block:0}
+.shared-hero-page .journey-shell>:is(.subpage-hero,.journey-shell>header) {display:block!important}
+@media(max-width:760px){
+ .shared-hero-page :is(.subpage-hero,.journey-shell>header) {min-height:400px!important;padding:30px 6% 76px!important}
+ .shared-hero-page :is(.subpage-hero,.journey-shell>header)::before {background:linear-gradient(90deg,#001817f5,#001817ca 65%,#00181799),url('images/modus-design-landscape.png') 63% center/cover no-repeat}
+ .shared-hero-page :is(.subpage-hero,.journey-shell>header)::after {width:135%!important;right:-30%!important;bottom:2px!important;height:100px!important;opacity:.6}
+ .shared-hero-page :is(.subpage-hero,.journey-shell>header) h1 {font-size:clamp(30px,8vw,40px)!important}
+ .shared-hero-page :is(.subpage-hero,.journey-shell>header) p {font-size:15px!important}
+ .shared-hero-page :is(.subpage-hero,.journey-shell>header) .path-actions {gap:12px}
+}
+html:is([data-theme=readable],[data-theme=contrast]) .shared-hero-page :is(.subpage-hero,.journey-shell>header) {background:var(--bg)!important;color:var(--ink)!important;border-bottom:1px solid var(--line)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .shared-hero-page :is(.subpage-hero,.journey-shell>header)::before,
+html:is([data-theme=readable],[data-theme=contrast]) .shared-hero-page :is(.subpage-hero,.journey-shell>header)::after {display:none}
+html:is([data-theme=readable],[data-theme=contrast]) .shared-hero-page :is(.subpage-hero,.journey-shell>header) :is(h1,h1 em,p,.eyebrow,.path-eyebrow,.draft,.hero-summary span,.hero-summary strong) {color:var(--ink)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .shared-hero-page :is(.subpage-hero,.journey-shell>header) a {background:var(--bg)!important;color:var(--ink)!important;border-color:var(--ink)!important}
+html:is([data-theme=readable],[data-theme=contrast]) .shared-hero-page :is(.subpage-hero,.journey-shell>header) a:focus-visible {outline-color:var(--ink)!important}
+@media(forced-colors:active){.shared-hero-page :is(.subpage-hero,.journey-shell>header)::before,.shared-hero-page :is(.subpage-hero,.journey-shell>header)::after{display:none}}
+
+/* MODUS+ retains its own subtitle and planned-membership notice. */
+.shared-hero-page .subpage-hero .membership-hero-subtitle {color:#fff!important}
+.shared-hero-page .subpage-hero .membership-hero-subtitle em,
+.shared-hero-page .subpage-hero .membership-plus-mark {color:#ffe329!important}
+html:is([data-theme=readable],[data-theme=contrast]) .shared-hero-page .subpage-hero :is(.membership-hero-subtitle,.membership-hero-subtitle em,.membership-plus-mark) {color:var(--ink)!important}

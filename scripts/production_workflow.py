@@ -216,7 +216,7 @@ def prepare(root, sha, out, c):
     qa = read(root.parent/'delivery/REPORT.json')
     if qa.get('status')!='LOCAL_CANDIDATE_PASSED' or qa.get('sourceSha')!=sha or not qa.get('stages') or not all(v['status']=='passed' for v in qa['stages']):
         raise ValueError('Complete automatic QA did not pass for this SHA')
-    required = {'build','static','reproducibility','scales-browser','navigation','release','piano','audio','article-jam'}
+    required = {'build','static','reproducibility','scales-browser','navigation','release','piano','audio','article-jam','ux-flow','ux-accessibility','ux-no-js','integration'}
     if {v['name'] for v in qa['stages']} != required or qa.get('ordinaryGroups',{}).get('failed') != 0:
         raise ValueError('Incomplete automatic QA evidence')
     source_gate(root,sha,c)

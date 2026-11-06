@@ -17,7 +17,11 @@ const stages=[
  ['release',['node','tests/release-browser.cjs']],
  ['piano',['node','tests/piano-browser.cjs']],
  ['audio',['node','tests/audio-signal-browser.cjs']],
- ['article-jam',['node','tests/article-jam-browser.cjs']]
+ ['article-jam',['node','tests/article-jam-browser.cjs']],
+ ['ux-flow',['node','tests/start-here-browser.cjs']],
+ ['ux-accessibility',['node','tests/start-here-accessibility.cjs']],
+ ['ux-no-js',['node','tests/start-here-no-js.cjs']],
+ ['integration',['python3','tests/ux-jam-integration.py']]
 ];
 // Clear old evidence in the summary, without discarding historical log files.
 let blocked=false;

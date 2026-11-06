@@ -2,10 +2,12 @@
 const fs=require('fs'),path=require('path'),assert=require('assert/strict'),vm=require('vm');
 const root=path.resolve(__dirname,'..'),base=path.join(root,'release-inputs/production-1721e30'),pkg=path.resolve(root,'../package');
 const changed=[];function walk(d,p=''){for(const e of fs.readdirSync(d,{withFileTypes:true})){const n=p+e.name;if(e.isDirectory())walk(path.join(d,e.name),n+'/');else if(n!=='release-manifest.json'&&!fs.readFileSync(path.join(base,n)).equals(fs.readFileSync(path.join(pkg,n))))changed.push(n);}}walk(base);
-assert.deepEqual(changed.sort(),['artikler/dorisk-og-eolisk.html','en/artikler/dorisk-og-eolisk.html']);
+const integration=JSON.parse(fs.readFileSync(path.join(root,'release-inputs/ux-jam-integration.json')));assert.deepEqual(changed.sort(),integration.changed_html);
 for(const prefix of ['','en/']){
  const n=prefix+'artikler/dorisk-og-eolisk.html',before=fs.readFileSync(path.join(base,n),'utf8'),after=fs.readFileSync(path.join(pkg,n),'utf8');
- assert.equal(after.replace(/<section class="related" data-article-jam="[^" ]+".*?<\/section>/,''),before);
+ const withoutPilot=after.replace(/<section class="related" data-article-jam="[^" ]+".*?<\/section>/,'');
+ assert.equal(require('crypto').createHash('sha256').update(withoutPilot).digest('hex'),integration.ux_reader_sha256[n]);
+ assert.equal(after.match(/<section class="related" data-article-jam="[^" ]+".*?<\/section>/)[0],integration.jam_sections[n]);
  const href=after.match(/data-article-jam=.*?href="([^"]+)"/)[1].replaceAll('&amp;','&'),url=new URL(href,'https://local/'+n);
  assert.equal(url.pathname,'/'+prefix+'backingtracks.html');assert.equal(url.searchParams.get('meter'),'4/4');
  const c={window:{},URLSearchParams};vm.createContext(c);for(const f of ['theory-data.js','progressions.js'])vm.runInContext(fs.readFileSync(path.join(pkg,f),'utf8'),c);

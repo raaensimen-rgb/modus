@@ -39,3 +39,8 @@ Gjeldende oppdrag viderefører Pakke A med lokal implementering og QA av Skalabi
 ## A03 / PL-AUTO-001 – lokal arbeidsflyt 2026-11-06
 
 Denne kopien viderefører faktisk offentlig 1721e302a3880804073e0dcb0de6543f939ba0f6 / 2c46a5f1-fdca-4920-b233-cac50f34d7bf i modus. Kun automatisering, pakke-/versjonskontroll, tester og prosedyre endres. Ingen innholds-/designendring, push, merge eller deploy i A03. Bruk docs/pl-auto-001.md og npm run production:workflow. C06s publiseringskommando er implementert for fremtidig separat GO og skal ikke kjøres her. Historiske d809a7b-/Preview-referanser i eldre avsnitt gir ingen rett til å overstyre det nye grunnlaget. Baseline og eierutvalg skal ikke flyttes bakover.
+## UX-001 – Start her, 2026-11-06
+Denne isolerte grenen bygger på publisert 1721e30/2c46a5f1, ikke eldre historiske kandidater. Oppdraget autoriserer lokal forsideinngang, anbefalt førstegangskort, leserekkefølge/praksisnavigasjon og gjenbruk av eksisterende progresjon. Ingen push, merge, deploy eller administratorendringer. Andre lokale kandidater beholdes separat.
+
+## Samordnet UX-001 / artikkel–Jam-kandidat
+Bruker har bestilt lokal integrasjon av eksakte SHA 5b498f5 og 5a9c453, med egen SHA og forseglet pakke før gjennomgang. A03-arbeidsflyten skal bevares. Ingen deploy før separat GO; lokale Git-sammenslåinger i isolert kopi er autorisert av dette oppdraget.

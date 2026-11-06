@@ -25,7 +25,7 @@
     "test:admin-preview": "node tests/admin-preview-package.cjs && node tests/admin-preview-browser.cjs",
     "preview:workflow": "python3 scripts/preview-workflow.py",
     "test:preview-workflow": "python3 tests/preview-workflow.py",
-    "build:candidate": "python3 scripts/build-scale-local.py",
+    "build:candidate": "python3 scripts/build-start-here.py",
     "test:diagrams": "python3 tests/teaching-diagrams.py && node tests/teaching-diagrams-browser.cjs",
     "test:library-layout": "node tests/article-library-layout-browser.cjs",
     "test:library-regression": "node tests/article-library-regression.cjs",
@@ -37,7 +37,9 @@
     "test:scales": "node tests/scale-library.cjs && node tests/scale-library-browser.cjs",
     "production:workflow": "python3 scripts/production_workflow.py",
     "test:production-workflow": "python3 tests/production-workflow.py",
-    "c06:publish": "python3 scripts/c06-publish.py"
+    "c06:publish": "python3 scripts/c06-publish.py",
+    "test:ux001": "python3 tests/start-here.py && python3 tests/start-here-preservation.py && node tests/start-here-browser.cjs && node tests/start-here-accessibility.cjs",
+    "preview:ux001": "node scripts/preview-start-here.cjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.118.0",
