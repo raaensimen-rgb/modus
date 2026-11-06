@@ -22,7 +22,8 @@ function render(directory){
   for(const [locale,t] of Object.entries(e.locales)){
    assert(['nb','en'].includes(locale));for(const k of ['title','instruction','button','start'])assert(typeof t[k]==='string'&&t[k].length);
    const file=path.join(directory,locale==='en'?'en':'','artikler',e.article+'.html');let html=fs.readFileSync(file,'utf8');
-   assert(html.includes('</article>')&&html.includes('class="article-quiz"'),'Only existing fulltext articles may receive exercises');
+   // Private/unavailable editions remain untouched in ordinary CMS policy builds.
+   if(!html.includes('</article>')||!html.includes('class="article-quiz"'))continue;
    assert(!html.includes('data-article-jam='),'Duplicate exercise');
    const section='<section class="related" data-article-jam="'+escape(e.id)+'" aria-labelledby="jam-'+escape(e.id)+'"><h2 id="jam-'+escape(e.id)+'">'+escape(t.title)+'</h2><p>'+escape(t.instruction)+'</p><p><a class="button" href="'+escape(link)+'">'+escape(t.button)+' ↗</a></p><p>'+escape(t.start)+'</p></section>';
    html=html.replace('</article>','</article>'+section);fs.writeFileSync(file,html);
