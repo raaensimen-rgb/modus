@@ -22,7 +22,7 @@ module.exports=async function(browser,browserName,base){
     assert.equal(metrics.width,width);assert.equal(metrics.overflow,false,path);
     for(const [size,weight] of metrics.fonts){
      assert.equal(weight,'500',path);
-     assert.equal(size,width>=1024?'14px':'11px','Approved shared reference navigation: '+path);
+     assert.equal(size,width>=1024?'13px':'10px','Approved shared reference navigation: '+path);
     }
    }
    if(!locale){

@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {chromium,webkit}=require('playwright');
 const {default:AxeBuilder}=require('@axe-core/playwright');
-const root=path.resolve('dist'),results=[],accessibility=[];
+const root=path.resolve(process.env.MODUS_TEST_DIST||'../package'),results=[],accessibility=[];
 const server=http.createServer((req,res)=>{
   let file=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));
   if(file!==root&&!file.startsWith(root+path.sep))return res.writeHead(403).end();

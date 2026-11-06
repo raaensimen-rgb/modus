@@ -81,7 +81,9 @@ with tempfile.TemporaryDirectory(prefix='modus-publication-test-') as temp:
         env = dict(os.environ)
         for key in ('MODUS_ISOLATED_PREVIEW', 'MODUS_PREVIEW_PROJECT'):
             env.pop(key, None)
-        run = subprocess.run(['npm', 'run', 'build'], cwd=project, capture_output=True, text=True, env=env)
+        # These deliberately mutated, Git-free fixtures exercise source publication policy.
+        # The separate candidate test checks the pinned production package and rejects drift.
+        run = subprocess.run(['npm', 'run', 'build:source'], cwd=project, capture_output=True, text=True, env=env)
         assert run.returncode == 0, run.stdout[-2000:] + run.stderr[-2000:]
         return {p.relative_to(dist).as_posix(): p.read_bytes() for p in dist.rglob('*') if p.is_file()}
 

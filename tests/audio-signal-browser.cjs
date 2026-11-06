@@ -1,7 +1,7 @@
 'use strict';
 /* Observe real samples at the final Web Audio output; UI animation is not proof of sound. */
 const assert=require('node:assert/strict'),http=require('node:http'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
-const {chromium,webkit}=require('playwright'),root=path.resolve('dist');
+const {chromium,webkit}=require('playwright'),root=path.resolve(process.env.MODUS_TEST_DIST||'../package');
 const server=http.createServer((req,res)=>{
  const name=path.resolve(root,'.'+new URL(req.url,'http://localhost').pathname);
  if(!name.startsWith(root+path.sep)||!fs.existsSync(name)||!fs.statSync(name).isFile()){res.writeHead(404).end();return;}

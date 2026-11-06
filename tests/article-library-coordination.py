@@ -1,11 +1,12 @@
 """P0/P1 preservation audit against the newest existing design/source."""
 from pathlib import Path
 import json,hashlib,re,sys
-R=Path(__file__).resolve().parents[1];B=R.parents[1]/'design-implementation-20261105/source';P=R.parent/'package';OLD=B.parent/'package'
+R=Path(__file__).resolve().parents[1];P=R.parent/'package';OLD=R/'release-inputs/published-d809a7b'
+INVARIANTS=json.loads((R/'release-inputs/published-source-invariants.json').read_text())
 h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 for name in ['content/articles.json','content/article-quizzes.json','content/publication.json','content/article-illustration-permissions.json','content/i18n/articles.en.json','client/editor.js','cms/admin-model.mjs','cms/deployment-config.json','design-refresh.css','index.html']:
- assert (R/name).read_bytes()==(B/name).read_bytes(),name
-for name in ['article-quiz.js','articles.js','client/progress-state.js']:assert (R/name).read_bytes()==(B/name).read_bytes(),name
+ assert h(R/name)==INVARIANTS[name],name
+for name in ['article-quiz.js','articles.js','client/progress-state.js']:assert h(R/name)==INVARIANTS[name],name
 articles=json.loads((R/'content/articles.json').read_text());assert len(articles)==52
 rows=[]
 for locale,pre,n in [('nb','',52),('en','en/',16)]:

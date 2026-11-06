@@ -4,10 +4,10 @@ import json,sys,re,hashlib,xml.etree.ElementTree as ET
 R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R/'scripts'))
 from teaching_diagram_specs import SPECS
 from teaching_diagrams import pitch,degree,svg
-BASE=R.parents[1]/'p0-totalrevision-20261105/source'
+INVARIANTS=json.loads((R/'release-inputs/published-source-invariants.json').read_text())
 # Preserve every original paragraph, quiz, translation and publication/version decision.
 for n in ['content/articles.json','content/article-quizzes.json','content/publication.json','content/article-illustration-permissions.json','content/i18n/articles.en.json','cms/deployment-config.json','client/editor.js','cms/admin-model.mjs']:
- assert (R/n).read_bytes()==(BASE/n).read_bytes(),n
+ assert hashlib.sha256((R/n).read_bytes()).hexdigest()==INVARIANTS[n],n
 oracle={'C':0,'C#':1,'Db':1,'D':2,'D#':3,'Eb':3,'E':4,'Fb':4,'E#':5,'F':5,'F#':6,'Gb':6,'G':7,'G#':8,'Ab':8,'A':9,'A#':10,'Bb':10,'B':11,'Cb':-1,'B#':12}
 def midi(n):
  m=re.fullmatch(r'([A-G][#b]*)(\d)',n);return oracle[m[1]]+12*(int(m[2])+1)

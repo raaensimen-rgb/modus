@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "build:account": "python3 scripts/build-client.py account",
-    "build": "python3 scripts/sync-design-system.py && npm run build:account && python3 scripts/build-account.py && python3 scripts/sync-navigation.py && python3 scripts/build-articles.py && python3 scripts/sync-design-system.py --finish && python3 scripts/build-languages.py && python3 scripts/build-search.py && npm run build:editor && python3 scripts/finalize-publication.py && python3 scripts/finalize-preview.py && python3 scripts/integrate-teaching-diagrams.py && python3 scripts/apply-design-refresh.py dist && python3 scripts/apply-article-library.py dist && python3 scripts/apply-library-hero.py dist && python3 scripts/apply-compact-navigation.py dist && python3 scripts/apply-approved-intro-film.py dist && python3 scripts/apply-subpage-hero.py dist",
+    "build": "npm run build:source && npm run build:candidate",
     "test": "node scripts/run-tests.cjs",
     "build:editor": "python3 scripts/build-editor.py && python3 scripts/build-client.py editor",
     "build:cms-runtime": "python3 scripts/build-client.py cms",
     "test:browser": "node tests/release-browser.cjs && node tests/piano-browser.cjs && node tests/audio-signal-browser.cjs",
     "test:homepage": "node tests/homepage-browser.cjs",
-    "test:navigation": "node tests/des002-navigation-browser.cjs && node tests/navigation-controls-browser.cjs",
+    "test:navigation": "node tests/navigation-hover.cjs && node tests/navigation-current-browser.cjs",
     "test:visual": "node tests/visual-regression-browser.cjs",
     "test:preview-isolation": "node tests/preview-isolation-browser.cjs",
     "test:editor-storage": "node tests/editor-storage-browser.cjs",
@@ -25,12 +25,15 @@
     "test:admin-preview": "node tests/admin-preview-package.cjs && node tests/admin-preview-browser.cjs",
     "preview:workflow": "python3 scripts/preview-workflow.py",
     "test:preview-workflow": "python3 tests/preview-workflow.py",
-    "build:candidate": "python3 scripts/package-p0-release.py",
+    "build:candidate": "python3 scripts/build-local-candidate.py",
     "test:diagrams": "python3 tests/teaching-diagrams.py && node tests/teaching-diagrams-browser.cjs",
     "test:library-layout": "node tests/article-library-layout-browser.cjs",
     "test:library-regression": "node tests/article-library-regression.cjs",
     "test:library-hero": "python3 tests/article-library-hero.py && node tests/article-library-hero-browser.cjs",
-    "build:hero-candidate": "python3 scripts/build-subpage-hero-candidate.py"
+    "build:hero-candidate": "python3 scripts/build-local-candidate.py",
+    "quality:local": "node scripts/quality-local.cjs",
+    "build:source": "python3 scripts/sync-design-system.py && npm run build:account && python3 scripts/build-account.py && python3 scripts/sync-navigation.py && python3 scripts/build-articles.py && python3 scripts/sync-design-system.py --finish && python3 scripts/build-languages.py && python3 scripts/build-search.py && npm run build:editor && python3 scripts/finalize-publication.py && python3 scripts/finalize-preview.py && python3 scripts/integrate-teaching-diagrams.py && python3 scripts/apply-design-refresh.py dist && python3 scripts/apply-article-library.py dist && python3 scripts/apply-library-hero.py dist && python3 scripts/apply-compact-navigation.py dist && python3 scripts/apply-approved-intro-film.py dist && python3 scripts/apply-subpage-hero.py dist",
+    "preview:local": "node scripts/preview-local.cjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.118.0",

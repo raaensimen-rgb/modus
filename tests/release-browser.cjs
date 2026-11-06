@@ -1,67 +1,70 @@
 'use strict';
-const assert = require('node:assert/strict');
-const http = require('node:http');
-const fs = require('node:fs');
-const path = require('node:path');
-const {chromium, webkit} = require('playwright');
-const root = path.resolve(__dirname, '../dist');
-const server = http.createServer((req,res)=>{
-  const file=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));
-  if(!file.startsWith(root+path.sep)&&file!==root){res.writeHead(403).end();return}
-  const target=fs.existsSync(file)&&fs.statSync(file).isDirectory()?path.join(file,'index.html'):file;
-  if(!fs.existsSync(target)){res.writeHead(404).end();return}
-  const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.mp4':'video/mp4','.svg':'image/svg+xml','.webp':'image/webp','.png':'image/png','.mp3':'audio/mpeg'};
-  const size=fs.statSync(target).size,range=req.headers.range?.match(/^bytes=(\d+)-(\d*)$/);
-  const headers={'Content-Type':mime[path.extname(target)]||'application/octet-stream','Accept-Ranges':'bytes'};
-  if(range){const start=Number(range[1]),end=Math.min(Number(range[2]||size-1),size-1);res.writeHead(206,{...headers,'Content-Range':`bytes ${start}-${end}/${size}`,'Content-Length':end-start+1});fs.createReadStream(target,{start,end}).pipe(res)}
-  else {res.writeHead(200,{...headers,'Content-Length':size});fs.createReadStream(target).pipe(res)}
-});
+// Current release contract: the approved 82-second film and 52 NB / 16 EN readers.
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const {chromium,webkit}=require('playwright');
+const {startPublicPackageServer}=require('./public-package-server.cjs');
+const root=path.resolve(process.env.MODUS_TEST_DIST||'../package'),out=path.resolve('test-results');
 (async()=>{
-  await new Promise(r=>server.listen(0,'127.0.0.1',r));
-  const base=process.env.MODUS_TEST_URL||`http://127.0.0.1:${server.address().port}`;
-  const results=[];
-  try {
-    for(const [name,type] of Object.entries({chromium,webkit})) {
-      const browser=await type.launch({headless:true});
-      try {for(const width of [1440,375])for(const locale of ['', 'en/']) {
-        const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();
-        const errors=[];page.on('pageerror',e=>errors.push(e.message));
-        await page.goto(base+'/'+locale);
-        const trigger=page.locator('[data-global-search-open]'),input=page.locator('[data-global-search-input]');
-        assert(await trigger.isVisible());await trigger.click();await input.waitFor({state:'visible'});
-        await input.press('Escape');assert(await trigger.evaluate(e=>document.activeElement===e));
-        await trigger.click();await input.fill('atlas');await page.locator('.global-search-result').first().waitFor();
-        assert((await page.locator('.global-search-result').count())>0);
-        await input.press('Escape');assert(await trigger.evaluate(e=>document.activeElement===e));
-        await trigger.click();await input.fill('zzzzmissingtest');await page.waitForFunction(()=>document.querySelector('[data-global-search-status]').textContent.match(/Ingen treff|No matches/));
-        await input.press('Escape');
-        const film=page.locator('[data-intro-film-open]');assert(await film.isVisible());
-        assert.equal(await film.innerText(),locale?'Watch the introduction':'Se introduksjonsfilmen');
-        const media=await page.request.get(base+'/media/modus-introduksjon.mp4');assert.equal(media.status(),200);assert(media.headers()['content-type'].includes('video/mp4'));
-        await film.click();await page.locator('.intro-film-dialog').waitFor({state:'visible'});
-        await page.waitForFunction(()=>{const v=document.querySelector('video');return v.readyState>=2&&v.currentTime>0&&!v.paused}, undefined, {timeout:20000});
-        assert(await page.locator('video').evaluate(v=>v.duration>38&&v.duration<39));
-        await page.locator('video').evaluate(v=>v.pause());assert(await page.locator('video').evaluate(v=>v.paused));
-        await page.locator('video').evaluate(v=>v.play());
-        await page.keyboard.press('Escape');assert(await film.evaluate(e=>document.activeElement===e));
-        assert(await page.locator('video').evaluate(v=>v.paused));
-        await film.click();await page.locator('.intro-film-close').click();assert(await film.evaluate(e=>document.activeElement===e));
-        assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Horizontal overflow');
-        assert.deepEqual(errors,[]);
-        const result={browser:name,width,locale:locale||'nb',status:'passed'};results.push(result);console.log(JSON.stringify(result));
-        await context.close();
+ const server=await startPublicPackageServer(root),base=server.origin,rows=[];
+ fs.mkdirSync(out,{recursive:true});
+ try{
+  for(const [name,engine] of Object.entries({chromium,webkit})){
+   const browser=await engine.launch();
+   try{
+    rows.push(...await require('./platform-browser.cjs')(browser,name,base));
+    rows.push(...await require('./learning-journey-browser.cjs')(browser,name,base));
+    for(const locale of ['','en/'])for(const width of [375,1440]){
+     const context=await browser.newContext({viewport:{width,height:1000}}),page=await context.newPage(),errors=[];
+     let filmRequests=0;
+     page.on('pageerror',e=>errors.push(e.message));
+     page.on('request',r=>{if(r.url().endsWith('/media/modus-intro-81eed15e5f0f.mp4'))filmRequests++;});
+     const open=async route=>{
+      await page.goto(base+'/'+locale+route);
+      if(await page.locator('.modus-premises-dialog[open]').count()){
+       await page.locator('#modus-premises-accept').check();await page.locator('.modus-premises-confirm').click();
       }
-      const platformResults=await require('./platform-browser.cjs')(browser,name,base);
-      fs.mkdirSync('test-results',{recursive:true});
-      fs.writeFileSync(`test-results/platform-${name}-results.json`,JSON.stringify(platformResults,null,2));
-      for(const result of platformResults)console.log('Platform '+JSON.stringify(result));
-      const journeyResults=await require('./learning-journey-browser.cjs')(browser,name,base);
-      fs.mkdirSync('test-results',{recursive:true});
-      fs.writeFileSync(`test-results/journey-${name}-results.json`,JSON.stringify(journeyResults,null,2));
-      for(const result of journeyResults) console.log('PL101 journey '+JSON.stringify(result));
-      } finally {await browser.close()}
+     };
+     try{
+      await open('index.html');
+      const search=page.locator('[data-global-search-open]'),input=page.locator('[data-global-search-input]');
+      await search.click();await input.fill(locale?'Roman numerals':'sekundærdominanter');
+      await page.locator('.global-search-result').first().waitFor();
+      await input.press('Escape');assert(await search.evaluate(e=>document.activeElement===e));
+      await search.click();await input.fill('zzzzmissingtest');
+      await page.waitForFunction(()=>/Ingen treff|No matches/.test(document.querySelector('[data-global-search-status]').textContent));
+      await input.press('Escape');
+      assert.equal(filmRequests,0,'Film must not download before the user clicks');
+      const film=page.locator('.intro-film-button[data-intro-film-open]');
+      assert.equal(await film.innerText(),locale?'Watch the film ▷':'Se filmen ▷');
+      await film.click();await page.locator('.intro-film-dialog').waitFor({state:'visible'});
+      await page.waitForFunction(()=>{const v=document.querySelector('video');return v.readyState>=2&&v.currentTime>0&&!v.paused;},undefined,{timeout:25000});
+      const video=page.locator('video');assert(await video.evaluate(v=>v.duration>80&&v.duration<85));
+      await video.evaluate(v=>{v.pause();v.currentTime=40;});
+      await page.waitForFunction(()=>Math.abs(document.querySelector('video').currentTime-40)<1&&!document.querySelector('video').seeking);
+      await video.evaluate(v=>v.play());await page.keyboard.press('Escape');
+      assert(await film.evaluate(e=>e===document.activeElement));assert(await video.evaluate(v=>v.paused));
+      await page.locator('.introduction-poster[data-intro-film-open]').click();await page.locator('.intro-film-close').click();
+      assert(await page.locator('.introduction-poster').evaluate(e=>e===document.activeElement));
+      assert.equal(filmRequests,1,'The local Blob is reused');
+      await open('artikler.html');assert.equal(await page.locator('.article-card').count(),locale?16:52);
+      for(const mode of ['list','grid']){
+       await page.locator('[data-card-layout-choice='+mode+']').click();assert.equal(await page.locator('#library').getAttribute('data-card-layout'),mode);
+      }
+      if(name==='chromium'&&width===1440){
+       const links=await page.locator('.article-card a').evaluateAll(es=>[...new Set(es.map(e=>e.href.split('#')[0]))]);assert.equal(links.length,locale?16:52);
+       for(const url of links){await page.goto(url);assert.equal(await page.locator('h1').count(),1);assert((await page.locator('main').innerText()).length>1000);assert.equal(await page.locator('[data-publication-hold]').count(),0);}
+       rows.push({browser:name,locale:locale||'nb',articles:links.length,fulltexts:true,status:'passed'});
+      }
+      await open('redaktor.html');assert.equal(await page.locator('[data-preview-unavailable]').count(),1);assert.equal(await page.locator('input,textarea').count(),0);
+      assert.deepEqual(await (await page.request.get(base+'/cms-seed.json')).json(),[]);
+      for(const pre of ['','en/'])for(const route of ['admin-app.js','admin-package.json','editor.js','editor-admin.js','library-draft-backup.json','content/articles.json','editorial/article-publication-review.json','media/modus-introduksjon.mp4','audio/kick.mp3']){
+       assert.equal((await page.request.get(base+'/'+pre+route)).status(),404,pre+route);
+      }
+      assert.deepEqual(errors,[]);rows.push({browser:name,locale:locale||'nb',width,search:true,filmPlaybackSeekFocus:true,catalog:true,privateBoundary:true,status:'passed'});
+     }finally{await context.close();}
     }
-  } finally {
-    fs.mkdirSync('test-results',{recursive:true});fs.writeFileSync('test-results/browser-results.json',JSON.stringify(results,null,2));server.close();
+   }finally{await browser.close();}
   }
-})().catch(e=>{console.error(e);process.exitCode=1});
+ }finally{await server.stop();fs.writeFileSync(path.join(out,'release-current.json'),JSON.stringify({base,root,rows},null,2)+'\n');}
+ console.log(rows.length+' current release scenarios passed; all 68 public fulltexts opened.');
+})().catch(e=>{console.error(e);process.exitCode=1;});

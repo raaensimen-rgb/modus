@@ -27,3 +27,7 @@ Prosjekteier har sett og godkjent den nye filmen med SHA-256 `81eed15e5f0fa3c43e
 ## Lokal større filmknapp – 2026-11-05
 
 Se docs/intro-film-button-visibility-20261105.txt. Brukerens lydproblem ble avklart av brukeren som en feil på hans egen maskin og er rettet. Denne kandidaten endrer bare filmfeltets plassering/utseende og gjør posteren klikkbar. Publisert MP4 og spiller-JS er uendret fra cefe31c. Den separate modale musikkandidaten er ikke publisert her. Ingen ny deploy-fullmakt foreligger; separat GO kreves for denne knapprettingen.
+
+## Pakke A – gjeldende lokale oppdrag 2026-11-06
+
+Denne isolerte kopien starter fra siste publiserte d809a7b / produksjonsdeployment 536b0e35 i prosjekt modus. Kun lokal menyretting, bygg-/testsamordning og kandidatleveranse er autorisert. Ingen push, merge, deploy, GitHub-endringer eller nye agenter. Baseline i release-inputs/published-d809a7b er låst og skal aldri redigeres. Gamle Preview-mål og kandidatbygg er historikk; bruk npm run quality:local som samlet kontroll. Ikke endre design, artikler, lyd, film, lagringsnøkler, Access eller private utkast.
