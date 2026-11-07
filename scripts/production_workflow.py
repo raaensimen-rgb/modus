@@ -216,7 +216,7 @@ def prepare(root, sha, out, c):
     qa = read(root.parent/'delivery/REPORT.json')
     if qa.get('status')!='LOCAL_CANDIDATE_PASSED' or qa.get('sourceSha')!=sha or not qa.get('stages') or not all(v['status']=='passed' for v in qa['stages']):
         raise ValueError('Complete automatic QA did not pass for this SHA')
-    required = {'build','static','reproducibility','scales-browser','navigation','release','piano','audio','article-jam','ux-flow','ux-accessibility','ux-no-js','integration','learning-route','images-browser','scale-p1-keyboard','scale-p1-contrast'}
+    required = {'build','static','reproducibility','scales-browser','navigation','release','piano','audio','article-jam','ux-flow','ux-accessibility','ux-no-js','integration','learning-route','images-browser','scale-p1-keyboard','scale-p1-contrast','learning-entry'}
     if {v['name'] for v in qa['stages']} != required or qa.get('ordinaryGroups',{}).get('failed') != 0:
         raise ValueError('Incomplete automatic QA evidence')
     source_gate(root,sha,c)
@@ -404,7 +404,7 @@ def verify(root,directory,deployment,out,c):
     boundary=perimeter(c)
     env={k:v for k,v in os.environ.items() if not k.startswith(('MODUS_','CF_PAGES_','CONTEXT'))}
     env['MODUS_TEST_URL']=PUBLIC
-    for test in ('tests/release-browser.cjs','tests/public-scale-browser.cjs','tests/public-audio-browser.cjs'):
+    for test in ('tests/learning-entry-browser.cjs','tests/release-browser.cjs','tests/public-scale-browser.cjs','tests/public-audio-browser.cjs'):
         run_stage(root,['node',test],out/(Path(test).stem+'.log'),env)
     candidate(root,directory,c)
     project_gate(cloud_project(c),c,r['source_sha'],deployment)
@@ -412,7 +412,7 @@ def verify(root,directory,deployment,out,c):
     write(out/'files.json',rows)
     write(out/'perimeter.json',boundary)
     return dict(status='PUBLIC_VERIFIED',source_sha=r['source_sha'],deployment=deployment,project='modus',origin=PUBLIC,
-                hashed_files=len(rows),boundary_checks=len(boundary),browser_groups=3,
+                hashed_files=len(rows),boundary_checks=len(boundary),browser_groups=4,
                 manual_safari=False,authenticated_admin=False,deployed=False)
 
 

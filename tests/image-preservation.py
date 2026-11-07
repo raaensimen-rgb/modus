@@ -5,6 +5,11 @@ R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R/'scripts'))
 import production_workflow as w
 from image_optimization import lock,PAGES,css
 c=w.config(R);P=R.parent/'package';images=lock()
+# A06's reversal still compares against the historical package preceding A06.
+a06_base=R/'release-inputs/production-584c98f'
+a06_manifest=w.read(a06_base/w.MANIFEST)
+c={**c,'source_sha':a06_manifest['source_sha'],'package':str(a06_base.relative_to(R)),
+   'files':{**w.file_map(a06_manifest['files']),w.MANIFEST:w.digest((a06_base/w.MANIFEST).read_bytes())}}
 
 def check_a06(package):
  actual=w.inventory(package);original=c['files'];added={'images/a06/'+n:v['sha256'] for n,v in images['files'].items()}
@@ -30,8 +35,11 @@ def check_a06(package):
 
 def check(package):
  from scale_p1 import reverse
+ from learning_entry_preservation import original_pages
  with tempfile.TemporaryDirectory() as tmp:
   normalized=Path(tmp)/'a06';reverse(package,normalized)
+  for name, original in original_pages(package).items():
+   (normalized/name).write_bytes(original)
   return check_a06(normalized)
 
 result=check(P)

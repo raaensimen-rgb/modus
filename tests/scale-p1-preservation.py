@@ -4,9 +4,12 @@ import sys,json,hashlib,tempfile,shutil
 R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R/'scripts'))
 from scale_p1 import reviewed,HASHES
 from production_workflow import inventory,public_boundary,config
+from learning_entry_preservation import original_pages
 P=R.parent/'package';pinned=json.loads((R/'release-inputs/scale-p1-a06-files.json').read_text());allowed={pre+n for pre in ('','en/') for n in HASHES}
 def check(package):
  old,new=reviewed();actual=inventory(package);actual.pop('release-manifest.json')
+ for name, original in original_pages(package).items():
+  actual[name]=hashlib.sha256(original).hexdigest()
  assert set(actual)==set(pinned),'P1 must not add/remove package files'
  for n,h in pinned.items():
   if n not in allowed:assert actual[n]==h,'Unrelated A06 delta: '+n

@@ -1,36 +1,9 @@
 {
-  "task": "#53 / A06 preserved; SK-QA-001 keyboard and SK-QA-006 theme contrast",
+  "task": "P1 \u2013 learning entry for existing published resources",
   "allowed_changes": [
-    "artikler.html",
-    "en/artikler.html",
-    "en/index.html",
-    "en/scale-library.css",
-    "en/scale-library.js",
-    "index.html",
-    "scale-library.css",
-    "scale-library.js"
+    "en/undervisning.html",
+    "undervisning.html"
   ],
-  "allowed_additions": [
-    "images/a06/modus-design-articles-384.jpg",
-    "images/a06/modus-design-articles-384.webp",
-    "images/a06/modus-design-articles-768.jpg",
-    "images/a06/modus-design-articles-768.webp",
-    "images/a06/modus-design-landscape-1152.jpg",
-    "images/a06/modus-design-landscape-1152.webp",
-    "images/a06/modus-design-landscape-1536.jpg",
-    "images/a06/modus-design-landscape-1536.webp",
-    "images/a06/modus-design-landscape-384.jpg",
-    "images/a06/modus-design-landscape-384.webp",
-    "images/a06/modus-design-landscape-768.jpg",
-    "images/a06/modus-design-landscape-768.webp",
-    "images/a06/modus-design-studies-v2-384.jpg",
-    "images/a06/modus-design-studies-v2-384.webp",
-    "images/a06/modus-design-studies-v2-768.jpg",
-    "images/a06/modus-design-studies-v2-768.webp",
-    "images/a06/modus-design-tools-384.jpg",
-    "images/a06/modus-design-tools-384.webp",
-    "images/a06/modus-design-tools-768.jpg",
-    "images/a06/modus-design-tools-768.webp"
-  ],
+  "allowed_additions": [],
   "allowed_removals": []
 }

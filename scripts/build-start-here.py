@@ -16,6 +16,8 @@ from image_optimization import apply as apply_images
 apply_images(P)
 from scale_p1 import apply as apply_scale_p1
 apply_scale_p1(P)
+from learning_entry import apply as apply_learning_entry
+apply_learning_entry(P)
 files=inventory(P);changed=[n for n in expected if files.get(n)!=expected[n] and n!='release-manifest.json'];added=sorted(set(files)-set(expected))
 assert all(n.endswith('.html') or n in ('scale-library.js','en/scale-library.js','scale-library.css','en/scale-library.css') for n in changed) and len(changed)>=72
 assert all(n.startswith(('start-here.','en/start-here.','learning-route.','en/learning-route.')) or n=='en/studierute.html' or n.startswith('images/a06/') for n in added)

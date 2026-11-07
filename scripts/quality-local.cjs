@@ -11,6 +11,7 @@ for(const name of ['test-results.json','local-candidate.json','navigation-curren
 const stages=[
  ['build',['npm','run','build'],true],
  ['static',['npm','test']],
+ ['learning-entry',['node','tests/learning-entry-browser.cjs']],
  ['reproducibility',['python3','tests/candidate-reproducibility.py']],
  ['scale-p1-keyboard',['node','tests/scale-p1-keyboard-browser.cjs']],
  ['scale-p1-contrast',['node','tests/scale-p1-contrast-browser.cjs','--source','.','--package','../package','--out','../evidence/scale-p1-contrast']],
