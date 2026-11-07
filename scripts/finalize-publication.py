@@ -1,7 +1,7 @@
 """Finalize the public artifact boundary after *all* generators have run."""
 import json
 import re
-from pathlib import Path
+from atlas import finalize as finalize_atlas
 from publication import ROOT, public_articles
 from article_library import ORDER
 
@@ -26,3 +26,5 @@ print('Finalized public-only article IDs; no private editorial source is deploye
 if json.loads((ROOT/'cms/deployment-config.json').read_text()).get('publishingEnabled') is not True:
     from editor_boundary import preserve_public_editor_hold
     preserve_public_editor_hold(ROOT)
+
+finalize_atlas(dist)

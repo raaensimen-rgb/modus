@@ -5,7 +5,7 @@ import runpy
 
 checks = runpy.run_path(str(Path(__file__).with_name("atlas-links.py")))
 validate = checks["validate_planned_links"]
-original = checks["pending"]
+original = [a for a in checks["pending"] if a["slug"] in checks["planned_slugs"]]
 module_ids = checks["module_ids"]
 
 validate(deepcopy(original), module_ids)

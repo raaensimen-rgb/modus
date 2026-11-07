@@ -19,26 +19,19 @@ const $=id=>document.getElementById(id);const ns="http://www.w3.org/2000/svg";
 const STORE="modus-musikkart-v1";const valid=new Set(["not-started","exploring","learned"]);
 let stored={};try{stored=JSON.parse(localStorage.getItem(STORE)||"{}")||{}}catch{}
 const records={};for(const m of catalog){const r=stored[m.id]||{};records[m.id]={state:valid.has(r.state)?r.state:"not-started",manual:r.manual===true||(r.manual===undefined&&valid.has(r.state)&&r.state!=="not-started"),idea:r.idea===true,note:typeof r.note==="string"?r.note.slice(0,2000):""};}
-// Article-to-module links are editorially defined; only directly related
-// material counts. Opening an article is not evidence of mastering a topic.
-const articleModules={
- 'toner-og-intervaller':'F03',
- 'dur-og-moll':'E02',
- 'kvintsirkelen':'E01',
- 'din-forste-improvisasjon':'I04',
- 'moduser-og-tonalt-sentrum':'I03',
- 'kirketonearter-ett-system-sju-uttrykk':'I03',
- 'romertall-i-musikk':'I01',
- 'ii-v-i-kadensen':'I02',
- 'treklanger-fra-grunnform-til-omvending':'E02',
- 'septimakkorder':'E02',
- 'harmonisk-moll-og-frygisk-dominant':'I03',
- 'stemmeforing':'A03',
- 'rytme-i-sju-aatte':'A04',
- 'bygg-akkorder-i-en-toneart':'E03',
- 'ett-skalakart-nye-maltoner':'E04',
- 'dorisk-og-eolisk':'I03'
-};
+// The build projects approved mappings for this locale. Existing quiz criteria
+// stay fixed when new reading links are added.
+const articleModules=/* atlas-progress */ {};
+const articleLinks=/* atlas-reading */ [];
+const linksByModule=new Map(catalog.map(m=>[m.id,[]]));
+for(const {slug,title,modules} of articleLinks){
+ for(const id of modules)linksByModule.get(id).push({slug,title});
+}
+const english=document.documentElement?.lang==="en";
+const firstArticle="toner-og-intervaller";
+function matchesModule(m){
+ return (m.id+" "+m.title+" "+linksByModule.get(m.id).map(a=>a.title).join(" ")).toLowerCase().includes(search);
+}
 const articleEvidenceKey='modus.atlas.article-evidence.v1';
 function articleEvidence(){try{const data=JSON.parse(localStorage.getItem(articleEvidenceKey)||'{}');return data&&typeof data==='object'&&!Array.isArray(data)?data:{};}catch{return {};}}
 function evidenceState(moduleId){
@@ -66,7 +59,7 @@ function variant(state){return state==="learned"?"on":state==="exploring"?"mid":
 function activityState(id){return moduleState(id);}
 function curve(x1,y1,x2,y2,color,state,width){return svgEl("path",{d:"M "+x1+" "+y1+" C "+(x1+135)+" "+y1+", "+(x2-140)+" "+y2+", "+x2+" "+y2,stroke:color,"stroke-width":width,class:"map-branch "+variant(state),style:"color:"+color});}
 function node(x,y,w,h,label,color,state,type,id){
- const group=svgEl("g",{class:"map-node "+variant(state)+" "+type+(chosen===id||category===id?" selected":""),role:"button",tabindex:"0","aria-label":label+". "+(state==="learned"?"Egenvurdert lært":state==="exploring"?"Under arbeid":"Ikke gjennomgått")});
+ const group=svgEl("g",{class:"map-node "+variant(state)+" "+type+(chosen===id||category===id?" selected":""),role:"button",tabindex:"0","data-atlas-id":id,"aria-controls":"inspector-module","aria-pressed":String((chosen||category)===id),"aria-label":label+". "+(state==="learned"?"Egenvurdert lært":state==="exploring"?"Under arbeid":"Ikke gjennomgått")});
  const rect=svgEl("rect",{x,y:y-h/2,width:w,height:h,rx:11,fill:type==="root-node"?"#d7f48c":"#1b231b",stroke:color,style:"color:"+color});
  const txt=svgEl("text",{x:x+18,y:y+5},label);
  group.append(rect,txt);
@@ -75,14 +68,17 @@ function node(x,y,w,h,label,color,state,type,id){
  return group;
 }
 function render(){
+ const focused=svg.contains?.(document.activeElement)?document.activeElement.dataset.atlasId:null;
  svg.replaceChildren();
  const layer=svgEl("g",{});
  // The entire musical landscape is always visible. Selection changes only emphasis and details.
- const W=1600,H=940,midX=800,midY=H/2;
- svg.setAttribute("viewBox","0 0 "+W+" "+H);
- svg.setAttribute("preserveAspectRatio","xMidYMid meet");
  const leftIds=["harmoni","rytme","gehor","impro","produksjon"];
  const rightIds=["grunnlag","skala","gitar","komposisjon","praksis"];
+ const branchBand=g=>Math.max(105,groupModules(g).length*34+42);
+ const sideHeight=ids=>ids.reduce((sum,id)=>sum+branchBand(groups.find(g=>g.id===id)),64+9*(ids.length-1));
+ const W=1600,H=Math.max(940,sideHeight(leftIds),sideHeight(rightIds)),midX=800,midY=H/2;
+ svg.setAttribute("viewBox","0 0 "+W+" "+H);
+ svg.setAttribute("preserveAspectRatio","xMidYMid meet");
  function curved(x1,y1,x2,y2,color,state,weight){
   const reach=Math.abs(x2-x1),sign=Math.sign(x2-x1);
   return svgEl("path",{
@@ -91,7 +87,7 @@ function render(){
  }
  function branchLayout(ids,left){
   const list=ids.map(id=>groups.find(g=>g.id===id));
-  const bands=list.map(g=>Math.max(105,groupModules(g).length*34+42));
+  const bands=list.map(branchBand);
   const total=bands.reduce((a,b)=>a+b,0),gap=Math.max(9,(H-64-total)/(list.length-1));
   let top=32;
   list.forEach((g,i)=>{
@@ -102,15 +98,14 @@ function render(){
    const catEdge=left?catX+catW:catX;
    layer.append(curved(rootEdge,midY,catEdge,y,g.color,state,4.2));
    const categoryNode=node(catX,y,catW,catH,g.name,g.color,state,"branch-node",g.id);
-   categoryNode.setAttribute("aria-expanded","true");
-   if(search && (g.name+" "+modules.map(m=>m.title).join(" ")).toLowerCase().includes(search))categoryNode.classList.add("match");
+   if(search && (g.name.toLowerCase().includes(search)||modules.some(matchesModule)))categoryNode.classList.add("match");
    layer.append(categoryNode);
    const leafGap=34,leafStart=y-(modules.length-1)*leafGap/2;
    modules.forEach((m,j)=>{
     const ly=leafStart+j*leafGap,leafX=left?33:1227;
     layer.append(curved(left?catX:catX+catW,y,left?leafX+337:leafX,ly,g.color,activityState(m.id),2.3));
     const leaf=node(leafX,ly,337,29,m.id+" · "+m.title,g.color,activityState(m.id),"module-node",m.id);
-    if(search && (m.id+" "+m.title).toLowerCase().includes(search))leaf.classList.add("match");
+    if(search && matchesModule(m))leaf.classList.add("match");
     layer.append(leaf);
    });
    if(!modules.length){
@@ -159,6 +154,7 @@ function render(){
  hub.append(svgEl("text",{x:midX,y:midY+95,class:"atlas-globe-caption","text-anchor":"middle"},"MITT MUSIKKATLAS"));
  layer.append(hub);
  svg.append(layer);
+ if(focused)svg.querySelector('[data-atlas-id="'+focused+'"]')?.focus({preventScroll:true});
  $("map-count").textContent=groups.length+" fagområder · "+catalog.length+" synlige moduler";
  $("map-learned").textContent=catalog.filter(m=>moduleState(m.id)==="learned").length;
  $("map-exploring").textContent=catalog.filter(m=>moduleState(m.id)==="exploring").length;
@@ -183,8 +179,26 @@ function choose(type,id){
  $("map-personal-note").value=m?records[m.id].note:"";
  $("course-idea").disabled=!m;
  $("course-idea").checked=m?records[m.id].idea:false;
- $("module-open").href=m?"undervisning.html?modul="+encodeURIComponent(m.id):"laereplan.html";
- $("module-open").textContent=m?"Åpne modulvisning ↗":"Se hele læreplanen ↗";
+ const intervals=m?.id===articleModules[firstArticle];
+ const links=m?linksByModule.get(m.id):[];
+ const first=intervals?links.find(a=>a.slug===firstArticle):null;
+ $("module-open").href=first?"artikler/"+first.slug+".html":"laereplan.html";
+ $("module-open").textContent=first
+  ? (english?"Read Notes and Intervals":"Les Toner og intervaller")
+  : (english?"View the curriculum":"Se læreplanen");
+ $("module-practice").hidden=!first;
+ const reading=links.filter(a=>a!==first);
+ $("atlas-reading").hidden=!reading.length;
+ $("atlas-reading-title").textContent=first
+  ? (english?"More theory articles":"Flere teoriartikler")
+  : (english?"Theory articles":"Teoriartikler");
+ $("atlas-articles").replaceChildren(...reading.map(({slug,title})=>{
+  const li=document.createElement("li"),link=document.createElement("a");
+  link.href="artikler/"+slug+".html";
+  link.textContent=title;
+  li.append(link);
+  return li;
+ }));
  $("map-save-status").textContent="";
  render();
 }
@@ -222,7 +236,9 @@ $("map-clear").addEventListener("click",()=>{
  save();
  chosen=null;category=null;$("inspector-module").hidden=true;$("inspector-heading").textContent="Velg et område";$("inspector-description").textContent="Alle atlasmarkeringer er nullstilt. Tidligere quizresultater på kontoen er beholdt.";render();
 });
-render();
+const requestedModule=new URLSearchParams(window.location?.search).get("modul");
+if(requestedModule===articleModules[firstArticle])choose("module",requestedModule);
+else render();
 window.addEventListener('pageshow',render);
 window.addEventListener('storage',event=>{if(!event.key||event.key===articleEvidenceKey||event.key.startsWith('modus.article-quiz.v1.'))render();});
 document.addEventListener('modus-account-change',render);

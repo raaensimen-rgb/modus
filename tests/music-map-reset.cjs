@@ -46,7 +46,7 @@ function runPage(code, storage, allowReset = true, blocked = {}) {
     createElement: tag => new Element(tag),
     addEventListener() {}
   };
-  vm.runInNewContext(code, { document, window, localStorage, console, URL, Blob, setTimeout }, { timeout: 5000 });
+  vm.runInNewContext(code, { document, window, localStorage, console, URL, URLSearchParams, Blob, setTimeout }, { timeout: 5000 });
   function selectModule(id) {
     function find(element) {
       if(element.attributes.class?.split(' ').includes('module-node') && element.attributes['aria-label']?.startsWith(id+' · '))return element;

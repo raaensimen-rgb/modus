@@ -149,3 +149,15 @@ html[data-theme="readable"] .map-hero-links a{
     background:linear-gradient(90deg,rgba(232,233,228,.97) 0%,rgba(232,233,228,.72) 100%);
   }
 }
+
+/* UX-003: reduce the space before the map and show focus on its SVG buttons. */
+.map-hero{min-height:325px;padding-block:66px 53px}
+.atlas-intro{padding-block:39px 42px}
+.map-node:focus-visible rect{stroke:#fff;stroke-width:3;opacity:1}
+.atlas-reading{margin:18px 0}
+.atlas-reading ul{margin:8px 0 0;padding-inline-start:22px}
+.atlas-reading a{display:inline-block;padding-block:4px;text-decoration:underline;text-underline-offset:.18em}
+@media(max-width:720px){
+ .map-hero{min-height:0;padding-block:48px 42px}
+ .atlas-intro{padding-block:31px}
+}
