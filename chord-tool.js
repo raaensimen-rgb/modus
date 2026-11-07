@@ -36,9 +36,14 @@ function drawPiano(){const c=info(chords[selected]),notes=pianoNotes(chords[sele
 function renderSelection(){const c=info(chords[selected]);C('selectedChordName').textContent=c.name;C('selectedRoman').textContent=analysis(chords[selected]).roman;C('romanReference').textContent=CK[centerKey][0]+' · '+window.ModusTheoryData.modes[scaleMode].name;C('selectedFormula').textContent=c.q.formula.join(' – ');C('selectedNotes').textContent=c.names.join(' · ');drawGuitar();drawPiano();updateLaunchLink();saveDraft();}
 function render(){renderSlots();renderSelection();}
 C('addChord').onclick=()=>{if(chords.length>=8)return;stop();const steps=window.ModusTheoryData.modes[scaleMode].steps,ints=[0,2,4,6].map(d=>steps[d]),q=qualities.findIndex(quality=>quality.ints.length===4&&quality.ints.every((n,i)=>n===ints[i]));chords.push({key:centerKey,q});selected=chords.length-1;gripIndex=0;inversion=0;render();};C('guitarGripTabs').addEventListener('click',e=>{const button=e.target.closest('button[data-grip]');if(!button)return;gripIndex=Number(button.dataset.grip);drawGuitar();});C('pianoInversionButtons').addEventListener('click',e=>{const b=e.target.closest('[data-inversion]');if(!b||b.hidden)return;stop();inversion=Number(b.dataset.inversion);drawPiano();});C('chordTempo').onchange=e=>{tempo=Math.max(40,Math.min(200,Math.round(Number(e.target.value)||90)));e.target.value=tempo;updateLaunchLink();saveDraft();};
-let playback=null,playbackFrame=0;
+let playback=null,playbackFrame=0,loopTimer=0;
 function updatePlaybackMarker(){
- const index=playback&&ctx.currentTime>=playback.start?playback.indices[Math.min(playback.indices.length-1,Math.floor((ctx.currentTime-playback.start)/playback.span))]:-1;
+ let index=-1;
+ if(playback&&ctx.currentTime>=playback.start){
+  const {start,span,indices,repeat}=playback;
+  const beatIndex=Math.floor((ctx.currentTime-start)/span);
+  index=indices[repeat?beatIndex%indices.length:Math.min(indices.length-1,beatIndex)];
+ }
  // Keep the theory-to-voicing view synchronized with each sounding chord.
  if(index>=0&&playback.indices.length>1&&index!==selected){
   selected=index;gripIndex=0;inversion=0;
@@ -56,14 +61,111 @@ function updatePlaybackMarker(){
  });
 }
 function clearPlaybackMarker(){cancelAnimationFrame(playbackFrame);playbackFrame=0;playback=null;updatePlaybackMarker();}
-function followPlayback(token,start,span,indices){
- clearPlaybackMarker();playback={start,span,indices};
+function followPlayback(token,start,span,indices,repeat){
+ clearPlaybackMarker();playback={start,span,indices,repeat};
  function tick(){if(token!==run)return;updatePlaybackMarker();playbackFrame=requestAnimationFrame(tick);}
  tick();
 }
-function stop(){harmonyPiano.clear();run++;clearPlaybackMarker();live.forEach(s=>{try{s.stop();}catch{}});live.clear();busy=false;C('playProgression').textContent='▶ Spill akkordrekken';C('playSelected').disabled=false;C('chordStatus').textContent='';}
+function resetTransport(){
+ clearPlaybackMarker();
+ busy=false;
+ C('playProgression').textContent='▶ Spill akkordrekken';
+ C('playSelected').disabled=false;
+ C('loopProgression').disabled=false;
+}
+function stop(){
+ run++;
+ clearTimeout(loopTimer);
+ harmonyPiano.clear();
+ live.forEach(source=>{try{source.stop();}catch{}});
+ live.clear();
+ resetTransport();
+ C('chordStatus').textContent='';
+}
 async function bufferFor(n){const key=Math.max(48,Math.min(84,48+Math.round((n-48)/3)*3));if(!cache.has(key))cache.set(key,(async()=>{let failure;for(let attempt=0;attempt<3;attempt++){try{const r=await fetch(`audio/grand-${key}.mp3`);if(!r.ok)throw Error('sample');return await ctx.decodeAudioData(await r.arrayBuffer());}catch(error){failure=error;if(attempt<2)await new Promise(resolve=>setTimeout(resolve,80*(attempt+1)));}}throw failure;})().catch(e=>{cache.delete(key);throw e;}));return {buffer:await cache.get(key),key};}
-async function play(all){if(busy){stop();return;}busy=true;const token=++run;C('chordStatus').textContent='Laster flygel…';C('playProgression').textContent='■ Stopp';C('playSelected').disabled=true;const playbackIndices=all?chords.map((_,i)=>i):[selected];const groups=all?chords.map(ch=>pianoNotes(ch,0)):[pianoNotes(chords[selected])];try{initChordAudio();await ctx.resume();if(ctx.state!=='running')throw Error('audio');const loaded=await Promise.all(groups.map(g=>Promise.all(g.map(bufferFor))));if(token!==run)return;const beat=60/tempo,span=all?4*beat:1.8,start=ctx.currentTime+.07;loaded.forEach((group,i)=>{group.forEach(({buffer,key},j)=>{const source=ctx.createBufferSource(),g=ctx.createGain(),t=start+i*span,d=Math.min(span+.45,buffer.duration/2**((groups[i][j]-key)/12)-.01);source.buffer=buffer;source.playbackRate.value=2**((groups[i][j]-key)/12);source.connect(g);g.connect(bus);g.gain.setValueAtTime(.65,t);g.gain.setValueAtTime(.65,t+Math.max(.01,d-.5));g.gain.exponentialRampToValueAtTime(.0001,t+d);source.start(t);source.stop(t+d+.01);live.add(source);harmonyPiano.track(source,groups[i][j],t,t+d,ctx);source.onended=()=>{live.delete(source);if(token===run&&live.size===0){clearPlaybackMarker();busy=false;C('playProgression').textContent='▶ Spill akkordrekken';C('playSelected').disabled=false;C('chordStatus').textContent='Spill gjerne akkordrekken selv, på gitar eller piano.';}};});});followPlayback(token,start,span,playbackIndices);C('chordStatus').textContent=all?'Spiller akkordrekken på flygel…':'Spiller valgt piano-omvending…';}catch{if(token===run){stop();C('chordStatus').textContent='Lyden kunne ikke starte. Sjekk forbindelsen og prøv igjen.';}}}
+async function play(all){
+ if(busy){stop();return;}
+ busy=true;
+ const token=++run;
+ const repeat=all&&C('loopProgression').checked;
+ const playbackIndices=all?chords.map((_,i)=>i):[selected];
+ const groups=all?chords.map(ch=>pianoNotes(ch,0)):[pianoNotes(chords[selected])];
+ C('chordStatus').textContent='Laster flygel…';
+ C('playProgression').textContent='■ Stopp';
+ C('playSelected').disabled=true;
+ C('loopProgression').disabled=true;
+ try{
+  initChordAudio();
+  await ctx.resume();
+  if(token!==run)return;
+  if(ctx.state!=='running')throw Error('audio');
+  const loaded=await Promise.all(groups.map(group=>Promise.all(group.map(bufferFor))));
+  if(token!==run)return;
+  const span=all?240/tempo:1.8;
+  const start=ctx.currentTime+.07;
+  const cycleDuration=span*loaded.length;
+
+  function scheduleCycle(cycleStart,earliest=0){
+   loaded.forEach((group,i)=>{
+    const time=cycleStart+i*span;
+    if(time<earliest)return;
+    group.forEach(({buffer,key},j)=>{
+     const source=ctx.createBufferSource();
+     const gain=ctx.createGain();
+     const midi=groups[i][j];
+     const rate=2**((midi-key)/12);
+     const duration=Math.min(span+.45,buffer.duration/rate-.01);
+     source.buffer=buffer;
+     source.playbackRate.value=rate;
+     source.connect(gain);
+     gain.connect(bus);
+     gain.gain.setValueAtTime(.65,time);
+     gain.gain.setValueAtTime(.65,time+Math.max(.01,duration-.5));
+     gain.gain.exponentialRampToValueAtTime(.0001,time+duration);
+     live.add(source);
+     source.onended=()=>{
+      live.delete(source);
+      source.disconnect();
+      gain.disconnect();
+      if(!repeat&&token===run&&live.size===0){
+       resetTransport();
+       C('chordStatus').textContent='Spill gjerne akkordrekken selv, på gitar eller piano.';
+      }
+     };
+     source.start(time);
+     source.stop(time+duration+.01);
+     harmonyPiano.track(source,midi,time,time+duration,ctx);
+    });
+   });
+  }
+
+  function queueCycle(nextStart){
+   // Use the audio clock so repeated rounds keep the same tempo.
+   const delay=Math.max(25,(nextStart-ctx.currentTime-.2)*1000);
+   loopTimer=setTimeout(()=>{
+    if(token!==run)return;
+    const now=ctx.currentTime;
+    if(now<nextStart-.25){queueCycle(nextStart);return;}
+    // If the browser stalled, skip elapsed rounds and keep the original beat grid.
+    const cycleStart=nextStart+Math.max(0,Math.floor((now-nextStart)/cycleDuration))*cycleDuration;
+    try{
+     scheduleCycle(cycleStart,now);
+     queueCycle(cycleStart+cycleDuration);
+    }catch{playbackError(token);}
+   },delay);
+  }
+
+  scheduleCycle(start);
+  if(repeat)queueCycle(start+cycleDuration);
+  followPlayback(token,start,span,playbackIndices,repeat);
+  C('chordStatus').textContent=repeat?'Gjentar akkordrekken på flygel…':all?'Spiller akkordrekken på flygel…':'Spiller valgt piano-omvending…';
+ }catch{playbackError(token);}
+}
+function playbackError(token){
+ if(token!==run)return;
+ stop();
+ C('chordStatus').textContent='Lyden kunne ikke starte. Sjekk forbindelsen og prøv igjen.';
+}
 window.addEventListener('pagehide',stop);C('playProgression').onclick=()=>play(true);C('playSelected').onclick=()=>play(false);document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
 C('exportChords').onclick=()=>{const data=window.ModusMidi.create({tempo,title:'MODUS · Egen akkordrekke',program:0,chords:chords.map(ch=>({name:info(ch).name,notes:pianoNotes(ch,0)}))}),url=URL.createObjectURL(new Blob([data],{type:'audio/midi'})),a=document.createElement('a');a.href=url;a.download=`MODUS_akkordrekke_${tempo}bpm.mid`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);C('chordStatus').textContent=`MIDI-fil laget · ${chords.length} takter · ${tempo} BPM`;};
 C('jamKey').innerHTML=CK.map((k,i)=>`<option value="${i}">${k[0]}</option>`).join('');C('jamMode').innerHTML=window.ModusTheoryData.modes.map((m,i)=>`<option value="${i}">${m.name}</option>`).join('');C('jamKey').value=centerKey;C('jamMode').value=scaleMode;C('chordTempo').value=tempo;

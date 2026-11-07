@@ -6,6 +6,7 @@ from html.parser import HTMLParser
 import html, json, re, shutil
 import xml.etree.ElementTree as ET
 from article_localization import apply_override
+from harmony_loop import TRANSLATIONS as HARMONY_TRANSLATIONS
 from publication import public_illustrations, load_policy, is_public, public_articles, holding_page, EN_TRANSLATIONS, preview_illustrations
 policy=load_policy()
 ROOT=Path(__file__).resolve().parents[1]
@@ -236,6 +237,9 @@ for source in list(DIST.rglob('*')):
             main=re.search(r'<main\b[^>]*>',result)
             if main and 'id=' not in main[0]:
                 result=result.replace(main[0],main[0].replace('<main','<main id="main-content" tabindex="-1"',1),1)
+        if rel.as_posix() == 'akkorder.html':
+            for nb, en in HARMONY_TRANSLATIONS.items():
+                result = result.replace(nb, en)
         target.write_text(result)
     elif source.suffix=='.js' and source.name not in ('language-init.js','language.js','account.js') and not source.name.startswith('account.'):
         if source.name=='learning-premises.js' or source.name.startswith('learning-premises.'):
@@ -244,6 +248,9 @@ for source in list(DIST.rglob('*')):
         localized=script(source.read_text())
         if rel.as_posix() == 'musikkart.js':
             localized=atlas_en_js(localized)
+        if rel.as_posix() == 'chord-tool.js':
+            for nb, en in HARMONY_TRANSLATIONS.items():
+                localized = localized.replace(nb, en)
         target.write_text(localized)
     elif rel.parts[:2]==('images','articles') and rel.stem in english_card_images:
         # Exact previously used EN bytes; illustration permission does not open text.

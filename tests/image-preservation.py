@@ -39,6 +39,8 @@ def check(package):
  from learning_entry_preservation import original_pages
  with tempfile.TemporaryDirectory() as tmp:
   normalized=Path(tmp)/'a06';reverse(package,normalized)
+  from harmony_loop import restore_reviewed_files
+  restore_reviewed_files(normalized)
   for name, original in original_pages(package).items():
    (normalized/name).write_bytes(original)
   for page in normalized.rglob("*.html"):

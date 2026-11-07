@@ -20,6 +20,7 @@ const stages=[
  ['release',['node','tests/release-browser.cjs']],
  ['piano',['node','tests/piano-browser.cjs']],
  ['audio',['node','tests/audio-signal-browser.cjs']],
+ ['harmony-loop',['node','tests/harmony-loop-browser.cjs']],
  ['article-jam',['node','tests/article-jam-browser.cjs']],
  ['learning-route',['node','tests/learning-route-browser.cjs']],
  ['ux-flow',['node','tests/start-here-browser.cjs']],

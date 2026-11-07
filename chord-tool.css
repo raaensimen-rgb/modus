@@ -205,3 +205,6 @@ html:is([data-theme="readable"],[data-theme="contrast"]) .chord-main {
 html:is([data-theme="readable"],[data-theme="contrast"]) .chord-main .listen-button {
  color:var(--appearance-panel);
 }
+
+.builder-transport #loopProgression{width:1.1rem;min-height:0;height:1.1rem;padding:0;accent-color:var(--accent)}
+.builder-transport label[for="loopProgression"]{min-height:44px;cursor:pointer}

@@ -119,6 +119,8 @@ def reverse_for_legacy_checks(candidate,out):
   apply_entry(expected)
   from learning_menu_copy import apply as apply_menu_copy
   apply_menu_copy(expected)
+  from harmony_loop import apply as apply_harmony_loop
+  apply_harmony_loop(expected)
   assert inventory(candidate)==inventory(expected),'Unexpected route, content, media or private-file delta'
  shutil.copytree(baseline,out)
  manifest=json.loads((out/'release-manifest.json').read_text());manifest['source_sha']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip();(out/'release-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

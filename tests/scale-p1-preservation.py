@@ -7,7 +7,7 @@ from production_workflow import inventory,public_boundary,config
 from learning_entry_preservation import original_pages
 from learning_menu_copy import previous
 P=R.parent/'package';pinned=json.loads((R/'release-inputs/scale-p1-a06-files.json').read_text());allowed={pre+n for pre in ('','en/') for n in HASHES}
-def check(package):
+def check_scale(package):
  old,new=reviewed();actual=inventory(package);actual.pop('release-manifest.json')
  for page in package.rglob("*.html"):
   actual[page.relative_to(package).as_posix()]=hashlib.sha256(previous(page.read_bytes())).hexdigest()
@@ -19,6 +19,14 @@ def check(package):
   else:assert (package/n).read_bytes()==new[Path(n).name],'Unreviewed P1 delta: '+n
  public_boundary(package,inventory(package),config(R))
  return {'status':'passed','files':len(actual)+1,'unchanged_a06_product_files':len(pinned)-len(allowed),'changed':sorted(allowed),'a06_images_articles_audio_storage_security_preserved':True}
+def check(package):
+ from harmony_loop import restore_reviewed_files
+ with tempfile.TemporaryDirectory() as tmp:
+  normalized=Path(tmp)/'p1'
+  shutil.copytree(package,normalized)
+  restore_reviewed_files(normalized)
+  return check_scale(normalized)
+
 result=check(P)
 with tempfile.TemporaryDirectory() as tmp:
  q=Path(tmp)/'package';shutil.copytree(P,q)
