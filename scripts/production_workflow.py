@@ -87,13 +87,29 @@ def file_map(value):
     return result
 
 
-def config(root=ROOT):
+def config(root=ROOT, baseline_dir=None):
     c = read(root/'release-inputs/production-baseline.json')
+    if baseline_dir is not None:
+        receipt = read(baseline_dir/'publication.json')
+        published = read(baseline_dir/'NEXT-BASELINE.json')
+        identity = ('project', 'project_id', 'account_id', 'origin',
+                    'public_fulltexts', 'admin_origins', 'access_host')
+        if any(published[key] != c[key] for key in identity):
+            raise ValueError('Publication receipt changes the configured production or private boundaries')
+        if (receipt.get('status') != 'PUBLIC_VERIFIED' or receipt.get('deployed') is not True
+                or receipt.get('origin') != c['origin']
+                or receipt.get('source_sha') != published['source_sha']
+                or receipt.get('deployment') != published['deployment_id']
+                or not SHA.fullmatch(published['source_sha'])):
+            raise ValueError('Use the directory from a successfully verified production publication')
+        base = baseline_dir/('public-package-' + published['source_sha'][:7])
+        c = {**published, 'package': str(base.resolve())}
+    else:
+        base = root/safe_name(c['package'])
     if (c['project'], c['project_id'], c['origin']) != ('modus', PROJECT_ID, PUBLIC) or not SHA.fullmatch(c['source_sha']):
         raise ValueError('Wrong production target/baseline')
     if subprocess.run(['git','merge-base','--is-ancestor',ANCHOR,c['source_sha']],cwd=root,capture_output=True).returncode:
         raise ValueError('Production baseline may not precede current MODUS 2.0 anchor')
-    base = root/safe_name(c['package'])
     if inventory(base) != c['files']:
         raise ValueError('Pinned production package changed')
     marker = read(base/MANIFEST)
@@ -224,9 +240,74 @@ def prepare(root, sha, out, c):
     delta = check_delta(product,c,read(root/'release-inputs/production-delta.json'))
     package = out/'package'
     shutil.copytree(product,package)
+    return seal_candidate(out, c, provenance, delta, qa)
+
+
+# Only assets exclusive to one surface qualify. Shared runtime, navigation,
+# content inventories and security files require the complete release checks.
+SMALL_RELEASE_FILES = {
+    'harmony': {prefix + name for prefix in ('', 'en/')
+                for name in ('akkorder.html', 'chord-tool.js', 'chord-tool.css')},
+    'learning-entry': {'undervisning.html', 'en/undervisning.html'},
+}
+
+
+def small_profile(delta):
+    changed = set(delta['changed'])
+    if changed and not delta['added'] and not delta['removed']:
+        for name, files in SMALL_RELEASE_FILES.items():
+            if changed <= files:
+                return name
+    raise ValueError('Change is outside a single supported small-release surface; use full prepare')
+
+
+def small_checks(profile, public=False):
+    if profile == 'harmony':
+        audio = 'public-audio-browser.cjs' if public else 'audio-signal-browser.cjs'
+        return [('harmony-loop-browser.cjs', {}), (audio, {'MODUS_AUDIO_APP': 'akkorder.html'})]
+    if profile == 'learning-entry':
+        return [('learning-entry-browser.cjs', {})]
+    raise ValueError('Unknown small-release surface')
+
+
+def prepare_small(root, sha, out, c):
+    provenance = source_gate(root, sha, c)
+    before = baseline_status(c)
+    env = {k: v for k, v in os.environ.items() if not k.startswith(('MODUS_', 'CF_PAGES_', 'CONTEXT'))}
+    run_stage(root, ['npm', 'run', 'build:candidate'], out/'build.log', env)
+    donor = root.parent/'package'
+    scope = read(root/'release-inputs/production-delta.json')
+    delta = check_delta(donor, c, scope)
+    profile = small_profile(delta)
+    package = out/'package'
+    shutil.copytree(root/c['package'], package)
+    for name in delta['changed']:
+        shutil.copyfile(donor/name, package/name)
+    check_delta(package, c, scope)
     files = inventory(package)
+    public_boundary(package, files, c)
+    env['MODUS_TEST_DIST'] = str(package)
+    stages = []
+    for test, extra in small_checks(profile):
+        run_stage(root, ['node', 'tests/'+test], out/(Path(test).stem+'.log'), {**env, **extra})
+        stages.append({'name': test, 'status': 'passed'})
+    if inventory(package) != files:
+        raise ValueError('Package changed during targeted tests')
+    source_gate(root, sha, c)
+    if baseline_status(c) != before:
+        raise ValueError('Production changed during targeted tests')
+    qa = dict(status='LOCAL_CANDIDATE_PASSED', sourceSha=sha, mode='small',
+              baseline=before, profile=profile, delta=delta, stages=stages)
+    return seal_candidate(out, c, provenance, delta, qa)
+
+
+def seal_candidate(out, c, provenance, delta, qa):
+    package = out/'package'
+    sha = provenance['source_sha']
+    files = inventory(package)
+    mode = {'qa_mode': 'small'} if qa.get('mode') == 'small' else {}
     m = dict(schema_version=1,kind='modus-public-candidate',project='modus',project_id=PROJECT_ID,
-             production_origin=PUBLIC,**provenance,public_baseline_sha=c['source_sha'],
+             production_origin=PUBLIC,**provenance,**mode,public_baseline_sha=c['source_sha'],
              public_baseline_deployment=c['deployment_id'],deploy_authorized=False,
              approval_required=True,backend='disabled',cms_seed_records=0,
              public_fulltexts=c['public_fulltexts'],delta=delta,
@@ -236,7 +317,7 @@ def prepare(root, sha, out, c):
     zip_hash = archive(package,out/'candidate.zip')
     check_archive(package,out/'candidate.zip')
     write(out/'qa.json',qa)
-    return dict(status='READY_FOR_OWNER_REVIEW',**provenance,zip_sha256=zip_hash,
+    return dict(status='READY_FOR_OWNER_REVIEW',**provenance,**mode,zip_sha256=zip_hash,
                 manifest_sha256=digest((package/MANIFEST).read_bytes()),files=len(files),delta=delta,
                 qa_sha256=digest((out/'qa.json').read_bytes()),
                 baseline_sha=c['source_sha'],baseline_deployment=c['deployment_id'],
@@ -251,14 +332,27 @@ def candidate(root, directory, c):
     if provenance['source_tree']!=r['source_tree']:
         raise ValueError('Source tree mismatch')
     files = manifest(directory/'package',r['source_sha'],c)
-    if read(directory/'package'/MANIFEST).get('source_tree') != r['source_tree']:
+    marker = read(directory/'package'/MANIFEST)
+    if marker.get('source_tree') != r['source_tree']:
         raise ValueError('Manifest source tree differs from reviewed source')
-    check_delta(directory/'package',c,read(root/'release-inputs/production-delta.json'))
+    delta = check_delta(directory/'package',c,read(root/'release-inputs/production-delta.json'))
     if digest((directory/'package'/MANIFEST).read_bytes())!=r['manifest_sha256'] or check_archive(directory/'package',directory/'candidate.zip')!=r['zip_sha256']:
         raise ValueError('Candidate or ZIP changed after QA')
     qa=read(directory/'qa.json')
     if digest((directory/'qa.json').read_bytes())!=r['qa_sha256'] or qa['sourceSha']!=r['source_sha'] or qa['status']!='LOCAL_CANDIDATE_PASSED':
         raise ValueError('QA evidence changed')
+    mode = r.get('qa_mode', 'full')
+    if mode not in ('full', 'small') or marker.get('qa_mode', 'full') != mode or qa.get('mode', 'full') != mode:
+        raise ValueError('Candidate QA mode mismatch')
+    if mode == 'small':
+        profile = small_profile(delta)
+        expected = [{'name': test, 'status': 'passed'} for test, _ in small_checks(profile)]
+        if (qa.get('stages') != expected or qa.get('profile') != profile or qa.get('delta') != delta
+                or qa.get('baseline', {}).get('deployment') != c['deployment_id']
+                or qa.get('baseline', {}).get('source_sha') != c['source_sha']
+                or qa.get('baseline', {}).get('manifest_sha256') != c['files'][MANIFEST]
+                or r.get('delta') != delta or marker.get('delta') != delta):
+            raise ValueError('Targeted QA evidence does not cover the sealed delta and baseline')
     return r,files
 
 
@@ -404,15 +498,20 @@ def verify(root,directory,deployment,out,c):
     boundary=perimeter(c)
     env={k:v for k,v in os.environ.items() if not k.startswith(('MODUS_','CF_PAGES_','CONTEXT'))}
     env['MODUS_TEST_URL']=PUBLIC
-    for test in ('tests/learning-entry-browser.cjs','tests/release-browser.cjs','tests/public-scale-browser.cjs','tests/public-audio-browser.cjs','tests/harmony-loop-browser.cjs'):
-        run_stage(root,['node',test],out/(Path(test).stem+'.log'),env)
+    if r.get('qa_mode') == 'small':
+        checks = small_checks(small_profile(r['delta']), public=True)
+    else:
+        checks = [(test, {}) for test in ('learning-entry-browser.cjs', 'release-browser.cjs',
+                  'public-scale-browser.cjs', 'public-audio-browser.cjs', 'harmony-loop-browser.cjs')]
+    for test, extra in checks:
+        run_stage(root, ['node', 'tests/'+test], out/(Path(test).stem+'.log'), {**env, **extra})
     candidate(root,directory,c)
     project_gate(cloud_project(c),c,r['source_sha'],deployment)
     if digest(public_get(PUBLIC,MANIFEST)[2])!=files[MANIFEST]: raise ValueError('Production changed during verification')
     write(out/'files.json',rows)
     write(out/'perimeter.json',boundary)
     return dict(status='PUBLIC_VERIFIED',source_sha=r['source_sha'],deployment=deployment,project='modus',origin=PUBLIC,
-                hashed_files=len(rows),boundary_checks=len(boundary),browser_groups=5,
+                hashed_files=len(rows),boundary_checks=len(boundary),browser_groups=len(checks),
                 manual_safari=False,authenticated_admin=False,deployed=False)
 
 
@@ -420,22 +519,26 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('action',choices=['prepare','check','status','preflight','verify','baseline-verify'])
     p.add_argument('--sha')
+    p.add_argument('--baseline', type=Path, help='Directory of the latest verified publication')
+    p.add_argument('--small', action='store_true', help='Prepare an allowlisted small change with targeted tests')
     p.add_argument('--candidate',type=Path)
     p.add_argument('--approval',type=Path)
     p.add_argument('--deployment')
     p.add_argument('--out',required=True,type=Path)
     a=p.parse_args()
+    if a.small and (a.action != 'prepare' or a.baseline is None):
+        p.error('--small requires prepare and --baseline')
     out=a.out.resolve()
     if out.exists(): p.error('Choose a new output directory; prior evidence is preserved')
     if out==ROOT or ROOT in out.parents: p.error('Keep delivery outside source')
     out.mkdir(parents=True)
     r={'status':'BLOCKED','deployed':False}
     try:
-        c=config()
+        c=config(baseline_dir=a.baseline)
         directory=a.candidate.resolve() if a.candidate else None
         if a.action=='prepare':
             if not a.sha or directory: raise ValueError('prepare requires --sha and builds its own candidate')
-            r=prepare(ROOT,a.sha,out,c)
+            r=(prepare_small if a.small else prepare)(ROOT,a.sha,out,c)
         elif a.action=='status': r=dict(status='BASELINE_CONFIRMED',**baseline_status(c),deployed=False)
         elif a.action=='baseline-verify':
             state=baseline_status(c)

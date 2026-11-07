@@ -35,8 +35,11 @@ async function open(page,url){
 async function snapshot(page){return page.evaluate(()=>({rms:window.__audioProbe.rms,peak:window.__audioProbe.peak,started:window.__audioProbe.started,decoded:window.__audioProbe.decoded,states:window.__audioProbe.contexts.map(e=>e.context.state),error:document.querySelector('#error,#chordStatus')?.textContent}));}
 async function audible(page){await page.waitForFunction(()=>window.__audioProbe.peak>.0005,undefined,{timeout:15000});return snapshot(page);}
 async function reset(page){await page.evaluate(()=>{window.__audioProbe.peak=0;});}
-const apps=[{url:'backingtracks.html',start:'#play',stop:'#play',piano:'#fretboard',jam:true},{url:'akkorder.html',start:'#playProgression',stop:'#playProgression',piano:'#chordKeyboard'}];
+const allApps=[{url:'backingtracks.html',start:'#play',stop:'#play',piano:'#fretboard',jam:true},{url:'akkorder.html',start:'#playProgression',stop:'#playProgression',piano:'#chordKeyboard'}];
 (async()=>{
+ const selectedApp=process.env.MODUS_AUDIO_APP;
+ const apps=selectedApp ? allApps.filter(app=>app.url===selectedApp) : allApps;
+ assert(apps.length>0,'Unknown audio test surface');
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const local=`http://127.0.0.1:${server.address().port}`,results=[];
  const baselineOnly=process.env.MODUS_AUDIO_BASELINE_ONLY==='1';
  const targets=baselineOnly?(process.env.MODUS_AUDIO_BASELINES||'').split(',').filter(Boolean).map(base=>({base,live:true})):[{base:process.env.MODUS_TEST_URL||local,live:false}];

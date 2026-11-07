@@ -6,7 +6,7 @@ const { startPublicPackageServer } = require('./public-package-server.cjs');
 
 (async () => {
   const publicOrigin = process.env.MODUS_TEST_URL;
-  const server = publicOrigin ? null : await startPublicPackageServer(path.resolve(__dirname, '../../package'));
+  const server = publicOrigin ? null : await startPublicPackageServer(process.env.MODUS_TEST_DIST || path.resolve(__dirname, '../../package'));
   const origin = publicOrigin || server.origin;
   try {
     for (const [engine, launcher] of Object.entries({ chromium, webkit })) {

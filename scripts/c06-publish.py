@@ -10,8 +10,8 @@ import sys
 import production_workflow as w
 
 
-def publish(candidate, approval, confirmed_sha, out, wrangler_js=None):
-    c=w.config()
+def publish(candidate, approval, confirmed_sha, out, wrangler_js=None, baseline_dir=None):
+    c=w.config(baseline_dir=baseline_dir)
     r,_=w.candidate(w.ROOT,candidate,c)
     if confirmed_sha!=r['source_sha']:
         raise ValueError('C06 must explicitly confirm the separately owner-approved source SHA')
@@ -66,6 +66,7 @@ def publish(candidate, approval, confirmed_sha, out, wrangler_js=None):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--candidate',required=True,type=Path)
+    p.add_argument('--baseline',type=Path,help='Directory of the latest verified publication')
     p.add_argument('--approval',required=True,type=Path)
     p.add_argument('--owner-go-source',required=True)
     p.add_argument('--wrangler-js',type=Path)
@@ -73,7 +74,7 @@ def main():
     a=p.parse_args();out=a.out.resolve()
     if out.exists() or out==w.ROOT or w.ROOT in out.parents: p.error('Choose a new delivery directory outside source')
     out.mkdir(parents=True)
-    try: r=publish(a.candidate.resolve(),a.approval.resolve(),a.owner_go_source,out,a.wrangler_js)
+    try: r=publish(a.candidate.resolve(),a.approval.resolve(),a.owner_go_source,out,a.wrangler_js,a.baseline)
     except Exception as error:
         r={'status':'BLOCKED_BEFORE_UPLOAD','error':str(error),'deployed':False,'upload_attempted':False}
         w.write(out/'publication.json',r)

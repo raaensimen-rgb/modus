@@ -36,6 +36,63 @@ class ProductionTests(unittest.TestCase):
         self.assertEqual(w.file_map(m['files']),{n:h for n,h in c['files'].items() if n!=w.MANIFEST})
         w.public_boundary(w.ROOT/c['package'],c['files'],c)
 
+    def test_small_profiles_select_only_affected_browser_suites(self):
+        for profile, names in w.SMALL_RELEASE_FILES.items():
+            delta = dict(changed=sorted(names), added=[], removed=[])
+            self.assertEqual(w.small_profile(delta), profile)
+            checks = w.small_checks(profile)
+            self.assertEqual(len(checks), 2 if profile == 'harmony' else 1)
+            if profile == 'harmony':
+                self.assertEqual(checks[1][1], {'MODUS_AUDIO_APP': 'akkorder.html'})
+                self.assertEqual(w.small_checks(profile, public=True)[1][0], 'public-audio-browser.cjs')
+        for delta in [dict(changed=[], added=[], removed=[]),
+                      dict(changed=['app.js'], added=[], removed=[]),
+                      dict(changed=['akkorder.html', 'undervisning.html'], added=[], removed=[]),
+                      dict(changed=['chord-tool.css'], added=['extra.css'], removed=[]),
+                      dict(changed=['chord-tool.css'], added=[], removed=['old.css'])]:
+            with self.subTest(delta=delta), self.assertRaises(ValueError):
+                w.small_profile(delta)
+        with self.assertRaises(ValueError):
+            w.small_checks('unknown')
+
+    def test_small_prepare_copies_baseline_and_runs_selected_tests(self):
+        with tempfile.TemporaryDirectory() as temp:
+            parent = Path(temp)
+            root = parent/'source'
+            root.mkdir()
+            base = parent/'baseline'
+            base.mkdir()
+            c, _ = self.fixture(base)
+            (base/'chord-tool.css').write_text('old')
+            c.update(package=str(base), files=w.inventory(base))
+            shutil.copytree(base, parent/'package')
+            (parent/'package/chord-tool.css').write_text('new')
+            (root/'release-inputs').mkdir()
+            w.write(root/'release-inputs/production-delta.json', dict(
+                allowed_changes=['chord-tool.css'], allowed_additions=[], allowed_removals=[]))
+            out = parent/'result'
+            out.mkdir()
+            state = dict(source_sha=c['source_sha'], deployment=c['deployment_id'],
+                         manifest_sha256=c['files'][w.MANIFEST])
+            provenance = dict(source_sha=SHA, source_tree='tree')
+            with patch.object(w, 'source_gate', return_value=provenance), \
+                 patch.object(w, 'baseline_status', return_value=state), \
+                 patch.object(w, 'run_stage') as run, \
+                 patch.object(w, 'seal_candidate', return_value={'ok': True}) as seal:
+                self.assertEqual(w.prepare_small(root, SHA, out, c), {'ok': True})
+                self.assertEqual(run.call_count, 3)
+                self.assertEqual(run.call_args_list[1].args[1], ['node', 'tests/harmony-loop-browser.cjs'])
+                self.assertEqual(run.call_args_list[2].args[1], ['node', 'tests/audio-signal-browser.cjs'])
+                self.assertEqual(run.call_args_list[2].args[3]['MODUS_TEST_DIST'], str(out/'package'))
+                self.assertEqual((out/'package/chord-tool.css').read_text(), 'new')
+                self.assertEqual((out/'package/index.html').read_bytes(), (base/'index.html').read_bytes())
+                self.assertEqual(seal.call_args.args[4]['profile'], 'harmony')
+            shutil.rmtree(out/'package')
+            with patch.object(w, 'source_gate', return_value=provenance), \
+                 patch.object(w, 'baseline_status', side_effect=[state, {**state, 'deployment': 'new'}]), \
+                 patch.object(w, 'run_stage'), self.assertRaisesRegex(ValueError, 'Production changed'):
+                w.prepare_small(root, SHA, out, c)
+
     def test_schema_both_formats_and_reject_duplicates_or_traversal(self):
         self.assertEqual(w.file_map({'a.js':'b'*64}),w.file_map([{'path':'a.js','sha256':'b'*64}]))
         for rows in [[{'path':'a.js','sha256':'b'*64}]*2,{'../private':'b'*64},{'x%2fy':'b'*64},{'release-manifest.json':'b'*64},{'x\\y':'b'*64},{'x':'bad'}]:

@@ -100,3 +100,33 @@ C06 avslutter med kort rapport om SHA, ZIP-hash, faktisk deployment, testresulta
 Klon den leverte lokale kilden eller Git-bundlen med full historikk til en ny oppdragsmappe med `source` som undermappe, og bruk grenen `codex/c10-release-workflow`. Installer låste avhengigheter og eksisterende Playwright-nettlesere før kontrollen. Kjør kommandoen over med faktisk full `git rev-parse HEAD` og en ny resultatmappe utenfor source. Alle baselinefiler følger kildecommiten. `check --candidate /mappe/kandidat --out /ny/mappe/kontroll` kontrollerer SHA/tre, filkart, privatgrense, QA, manifest og ZIP på nytt lokalt.
 
 C10 oppdaterer og tester bare lokale utviklerverktøy. Den eksisterende C06-publiseringsfunksjonen er historisk kode og er urørt; ingen ny opplasting, deployfunksjon eller fullmakt inngår. Ikke kjør den som del av denne pakken. Offentlig `verify` brukes først etter en separat autorisert faktisk publisering; C10s lokale kandidat skal aldri omtales som publisert.
+
+
+## Små endringer fra siste verifiserte produksjonspakke
+
+Bruk den siste vellykkede publiseringens resultatmappe som `--baseline`. Mappen skal inneholde `publication.json` med `PUBLIC_VERIFIED`, `NEXT-BASELINE.json` og den eksakte `public-package-<sha7>`. Pakken og kvitteringen kontrolleres sammen med aktiv canonical deployment, offentlig manifest og avslått Git-autodeploy. Slik kan samme publiserte pakke gjenbrukes direkte uten en ny innkopiering i release-inputs.
+
+Utvikle fra siste publiserte kilde i en isolert gren. Oppgi endrede produktfiler i `release-inputs/production-delta.json`, og commit kilden før klargjøring.
+
+```sh
+npm run production:workflow -- prepare --small --baseline /siste/publisering --sha FULL_SOURCE_SHA --out /ny/mappe/kandidat
+```
+
+Småendringsflyten kjører produktbyggeren én gang som kilde til endrede filer. Hele byggets delta må samsvare med den erklærte endringen. Kandidaten lages ved å kopiere den verifiserte produksjonspakken og erstatte akkurat disse filene. Alle øvrige produktfiler skal ha identiske hash. Kildetre, privatgrenser, artikkeltall, manifest og ZIP kontrolleres fortsatt.
+
+Første støttede omfang er én av disse funksjonene per kandidat.
+
+- Modusharmoni med `akkorder.html`, `chord-tool.js` og `chord-tool.css` på NB/EN. Kjører eksisterende loop-/betjeningskontroll og faktiske lydsignaltester for Modusharmoni i Chromium/WebKit på begge språk, inkludert lydfeilscenarier.
+- Læringsinngangen med `undervisning.html` på NB/EN. Kjører eksisterende læringsinngangstester.
+
+Tomt delta, nye/slettede filer, delte filer og kombinerte funksjoner henvises til ordinær `prepare` med full testflyt. Flere omfang kan legges til sammen med relevante testutvalg. Tester som dekker hele nettstedet kjøres ved full klargjøring.
+
+Produksjon kontrolleres før og etter de målrettede testene. Hvis andre publiserer i mellomtiden, må kandidaten klargjøres mot det nye grunnlaget. QA-evidensen binder testutvalget til eksakt delta og baseline.
+
+Bruk samme `--baseline /siste/publisering` også med `check`, `status`, `preflight`, `verify` og `c06:publish`. Eksempel på lokal etterkontroll følger.
+
+```sh
+npm run production:workflow -- check --baseline /siste/publisering --candidate /mappe/kandidat --out /ny/mappe/kontroll
+```
+
+Separat eier-GO gjelder fortsatt for eksakt SHA og ZIP. Den eksisterende publiseringskommandoen tar samme baseline-argument. Før publisering kontrolleres kandidat, aktiv produksjon og Access. Etter publisering kontrolleres alle offentlige filhash og private grenser, mens nettlesertestene følger kandidatens berørte funksjon. Full klargjøring beholder de komplette nettlesertestene. Resultatet blir neste verifiserte produksjonspakke gjennom eksisterende publiseringskvittering.
