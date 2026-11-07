@@ -12,6 +12,9 @@ const store = 'modus-musikkart-v1';
 const quiz = 'modus.article-quiz.v1.toner-og-intervaller';
 const evidence = 'modus.atlas.article-evidence.v1';
 const article = 'artikler/toner-og-intervaller.html';
+const modulation = 'artikler/tonikalisering-og-modulering.html';
+const auditory = 'artikler/auditiv-intervall-og-funksjonsprove.html';
+const intervals = 'artikler/intervallomvendinger.html';
 const topology = page => page.locator('#music-map').evaluate(svg => ({
   box: svg.getAttribute('viewBox'),
   nodes: [...svg.querySelectorAll('.map-node')].map(n =>
@@ -28,7 +31,7 @@ async function scenario(browser, engine, locale, width, candidate, baseline) {
       localStorage.setItem('atlas-test-seeded', 'true');
       localStorage.setItem(store, JSON.stringify({ I03: { state: 'exploring', note: 'Tidligere notat', idea: true } }));
       localStorage.setItem(quiz, 'passed');
-      localStorage.setItem(evidence, JSON.stringify({ intervallomvendinger: { opened: true } }));
+      localStorage.setItem(evidence, JSON.stringify({ 'intervallomvendinger': { opened: true }, 'tonikalisering-og-modulering': { opened: true, passed: true } }));
     }, { store, quiz, evidence });
     const page = await context.newPage();
     const errors = [];
@@ -46,10 +49,11 @@ async function scenario(browser, engine, locale, width, candidate, baseline) {
     assert.equal(await page.locator('[data-state=learned]').getAttribute('aria-pressed'), 'true');
     const related = page.locator('#atlas-articles a');
     assert.deepEqual(await related.evaluateAll(nodes => nodes.map(n => n.getAttribute('href'))),
-      locale === 'nb' ? ['artikler/intervallomvendinger.html'] : []);
+      locale === 'nb' ? [intervals, auditory] : []);
     if (locale === 'nb') {
-      await related.first().click();
-      assert.match(page.url(), /\/artikler\/intervallomvendinger(?:\.html)?$/);
+      await related.filter({ hasText: /Auditiv kontroll/ }).click();
+      assert.match(page.url(), /\/artikler\/auditiv-intervall-og-funksjonsprove(?:\.html)?$/);
+      assert(await page.locator('main article').isVisible());
       await page.goBack();
     }
 
@@ -57,6 +61,10 @@ async function scenario(browser, engine, locale, width, candidate, baseline) {
     const search = page.locator('#map-search');
     await search.fill(locale === 'nb' ? 'intervallomvendinger' : 'Roman numerals');
     assert.match(await node(locale === 'nb' ? 'F03' : 'I01').getAttribute('class'), /\bmatch\b/);
+    await search.fill('tonikalisering og modulering');
+    for (const id of ['A01', 'I02']) {
+      assert.equal(await node(id).evaluate(el => el.classList.contains('match')), locale === 'nb');
+    }
     await search.fill('');
     await page.keyboard.press('Tab');
     await node('I03').focus();
@@ -81,10 +89,12 @@ async function scenario(browser, engine, locale, width, candidate, baseline) {
     await page.keyboard.press('Enter');
     assert(await page.locator('#module-practice').isHidden());
     assert.deepEqual(await related.evaluateAll(nodes => nodes.map(n => n.getAttribute('href'))),
-      locale === 'nb' ? ['artikler/sekundaerdominanter.html'] : []);
+      locale === 'nb' ? ['artikler/sekundaerdominanter.html', modulation] : []);
+    assert.equal(await page.locator('[data-state=not-started]').getAttribute('aria-pressed'), 'true');
     await node('I02').focus();
     await page.keyboard.press('Enter');
     assert.equal(await related.filter({ hasText: /Kadens og tonale funksjoner/ }).count(), locale === 'nb' ? 1 : 0);
+    assert.equal(await page.locator(`#atlas-articles a[href="${modulation}"]`).count(), locale === 'nb' ? 1 : 0);
     assert.equal(await page.locator('[data-state=not-started]').getAttribute('aria-pressed'), 'true');
     const audit = await new AxeBuilder({ page }).include('.map-layout')
       .withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();

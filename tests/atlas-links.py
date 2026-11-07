@@ -38,6 +38,11 @@ assert len(planned_slugs) == 5
 assert planned_slugs <= {a["slug"] for a in pending}
 assert len({a["slug"] for a in pending}) == len(pending)
 assert not ({a["slug"] for a in pending} & expected_slugs)
+unmapped = {'gitarteknikk-metal-fusion-og-oving', 'stilforstaelse-repertoar-og-lytteanalyse'}
+ux003 = [entry for entry in pending if entry['slug'] not in planned_slugs]
+assert len(ux003) == 29
+assert {entry['slug'] for entry in ux003} == {article['slug'] for article in published} - expected_slugs - planned_slugs - unmapped
+assert all(entry['approval'] == 'subject_approved' for entry in ux003)
 approved = {
     "intervallomvendinger": ("F03", []),
     "kadens-og-tonale-funksjoner": ("I01", ["I02"]),
@@ -71,7 +76,7 @@ assert "localStorage.setItem(STORE" in js
 assert 'const articleEvidenceKey=\'modus.atlas.article-evidence.v1\'' in js
 assert "publication_approval" in (ROOT / "content/curriculum/quality-register.json").read_text(encoding="utf-8")
 
-print("Atlas links integrity passed: 24 stable modules, 16 published links, 5 subject-approved planned article mappings.")
+print("Atlas links integrity passed: 24 stable modules, 16 published links, 5 PL-067 and 29 UX-003 reading mappings.")
 
 # The generated per-language data uses the real article publication gate.
 import sys
@@ -90,6 +95,12 @@ for locale, folder in [('nb', 'dist'), ('en', 'dist/en')]:
     assert progress == {slug: module for slug, module in actual_links.items() if slug in public_slugs}
     assert all('<article' in (ROOT / folder / 'artikler' / (row['slug'] + '.html')).read_text() for row in reading)
     by_slug = {row['slug']: row['modules'] for row in reading}
+    assert len(by_slug) == (50 if locale == 'nb' else 16)
+    assert not (unmapped & by_slug.keys())
+    for entry in ux003:
+        modules = [entry['module_id'], *entry['related_module_ids']]
+        assert by_slug.get(entry['slug']) == (modules if locale == 'nb' else None)
+        assert entry['slug'] not in progress
     for slug, (primary, related) in approved.items():
         assert by_slug.get(slug) == ([primary, *related] if slug in public_slugs else None)
 

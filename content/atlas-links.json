@@ -246,6 +246,233 @@
       "related_module_ids": [
         "I03"
       ]
+    },
+    {
+      "slug": "tonikalisering-og-modulering",
+      "status": "planned",
+      "module_id": "A01",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "I02"
+      ]
+    },
+    {
+      "slug": "sekstkvart-bass-og-kadens",
+      "status": "planned",
+      "module_id": "I02",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "A03"
+      ]
+    },
+    {
+      "slug": "satb-tendenstoner-og-dobling",
+      "status": "planned",
+      "module_id": "A03",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "modal-interchange-og-kromatiske-medianter",
+      "status": "planned",
+      "module_id": "P01",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "A02"
+      ]
+    },
+    {
+      "slug": "napolitansk-og-forstorret-sekst",
+      "status": "planned",
+      "module_id": "P01",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "tritonussubstitusjon-og-reharmonisering",
+      "status": "planned",
+      "module_id": "A03",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "P02"
+      ]
+    },
+    {
+      "slug": "kontrapunkt-to-selvstendige-stemmer",
+      "status": "planned",
+      "module_id": "P03",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "dissonans-gjennomgang-og-forholdning",
+      "status": "planned",
+      "module_id": "P03",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "A03"
+      ]
+    },
+    {
+      "slug": "imitasjon-kanon-og-partimento",
+      "status": "planned",
+      "module_id": "P03",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "melodisk-moll-og-akkordskala",
+      "status": "planned",
+      "module_id": "P02",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "I03"
+      ]
+    },
+    {
+      "slug": "altererte-dominanter-og-symmetriske-skalaer",
+      "status": "planned",
+      "module_id": "P02",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "kvartklanger-cluster-og-polykorder",
+      "status": "planned",
+      "module_id": "X02",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "motiv-og-transformasjon",
+      "status": "planned",
+      "module_id": "X03",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "I04"
+      ]
+    },
+    {
+      "slug": "frase-periode-og-harmonisk-rytme",
+      "status": "planned",
+      "module_id": "X01",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "I02"
+      ]
+    },
+    {
+      "slug": "storform-rondo-sonatisk-og-dramaturgi",
+      "status": "planned",
+      "module_id": "X03",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "X01"
+      ]
+    },
+    {
+      "slug": "komposisjon-fra-skisse-til-revisjon",
+      "status": "planned",
+      "module_id": "X03",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "arrangering-for-lite-ensemble",
+      "status": "planned",
+      "module_id": "P04",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "instrumentasjon-og-hybrid-metal",
+      "status": "planned",
+      "module_id": "P04",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "swing-bebop-og-jazzfrasering",
+      "status": "planned",
+      "module_id": "I04",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "P02"
+      ]
+    },
+    {
+      "slug": "comping-og-akkordmelodi",
+      "status": "planned",
+      "module_id": "P02",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "A03"
+      ]
+    },
+    {
+      "slug": "gehor-og-transkripsjon",
+      "status": "planned",
+      "module_id": "E04",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "rytmikk-oddetakt-og-metrisk-modulasjon",
+      "status": "planned",
+      "module_id": "A04",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "logic-midi-og-opptak",
+      "status": "planned",
+      "module_id": "P04",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "miks-balanse-og-kritisk-lytting",
+      "status": "planned",
+      "module_id": "P04",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "portefolje-kunstnerisk-refleksjon-og-samspill",
+      "status": "planned",
+      "module_id": "X04",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "auditiv-intervall-og-funksjonsprove",
+      "status": "planned",
+      "module_id": "F03",
+      "approval": "subject_approved",
+      "related_module_ids": [
+        "I01"
+      ]
+    },
+    {
+      "slug": "samspill-og-improvisatorisk-respons",
+      "status": "planned",
+      "module_id": "I04",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "formanalyse-av-hele-verk",
+      "status": "planned",
+      "module_id": "X01",
+      "approval": "subject_approved",
+      "related_module_ids": []
+    },
+    {
+      "slug": "utovende-presentasjon-og-sluttprosjekt",
+      "status": "planned",
+      "module_id": "X04",
+      "approval": "subject_approved",
+      "related_module_ids": []
     }
   ]
 }
