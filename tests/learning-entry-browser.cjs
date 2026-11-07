@@ -30,6 +30,11 @@ async function check(browser, engine, base, locale, width) {
     await studies.press('ArrowDown');
     const entryLink = page.locator('#nav-panel-learn a[href="undervisning.html"]');
     await entryLink.waitFor({ state: 'visible' });
+    const hint = entryLink.locator('#nav-hint-lesson');
+    assert.equal(await hint.innerText(), locale === 'en'
+      ? 'Read theory articles, take quizzes and try the piano exercise.'
+      : 'Les teoriartikler, svar på quiz og prøv pianoøvelsen.');
+    assert.equal(await entryLink.getAttribute('aria-describedby'), 'nav-hint-lesson');
     await entryLink.focus();
     await entryLink.press('Enter');
     await page.waitForURL(url => url.pathname.replace(/\.html$/, '') === prefix + 'undervisning');

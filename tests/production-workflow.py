@@ -29,7 +29,7 @@ class ProductionTests(unittest.TestCase):
         return c,m
 
     def test_real_published_baseline_and_legacy_dictionary(self):
-        c=w.config();self.assertEqual(c['source_sha'],'6b089d6778f054a7d6e32de0aa5aa9070a1e023c')
+        c=w.config();self.assertEqual(c['source_sha'],'446d4040f712d040fbe2fae139646e69099d53c6')
         self.assertEqual(len(c['files']),680)
         m=w.read(w.ROOT/c['package']/w.MANIFEST)
         self.assertEqual(w.file_map(m['files']),{n:h for n,h in c['files'].items() if n!=w.MANIFEST})

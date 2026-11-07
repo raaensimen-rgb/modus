@@ -1,0 +1,11 @@
+/* P0 original teaching diagrams */
+.teaching-diagram{margin:32px 0;padding:16px;border:1px solid var(--modus-b-4c6837,#4c6837);border-radius:16px;background:var(--modus-c-1b2814,#1b2814);color:inherit;min-width:0}
+.teaching-diagram img{display:block;width:100%;max-width:600px;height:auto;margin:auto;border-radius:12px}
+.teaching-diagram figcaption{display:block;font-size:15px;line-height:1.65;padding:16px 4px 0;color:inherit}
+.teaching-diagram details{margin-top:12px;font-size:14px;line-height:1.7;overflow-wrap:anywhere}
+.teaching-diagram summary{cursor:pointer;min-height:44px;padding:8px 0;color:var(--accent,#d9ef8b)}
+.teaching-diagram summary:focus-visible{outline:3px solid currentColor;outline-offset:4px}
+.teaching-diagram li{margin:10px 0}.teaching-diagram ul{padding-left:22px}
+@media(max-width:550px){.teaching-diagram{margin:24px -8px;padding:8px}.teaching-diagram figcaption{display:block;font-size:14px}.teaching-diagram img{border-radius:8px}}
+@media(forced-colors:active){.teaching-diagram{border:1px solid CanvasText}.teaching-diagram summary{color:LinkText}}
+@media print{.teaching-diagram{break-inside:avoid}}

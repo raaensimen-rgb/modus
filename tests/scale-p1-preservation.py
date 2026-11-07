@@ -5,9 +5,12 @@ R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R/'scripts'))
 from scale_p1 import reviewed,HASHES
 from production_workflow import inventory,public_boundary,config
 from learning_entry_preservation import original_pages
+from learning_menu_copy import previous
 P=R.parent/'package';pinned=json.loads((R/'release-inputs/scale-p1-a06-files.json').read_text());allowed={pre+n for pre in ('','en/') for n in HASHES}
 def check(package):
  old,new=reviewed();actual=inventory(package);actual.pop('release-manifest.json')
+ for page in package.rglob("*.html"):
+  actual[page.relative_to(package).as_posix()]=hashlib.sha256(previous(page.read_bytes())).hexdigest()
  for name, original in original_pages(package).items():
   actual[name]=hashlib.sha256(original).hexdigest()
  assert set(actual)==set(pinned),'P1 must not add/remove package files'

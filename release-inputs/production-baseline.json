@@ -4,9 +4,9 @@
   "project_id": "befea306-6ef6-4282-9fbb-a754c93e6d1b",
   "account_id": "d56ac50a4568da9b7995405c62d7479e",
   "origin": "https://modus-4ye.pages.dev",
-  "source_sha": "6b089d6778f054a7d6e32de0aa5aa9070a1e023c",
-  "deployment_id": "764a7ff1-49a5-4123-8e9d-44eeea640f36",
-  "package": "release-inputs/production-6b089d6",
+  "source_sha": "446d4040f712d040fbe2fae139646e69099d53c6",
+  "deployment_id": "3e8d0483-67f6-4f1b-b2c0-c684dab4e9f6",
+  "package": "release-inputs/production-446d404",
   "files": {
     "404.html": "ba8d16fd36e92e65f45e5e19cdc0a0ba60a73e8306d2c60784df6b7e2014bd95",
     "_headers": "b5620252b31d33c896162efea2cb35450bbd229008d33a7d8410b3d8606f4bb9",
@@ -415,7 +415,7 @@
     "en/theory-library.e633c9710d.css": "e633c9710de416e6cc107f9e277ea1080d25974e65a87dafd0e2ac7f7ab60bd0",
     "en/theory.css": "820921f29f103b40e833c8e5c523406ee503992fe30c8b793d6ce30388b201d8",
     "en/theory.js": "2f34c6c8feded7906e53700ecec269b3efefd014bfe2e2b7cb32b397afd6bed6",
-    "en/undervisning.html": "352e226c9f9f32a9b7955492588ef0da99ee372da8a9cf888c7577b6c9642c5a",
+    "en/undervisning.html": "0cc33f8cedb88112d5352e20bcfd107de54b183f18de93b6f08d27f775da0b21",
     "f03-laeringsreise.html": "91de2a95678b1ba3ef96942978ea4d6c4cb6de1ca7f239bf9893300dff04952e",
     "feedback.css": "8040e8b98cced5087448d7cf6d46dc79d816f308a3a1865635c9cb58adb9162b",
     "feedback.js": "d5fe4332f6f642a7d249770692e0c682cffa353a1c0d694e8fcd936843a33ae3",
@@ -665,7 +665,7 @@
     "preview-guard.js": "f32cb3a9c430f5f235b8ba2472cf0a9986284966173395c21871d67568cf5d39",
     "progressions.js": "83c0444ddccb6005b49ee28c53948ae8f940c9d050d0b26a69b447a6b76a46b2",
     "redaktor.html": "507617fb6f546957620ffa0cfe5cedacaeec2d36bc01e18462371f483da0d876",
-    "release-manifest.json": "aebd5144f87fec0c4f30df1fb6f3573e938984622a756b56f42ac5d507423a67",
+    "release-manifest.json": "4a3de8640b3a840b46e58deeb7b6a7d2687eba8085932ad6cd9ec60db76b7a4e",
     "robots.txt": "275a62c0e5146404c3b02c07060e228771a3dc32fdd9df9a82a6d64eb9f7ac14",
     "scale-library.css": "b6181aef47ae49d0aca9ab05c797421dd08f13e460067a52dafb9aa12504b3f1",
     "scale-library.js": "635c7e61eb876e9a0ab1db1798a0d8017b97dcadebe4c9ab709a1776c2b806e8",
@@ -687,7 +687,7 @@
     "theory-library.e633c9710d.css": "e633c9710de416e6cc107f9e277ea1080d25974e65a87dafd0e2ac7f7ab60bd0",
     "theory.css": "820921f29f103b40e833c8e5c523406ee503992fe30c8b793d6ce30388b201d8",
     "theory.js": "f0eb9116b0cda15b8546cd71836204e8b1bcc8e0fefc7a1f50e650da537629f5",
-    "undervisning.html": "fe38b735456f5b434f595771969635eb4ec7852875251cbfad7a9a498cc48dcf"
+    "undervisning.html": "1ffc6f63afff5ccc888949765f05d192422246a7917ff690bd8e9709a625d097"
   },
   "public_fulltexts": {
     "nb": 52,

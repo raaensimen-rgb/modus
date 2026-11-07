@@ -35,11 +35,15 @@ def check_a06(package):
 
 def check(package):
  from scale_p1 import reverse
+ from learning_menu_copy import previous
  from learning_entry_preservation import original_pages
  with tempfile.TemporaryDirectory() as tmp:
   normalized=Path(tmp)/'a06';reverse(package,normalized)
   for name, original in original_pages(package).items():
    (normalized/name).write_bytes(original)
+  for page in normalized.rglob("*.html"):
+   html=page.read_bytes();original=previous(html)
+   if original!=html:page.write_bytes(original)
   return check_a06(normalized)
 
 result=check(P)
