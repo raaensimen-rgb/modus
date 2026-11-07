@@ -150,14 +150,21 @@ html[data-theme="readable"] .map-hero-links a{
   }
 }
 
-/* UX-003: reduce the space before the map and show focus on its SVG buttons. */
-.map-hero{min-height:325px;padding-block:66px 53px}
+/* UX-003: compact introduction above the interactive workspace. */
+.map-shell > section.map-hero{min-height:0;padding-block:14px}
+.map-hero .map-eyebrow{margin-block:0 5px}
+.map-hero h1{font-size:clamp(32px,3.4vw,49px);margin-block:0 4px}
+.map-shell .map-hero .map-hero-subtitle{font-size:17px;line-height:1.4;margin-block:0}
+.map-hero-links{margin-block-start:8px;gap:4px 18px}
+.map-workspace{padding-block-start:24px}
+.atlas-guide summary{cursor:pointer;color:var(--accent);padding-block:12px}
+.atlas-guide summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .atlas-intro{padding-block:39px 42px}
 .map-node:focus-visible rect{stroke:#fff;stroke-width:3;opacity:1}
 .atlas-reading{margin:18px 0}
 .atlas-reading ul{margin:8px 0 0;padding-inline-start:22px}
 .atlas-reading a{display:inline-block;padding-block:4px;text-decoration:underline;text-underline-offset:.18em}
 @media(max-width:720px){
- .map-hero{min-height:0;padding-block:48px 42px}
+ .map-workspace{padding-block-start:18px}
  .atlas-intro{padding-block:31px}
 }

@@ -66,6 +66,23 @@ def script(code, locale):
 
 def page(html, locale):
     en = locale == 'en'
+    guide = 'How to use the atlas' if en else 'Slik bruker du kartet'
+    lead = 'Explore how music theory fits together.' if en else 'Utforsk sammenhengene i musikkteorien.'
+    html, count = re.subn(
+        r'(<p class="map-hero-subtitle">).*?</p>\s*<p>.*?</p>',
+        lambda match: match[1] + lead + '</p>', html, count=1, flags=re.S,
+    )
+    if count != 1:
+        raise ValueError('Missing Atlas banner copy')
+    html, count = re.subn(
+        r'(<section class="atlas-intro"[^>]*>.*?</section>)(\s*)'
+        r'(<section class="map-workspace"[^>]*>.*?</section>)',
+        lambda match: (match[3] + match[2] + '<details class="atlas-guide">'
+                       f'<summary>{guide}</summary>{match[1]}</details>'),
+        html, count=1, flags=re.S,
+    )
+    if count != 1:
+        raise ValueError('Missing Atlas introduction or workspace')
     if 'id="module-practice"' not in html:
         controls = re.search(r'<a id="module-open"[^>]*>.*?</a>', html)[0]
         practice = 'Try intervals on the piano' if en else 'Prøv intervaller på pianoet'
@@ -82,6 +99,8 @@ def page(html, locale):
     if count != 1:
         raise ValueError('Missing Atlas practice controls')
     if en:
+        html = html.replace('>Se læreplanen ↗︎</a>', '>Explore the curriculum ↗</a>')
+        html = html.replace('placeholder="Søk etter f.eks. moduser"', 'placeholder="Search for modes, intervals…"')
         html = html.replace('aria-label="Egenvurdert læringsstatus"', 'aria-label="Self-assessed learning status"')
     note = (
         'Automatic status uses the Atlas’s original set of articles and quizzes. Additional reading links leave your progress unchanged. This is personal learning progress. '
@@ -92,7 +111,7 @@ def page(html, locale):
         'Quizresultater kan også være knyttet til kontoen din.'
     )
     html = re.sub(r'(<p class="atlas-intro-note">).*?(</p>)', rf'\g<1>{note}\2', html, count=1)
-    return re.sub(r'(musikkart\.(?:css|js))\?v=[^"]+', r'\1?v=ux003', html)
+    return re.sub(r'(musikkart\.(?:css|js))\?v=[^"]+', r'\1?v=ux003-compact', html)
 
 
 def finalize(dist):

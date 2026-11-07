@@ -23,6 +23,13 @@ const topology = page => page.locator('#music-map').evaluate(svg => ({
   globe: svg.querySelector('.atlas-globe').outerHTML,
 }));
 
+const verticalPosition = (page, selector) => page.locator(selector).evaluate(
+  element => Math.round(element.getBoundingClientRect().top + window.scrollY)
+);
+const sectionHeight = (page, selector) => page.locator(selector).evaluate(
+  element => Math.round(element.getBoundingClientRect().height)
+);
+
 async function scenario(browser, engine, locale, width, candidate, baseline) {
   const context = await browser.newContext({ viewport: { width, height: 950 } });
   try {
@@ -39,10 +46,32 @@ async function scenario(browser, engine, locale, width, candidate, baseline) {
     const route = (locale === 'en' ? '/en/' : '/') + 'musikkart.html';
     await page.goto(baseline + route);
     const expected = await topology(page);
+    await page.evaluate(() => document.fonts.ready.then(() => {}));
+    const previousMapTop = await verticalPosition(page, '#music-map');
+    const previousHeroHeight = await sectionHeight(page, '.map-hero');
     await page.goto(candidate + route + '?modul=F03');
     assert.equal(await page.locator('.branch-node').count(), 10);
     assert.equal(await page.locator('.module-node').count(), 24);
     assert.deepEqual(await topology(page), expected);
+    await page.evaluate(() => document.fonts.ready.then(() => {}));
+    const mapTop = await verticalPosition(page, '#music-map');
+    const heroHeight = await sectionHeight(page, '.map-hero');
+    assert(mapTop < previousMapTop, 'The map starts higher on the page');
+    if (width === 1440) assert(mapTop < 900, 'Desktop shows the start of the map within 900 pixels');
+    assert(heroHeight < previousHeroHeight, `The hero is shorter (${heroHeight}px < ${previousHeroHeight}px)`);
+    assert(await page.locator('.map-workspace').evaluate(workspace =>
+      Boolean(workspace.compareDocumentPosition(document.querySelector('.atlas-intro')) & Node.DOCUMENT_POSITION_FOLLOWING)));
+    const guide = page.locator('.atlas-guide');
+    assert(await guide.locator('.atlas-intro').isHidden());
+    await guide.locator('summary').focus();
+    await page.keyboard.press('Enter');
+    assert(await guide.locator('.atlas-intro').isVisible());
+    await page.keyboard.press('Enter');
+    assert(await guide.locator('.atlas-intro').isHidden());
+    const expectedPlaceholder = locale === 'en' ? 'Search for modes, intervals…' : 'Søk etter f.eks. moduser';
+    assert.equal(await page.locator('#map-search').getAttribute('placeholder'), expectedPlaceholder);
+    assert.match(await page.locator('.map-hero-links a[href="laereplan.html"]').textContent(),
+      locale === 'en' ? /Explore the curriculum/ : /Se læreplanen/);
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
     assert.equal(await page.locator('#module-open').getAttribute('href'), article);
     assert(await page.locator('#module-practice').isVisible());
@@ -104,7 +133,7 @@ async function scenario(browser, engine, locale, width, candidate, baseline) {
       await page.locator('#inspector-heading').scrollIntoViewIfNeeded();
       await page.screenshot({ path: path.join(output, `${locale}-${width}-atlas.png`), fullPage: true });
     }
-    return { engine, locale, width, topology: 'identical', axeViolations: 0, result: 'passed' };
+    return { engine, locale, width, previousMapTop, mapTop, previousHeroHeight, heroHeight, topology: 'identical', axeViolations: 0, result: 'passed' };
   } finally {
     await context.close();
   }

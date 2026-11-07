@@ -11,7 +11,7 @@ nav=(root/"scripts/site_navigation.py").read_text()
 data=json.loads((root/"content/curriculum/quality-register.json").read_text())
 assert 'id="music-map"' in html and 'id="inspector-module"' in html
 assert '<h1>Mitt <em>musikkatlas.</em></h1>' in html, "Atlas name should be the primary heading"
-assert '<p class="map-hero-subtitle">Se hvordan alt henger sammen.</p>' in html
+assert '<p class="map-hero-subtitle">Utforsk sammenhengene i musikkteorien.</p>' in html
 assert 'id="atlas-intro-title"' in html and 'atlas-intro-steps' in html
 assert all(label in html for label in ('Se hele landskapet', 'Følg ditt eget arbeid', 'Se neste mulighet'))
 assert 'lagres lokalt i denne nettleseren' in html, "Storage claims must be accurate"
