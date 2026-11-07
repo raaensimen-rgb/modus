@@ -1,0 +1,177 @@
+{
+  "schema": 1,
+  "codec": "Chromium canvas / sRGB / high smoothing",
+  "chromium": "151.0.7922.34",
+  "quality": {
+    "webp": 0.9,
+    "jpeg": 0.92
+  },
+  "sources": {
+    "modus-design-landscape.png": "0f36c4f793a06ca5e7b40b04edf666c360397fdc283b08624e7d2cee2ad6da53",
+    "modus-design-studies-v2.png": "0089a29fb02f61de82976744e08afc07154c3a5329755b3a16e21cfdacf27098",
+    "modus-design-tools.png": "ffd9556da753f2269e14711dc677119095b7d9482039b829af77b5166791b876",
+    "modus-design-articles.png": "ee68b18aefbe179a349429876313888648868bdef0631a5acfd4476372c05a48"
+  },
+  "files": {
+    "modus-design-landscape-384.webp": {
+      "sha256": "88ea0ede8b861905318900782ef8131320960c22238abd357ec8b88eedc45be1",
+      "bytes": 20380,
+      "width": 384,
+      "height": 256,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-landscape-384.jpg": {
+      "sha256": "a8b99010762f87a1241e9bc100a9dae37ebf2aa37d057bf0d2675f98f1643b7f",
+      "bytes": 26812,
+      "width": 384,
+      "height": 256,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-landscape-768.webp": {
+      "sha256": "68681dbb9d568cfdd741af0a1f023087e27a998b82ac1e8d4624718bdd16b5d7",
+      "bytes": 64670,
+      "width": 768,
+      "height": 512,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-landscape-768.jpg": {
+      "sha256": "38f1ae9590f05041da9502b307591db75f739f0cb63ad4625d0acd97a1991524",
+      "bytes": 90603,
+      "width": 768,
+      "height": 512,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-landscape-1152.webp": {
+      "sha256": "39572218aab6b64f2d02d2c59d5569ecd6cbc7f1ac40175fd3cc1d9c22a9342b",
+      "bytes": 124060,
+      "width": 1152,
+      "height": 768,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-landscape-1152.jpg": {
+      "sha256": "ca4e376769652a47f021b00dd43b81e34b982b4c385e6c10dd7b68df862765c0",
+      "bytes": 180982,
+      "width": 1152,
+      "height": 768,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-landscape-1536.webp": {
+      "sha256": "e57f27cd31b262fc269daa88ad7fd4b085230771b16d7aab4686f68faf9a951a",
+      "bytes": 209274,
+      "width": 1536,
+      "height": 1024,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-landscape-1536.jpg": {
+      "sha256": "cf86d2049fce58d8b596364fb76d04c27236f16277316bcc98c8ee7213206a74",
+      "bytes": 311834,
+      "width": 1536,
+      "height": 1024,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-studies-v2-384.webp": {
+      "sha256": "ee5ef70d71c1465b1794313c79434e47ba3919c35dfa9624fb870633cd3979e2",
+      "bytes": 28224,
+      "width": 384,
+      "height": 256,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-studies-v2-384.jpg": {
+      "sha256": "dc3a249544a223eccbdeb90dea525e657da31327f3a9355913b2e131c9b731d2",
+      "bytes": 34725,
+      "width": 384,
+      "height": 256,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-studies-v2-768.webp": {
+      "sha256": "538d779c09bedfa59821ba4fb41e19cdf7f6fcece0878599f13dd59fef70de13",
+      "bytes": 101604,
+      "width": 768,
+      "height": 512,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-studies-v2-768.jpg": {
+      "sha256": "1e799d718b0b218b99dbc9c2c6d84b0bbbd19ca6ca630769b3316652e8d0f17e",
+      "bytes": 126285,
+      "width": 768,
+      "height": 512,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-tools-384.webp": {
+      "sha256": "a3e183fc5d299ed8592b751da8840ed7849433d7175e21b700c45a8d0d2e9309",
+      "bytes": 18562,
+      "width": 384,
+      "height": 256,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-tools-384.jpg": {
+      "sha256": "feb964efaef09c4fa01cdc07261ea4d9afffcde71128ab16850246c815887a31",
+      "bytes": 25280,
+      "width": 384,
+      "height": 256,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-tools-768.webp": {
+      "sha256": "1bece6d8a7935582ee40bdf74caa8a48a9c65f1e34f5320626dcd2655594b6a5",
+      "bytes": 55970,
+      "width": 768,
+      "height": 512,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-tools-768.jpg": {
+      "sha256": "a35f659e0b83ba4a8a68915b1723616eff73cd46a09a4b6134273b1f75304131",
+      "bytes": 78993,
+      "width": 768,
+      "height": 512,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-articles-384.webp": {
+      "sha256": "d4ddd4dbef74e781577c8ad80b171ebb45b41437bcea0dc1a877d9403580afb7",
+      "bytes": 13960,
+      "width": 384,
+      "height": 256,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-articles-384.jpg": {
+      "sha256": "dc7ebf76af816eaada531d9de6d434143b9745feb1ba910f2709f3bf56bfb369",
+      "bytes": 19351,
+      "width": 384,
+      "height": 256,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-articles-768.webp": {
+      "sha256": "654b14525a6c63d8f4af4353caf717a70ce2f8c54379a97f14cb00bb774e563f",
+      "bytes": 44272,
+      "width": 768,
+      "height": 512,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    },
+    "modus-design-articles-768.jpg": {
+      "sha256": "f9d909a5493b40d52001b7623d4b24e2980d6b4407553ffa119bef8220f10204",
+      "bytes": 63772,
+      "width": 768,
+      "height": 512,
+      "sourceWidth": 1536,
+      "sourceHeight": 1024
+    }
+  }
+}

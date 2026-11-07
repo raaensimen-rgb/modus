@@ -22,7 +22,8 @@ const stages=[
  ['ux-flow',['node','tests/start-here-browser.cjs']],
  ['ux-accessibility',['node','tests/start-here-accessibility.cjs']],
  ['ux-no-js',['node','tests/start-here-no-js.cjs']],
- ['integration',['python3','tests/ux-jam-integration.py']]
+ ['integration',['python3','tests/ux-jam-integration.py']],
+ ['images-browser',['node','tests/responsive-images-browser.cjs']]
 ];
 // Clear old evidence in the summary, without discarding historical log files.
 let blocked=false;

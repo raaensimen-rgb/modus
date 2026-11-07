@@ -1,6 +1,32 @@
 {
-  "task": "#53 / A03-A04 / T05: C10 developer workflow only; no public product delta",
-  "allowed_changes": [],
-  "allowed_additions": [],
+  "task": "#53 / A06: responsive existing photographs on NB/EN home and catalog",
+  "allowed_changes": [
+    "artikler.html",
+    "en/artikler.html",
+    "en/index.html",
+    "index.html"
+  ],
+  "allowed_additions": [
+    "images/a06/modus-design-articles-384.jpg",
+    "images/a06/modus-design-articles-384.webp",
+    "images/a06/modus-design-articles-768.jpg",
+    "images/a06/modus-design-articles-768.webp",
+    "images/a06/modus-design-landscape-1152.jpg",
+    "images/a06/modus-design-landscape-1152.webp",
+    "images/a06/modus-design-landscape-1536.jpg",
+    "images/a06/modus-design-landscape-1536.webp",
+    "images/a06/modus-design-landscape-384.jpg",
+    "images/a06/modus-design-landscape-384.webp",
+    "images/a06/modus-design-landscape-768.jpg",
+    "images/a06/modus-design-landscape-768.webp",
+    "images/a06/modus-design-studies-v2-384.jpg",
+    "images/a06/modus-design-studies-v2-384.webp",
+    "images/a06/modus-design-studies-v2-768.jpg",
+    "images/a06/modus-design-studies-v2-768.webp",
+    "images/a06/modus-design-tools-384.jpg",
+    "images/a06/modus-design-tools-384.webp",
+    "images/a06/modus-design-tools-768.jpg",
+    "images/a06/modus-design-tools-768.webp"
+  ],
   "allowed_removals": []
 }

@@ -1,0 +1,56 @@
+A06 / #53 – responsive eksisterende fotografier, lokal kandidat 7. november 2026
+
+Grunnlag: publisert 584c98f / 73e46085 og videreført lokal releaseflyt 950067a.
+Kun NB/EN forside og bibliotek endres. Ingen nye motiv eller fagillustrasjoner.
+Originale PNG-er, SVG-er, film, runtime og private grenser er uendret.
+
+Eksisterende Chromium-canvas-kodeker har laget WebP 0,90 og JPEG 0,92 i sRGB med
+høy resizekvalitet. Bredder og kildehash er låst i release-inputs/a06-images.json.
+Normal bygging kopierer disse ferdige, gjennomgåtte filene og koder dem ikke om.
+Valgfri eksplisitt regenerering: node scripts/encode-responsive-images.cjs.
+Dette krever eksisterende Playwright Chromium, ingen nye avhengigheter.
+
+HTML picture/srcset velger WebP eller JPEG uten JS. Original img src, alt,
+dimensjoner og fetchpriority er beholdt. Høye mobilfelt har en høyere oppløsnings-
+grensning fordi object-fit:cover trenger flere piksler enn elementets bredde alene.
+Filosofifeltets eksisterende CSS-fotografi er flyttet til et absolutt dekorativt
+picture-element med identisk gradient, crop/posisjon og tema-/forced-colors-vern.
+Dette samordner bildelastingen. Gjenbruk av samme allerede kritiske fjellbilde
+er eager også i dekorfelt/kort: WebKit sendte ellers en ekstra forespørsel i
+lazy-batchen under eksisterende no-store-policy. De øvrige fotoene er fortsatt lazy. Den endelige
+bibliotekstilen har allerede background:none; en tidlig scoped regel hindrer
+at det gamle bakgrunnsbildet lastes mens stilarkene ankommer.
+
+Måling: node tests/image-performance.cjs baseline og deretter candidate.
+Fem kalde Chromium-lastinger per NB/EN × forside/katalog × mobil/desktop.
+Profil: 375x812 DPR2 og 1440x1000 DPR1; 10 Mbit/s ned, 5 Mbit/s opp,
+40 ms latency, CPU x4, nye kontekster, deaktivert HTTP-cache, redusert animasjon.
+Samme lokale public-package-server uten komprimering og med eksisterende CSP.
+Ingen andre tunge QA-/kodekkjøringer samtidig med ytelsesmålingen.
+Serveropprinnelsene er tilfeldige loopback-porter, ikke offentlig produksjon.
+Observer LCP/element, FCP, CLS (sesjonsvinduer), bilde-/totalbytes og kilder.
+Long-task blocking etter FCP rapporteres som labdiagnostikk, ikke felt-INP eller
+standardisert Lighthouse-TBT. Rålogger og femmålingenes median/min/max beholdes.
+Flytt tidligere evidence/performance-baseline eller performance-candidate til en
+ny historisk mappe før omkjøring; tidligere målinger skal ikke overskrives.
+Sammenligningsrapport: python3 scripts/summarize-image-performance.py.
+
+Lokale tester: python3 tests/image-preservation.py og
+node tests/responsive-images-browser.cjs. Begge inngår i production:workflow prepare.
+Bevaringstesten reverserer bare de uttrykkelige bildeinnpakningene/stilen og krever
+byteidentisk øvrig HTML, alle øvrige produktfiler og originale illustrasjoner/media.
+Historiske læringsflyt-/integrasjonstester validerer den komplette nye bildeendringen
+før de bruker sin gamle referanse; ingen svakere aksept av ukjente filer eller bytes.
+Negativprøver avviser private filer, endret runtime, endret HTML og derivater.
+Formatfallback simuleres ved å gjøre WebP-type utilgjengelig i testsvaret; dette er
+ikke en attest av eldre fysisk nettleser. Original-src-fallback og no-JS testes også.
+
+Full leveranse: npm run production:workflow -- prepare --sha FULL_SHA --out ../candidate
+Ingen deploy, Preview, push, merge eller ny publiseringsautorisasjon inngår.
+
+Ytelsesmålingene bruker nye tomme nettleserprofiler. Katalogens eksisterende
+introduksjonsdialog kan derfor vises; det faktiske LCP-elementet er lagret per
+kjøring og skal ikke omtales som samme element uten kontroll. Visuell QA av selve
+katalogen lukker dialogen med syntetisk samtykke før bildesammenligning.
+Katalogen overfører fortsatt et eldre mountain-lake.webp på ca. 327 kB fra eksisterende
+CSS/dialog-/headerressurser. A06 påstår ikke at alle historiske ytelsesfunn er lukket.

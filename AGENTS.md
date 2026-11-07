@@ -48,3 +48,9 @@ Bruker har bestilt lokal integrasjon av eksakte SHA 5b498f5 og 5a9c453, med egen
 
 ## C10 – lokal releaseflyt 7. november 2026
 Gjeldende bestilte økt bygger på publisert 584c98f06843e6981e3009cbfbb9bdda5ba34169 / 73e46085-18ca-495a-9b3e-5ee120ba4283. release-inputs/production-baseline.json og production-584c98f låser eksakt 660-filspakke. Kun utviklerverktøy, tester og dokumentasjon endres, med null offentlig produktdelta; eldre kilde-/designreferanser skal ikke erstatte denne. npm run production:workflow -- prepare er lokal kontroll/pakking. Ingen push, merge, deploy, Access-, database-, DNS- eller tjenesteendring. Eksisterende separat C06-opplastingskode kjøres ikke. Ingen nye agenter.
+
+## C10 A06 – lokal bildeoptimalisering 7. november 2026
+A06 viderefører offentlig 584c98f og lokal releaseflyt 950067a. Kun eksisterende
+fotografier på NB/EN forside/katalog optimaliseres med låste varianter og avgrenset
+HTML/bildestil-delta. Originaler og læringsflyt bevares. Se docs/a06-responsive-images.txt.
+Ingen publisering, push/merge, Access-/database-/tjenesteendring eller nye agenter.
