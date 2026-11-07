@@ -36,6 +36,36 @@ class ProductionTests(unittest.TestCase):
         self.assertEqual(w.file_map(m['files']),{n:h for n,h in c['files'].items() if n!=w.MANIFEST})
         w.public_boundary(w.ROOT/c['package'],c['files'],c)
 
+    def test_verified_receipt_baseline_identity_and_hashes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root/'release-inputs').mkdir()
+            receipt = root/'publication'
+            receipt.mkdir()
+            package = receipt/('public-package-'+SHA[:7])
+            package.mkdir()
+            c, marker = self.fixture(package)
+            (package/'_redirects').write_text('')
+            marker['files'] = {n: h for n, h in w.inventory(package).items() if n != w.MANIFEST}
+            w.write(package/w.MANIFEST, marker)
+            original = w.read(w.ROOT/'release-inputs/production-baseline.json')
+            original.update(public_fulltexts=c['public_fulltexts'], admin_origins=c['admin_origins'], access_host=c['access_host'])
+            published = {**original, **c, 'source_sha': SHA, 'files': w.inventory(package)}
+            w.write(root/'release-inputs/production-baseline.json', original)
+            w.write(receipt/'NEXT-BASELINE.json', published)
+            r = dict(status='PUBLIC_VERIFIED', deployed=True, source_sha=SHA,
+                     origin=w.PUBLIC, deployment=published['deployment_id'])
+            w.write(receipt/'publication.json', r)
+            with patch.object(w.subprocess, 'run', return_value=subprocess.CompletedProcess([], 0)):
+                self.assertEqual(w.config(root, receipt)['package'], str(package.resolve()))
+                w.write(receipt/'publication.json', {**r, 'status': 'PUBLICATION_NOT_VERIFIED'})
+                with self.assertRaises(ValueError): w.config(root, receipt)
+                w.write(receipt/'publication.json', r)
+                (package/'index.html').write_text('tampered')
+                with self.assertRaises(ValueError): w.config(root, receipt)
+                w.write(receipt/'NEXT-BASELINE.json', {**published, 'origin': 'https://example.org'})
+                with self.assertRaises(ValueError): w.config(root, receipt)
+
     def test_small_profiles_select_only_affected_browser_suites(self):
         for profile, names in w.SMALL_RELEASE_FILES.items():
             delta = dict(changed=sorted(names), added=[], removed=[])
