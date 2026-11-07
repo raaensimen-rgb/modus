@@ -5,8 +5,8 @@ Gjelder A03/A04/T05, oppdatert av C10 7. november 2026. C07 utvikler og ferdigst
 ## Autoritativt grunnlag
 
 - Offentlig prosjekt: `modus`, ID `befea306-6ef6-4282-9fbb-a754c93e6d1b`, https://modus-4ye.pages.dev/.
-- Produksjonskilde: `584c98f06843e6981e3009cbfbb9bdda5ba34169`; deployment `73e46085-18ca-495a-9b3e-5ee120ba4283`.
-- C06s eksakte offentlige pakke er låst i `release-inputs/production-584c98f`, med alle 660 filhash i `production-baseline.json`. Dette er inngangsgrunnlaget, ikke en ny deployfullmakt.
+- Gjeldende produksjonskilde og deployment leses fra siste verifiserte `publication.json` og `NEXT-BASELINE.json`, og bekreftes mot Cloudflare og offentlig manifest.
+- Siste publiserte pakke brukes direkte med `--baseline` som beskrevet under små endringer. Den historiske låsen i `production-baseline.json` brukes når dette argumentet utelates. Oppdater grunnlaget før full klargjøring hvis låsen ligger bak faktisk produksjon.
 - 52 NB/16 EN-fulltekster, valgte illustrasjoner/medier og private grenser bevares. Nye utkast er private. Ingen opphevede passive kort eller generelle fulltekstsperrer gjeninnføres.
 - Privat administrator/Access er separat i `modus-2-preview`; prosjektet er ikke et offentlig utviklingsmål. Ikke flytt, slett eller deploy administrator fra den offentlige flyten.
 
