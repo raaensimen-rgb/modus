@@ -12,6 +12,8 @@ const stages=[
  ['build',['npm','run','build'],true],
  ['static',['npm','test']],
  ['reproducibility',['python3','tests/candidate-reproducibility.py']],
+ ['scale-p1-keyboard',['node','tests/scale-p1-keyboard-browser.cjs']],
+ ['scale-p1-contrast',['node','tests/scale-p1-contrast-browser.cjs','--source','.','--package','../package','--out','../evidence/scale-p1-contrast']],
  ['scales-browser',['node','tests/scale-library-browser.cjs']],
  ['navigation',['npm','run','test:navigation']],
  ['release',['node','tests/release-browser.cjs']],

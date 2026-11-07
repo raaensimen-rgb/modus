@@ -40,4 +40,14 @@ practice.addEventListener('click',()=>{document.body.classList.toggle('scale-pra
 full.addEventListener('click',async()=>{if(document.fullscreenElement){await document.exitFullscreen();}else if(main.classList.contains('scale-fullscreen-fallback')){main.classList.remove('scale-fullscreen-fallback');}else{try{if(!main.requestFullscreen)throw Error('Unavailable');await main.requestFullscreen();}catch{main.classList.add('scale-fullscreen-fallback');$('scale-display-status').textContent=en?'Expanded view. Press Escape to return.':'Utvidet visning. Trykk Escape for å gå tilbake.';}}syncDisplay();});
 document.addEventListener('fullscreenchange',syncDisplay);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&main.classList.contains('scale-fullscreen-fallback')){main.classList.remove('scale-fullscreen-fallback');$('scale-display-status').textContent='';syncDisplay();full.focus();}});
+// SK-QA-001: keyboard scrolling belongs only to the focused fretboard region.
+const scrollRegion=$('scale-scroll');
+scrollRegion.addEventListener('keydown',event=>{
+ if(event.target!==scrollRegion||event.altKey||event.ctrlKey||event.metaKey||event.shiftKey)return;
+ const max=scrollRegion.scrollWidth-scrollRegion.clientWidth;if(max<=1)return;
+ const step=Math.max(48,Math.min(240,Math.round(scrollRegion.clientWidth/4)));
+ const next={ArrowLeft:scrollRegion.scrollLeft-step,ArrowRight:scrollRegion.scrollLeft+step,Home:0,End:max}[event.key];
+ if(next===undefined)return;
+ event.preventDefault();scrollRegion.scrollTo({left:Math.max(0,Math.min(max,next)),behavior:'instant'});
+});
 syncDisplay();render();})();

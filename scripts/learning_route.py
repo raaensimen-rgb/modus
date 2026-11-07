@@ -113,6 +113,8 @@ def reverse_for_legacy_checks(candidate,out):
   expected=Path(tmp)/'expected';shutil.copytree(baseline,expected);apply(expected)
   from image_optimization import apply as apply_images
   apply_images(expected)
+  from scale_p1 import apply as apply_p1
+  apply_p1(expected)
   assert inventory(candidate)==inventory(expected),'Unexpected route, content, media or private-file delta'
  shutil.copytree(baseline,out)
  manifest=json.loads((out/'release-manifest.json').read_text());manifest['source_sha']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip();(out/'release-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

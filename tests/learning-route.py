@@ -35,9 +35,10 @@ for pre,n in [('',52),('en/',16)]:
    for p in (B/pre/folder).glob(slug+'*.svg'):assert p.read_bytes()==(root/folder/p.name).read_bytes()
  for name in ['article-quiz.js','account.js','articles.js','theory.js','app.js','scale-model.js','preview-guard.js']:
   assert (root/name).read_bytes()==(B/pre/name).read_bytes(),pre+name
- # Only the bounded context-preserving query patch is allowed in the scale runtime.
+ # Only the reviewed query-context and local keyboard patch are allowed in the scale runtime.
  scale_old=(B/pre/'scale-library.js').read_text();scale_new=(root/'scale-library.js').read_text()
- assert scale_new==scale_old.replace("const query=new URLSearchParams(state);if(document.body.classList.contains('scale-practicing'))","const query=new URLSearchParams(state);const fromArticle=params.get('fromArticle');if(/^[a-z0-9-]+$/.test(fromArticle||''))query.set('fromArticle',fromArticle);if(document.body.classList.contains('scale-practicing'))")
+ from scale_p1 import keyboard_patch
+ assert scale_new==keyboard_patch(scale_old.replace("const query=new URLSearchParams(state);if(document.body.classList.contains('scale-practicing'))","const query=new URLSearchParams(state);const fromArticle=params.get('fromArticle');if(/^[a-z0-9-]+$/.test(fromArticle||''))query.set('fromArticle',fromArticle);if(document.body.classList.contains('scale-practicing'))"))
 for slug in set(ORDER)-{x['id'] for x in rows}:assert 'learning-route' not in (P/'en/artikler'/f'{slug}.html').read_text()
 nb=(P/'studierute.html').read_text();old=(B/'studierute.html').read_text();assert all(f'id="T{i}"' in nb for i in range(1,11))
 # The existing detailed curriculum body is intact, not replaced with a second course.
@@ -49,4 +50,4 @@ with tempfile.TemporaryDirectory() as temp:
  assert (out/'index.html').read_bytes()==(B/'index.html').read_bytes()
 for f in P.rglob('*'):
  if f.is_file():assert not f.relative_to(P).as_posix().startswith(('editorial/','content/','cms/','tests/','scripts/'))
-print('PASS: shared ORDER; 52 NB/16 EN real readers/activities; no private manuscript/storage/security-header/media changes; bounded scale URL-context repair; T1–T10 preserved.')
+print('PASS: shared ORDER; 52 NB/16 EN real readers/activities; no private manuscript/storage/security-header/media changes; bounded scale URL-context/keyboard repair; T1–T10 preserved.')

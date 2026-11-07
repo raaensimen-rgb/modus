@@ -1,4 +1,4 @@
-"""A06 independent reversible HTML delta and complete unchanged-file proof."""
+"""A06 preservation after exact verification and reversal of the four reviewed scale P1 files."""
 from pathlib import Path
 import json,hashlib,re,sys,shutil,tempfile
 R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R/'scripts'))
@@ -6,7 +6,7 @@ import production_workflow as w
 from image_optimization import lock,PAGES,css
 c=w.config(R);P=R.parent/'package';images=lock()
 
-def check(package):
+def check_a06(package):
  actual=w.inventory(package);original=c['files'];added={'images/a06/'+n:v['sha256'] for n,v in images['files'].items()}
  assert set(actual)==set(original)|set(added),'File inventory changed outside A06'
  for n,h in original.items():
@@ -28,7 +28,14 @@ def check(package):
  w.public_boundary(package,actual,c)
  return {'baseline_sha':c['source_sha'],'unchanged_files':len(original)-len(PAGES)-1,'changed_html':list(PAGES),'metadata_only':w.MANIFEST,'added_derivatives':added,'removed':[],'all_original_images_runtime_articles_media_storage_security_hash_identical':True}
 
+def check(package):
+ from scale_p1 import reverse
+ with tempfile.TemporaryDirectory() as tmp:
+  normalized=Path(tmp)/'a06';reverse(package,normalized)
+  return check_a06(normalized)
+
 result=check(P)
+result['normalization_scope']='A06 proof after strict P1 reversal; actual four-file P1 delta is checked in scale-p1-preservation.json'
 with tempfile.TemporaryDirectory() as temp:
  q=Path(temp)/'package';shutil.copytree(P,q)
  mutations=[('index.html',(P/'index.html').read_bytes().replace(b'home-hero',b'UNAUTHORIZED',1)),('article-quiz.js',b'changed progression'),('admin-app.js',b'private'),('content/private-draft.json',b'private'),('images/a06/'+next(iter(images['files'])),b'changed derivative')]

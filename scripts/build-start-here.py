@@ -1,4 +1,4 @@
-"""Build UX-001 only, on the hash-pinned latest public release. No network calls."""
+"""Rebuild pinned MODUS routes, A06 photos and bounded scale P1 fixes. No network calls."""
 from pathlib import Path
 import json,hashlib,shutil,subprocess
 from start_here import apply
@@ -14,8 +14,10 @@ from learning_route import apply as apply_route
 apply_route(P)
 from image_optimization import apply as apply_images
 apply_images(P)
+from scale_p1 import apply as apply_scale_p1
+apply_scale_p1(P)
 files=inventory(P);changed=[n for n in expected if files.get(n)!=expected[n] and n!='release-manifest.json'];added=sorted(set(files)-set(expected))
-assert all(n.endswith('.html') or n in ('scale-library.js','en/scale-library.js') for n in changed) and len(changed)>=72
+assert all(n.endswith('.html') or n in ('scale-library.js','en/scale-library.js','scale-library.css','en/scale-library.css') for n in changed) and len(changed)>=72
 assert all(n.startswith(('start-here.','en/start-here.','learning-route.','en/learning-route.')) or n=='en/studierute.html' or n.startswith('images/a06/') for n in added)
 m={'kind':'learning-route-53-local','integrated_sources':json.loads((R/'release-inputs/ux-jam-integration.json').read_text())['upstream_sources'],'source_sha':subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip(),'baseline_sha':'1721e302a3880804073e0dcb0de6543f939ba0f6','baseline_deployment':'2c46a5f1-fdca-4920-b233-cac50f34d7bf','project':'modus','deploy_authorized':False,'changed':changed,'added':added,'preserved':sum(n!='release-manifest.json' and files[n]==v for n,v in expected.items()),'files':{n:v for n,v in files.items() if n!='release-manifest.json'}}
 (P/'release-manifest.json').write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n');print(json.dumps({k:v for k,v in m.items() if k!='files'},indent=2))

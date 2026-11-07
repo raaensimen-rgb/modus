@@ -54,3 +54,6 @@ A06 viderefører offentlig 584c98f og lokal releaseflyt 950067a. Kun eksisterend
 fotografier på NB/EN forside/katalog optimaliseres med låste varianter og avgrenset
 HTML/bildestil-delta. Originaler og læringsflyt bevares. Se docs/a06-responsive-images.txt.
 Ingen publisering, push/merge, Access-/database-/tjenesteendring eller nye agenter.
+
+## SK-QA-001 / SK-QA-006 – lokal A06-integrasjon 7. november 2026
+Denne isolerte grenen bygger på godkjent A06 670c564 og releaseflyt950067a. Eierens direkte samordningsordre i C05 autoriserer lokal lukking av de to skala-P1-funnene og nødvendige meldinger mellom eksisterende C01/C02/C05/C04. C01 eier bare alternativ-tema-append i scale-library.css; C02 eier tastatur på #scale-scroll, integrasjon, bygg og regresjon. Bilder/A06,52NB/16EN, læringsflyt/retur, lyd/film, lagring og private grenser bevares. Se docs/scale-p1-a06-20261107.md. Ingen C11/P2-import, nye agenter/chatter, deploy/Preview, push/merge, Access-, database-, DNS/MODUS.NO- eller tjenesteendring. Ny ren SHA og forseglet pakke skal etterkontrolleres av C05 før eventuell senere eierbeslutning. Dette gir ingen publiseringsfullmakt.

@@ -1,10 +1,14 @@
 {
-  "task": "#53 / A06: responsive existing photographs on NB/EN home and catalog",
+  "task": "#53 / A06 preserved; SK-QA-001 keyboard and SK-QA-006 theme contrast",
   "allowed_changes": [
     "artikler.html",
     "en/artikler.html",
     "en/index.html",
-    "index.html"
+    "en/scale-library.css",
+    "en/scale-library.js",
+    "index.html",
+    "scale-library.css",
+    "scale-library.js"
   ],
   "allowed_additions": [
     "images/a06/modus-design-articles-384.jpg",
