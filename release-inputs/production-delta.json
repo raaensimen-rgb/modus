@@ -1,12 +1,6 @@
 {
-  "task": "Optional progression repeat in Harmony",
   "allowed_changes": [
-    "akkorder.html",
-    "chord-tool.css",
-    "chord-tool.js",
-    "en/akkorder.html",
-    "en/chord-tool.css",
-    "en/chord-tool.js"
+    "artikler/dur-og-moll.html"
   ],
   "allowed_additions": [],
   "allowed_removals": []
