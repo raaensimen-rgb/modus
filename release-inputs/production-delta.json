@@ -1,6 +1,7 @@
 {
   "allowed_changes": [
-    "artikler.html"
+    "artikler.html",
+    "artikler/ii-v-i-kadensen.html"
   ],
   "allowed_additions": [],
   "allowed_removals": []
