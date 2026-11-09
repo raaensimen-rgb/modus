@@ -264,7 +264,7 @@
         },
         {
           "slug": "bygg-akkorder-i-en-toneart",
-          "label": "Bygg akkordene i en toneart"
+          "label": "Hvordan bygge akkordene i en toneart"
         }
       ]
     },
@@ -534,7 +534,7 @@
     "level": "beginner",
     "topic": "Akkorder",
     "category": "chords",
-    "title": "Bygg akkordene i en toneart",
+    "title": "Hvordan bygge akkordene i en toneart",
     "intro": "Når du bygger treklanger av skalatonene, får du en familie av akkorder. G-dur viser hvordan tonene, akkordnavnene og romertallene henger sammen.",
     "art": "diatonic",
     "sections": [
