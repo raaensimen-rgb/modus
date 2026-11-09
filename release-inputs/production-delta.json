@@ -1,6 +1,6 @@
 {
   "allowed_changes": [
-    "artikler/dur-og-moll.html"
+    "artikler.html"
   ],
   "allowed_additions": [],
   "allowed_removals": []
