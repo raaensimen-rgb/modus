@@ -1,7 +1,7 @@
 (function(){
  'use strict';
  function matches(article,filters){
-  const normalize=s=>s.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const normalize=s=>s.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/æ/g,'ae').replace(/ø/g,'o');
   const words=normalize(filters.q.trim()).split(/\s+/).filter(Boolean);
   return (filters.level==='all'||article.level===filters.level)&&(filters.topic==='all'||article.topic===filters.topic)&&words.every(w=>normalize(article.search).includes(w));
  }

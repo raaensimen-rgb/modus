@@ -7,11 +7,13 @@ const server=http.createServer((req,res)=>{
  if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){res.writeHead(404).end();return;}
  res.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.css':'text/css','.mp3':'audio/mpeg','.svg':'image/svg+xml'})[path.extname(file)]||'application/octet-stream');fs.createReadStream(file).pipe(res);
 });
+const theoryOnly=process.env.MODUS_PIANO_THEORY_ONLY==='1';
 const cases=[
  {url:'teori.html',id:'theoryKeyboard',play:'listen',stop:'listen',key:'theoryKey'},
  {url:'akkorder.html',id:'chordKeyboard',play:'playSelected',stop:'playProgression',key:'jamKey'},
  {url:'backingtracks.html',id:'fretboard',play:'play',stop:'play',key:'key',jam:true},
 ];
+const testedCases=theoryOnly ? cases.slice(0,1) : cases;
 async function openPage(page,url){
  await page.goto(url);
  const notice=page.locator('.modus-premises-dialog[open]');
@@ -35,9 +37,9 @@ async function manual(page,id){
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base=process.env.MODUS_TEST_URL||`http://127.0.0.1:${server.address().port}`,results=[];
  try{for(const [browserName,type] of Object.entries({chromium,webkit})){
   const browser=await type.launch({headless:true});
-  try{const journey=await require('./learning-journey-browser.cjs')(browser,browserName,base);fs.writeFileSync('test-results/journey-'+browserName+'-results.json',JSON.stringify(journey,null,2));const publication=await require('./publication-browser.cjs')(browser,browserName,base);fs.writeFileSync('test-results/publication-'+browserName+'-results.json',JSON.stringify(publication,null,2));for(const width of [1440,375])for(const locale of ['', 'en/']){
+  try{if(!theoryOnly){const journey=await require('./learning-journey-browser.cjs')(browser,browserName,base);fs.writeFileSync('test-results/journey-'+browserName+'-results.json',JSON.stringify(journey,null,2));const publication=await require('./publication-browser.cjs')(browser,browserName,base);fs.writeFileSync('test-results/publication-'+browserName+'-results.json',JSON.stringify(publication,null,2));}for(const width of [1440,375])for(const locale of ['', 'en/']){
    const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
-   for(const test of cases){
+   for(const test of testedCases){
     await openPage(page,`${base}/${locale}${test.url}`);
     if(test.jam)await page.selectOption('#mapInstrument','piano');
     const tonic=page.locator(`#${test.id} [data-tonic="true"]`).first(),fill=await tonic.getAttribute('fill');
@@ -53,7 +55,7 @@ async function manual(page,id){
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'No page overflow');
     results.push({browser:browserName,width,locale:locale||'nb',page:test.url,status:'passed'});console.log(JSON.stringify(results.at(-1)));
    }
-   if(!locale){
+   if(!theoryOnly&&!locale){
     await openPage(page,base+'/undervisning.html?modul=F03');
     assert.equal(await page.locator('[data-publication-hold]').count(),1,'Legacy F03 is a public holding page');
     assert.equal(await page.locator('#f03-piano').count(),0,'No private teaching controls in public build');

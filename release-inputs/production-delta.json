@@ -1,22 +1,11 @@
 {
   "allowed_changes": [
-    "akkorder.html",
-    "artikler.html",
-    "artikler/bygg-akkorder-i-en-toneart.html",
-    "artikler/dur-og-moll.html",
-    "artikler/kvintsirkelen.html",
-    "artikler/romertall-i-musikk.html",
-    "artikler/septimakkorder.html",
-    "artikler/treklanger-fra-grunnform-til-omvending.html",
-    "backingtracks.html",
-    "grunnstudier.html",
-    "index.html",
-    "laeringssti.html",
-    "musikkart.js",
-    "search-index.json",
-    "skalabibliotek.html",
-    "studierute.html",
-    "teori.html"
+    "articles.js",
+    "en/articles.js",
+    "en/global-search.js",
+    "en/theory.js",
+    "global-search.js",
+    "theory.js"
   ],
   "allowed_additions": [],
   "allowed_removals": []
