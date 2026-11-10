@@ -242,7 +242,7 @@ for source in list(DIST.rglob('*')):
                 result = result.replace(nb, en)
         target.write_text(result)
     elif source.suffix=='.js' and source.name not in ('language-init.js','language.js','account.js') and not source.name.startswith('account.'):
-        if source.name=='learning-premises.js' or source.name.startswith('learning-premises.'):
+        if source.name in ('learning-premises.js','scale-library.js') or source.name.startswith('learning-premises.'):
             target.write_bytes(source.read_bytes())
             continue  # Bilingual UI copy chooses the current HTML language at runtime.
         localized=script(source.read_text())

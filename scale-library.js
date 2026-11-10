@@ -8,7 +8,14 @@ const controls=[['root',en?'Root':'Grunntone',roots.map(n=>[n,n])],['mode',en?'S
 $('scale-controls').innerHTML=controls.map(([id,label,options])=>`<label for="scale-${id}">${label}<select id="scale-${id}">${options.map(([v,t])=>`<option value="${v}">${t}</option>`).join('')}</select></label>`).join('');
 for(const [id,,options] of controls){const v=params.get(id)||({root:'E',mode:'dorian',range:'0-24'})[id];if(options.some(o=>o[0]===v))$('scale-'+id).value=v;}
 $('scale-controls').addEventListener('submit',e=>e.preventDefault());$('scale-controls').addEventListener('change',render);
-function render(){const state=Object.fromEntries(controls.map(([id])=>[id,$('scale-'+id).value])),notes=model.scale(state.root,state.mode),[lo,hi]=state.range.split('-').map(Number),board=model.board(state.root,state.mode);$('scale-summary').textContent=state.root+' '+names[ModusScales.ids.indexOf(state.mode)]+' · '+notes.map(n=>n.name).join(' – ')+' · '+notes.map(n=>n.degree).join(' – ');
+const readControls=()=>Object.fromEntries(controls.map(([id])=>[id,$('scale-'+id).value]));
+const fromArticle=params.get('fromArticle');
+const article=/^[a-z0-9-]+$/.test(fromArticle||'')?fromArticle:null;
+const practiceParam=()=>document.body.classList.contains('scale-practicing')?'1':null;
+window.ModusLanguage=window.ModusLanguage||{};
+window.ModusLanguage.query=()=>({...readControls(),fromArticle:article,practice:practiceParam()});
+
+function render(){const state=readControls(),notes=model.scale(state.root,state.mode),[lo,hi]=state.range.split('-').map(Number),board=model.board(state.root,state.mode);$('scale-summary').textContent=state.root+' '+names[ModusScales.ids.indexOf(state.mode)]+' · '+notes.map(n=>n.name).join(' – ')+' · '+notes.map(n=>n.degree).join(' – ');
 const modeIndex=ModusScales.ids.indexOf(state.mode),parent=notes[(7-modeIndex)%7].name;
 $('scale-name').textContent=state.root+' '+names[modeIndex];
 $('scale-formula-caption').textContent=en?'Formula':'Formel';
@@ -32,7 +39,23 @@ $('scale-details-title').textContent=en?'Notes, intervals and tonal centre':'Ton
 const comparisons=en?['3 and 7 describe the major reference.','6 differs from natural minor (♭6).','♭2 differs from natural minor (2).','♯4 differs from major (4).','♭7 differs from major (7).','♭6 differs from Dorian (6).','♭2 and ♭5 differ from natural minor (2 and 5).']:['3 og 7 beskriver durreferansen.','6 skiller fra naturlig moll (♭6).','♭2 skiller fra naturlig moll (2).','♯4 skiller fra dur (4).','♭7 skiller fra dur (7).','♭6 skiller fra dorisk (6).','♭2 og ♭5 skiller fra naturlig moll (2 og 5).'];
 $('scale-explanation').textContent=comparisons[ModusScales.ids.indexOf(state.mode)]+' '+(en?'Character tones are teaching comparisons. A tonal centre also depends on harmony, melodic emphasis and context. International B and B♭ are used. Enharmonic roots retain their diatonic spelling, including double accidentals.':'Karaktertoner er pedagogiske sammenligninger. Tonalt sentrum avhenger også av harmonikk, melodisk vekt og sammenheng. Vi bruker internasjonalt B (= norsk H) og B♭ (= norsk B). Enharmoniske grunntoner beholder diatonisk stavemåte, også doble fortegn.');
 $('scale-table').innerHTML=`<table><caption>${en?'Scale degrees':'Skalatrinn'}</caption><thead><tr><th>${en?'Note':'Tone'}</th><th>${en?'Interval':'Intervall'}</th><th>${en?'Character tone':'Karaktertone'}</th></tr></thead><tbody>${notes.map(n=>`<tr><td>${n.name}</td><td>${n.degree} · ${intervalNames[n.degree][en?1:0]}</td><td>${n.character?(en?'Yes':'Ja'):'–'}</td></tr>`).join('')}</tbody></table>`;
-const query=new URLSearchParams(state);const fromArticle=params.get('fromArticle');if(/^[a-z0-9-]+$/.test(fromArticle||''))query.set('fromArticle',fromArticle);if(document.body.classList.contains('scale-practicing'))query.set('practice','1');history.replaceState(null,'','?'+query);query.set('lang',en?'nb':'en');$('scale-language').href=(en?'../skalabibliotek.html':'en/skalabibliotek.html')+'?'+query;$('scale-language').textContent=en?'Norsk':'English';$('scale-language').lang=en?'nb':'en';}
+const query=new URLSearchParams(state);
+if(article)query.set('fromArticle',article);
+if(practiceParam())query.set('practice','1');
+const currentUrl='?'+query;
+query.set('lang',en?'nb':'en');
+const languageLink=$('scale-language');
+languageLink.href=(en?'../skalabibliotek.html':'en/skalabibliotek.html')+'?'+query;
+languageLink.textContent=en?'Norsk':'English';
+languageLink.lang=en?'nb':'en';
+
+// WebKit can refuse History API writes during rapid changes. The language
+// links use the controls directly, even when the address bar is stale.
+if(location.search!==currentUrl||location.hash){
+ try{history.replaceState(null,'',currentUrl);}
+ catch(error){if(error.name!=='SecurityError')throw error;}
+}
+}
 if(params.get('practice')==='1')document.body.classList.add('scale-practicing');
 const practice=$('scale-practice'),full=$('scale-fullscreen'),main=$('main-content');
 function syncDisplay(){practice.textContent=en?'Practice view':'Øvingsvisning';practice.setAttribute('aria-pressed',String(document.body.classList.contains('scale-practicing')));const active=!!document.fullscreenElement||main.classList.contains('scale-fullscreen-fallback');full.textContent=active?(en?'Exit fullscreen':'Avslutt fullskjerm'):(en?'Fullscreen':'Fullskjerm');full.setAttribute('aria-pressed',String(active));}

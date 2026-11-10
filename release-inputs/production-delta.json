@@ -1,19 +1,7 @@
 {
   "allowed_changes": [
-    "akkorder.html",
-    "artikler.html",
-    "artikler/din-forste-improvisasjon.html",
-    "artikler/septimakkorder.html",
-    "artikler/treklanger-fra-grunnform-til-omvending.html",
-    "backingtracks.html",
-    "grunnstudier.html",
-    "index.html",
-    "laeringssti.html",
-    "musikkart.js",
-    "search-index.json",
-    "skalabibliotek.html",
-    "studierute.html",
-    "teori.html"
+    "en/scale-library.js",
+    "scale-library.js"
   ],
   "allowed_additions": [],
   "allowed_removals": []
