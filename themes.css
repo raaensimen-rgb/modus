@@ -99,3 +99,96 @@ html[data-site-palette=blue][data-theme=original] .modus-home .landscape::after{
 html[data-site-palette=blue][data-theme=original] .modus-home .new-philosophy>picture[data-a06-background]::after{
   background-image:linear-gradient(0deg,rgba(11,20,33,.5),#0b1421 92%);
 }
+/* Shared Blue surfaces. Reading and contrast modes retain their own palette. */
+html[data-site-palette=blue][data-theme=original]{
+  --blue-base:#0b1421;
+  --blue-panel:#17283c;
+  --blue-raised:#223a55;
+  --blue-line:#415f80;
+  --blue-muted:#bfd3eb;
+  --appearance-panel:var(--blue-panel);
+  --appearance-ink:#e6edf7;
+  --appearance-muted:var(--blue-muted);
+  --appearance-line:var(--blue-line);
+  --appearance-accent:#67c9dd;
+}
+html[data-site-palette=blue][data-theme=original] :is(.modus-home,.modus-interior){
+  --bg:var(--blue-base);
+  --panel:var(--blue-panel);
+  --line:var(--blue-line);
+  --muted:var(--blue-muted);
+  --modus-forest:var(--blue-base);
+  --modus-surface:var(--blue-panel);
+  --modus-muted:var(--blue-muted);
+  --modus-edge:var(--blue-line);
+}
+html[data-site-palette=blue][data-theme=original] :is(.site-header .nav-panel,.site-header .theme-options,
+  .article-card,.upcoming-card,.section-card,.study-card,.route-card,.catalog-preview-card,
+  .article-quiz,.article-learning,.article-prerequisites,.article-practice,.start-resume,
+  .global-search-dialog,.builder-panel,.selected-panel,.lesson,.journey-stage,.price-card,
+  .account-panel,.billing-panel,.membership-dialog,.student-info-dialog,.student-verification-panel,
+  .modus-feedback-panel,.modus-help-panel,.map-inspector,.map-stage,.scale-reading){
+  background-color:var(--blue-panel)!important;
+}
+html[data-site-palette=blue][data-theme=original] :is(.card-level-row,.level-badge,
+  .home-portal,.global-search-result:is(:hover,:focus-visible),.modus-feedback-toggle){
+  background-color:var(--blue-raised);
+}
+html[data-site-palette=blue][data-theme=original] #library :is(.card-level-row,.card-art,.card-art img){
+  background-color:var(--blue-base)!important;
+}
+html[data-site-palette=blue][data-theme=original] #library .level-badge{
+  background-color:var(--blue-raised)!important;
+  border-color:var(--blue-line);
+  color:var(--blue-muted);
+}
+html[data-site-palette=blue][data-theme=original] #library :is(.card-meta,.card-description,.upcoming-card-meta){
+  color:var(--blue-muted);
+}
+html[data-site-palette=blue][data-theme=original] :is(.article-search,.library-filter,.filter-row input,
+  .map-toolbar select,.scale-controls select,.harmonic-context-controls select,
+  .progression-presets-controls select,.modus-feedback-form :is(input,select,textarea)){
+  background-color:var(--blue-base);
+  border-color:var(--blue-line);
+  color:#e6edf7;
+}
+html[data-site-palette=blue][data-theme=original] :is(.scale-neck,.scale-fret-band){
+  fill:var(--blue-panel);
+}
+html[data-site-palette=blue][data-theme=original] :is(.scale-fret-wire,.scale-string,.scale-neck-edge){
+  stroke:var(--blue-line);
+}
+html[data-site-palette=blue][data-theme=original] :is(.scale-fret-labels,.scale-string-label,.scale-row-label){
+  fill:var(--blue-muted);
+}
+html[data-site-palette=blue][data-theme=original] .modus-home .home-introduction{
+  background-image:linear-gradient(90deg,#17283c,#0b1421);
+}
+html[data-site-palette=blue][data-theme=original] .modus-home .home-portal::before{
+  background-image:linear-gradient(0deg,rgba(11,20,33,.96),rgba(11,20,33,.35) 85%);
+}
+html[data-site-palette=blue][data-theme=original] :is(.scale-scroll,.scale-formula,.scale-note-chips>span){
+  background-color:var(--blue-panel);
+}
+html[data-site-palette=blue][data-theme=original] .scale-note circle{fill:#456b91}
+html[data-site-palette=blue][data-theme=original] .scale-root circle{fill:#ffdf29}
+html[data-site-palette=blue][data-theme=original] .scale-root text{fill:#0b1421}
+html[data-site-palette=blue][data-theme=original] .scale-note .scale-root-ring{stroke:#ffdf29}
+html[data-site-palette=blue][data-theme=original] .scale-note .scale-character-ring{stroke:#9db9da}
+html[data-site-palette=blue][data-theme=original] .scale-note-chips>.is-root{background-color:#ffdf29;color:#0b1421}
+html[data-site-palette=blue][data-theme=original] :is(.modus-help-toggle,.modus-feedback-toggle,
+  .modus-context-tip,.global-search-result:is(:hover,:focus-visible)){
+  background-color:var(--blue-raised);
+  border-color:var(--blue-line);
+}
+html[data-site-palette=blue][data-theme=original] :is(.modus-help-toggle,.modus-feedback-toggle):is(:hover,:focus-visible){
+  background-color:#345677;
+}
+html[data-site-palette=blue][data-theme=original] .modus-feedback-toggle svg{stroke:#67c9dd}
+html[data-site-palette=blue][data-theme=original] .modus-feedback-send{background-color:#ffdf29;color:#0b1421}
+html[data-site-palette=blue][data-theme=original] .modus-feedback-send:hover{background-color:#ffe763}
+html[data-site-palette=blue][data-theme=original] .map-node.match rect{stroke:#67c9dd}
+html[data-site-palette=blue][data-theme=original] .map-node:focus-visible rect{stroke:#ffdf29}
+html[data-site-palette=blue][data-theme=original] .map-dot.dim{background-color:var(--blue-line)}
+html[data-site-palette=blue][data-theme=original] .map-dot.working{background-color:#9db9da}
+html[data-site-palette=blue][data-theme=original] .map-dot.learned{background-color:#67c9dd}
