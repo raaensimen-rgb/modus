@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const key='modus-theme-v1',values=['original','readable','contrast'];
+  const key='modus-theme-v1',values=['original','blue','readable','contrast'];
   function valid(value){return values.includes(value)?value:'original';}
   function apply(value,persist=true){
     value=valid(value);document.documentElement.dataset.theme=value;
