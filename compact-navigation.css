@@ -166,3 +166,20 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) .site-header .sit
 @media (forced-colors: active) {
   .site-header .site-nav::before { display: none; }
 }
+
+/* Keep the centered brand separate from desktop utilities and primary navigation. */
+@media (min-width: 1024px) {
+  html:not([data-theme="readable"]):not([data-theme="contrast"]) body:is(.modus-home,.modus-interior) > header.site-header::after {
+    height: 114px !important;
+    background-position: center 2px !important;
+  }
+  .site-header .brand {
+    height: 158px !important;
+  }
+  .site-header .header-tools {
+    position: absolute !important;
+    inset: 16px 3% auto auto !important;
+    grid-area: auto !important;
+    z-index: 3;
+  }
+}
