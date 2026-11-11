@@ -3,6 +3,11 @@ from pathlib import Path
 import hashlib,re,sys
 R=Path(__file__).resolve().parents[1]
 PAGES={'laeringssti':'path-hero','laereplan':'curriculum-hero','teori':'theory-hero','backingtracks':'intro','akkorder':'theory-hero','undervisning':None,'grunnstudier':None,'laer-dorisk':None,'f03-laeringsreise':'dynamic','modus-plus':'membership-hero'}
+def full_width_study_hero(page):
+ template=(R/'scripts/full-width-study-hero.html').read_text().strip()
+ style,script=template.split('</style>\n',1)
+ return page.replace('</head>',style+'</style></head>',1).replace('</header>','</header>'+script,1)
+
 def apply(target):
  target=Path(target).resolve()
  css=(R/'subpage-hero.css').read_bytes();name='subpage-hero.'+hashlib.sha256(css).hexdigest()[:10]+'.css'
@@ -10,6 +15,8 @@ def apply(target):
   base=target/prefix;(base/name).write_bytes(css)
   for slug,kind in PAGES.items():
    p=base/(slug+'.html');s=p.read_text()
+   if slug in {'teori','laeringssti'} and 'id="modus-study-landscape"' not in s:
+    s=full_width_study_hero(s)
    if 'shared-hero-page' in s:
     s=re.sub(r'<link rel="stylesheet" href="subpage-hero\.[a-f0-9]{10}\.css">','',s)
     p.write_text(s.replace('</head>',f'<link rel="stylesheet" href="{name}"></head>',1));continue
