@@ -1,8 +1,1 @@
-{
-  "allowed_changes": [
-    "en/scale-library.js",
-    "scale-library.js"
-  ],
-  "allowed_additions": [],
-  "allowed_removals": []
-}
+{"task":"Homepage sky and wave","allowed_changes":["en/index.html","index.html"],"allowed_additions":[],"allowed_removals":[]}
