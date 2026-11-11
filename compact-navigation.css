@@ -183,3 +183,21 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) .site-header .sit
     z-index: 3;
   }
 }
+
+/* Reduce spacing while keeping desktop utility controls at least 44px wide. */
+@media (min-width: 1024px) {
+  .site-header .header-tools {
+    grid-template-columns: 44px 88px 44px 44px !important;
+    padding-inline: 3px !important;
+  }
+  .site-header .header-tools.header-tools--site-theme {
+    grid-template-columns: 44px 88px 44px 44px 52px !important;
+  }
+  .site-header .header-tools > .language-picker {
+    width: 88px !important;
+    grid-template-columns: repeat(2, 44px) !important;
+  }
+  .site-header .header-tools :is(.nav-account, .global-search-trigger, .theme-picker > summary) {
+    width: 44px !important;
+  }
+}

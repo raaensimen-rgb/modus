@@ -1,5 +1,5 @@
 {
-  "task": "Center the MODUS brand and move desktop tools to the upper right",
+  "task": "Narrow the desktop header utility bar",
   "allowed_changes": [
     "akkorder.html",
     "artikler.html",
@@ -143,8 +143,8 @@
     "undervisning.html"
   ],
   "allowed_additions": [
-    "compact-navigation.7ada743a44.css",
-    "en/compact-navigation.7ada743a44.css"
+    "compact-navigation.4309e80ae0.css",
+    "en/compact-navigation.4309e80ae0.css"
   ],
   "allowed_removals": []
 }
