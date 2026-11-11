@@ -44,6 +44,40 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home .site
   }
 }
 </style>
+<style id="modus-home-lower">
+html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home .home-lower-landscape {
+  position: relative;
+  isolation: isolate;
+  --lake-fade: linear-gradient(180deg, #001917 0%, #00191763 32%, #00191775 66%, #001917e6 100%);
+}
+html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home .home-lower-landscape:not(:has(picture[data-a06-background])) {
+  background: var(--lake-fade), url("images/modus-design-landscape.png") center bottom / cover no-repeat;
+}
+html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home .home-lower-landscape .new-philosophy {
+  position: static;
+  isolation: auto;
+  background: transparent;
+}
+.modus-home .home-lower-landscape .new-philosophy > picture[data-a06-background] > img {
+  object-position: center bottom;
+}
+.modus-home .home-lower-landscape .new-philosophy > picture[data-a06-background]::after {
+  background: var(--lake-fade);
+}
+@media (max-width: 760px) {
+  .modus-home .home-lower-landscape .new-philosophy > picture[data-a06-background] {
+    overflow: hidden;
+  }
+  .modus-home .home-lower-landscape .new-philosophy > picture[data-a06-background] > img {
+    position: absolute;
+    bottom: 0;
+    height: 185%;
+  }
+}
+@media (forced-colors: active) {
+  .modus-home .home-lower-landscape { background: none !important; }
+}
+</style>
 </head><body class="modus-home">
 <a class="home-skip" href="#main">Hopp til innhold</a>
 <header class="site-header"><a class="brand" href="./" aria-label="MODUS – forsiden" aria-current="page"><svg class="brand-arch" viewBox="0 0 72 64" width="30" height="28" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="modusArchGradient" gradientUnits="userSpaceOnUse" x1="7" y1="32" x2="67" y2="32"><stop offset="0" stop-color="#d7f48c"/><stop offset=".35" stop-color="#d0eb91" stop-opacity=".86"/><stop offset=".7" stop-color="#a5c783" stop-opacity=".5"/><stop offset="1" stop-color="#7c9f70" stop-opacity=".18"/></linearGradient></defs><path d="M7 49C12 30 14 16 23 16C32 16 33 31 36 49C40 30 42 16 51 16C60 16 62 30 67 49" stroke="url(#modusArchGradient)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>MODUS<svg class="brand-arch-end" viewBox="0 0 72 64" width="30" height="28" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="modusArchEndGradient" gradientUnits="userSpaceOnUse" x1="7" y1="32" x2="67" y2="32"><stop offset="0" stop-color="#7c9f70" stop-opacity=".18"/><stop offset=".3" stop-color="#a5c783" stop-opacity=".5"/><stop offset=".65" stop-color="#d0eb91" stop-opacity=".86"/><stop offset="1" stop-color="#d7f48c"/></linearGradient></defs><path d="M7 49C12 30 14 16 23 16C32 16 33 31 36 49C40 30 42 16 51 16C60 16 62 30 67 49" stroke="url(#modusArchEndGradient)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></a><nav class="site-nav" aria-label="Hovedmeny"><div class="nav-group"><button type="button" class="nav-trigger" id="nav-learn" aria-expanded="false" aria-controls="nav-panel-learn">Lær<span class="nav-chevron" aria-hidden="true">⌄</span></button><div class="nav-panel" id="nav-panel-learn" aria-labelledby="nav-learn" hidden><a href="laer-dorisk.html" class="" aria-label="Læringssti" aria-describedby="nav-hint-course"><strong>Læringssti</strong><small id="nav-hint-course">Lær steg for steg, fra lytting til spilling.</small><span aria-hidden="true">↗</span></a><a href="teori.html" class="" aria-label="Teorirommet" aria-describedby="nav-hint-theory"><strong>Teorirommet</strong><small id="nav-hint-theory">Utforsk intervaller, akkorder og moduser.</small><span aria-hidden="true">↗</span></a></div></div><div class="nav-group"><button type="button" class="nav-trigger" id="nav-play" aria-expanded="false" aria-controls="nav-panel-play">Spill<span class="nav-chevron" aria-hidden="true">⌄</span></button><div class="nav-panel" id="nav-panel-play" aria-labelledby="nav-play" hidden><a href="backingtracks.html" class="" aria-label="Backingtracks" aria-describedby="nav-hint-jam"><strong>Backingtracks</strong><small id="nav-hint-jam">Spill med trommer, bass og piano.</small><span aria-hidden="true">↗</span></a><a href="akkorder.html" class="" aria-label="Akkordverksted" aria-describedby="nav-hint-chords"><strong>Akkordverksted</strong><small id="nav-hint-chords">Bygg akkordrekker og utforsk grep.</small><span aria-hidden="true">↗</span></a></div></div><a href="artikler.html" class="">Artikler</a><a href="om-modus.html" class="">Om MODUS</a></nav><div class="header-tools"><a href="modus-plus.html" class="nav-membership">Medlemskap</a><a href="konto.html" class="nav-account" data-account-link>Logg inn</a><nav class="language-picker" aria-label="Språk / Language"><a href="?lang=nb" data-language="nb" lang="nb" hreflang="nb" aria-label="Norsk" title="Norsk" aria-current="true"><span aria-hidden="true">🇳🇴</span> NO</a><a href="?lang=en" data-language="en" lang="en" hreflang="en" aria-label="English" title="English"><span aria-hidden="true">🇬🇧</span> EN</a></nav><details class="theme-picker"><summary><span aria-hidden="true">◐</span> Visning<span class="theme-current" data-theme-name>Original</span></summary><fieldset class="theme-options"><legend>Velg visning</legend><label><input type="radio" name="modus-theme" value="original" checked><span><strong>Original</strong><small>Mørke naturfarger, slik siden er nå.</small></span></label><label><input type="radio" name="modus-theme" value="readable"><span><strong>Lesevennlig</strong><small>Lys bakgrunn, mørk tekst og større leseskrift.</small></span></label><label><input type="radio" name="modus-theme" value="contrast"><span><strong>Høy kontrast</strong><small>Svart-hvitt, tydelige rammer og mindre dekor.</small></span></label><p>Valget huskes i denne nettleseren.</p></fieldset></details><span id="theme-status" class="theme-sr-only" role="status" aria-live="polite"></span></div></header><script id="modus-home-landscape">
@@ -79,7 +113,7 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home .site
 <a class="home-portal" href="musikkart.html"><img src="images/modus-design-landscape.png" width="600" height="300" alt="" loading="lazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="m3 6 9-4 9 4v11l-9 5-9-5ZM7 8v7l5 3 5-3V8L12 6Z"/></svg><span class="portal-number">03 / OPPDAG</span><h2>Musikkatlas</h2><p>Interaktive oversikter og systemer</p><span class="portal-link">Åpne musikkatlas <span aria-hidden="true">↗</span></span></a>
 <a class="home-portal" href="artikler.html"><img src="images/modus-design-articles.png" width="600" height="300" alt="" loading="lazy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 2h14v20H5ZM8 6h8M8 10h8M8 14h5"/></svg><span class="portal-number">04 / FORDYP</span><h2>Artikler</h2><p>Faglig fordypning og innsikt</p><span class="portal-link">Utforsk artiklene <span aria-hidden="true">↗</span></span></a>
 </section>
-<section class="home-philosophy new-philosophy" aria-labelledby="why-modus">
+<div class="home-lower-landscape"><section class="home-philosophy new-philosophy" aria-labelledby="why-modus">
 <div class="philosophy-heading"><p class="eyebrow">FILOSOFIEN BAK MODUS</p><h2 id="why-modus">Forstå · Utvikle · Skap</h2><p>MODUS er et personlig læreprosjekt for alle som vil forstå musikk, spille bedre og skape egen musikk – uansett nivå.</p><a class="button button-secondary" href="om-modus.html">Les mer om MODUS <span aria-hidden="true">→</span></a></div>
 <div class="philosophy-stages"><div><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 26h30M9 33V16M18 33V7M28 33V12M6 18h6M15 11h6M25 16h6"/></svg><h3>Forstå musikken</h3><p>Se sammenhenger, strukturer og det større bildet.</p></div><div><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="14"/><path d="m19 9 1 8 9 3-8 3-2 8-2-9-8-2 8-2Z"/></svg><h3>Utvikle ferdigheter</h3><p>Fra teori til praktisk mestring på instrumentet.</p></div><div><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 20C12 5 2 9 2 20s10 15 18 0S38 9 38 20s-10 15-18 0"/></svg><h3>Skap noe eget</h3><p>Bruk kunnskapen til å komponere, improvisere og uttrykke deg fritt.</p></div></div>
 </section>
@@ -100,6 +134,6 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home .site
  <p>Her kan du lese, lytte, prøve deg frem og bygge forståelse steg for steg. Målet mitt er ikke bare at du skal lære mer teori, men at du skal oppdage hva du kan gjøre med musikken når du forstår den.</p>
  <a class="founder-welcome-link" href="om-modus.html">Les mer om tanken bak MODUS <span aria-hidden="true">↗</span></a></div>
 </section>
-<section class="closing"><p>Det begynner med å lytte.</p><p>Så finner du din egen vei.</p></section></details></main>
+<section class="closing"><p>Det begynner med å lytte.</p><p>Så finner du din egen vei.</p></section></details></div></main>
 <footer><a class="brand footer-brand" href="./">MODUS</a><span>Natur som inspirasjon. Musikk som uttrykk.</span></footer>
 </body></html>
