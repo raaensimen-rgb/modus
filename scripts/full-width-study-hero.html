@@ -1,5 +1,5 @@
 <style id="modus-study-landscape">
-body[data-full-study-hero] main > .subpage-hero {
+body[data-full-study-hero] main > :is(.subpage-hero, .scale-hero) {
   width: var(--study-page-width);
   margin-inline: calc((100% - var(--study-page-width)) / 2);
   padding-inline: max(6%, calc((var(--study-page-width) - 1440px) / 2)) !important;
@@ -12,19 +12,27 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-st
   height: auto !important;
   background: linear-gradient(180deg, #001918eb, #00191896 48%, #00191850 82%, #00191800) !important;
 }
-html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-study-hero] main > .subpage-hero {
+html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-study-hero] main > :is(.subpage-hero, .scale-hero) {
+  position: relative;
   overflow: visible;
   clip-path: inset(calc(-1 * var(--study-header-height)) 0 0);
 }
-html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-study-hero] main > .subpage-hero::before {
+html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-study-hero] main > :is(.subpage-hero, .scale-hero)::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  pointer-events: none;
   inset: calc(-1 * var(--study-header-height)) 0 0;
   background:
     linear-gradient(90deg, #001817f5, #001817b8 40%, #00181718 78%),
     linear-gradient(0deg, #001917, #00191700 28%),
     url("/images/a06/modus-design-landscape-1536.webp") center 12% / cover no-repeat;
 }
+html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-study-hero] .scale-library > .scale-hero {
+  background: #001917;
+}
 @media (max-width: 760px) {
-  html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-study-hero] main > .subpage-hero::before {
+  html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-study-hero] main > :is(.subpage-hero, .scale-hero)::before {
     background-image: linear-gradient(90deg, #001817eb, #00181765),
       linear-gradient(0deg, #001917, #00191700 28%),
       url("/images/a06/modus-design-landscape-768.webp");
@@ -32,7 +40,8 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-st
 }
 @media (forced-colors: active) {
   body[data-full-study-hero] > .site-header { background: Canvas !important; }
-  body[data-full-study-hero] > .site-header::before { display: none; }
+  body[data-full-study-hero] > .site-header::before,
+  body[data-full-study-hero] .scale-library > .scale-hero::before { display: none; }
 }
 </style>
 <script id="modus-study-resize">
