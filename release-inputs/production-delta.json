@@ -1,17 +1,1 @@
-{
-  "task": "Full-width existing landscapes on Study and Tools menu routes",
-  "allowed_changes": [
-    "akkorder.html",
-    "backingtracks.html",
-    "en/akkorder.html",
-    "en/backingtracks.html",
-    "en/laereplan.html",
-    "en/skalabibliotek.html",
-    "en/undervisning.html",
-    "laereplan.html",
-    "skalabibliotek.html",
-    "undervisning.html"
-  ],
-  "allowed_additions": [],
-  "allowed_removals": []
-}
+{"task":"Remove the scale hero width cap","allowed_changes":["en/skalabibliotek.html","skalabibliotek.html"],"allowed_additions":[],"allowed_removals":[]}
