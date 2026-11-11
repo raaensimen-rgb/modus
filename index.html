@@ -19,6 +19,17 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home[data-
 html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home[data-shared-landscape] .home-hero .landscape img {
   object-position: center 10% !important;
 }
+html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home[data-shared-landscape] .site-nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: #001918b8;
+  background: currentColor;
+  box-shadow: 0 0 0 100vmax currentColor;
+  clip-path: inset(0 -100vmax);
+  pointer-events: none;
+}
 html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home .site-header::after {
   background-position: center -20px !important;
   background-size: min(72%, 1040px) 118px !important;
