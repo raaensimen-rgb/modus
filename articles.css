@@ -252,3 +252,19 @@ html:is([data-theme="readable"],[data-theme="contrast"]) .article-grid>.catalog-
 html:is([data-theme="readable"],[data-theme="contrast"]) .article-grid>.catalog-preview-card .card-meta {
  color:var(--appearance-muted);
 }
+
+.article-card .card-level-row:has(.article-new-badge) {
+  flex-wrap: wrap;
+  gap: 6px 8px;
+}
+.article-new-badge {
+  display: inline-block;
+  border: 1px solid #a4ba76;
+  border-radius: 5px;
+  background: #28371d;
+  color: #e9f6cb;
+  padding: 3px 7px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+}

@@ -1004,6 +1004,14 @@
         "<p>Bruk én akkord per takt: C, F, Dm, G7; C, Am, D7, G; Em, Am, D7, G; Am, D7, G, G. De første fire taktene støtter C. Takt 6 kan leses i begge tonearter. De siste åtte støtter G gjennom gjentatt ii–V–I.</p><p>Lag en egen melodi og marker konkrete kadenspunkter. Sammenlign med en variant der takt 9 blir C og slutten F–G7–C. Da får den samme D7–G-hendelsen mindre global betydning. Forklar med taktreferanser hva du hører, og transponer hele planen fra G til D som nytt mål.</p>"
       ],
       [
+        "To lokale mål i samme mollfrase",
+        "<p>Spill <strong>Dm9 – B♭maj7 – E7(♭9) – Am9 – D7 – Gm9 – A7(♭9) – Dm(maj7)</strong>. Begynn med å lytte etter sluttpunktet D. Marker så <strong>i9 – ♭VImaj7 – V7(♭9)/v – v9 – V7/iv – iv9 – V7(♭9) – i(maj7)</strong>. Spill basslinjen alene før du legger til tersen i hver dominant.</p><p>Over E7 peker G♯ mot A. Over D7 peker F♯ mot G. Over A7 peker C♯ mot D. Det er tre melodiske muligheter i denne realiseringen. C♯ kan også bli liggende i en stemme som stor septim i sluttklangen mens bassen lander på D. Stopp først på Am9, så på Gm9, og spill til slutt hele frasen. Sammenlign lokale landinger med hovedtonikaens retur.</p>"
+      ],
+      [
+        "Prøv samme lesemåte i E-moll",
+        "<p>Spill Em(maj7) – Cmaj7 – A7(♭9) – Dmaj7 – F♯7/A♯ – B7(♭9) – Em(maj7). A7 peker mot D, ♭VII i E-moll. Prøv G→F♯ i én stemme og behold C♯ som stor septim i Dmaj7 i en annen. F♯7/A♯ gir A♯→B i bassen på vei til B7. Hør hvordan B7 trekker forløpet tilbake til E.</p><p>Kontroll: D er et lokalt mål, B7 er et direkte mål for F♯7, og E er hovedtonika. Prøv å stoppe på Dmaj7 og legg merke til hvordan en tidlig stopp påvirker opplevelsen av sentrum.</p>"
+      ],
+      [
         "Kildegrunnlag og faglig status",
         "<p>Original norsk MODUS-tekst med egne undervisningseksempler. Faglig referansegrunnlag for videre kontroll:</p><ul><li><a href=\"https://musictheory.pugetsound.edu/mt21c/\">Music Theory for the 21st-Century Classroom – harmonikk og analyse</a></li></ul><p>Under arbeid – ikke faglig sluttgodkjent. Artikkelen dokumenterer ingen personlig mestring og gir ingen formell studie- eller publiseringsgodkjenning. Skriftlig forklaring, faktisk spill og lytting må vurderes hver for seg.</p>"
       ]
@@ -2707,5 +2715,91 @@
       "Spill den konkrete modellen på gitar og piano, og lytt til forskjellen.",
       "Lag en ny variant og behold første og bearbeidede versjon separat."
     ]
+  },
+  {
+    "slug": "dorisk-fra-d-over-a",
+    "title": "Dorisk fra D/A: la bassen bli hjemme",
+    "level": "advanced",
+    "topic": "Modalitet",
+    "intro": "Hold A i bassen og skift mellom D og Dm over den. Da kan du høre hva F♯ og F gjør mens resten av akkordrekken ligger fast.",
+    "art": "modes",
+    "category": "modes",
+    "practice": "akkorder.html",
+    "practice_label": "Prøv akkordene i Modusharmoni",
+    "new_badge": true,
+    "sections": [
+      [
+        "Legg et gulv av A",
+        "<p>Spill én takt per grep: <strong>Am(add9) – G/A – D/A – Am(add9)</strong>. La bassen være A i alle fire takter. Over A spiller du C–E–B, så G–B–D, D–F♯–A og til slutt C–E–B. På piano spiller venstre hånd A og høyre hånd tonene over. På gitar kan du spille x02410, x00003, x00232 og x02410. Strengene leses fra tykkest til tynnest. x betyr at strengen ikke spilles.</p>"
+      ],
+      [
+        "Finn tonen som skifter",
+        "<p>Syng F♯ over D/A. Fra A er det en stor sekst. I D-durtreklangen er F♯ tersen. Bytt så D/A mot Dm/A (x00231) og syng F. Bassen er fremdeles A. Nå er F den lille seksten fra A, og Dm gir den eoliske fargen. Spør øret hva som endret seg selv om bassen og returen er identiske.</p>"
+      ],
+      [
+        "Lytt etter hjem i siste takt",
+        "<p>Spill den siste Am(add9)-takten dobbelt så lenge første gang. Syng E–C–A over den. Prøv så samme akkorder uten den siste returen og hør hvor åpen frasen blir. En A-pedal støtter sentrum, og melodien kan gjøre det tydeligere.</p><p>Som oppslag har A dorisk A–B–C–D–E–F♯–G. A eolisk har F i stedet for F♯. Spill først kontrasten med bare akkordene og karaktertonen.</p>"
+      ]
+    ],
+    "exercise": "Spill to opptak med samme tempo, bass og avslutning. Bytt bare D/A og F♯ mot Dm/A og F i den andre versjonen. Kontroll: A ligger i bassen begge ganger. F♯ og F har samme plass i frasen, men gir stor og liten sekst fra A.",
+    "learning": {
+      "goals": [
+        "Hør den doriske seksten og skill den fra eolisk over samme A-pedal."
+      ],
+      "prerequisites": "Treklanger og grunnleggende akkordlesing.",
+      "links": [
+        {
+          "slug": "dorisk-og-eolisk",
+          "label": "Sammenlign dorisk og eolisk i E"
+        },
+        {
+          "slug": "modal-harmonikk-i-praksis",
+          "label": "Utforsk modal harmonikk"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "da-sju-takter-var-nok",
+    "title": "Da sju takter var nok",
+    "level": "advanced",
+    "topic": "Komposisjon og form",
+    "intro": "Gi siste dominant én takt, så to. Den samme rekken kan føles mer framoverlent når returen kommer én takt tidligere.",
+    "art": "rhythm",
+    "category": "rhythm",
+    "practice": "akkorder.html",
+    "practice_label": "Prøv akkordene i Modusharmoni",
+    "new_badge": true,
+    "sections": [
+      [
+        "Tell hvor lenge klangene får virke",
+        "<p>Spill en B-del i 4/4 med <strong>Em(maj7) i to takter, F♯7 i to, Gmaj7(♯5) i to og B7(♭9) i én</strong>. Vend så tilbake til Em(add9). Tell sju takter høyt. Den siste dominanten er i takt 7, og returen kommer på første slag i takt 8.</p>"
+      ],
+      [
+        "Hør forventningen og avviket",
+        "<p>F♯7 kan peke mot B, men her kommer Gmaj7(♯5) først. Spill G–B–D♯–F♯ over G. Prøv å holde B når bassen går til B7(♭9). Spill så C over B7 og la C falle til B på Em(add9). På piano kan venstre hånd spille grunntonene og høyre hånd bære C–B. På gitar kan du ta opp bassen først og spille C på andre streng, første bånd, til åpen B i et eget spor.</p>"
+      ],
+      [
+        "Prøv én takt til",
+        "<p>Spill samme form ved 72 slag i minuttet, men gi nå B7(♭9) to takter. La alle andre akkordlengder og melodivalg ligge fast. I åttetaktersversjonen kommer returen i takt 9. Lytt etter om den ekstra takten gir spenningen tid til å virke, eller om bevegelsen mot E blir mindre presserende.</p>"
+      ]
+    ],
+    "exercise": "Ta opp de to versjonene med samme tempo og lyd. Marker takt 7, returen og C→B. Kontroll: 2 + 2 + 2 + 1 gir sju takter før Em(add9). I den andre varianten kommer samme Em(add9) nøyaktig fire slag senere.",
+    "learning": {
+      "goals": [
+        "Bruk 2+2+2+1 takter til å forme forventningen før tilbakekomsten."
+      ],
+      "prerequisites": "Treklanger og grunnleggende akkordlesing.",
+      "links": [
+        {
+          "slug": "frase-periode-og-harmonisk-rytme",
+          "label": "Arbeid videre med harmonisk rytme"
+        },
+        {
+          "slug": "storform-rondo-sonatisk-og-dramaturgi",
+          "label": "Se hvordan tilbakekomst former et verk"
+        }
+      ]
+    }
   }
 ]

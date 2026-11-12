@@ -120,8 +120,8 @@ def svg(spec,locale,compact=False):
  return out
 
 def generate():
- articles=json.loads((ROOT/'content/articles.json').read_text());assert len(SPECS)==len(articles)==52
- manifest={'schema_version':1,'source_article_count':52,'source_basis':'cf1258793e8eb28cf49683cf9a020948a48ed764','original_work':True,'academic_status':'technical and bounded music checks; not final academic approval','articles':[]}
+ articles=json.loads((ROOT/'content/articles.json').read_text());assert len(SPECS)==len(articles)
+ manifest={'schema_version':1,'source_article_count':len(articles),'source_basis':'cf1258793e8eb28cf49683cf9a020948a48ed764','original_work':True,'academic_status':'technical and bounded music checks; not final academic approval','articles':[]}
  out=ROOT/'editorial/teaching-diagrams';out.mkdir(exist_ok=True)
  for i,(a,spec) in enumerate(zip(articles,SPECS)):
   assert a['slug']==spec[0],(i,a['slug'],spec[0]);entry={'slug':a['slug'],'title':a['title'],'source_sections':[s[0] for s in a['sections']],'existing_art':a['art'],'reuse_existing_approved':i<16,'locales':{}}
@@ -131,5 +131,5 @@ def generate():
     f=d/(a['slug']+suffix+'.svg');f.write_text(svg(spec,loc,compact));ET.fromstring(f.read_text());files['card' if compact else 'diagram']={'path':str(f.relative_to(ROOT)),'sha256':hashlib.sha256(f.read_bytes()).hexdigest()}
    entry['locales'][loc]={'title':spec[1][loc],'transcript':transcript(spec,loc),'assets':files,'article_available':loc=='nb' or i<16}
   manifest['articles'].append(entry)
- (out/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n');print('Generated 104 teaching diagrams and 104 compact card variants; no publication decisions changed.')
+ (out/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n');print(f'Generated {2*len(articles)} teaching diagrams and compact card variants.')
 if __name__=='__main__':generate()

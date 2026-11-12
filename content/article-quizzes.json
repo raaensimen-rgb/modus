@@ -2250,5 +2250,75 @@
       "explanation": "Sluttkompetanse krever bredere vurderingsgrunnlag.",
       "section": 4
     }
+  ],
+  "dorisk-fra-d-over-a": [
+    {
+      "question": "Hvilken tone er stor sekst fra A?",
+      "options": [
+        "F",
+        "F♯",
+        "G"
+      ],
+      "answer": 1,
+      "explanation": "A til F♯ er stor sekst. A til F er liten sekst.",
+      "section": 2
+    },
+    {
+      "question": "Hvilken basstone skal ligge under D/A og Dm/A?",
+      "options": [
+        "D",
+        "F",
+        "A"
+      ],
+      "answer": 2,
+      "explanation": "Tonen etter skråstreken er bassen.",
+      "section": 2
+    },
+    {
+      "question": "Hva gjør E–C–A på siste Am(add9)?",
+      "options": [
+        "Støtter A som hjem",
+        "Modulerer til C-dur",
+        "Gjør F♯ til grunntone"
+      ],
+      "answer": 0,
+      "explanation": "Frasen lander på A over A i bassen.",
+      "section": 3
+    }
+  ],
+  "da-sju-takter-var-nok": [
+    {
+      "question": "Hvor mange takter får B7(♭9) i sjutaktersversjonen?",
+      "options": [
+        "Én",
+        "To",
+        "Tre"
+      ],
+      "answer": 0,
+      "explanation": "De tre første akkordene får to takter hver. B7 får den sjuende takten.",
+      "section": 1
+    },
+    {
+      "question": "Hvilken tone kan ligge i både Gmaj7(♯5) og B7(♭9)?",
+      "options": [
+        "D",
+        "B",
+        "C"
+      ],
+      "answer": 1,
+      "explanation": "B er ters i G-klangen og grunntone i B-klangen.",
+      "section": 2
+    },
+    {
+      "question": "Når kommer returen etter en B-del på åtte takter?",
+      "options": [
+        "Takt 7",
+        "Takt 8",
+        "Takt 9"
+      ],
+      "answer": 2,
+      "explanation": "Returen følger etter at alle åtte taktene er spilt.",
+      "section": 3
+    }
   ]
 }
