@@ -417,6 +417,20 @@
         "sha256": "63f74541e67e2ae27efe9ae18248b5d79bf67ae86a974574046013d3174db320",
         "public_reference": "docs/p0-release-authority.md#52-public-readers"
       }
+    },
+    "dorisk-fra-d-over-a": {
+      "nb": {
+        "sha256": "83c0d6a19b5c54b463a9e3dd7d01fd8a5c96e4781196e489a1155a2c4ebd550a",
+        "reference": "docs/education-articles-2026-11-12.md",
+        "public_reference": "docs/education-articles-2026-11-12.md"
+      }
+    },
+    "da-sju-takter-var-nok": {
+      "nb": {
+        "sha256": "3086991ef9b8007394cdbf70322f70bc72dbe46c173060b9e49deac74f9c25c7",
+        "reference": "docs/education-articles-2026-11-12.md",
+        "public_reference": "docs/education-articles-2026-11-12.md"
+      }
     }
   },
   "public_selection_reference": "docs/modus-08-owner-decision.md#2026-11-05"

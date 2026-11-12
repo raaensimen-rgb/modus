@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict');
 const {matches,nextArticle}=require('../dist/articles.js');
-const allArticles=require('../content/articles.json');const articles=allArticles.slice(0,16);assert.equal(allArticles.length,52);
+const allArticles=require('../content/articles.json');const articles=allArticles.slice(0,16);assert.equal(allArticles.length,54);
 const publicIds=require('./publication-helper.cjs')();
 const filters={level:'all',topic:'all',q:''};
 const items=articles.map(a=>({id:a.slug,level:a.level,topic:a.category,search:a.title+' '+a.intro}));

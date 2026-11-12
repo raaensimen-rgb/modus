@@ -63,3 +63,16 @@ SPECS=[
 # The inversion article benefits from the same two pairs in literal notation.
 SPECS[16][2].insert(2,S(('Les parene: C4–E4, så E4–C5','Read the pairs: C4–E4, then E4–C5'),'C4 E4 E4 C5',[2,2,2,2]))
 SPECS[42][2][0]['kind']='crossrhythm'
+
+SPECS += [
+    ('dorisk-fra-d-over-a', L('A-pedal · F♯ mot F', 'A pedal · F sharp versus F'),
+     [F(('Behold bassen på A', 'Keep A in the bass'),
+        [('Am(add9) → G/A → D/A → Am(add9)', 'Am(add9) → G/A → D/A → Am(add9)'),
+         ('D/A · F♯ er stor sekst fra A', 'D/A · F sharp is the major sixth from A'),
+         ('Dm/A · F er liten sekst fra A', 'Dm/A · F is the minor sixth from A')])]),
+    ('da-sju-takter-var-nok', L('2 + 2 + 2 + 1 takter', '2 + 2 + 2 + 1 bars'),
+     [F(('Harmonisk rytme i 4/4', 'Harmonic rhythm in 4/4'),
+        [('1–2 · Em(maj7) | 3–4 · F♯7', '1–2 · Em(maj7) | 3–4 · F♯7'),
+         ('5–6 · Gmaj7(♯5) | 7 · B7(♭9)', '5–6 · Gmaj7(♯5) | 7 · B7(♭9)'),
+         ('8 · Em(add9), med C → B inn i returen', '8 · Em(add9), with C → B into the return')])]),
+]

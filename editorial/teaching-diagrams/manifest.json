@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "source_article_count": 52,
+  "source_article_count": 54,
   "source_basis": "cf1258793e8eb28cf49683cf9a020948a48ed764",
   "original_work": true,
   "academic_status": "technical and bounded music checks; not final academic approval",
@@ -169,7 +169,7 @@
     },
     {
       "slug": "din-forste-improvisasjon",
-      "title": "Fra skala til din første improvisasjon",
+      "title": "Fra skala til første improvisasjon",
       "source_sections": [
         "Begynn med et lite område",
         "Gi en liten idé flere liv",
@@ -711,7 +711,7 @@
     },
     {
       "slug": "bygg-akkorder-i-en-toneart",
-      "title": "Hvordan bygge akkordene i en toneart",
+      "title": "Hvordan bygge akkordene i en toneart?",
       "source_sections": [
         "Begynn med tonene, ikke med grepene",
         "De sju treklangene i G-dur",
@@ -1165,6 +1165,8 @@
         "Pivotakkorden får to lesemåter",
         "Piano og gitar: vis selve skiftet",
         "Et originalt 16-takters analyseforløp",
+        "To lokale mål i samme mollfrase",
+        "Prøv samme lesemåte i E-moll",
         "Kildegrunnlag og faglig status"
       ],
       "existing_art": "voices",
@@ -2820,6 +2822,104 @@
             "card": {
               "path": "editorial/teaching-diagrams/en/utovende-presentasjon-og-sluttprosjekt-card.svg",
               "sha256": "7640b6f5e65343aa44e55d6d3f20de1cb57d6e37af653bc97da13ae21c310a19"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "dorisk-fra-d-over-a",
+      "title": "Dorisk fra D/A: la bassen bli hjemme",
+      "source_sections": [
+        "Legg et gulv av A",
+        "Finn tonen som skifter",
+        "Lytt etter hjem i siste takt"
+      ],
+      "existing_art": "modes",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "A-pedal · F♯ mot F",
+          "transcript": [
+            "A-pedal · F♯ mot F",
+            "Behold bassen på A: Am(add9) → G/A → D/A → Am(add9); D/A · F♯ er stor sekst fra A; Dm/A · F er liten sekst fra A"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/dorisk-fra-d-over-a.svg",
+              "sha256": "83c0d6a19b5c54b463a9e3dd7d01fd8a5c96e4781196e489a1155a2c4ebd550a"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/dorisk-fra-d-over-a-card.svg",
+              "sha256": "83c0d6a19b5c54b463a9e3dd7d01fd8a5c96e4781196e489a1155a2c4ebd550a"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "A pedal · F sharp versus F",
+          "transcript": [
+            "A pedal · F sharp versus F",
+            "Keep A in the bass: Am(add9) → G/A → D/A → Am(add9); D/A · F sharp is the major sixth from A; Dm/A · F is the minor sixth from A"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/dorisk-fra-d-over-a.svg",
+              "sha256": "ecce53f84bbd9d492c87ee2bfbc33bfd26020da6111ad3129c4e1f90cfbf33c1"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/dorisk-fra-d-over-a-card.svg",
+              "sha256": "ecce53f84bbd9d492c87ee2bfbc33bfd26020da6111ad3129c4e1f90cfbf33c1"
+            }
+          },
+          "article_available": false
+        }
+      }
+    },
+    {
+      "slug": "da-sju-takter-var-nok",
+      "title": "Da sju takter var nok",
+      "source_sections": [
+        "Tell hvor lenge klangene får virke",
+        "Hør forventningen og avviket",
+        "Prøv én takt til"
+      ],
+      "existing_art": "rhythm",
+      "reuse_existing_approved": false,
+      "locales": {
+        "nb": {
+          "title": "2 + 2 + 2 + 1 takter",
+          "transcript": [
+            "2 + 2 + 2 + 1 takter",
+            "Harmonisk rytme i 4/4: 1–2 · Em(maj7) | 3–4 · F♯7; 5–6 · Gmaj7(♯5) | 7 · B7(♭9); 8 · Em(add9), med C → B inn i returen"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/nb/da-sju-takter-var-nok.svg",
+              "sha256": "3086991ef9b8007394cdbf70322f70bc72dbe46c173060b9e49deac74f9c25c7"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/nb/da-sju-takter-var-nok-card.svg",
+              "sha256": "3086991ef9b8007394cdbf70322f70bc72dbe46c173060b9e49deac74f9c25c7"
+            }
+          },
+          "article_available": true
+        },
+        "en": {
+          "title": "2 + 2 + 2 + 1 bars",
+          "transcript": [
+            "2 + 2 + 2 + 1 bars",
+            "Harmonic rhythm in 4/4: 1–2 · Em(maj7) | 3–4 · F♯7; 5–6 · Gmaj7(♯5) | 7 · B7(♭9); 8 · Em(add9), with C → B into the return"
+          ],
+          "assets": {
+            "diagram": {
+              "path": "editorial/teaching-diagrams/en/da-sju-takter-var-nok.svg",
+              "sha256": "e7c446aafc63a808862c5e0d36d3d0a7bec3956ae88dad9e514c1c908e8a6dd2"
+            },
+            "card": {
+              "path": "editorial/teaching-diagrams/en/da-sju-takter-var-nok-card.svg",
+              "sha256": "e7c446aafc63a808862c5e0d36d3d0a7bec3956ae88dad9e514c1c908e8a6dd2"
             }
           },
           "article_available": false

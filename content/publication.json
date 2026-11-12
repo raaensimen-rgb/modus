@@ -513,9 +513,9 @@
       "publication_decision": "owner_authorized",
       "publication_evidence": {
         "nb": {
-          "reference": "docs/p0-release-authority.md#52-public-readers",
-          "reviewed_version_sha256": "843582117a03686e8cda030979c324902d83dae10aaeee29f9cc4fb20d0ffedc",
-          "scope": "previously-public-exact-original"
+          "reference": "docs/education-articles-2026-11-12.md",
+          "reviewed_version_sha256": "e29121fcef8a7aa287a0bf1a3d2b72cede1e90e16763b5b7a42c3fb79da29a60",
+          "scope": "owner-authorized-2026-11-12"
         }
       },
       "personal_mastery_status": "not_documented",
@@ -1091,6 +1091,44 @@
       "personal_mastery_status": "not_documented",
       "source_control_status": "under_review",
       "catalog_metadata_visibility": "public"
+    },
+    "dorisk-fra-d-over-a": {
+      "editorial_status": "approved",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/education-articles-2026-11-12.md",
+      "publication_decision": "owner_authorized",
+      "personal_mastery_status": "documented_for_article_scope",
+      "source_control_status": "approved",
+      "catalog_metadata_visibility": "public",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/education-articles-2026-11-12.md",
+          "reviewed_version_sha256": "d205f14c053cd6c89477f357e83cc0125fd3ba09af4d3f9c9ba7236e983e2a82",
+          "scope": "owner-authorized-2026-11-12"
+        }
+      }
+    },
+    "da-sju-takter-var-nok": {
+      "editorial_status": "approved",
+      "visibility": "public",
+      "approved_locales": [
+        "nb"
+      ],
+      "approval_reference": "docs/education-articles-2026-11-12.md",
+      "publication_decision": "owner_authorized",
+      "personal_mastery_status": "documented_for_article_scope",
+      "source_control_status": "approved",
+      "catalog_metadata_visibility": "public",
+      "publication_evidence": {
+        "nb": {
+          "reference": "docs/education-articles-2026-11-12.md",
+          "reviewed_version_sha256": "0aa9c113196ed96d6ea75b121c57dd5aff00a9ca57f0985abfd711c41e0e65f1",
+          "scope": "owner-authorized-2026-11-12"
+        }
+      }
     }
   },
   "learning_pages": {
