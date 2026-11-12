@@ -33,7 +33,10 @@ assert(html.includes('data-category="reading-beginner"'),'Beginner heading must 
 assert(html.includes('data-category="reading-intermediate"'),'Intermediate heading must exist');
 assert(html.includes('data-category="reading-advanced"'),'Advanced heading must exist');
 const readingHeadings=[...html.matchAll(/<section class="article-category" data-category="reading-[^"]+">[\s\S]*?<h3>([^<]+)<\/h3>/g)].map(m=>m[1]);
-assert.deepEqual(readingHeadings.slice(0,3),['Grunnleggende musikkteori','Videregående musikkteori','Faglig fordypning']);
+const newIds=progression.filter(id=>publicIds.includes(id)&&allArticles.find(a=>a.slug===id).new_badge);
+const levelHeadings=['Grunnleggende musikkteori','Videregående musikkteori','Faglig fordypning'];
+const expectedHeadings=newIds.length?['Nye artikler',...levelHeadings]:levelHeadings;
+assert.deepEqual(readingHeadings.slice(0,expectedHeadings.length),expectedHeadings);
 assert(progression.indexOf('din-forste-improvisasjon')<progression.indexOf('septimakkorder'),'Beginner block must precede intermediate block');
 
 assert.equal((html.match(/class="card-level-row"/g)||[]).length,publicIds.length+require('./publication-helper.cjs')('catalog').length+(html.match(/class="upcoming-card catalog-preview-card"/g)||[]).length,'All published and upcoming card badges must occupy their own row');
@@ -41,5 +44,6 @@ for(const art of html.match(/<div class="card-art">[^]*?<\/div>/g)||[]) assert(!
 assert(html.includes('data-group-by="topic"'),'Topic grouping must remain available');
 assert(html.includes('data-group-by="level"'),'Level grouping must remain available');
 const mainCards=[...html.matchAll(/data-article-id="([^"]+)"/g)].map(m=>m[1]);
-assert.deepEqual(mainCards,['beginner','intermediate','advanced'].flatMap(level=>progression.filter(id=>publicIds.includes(id)&&allArticles.find(a=>a.slug===id).level===level)),'First rendered article group must follow pedagogical order');
+const groupedIds=['beginner','intermediate','advanced'].flatMap(level=>progression.filter(id=>publicIds.includes(id)&&!newIds.includes(id)&&allArticles.find(a=>a.slug===id).level===level));
+assert.deepEqual(mainCards,[...newIds,...groupedIds],'New cards precede the existing reading groups');
 console.log('Passed: combined level/topic/search filters, case folding, empty results and next-unfinished recommendations.');

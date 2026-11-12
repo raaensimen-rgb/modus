@@ -21,10 +21,14 @@ ORDER += ['dorisk-fra-d-over-a', 'da-sju-takter-var-nok']
 def group_section(key, label, description, cards='', kind='level'):
  return f'<section class="article-category" data-category="{key}"><header class="category-header"><div><p class="eyebrow">{"NIVÅ" if kind=="level" else "TEMA" if kind=="topic" else "LESEREKKEFØLGE"}</p><h3>{label}</h3><p>{description}</p></div><span class="category-count" data-category-count></span></header><div class="article-grid">{cards}</div></section>'
 
+def new_articles_section(cards=''):
+ return f'<section class="article-category" data-category="reading-new"><header class="category-header"><h3>Nye artikler</h3><span class="category-count" data-category-count></span></header><div class="article-grid">{cards}</div></section>'
+
 def render_library(articles, levels, card, upcoming=(), upcoming_card=None):
  ordered=sorted(articles,key=lambda a:ORDER.index(a['slug']))
- groups=''.join(group_section('reading-'+k, levels[k][0], LEVEL_DESCRIPTIONS[k], ''.join(card(a) for a in ordered if a['level']==k)+''.join(upcoming_card(a) for a in upcoming if a['level']==k), kind='order') for k in levels)
- order_templates=''.join(group_section('reading-'+k, levels[k][0], LEVEL_DESCRIPTIONS[k], kind='order') for k in levels)
+ new_articles=[a for a in ordered if a.get('new_badge')]
+ groups=(new_articles_section(''.join(card(a) for a in new_articles)) if new_articles else '')+''.join(group_section('reading-'+k, levels[k][0], LEVEL_DESCRIPTIONS[k], ''.join(card(a) for a in ordered if a['level']==k and not a.get('new_badge'))+''.join(upcoming_card(a) for a in upcoming if a['level']==k), kind='order') for k in levels)
+ order_templates=(new_articles_section() if new_articles else '')+''.join(group_section('reading-'+k, levels[k][0], LEVEL_DESCRIPTIONS[k], kind='order') for k in levels)
  level_templates=''.join(group_section(k,v[0],LEVEL_DESCRIPTIONS[k]) for k,v in levels.items())
  topic_templates=''.join(group_section(k,v[0],v[1],kind='topic') for k,v in TOPICS.items())
  level_buttons=''.join(f'<button type="button" data-filter="{k}" aria-pressed="false">{v[0]} <span>{sum(a["level"]==k for a in articles)}</span></button>' for k,v in levels.items())
