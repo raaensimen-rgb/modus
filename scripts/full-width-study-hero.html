@@ -24,9 +24,9 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-st
   pointer-events: none;
   inset: calc(-1 * var(--study-header-height)) 0 0;
   background:
-    linear-gradient(90deg, #001817f5, #001817b8 40%, #00181718 78%),
+    linear-gradient(90deg, #00181745, #001817bd 12%, #001817bd min(700px, 92%), #0018171a max(78%, 800px)),
     linear-gradient(0deg, #001917, #00191700 28%),
-    url("/images/a06/modus-design-landscape-1536.webp") center 12% / cover no-repeat;
+    url("/images/article-landscape-wide.jpg") center 12% / cover no-repeat;
 }
 body[data-full-study-hero] .scale-library > .scale-hero {
   max-width: none;
@@ -36,9 +36,9 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-st
 }
 @media (max-width: 760px) {
   html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-study-hero] main > :is(.subpage-hero, .scale-hero)::before {
-    background-image: linear-gradient(90deg, #001817eb, #00181765),
+    background-image: linear-gradient(90deg, #00181766, #001817bd 10%, #001817a6),
       linear-gradient(0deg, #001917, #00191700 28%),
-      url("/images/a06/modus-design-landscape-768.webp");
+      url("/images/article-landscape-wide-960.jpg");
   }
 }
 @media (forced-colors: active) {

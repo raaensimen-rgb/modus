@@ -7,7 +7,7 @@
 }
 .shared-hero-page :is(.subpage-hero,.journey-shell>header)::before {
  content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
- background:linear-gradient(90deg,#001817f5 0%,#001817de 34%,#00181788 58%,#00181700 80%),linear-gradient(0deg,#001917a6,transparent 35%),url('images/modus-design-landscape.png') center 48%/cover no-repeat;
+ background:linear-gradient(90deg,#00181745,#001817bd 12%,#001817bd min(700px, 92%),#0018171a max(78%, 800px)),linear-gradient(0deg,#001917a6,transparent 35%),url('/images/article-landscape-wide.jpg') center 18%/cover no-repeat;
 }
 .shared-hero-page :is(.subpage-hero,.journey-shell>header)::after {
  content:"";position:absolute!important;inset:auto -3% 15px auto!important;width:70%!important;height:150px!important;
@@ -33,7 +33,7 @@
 .shared-hero-page .journey-shell>:is(.subpage-hero,.journey-shell>header) {display:block!important}
 @media(max-width:760px){
  .shared-hero-page :is(.subpage-hero,.journey-shell>header) {min-height:400px!important;padding:30px 6% 76px!important}
- .shared-hero-page :is(.subpage-hero,.journey-shell>header)::before {background:linear-gradient(90deg,#001817f5,#001817ca 65%,#00181799),url('images/modus-design-landscape.png') 63% center/cover no-repeat}
+ .shared-hero-page :is(.subpage-hero,.journey-shell>header)::before {background:linear-gradient(90deg,#00181766,#001817bd 10%,#001817a6),url('/images/article-landscape-wide-960.jpg') center 42%/cover no-repeat}
  .shared-hero-page :is(.subpage-hero,.journey-shell>header)::after {width:135%!important;right:-30%!important;bottom:2px!important;height:100px!important;opacity:.6}
  .shared-hero-page :is(.subpage-hero,.journey-shell>header) h1 {font-size:clamp(30px,8vw,40px)!important}
  .shared-hero-page :is(.subpage-hero,.journey-shell>header) p {font-size:15px!important}
@@ -52,3 +52,22 @@ html:is([data-theme=readable],[data-theme=contrast]) .shared-hero-page :is(.subp
 .shared-hero-page .subpage-hero .membership-hero-subtitle em,
 .shared-hero-page .subpage-hero .membership-plus-mark {color:#ffe329!important}
 html:is([data-theme=readable],[data-theme=contrast]) .shared-hero-page .subpage-hero :is(.membership-hero-subtitle,.membership-hero-subtitle em,.membership-plus-mark) {color:var(--ink)!important}
+
+/* Extend the remaining shared banners without moving the hero content. */
+html:has(body.shared-hero-page) { container-type: inline-size; }
+html:not([data-theme=readable]):not([data-theme=contrast]) .shared-hero-page:not([data-full-study-hero]) :is(.subpage-hero,.journey-shell>header) {
+ --landscape-inset: calc((100% - 100cqw) / 2);
+ overflow: visible;
+ clip-path: inset(0 var(--landscape-inset));
+}
+html:not([data-theme=readable]):not([data-theme=contrast]) .shared-hero-page:not([data-full-study-hero]) :is(.subpage-hero,.journey-shell>header)::before {
+ inset-inline: var(--landscape-inset);
+}
+html:not([data-theme=readable]):not([data-theme=contrast]) .shared-hero-page :is(.subpage-hero,.journey-shell>header) a.secondary {
+ background-color:#001817d9!important;
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+ html:not([data-theme=readable]):not([data-theme=contrast]) .shared-hero-page :is(.subpage-hero,.journey-shell>header)::after {
+  mask-image:linear-gradient(90deg,transparent 43%,#000 62%,#000 86%,transparent);
+ }
+}
