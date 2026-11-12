@@ -1,4 +1,6 @@
 <style id="modus-library-landscape">
+/* Use the viewport's layout width, excluding a classic vertical scrollbar. */
+:root { container-type: inline-size; }
 html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-interior[data-shared-landscape] .site-header {
   background: transparent !important;
 }
@@ -8,11 +10,19 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-interior[d
   background: linear-gradient(180deg, #001918eb, #00191896 48%, #00191850 82%, #00191800) !important;
 }
 html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-interior[data-shared-landscape] .library-hero {
+  --library-landscape-inset: calc((100% - 100cqw) / 2);
   overflow: visible;
-  clip-path: inset(calc(-1 * var(--library-header-height)) 0 -70px);
+  clip-path: inset(calc(-1 * var(--library-header-height)) var(--library-landscape-inset) -70px);
+}
+.modus-interior .library-hero-wave-frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
 }
 html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-interior[data-shared-landscape] .library-hero .articles-landscape {
-  inset: calc(-1 * var(--library-header-height)) 0 -70px !important;
+  inset: calc(-1 * var(--library-header-height)) var(--library-landscape-inset) -70px !important;
   height: auto;
 }
 html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-interior[data-shared-landscape] .library-hero .articles-landscape img {
