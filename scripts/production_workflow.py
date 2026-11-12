@@ -228,6 +228,7 @@ def run_stage(root, command, log, env, timeout=1200):
 def prepare(root, sha, out, c):
     provenance = source_gate(root,sha,c)
     env = {k:v for k,v in os.environ.items() if not k.startswith(('MODUS_','CF_PAGES_','CONTEXT'))}
+    env['MODUS_ARTICLE_BASELINE_MANIFEST'] = str(root / c['package'] / MANIFEST)
     run_stage(root,['npm','run','quality:local'],out/'quality.log',env)
     qa = read(root.parent/'delivery/REPORT.json')
     if qa.get('status')!='LOCAL_CANDIDATE_PASSED' or qa.get('sourceSha')!=sha or not qa.get('stages') or not all(v['status']=='passed' for v in qa['stages']):

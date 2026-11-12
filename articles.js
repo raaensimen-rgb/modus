@@ -25,7 +25,15 @@
   const template=document.getElementById(state.view==='topic'?'topicGroupTemplate':state.view==='level'?'levelGroupTemplate':'orderGroupTemplate');
   // Keep the existing card nodes and their completion state while changing groups.
   container.replaceChildren(template.content.cloneNode(true));
-  items.forEach(item=>container.querySelector(`[data-category="${state.view==='order'?'reading-'+item.level:item[state.view]}"] .article-grid`).append(item.card));
+  const newGrid=container.querySelector('[data-category="reading-new"] .article-grid');
+  items.forEach(item=>{
+   if(newGrid&&item.card.querySelector('.article-new-badge')){
+    newGrid.append(item.card);
+    return;
+   }
+   const group=state.view==='order'?'reading-'+item.level:item[state.view];
+   container.querySelector(`[data-category="${group}"] .article-grid`).append(item.card);
+  });
  }
  function updateProgress(){
   document.querySelectorAll('[data-stage-progress]').forEach(label=>{
