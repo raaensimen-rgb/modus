@@ -8,6 +8,10 @@ Prosjekteiers arbeidsordre for nettartikler fra Musikkutdannelse 1.0–3.0 velge
 | da-sju-takter-var-nok | Harmoniseringen 2+2+2+1 og et lytteforsøk med én ekstra dominanttakt. |
 | tonikalisering-og-modulering | Analyser to konkrete mollforløp på lokalt og globalt nivå. |
 
-Det lille merket på nye artikkelkort styres av `new_badge` i artikkelkilden. Utvidelser bruker eksisterende adresse og quizgrunnlag.
+## Fast praksis for nye artikler
+
+Produksjonsforberedelsen gir godkjente artikler med en ny artikkel-ID «Nytt» automatisk. Den ordinære kortmalen brukes, og kortet legges én gang under «Nye artikler» først i standardvisningen. Bygget sammenligner med det verifiserte produksjonsmanifestet i begge språk. Utvidelser og oversettelser av eksisterende ID-er får ingen automatisk nymerking.
+
+Ved avgrenset artikkelbygg utenfor produksjonsforberedelsen, sett `MODUS_ARTICLE_BASELINE_MANIFEST` til `release-manifest.json` fra den verifiserte, gjeldende produksjonspakken før `npm run build:source`. Bruk det genererte biblioteket som kilde til kortene i leveransepakken. Automatisk merking gjelder første publisering mot dette grunnlaget. Et eksplisitt `new_badge: true` beholder merket ved senere artikkelbygg så lenge feltet er satt.
 
 Den norske utvidelsen bruker også Simen Raaens «Musikkteori – for alle sjangere og nivåer», revidert arbeidsutgave v3 av 6. oktober 2026. Kapittel 12.8, trykt s. 63, gir det lange E-mollforløpet. Den korte dominantkjeden kommer fra kapittel 12.3, trykt s. 62, og leserekkefølgen følger kommentar R71. Sangøvelsen og den forskjøvne melodiske landingen er redaksjonelle modeller. Det vurderte læringsmålet gjelder skriftlig tolkning av lokale mål og hovedtonika.

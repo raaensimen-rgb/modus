@@ -1,9 +1,17 @@
 from pathlib import Path
-import json,math,re,html
+import json,math,re,html,os
 from site_navigation import render_header, with_navigation_css
 from article_library import TOPICS, ORDER, render_library
 from publication import load_policy, public_illustrations, public_articles, public_catalog, holding_page, preview_catalog_cards, preview_illustrations
 ROOT=Path(__file__).resolve().parents[1];DIST=ROOT/'dist';SOURCE_ARTICLES=json.loads((ROOT/'content/articles.json').read_text());ARTICLES=public_articles(ROOT)
+baseline_path=os.environ.get('MODUS_ARTICLE_BASELINE_MANIFEST')
+published_files=None
+if baseline_path:
+ baseline=json.loads(Path(baseline_path).read_text())
+ if baseline.get('production_origin')!='https://modus-4ye.pages.dev' or not baseline.get('files'):
+  raise ValueError('Expected the verified MODUS production manifest')
+ published_files=baseline['files']
+
 QUIZZES=json.loads((ROOT/'content/article-quizzes.json').read_text())
 LEVELS={'beginner':('Grunnleggende musikkteori','Start med byggesteinene.'),'intermediate':('Videregående musikkteori','Se de større sammenhengene.'),'advanced':('Faglig fordypning','Utforsk flere nyanser.')}
 ALT={'circle':'Kvintsirkelen med durtonearter ytterst, relativ moll innenfor og antall faste fortegn. Med klokken: C, G, D, A, E, B, F♯ eller G♭, D♭, A♭, E♭, B♭, F.', 'intervals':'C og G, en ren kvint med sju halvtoners avstand','triads':'C-dur med C E G sammenlignet med C-moll med C E♭ G', 'triadfamily':'Treklangstyper fra C: C E G, C E♭ G, C E♭ G♭ og C E G♯ med formler og intervallkvaliteter','melody':'En enkel melodisk frase med E G B og en pause','modes':'E dorisk med stor sekst C♯ fremhevet', 'sevenmodes':'De sju diatoniske modusene fra ett C-dur-tonemateriale: C ionisk, D dorisk, E frygisk, F lydisk, G miksolydisk, A eolisk og B lokrisk','romans':'Romertallene I, ii, iii, IV, V, vi og vii° under de sju akkordene C, Dm, Em, F, G, Am og Bdim i C-dur','cadence':'Dm7 G7 Cmaj7 med romertall ii7 V7 Imaj7','sevenths':'Cmaj7 bygget av C E G B, trinnene 1 3 5 7','harmonic':'A harmonisk moll og E frygisk dominant med samme toner og ulikt sentrum','voices':'C E G beholdes mens B går til A, fra Cmaj7 til Am7/C','rhythm':'Sju åttendedeler gruppert som to pluss to pluss tre'}
@@ -177,10 +185,18 @@ def generate_articles(items, output):
   (output/'artikler'/f'{a["slug"]}.html').write_text(with_navigation_css(page, '../'))
 def build_listing(ARTICLES, UPCOMING, locale='nb'):
  previews=[a for a in preview_catalog_cards(ROOT,locale) if a['slug'] not in {x['slug'] for x in ARTICLES}]
- items=ARTICLES+previews
+ # Compare by article ID across both editions, so revisions and new translations
+ # do not look like first publication of an article.
+ items=[
+  dict(a,new_badge=True) if published_files is not None
+  and f'artikler/{a["slug"]}.html' not in published_files
+  and f'en/artikler/{a["slug"]}.html' not in published_files
+  else a
+  for a in ARTICLES
+ ]+previews
  images=preview_illustrations(ROOT,locale)
  def render_item(a):return preview_card(a,images.get(a['slug'])) if a in previews else card(a,locale=locale)
- journey,library=render_library(items, LEVELS, render_item, UPCOMING, upcoming_card)
+ journey,library=render_library(items, LEVELS, render_item, UPCOMING, upcoming_card, locale)
  if previews and not ARTICLES:
   library=re.sub(r'<div class="library-progress">.*?</div>', f'<div class="library-progress catalog-preview-note"><strong>{len(previews)} <span>artikkelkort · fulltekst ikke tilgjengelig</span></strong></div>', library, count=1)
 

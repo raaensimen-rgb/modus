@@ -33,7 +33,10 @@ assert(html.includes('data-category="reading-beginner"'),'Beginner heading must 
 assert(html.includes('data-category="reading-intermediate"'),'Intermediate heading must exist');
 assert(html.includes('data-category="reading-advanced"'),'Advanced heading must exist');
 const readingHeadings=[...html.matchAll(/<section class="article-category" data-category="reading-[^"]+">[\s\S]*?<h3>([^<]+)<\/h3>/g)].map(m=>m[1]);
-const newIds=progression.filter(id=>publicIds.includes(id)&&allArticles.find(a=>a.slug===id).new_badge);
+const baselinePath=process.env.MODUS_ARTICLE_BASELINE_MANIFEST;
+const publishedFiles=baselinePath?JSON.parse(fs.readFileSync(baselinePath,'utf8')).files:null;
+const newIds=progression.filter(id=>publicIds.includes(id)&&(allArticles.find(a=>a.slug===id).new_badge||
+ (publishedFiles&&!publishedFiles['artikler/'+id+'.html']&&!publishedFiles['en/artikler/'+id+'.html'])));
 const levelHeadings=['Grunnleggende musikkteori','Videregående musikkteori','Faglig fordypning'];
 const expectedHeadings=newIds.length?['Nye artikler',...levelHeadings]:levelHeadings;
 assert.deepEqual(readingHeadings.slice(0,expectedHeadings.length),expectedHeadings);
