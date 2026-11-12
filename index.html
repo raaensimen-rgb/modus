@@ -19,6 +19,24 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home[data-
 html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home[data-shared-landscape] .home-hero .landscape img {
   object-position: center 10% !important;
 }
+html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home[data-shared-landscape] .home-hero .landscape::after {
+  background: linear-gradient(90deg, #00181745, #001817bd 12%, #001817bd min(630px, 90%), #0018171a max(72%, 760px)),
+    linear-gradient(0deg, #001917, transparent 30%) !important;
+}
+html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home[data-shared-landscape] .home-hero .button-secondary:not(:hover) {
+  background-color: #001817d9;
+}
+@media (max-width: 760px) {
+  html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home[data-shared-landscape] .home-hero .landscape::after {
+    background: linear-gradient(90deg, #00181766, #001817ae 10%, #001817a6),
+      linear-gradient(0deg, #001917, transparent 32%) !important;
+  }
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+  .modus-home[data-shared-landscape] .home-hero .home-hero-wave {
+    mask-image: linear-gradient(90deg, transparent 38%, #000 56%, #000 80%, transparent);
+  }
+}
 html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home[data-shared-landscape] .site-nav::before {
   content: "";
   position: absolute;
@@ -94,7 +112,7 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) .modus-home .home
 </script>
 <main id="main" tabindex="-1">
 <section class="hero home-hero" aria-labelledby="welcome">
- <div class="landscape"><img src="images/modus-design-landscape.png" width="1536" height="1024" alt="Snødekte fjell og deres speilbilde i en stille innsjø" fetchpriority="high"></div>
+ <div class="landscape"><img src="/images/article-landscape-wide.jpg" srcset="/images/article-landscape-wide-960.jpg 960w, /images/article-landscape-wide.jpg 1774w" sizes="(max-width: 760px) 1160px, 100vw" width="1774" height="887" alt="Snødekte fjell og deres speilbilde i en stille innsjø" fetchpriority="high" decoding="async"></div>
  <div class="hero-content">
   <p class="eyebrow">MODUS 2.0</p>
   <h1 id="welcome">Musikkteori med <em>skaperglede</em></h1>
