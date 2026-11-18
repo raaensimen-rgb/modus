@@ -210,3 +210,17 @@ html:not([data-theme="readable"]):not([data-theme="contrast"])
   position: relative;
   z-index: 2;
 }
+
+
+/* Owner refinement 2026-11-18: only MODUS text scale, preserve the wings,
+   diamond, tag line, alignment and the rest of the header. */
+@media (min-width: 761px) {
+  body.modus-home .site-header .home-wordmark {
+    font-size: 27px !important;
+  }
+}
+@media (max-width: 760px) {
+  body.modus-home .site-header .home-wordmark {
+    font-size: 22px !important;
+  }
+}
