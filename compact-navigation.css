@@ -212,15 +212,15 @@ html:not([data-theme="readable"]):not([data-theme="contrast"])
 }
 
 
-/* Owner refinement 2026-11-18: only MODUS text scale, preserve the wings,
-   diamond, tag line, alignment and the rest of the header. */
+/* Owner refinement 2026-11-18: reduce only the hero MODUS wordmark;
+   preserve wings, diamond, tag line and masthead geometry. */
 @media (min-width: 761px) {
   body.modus-home .site-header .home-wordmark {
-    font-size: 27px !important;
+    font-size: 23px !important;
   }
 }
 @media (max-width: 760px) {
   body.modus-home .site-header .home-wordmark {
-    font-size: 22px !important;
+    font-size: 19px !important;
   }
 }
