@@ -201,3 +201,12 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) .site-header .sit
     width: 44px !important;
   }
 }
+
+
+/* P1 header layering: keep the original interior MODUS mark above the
+   full-width navigation veil, without altering the home design master. */
+html:not([data-theme="readable"]):not([data-theme="contrast"])
+  body.modus-interior > .site-header > .brand {
+  position: relative;
+  z-index: 2;
+}
