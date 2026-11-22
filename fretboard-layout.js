@@ -40,6 +40,43 @@
     group(t('Stemming', 'Tuning'), tuning)
   );
 
+  const scaleSummary = document.createElement('section');
+  const scaleTitle = document.createElement('h3');
+  const scaleLabel = document.createElement('span');
+  const scaleName = document.createElement('strong');
+  const scaleDegrees = document.createElement('ul');
+  scaleSummary.className = 'fretboard-scale-summary';
+  scaleSummary.setAttribute('aria-labelledby', 'fretboard-scale-title');
+  scaleTitle.id = 'fretboard-scale-title';
+  scaleLabel.textContent = t('Skala', 'Scale');
+  scaleDegrees.setAttribute('aria-label', t('Skalaformel og toner', 'Scale formula and notes'));
+  scaleTitle.append(scaleLabel, scaleName);
+  scaleSummary.append(scaleTitle, scaleDegrees);
+
+  function updateScaleSummary() {
+    const tonic = root.value;
+    const mode = scale.value;
+    const name = scale.selectedOptions[0].textContent;
+    scaleName.textContent = mode === 'ionian'
+      ? t(tonic + '-dur (ionisk)', tonic + ' major (Ionian)')
+      : mode === 'major' ? t(tonic + '-dur', tonic + ' major') : tonic + ' ' + name;
+
+    scaleDegrees.replaceChildren(...window.ModusTools.scale(tonic, mode).map(tone => {
+      const tile = document.createElement('li');
+      const degree = document.createElement('strong');
+      const note = document.createElement('span');
+      tile.classList.toggle('is-tonic', tone.root);
+      degree.textContent = tone.degree;
+      note.textContent = tone.name;
+      tile.append(degree, note);
+      return tile;
+    }));
+  }
+
+  root.addEventListener('change', updateScaleSummary);
+  scale.addEventListener('change', updateScaleSummary);
+  updateScaleSummary();
+
   const skip = document.createElement('a');
   skip.className = 'fretboard-skip';
   skip.href = '#tool-controls';
@@ -57,6 +94,6 @@
   const notes = document.createElement('div');
   notes.className = 'fretboard-notes';
   notes.append(toneSet, legend, context, status);
-  board.after(scrollHint, notes, controls);
+  board.after(scrollHint, notes, controls, scaleSummary);
   workspace.classList.add('fretboard-layout');
 }());

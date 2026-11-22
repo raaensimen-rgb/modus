@@ -52,7 +52,67 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, .7fr) minmax(0, 1.45fr) max-content;
   align-items: stretch;
-  gap: .65rem;
+  gap: .45rem;
+}
+
+.fretboard-layout .fretboard-scale-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem 1.25rem;
+  margin-block-start: .55rem;
+  padding: .55rem .65rem;
+  border: 1px solid var(--tool-jam-border);
+  border-radius: .45rem;
+}
+
+.fretboard-layout .fretboard-scale-summary h3 {
+  display: grid;
+  gap: .1rem;
+  flex: 0 1 11rem;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+.fretboard-layout .fretboard-scale-summary h3 span,
+.fretboard-layout .fretboard-scale-summary li span {
+  font-size: .75rem;
+}
+
+.fretboard-layout .fretboard-scale-summary ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fretboard-layout .fretboard-scale-summary li {
+  display: grid;
+  place-content: center;
+  min-width: 2.35rem;
+  min-height: 2.6rem;
+  margin: 0;
+  padding: .15rem .25rem;
+  border: 1px solid var(--tool-jam-border);
+  border-radius: .3rem;
+  line-height: 1.15;
+  text-align: center;
+}
+
+html:not([data-theme="readable"]):not([data-theme="contrast"]) .fretboard-layout .fretboard-scale-summary {
+  background: #10292c;
+}
+
+html:not([data-theme="readable"]):not([data-theme="contrast"]) .fretboard-layout .fretboard-scale-summary li {
+  color: #ece8d5;
+  background: #0b1816;
+}
+
+html:not([data-theme="readable"]):not([data-theme="contrast"]) .fretboard-layout .fretboard-scale-summary .is-tonic strong {
+  color: #ffe329;
 }
 
 .fretboard-layout .fretboard-settings {
@@ -60,7 +120,7 @@
   flex-wrap: wrap;
   align-content: start;
   align-items: end;
-  gap: .35rem .45rem;
+  gap: .25rem .45rem;
   min-width: 0;
   margin: 0;
   padding: 0;
@@ -69,16 +129,16 @@
 
 .fretboard-layout .fretboard-settings-card {
   min-width: 0;
-  padding: .7rem .8rem;
+  padding: .45rem .6rem;
   border: 1px solid var(--tool-jam-border);
-  border-radius: .65rem;
+  border-radius: .45rem;
 }
 
 .fretboard-layout .fretboard-settings legend {
   float: left;
   width: 100%;
   padding: 0;
-  margin-block-end: .15rem;
+  margin-block-end: .05rem;
   color: var(--ink, inherit);
   font-size: .9rem;
   font-weight: 600;
@@ -164,10 +224,6 @@
     display: block;
   }
 
-  .fretboard-layout #tool-controls {
-    row-gap: .65rem;
-  }
-
   .fretboard-layout #tool-controls,
   .fretboard-layout .fretboard-notes {
     grid-template-columns: minmax(0, 1fr);
@@ -198,14 +254,25 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) .fretboard-layout
 }
 
 html:not([data-theme="readable"]):not([data-theme="contrast"]) .tool-workbench .fretboard-layout .fretboard-settings :is(select, button) {
-  background-color: transparent;
-  border-color: #476263;
+  background-color: #1c3433;
+  border-color: #516866;
+  color: #ece8d5;
   box-shadow: none;
+}
+
+html:not([data-theme="readable"]):not([data-theme="contrast"]) .tool-workbench .fretboard-layout .fretboard-settings select {
+  background-color: #0b1816;
+  color-scheme: dark;
+}
+
+html:not([data-theme="readable"]):not([data-theme="contrast"]) .fretboard-layout .fretboard-settings p {
+  color: #ece8d5;
 }
 
 html:not([data-theme="readable"]):not([data-theme="contrast"]) .tool-workbench .fretboard-layout .fretboard-settings button[aria-pressed="true"] {
   background-color: #233634;
   border-color: #a69c46;
+  color: #fff0af;
 }
 
 html:not([data-theme="readable"]):not([data-theme="contrast"]) .tool-workbench .fretboard-layout .tool-board,
