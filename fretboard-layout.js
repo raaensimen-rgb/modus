@@ -21,7 +21,9 @@
     const heading = document.createElement('legend');
     card.className = 'fretboard-settings-card';
     fieldset.className = 'fretboard-settings';
-    heading.textContent = title;
+    const label = document.createElement('span');
+    label.textContent = title;
+    heading.append(label);
     fieldset.append(heading, ...items);
     card.append(fieldset);
     return card;
@@ -32,11 +34,15 @@
     .map(midi => window.ModusTools.roots[midi % 12])
     .join(' · ');
 
+  const viewActions = document.createElement('div');
+  viewActions.className = 'fretboard-view-actions';
+  viewActions.append(showAll, practice, fullscreen);
+
   // Keep the original select order and move the live controls with their listeners.
   controls.append(
     group(t('Skala', 'Scale'), root.parentElement, scale.parentElement, isolate),
     group(t('Akkord og arpeggio', 'Chord and arpeggio'), noteSet.parentElement, arpeggio),
-    group(t('Visning', 'View'), display.parentElement, frets.parentElement, showAll, practice, fullscreen),
+    group(t('Visning', 'View'), display.parentElement, frets.parentElement, viewActions),
     group(t('Stemming', 'Tuning'), tuning)
   );
 
