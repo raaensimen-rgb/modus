@@ -78,13 +78,13 @@
 
 .fretboard-layout .fretboard-scale-summary h3 span,
 .fretboard-layout .fretboard-scale-summary li span {
-  font-size: .75rem;
+  font-size: .875rem;
 }
 
 .fretboard-layout .fretboard-scale-summary ul {
   display: flex;
   flex-wrap: wrap;
-  gap: .3rem;
+  gap: clamp(.24rem, .4vw, .45rem);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -93,9 +93,10 @@
 .fretboard-layout .fretboard-scale-summary li {
   display: grid;
   place-content: center;
-  min-width: 2.35rem;
+  min-width: clamp(2.6rem, 4vw, 3.2rem);
   box-sizing: border-box;
-  min-height: 2.6rem;
+  min-height: 3.15rem;
+  font-size: 1.125rem;
   margin: 0;
   padding: .15rem .25rem;
   border: 1px solid var(--tool-jam-border);
@@ -112,7 +113,7 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) .fretboard-layout
   grid-template-rows: 1fr auto;
   place-content: stretch;
   padding: 0;
-  color: #ece8d5;
+  color: #f5f1e1;
   background: #0b1816;
 }
 
@@ -122,8 +123,9 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) .fretboard-layout
 }
 
 html:not([data-theme="readable"]):not([data-theme="contrast"]) .fretboard-layout .fretboard-scale-summary li span {
-  padding: .15rem .25rem;
+  padding: .2rem .25rem;
   border-radius: 0 0 .24rem .24rem;
+  font-weight: 700;
   color: #18201a;
   background: #d5b949;
 }
