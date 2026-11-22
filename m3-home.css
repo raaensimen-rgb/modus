@@ -1,0 +1,371 @@
+/* The landscape and one centered identity compose the whole masthead. */
+.modus-home[data-nordic-preview] {
+  --m3-paper: #f6efe2;
+  --m3-gold: #f0d37d;
+  --m3-measure: 76rem;
+}
+
+.modus-home[data-nordic-preview] .site-header > .brand {
+  height: auto !important;
+  min-height: 0;
+  justify-content: center !important;
+  padding: clamp(22px, 1.4vw, 28px) 0 clamp(34px, 3.2vw, 52px) !important;
+  text-align: center;
+}
+
+.modus-home[data-nordic-preview] .site-header > .brand .home-subjects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.5rem, 2vw, 1.4rem);
+  width: min(100%, 42rem);
+  margin: 0 0 7px;
+  color: var(--ink);
+  font-size: clamp(.59rem, .92vw, .76rem);
+  letter-spacing: .19em;
+  line-height: 1.45;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.modus-home .home-subjects::before,
+.modus-home .home-subjects::after {
+  content: "";
+  width: clamp(16px, 7vw, 94px);
+  flex-shrink: 0;
+  height: 1px;
+  background: currentColor;
+  opacity: .6;
+}
+
+.modus-home[data-nordic-preview] .site-header > .brand .home-geometric {
+  position: static !important;
+  width: clamp(32px, 4vw, 56px) !important;
+  height: clamp(32px, 4vw, 56px) !important;
+  margin: 0 !important;
+}
+
+.modus-home[data-nordic-preview] .site-header > .brand .home-wordmark {
+  font-size: clamp(25px, 1.9vw, 36px) !important;
+  margin: .05em 0 0 !important;
+  line-height: 1.18 !important;
+  letter-spacing: .6em !important;
+  padding-inline-start: .6em;
+}
+
+.modus-home[data-nordic-preview] .site-header .home-tagline {
+  display: none;
+}
+
+.modus-home[data-nordic-preview] .new-philosophy .philosophy-heading > .home-lead {
+  display: block;
+  max-width: min(49ch, 100%) !important;
+  margin: .8rem auto clamp(30px, 4vw, 60px) !important;
+  color: var(--ink);
+  font: italic clamp(.95rem, 1.1vw, 1.13rem)/1.3 Georgia, serif !important;
+  letter-spacing: normal;
+  text-wrap: balance;
+}
+
+html:not([data-theme="readable"]):not([data-theme="contrast"]) body.modus-home[data-shared-landscape] > .site-header::before {
+  background: linear-gradient(180deg, #061f24d6 0%, #08272b4d 55%, #092e3192 88%, #062123),
+    url("/images/modus-landskap-3d-2026-11-22.webp") center 44% / cover no-repeat !important;
+}
+
+html:not([data-theme="readable"]):not([data-theme="contrast"]) body.modus-home[data-nordic-preview] > .site-header::after {
+  height: 142px !important;
+  background-position: center 0 !important;
+  background-size: min(98%, 460px) 76px !important;
+  transform: translateY(clamp(32px, 3.2vw, 46px));
+}
+
+.modus-home[data-nordic-preview] .hero.home-hero {
+  min-height: 0 !important;
+  padding: clamp(12px, 1.8vw, 26px) var(--nordic-gutter) !important;
+  justify-content: center;
+}
+
+.modus-home[data-nordic-preview] .home-hero .hero-content {
+  width: min(100%, var(--m3-measure));
+  margin-inline: auto;
+}
+
+.modus-home[data-nordic-preview] .home-hero h1 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.modus-home[data-nordic-preview] .home-hero :is(.landscape, .home-hero-wave) {
+  display: none;
+}
+
+.modus-home[data-nordic-preview] .home-hero .hero-actions {
+  margin-inline: auto;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .6rem 1rem;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home[data-nordic-preview] .home-hero .hero-actions > .button {
+  color: var(--m3-paper) !important;
+  background: #153b3e !important;
+  border: 1px solid #6da39c !important;
+  box-shadow: none;
+}
+
+.modus-home[data-nordic-preview] .start-resume:not([hidden]) {
+  width: min(90%, var(--m3-measure));
+  margin: 0 auto clamp(12px, 2vw, 26px) !important;
+  border-radius: 14px;
+}
+
+.modus-home[data-nordic-preview] .start-resume-link {
+  gap: .25rem;
+  padding-block: .65rem;
+}
+
+.modus-home[data-nordic-preview] .illustrated-portals {
+  max-width: 62rem;
+  gap: .6rem 1rem !important;
+  margin-inline: auto !important;
+  padding-inline: clamp(14px, 2.4vw, 28px) !important;
+  background: transparent;
+}
+
+.modus-home[data-nordic-preview] .illustrated-portals .home-portal {
+  min-height: 80px;
+  padding-block: 2rem .55rem !important;
+}
+
+@media (min-width: 701px) {
+  .modus-home[data-nordic-preview] .illustrated-portals {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .modus-home[data-nordic-preview] .site-header .site-nav {
+    width: min(94%, 49rem) !important;
+    margin-inline: auto;
+    border: 1px solid #609391 !important;
+    border-radius: 2rem;
+    padding-block: 0 !important;
+  }
+}
+
+@media (min-width: 701px) {
+  html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home[data-shared-landscape] .site-nav::before {
+    border-radius: inherit;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .modus-home[data-nordic-preview] .site-header .site-nav {
+    margin-top: 18px;
+  }
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home[data-nordic-preview] .site-header .site-nav::after {
+  display: block;
+  top: -24px;
+  bottom: auto;
+  height: 24px;
+  opacity: 1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 740 24' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='wave'%3E%3Cstop stop-color='%2359e5d9' stop-opacity='0'/%3E%3Cstop offset='.5' stop-color='%2389fff0'/%3E%3Cstop offset='1' stop-color='%2359e5d9' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 23H270C316 23 339 2 370 2S424 23 470 23H740' fill='none' stroke='url(%23wave)' stroke-width='2'/%3E%3C/svg%3E") center / 100% 100% no-repeat !important;
+  filter: drop-shadow(0 0 4px #59e5d9);
+}
+
+.modus-home[data-nordic-preview] .illustrated-portals .home-portal :is(h2, h3) {
+  font-size: 1.12rem;
+}
+
+.modus-home[data-nordic-preview] .illustrated-portals .portal-number {
+  display: none;
+}
+
+.modus-home[data-nordic-preview] .new-philosophy h2,
+.modus-home[data-nordic-preview] .home-introduction h2 {
+  font-family: Georgia, serif !important;
+  font-weight: 400;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home[data-nordic-preview] .new-philosophy :is(.eyebrow, svg) {
+  color: var(--m3-gold);
+}
+
+.modus-home[data-nordic-preview] .philosophy-stages {
+  max-width: var(--m3-measure);
+  margin-inline: auto;
+}
+
+.modus-home[data-nordic-preview] .home-introduction {
+  max-width: 69rem;
+  margin-inline: max(var(--nordic-gutter), calc((100% - 69rem) / 2)) !important;
+}
+
+@view-transition { navigation: none; }
+
+/* Keep the footer at the bottom when the page is shorter than the viewport. */
+body.modus-home[data-nordic-preview] {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.modus-home[data-nordic-preview] > :is(.site-header, main, footer) {
+  width: 100%;
+  margin-block: 0;
+}
+
+.modus-home[data-nordic-preview] > main {
+  flex: 1 0 auto;
+}
+
+.modus-home[data-nordic-preview] > :is(.site-header, footer) {
+  flex: none;
+}
+
+.modus-home .home-explore {
+  width: min(100% - 40px, 1180px);
+  margin: clamp(28px, 4vw, 56px) auto;
+}
+
+.modus-home .home-explore h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.modus-home .home-explore-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.modus-home .home-explore-list a {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--ink);
+}
+
+.modus-home .home-explore-list a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.modus-home .home-explore-list a:hover span {
+  text-decoration: underline;
+}
+
+.modus-home .home-explore-list img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 1;
+  object-fit: contain;
+  border-radius: 11px 11px 0 0;
+  background: var(--bg);
+}
+
+.modus-home .home-explore-list span {
+  padding: 12px 16px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+@media (min-width: 600px) {
+  .modus-home .home-explore-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1120px) {
+  .modus-home .home-explore-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Paint the two landscape extensions independently of the existing photo crops. */
+@media (forced-colors: none) {
+  html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home[data-shared-landscape] .home-hero[data-landscape-extension]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: url("/images/modus-landskap-3d-2026-11-22.webp") var(--scene-x) var(--landscape-top-offset) / var(--scene-width) auto no-repeat;
+  }
+
+  html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home[data-shared-landscape] .home-hero[data-landscape-extension]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(#062123f2, #06212380 42%, var(--nordic-canvas));
+  }
+
+  html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home[data-landscape-extension] {
+    position: relative;
+    isolation: isolate;
+  }
+
+  html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home[data-landscape-extension]::before {
+    content: "";
+    position: absolute;
+    inset: var(--landscape-lower-start) 0 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      linear-gradient(to top, #001917e6, #001917ab 38%, #001917b8),
+      url("/images/modus-landskap-3d-2026-11-22.webp") var(--scene-x) bottom / var(--scene-width) var(--landscape-lower-height) no-repeat;
+    transform: scaleY(-1);
+  }
+}
+
+
+/* Bring the lake in after the card band, below the repeated sky. */
+@media (forced-colors: none) {
+  html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home .home-lower-landscape[data-lake-join] picture[data-a06-background] {
+    mask-image: linear-gradient(to bottom,
+      transparent calc(var(--lake-join-depth) * 0.68),
+      #000 var(--lake-join-depth));
+  }
+}
+
+
+/* Use one photograph and one horizontal crop for the sky and the reflected lake. */
+@media (forced-colors: none) {
+  html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home[data-shared-landscape][data-landscape-extension] > .site-header::before {
+    background-position: center, var(--scene-x) var(--scene-top) !important;
+    background-size: auto, var(--scene-width) auto !important;
+  }
+
+  html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home[data-landscape-extension] .home-lower-landscape picture[data-a06-background] {
+    background: url("/images/modus-landskap-3d-2026-11-22.webp") var(--scene-x) bottom / var(--scene-width) var(--scene-water-height) no-repeat;
+  }
+
+  html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home[data-landscape-extension] .home-lower-landscape picture[data-a06-background] > img {
+    visibility: hidden;
+  }
+}
+
+/* Keep the sun and its reflection on the same horizontal crop. */
+@media (forced-colors: none) {
+  html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home[data-shared-landscape] .home-hero[data-landscape-extension] .landscape > img {
+    position: absolute;
+    inset: var(--landscape-image-top) auto auto var(--scene-x);
+    width: var(--scene-width);
+    max-width: none;
+    height: auto;
+  }
+}

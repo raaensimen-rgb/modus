@@ -1,0 +1,187 @@
+/*
+ * MODUS design system v1 — shared presentation and interaction details.
+ * Intentionally conservative: existing page layouts, themes and tool controls
+ * remain owned by their page-specific stylesheets.
+ */
+:root {
+  --modus-ui-radius-sm: 7px;
+  --modus-ui-radius-card: 13px;
+  --modus-ui-focus: var(--accent, #d7f48c);
+  --modus-ui-motion: 160ms;
+}
+html { -webkit-text-size-adjust: 100%; }
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: 2px solid var(--modus-ui-focus);
+  outline-offset: 3px;
+}
+:where(a,button,input,select,textarea,summary,[tabindex]):focus:not(:focus-visible) {
+  outline: none;
+}
+/* Keep visual feedback consistent for navigational actions, not playback controls. */
+:where(a.button,button.button,.plan-action,.nav-cta) {
+  transition: background-color var(--modus-ui-motion) ease,
+              border-color var(--modus-ui-motion) ease,
+              color var(--modus-ui-motion) ease,
+              transform var(--modus-ui-motion) ease;
+}
+:where(.theory-main,.chord-main,.articles-page,.membership-main) :where(h1,h2,h3) {
+  text-wrap: balance;
+}
+:where(.theory-main,.chord-main,.articles-page,.membership-main) :where(p,li) {
+  overflow-wrap: break-word;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(a.button,button.button,.plan-action,.nav-cta) { transition: none; }
+}
+
+/* Shared editorial rhythm across the main MODUS rooms. */
+:where(.theory-hero,.articles-hero,.membership-hero,.intro) h1 {
+  line-height: 1.13;
+  text-wrap: balance;
+}
+:where(.theory-hero,.articles-hero,.membership-hero,.intro) :where(p:not(.eyebrow)) {
+  max-width: 58ch;
+  line-height: 1.85;
+}
+:where(.theory-main,.chord-main,.articles-page,.membership-main) .eyebrow {
+  letter-spacing: .13em;
+  font-weight: 600;
+}
+:where(.theory-main,.chord-main,.articles-page,.membership-main) :where(h2,h3) {
+  line-height: 1.28;
+}
+
+/* One card silhouette; retain each room's existing background and border colors. */
+:where(.lesson,.builder-panel,.selected-panel,.panel,.article-card,.journey-stage,.price-card,.launch-notice) {
+  border-radius: var(--modus-ui-radius-card);
+}
+:where(.article-card,.journey-stage,.topic-tabs button) {
+  transition: border-color var(--modus-ui-motion) ease,
+              background-color var(--modus-ui-motion) ease,
+              transform var(--modus-ui-motion) ease;
+}
+:where(.article-card,.journey-stage):focus-within {
+  border-color: var(--modus-ui-focus);
+}
+:where(.lesson,.builder-panel,.selected-panel,.panel,.price-card) {
+  min-width: 0;
+}
+
+/* Avoid horizontal overflow in flex and grid layouts, particularly at laptop widths. */
+:where(.theory-body,.workspace,.pricing-grid,.article-grid,.journey-stages) > * {
+  min-width: 0;
+}
+:where(.theory-main,.chord-main,.articles-page,.membership-main) :where(button,input,select) {
+  max-width: 100%;
+}
+@media (max-width: 700px) {
+  :where(.theory-hero,.articles-hero,.membership-hero,.intro) h1 {
+    letter-spacing: -.045em;
+  }
+  :where(.theory-main,.chord-main,.articles-page,.membership-main) .eyebrow {
+    line-height: 1.5;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(.article-card,.journey-stage,.topic-tabs button) {
+    transition: none;
+  }
+  :where(.article-card,.journey-stage):hover {
+    transform: none;
+  }
+}
+
+/* Extend the same rhythm to the guided course and the MODUS story. */
+:where(.course-main,.about-main) :where(h1,h2,h3) {
+  text-wrap: balance;
+}
+:where(.course-main,.about-main) :where(p,li) {
+  overflow-wrap: break-word;
+}
+:where(.course-main,.about-main) .eyebrow {
+  letter-spacing: .13em;
+  font-weight: 600;
+  line-height: 1.5;
+}
+:where(.course-main,.about-main) :where(.course-toolbar,.about-story) {
+  min-width: 0;
+}
+:where(.course-main,.about-main) :where(a,button,input,select) {
+  max-width: 100%;
+}
+
+
+/*
+ * MODUS body-copy readability only.
+ * No changes to headings, labels, overlines, icons, controls or numerical diagrams.
+ * Apply to explanatory prose and actual reading content across the site.
+ */
+body :is(
+  .tool-copy>p,.section-intro>p:last-child,.theory-entry p:last-child,
+  .home-feature-grid>.theory-entry p:last-child,
+  .hero-note,.hero .quote-explanation,.hero-route-note,.quote-translation,
+  .articles-hero p:last-child,.article-card p,.library-bottom p:last-child,
+  .no-results p,.plus-teaser p,.overview-heading>p,.journey-stage p,
+  .next-article p,.category-header p:last-child,
+  .article-category[data-category^="reading-"] .category-header p,
+  .article-practice p,.article-prerequisites p,
+  .reading-body .article-quiz>p,.reading-body .quiz-feedback p,
+  .reading-body .quiz-complete p,
+  .theory-hero p:last-child,.aside-note p,.lesson .lead,.concept,
+  .lesson-reflection>p,.lesson-reflection details p,
+  .intro p,.mode-detail p,.mixer p,.custom-sequence-note p,
+  .chord-type-row p,.course-lesson p,.course-exercise>p:not(.eyebrow),
+  .course-reflection p,.practice-note,
+  .about-reading p,.about-credit>p,.about-links p,
+  .builder-help,.guitar-voicing>p,.piano-help,.voicing-note,
+  .jam-transfer p,.sequence-library p,.harmonic-context>p,
+  .map-small,.map-copy,.map-note,.map-next p:not(.map-eyebrow),
+  .atlas-intro-heading>p:not(.map-eyebrow),.atlas-intro-step p,
+  .path-card p,.path-intro,.path-note,
+  .account-panel .account-note,.account-panel .account-preview-note,
+  .modus-feedback-heading p,.modus-feedback-note
+){font-size:15px;line-height:1.75}
+/* Full-sized explanatory paragraphs, including the Musikkatlas passage
+   "Musikkatlaset samler teori..." previously missed by the generic selector.
+   Only body copy: do not enlarge headings, badges, captions or controls. */
+body :is(
+  .atlas-intro-heading>p:not(.map-eyebrow),
+  .atlas-intro-step p,.atlas-intro-note,
+  .map-hero>p:not(.map-eyebrow),.map-next p:not(.map-eyebrow),
+  .map-small,.map-copy,.map-note,
+  .path-lead,.path-intro,.path-card p,.path-note,
+  .articles-hero p:last-child,.article-card p,
+  .overview-heading>p,.journey-stage p,.category-header p:last-child,
+  .article-category[data-category^="reading-"] .category-header p,
+  .home-feature-grid>.theory-entry p:last-child,
+  .tool-copy>p,.section-intro>p:last-child,.theory-entry p:last-child,
+  .theory-hero p:last-child,.aside-note p,.lesson .lead,
+  .lesson-reflection>p,.lesson-reflection details p,
+  .course-lesson p,.course-exercise>p:not(.eyebrow),.course-reflection p,
+  .about-reading p,.about-credit>p,.about-links p
+){font-size:18px;line-height:1.75}
+/* Keep article reading prose consistent with the larger body-copy standard. */
+body :is(
+  .reading-body>p,.reading-body section>p,.reading-body>ul>li,
+  .reading-body>ol>li,.reading-body section>ul>li,
+  .reading-body .practice-steps li,.article-learning li,
+  .about-reading>p
+){font-size:18px;line-height:1.8}
+/* Larger introductions and editorial text already sized intentionally are kept. */
+
+/* Keep the document inside the mobile viewport. Tool-owned horizontal scrollers
+   remain scrollable; only accidental page-level horizontal overflow is clipped. */
+html,body{max-width:100%;overflow-x:clip}
+@supports not (overflow:clip){html,body{overflow-x:hidden}}
+@media(max-width:700px){
+  .site-header,.site-header .site-nav,.site-header .header-tools{max-width:100%;min-width:0}
+  main,footer{min-width:0}
+  img,video{max-width:100%;height:auto}
+}
+
+/* Paired Arch logos frame MODUS without a trailing dot, including generated footers. */
+.brand > .branddot{display:none}
+
+/* The short founder bio is a compact sidebar caption, not long-form body copy. */
+

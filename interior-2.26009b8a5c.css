@@ -1,0 +1,44 @@
+/* Public MODUS rooms: same identity, existing tools and editorial content. */
+.modus-interior {
+ --bg:#061813;--panel:#0c211a;--ink:#f1f1e9;--muted:#c0ccc2;
+ --accent:#e2ee61;--line:#42513a;
+ background:var(--bg);color:var(--ink);
+}
+html[data-theme=readable] .modus-interior {--bg:#e8e9e4;--panel:#f4f5f1;--ink:#1b2a20;--muted:#43533b;--accent:#245b34;--line:#687a57}
+html[data-theme=contrast] .modus-interior {--bg:#fff;--panel:#fff;--ink:#000;--muted:#000;--accent:#000;--line:#000}
+.modus-interior>main,.modus-interior>footer {max-width:1536px;margin-inline:auto}
+.modus-interior>main {min-width:0}
+.modus-interior :is(a,button,input,select,textarea,summary):focus-visible {outline:3px solid var(--accent);outline-offset:4px}
+.interior-skip {position:absolute;top:8px;left:16px;z-index:300;padding:12px 20px;background:var(--accent);color:var(--bg);transform:translateY(-160%);font-weight:600}
+.interior-skip:focus {transform:none}
+.modus-interior main h1 {font-family:Georgia,'Times New Roman',serif;font-size:clamp(36px,3.5vw,48px);font-weight:400;letter-spacing:-.02em;line-height:1.16;text-wrap:balance;max-width:28ch}
+.modus-interior main h1 em {font-weight:400;color:var(--accent)}
+.modus-interior main h2 {font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.015em;line-height:1.25;text-wrap:balance}
+.modus-interior main :is(.eyebrow,.map-eyebrow,.aside-label) {color:var(--accent);font-weight:600;letter-spacing:.13em}
+.modus-interior :is(.intro,.theory-hero,.articles-hero,.membership-hero,.curriculum-hero,.path-hero,.map-hero,.about-hero) {padding-block:clamp(32px,4vw,56px);border-bottom:1px solid var(--line)}
+html:not([data-theme=readable]):not([data-theme=contrast]) .modus-interior :is(.intro,.theory-hero,.articles-hero,.membership-hero,.curriculum-hero,.path-hero,.map-hero,.about-hero):not(:has(.theory-landscape,.articles-landscape,.membership-landscape,.about-landscape,.intro-art)) {
+ background-image:linear-gradient(90deg,#061813 28%,#061813c9 70%,#061813a6),url('images/mountain-lake.webp');background-size:cover;background-position:center 48%;
+}
+.modus-interior :is(.theory-hero,.articles-hero,.membership-hero,.curriculum-hero,.path-hero,.map-hero,.about-hero,.account-intro) p:not(.eyebrow):not(.map-eyebrow) {max-width:58ch;line-height:1.75;color:var(--muted)}
+.modus-interior :is(.lesson,.builder-panel,.selected-panel,.article-card,.path-card,.journey-stage,.price-card,.launch-notice,.account-panel,.catalog-preview-card,.learning-callout,.atlas-intro-step,.billing-panel) {background-color:var(--panel);border-color:var(--line);border-radius:8px;box-shadow:none}
+.modus-interior :is(.article-card,.path-card,.journey-stage,.price-card):focus-within {border-color:var(--accent)}
+.modus-interior :is(a.button,.plan-action) {display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 24px;border:1px solid var(--accent);border-radius:999px;color:var(--bg);background:var(--accent);font-weight:600;line-height:1.4}
+.modus-interior a.button-secondary {background:transparent;color:var(--ink)}
+.modus-interior main :is(input,select,textarea):not([type=range]):not([type=checkbox]):not([type=radio]) {min-height:44px;max-width:100%}
+.modus-interior .reading-body {max-width:76ch}
+.modus-interior .reading-body :is(p,li) {line-height:1.8}
+.modus-interior .publication-hold {margin-block:24px;min-height:40vh}
+html[data-theme=contrast] .modus-interior main :is(h1,h2,h3,h4,em) {font-family:Arial,sans-serif;font-weight:700;letter-spacing:normal}
+@media(max-width:700px) {
+ .modus-interior main h1 {font-size:clamp(30px,8.5vw,36px);line-height:1.18}
+ .modus-interior :is(.intro,.theory-hero,.articles-hero,.membership-hero,.curriculum-hero,.path-hero,.map-hero,.about-hero) {padding-block:32px}
+}
+@media(prefers-reduced-motion:reduce) {.modus-interior * {scroll-behavior:auto;transition:none!important;animation:none!important}}
+@media(forced-colors:active) {.modus-interior :is(a.button,.plan-action) {border:1px solid ButtonText;color:ButtonText;background:Canvas}}
+
+/* Keep existing control states legible in every appearance mode. */
+.modus-interior .topic-tabs button {background:var(--panel);border-color:var(--line);color:var(--ink)}
+.modus-interior .topic-tabs button[aria-selected=true] {background:color-mix(in srgb,var(--accent) 12%,var(--panel));border-color:var(--accent)}
+.modus-interior :is(.plan-ribbon,.student-eligibility-note) {color:var(--muted)}
+.modus-interior #modus-premises-note {background:var(--panel);color:var(--ink);border-color:var(--line)}
+html:not([data-theme=readable]):not([data-theme=contrast]) .modus-interior {--modus-c-111310:var(--bg);--modus-c-111310aa:#061813aa}

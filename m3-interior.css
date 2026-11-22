@@ -1,0 +1,118 @@
+/* Reuse the existing masthead artwork at the smaller interior scale. */
+body.modus-interior > header.site-header > a.brand {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  justify-self: start !important;
+  position: relative !important;
+  /* Navigation and its full-width veil occupy layer 3. */
+  z-index: 4;
+  width: clamp(114px, 14vw, 174px);
+  height: 67px !important;
+  padding-block: 5px !important;
+  margin: 0 !important;
+  justify-content: center !important;
+}
+
+body.modus-interior > header.site-header > .brand .home-geometric {
+  position: static !important;
+  width: 19px !important;
+  height: 19px !important;
+  margin: 0 !important;
+}
+
+body.modus-interior > header.site-header > .brand .home-wordmark {
+  font-size: clamp(16px, 1.65vw, 24px) !important;
+  margin: 3px 0 0 !important;
+  color: var(--ink) !important;
+}
+
+body.modus-interior > header.site-header > .brand .home-tagline {
+  display: none;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-interior > header.site-header::after {
+  content: none;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-interior > header.site-header > .brand {
+  background: url("/images/modus-waves.svg") center 1px / 119% 39px no-repeat;
+  opacity: 1 !important;
+}
+
+@media (min-width: 1240px) {
+  body.modus-interior > header.site-header {
+    grid-template-columns: auto minmax(0, 1fr) auto !important;
+    align-items: center;
+    column-gap: clamp(10px, 1.5vw, 24px) !important;
+  }
+
+  body.modus-interior > header.site-header > nav.site-nav {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    gap: 0 clamp(6px, 1.1vw, 18px) !important;
+  }
+
+  body.modus-interior > header.site-header > .header-tools {
+    position: relative !important;
+    inset: auto !important;
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+  }
+}
+
+@view-transition { navigation: none; }
+
+/* Align the reading path with the article library's content edges. */
+.modus-interior main[data-lesesti] .path-inner {
+  width: 100%;
+}
+
+.modus-interior main[data-lesesti] :is(.path-levels, .path-steps) {
+  gap: clamp(1.125rem, 1.65vw, 2rem);
+}
+
+/* Match the full-width harmony hero to its centered workbench. */
+.modus-interior main.chord-main > .subpage-hero {
+  padding-inline: calc(max(20px, 5vw) + max(0px, (var(--study-page-width, 100vw) - 1536px) / 2)) !important;
+}
+
+@media (max-width: 760px) {
+  .modus-interior main.chord-main {
+    padding-inline: max(20px, 5vw);
+  }
+}
+
+/* Align the full-width study heroes to their own content columns. */
+.modus-interior main:is(.path-shell:has(> #f03-resume), .curriculum, .theory-main:has(.topic-tabs)) {
+  --study-viewport: var(--study-page-width, 100vw);
+  --study-main-width: min(var(--study-viewport), 1536px);
+}
+
+.modus-interior main.path-shell:has(> #f03-resume) {
+  --study-content-inset: 6vw;
+}
+
+.modus-interior main.curriculum {
+  --study-content-inset: calc(var(--study-main-width) * .07);
+}
+
+.modus-interior main.theory-main:has(.topic-tabs) {
+  --study-content-inset: max(20px, 5vw);
+}
+
+.modus-interior main:is(.path-shell:has(> #f03-resume), .curriculum, .theory-main:has(.topic-tabs)) > .subpage-hero {
+  padding-inline: calc((var(--study-viewport) - var(--study-main-width)) / 2 + var(--study-content-inset)) !important;
+}
+
+@media (max-width: 850px) {
+  .modus-interior main.curriculum {
+    --study-content-inset: calc(var(--study-main-width) * .06);
+  }
+}
+
+@media (max-width: 650px) {
+  .modus-interior main.path-shell:has(> #f03-resume) {
+    --study-content-inset: 5vw;
+  }
+}

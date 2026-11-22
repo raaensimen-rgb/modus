@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "include": [
+    "/artikler/modus-verify-01-privat-testutkast",
+    "/artikler/modus-verify-01-privat-testutkast/",
+    "/artikler/modus-verify-01-privat-testutkast.html",
+    "/artikler/modus-verify-01-privat-testutkast.html/",
+    "/images/editorial-cards/modus-verify-01-privat-testutkast-nb-5815fcfc038f.jpg",
+    "/images/editorial-cards/modus-verify-01-privat-testutkast-nb-5815fcfc038f.jpg/",
+    "/_worker.js",
+    "/_worker.js/",
+    "/_routes.json",
+    "/_routes.json/"
+  ],
+  "exclude": []
+}

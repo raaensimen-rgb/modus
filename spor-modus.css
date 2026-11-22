@@ -1,0 +1,29 @@
+.modus-assistant-open,
+.modus-assistant form button {
+  border: 1px solid #91b6a8;
+  border-radius: 999px;
+  background: #123b34;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 650;
+  min-height: 44px;
+  padding: .55rem 1rem;
+}
+.modus-assistant-open {
+  position: fixed;
+  z-index: 20;
+  inset-inline-start: max(1rem, env(safe-area-inset-left));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  box-shadow: 0 4px 16px #0004;
+}
+.modus-assistant-open:focus-visible {
+  outline: 3px solid #ebedaa;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px #123b34;
+}
+.modus-assistant h2 { margin: 0; font-size: 1.3rem; }
+.modus-assistant form { margin-block-start: 1rem; }
+.modus-assistant .global-search-input { margin: .5rem 0 .75rem; font-size: 1rem; }
+.modus-assistant .global-search-results { max-height: 32vh; }
+.modus-assistant form button:disabled { opacity: .7; cursor: wait; }

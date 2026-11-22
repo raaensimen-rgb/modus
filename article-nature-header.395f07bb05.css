@@ -1,0 +1,37 @@
+/* Decorative landscape for the shared full-text reader. */
+html:not([data-theme="readable"], [data-theme="contrast"]) .reading-page .reading-header {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(24px, 4vw, 56px) clamp(28px, 5vw, 64px);
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) .reading-page .reading-header::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset-block: 0;
+  left: 50%;
+  width: min(90vw, 1400px);
+  transform: translateX(-50%);
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, rgb(0 19 18 / 84%) 25%, rgb(0 19 18 / 38%) 100%),
+    url("/images/article-landscape-wide.jpg") center 42% / cover no-repeat;
+  mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 48%, transparent),
+              linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-composite: intersect;
+}
+
+@media (max-width: 960px) {
+  html:not([data-theme="readable"], [data-theme="contrast"]) .reading-page .reading-header::before {
+    background-image:
+      radial-gradient(ellipse at center, rgb(0 19 18 / 86%) 33%, rgb(0 19 18 / 55%) 100%),
+      url("/images/article-landscape-wide-960.jpg");
+  }
+}
+
+@media (forced-colors: active), print {
+  .reading-page .reading-header::before {
+    display: none;
+  }
+}

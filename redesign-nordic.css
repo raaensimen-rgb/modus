@@ -1,0 +1,471 @@
+/* The Nordisk preview uses the production masthead, artwork and Manrope. */
+:root {
+  --nordic-gutter: clamp(18px, 4.8vw, 88px);
+  --nordic-radius: 16px;
+  --nordic-edge: #386861;
+  --nordic-surface: #0a2b29;
+  --nordic-gold: #f4d566;
+}
+
+.modus-home .home-hero {
+  min-height: clamp(410px, 39vw, 660px) !important;
+  align-items: center;
+  padding: clamp(40px, 5vw, 84px) var(--nordic-gutter) clamp(66px, 7vw, 110px) !important;
+}
+.modus-home .home-hero .landscape img { object-position: 62% 54% !important; }
+.modus-home .home-hero .landscape::after {
+  background: linear-gradient(90deg, #031b1af5, #031b1ac9 28%, #031b1a40 57%, transparent 80%),
+    linear-gradient(0deg, #031b1a, transparent 30%) !important;
+}
+.modus-home .home-hero .eyebrow {
+  font-size: .82rem;
+  font-weight: 700;
+  margin-bottom: .65rem !important;
+}
+.modus-home .home-hero h1 {
+  font-size: clamp(3.25rem, 6.5vw, 7.35rem) !important;
+  line-height: .93 !important;
+  letter-spacing: -.065em !important;
+  text-wrap: initial;
+  margin-bottom: 1.3rem !important;
+}
+.modus-home .home-hero h1 span { display: block; }
+.modus-home .home-lead { max-width: 42ch !important; font-size: clamp(1rem, 1.35vw, 1.24rem) !important; }
+.modus-home .hero-actions { gap: 12px; }
+.modus-home .hero-actions > .button:first-child { box-shadow: none; }
+.modus-home .home-hero-wave { width: 100% !important; height: 95px !important; bottom: 2px !important; opacity: .55; }
+.modus-home .start-resume:not([hidden]) { margin: 0 var(--nordic-gutter) 18px !important; max-width: none; }
+.modus-home .illustrated-portals { gap: clamp(10px, 1.5vw, 24px); padding: 0 var(--nordic-gutter) 34px !important; }
+.modus-home .illustrated-portals .home-portal {
+  min-height: clamp(152px, 15vw, 218px);
+  justify-content: flex-end;
+  padding: 48px clamp(13px, 2vw, 24px) 17px !important;
+  border-radius: var(--nordic-radius);
+}
+.modus-home .home-portal::before {
+  background: linear-gradient(0deg, #051e1c 0%, #051e1cde 42%, #051e1c30 82%);
+}
+.modus-home .home-portal h2 { font-size: clamp(1.1rem, 1.75vw, 1.65rem); }
+.modus-home .new-philosophy { padding-top: clamp(30px, 4vw, 68px) !important; padding-bottom: clamp(36px, 5vw, 80px) !important; }
+.modus-home .home-introduction {
+  margin: 0 var(--nordic-gutter) 36px !important;
+  padding: clamp(16px, 2.4vw, 36px) !important;
+  gap: clamp(18px, 3.5vw, 62px);
+}
+.modus-home .introduction-poster { flex: 0 1 42%; height: auto; aspect-ratio: 16 / 9; border-radius: 12px; }
+.modus-home .introduction-copy { grid-template-columns: 1fr; gap: 8px; }
+.modus-home .introduction-copy > :is(button, .intro-film-button) { grid-column: 1; grid-row: auto; justify-self: start; }
+
+/* Shared heading scale, with calmer banners in reading and working views. */
+.modus-interior main :is(.library-hero,.subpage-hero,.reading-header,.about-hero) h1 {
+  font-family: Manrope, 'DM Sans', sans-serif;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+.modus-interior main :is(.subpage-hero,.library-hero,.about-hero) h1 {
+  font-size: clamp(2rem, 4.15vw, 4.25rem) !important;
+  line-height: 1.08;
+}
+.modus-interior main :is(.library-hero) { min-height: auto; padding-block: clamp(30px, 4.5vw, 75px); }
+.modus-interior main .reading-header { padding-block: clamp(34px, 5vw, 79px); }
+.modus-interior main .reading-header h1 { font-size: clamp(1.95rem, 4.4vw, 4.35rem) !important; line-height: 1.12; }
+.modus-interior .reading-body { line-height: 1.75; }
+.modus-interior .reading-body > section { scroll-margin-top: 28px; }
+.modus-interior .reading-body h2 { letter-spacing: -.025em; }
+.modus-interior .reading-illustration { border-radius: var(--nordic-radius); overflow: hidden; }
+.modus-interior :is(.library .article-card,.reading-path .article-card,.path-card,.route-entry,
+  .tool-panel,.builder-panel,.selected-panel,.workspace,.lesson,.article-quiz) {
+  border-radius: var(--nordic-radius);
+}
+
+html:not([data-theme=readable],[data-theme=contrast]) {
+  --nordic-canvas: #061e1e;
+}
+html:not([data-theme=readable],[data-theme=contrast]) body.modus-interior {
+  background: var(--nordic-canvas);
+}
+html:not([data-theme=readable],[data-theme=contrast]) .modus-interior :is(
+  .library .article-card:not(.is-closed),.reading-path .article-card,.path-card,
+  .tool-panel,.builder-panel,.selected-panel,.article-quiz
+) {
+  border-color: var(--nordic-edge);
+}
+html:not([data-theme=readable],[data-theme=contrast]) .modus-interior :is(
+  .tool-panel,.builder-panel,.selected-panel,.article-quiz
+) {
+  background-color: var(--nordic-surface);
+}
+.modus-interior .tool-workbench .subpage-hero h1 { font-size: clamp(1.85rem, 3.55vw, 3.35rem) !important; }
+
+@media (max-width: 760px) {
+  .modus-home .home-hero { min-height: 380px !important; padding-block: 34px 62px !important; }
+  .modus-home .home-hero h1 { font-size: clamp(2.6rem, 10vw, 4.8rem) !important; }
+  .modus-home .home-hero .landscape::after {
+    background: linear-gradient(90deg, #031b1ae8, #031b1ab0 62%, #031b1a30),
+      linear-gradient(0deg, #031b1a, transparent 35%) !important;
+  }
+  .modus-home .illustrated-portals { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+  .modus-home .illustrated-portals .home-portal { min-height: 145px; }
+  .modus-home .home-introduction { flex-direction: column; align-items: stretch; }
+  .modus-home .introduction-poster { flex-basis: auto; width: 100%; }
+}
+@media (max-width: 360px) {
+  .modus-home .hero-actions > .button { max-width: 100%; white-space: normal; }
+}
+html:is([data-theme=readable],[data-theme=contrast]) .modus-home .home-hero .landscape::after { background: none !important; }
+
+/* Continuous heroes supply their own picture behind the masthead. */
+html:not([data-theme=readable]):not([data-theme=contrast])
+  body[data-nordic-preview].modus-interior:not([data-shared-landscape],[data-full-study-hero]) > header.site-header {
+  background: linear-gradient(180deg, #041d20, #061e1e) !important;
+}
+html:not([data-theme=readable]):not([data-theme=contrast])
+  body[data-nordic-preview].modus-interior:not([data-shared-landscape],[data-full-study-hero]) > header.site-header::before {
+  background: transparent !important;
+}
+html:not([data-theme=readable],[data-theme=contrast]) body:is(.modus-home,.modus-interior) {
+  background-color: var(--nordic-canvas);
+}
+
+.modus-interior main :is(.about-hero,.account-intro,.membership-hero,.journey-shell > header) h1 {
+  font-family: Manrope, 'DM Sans', sans-serif;
+  font-size: clamp(2rem,4.15vw,4.25rem) !important;
+  letter-spacing: -.045em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+.modus-interior main :is(.account-panel,.account-progress,.membership-details,.billing-panel,.membership-faq,.journey-resume) {
+  border-radius: var(--nordic-radius);
+}
+html:not([data-theme=readable],[data-theme=contrast]) .modus-interior main
+  :is(.account-panel,.membership-details,.billing-panel,.journey-resume) {
+  border-color: var(--nordic-edge);
+}
+
+/* Browsers supporting same-origin view transitions may blend the two content states. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-group(root) { animation-duration: 130ms; }
+}
+
+/* About MODUS gives the founder story an editorial layout of its own. */
+.modus-interior .about-main { padding-inline: var(--nordic-gutter); }
+.modus-interior .about-main .about-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-rows: repeat(3, min-content) 1fr;
+  column-gap: clamp(28px, 5vw, 80px);
+  row-gap: 12px;
+  align-content: center;
+  overflow: visible;
+  margin-block: clamp(25px, 4vw, 64px) 0;
+  padding-block: 0 clamp(24px, 3.2vw, 48px);
+  border-color: var(--line);
+}
+.modus-interior .about-main .about-hero > :not(.about-landscape) {
+  grid-column: 1;
+  min-width: 0;
+  margin: 0;
+}
+.modus-interior .about-main .about-hero h1 {
+  font-size: clamp(2.2rem, 4.4vw, 5rem) !important;
+  text-wrap: initial;
+}
+.modus-interior .about-main .about-hero h1 br { display: none; }
+.modus-interior .about-main .about-hero h1 em { display: block; }
+.modus-interior .about-main .about-lead { font-size: clamp(1rem, 1.35vw, 1.24rem); line-height: 1.65; }
+.modus-interior .about-main .about-signature { font-size: .875rem; }
+.modus-interior .about-main .about-hero > .about-landscape {
+  grid-area: 1 / 2 / 5 / 3;
+  position: relative;
+  inset: auto;
+  z-index: 0;
+  min-height: clamp(240px, 30vw, 440px);
+  opacity: 1;
+  mask-image: none;
+  border: 1px solid var(--line);
+  border-radius: var(--nordic-radius);
+  background: linear-gradient(0deg, #041d1e44, transparent 60%),
+    url('images/a06/modus-design-studies-v2-768.webp') 58% center / cover no-repeat;
+}
+.modus-interior .about-main .about-story {
+  display: block;
+  padding-top: clamp(22px, 4vw, 60px);
+}
+.modus-interior .about-main .about-byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px clamp(16px, 2vw, 30px);
+  align-items: center;
+  padding: 18px clamp(16px, 2.4vw, 34px);
+  border-radius: var(--nordic-radius);
+}
+.modus-interior .about-main .about-story .about-byline :is(.eyebrow,p) { margin: 0; }
+.modus-interior .about-main .about-byline a { margin-inline-start: auto; font-size: .875rem; }
+.modus-interior .about-main .about-reading {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 28px);
+  margin-top: clamp(18px, 2.8vw, 36px);
+  scroll-margin-top: 20px;
+}
+.modus-interior .about-main .about-reading > section {
+  margin: 0;
+  padding: clamp(20px, 3vw, 42px);
+  border: 1px solid var(--line);
+  border-radius: var(--nordic-radius);
+}
+.modus-interior .about-main .about-reading h2 { font-size: clamp(1.4rem, 2.4vw, 2.25rem); line-height: 1.18; }
+.modus-interior .about-main .about-reading p { font-size: .975rem; line-height: 1.75; }
+.modus-interior .about-main .about-reading .about-credit { grid-column: 1 / -1; }
+.modus-interior .about-main .about-explore { border-color: var(--line); }
+.modus-interior .about-main .about-links > a { border-radius: var(--nordic-radius); }
+html:not([data-theme=readable],[data-theme=contrast]) .modus-interior .about-main :is(
+  .about-byline,.about-reading > section,.about-links > a
+) { background: var(--nordic-surface); border-color: var(--nordic-edge); }
+
+@media (max-width: 760px) {
+  .modus-interior .about-main .about-hero,
+  .modus-interior .about-main .about-reading { grid-template-columns: minmax(0, 1fr); }
+  .modus-interior .about-main .about-hero > .about-landscape {
+    grid-area: 5 / 1;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+    margin-top: 10px;
+  }
+  .modus-interior .about-main .about-byline a { margin-inline-start: 0; }
+}
+
+/* Keep filtering and presentation controls in coherent rows during resize. */
+@media (max-width: 1099px) {
+  .articles-page #library > .library-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "search topic" "level level" "layout sort";
+    align-items: end;
+    gap: 14px 16px;
+    padding: clamp(12px, 2vw, 22px);
+    border: 1px solid var(--line);
+    border-radius: var(--nordic-radius);
+    background: var(--panel);
+  }
+  .articles-page #library .article-search { grid-area: search; max-width: none; }
+  .articles-page #library .library-filter:not(:has(.compact-topics)) {
+    grid-area: level;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 6px;
+  }
+  .articles-page #library .library-filter:has(.compact-topics) {
+    grid-area: topic;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+  .articles-page #library .compact-topics summary {
+    width: 100%;
+    min-width: min(180px, 100%);
+  }
+  .articles-page #library .compact-topics[open] .topic-filters {
+    position: absolute;
+    inset: calc(100% + 6px) 0 auto auto;
+    z-index: 5;
+    width: min(270px, 75vw);
+    box-sizing: border-box;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--panel);
+  }
+  .articles-page #library .card-layout-control { grid-area: layout; }
+  .articles-page #library .library-view { grid-area: sort; }
+  .articles-page #library .library-filter:not(:has(.compact-topics)) .filter-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .articles-page #library .filter-row button { justify-content: space-between; }
+}
+@media (max-width: 600px) {
+  .articles-page #library > .library-controls {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "search" "level" "topic" "layout" "sort";
+    gap: 10px;
+  }
+  .articles-page #library .library-filter:not(:has(.compact-topics)) .filter-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .articles-page #library .compact-topics[open] .topic-filters {
+    position: static;
+    width: auto;
+    margin-top: 6px;
+  }
+  .articles-page #library .library-view { justify-content: start; }
+}
+@media (min-width: 601px) and (max-width: 700px) {
+  .articles-page #library .library-filter:not(:has(.compact-topics)) .filter-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Keep the library controls compact while reserving larger mobile targets. */
+.articles-page #library > .library-controls {
+  --library-control-height: 38px;
+}
+.articles-page #library .article-search input,
+.articles-page #library .filter-row button,
+.articles-page #library .compact-topics summary,
+.articles-page #library .card-layout-control button,
+.articles-page #library .library-view button {
+  min-height: var(--library-control-height);
+  padding-block: 7px;
+}
+@media (max-width: 1099px) {
+  .articles-page #library > .library-controls { row-gap: 10px; }
+}
+@media (max-width: 600px), (pointer: coarse) {
+  .articles-page #library > .library-controls { --library-control-height: 40px; }
+}
+
+/* UX-FIX-01 · Keep the existing photograph and shade only the hero's copy area. */
+html:not([data-theme=readable]):not([data-theme=contrast]) .modus-home[data-shared-landscape] .home-hero .landscape::after {
+  background:
+    linear-gradient(90deg, #031918bd, #031918ab min(690px, 75%), transparent 88%)
+      center bottom / 100% calc(100% - var(--home-header-height)) no-repeat,
+    linear-gradient(90deg, #00181745, #001817bd 12%, #001817bd min(630px, 90%), #0018171a max(72%, 760px)),
+    linear-gradient(0deg, #001917, transparent 30%) !important;
+}
+@media (max-width: 760px) {
+  html:not([data-theme=readable]):not([data-theme=contrast]) .modus-home[data-shared-landscape] .home-hero .landscape::after {
+    background:
+      linear-gradient(90deg, #031918bd, #031918a8 72%, #03191873)
+        center bottom / 100% calc(100% - var(--home-header-height)) no-repeat,
+      linear-gradient(90deg, #00181766, #001817ae 10%, #001817a6),
+      linear-gradient(0deg, #001917, transparent 32%) !important;
+  }
+}
+.modus-home .home-hero {
+  --home-hero-ink: #f7fbf8;
+  --home-hero-accent: #ffe04c;
+  --home-hero-action-ink: #071b17;
+  --home-hero-action: #ffe04c;
+  --home-hero-action-hover: #fff08d;
+  --home-hero-secondary-ink: #f7fbf8;
+  --home-hero-secondary: #102b29;
+  --home-hero-secondary-hover: #21443d;
+  --home-hero-secondary-border: #b8d9d2;
+  --home-hero-focus: #f7fbf8;
+}
+html[data-theme=readable] .modus-home[data-nordic-preview] .home-hero .landscape::after {
+  background: linear-gradient(90deg, #eff6f2, #eff6f2f5 min(690px, 76%), #eff6f270 86%, transparent 100%) !important;
+}
+@media (max-width: 760px) {
+  html[data-theme=readable] .modus-home[data-nordic-preview] .home-hero .landscape::after {
+    background: linear-gradient(90deg, #eff6f2, #eff6f2f3 82%, #eff6f2d9) !important;
+  }
+}
+html[data-theme=readable] .modus-home .home-hero {
+  --home-hero-ink: #13332e;
+  --home-hero-accent: #205043;
+  --home-hero-action-ink: #fff;
+  --home-hero-action: #235446;
+  --home-hero-action-hover: #173d34;
+  --home-hero-secondary-ink: #13332e;
+  --home-hero-secondary: #fff;
+  --home-hero-secondary-hover: #e0eee8;
+  --home-hero-secondary-border: #466e60;
+  --home-hero-focus: #13332e;
+}
+html[data-theme=contrast] .modus-home .home-hero {
+  --home-hero-ink: #000;
+  --home-hero-accent: #000;
+  --home-hero-action-ink: #fff;
+  --home-hero-action: #000;
+  --home-hero-action-hover: #262626;
+  --home-hero-secondary-ink: #000;
+  --home-hero-secondary: #fff;
+  --home-hero-secondary-hover: #e6e6e6;
+  --home-hero-secondary-border: #000;
+  --home-hero-focus: #000;
+}
+html .modus-home[data-nordic-preview] .home-hero :is(h1, .home-lead) {
+  color: var(--home-hero-ink) !important;
+}
+html .modus-home[data-nordic-preview] .home-hero h1 em {
+  color: var(--home-hero-accent) !important;
+}
+html .modus-home[data-nordic-preview] .home-hero .hero-actions > .button:first-child {
+  color: var(--home-hero-action-ink) !important;
+  background: var(--home-hero-action) !important;
+  border-color: var(--home-hero-action) !important;
+}
+html .modus-home[data-nordic-preview] .home-hero .hero-actions > .button:first-child:hover {
+  background: var(--home-hero-action-hover) !important;
+}
+html .modus-home[data-nordic-preview] .home-hero .hero-actions > .button-secondary {
+  color: var(--home-hero-secondary-ink) !important;
+  background: var(--home-hero-secondary) !important;
+  border-color: var(--home-hero-secondary-border) !important;
+}
+html .modus-home[data-nordic-preview] .home-hero .hero-actions > .button-secondary:hover {
+  background: var(--home-hero-secondary-hover) !important;
+}
+html .modus-home[data-nordic-preview] .home-hero .hero-actions > .button:focus-visible {
+  outline: 3px solid var(--home-hero-focus) !important;
+  outline-offset: 3px;
+}
+
+/* Keep the high-contrast text area white while showing the original motif. */
+@media (forced-colors: none) {
+  html[data-theme=contrast] .modus-home[data-nordic-preview] .home-hero .landscape {
+    display: block !important;
+    inset: 0 !important;
+  }
+  html[data-theme=contrast] .modus-home[data-nordic-preview] .home-hero .landscape img {
+    filter: grayscale(1);
+  }
+  html[data-theme=contrast] .modus-home[data-nordic-preview] .home-hero .landscape::after {
+    background:
+      linear-gradient(90deg, #fff 30%, #fffffff5 min(680px, 74%), #ffffff33 93%),
+      linear-gradient(0deg, #fff, transparent 28%) !important;
+  }
+}
+@media (forced-colors: none) and (max-width: 760px) {
+  html[data-theme=contrast] .modus-home[data-nordic-preview] .home-hero .landscape::after {
+    background: linear-gradient(90deg, #fff, #fffffff0 62%, #ffffffc9) !important;
+  }
+}
+
+/* Let the mobile reading column shrink below wide tables and figures. */
+@media (max-width: 800px) {
+  .modus-interior .reading-page .reading-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .modus-interior .reading-page .reading-body {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .modus-interior .reading-page .reading-body :is(img, svg, video, iframe) {
+    max-width: 100%;
+  }
+}
+
+/* Compact homepage proposal approved 16 November. */
+.modus-home .home-hero h1 {font-size:clamp(2.5rem,4.15vw,4.6rem)!important;line-height:1.03!important;margin-bottom:1rem!important;}
+ .modus-home .home-hero h1 em {display:inline!important;}
+ @media(min-width:1000px){.modus-home .home-hero h1 {white-space:nowrap;max-width:none!important;}}
+ .modus-home .home-hero h1 span {display:inline;margin-inline-end:.2em;}
+ .modus-home .home-hero {min-height:clamp(305px,25vw,390px)!important;padding-block:42px 62px!important;}
+ .modus-home .home-hero-wave {height:65px!important;}
+ .modus-home .illustrated-portals {padding-bottom:22px!important;}
+ .modus-home .new-philosophy {padding-block:clamp(24px,3vw,46px) clamp(30px,3.6vw,54px)!important;}
+ @media(max-width:760px){
+  .modus-home .home-hero h1 {font-size:clamp(1.85rem,7.7vw,3.2rem)!important;}
+  .modus-home .home-hero {min-height:0!important;padding-block:32px 50px!important;}
+ }
+
+@media (max-width: 350px) {
+  .modus-home .home-hero h1 span:first-child {
+    display: block;
+  }
+}

@@ -1,0 +1,247 @@
+.tool-workbench { width:min(92rem, calc(100% - 2rem)); margin:2rem auto 4rem; color:var(--text,#e9efdf); }
+.tool-workbench .tool-panel { background:var(--surface,#142623); border:1px solid var(--line,#4c6b5d); border-radius:1rem; padding:clamp(1rem,3vw,2rem); }
+.tool-controls,.tool-fields,.tool-actions,.tool-links { display:flex; flex-wrap:wrap; align-items:end; gap:.65rem; }
+.tool-links { margin:0 0 1rem; }
+.tool-controls label,.tool-fields label { display:grid; gap:.3rem; min-width:0; }
+.tool-workbench input,.tool-workbench select,.tool-workbench button { border:1px solid var(--line,#628275); border-radius:.45rem; padding:.5rem .65rem; min-height:44px; max-width:100%; font:inherit; background:var(--surface,#152b26); color:inherit; }
+.tool-workbench button:hover:not(:disabled),.tool-workbench button[aria-pressed=true] { border-color:#fddd47; }
+.tool-workbench button:disabled { opacity:.5; }
+.tool-workbench :is(button,select,input,a,div[tabindex]):focus-visible { outline:3px solid #fddd47; outline-offset:3px; }
+.tool-workbench a { color:inherit; text-decoration:underline; }
+.tool-board { overflow:auto; max-width:100%; border-radius:.6rem; margin:1rem 0; }
+.fretboard { border-collapse:separate; border-spacing:0; width:100%; }
+.fretboard :is(td,th) { text-align:center; border-bottom:1px solid var(--line,#4c6b5d); padding:.3rem; }
+.fretboard th[scope=row] { position:sticky; left:0; background:var(--surface,#142623); z-index:1; white-space:nowrap; }
+.fretboard td { min-width:3.25rem; border-inline-end:1px solid var(--line,#4c6b5d); height:3.2rem; }
+.fretboard button { min-width:2.65rem; padding:.25rem; }
+.fretboard .tool-tonic { background:#fddd47; color:#17271e; }
+.fretboard .tool-character { background:#bce9df; color:#152824; }
+.fretboard .tool-other { border-color:transparent; }
+.tool-legend span { display:inline-block; padding:.1rem .5rem; margin-inline-end:.3rem; color:#17271e; border-radius:.3rem; background:#fddd47; }
+.tool-legend span+span { background:#bce9df; }
+#progression { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr)); gap:.75rem; margin-block:1.25rem; padding-left:1.7rem; }
+#progression li { border:1px solid var(--line,#628275); border-radius:.65rem; padding:1rem; }
+#progression li[aria-current=step] { outline:2px solid #fddd47; }
+#progression h2 { margin:0; }
+.tool-workbench #tool-status { min-height:1.5em; }
+
+.tool-neck { position:relative; min-width:var(--neck-width); background:var(--surface,#152623); }
+.tool-neck svg { display:block; width:100%; height:auto; }
+.tool-neck text { fill:currentColor; text-anchor:middle; dominant-baseline:central; font-size:16px; }
+.tool-neck-edge { fill:#142a25; stroke:#52726a; }
+.tool-wire { stroke:#6e8980; }
+.tool-nut { stroke:#cfdfd5; stroke-width:4; }
+.tool-string { stroke:#93afa1; }
+.tool-inlay { fill:#66847a; }
+.tool-neck .tool-neck-note {
+  position:absolute; transform:translate(-50%,-50%); width:38px; height:38px;
+  min-height:0; padding:0; border-radius:50%; font-size:.94rem; line-height:1;
+}
+.tool-neck .tool-neck-note:focus-visible { z-index:2; }
+.tool-neck .tool-tonic { background:#fddd47; color:#17271e; }
+.tool-neck .tool-character { background:#bce9df; color:#152824; }
+.tool-neck .tool-member { background:#25443a; color:#f1f6e9; }
+.tool-neck .tool-other { background:#172d27; color:#d4e1da; }
+.tool-panel:fullscreen,.tool-panel.tool-fullscreen { background:#081f1d; color:#f0f5eb; overflow:auto; }
+.tool-panel.tool-fullscreen { position:fixed; inset:0; z-index:10000; }
+.fretboard-practice .tool-legend,.fretboard-practice #fret-context { display:none; }
+
+body[data-full-study-hero] main > :is(.subpage-hero, .scale-hero) {
+  width: var(--study-page-width);
+  margin-inline: calc((100% - var(--study-page-width)) / 2);
+  padding-inline: max(6%, calc((var(--study-page-width) - 1440px) / 2)) !important;
+}
+html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-study-hero] > .site-header {
+  background: transparent !important;
+}
+html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-study-hero] > .site-header::before {
+  inset: 0 !important;
+  height: auto !important;
+  background: linear-gradient(180deg, #001918eb, #00191896 48%, #00191850 82%, #00191800) !important;
+}
+html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-study-hero] main > :is(.subpage-hero, .scale-hero) {
+  position: relative;
+  overflow: visible;
+  clip-path: inset(calc(-1 * var(--study-header-height)) 0 0);
+}
+html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-study-hero] main > :is(.subpage-hero, .scale-hero)::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  pointer-events: none;
+  inset: calc(-1 * var(--study-header-height)) 0 0;
+  background:
+    linear-gradient(90deg, #00181745, #001817bd 12%, #001817bd min(700px, 92%), #0018171a max(78%, 800px)),
+    linear-gradient(0deg, #001917, #00191700 28%),
+    url("/images/article-landscape-wide.jpg") center 12% / cover no-repeat;
+}
+html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-study-hero] .scale-library > .scale-hero {
+  background: #001917;
+}
+@media (max-width: 760px) {
+  html:not([data-theme="readable"]):not([data-theme="contrast"]) body[data-full-study-hero] main > :is(.subpage-hero, .scale-hero)::before {
+    background-image: linear-gradient(90deg, #00181766, #001817bd 10%, #001817a6),
+      linear-gradient(0deg, #001917, #00191700 28%),
+      url("/images/article-landscape-wide-960.jpg");
+  }
+}
+@media (forced-colors: active) {
+  body[data-full-study-hero] > .site-header { background: Canvas !important; }
+  body[data-full-study-hero] > .site-header::before,
+  body[data-full-study-hero] .scale-library > .scale-hero::before { display: none; }
+}
+
+/* Match the published Jam workspaces and retain the existing tool state and DOM hooks. */
+.tool-studio-page .tool-workbench {
+  width:100%; max-width:none; margin:0 0 4rem;
+}
+.tool-studio-page .tool-workbench .subpage-hero {
+  min-height:clamp(300px, 29vw, 440px)!important;
+}
+.tool-studio-page .subpage-hero-copy em { text-transform:uppercase; }
+.tool-jam-workspace { width:min(100% - 10%, 1440px); margin-inline:auto; }
+.tool-jam-workspace .tool-links {
+  color:var(--muted,#bdcfca); margin:0 0 1rem;
+  font-size:.9rem; gap:.55rem 1rem;
+}
+.tool-jam-workspace .tool-links a:first-child { display:inline; }
+.tool-jam-grid { display:grid; grid-template-columns:minmax(17rem,.8fr) minmax(0,1.2fr); gap:1rem; align-items:start; }
+.tool-studio-page .tool-panel {
+  --tool-jam-border:var(--modus-b-30372a,#255c57);
+  background:var(--modus-c-1a1d18,#092825); border-color:var(--tool-jam-border); border-radius:1rem;
+  min-width:0;
+}
+.tool-section-label {
+  color:var(--accent,#ffe329); font:600 .75rem/1.4 'DM Sans',sans-serif;
+  text-transform:uppercase; letter-spacing:.14em; margin:0 0 1.15rem;
+}
+.tool-studio-page .tool-controls,.tool-studio-page .tool-fields { gap:.65rem .8rem; }
+.tool-studio-page :is(.tool-controls,.tool-fields) label {
+  color:var(--muted,#bdcfca); font-size:.875rem;
+}
+.tool-studio-page :is(.tool-controls,.tool-fields) :is(input,select) {
+  background:var(--modus-c-20271b,#20251c);
+  color:var(--ink,#f0f0e6); border-color:var(--modus-b-546244,#4e5847);
+}
+.tool-studio-page #tool-actions {
+  border-top:1px solid var(--tool-jam-border); padding-top:1rem; margin-top:1rem;
+}
+.tool-studio-page #tool-actions > button:nth-child(2):not(:disabled),
+.tool-studio-page #tool-controls > button[aria-pressed="true"] {
+  background:#ffe329; color:#152015; border-color:#ffe329; font-weight:700;
+}
+.tool-studio-page #progression {
+  grid-template-columns:repeat(auto-fit,minmax(min(100%, 14rem),1fr));
+  list-style:none; padding:0; margin:0; gap:.65rem;
+}
+.tool-studio-page #progression li {
+  background:var(--modus-c-20271b,#20251c);
+  border-color:var(--modus-b-546244,#45645d);
+}
+.tool-studio-page #progression h2 { color:var(--accent,#ffe329); font-size:clamp(1.2rem,2vw,1.55rem); }
+.tool-studio-page .tool-board { background:var(--modus-c-20271b,#15241f); border:1px solid var(--tool-jam-border); }
+.tool-studio-page .tool-panel:fullscreen { padding:clamp(1rem,3vw,2rem); }
+html:is([data-theme="readable"],[data-theme="contrast"]) .tool-studio-page :is(.tool-panel,.tool-board,#progression li) {
+  background:var(--bg); color:var(--ink); border-color:var(--ink);
+}
+html:is([data-theme="readable"],[data-theme="contrast"]) .tool-studio-page :is(.tool-section-label,#progression h2) { color:var(--ink); }
+@media(max-width:850px) { .tool-jam-grid { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:600px) {
+  .tool-studio-page .tool-workbench .subpage-hero { min-height:300px!important; }
+  .tool-jam-workspace { width:calc(100% - 2rem); }
+}
+.tool-form-info { color:var(--muted,#bdcfca); margin:0 0 .5rem; }
+.tool-neck.is-form { min-width:0; width:100%; max-width:46rem; margin-inline:auto; }
+.tool-neck.is-form svg { height:clamp(240px,44vw,360px); }
+@media(max-width:500px) {
+  .tool-neck.is-form .tool-neck-note { width:29px; height:29px; font-size:.77rem; }
+}
+
+[data-modus-tool="composition-lab"] .tool-jam-grid {
+  grid-template-columns:minmax(0,1fr);
+}
+.lab-palette { margin-bottom:1.15rem; }
+.lab-palette h3 { margin:0 0 .65rem; font-size:1rem; font-weight:600; }
+.lab-chord-options { display:flex; flex-wrap:wrap; gap:.5rem; }
+.tool-studio-page .lab-chord-options button { border-color:var(--accent,#ffe329); }
+.tool-studio-page [data-modus-tool="composition-lab"] #progression {
+  grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:minmax(16rem, 1fr);
+  overflow-x:auto; scroll-snap-type:x proximity; padding:.25rem .3rem .8rem;
+}
+[data-modus-tool="composition-lab"] #progression li { scroll-snap-align:start; min-width:0; }
+.lab-bar-label { color:var(--muted,#bad0c7); margin:0 0 .25rem; font-size:.8rem; }
+.lab-melody { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.35rem; padding:.6rem 0; border:0; margin:.6rem 0; min-width:0; }
+.lab-melody label { display:grid; gap:.3rem; font-size:.8rem; }
+.lab-melody select { width:100%; padding-inline:.3rem; }
+#lab-empty { color:var(--muted,#bad0c7); }
+.tool-studio-page [data-modus-tool="composition-lab"] .subpage-hero { min-height:clamp(245px,22vw,340px)!important; }
+#lab-empty:not([hidden]) { display:flex; align-items:center; flex-wrap:wrap; gap:.65rem; padding:1rem; border:1px dashed var(--line,#44655e); border-radius:.5rem; }
+[data-modus-tool="composition-lab"] #progression details { margin:.8rem 0; }
+[data-modus-tool="composition-lab"] #progression summary { cursor:pointer; margin-bottom:.45rem; }
+
+/* Keep the shared landscape as a short introduction to the workbench. */
+.tool-studio-page .tool-workbench[data-modus-tool] > .subpage-hero {
+  min-height:155px!important;
+  padding-block:18px 34px!important;
+  margin-block:0!important;
+}
+.tool-studio-page .tool-workbench[data-modus-tool] > .subpage-hero h1 {
+  font-size:clamp(30px,3.25vw,50px)!important;
+  margin-block:0 .35rem!important;
+}
+.tool-studio-page .tool-workbench[data-modus-tool] > .subpage-hero p {
+  margin:0!important; line-height:1.5!important;
+}
+.tool-studio-page .tool-workbench[data-modus-tool] > .subpage-hero::after {
+  height:90px!important; bottom:0!important; opacity:.48;
+}
+.tool-studio-page .tool-jam-workspace {
+  position:relative; z-index:2; margin-top:-17px;
+}
+.tool-studio-page .tool-jam-workspace .tool-links {
+  margin:0 0 .45rem; padding:.4rem .65rem;
+  border-radius:.5rem; background:var(--panel,#0a2825);
+}
+.tool-studio-page .tool-jam-workspace .tool-panel { padding:clamp(.65rem,1.45vw,1.3rem); }
+.tool-studio-page .tool-jam-workspace .tool-section-label { margin-bottom:.55rem; }
+.tool-studio-page .tool-jam-grid { gap:.6rem; }
+.tool-studio-page .tool-workbench #tone-set { margin:.45rem 0; }
+.tool-studio-page .tool-workbench #tool-actions { padding-top:.6rem; margin-top:.6rem; }
+.tool-studio-page .tool-workbench #tool-status { margin:.45rem 0 0; }
+.tool-studio-page .tool-workbench #tool-status:empty { display:none; }
+.tool-studio-page .tool-board { margin:.55rem 0 0; }
+.tool-studio-page [data-modus-tool="composition-lab"] .lab-palette { margin-bottom:.6rem; }
+@media(max-width:600px) {
+  .tool-studio-page .tool-workbench[data-modus-tool] > .subpage-hero {
+    min-height:0!important; padding:15px 1rem 25px!important;
+  }
+  .tool-studio-page .tool-workbench[data-modus-tool] > .subpage-hero h1 {
+    font-size:clamp(25px,7vw,34px)!important;
+  }
+  .tool-studio-page .tool-workbench[data-modus-tool] > .subpage-hero p {
+    font-size:.86rem!important;
+  }
+  .tool-studio-page .tool-jam-workspace { margin-top:-12px; }
+  .tool-studio-page .tool-controls { gap:.45rem; }
+  .tool-studio-page .tool-legend { margin:.45rem 0; }
+}
+html:is([data-theme="readable"],[data-theme="contrast"]) .tool-studio-page .tool-jam-workspace {
+  margin-top:.5rem;
+}
+
+/* The SVG and the note positions share the same percentage coordinates. */
+#fretboard-scroll .tool-neck:not(.is-form) {
+  min-width:0;
+  width:100%;
+  container-type:inline-size;
+}
+#fretboard-scroll .tool-neck:not(.is-form) svg {
+  height:max(145px, var(--fretboard-height));
+}
+#fretboard-scroll .tool-neck:not(.is-form) .tool-neck-note {
+  /* Keep the circles within the narrowest intervals near the last fret. */
+  --note-size:min(38px, var(--fretboard-note));
+  width:var(--note-size);
+  height:var(--note-size);
+  font-size:calc(var(--note-size) * .52);
+}

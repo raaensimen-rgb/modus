@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /redaktor
+Disallow: /konto
+Disallow: /en/redaktor
+Disallow: /en/konto
+
+Sitemap: https://modusmusic.no/sitemap.xml

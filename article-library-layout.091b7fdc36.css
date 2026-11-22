@@ -1,0 +1,45 @@
+/* P0/P1: compact overview, existing illustrations and complete reader content. */
+#library .article-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:stretch}
+#library .article-card{min-width:0;border-radius:14px;transform:none}
+#library .article-card[hidden]{display:none}
+#library .card-main{min-width:0}
+#library .card-level-row{padding:10px 12px;min-height:0}
+#library .level-badge{max-width:100%;font-size:11px;line-height:1.35;white-space:normal}
+#library .card-art{aspect-ratio:3/2;display:grid;place-items:center;background:var(--panel-deep,var(--bg));height:auto}
+#library .card-art img{display:block;width:100%;height:100%;object-fit:contain;max-height:none}
+#library .card-copy{padding:12px;min-width:0;gap:0}
+#library .card-meta{font-size:12px;line-height:1.5;gap:6px;flex-wrap:wrap;margin-bottom:8px;overflow-wrap:anywhere}
+#library .card-meta span:last-child{white-space:nowrap}
+#library .article-card h2{font-size:16px;line-height:1.4;letter-spacing:0;font-weight:600;margin:0 0 10px;overflow-wrap:anywhere;hyphens:auto}
+#library .article-card p{font-size:13px;line-height:1.65;margin:0 0 14px;overflow-wrap:anywhere}
+#library:not([data-card-layout=list]) .article-card p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+#library .read-more{min-height:44px;font-size:13px;line-height:1.5;padding-top:10px;align-items:center;gap:6px}
+#library .card-quiz{padding:0 12px 10px;display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;line-height:1.5;min-width:0}
+#library .card-quiz a{min-height:44px;align-items:center}
+#library .card-main:focus-visible,#library .card-quiz a:focus-visible{outline:3px solid var(--accent);outline-offset:-4px;border-radius:8px}
+#library .card-layout-control{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;margin-bottom:18px}
+#library .card-layout-control[hidden]{display:none}
+#library .card-layout-control>span{font-size:13px;color:var(--ink)}
+#library .card-layout-control [role=group]{display:flex;flex-wrap:wrap;gap:8px}
+#library .card-layout-control button{min-width:88px;min-height:44px;padding:10px 16px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);font:inherit;font-size:14px;font-weight:600;line-height:1.5;cursor:pointer}
+#library .card-layout-control button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+#library .card-layout-control button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#library[data-card-layout=list] .article-grid{grid-template-columns:minmax(0,1fr)}
+#library[data-card-layout=list] .card-main{display:grid;grid-template-columns:minmax(100px,24%) minmax(0,1fr);align-content:start}
+#library[data-card-layout=list] .card-level-row{grid-column:1/-1}
+#library[data-card-layout=list] .card-art{margin:0 0 12px 12px;border:0;align-self:start}
+#library[data-card-layout=list] .card-copy{padding-top:0}
+#library[data-card-layout=list] .article-card p{display:block;overflow:visible}
+#library[data-card-layout=list] .card-quiz{justify-content:flex-end}
+@media(max-width:359px){#library .article-grid{grid-template-columns:minmax(0,1fr)}#library .article-card h2{font-size:18px}#library[data-card-layout=list] .card-main{display:flex}#library[data-card-layout=list] .card-art{margin:0;aspect-ratio:2/1}#library[data-card-layout=list] .card-copy{padding:12px}}
+@media(min-width:700px){#library .article-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}#library .card-copy{padding:16px}#library .article-card h2{font-size:18px}#library:not([data-card-layout=list]) .article-card p{-webkit-line-clamp:4}#library .card-level-row{padding:12px 16px}#library .card-quiz{padding:0 16px 12px}}
+@media(min-width:1000px){#library .article-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}#library:not([data-card-layout=list]) .article-card p{-webkit-line-clamp:6}}
+@media(forced-colors:active){#library .card-layout-control button[aria-pressed=true]{border:3px solid Highlight;background:Canvas;color:CanvasText}#library .article-card{border:1px solid CanvasText}}
+/* A fixed illustration viewport must not inherit a square image's intrinsic height. */
+#library .card-art{display:block;position:relative}
+#library .card-art img{position:absolute;inset:0}
+/* Reading-order markers belong outside the diagram, never over its notes or title. */
+#library .article-card .card-art::after{display:none}
+#library .article-category[data-category^="reading-"] .card-level-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+#library .article-category[data-category^="reading-"] .card-level-row .level-badge{max-width:calc(100% - 30px)}
+#library .article-category[data-category^="reading-"] .card-level-row::after{content:counter(modus-reading-step,decimal-leading-zero);flex:none;font-size:12px;font-weight:600;color:var(--ink)}

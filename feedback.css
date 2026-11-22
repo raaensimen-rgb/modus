@@ -1,0 +1,49 @@
+/* MODUS floating visitor feedback — deliberately separate from site navigation. */
+.modus-feedback{position:fixed;right:clamp(12px,2.5vw,32px);bottom:clamp(12px,2.5vw,28px);z-index:7000;font-family:inherit;color:#ebf2e8}
+.modus-feedback *{box-sizing:border-box}
+.modus-feedback-toggle{display:flex;align-items:center;gap:10px;max-width:calc(100vw - 24px);border:1px solid rgba(171,222,124,.35);border-radius:999px;background:#17251e;color:#e9f2e5;padding:12px 17px;box-shadow:0 10px 38px rgba(0,0,0,.35);cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;line-height:1.2}
+.modus-feedback-toggle:hover,.modus-feedback-toggle:focus-visible{background:#26372a;border-color:#b6ed80}
+.modus-feedback-toggle svg{width:19px;height:19px;fill:none;stroke:#b9ea83;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.modus-feedback-panel{width:min(366px,calc(100vw - 24px));max-height:min(660px,calc(100dvh - 88px));overflow:auto;margin-bottom:10px;padding:22px;border:1px solid rgba(185,234,131,.25);border-radius:17px;background:#15211b;box-shadow:0 18px 60px rgba(0,0,0,.5);color:#e9f2e5}
+.modus-feedback-panel[hidden]{display:none!important}
+.modus-feedback-heading{display:flex;align-items:start;justify-content:space-between;gap:10px;margin-bottom:15px}
+.modus-feedback-heading strong{font-size:19px;letter-spacing:-.4px}
+.modus-feedback-heading p,.modus-feedback-note{color:#b6c5b6;font-size:12px;line-height:1.6;margin:5px 0 0}
+.modus-feedback-close{cursor:pointer;color:#dee9d9;background:transparent;border:0;font-size:22px;line-height:1}
+.modus-feedback-form label{display:block;margin:13px 0 6px;font-size:12px;font-weight:650;color:#d5e4cf}
+.modus-feedback-form select,.modus-feedback-form textarea,.modus-feedback-form input:not([name="website"]){display:block;width:100%;padding:11px 12px;background:#202d24;color:#f5f7f0;border:1px solid #4d634f;border-radius:8px;font:inherit;font-size:14px}
+.modus-feedback-form textarea{min-height:115px;resize:vertical}
+.modus-feedback-form :is(select,textarea,input):focus-visible{outline:2px solid #b6ed80;outline-offset:2px}
+.modus-feedback-form [name="website"]{position:absolute!important;left:-10000px!important;width:1px;height:1px;opacity:0;pointer-events:none}
+.modus-feedback-send{display:block;margin-top:16px;padding:12px 16px;width:100%;background:#c7ed91;color:#17221a;border:0;border-radius:8px;font-family:inherit;font-size:13px;font-weight:750;line-height:1.2;cursor:pointer}
+.modus-feedback-send:hover{background:#d8f5b5}.modus-feedback-send:disabled{opacity:.55;cursor:wait}
+.modus-feedback-status{font-size:12px;line-height:1.5;margin:12px 0 0;color:#d2ead0}
+.modus-feedback-status[data-error="true"]{color:#ffc4b9}
+@media(max-width:620px){.modus-feedback{right:12px;bottom:12px}.modus-feedback-toggle{padding:12px}.modus-feedback-toggle span{font-size:12px}.modus-feedback-panel{padding:18px}}
+@media(prefers-reduced-motion:no-preference){.modus-feedback-panel{animation:modus-feedback-in .18s ease-out}@keyframes modus-feedback-in{from{opacity:.6;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}}
+
+
+/* Global help button shares the contact widget's footer-aware position. */
+.modus-feedback-actions{display:flex;justify-content:flex-end;align-items:center;gap:10px}
+.modus-help-toggle{display:grid;place-items:center;width:44px;height:44px;flex:0 0 44px;border:1px solid rgba(171,222,124,.45);border-radius:50%;background:#17251e;color:#d6eeaa;font:700 21px/1 'DM Sans',sans-serif;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.25)}
+.modus-help-toggle:hover,.modus-help-toggle[aria-expanded='true']{border-color:#b6ed80;background:#26372a}
+.modus-help-toggle:focus-visible{outline:2px solid #b6ed80;outline-offset:3px}
+.modus-help-panel{width:min(350px,calc(100vw - 24px));max-height:min(520px,calc(100dvh - 110px));overflow:auto;margin:0 0 10px auto;padding:20px 22px;border:1px solid #50694f;border-radius:15px;background:#18251d;color:#eaf1e5;box-shadow:0 18px 54px rgba(0,0,0,.38)}
+.modus-help-panel[hidden]{display:none!important}
+.modus-help-panel>strong{display:block;font-size:17px;margin-bottom:13px}
+.modus-help-panel dl{margin:0}
+.modus-help-panel dt{font-size:13px;font-weight:700;color:#d6eeaa;margin-top:14px}
+.modus-help-panel dd{font-size:12px;line-height:1.65;color:#d4dfd0;margin:4px 0 0}
+html[data-theme='readable'] .modus-help-panel{background:#f4f5f1;color:#1b2a20;border-color:#8c9b86}
+html[data-theme='readable'] .modus-help-panel dt{color:#245b34}
+html[data-theme='readable'] .modus-help-panel dd{color:#43533b}
+@media(max-width:620px){.modus-feedback-actions{gap:8px}.modus-help-toggle{width:42px;height:42px;flex-basis:42px}.modus-help-panel{padding:17px 19px}}
+
+
+/* Small contextual explanations, positioned near the relevant control. */
+.modus-context-tip{position:fixed;z-index:7100;width:max-content;max-width:min(290px,calc(100vw - 24px));padding:11px 14px;border:1px solid #64835a;border-radius:9px;background:#18251d;color:#edf4e9;font:500 12px/1.6 'DM Sans',sans-serif;box-shadow:0 9px 28px #0005;pointer-events:none}
+.modus-context-tip[hidden]{display:none!important}
+.modus-help-toggle[aria-pressed='true']{background:#d7f48c;color:#18251d;border-color:#d7f48c}
+.modus-context-help-active :is(button,select,a,input):focus-visible{outline-offset:3px}
+html[data-theme='readable'] .modus-context-tip{background:#f4f5f1;color:#1b2a20;border-color:#8c9b86}
+html[data-theme='readable'] .modus-help-toggle[aria-pressed='true']{background:#b8d49f;color:#183522}

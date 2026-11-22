@@ -1,0 +1,10 @@
+#library .card-art.vis-art img { object-fit:cover; object-position:center; }
+#library .vis-art-focus {
+ position:absolute; inset:auto auto .65rem .65rem; z-index:1; max-width:calc(100% - 1.3rem);
+ padding:.24rem .48rem; border:1px solid #75968b; border-radius:.28rem;
+ background:#061c1bed; color:#ffe329; font-size:clamp(.66rem,1.02vw,.88rem); font-weight:600;
+}
+#library[data-card-layout="list"] .vis-art-focus { display:none; }
+@media(max-width:480px){#library .vis-art-focus{inset:auto auto .4rem .4rem}}
+#library .card-art.vis-art-mode img { object-fit:contain; }
+#library .card-art.vis-art-mode { background:#0b302c; }

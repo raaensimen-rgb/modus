@@ -1,0 +1,106 @@
+/* Article catalog presentation. Keep the existing filters, groups and cards. */
+.modus-interior .articles-hero.library-hero {
+  min-height: clamp(158px, 16vw, 240px);
+  padding-block: clamp(18px, 3.2vw, 44px);
+}
+
+.modus-interior main .library-hero h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(2.2rem, 5vw, 4.6rem) !important;
+  font-weight: 400;
+  letter-spacing: -.025em;
+  margin-block-end: .25em;
+}
+
+.modus-interior .library-hero .library-hero-copy > p:not(.eyebrow) {
+  margin-block-end: 1rem;
+}
+
+.modus-interior .library-hero-wave-frame {
+  display: none;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) .modus-interior .library-hero .articles-landscape::after {
+  background: linear-gradient(90deg, #042021f5, #042021b3 37%, #04202105 76%),
+    linear-gradient(0deg, #061e1e, transparent 52%);
+}
+
+#library .library-controls {
+  gap: .5rem 1rem;
+  padding: clamp(12px, 1.65vw, 21px);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+#library :is(.article-group, .library-routes) {
+  scroll-margin-block-start: 1rem;
+}
+
+#library .article-group h3,
+#library .article-card h2 {
+  font-family: Georgia, serif;
+}
+
+#library .article-card {
+  border-radius: 14px;
+  box-shadow: none;
+}
+
+#library .article-card .card-art {
+  overflow: hidden;
+}
+
+#library [hidden] {
+  display: none !important;
+}
+
+#library .article-card .card-quiz-status {
+  color: var(--ink);
+}
+
+/* Keep status text legible even when the card's action is unavailable. */
+#library .article-card > .card-quiz:has(.card-quiz-status) {
+  opacity: 1;
+  filter: none;
+}
+
+/* A shallower landscape and one compact control surface keep the catalog above the fold. */
+.modus-interior .library-hero .eyebrow {
+  margin-block-end: .65rem;
+}
+
+#library .article-search input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+}
+
+#library .category-header h3 {
+  font: 400 clamp(1.3rem, 2.3vw, 1.9rem)/1.2 Georgia, serif;
+}
+
+#library:not([data-card-layout="list"]) .article-card .card-main {
+  display: flex;
+  flex-direction: column;
+}
+
+#library:not([data-card-layout="list"]) .article-card .card-art {
+  order: -1;
+  border-radius: 13px 13px 0 0;
+  margin: 0;
+}
+
+#library:not([data-card-layout="list"]) .article-card .card-art img {
+  display: block;
+  width: 100%;
+}
+
+#library .article-card .card-copy h2 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  line-height: 1.24;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) #library :is(.article-card, .library-controls) {
+  background: linear-gradient(145deg, #0d3336, #082426);
+}
