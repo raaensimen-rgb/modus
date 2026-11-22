@@ -141,17 +141,21 @@
       picker.querySelectorAll('select')[4].disabled=!!form;
       toggle.disabled=!!form;
       const width = compact ? 400 : form ? 650 : first === 0 && last === 24 ? 1800 : 1200;
-      const height = 390, left = compact ? 17 : 65, nut = compact ? 25 : 132;
-      const right = width - (compact ? 5 : 24);
+      const height = 390, left = compact ? 17 : 52, nut = compact ? 25 : 110;
+      const right = width - (compact ? 5 : 18);
       const physical=fret=>1-2**(-fret/12);
-      const origin=physical(Math.max(0,first-1)), span=physical(last)-origin;
-      const wire = fret => nut + (right - nut) * (compact ? fret / last : (physical(fret) - origin) / span);
-      const centre=fret=>fret===0?(left+nut)/2:(wire(fret-1)+wire(fret))/2;
-      const y=(x,string)=>{
-        const fullPosition=origin+(x-nut)/(right-nut)*span;
-        return 80+(string-1)*43+fullPosition*(-32+(string-1)*13);
+      const startFret = Math.max(0, first - 1);
+      const origin = physical(startFret), span = physical(last) - origin;
+      const wire = fret => {
+        if (compact) return nut + (right - nut) * fret / last;
+        const physicalProgress = (physical(fret) - origin) / span;
+        const evenProgress = (fret - startFret) / (last - startFret);
+        // Keep the guitar's decreasing fret spacing while giving high frets more room.
+        return nut + (right - nut) * (.76 * physicalProgress + .24 * evenProgress);
       };
-      const top=x=>y(x,1)-23, bottom=x=>y(x,6)+23;
+      const centre=fret=>fret===0?(left+nut)/2:(wire(fret-1)+wire(fret))/2;
+      const y = string => 69 + (string - 1) * 49;
+      const top = y(1) - 23, bottom = y(6) + 23;
       const frets=Array.from({length:last-first+1},(_,i)=>first+i);
       const line=(css,x1,y1,x2,y2,extra='')=>`<line class="${css}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" ${extra}/>`;
       const text=(x,y,label)=>`<text x="${x}" y="${y}">${label}</text>`;
@@ -162,15 +166,15 @@
       neck.classList.toggle('fretboard-fit', compact);
       neck.style.setProperty('--neck-width',width+'px');
       neck.style.setProperty('--fretboard-height', (100*height/width)+'cqw');
-      neck.style.setProperty('--fretboard-note', (100*30/width)+'cqw');
+      neck.style.setProperty('--fretboard-note', (100*35/width)+'cqw');
       const inlays=[3,5,7,9,12,15,17,19,21,24].filter(f=>frets.includes(f)).flatMap(f=>
-        (f%12===0?[2.5,4.5]:[3.5]).map(string=>`<circle class="tool-inlay" cx="${centre(f)}" cy="${y(centre(f),string)}" r="5"/>`));
+        (f%12===0?[2.5,4.5]:[3.5]).map(string=>`<circle class="tool-inlay" cx="${centre(f)}" cy="${y(string)}" r="5"/>`));
       neck.innerHTML=`<svg aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 ${width} ${height}">
-        <path class="tool-neck-edge" d="M ${nut} ${top(nut)} L ${right} ${top(right)} L ${right} ${bottom(right)} L ${nut} ${bottom(nut)} Z"/>
+        <path class="tool-neck-edge" d="M ${nut} ${top} L ${right} ${top} L ${right} ${bottom} L ${nut} ${bottom} Z"/>
         ${inlays.join('')}
-        ${line(first===0?'tool-nut':'tool-wire',nut,top(nut),nut,bottom(nut))}
-        ${frets.filter(f=>f>0).map(f=>line('tool-wire',wire(f),top(wire(f)),wire(f),bottom(wire(f)),`data-fret-wire="${f}"`)).join('')}
-        ${strings.map((name,i)=>text(compact ? 12 : 28,y(left,i+1),name)+line('tool-string',first===0?left:nut,y(first===0?left:nut,i+1),right,y(right,i+1),`style="stroke-width:${1+i*.24}"`)).join('')}
+        ${line(first===0?'tool-nut':'tool-wire',nut,top,nut,bottom)}
+        ${frets.filter(f=>f>0).map(f=>line('tool-wire',wire(f),top,wire(f),bottom,`data-fret-wire="${f}"`)).join('')}
+        ${strings.map((name,i)=>text(compact ? 12 : 28,y(i+1),name)+line('tool-string',first===0?left:nut,y(i+1),right,y(i+1),`style="stroke-width:${1+i*.24}"`)).join('')}
         ${frets.map(f=>text(centre(f),height-26,f)).join('')}
         </svg>`;
       const chromatic=model.roots.slice(0,12);
@@ -185,7 +189,7 @@
           key.className='tool-neck-note '+(note?.root?'tool-tonic':note?.character?'tool-character':note?'tool-member':'tool-other');
           key.setAttribute('aria-label',description);
           key.style.left=(100*centre(fret)/width)+'%';
-          key.style.top=(100*y(centre(fret),index+1)/height)+'%';
+          key.style.top=(100*y(index+1)/height)+'%';
           key.dataset.midi=midi;key.dataset.fret=fret;key.dataset.string=index+1;
           neck.append(key);
         }

@@ -16,12 +16,15 @@
   const t = (nb, en) => english ? en : nb;
 
   function group(title, ...items) {
+    const card = document.createElement('div');
     const fieldset = document.createElement('fieldset');
     const heading = document.createElement('legend');
+    card.className = 'fretboard-settings-card';
     fieldset.className = 'fretboard-settings';
     heading.textContent = title;
     fieldset.append(heading, ...items);
-    return fieldset;
+    card.append(fieldset);
+    return card;
   }
 
   const tuning = document.createElement('p');

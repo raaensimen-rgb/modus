@@ -51,8 +51,8 @@
 .fretboard-layout #tool-controls {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, .7fr) minmax(0, 1.45fr) max-content;
-  align-items: start;
-  gap: .45rem 1rem;
+  align-items: stretch;
+  gap: .65rem;
 }
 
 .fretboard-layout .fretboard-settings {
@@ -60,19 +60,27 @@
   flex-wrap: wrap;
   align-content: start;
   align-items: end;
-  gap: .15rem .45rem;
+  gap: .35rem .45rem;
   min-width: 0;
   margin: 0;
   padding: 0;
   border: 0;
 }
 
+.fretboard-layout .fretboard-settings-card {
+  min-width: 0;
+  padding: .7rem .8rem;
+  border: 1px solid var(--tool-jam-border);
+  border-radius: .65rem;
+}
+
 .fretboard-layout .fretboard-settings legend {
   float: left;
   width: 100%;
   padding: 0;
+  margin-block-end: .15rem;
   color: var(--ink, inherit);
-  font-size: .8rem;
+  font-size: .9rem;
   font-weight: 600;
 }
 
@@ -82,7 +90,7 @@
   font-size: .75rem;
 }
 
-.fretboard-layout .fretboard-settings:nth-child(3) label {
+.fretboard-layout .fretboard-settings-card:nth-child(3) label {
   flex-basis: calc(50% - .225rem);
 }
 
@@ -121,6 +129,13 @@
   color: #fff0af;
   box-shadow: none;
   font-weight: 700;
+}
+
+@media (min-width: 761px) {
+  [data-modus-tool="fretboard"] .fretboard-layout #fretboard-scroll {
+    margin-inline: -.55rem;
+    max-width: none;
+  }
 }
 
 /* Keep every fret range inside the same scrollable board width. */
@@ -165,15 +180,16 @@ html:not([data-theme="readable"]):not([data-theme="contrast"]) [data-modus-tool=
   background: #0a2023;
 }
 
-html:not([data-theme="readable"]):not([data-theme="contrast"]) .fretboard-layout .fretboard-settings {
+html:not([data-theme="readable"]):not([data-theme="contrast"]) .fretboard-layout .fretboard-settings-card {
   --panel-tint: #b2c6bc;
+  background: #10292c;
 }
 
-html:not([data-theme="readable"]):not([data-theme="contrast"]) .fretboard-layout .fretboard-settings:nth-child(2) {
+html:not([data-theme="readable"]):not([data-theme="contrast"]) .fretboard-layout .fretboard-settings-card:nth-child(2) {
   --panel-tint: #bac29f;
 }
 
-html:not([data-theme="readable"]):not([data-theme="contrast"]) .fretboard-layout .fretboard-settings:nth-child(3) {
+html:not([data-theme="readable"]):not([data-theme="contrast"]) .fretboard-layout .fretboard-settings-card:nth-child(3) {
   --panel-tint: var(--fretboard-character);
 }
 
