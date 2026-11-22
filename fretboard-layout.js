@@ -40,42 +40,70 @@
     group(t('Stemming', 'Tuning'), tuning)
   );
 
-  const scaleSummary = document.createElement('section');
-  const scaleTitle = document.createElement('h3');
-  const scaleLabel = document.createElement('span');
-  const scaleName = document.createElement('strong');
-  const scaleDegrees = document.createElement('ul');
-  scaleSummary.className = 'fretboard-scale-summary';
-  scaleSummary.setAttribute('aria-labelledby', 'fretboard-scale-title');
-  scaleTitle.id = 'fretboard-scale-title';
-  scaleLabel.textContent = t('Skala', 'Scale');
-  scaleDegrees.setAttribute('aria-label', t('Skalaformel og toner', 'Scale formula and notes'));
-  scaleTitle.append(scaleLabel, scaleName);
-  scaleSummary.append(scaleTitle, scaleDegrees);
+  function summaryRow(id, label, listLabel) {
+    const section = document.createElement('section');
+    const title = document.createElement('h3');
+    const caption = document.createElement('span');
+    const name = document.createElement('strong');
+    const list = document.createElement('ul');
+    section.className = 'fretboard-scale-summary';
+    section.setAttribute('aria-labelledby', id);
+    title.id = id;
+    caption.textContent = label;
+    list.setAttribute('aria-label', listLabel);
+    title.append(caption, name);
+    section.append(title, list);
+    return { section, name, list };
+  }
+
+  function summaryTile(degree, text, tonic) {
+    const tile = document.createElement('li');
+    const heading = document.createElement('strong');
+    const value = document.createElement('span');
+    tile.classList.toggle('is-tonic', tonic);
+    heading.textContent = degree;
+    value.textContent = text;
+    tile.append(heading, value);
+    return tile;
+  }
+
+  const scaleSummary = summaryRow('fretboard-scale-title', t('Skala', 'Scale'),
+    t('Skalaformel og toner', 'Scale formula and notes'));
+  const chordSummary = summaryRow('fretboard-chords-title', t('Akkorder', 'Chords'),
+    t('Romertall og akkordnavn', 'Roman numerals and chord names'));
+  chordSummary.name.textContent = t('Treklanger', 'Triads');
 
   function updateScaleSummary() {
+    const model = window.ModusTools;
     const tonic = root.value;
     const mode = scale.value;
     const name = scale.selectedOptions[0].textContent;
-    scaleName.textContent = mode === 'ionian'
+    scaleSummary.name.textContent = mode === 'ionian'
       ? t(tonic + '-dur (ionisk)', tonic + ' major (Ionian)')
       : mode === 'major' ? t(tonic + '-dur', tonic + ' major') : tonic + ' ' + name;
 
-    scaleDegrees.replaceChildren(...window.ModusTools.scale(tonic, mode).map(tone => {
-      const tile = document.createElement('li');
-      const degree = document.createElement('strong');
-      const note = document.createElement('span');
-      tile.classList.toggle('is-tonic', tone.root);
-      degree.textContent = tone.degree;
-      note.textContent = tone.name;
-      tile.append(degree, note);
-      return tile;
+    const tones = model.scale(tonic, mode);
+    scaleSummary.list.replaceChildren(...tones.map(tone =>
+      summaryTile(tone.degree, tone.name, tone.root)));
+    chordSummary.list.replaceChildren(...tones.map((tone, index) => {
+      const intervals = [0, 2, 4].map(step => model.mod(tones[(index + step) % tones.length].pc - tone.pc));
+      const quality = ['maj', 'min', 'dim', 'aug'].find(id =>
+        model.qualities[id][3].every((interval, position) => interval === intervals[position]));
+      const [suffix] = model.qualities[quality];
+      const { roman } = model.analyze({root: model.roots[tone.pc], quality}, tonic, mode);
+      return summaryTile(roman, tone.name + suffix, tone.root);
     }));
+  }
+
+  function updateToneSetVisibility() {
+    toneSet.hidden = noteSet.value === 'scale';
   }
 
   root.addEventListener('change', updateScaleSummary);
   scale.addEventListener('change', updateScaleSummary);
+  noteSet.addEventListener('change', updateToneSetVisibility);
   updateScaleSummary();
+  updateToneSetVisibility();
 
   const skip = document.createElement('a');
   skip.className = 'fretboard-skip';
@@ -93,7 +121,7 @@
 
   const notes = document.createElement('div');
   notes.className = 'fretboard-notes';
-  notes.append(toneSet, legend, context, status);
-  board.after(scrollHint, notes, controls, scaleSummary);
+  notes.append(scaleSummary.section, chordSummary.section, toneSet, legend, context, status);
+  board.after(scrollHint, notes, controls);
   workspace.classList.add('fretboard-layout');
 }());

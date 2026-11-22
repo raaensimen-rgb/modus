@@ -60,7 +60,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: .6rem 1.25rem;
-  margin-block-start: .55rem;
+  grid-column: 1 / -1;
   padding: .55rem .65rem;
   border: 1px solid var(--tool-jam-border);
   border-radius: .45rem;
@@ -93,6 +93,7 @@
   display: grid;
   place-content: center;
   min-width: 2.35rem;
+  box-sizing: border-box;
   min-height: 2.6rem;
   margin: 0;
   padding: .15rem .25rem;
