@@ -40,6 +40,10 @@
     }
 
     const page = body.getBoundingClientRect();
+    if (approvedScene) {
+      const continuationStart = approvedScene.getBoundingClientRect().bottom - page.top - 96;
+      body.style.setProperty('--approved-continuation-start', px(continuationStart));
+    }
     const fill = Math.max(0, page.bottom - lowerBounds.bottom);
     // Show only the portion below the horizon. Both crops use exactly the same horizontal mapping.
     const waterHeight = lowerBounds.height / 0.465;
@@ -50,6 +54,8 @@
   }
 
   const observer = new ResizeObserver(update);
-  for (const element of [body, header, hero, lower, intro]) observer.observe(element);
+  for (const element of [body, header, hero, approvedScene, lower, intro]) {
+    if (element) observer.observe(element);
+  }
   update();
 })();

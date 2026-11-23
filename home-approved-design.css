@@ -299,19 +299,6 @@ html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home .appr
   display: flow-root;
 }
 
-html:not([data-theme="readable"], [data-theme="contrast"]) .approved-middle::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: -12px 0;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgb(3 25 24 / 25%), rgb(3 25 24 / 65%)),
-    url("/images/modus-landskap-3d-2026-11-22.webp") center 73% / cover;
-  filter: blur(13px);
-  mask-image: linear-gradient(transparent, #000 19%, #000 69%, transparent);
-}
-
 .modus-home .approved-middle :is(.approved-explore, .approved-latest) li a {
   background: rgb(5 28 27 / 82%);
 }
@@ -320,9 +307,15 @@ html:is([data-theme="readable"], [data-theme="contrast"]) .modus-home .approved-
   background: var(--bg);
 }
 
-/* The blurred middle backdrop replaces the stretched lower landscape on this homepage. */
-html body.modus-home[data-landscape-extension]:has(.approved-middle)::before {
-  content: none;
+/* Continue the original hero with a generated, separately cropped lake foreground. */
+html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home[data-landscape-extension]:has(.approved-middle)::before {
+  inset: var(--approved-continuation-start, 45vh) 0 0;
+  background:
+    linear-gradient(180deg, rgb(5 26 27 / 32%), rgb(5 26 27 / 38%) 50%, rgb(5 26 27 / 24%)),
+    url("/images/modus-lake-continuation.jpg") 82% top / cover no-repeat;
+  mask-image: linear-gradient(transparent, #000 150px);
+  transform: none;
+  filter: blur(4px);
 }
 
 .modus-home .home-lower-landscape:has(.approved-middle) .home-philosophy > picture[data-a06-background] {
