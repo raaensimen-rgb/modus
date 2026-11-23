@@ -1,0 +1,257 @@
+.modus-home main .approved-hero.home-hero {
+  justify-content: flex-end;
+  min-height: clamp(250px, 32vw, 460px) !important;
+  padding: 50px 5% 38px !important;
+  isolation: isolate;
+}
+
+.modus-home .approved-hero .hero-content {
+  width: min(100%, 72rem);
+  margin-inline: auto;
+  text-align: center;
+}
+
+html .modus-home .approved-hero #welcome {
+  position: static;
+  width: auto;
+  height: auto;
+  max-width: none;
+  clip-path: none;
+  overflow: visible;
+  white-space: normal;
+  margin-inline: auto;
+  font: 500 clamp(1.85rem, 4.8vw, 4.25rem)/1.1 Georgia, serif !important;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+.modus-home .approved-hero h1 em {
+  color: var(--accent, #e4ea62);
+}
+
+.modus-home .approved-hero .hero-actions {
+  justify-content: center;
+}
+
+.modus-home .approved-hero .landscape {
+  display: block !important;
+  pointer-events: none;
+}
+
+.modus-home .illustrated-portals:has([data-card-reveal]) {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(10px, 1.6vw, 24px);
+  padding-block: 18px 28px !important;
+}
+
+.modus-home .illustrated-portals .home-portal[data-card-reveal] {
+  min-height: clamp(184px, 21vw, 260px);
+  justify-content: flex-end;
+  padding: 16px 16px 38px !important;
+  border-radius: 14px;
+}
+
+.modus-home .illustrated-portals .home-portal[data-card-reveal] h2 {
+  font: 500 clamp(1.05rem, 1.85vw, 1.75rem)/1.15 Georgia, serif;
+  text-wrap: balance;
+}
+
+.modus-home .illustrated-portals .home-portal[data-card-reveal] p {
+  font-size: clamp(.81rem, 1.2vw, .98rem);
+  line-height: 1.35;
+}
+
+.modus-home :is(.approved-explore, .approved-latest, .approved-film-philosophy) {
+  position: relative;
+  width: min(90%, 90rem);
+  margin: 0 auto clamp(28px, 4vw, 60px);
+}
+
+.modus-home :is(.approved-explore, .approved-latest) h2 {
+  margin: 0;
+  color: var(--ink, #fff);
+  font: 500 clamp(1.4rem, 3vw, 2.8rem)/1.15 Georgia, serif;
+}
+
+.approved-explore h2 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.approved-explore h2::before,
+.approved-explore h2::after,
+.approved-section-heading::before {
+  content: "";
+  height: 1px;
+  background: currentColor;
+  opacity: .28;
+  flex: 1;
+}
+
+.approved-section-heading {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.approved-section-heading::before {
+  order: 1;
+}
+
+.approved-section-heading a {
+  order: 2;
+  color: inherit;
+  text-underline-offset: .2em;
+}
+
+.modus-home :is(.approved-explore, .approved-latest) ul {
+  display: grid;
+  margin: 16px 0 0;
+  padding: 0;
+  gap: clamp(8px, 1.15vw, 16px);
+  list-style: none;
+}
+
+.approved-explore ul {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
+.approved-latest ul {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.modus-home :is(.approved-explore, .approved-latest) li a {
+  display: grid;
+  height: 100%;
+  min-width: 0;
+  border: 1px solid var(--modus-edge, #376061);
+  border-radius: 12px;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+}
+
+.modus-home :is(.approved-explore, .approved-latest) li a:is(:hover, :focus-visible) {
+  border-color: var(--accent, #e4ea62);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.approved-explore li a {
+  place-content: center;
+  justify-items: center;
+  gap: .3rem;
+  min-height: 72px;
+  padding: .45rem;
+  text-align: center;
+  font-size: clamp(.75rem, 1.3vw, 1rem);
+  overflow-wrap: anywhere;
+}
+
+.approved-explore li span {
+  color: var(--accent, #e4ea62);
+  font-size: 1.5rem;
+}
+
+.approved-latest li a {
+  align-content: start;
+}
+
+.approved-latest li img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.approved-latest li span {
+  padding: .65rem;
+}
+
+.approved-film-philosophy {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: clamp(16px, 3vw, 40px);
+}
+
+.modus-home .approved-film-philosophy > :is(.home-introduction, .home-philosophy) {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  margin: 0;
+  padding: 0 !important;
+  background: transparent;
+}
+
+.modus-home .approved-film-philosophy .introduction-copy {
+  padding: .8rem;
+}
+
+.modus-home .approved-film-philosophy .home-philosophy {
+  padding: 1rem !important;
+}
+
+.modus-home .approved-film-philosophy .home-philosophy h2 {
+  font: 500 clamp(1.5rem, 2.65vw, 2.5rem)/1.15 Georgia, serif;
+}
+
+.modus-home .approved-film-philosophy .philosophy-stages {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .modus-home .illustrated-portals:has([data-card-reveal]) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .approved-explore ul { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .approved-latest ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .approved-film-philosophy { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .approved-latest ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Keep the shared landscape crop inside the home page on narrow screens. */
+.modus-home main:has(.approved-hero) {
+  overflow-x: clip;
+}
+
+.modus-home .illustrated-portals:has([data-card-reveal]) {
+  width: min(90%, 90rem);
+  max-width: none;
+  margin: 0 auto 24px !important;
+  padding-inline: 0 !important;
+}
+
+.modus-home .approved-film-philosophy .introduction-poster {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+.modus-home .approved-film-philosophy .philosophy-heading {
+  text-align: start;
+}
+
+.modus-home .approved-film-philosophy .philosophy-heading > p:not(.eyebrow) {
+  display: block;
+  margin-block: .85rem;
+  line-height: 1.55;
+}
+
+.modus-home .approved-film-philosophy .philosophy-heading > .button {
+  display: inline-flex;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home[data-shared-landscape] .approved-hero[data-landscape-extension]::after,
+html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home .approved-hero .landscape::after {
+  background: linear-gradient(0deg, var(--nordic-canvas, #001917), #00191788 35%, transparent 90%) !important;
+}

@@ -1,0 +1,66 @@
+/* Keep each card's existing box and illustration. Reveal the original copy in place. */
+.modus-home .illustrated-portals .home-portal[data-card-ready]::before {
+  background: linear-gradient(0deg, rgb(0 16 15 / 80%), rgb(0 16 15 / 64%));
+}
+
+.modus-home .illustrated-portals .home-portal[data-card-ready]::after,
+.modus-home .illustrated-portals .home-portal[data-card-ready] > :is(svg, .portal-number) {
+  opacity: 0;
+}
+
+.home-portal[data-card-ready]::before,
+.home-portal[data-card-ready] > :is(h2, p, .portal-link) {
+  opacity: 0;
+}
+
+.home-portals[data-card-motion] .home-portal[data-card-ready]::before,
+.home-portals[data-card-motion] .home-portal[data-card-ready] > :is(h2, p, .portal-link) {
+  transition: opacity 250ms ease;
+}
+
+.modus-home .illustrated-portals .home-portal[data-card-ready] > :is(h2, p, .portal-link) {
+  color: #fff;
+}
+
+.home-portal[data-card-ready]:is(:focus-visible, [data-card-open])::before,
+.home-portal[data-card-ready]:is(:focus-visible, [data-card-open]) > :is(h2, p, .portal-link) {
+  opacity: 1;
+}
+
+.modus-home .illustrated-portals .home-portal[data-card-ready]:hover {
+  border-color: var(--modus-edge);
+  transform: none;
+}
+
+.home-portal[data-card-open] > .portal-link {
+  display: block;
+  position: absolute;
+  inset-inline-start: 12px;
+  bottom: 12px;
+  font-size: .875rem;
+  text-decoration: underline;
+}
+
+@media (any-hover: hover) {
+  .home-portals:not([data-card-touch]) .home-portal[data-card-ready]:hover::before,
+  .home-portals:not([data-card-touch]) .home-portal[data-card-ready]:hover > :is(h2, p, .portal-link) {
+    opacity: 1;
+  }
+}
+
+@media (forced-colors: active) {
+  .modus-home .illustrated-portals .home-portal[data-card-ready]::before {
+    background: Canvas;
+  }
+
+  .modus-home .illustrated-portals .home-portal[data-card-ready] > :is(h2, p, .portal-link) {
+    color: LinkText;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-portals[data-card-motion] .home-portal[data-card-ready]::before,
+  .home-portals[data-card-motion] .home-portal[data-card-ready] > :is(h2, p, .portal-link) {
+    transition: none;
+  }
+}

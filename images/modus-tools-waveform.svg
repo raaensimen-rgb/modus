@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320">
+  <defs>
+    <radialGradient id="screen">
+      <stop stop-color="#104c56"/>
+      <stop offset="1" stop-color="#04191e"/>
+    </radialGradient>
+    <pattern id="grid" width="30" height="24" patternUnits="userSpaceOnUse">
+      <path d="M0 24V0h30" fill="none" stroke="#31818b" opacity=".34"/>
+    </pattern>
+  </defs>
+  <path fill="url(#screen)" d="M0 0h600v320H0z"/>
+  <rect x="22" y="40" width="556" height="235" rx="10" fill="url(#grid)" stroke="#25606a"/>
+  <path d="M41 65h104m12 0h31m12 0h94m14 0h58m12 0h39m12 0h124M41 250h512" stroke="#3a8790" opacity=".54" stroke-width="3"/>
+  <path d="M29 157h30l4-5 5 12 6-16 6 22 7-31 7 38 7-49 7 62 8-81 8 96 9-74 8 47 8-29 8 19 8-11 8 3 8-7 8 14 8-28 8 46 9-68 8 89 8-112 9 129 9-93 9 62 9-46 8 29 8-16 8 9 8-4 8 1 8-7 8 14 8-22 8 38 8-54 8 69 8-84 8 99 8-112 9 121 9-95 9 66 8-43 8 28 8-19 8 10 8-3 8 2 8-9 8 14 8-23 8 36 8-47 8 59 8-72 8 66 8-49 8 39 8-29 8 20 8-14 8 7 8-2h18" fill="none" stroke="#19dce7" stroke-width="8" stroke-linejoin="round" opacity=".19"/>
+  <path d="M29 157h30l4-5 5 12 6-16 6 22 7-31 7 38 7-49 7 62 8-81 8 96 9-74 8 47 8-29 8 19 8-11 8 3 8-7 8 14 8-28 8 46 9-68 8 89 8-112 9 129 9-93 9 62 9-46 8 29 8-16 8 9 8-4 8 1 8-7 8 14 8-22 8 38 8-54 8 69 8-84 8 99 8-112 9 121 9-95 9 66 8-43 8 28 8-19 8 10 8-3 8 2 8-9 8 14 8-23 8 36 8-47 8 59 8-72 8 66 8-49 8 39 8-29 8 20 8-14 8 7 8-2h18" fill="none" stroke="#67edf2" stroke-width="2" stroke-linejoin="round"/>
+</svg>
