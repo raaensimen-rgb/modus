@@ -10,9 +10,13 @@ const groups=[
  {id:"gehor",name:"Gehør og lytting",color:"#d3a5c2",ids:[]},
  {id:"gitar",name:"Gitar og teknikk",color:"#91aaa4",ids:[]},
  {id:"impro",name:"Improvisasjon",color:"#ddaf8d",ids:["I04"]},
- {id:"komposisjon",name:"Komposisjon og form",color:"#aa9ed7",ids:["P03","X02","X03"]},
- {id:"produksjon",name:"Arrangering og produksjon",color:"#b0c584",ids:["P04"]},
- {id:"praksis",name:"Musikalsk praksis",color:"#7fbdc4",ids:["A03","X01","X04"]}
+ {id:"komposisjon",name:"Komposisjon og form",color:"#aa9ed7",ids:["X01","X02","X03"]},
+ {id:"produksjon",name:"Produksjon og lydarbeid",color:"#b0c584",ids:["P04"]},
+ {id:"praksis",name:"Musikalsk praksis",color:"#7fbdc4",ids:["X04"]},
+ {id:"kontrapunkt",name:"Kontrapunkt og sats",color:"#bcadd4",ids:["P03"]},
+ {id:"stemmeforing",name:"Stemmeføring og reharmonisering",color:"#9abeba",ids:["A03"]},
+ {id:"arrangering",name:"Arrangering og instrumentasjon",color:"#a9c693",ids:[]},
+ {id:"samspill",name:"Samspill",color:"#d4b294",ids:[]}
 ];
 const byId=new Map(catalog.map(m=>[m.id,m]));
 const $=id=>document.getElementById(id);const ns="http://www.w3.org/2000/svg";
@@ -30,6 +34,8 @@ for(const {slug,title,modules} of articleLinks){
 const english=document.documentElement?.lang==="en";
 const firstArticle="toner-og-intervaller";
 const branchResources = {
+ arrangering: [{"url": "artikler/arrangering-for-lite-ensemble.html", "title": "Arrangering for lite ensemble"}, {"url": "artikler/instrumentasjon-og-hybrid-metal.html", "title": "Instrumentasjon og hybrid metal"}],
+ samspill: [{"url": "artikler/samspill-og-improvisatorisk-respons.html", "title": "Lytting og improvisatorisk respons"}, {"url": "backingtracks.html", "title": "MODUS JAM"}],
  gehor: [
   {url:"teori.html?topic=intervals",title:english?"Listen to intervals in the Theory Room":"Lytt til intervaller i Teorirommet"},
   ...(!english ? [
@@ -79,7 +85,7 @@ function evidenceState(moduleId){
 }
 function moduleState(id){return records[id]?.manual?records[id].state:evidenceState(id);}
 const categoryRecords={};for(const g of groups){categoryRecords[g.id]=valid.has(stored._categories?.[g.id])?stored._categories[g.id]:"not-started";}
-let chosen=null,category=null,search="";
+let chosen=null,category=null,search="",selectedResource=null;
 const svg=$("music-map");
 function svgEl(tag,attr={},content){const e=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attr))e.setAttribute(k,String(v));if(content!==undefined)e.textContent=content;return e;}
 function save(){try{localStorage.setItem(STORE,JSON.stringify({...records,_categories:categoryRecords}));$("map-save-status").textContent="Lagret i denne nettleseren.";}catch{$("map-save-status").textContent="Nettleseren tillot ikke lagring. Bruk eksport for å ta vare på kartleggingen.";}}
@@ -88,13 +94,19 @@ function groupState(g){const a=groupModules(g);if(!a.length)return categoryRecor
 function variant(state){return state==="learned"?"on":state==="exploring"?"mid":"off";}
 function activityState(id){return moduleState(id);}
 function curve(x1,y1,x2,y2,color,state,width){return svgEl("path",{d:"M "+x1+" "+y1+" C "+(x1+135)+" "+y1+", "+(x2-140)+" "+y2+", "+x2+" "+y2,stroke:color,"stroke-width":width,class:"map-branch "+variant(state),style:"color:"+color});}
-function node(x,y,w,h,label,color,state,type,id){
- const group=svgEl("g",{class:"map-node "+variant(state)+" "+type+(chosen===id||category===id?" selected":""),role:"button",tabindex:"0","data-atlas-id":id,"aria-controls":"inspector-module","aria-pressed":String((chosen||category)===id),"aria-label":label+". "+(state==="learned"?"Egenvurdert lært":state==="exploring"?"Under arbeid":"Ikke gjennomgått")});
+function node(x,y,w,h,label,color,state,type,id,resource=null){
+ const nodeId=resource?id+":"+resource.url:id;
+ const active=resource?category===id&&selectedResource===resource.url:type==="branch-node"?category===id&&!selectedResource:chosen===id;
+ const group=svgEl("g",{class:"map-node "+variant(state)+" "+type+(active?" selected":""),role:"button",tabindex:"0","data-atlas-id":nodeId,"aria-controls":"inspector-module","aria-pressed":String(active),"aria-label":label+". "+(state==="learned"?"Egenvurdert lært":state==="exploring"?"Under arbeid":"Ikke gjennomgått")});
  const rect=svgEl("rect",{x,y:y-h/2,width:w,height:h,rx:11,fill:type==="root-node"?"#d7f48c":"#1b231b",stroke:color,style:"color:"+color});
  const txt=svgEl("text",{x:x+18,y:y+5},label);
+ if(type==="branch-node"&&label.length>25){
+  txt.setAttribute("textLength",String(w-36));
+  txt.setAttribute("lengthAdjust","spacingAndGlyphs");
+ }
  group.append(rect,txt);
- group.addEventListener("click",()=>choose(type==="branch-node"?"category":"module",id));
- group.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();choose(type==="branch-node"?"category":"module",id);}});
+ group.addEventListener("click",()=>choose(type==="branch-node"||resource?"category":"module",id,resource));
+ group.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();choose(type==="branch-node"||resource?"category":"module",id,resource);}});
  return group;
 }
 function render(){
@@ -102,9 +114,9 @@ function render(){
  svg.replaceChildren();
  const layer=svgEl("g",{});
  // The entire musical landscape is always visible. Selection changes only emphasis and details.
- const leftIds=["harmoni","rytme","gehor","impro","produksjon"];
- const rightIds=["grunnlag","skala","gitar","komposisjon","praksis"];
- const branchBand=g=>Math.max(105,groupModules(g).length*34+42);
+ const leftIds=["harmoni","rytme","gehor","impro","samspill","arrangering","produksjon"];
+ const rightIds=["grunnlag","skala","gitar","komposisjon","kontrapunkt","stemmeforing","praksis"];
+ const branchBand=g=>Math.max(105,(g.ids.length||(branchResources[g.id]||[]).length)*34+42);
  const sideHeight=ids=>ids.reduce((sum,id)=>sum+branchBand(groups.find(g=>g.id===id)),64+9*(ids.length-1));
  const W=1600,H=Math.max(940,sideHeight(leftIds),sideHeight(rightIds)),midX=800,midY=H/2;
  svg.setAttribute("viewBox","0 0 "+W+" "+H);
@@ -139,9 +151,15 @@ function render(){
     layer.append(leaf);
    });
    if(!modules.length){
-    const label=svgEl("text",{x:left?145:1230,y:y+36,fill:g.color,"font-size":14,"font-family":"Manrope,Arial,sans-serif","opacity":.95},
-      english?"Explore linked resources":"Utforsk tilknyttet innhold");
-    layer.append(label);
+    const resources=branchResources[g.id]||[];
+    const resourceStart=y-(resources.length-1)*leafGap/2;
+    resources.forEach((resource,j)=>{
+     const ly=resourceStart+j*leafGap,leafX=left?33:1227;
+     layer.append(curved(left?catX:catX+catW,y,left?leafX+337:leafX,ly,g.color,state,2.3));
+     const leaf=node(leafX,ly,337,29,resource.title,g.color,state,"module-node",g.id,resource);
+     if(search && resource.title.toLowerCase().includes(search))leaf.classList.add("match");
+     layer.append(leaf);
+    });
    }
    top+=bands[i]+gap;
   });
@@ -197,13 +215,14 @@ function render(){
  }
 }
 
-function choose(type,id){
+function choose(type,id,resource=null){
  const g=type==="category"?groups.find(x=>x.id===id):null;
  const m=type==="module"?byId.get(id):null;
  if(!m&&!g)return;
+ selectedResource=resource?.url||null;
  chosen=m?.id||null;category=g?.id||(m?groups.find(group=>group.ids.includes(m.id))?.id:null)||null;
  $("inspector-module").hidden=false;
- $("inspector-heading").textContent=m?m.title:g.name;
+ $("inspector-heading").textContent=resource?.title||(m?m.title:g.name);
  $("inspector-description").textContent=m?"Atlaset følger åpnete artikler og fullførte quizer. Du kan også velge en egen status som overstyrer den automatiske statusen. Bestått quiz er ikke en faglig godkjenning.":"Dette fagområdet samler "+g.ids.length+" planlagte moduler. Endrer du status her, får alle modulene i grenen samme egenvurderte status.";
  $("inspector-meta").textContent=m?"MODUL "+m.id+" · NIVÅ "+m.level:"FAGOMRÅDE · "+g.ids.length+" MODULER";
  $("map-personal-note").disabled=!m;
@@ -213,7 +232,7 @@ function choose(type,id){
  const intervals=m?.id===articleModules[firstArticle];
  const links=m?linksByModule.get(m.id):[];
  const linkedUrls=new Set(links.map(({slug})=>"artikler/"+slug+".html"));
- const resources=(g?branchResources[g.id]:moduleResources[m.id])||[];
+ const resources=resource?[resource]:(g?branchResources[g.id]:moduleResources[m.id])||[];
  const extra=resources.filter(({url})=>!linkedUrls.has(url));
  if(g&&!g.ids.length&&resources.length){
   $("inspector-description").textContent=english
@@ -258,7 +277,7 @@ $("map-search").addEventListener("input",e=>{
  render();
 });
 $("map-reset").addEventListener("click",()=>{
- $("map-search").value="";search="";category=null;chosen=null;
+ $("map-search").value="";search="";category=null;chosen=null;selectedResource=null;
  $("inspector-module").hidden=true;
  $("inspector-heading").textContent="Velg et område";
  $("inspector-description").textContent="Hele kartet vises samtidig. Velg et emne for å markere din egen læringsstatus.";
@@ -276,7 +295,7 @@ $("map-clear").addEventListener("click",()=>{
  for(const m of catalog)records[m.id]={state:"not-started",manual:true,idea:false,note:""};
  for(const g of groups)categoryRecords[g.id]="not-started";
  save();
- chosen=null;category=null;$("inspector-module").hidden=true;$("inspector-heading").textContent="Velg et område";$("inspector-description").textContent="Alle atlasmarkeringer er nullstilt. Tidligere quizresultater på kontoen er beholdt.";render();
+ chosen=null;category=null;selectedResource=null;$("inspector-module").hidden=true;$("inspector-heading").textContent="Velg et område";$("inspector-description").textContent="Alle atlasmarkeringer er nullstilt. Tidligere quizresultater på kontoen er beholdt.";render();
 });
 const requestedModule=new URLSearchParams(window.location?.search).get("modul");
 if(requestedModule===articleModules[firstArticle])choose("module",requestedModule);
