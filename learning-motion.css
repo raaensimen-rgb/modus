@@ -1,0 +1,479 @@
+.side-menu-toggle > button[aria-expanded="true"] .side-row-icon {
+  color: var(--menu-active);
+}
+
+:is(.side-menu-toggle > button, .home-hero .hero-actions > a, .quiz-next, .start-reading-next):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.article-quiz:target {
+  scroll-margin-block-start: 1rem;
+}
+
+.quiz-complete > .quiz-next {
+  margin-inline: 0 12px;
+  font-weight: 650;
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  main {
+    view-transition-name: learning-content;
+  }
+
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+
+  ::view-transition-group(learning-content) {
+    animation-duration: 360ms;
+  }
+
+  ::view-transition-old(learning-content) {
+    animation: learning-exit 220ms ease-in both;
+  }
+
+  ::view-transition-new(learning-content) {
+    animation: learning-enter 360ms cubic-bezier(.2, .75, .25, 1) both;
+  }
+
+  .home-hero .hero-content > h1 {
+    animation: learning-enter 550ms cubic-bezier(.2, .75, .25, 1) both;
+  }
+
+  .home-hero .hero-actions > a {
+    animation: learning-enter 420ms cubic-bezier(.2, .75, .25, 1) backwards;
+    animation-delay: 110ms;
+  }
+
+  .home-hero .hero-actions > a + a {
+    animation-delay: 170ms;
+  }
+
+  .side-menu[open] .side-links:not([hidden]) {
+    animation: learning-fade 200ms ease-out both;
+  }
+
+  .side-menu[open] .side-links:not([hidden]) > a {
+    animation: learning-menu-item 240ms cubic-bezier(.2, .75, .25, 1) backwards;
+  }
+
+  .side-menu[open] .side-links:not([hidden]) > a:nth-child(2) { animation-delay: 30ms; }
+  .side-menu[open] .side-links:not([hidden]) > a:nth-child(3) { animation-delay: 60ms; }
+  .side-menu[open] .side-links:not([hidden]) > a:nth-child(n+4) { animation-delay: 90ms; }
+
+  .modus-home .illustrated-portals .home-portal[data-card-ready] {
+    transition: translate 230ms cubic-bezier(.2, .75, .25, 1), border-color 230ms ease-out;
+  }
+
+  .home-portal[data-card-ready] img {
+    transition: scale 430ms cubic-bezier(.2, .75, .25, 1);
+  }
+
+  .modus-home .illustrated-portals .home-portal[data-card-ready]:is(:focus-visible, [data-card-open]) {
+    translate: 0 -4px;
+  }
+
+  .home-portal[data-card-ready]:is(:focus-visible, [data-card-open]) img {
+    scale: 1.07;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .modus-home .illustrated-portals .home-portal[data-card-ready]:hover {
+      translate: 0 -4px;
+    }
+
+    .home-portal[data-card-ready]:hover img {
+      scale: 1.07;
+    }
+  }
+
+  .article-quiz .quiz-complete:not([hidden]) {
+    position: relative;
+    animation: learning-enter 360ms cubic-bezier(.2, .75, .25, 1) both;
+  }
+
+  .article-quiz .quiz-complete:not([hidden])::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 2px;
+    background: var(--accent);
+    content: "";
+    pointer-events: none;
+    transform-origin: left;
+    animation: learning-progress 620ms cubic-bezier(.2, .75, .25, 1) both;
+  }
+
+  :is(.side-menu-toggle > button .side-row-icon, .home-hero .hero-actions > a, .quiz-next, .start-reading-next) {
+    transition: translate 150ms ease-out, color 150ms ease-out;
+  }
+
+  :is(.side-menu-toggle > button:active .side-row-icon, .home-hero .hero-actions > a:active, .quiz-next:active, .start-reading-next:active) {
+    translate: 0 3px;
+  }
+
+  @keyframes learning-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes learning-enter {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes learning-exit {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-9px); }
+  }
+
+  @keyframes learning-menu-item {
+    from { opacity: 0; transform: translateX(-8px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes learning-progress {
+    0% { opacity: .9; transform: scaleX(0); }
+    65% { opacity: .85; }
+    100% { opacity: 0; transform: scaleX(1); }
+  }
+}
+
+.dawn-layer {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+  html.home-sunrise .dawn-layer {
+    /* Match the landscape crop in home-approved-design.css. */
+    --sky-offset: clamp(16px, 2.3vw, 34px);
+    --landscape-width: max(100vw, 1440px);
+    --sun-x: calc(81vw - .01 * var(--landscape-width));
+    --sun-y: calc(var(--sky-offset) + var(--landscape-width) / 6);
+    --dawn-duration: 1750ms;
+    display: block;
+    position: fixed;
+    z-index: 10000;
+    inset: 0;
+    background: #030c10;
+    pointer-events: none;
+    animation: dawn-clear var(--dawn-duration) both;
+  }
+
+  html.home-sunrise .dawn-horizon {
+    position: absolute;
+    inset: 0 0 auto;
+    height: calc(var(--sun-y) + 19px);
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 23px), transparent);
+  }
+
+  html.home-sunrise .dawn-horizon::before {
+    content: "";
+    position: absolute;
+    left: var(--sun-x);
+    top: var(--sun-y);
+    width: clamp(180px, 37vw, 490px);
+    aspect-ratio: 1;
+    background: radial-gradient(circle,
+      #fff5ca 0 2%, #ffc972 3%, #fca951a0 5%, #ef8b3945 17%, transparent 66%);
+    animation: dawn-rise 1550ms cubic-bezier(.24, .6, .34, 1) both;
+  }
+
+  html.home-sunrise .modus-home > .site-header {
+    z-index: 10001;
+  }
+
+  html.home-sunrise .modus-home > .site-header::after,
+  html.home-sunrise .modus-home > .site-header > :not(.brand) {
+    animation: dawn-controls 1750ms ease both;
+  }
+
+  @keyframes dawn-clear {
+    0%, 12% { opacity: 1; }
+    47% { opacity: .68; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes dawn-rise {
+    0%, 12% { opacity: 0; transform: translate(-50%, calc(-50% + 62px)); }
+    47% { opacity: 1; }
+    100% { opacity: 1; transform: translate(-50%, calc(-50% - 7px)); }
+  }
+
+  @keyframes dawn-controls {
+    0%, 42% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+}
+
+/* Give each destination a visible label while keeping the landscape behind it. */
+:is(.modus-home, .modus-interior) .site-header > .side-menu-toggle {
+  gap: clamp(0px, 1vw, 14px);
+  padding: 4px clamp(2px, 1vw, 14px);
+}
+
+.site-header > .side-menu-toggle > :is(a, button) {
+  position: relative;
+  grid-template-rows: 24px auto;
+  align-content: center;
+  gap: 2px;
+  min-width: clamp(44px, 8vw, 90px);
+  min-height: 51px;
+  padding: 3px 2px 5px;
+  border-radius: 12px;
+}
+
+.site-header > .side-menu-toggle > :is(a, button) .side-row-icon {
+  width: 26px;
+  height: 24px;
+  border: 0;
+}
+
+.site-header > .side-menu-toggle > :is(a, button)::after {
+  content: attr(title);
+  font: 650 clamp(8px, 1.2vw, 12px)/1.1 system-ui, sans-serif;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.site-header > .side-menu-toggle > :is(a, button):is(:hover, :focus-visible, [aria-expanded="true"]) {
+  background: color-mix(in srgb, currentColor 13%, transparent);
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) :is(.modus-home, .modus-interior) dialog.side-menu {
+  background: rgb(7 27 31 / 80%);
+  box-shadow: 0 8px 22px #00100e58;
+}
+
+.side-menu .side-links {
+  gap: 4px;
+}
+
+.side-menu .side-links a {
+  align-items: center;
+  min-height: 46px;
+  padding-inline: 12px;
+}
+
+.side-menu .side-links strong {
+  transform: none;
+  font-size: 15px;
+}
+
+@media (max-width: 520px) {
+  .site-header > .side-menu-toggle > a[href$="/musikkart.html"]::after {
+    content: "Atlas";
+  }
+}
+
+@media (max-width: 370px) {
+  :is(.modus-home, .modus-interior) .site-header > .side-menu-toggle {
+    gap: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-header > .side-menu-toggle > :is(a, button) {
+    transition: color 160ms ease-out, background-color 160ms ease-out;
+  }
+
+  .site-header > .side-menu-toggle > :is(a, button) .side-row-icon {
+    transition: translate 170ms ease-out, scale 170ms ease-out;
+  }
+
+  .site-header > .side-menu-toggle > :is(a, button):is(:focus-visible, [aria-expanded="true"]) .side-row-icon {
+    translate: 0 -2px;
+    scale: 1.12;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .site-header > .side-menu-toggle > :is(a, button):hover .side-row-icon {
+      translate: 0 -2px;
+      scale: 1.12;
+    }
+  }
+
+  .site-header > .side-menu-toggle > :is(a, button):active .side-row-icon {
+    translate: 0 2px;
+    scale: .95;
+  }
+}
+
+.site-header > .side-menu-toggle[data-gliding-menu]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 6px;
+  width: 26px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--menu-active);
+  opacity: 0;
+  transform: translateX(calc(var(--menu-marker-x, 0px) - 50%));
+  pointer-events: none;
+}
+
+.site-header > .side-menu-toggle[data-menu-marker]::after {
+  opacity: 1;
+}
+
+html :is(.modus-home, .modus-interior):has([data-gliding-menu]) dialog.side-menu {
+  width: min(208px, calc(100% - 16px));
+  min-width: 0;
+  height: var(--side-panel-size, auto);
+  padding: 4px 5px 5px;
+  border-radius: 16px;
+}
+
+:is(.modus-home, .modus-interior):has([data-gliding-menu]) .side-menu-heading {
+  padding: 0 6px 3px;
+  margin-bottom: 3px;
+}
+
+:is(.modus-home, .modus-interior):has([data-gliding-menu]) .side-menu-heading h2 {
+  font-size: 15px;
+}
+
+:is(.modus-home, .modus-interior):has([data-gliding-menu]) .side-menu .side-links a {
+  min-height: 44px;
+  padding-block: 4px;
+  border-radius: 9px;
+}
+
+:is(.modus-home, .modus-interior):has([data-gliding-menu]) .side-menu .side-links strong {
+  font-size: 14px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :is(.modus-home, .modus-interior):has([data-gliding-menu]) .side-menu .side-links a {
+    min-height: 30px;
+    padding-block: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-header > .side-menu-toggle[data-gliding-menu]::after {
+    transition: transform 320ms cubic-bezier(.25, .8, .25, 1), opacity 130ms ease-out;
+  }
+
+  html :is(.modus-home, .modus-interior):has([data-gliding-menu]) dialog.side-menu[open][data-menu-sliding] {
+    transition: left 320ms cubic-bezier(.25, .8, .25, 1),
+      top 320ms cubic-bezier(.25, .8, .25, 1),
+      height 320ms cubic-bezier(.25, .8, .25, 1),
+      opacity 150ms ease, transform 180ms ease-out,
+      display 180ms allow-discrete, overlay 180ms allow-discrete;
+  }
+}
+
+:is(.modus-home, .modus-interior):has([data-gliding-menu]) .side-menu-heading .side-row-icon {
+  height: 22px;
+}
+
+.side-menu nav:has(> .side-links-outgoing) {
+  position: relative;
+}
+
+.side-menu nav > .side-links.side-links-outgoing {
+  position: absolute;
+  inset: 0 0 auto;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .side-menu[open][data-menu-sliding] .side-links[data-group]:not([hidden]) {
+    animation: learning-fade 265ms ease-out both;
+  }
+
+  .side-menu[open][data-menu-sliding] .side-links[data-group]:not([hidden]) > a,
+  .side-menu[open] .side-links.side-links-outgoing,
+  .side-menu[open] .side-links.side-links-outgoing > a {
+    animation: none;
+  }
+
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-header > .side-menu-toggle[data-gliding-menu] > :is(a, button)::after {
+    opacity: 0;
+  }
+
+  :is(.modus-home, .modus-interior):has(dialog.side-menu[open]) .site-header > .side-menu-toggle[data-gliding-menu] > :is(a, button)::after,
+  .site-header > .side-menu-toggle[data-gliding-menu]:is(:hover, :focus-within) > :is(a, button)::after {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header > .side-menu-toggle[data-gliding-menu] > :is(a, button)::after {
+      translate: 0 5px;
+      transition: translate 200ms cubic-bezier(.25, .8, .25, 1), opacity 170ms ease-out;
+    }
+
+    .site-header > .side-menu-toggle[data-gliding-menu] > :is(a, button):nth-child(3n + 2)::after {
+      transition-delay: 22ms;
+    }
+
+    .site-header > .side-menu-toggle[data-gliding-menu] > :is(a, button):nth-child(3n)::after {
+      transition-delay: 44ms;
+    }
+  }
+}
+
+.side-menu-surface {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  /* Reserve the expanded height so revealing the labels leaves the page in place. */
+  html :is(.modus-home, .modus-interior) .site-header > .side-menu-toggle[data-gliding-menu] {
+    --menu-surface-trim: 15px;
+    background: transparent;
+    border-color: transparent;
+    backdrop-filter: none;
+  }
+
+  html :is(.modus-home, .modus-interior):has(dialog.side-menu[open]) .site-header > .side-menu-toggle[data-gliding-menu],
+  html :is(.modus-home, .modus-interior) .site-header > .side-menu-toggle[data-gliding-menu]:is(:hover, :focus-within) {
+    --menu-surface-trim: 0px;
+  }
+
+  .side-menu-surface {
+    display: block;
+    position: absolute;
+    z-index: -1;
+    inset: -1px -1px calc(var(--menu-surface-trim) - 1px);
+    border: 1px solid var(--menu-edge);
+    border-radius: inherit;
+    background: var(--menu-glass);
+    backdrop-filter: blur(12px);
+    pointer-events: none;
+  }
+
+  html:is([data-theme="readable"], [data-theme="contrast"]) .side-menu-surface {
+    background: var(--panel);
+    backdrop-filter: none;
+  }
+
+  .site-header > .side-menu-toggle[data-gliding-menu]::after {
+    bottom: calc(6px + var(--menu-surface-trim));
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .side-menu-surface {
+      transition: bottom 200ms cubic-bezier(.25, .8, .25, 1);
+    }
+
+    .site-header > .side-menu-toggle[data-gliding-menu]::after {
+      transition: bottom 200ms cubic-bezier(.25, .8, .25, 1),
+        transform 320ms cubic-bezier(.25, .8, .25, 1), opacity 130ms ease-out;
+    }
+  }
+}
