@@ -28,7 +28,8 @@ html .modus-home .approved-hero #welcome {
   clip-path: none;
   overflow: visible;
   white-space: normal;
-  margin-inline: auto;
+  margin-inline: auto !important;
+  text-align: center !important;
   font: 500 clamp(1.75rem, 4.05vw, 3.6rem)/1.1 Georgia, serif !important;
   letter-spacing: -.025em;
   text-wrap: balance;
@@ -39,7 +40,9 @@ html .modus-home .approved-hero #welcome {
 }
 
 .modus-home .approved-hero .hero-actions {
+  margin-inline: auto !important;
   justify-content: center;
+  align-items: center;
 }
 
 html body.modus-home #main .approved-scene .approved-hero .hero-actions > a.button {
