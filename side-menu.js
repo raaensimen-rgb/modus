@@ -1,6 +1,22 @@
 (() => {
   const strip = document.querySelector('.side-menu-toggle');
   const menu = document.querySelector('#side-menu');
+  if (!strip || !menu) return;
+  const plus = strip.lastElementChild;
+  if (plus?.matches('a[href$="/modus-plus.html"]')) {
+    const english = document.documentElement.lang === 'en';
+    const courses = document.createElement('a');
+    courses.href = english ? '/en/kurs.html' : '/kurs.html';
+    courses.title = english ? 'Courses' : 'Kurs';
+    courses.setAttribute('aria-label', courses.title);
+    if (/^\/(?:en\/)?kurs(?:-finn-pulsen)?(?:\.html)?\/?$/.test(location.pathname)) {
+      courses.setAttribute('aria-current', 'page');
+    }
+    const icon = plus.querySelector('.side-row-icon').cloneNode(true);
+    icon.querySelector('path').setAttribute('d', 'M4 4h13a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3z M4 17a3 3 0 0 1 3-3h13 M10 7l5 2-5 2z');
+    courses.append(icon);
+    plus.before(courses);
+  }
   const heading = menu.querySelector('h2');
   const groups = menu.querySelectorAll('[data-group]');
   let button;

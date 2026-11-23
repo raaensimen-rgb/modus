@@ -261,3 +261,22 @@ body:is(.modus-home, .modus-interior) .home-portals.illustrated-portals {
   position: relative;
   top: clamp(12px, 2vw, 28px);
 }
+
+/* Seven navigation entries, including MODUS+ at the end. */
+@media (max-width: 420px) {
+  :is(.modus-home, .modus-interior) .site-header > .side-menu-toggle {
+    padding-inline: 4px;
+    gap: clamp(0px, calc((100vw - 320px) / 12), 8px);
+  }
+  .side-menu-toggle > :is(a, button) { min-width: 44px; }
+}
+
+@media (max-width: 370px) {
+  :is(.modus-home, .modus-interior) .site-header > .side-menu-toggle {
+    width: max-content;
+    max-width: none;
+    justify-self: center;
+    padding-inline: 2px;
+    gap: 0;
+  }
+}
