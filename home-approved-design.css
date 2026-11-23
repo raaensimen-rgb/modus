@@ -298,17 +298,17 @@ html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home .approved
   opacity: 0 !important;
 }
 
-html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home .approved-scene
-.approved-hero .hero-actions > a[data-start-learning].button {
-  background: #ffe047 !important;
-  border-color: #ffe047 !important;
-  color: #11231d !important;
-  font-weight: 700;
+html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home #main .approved-hero .hero-actions > a.button {
+  background: var(--menu-glass) !important;
+  border-color: var(--menu-edge) !important;
+  color: var(--m3-paper) !important;
+  font-weight: 600;
 }
 
-html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home .approved-scene
-.approved-hero .hero-actions > a[data-start-learning].button:hover {
-  background: #ffed83 !important;
+html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home #main
+.approved-hero .hero-actions > a.button:is(:hover, :focus-visible) {
+  border-color: var(--menu-icon) !important;
+  color: var(--menu-active) !important;
 }
 
 .approved-middle {
