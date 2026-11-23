@@ -1,30 +1,46 @@
-/* Keep each card's existing box and illustration. Reveal the original copy in place. */
-.modus-home .illustrated-portals .home-portal[data-card-ready]::before {
-  background: linear-gradient(0deg, rgb(0 16 15 / 80%), rgb(0 16 15 / 64%));
+.modus-home .illustrated-portals .home-portal[data-card-reveal]::before {
+  background: linear-gradient(to top, rgb(0 16 15 / 90%), rgb(0 16 15 / 72%) 33%, transparent 76%);
 }
 
-.modus-home .illustrated-portals .home-portal[data-card-ready]::after,
-.modus-home .illustrated-portals .home-portal[data-card-ready] > :is(svg, .portal-number) {
-  opacity: 0;
+.modus-home .illustrated-portals .home-portal[data-card-reveal]::after {
+  content: "→";
+  position: absolute;
+  inset: 10px 10px auto auto;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: rgb(0 16 15 / 78%);
+  clip-path: none;
+  color: #fff;
+  font: 16px/1 system-ui, sans-serif;
 }
 
-.home-portal[data-card-ready]::before,
-.home-portal[data-card-ready] > :is(h2, p, .portal-link) {
-  opacity: 0;
-}
-
-.home-portals[data-card-motion] .home-portal[data-card-ready]::before,
-.home-portals[data-card-motion] .home-portal[data-card-ready] > :is(h2, p, .portal-link) {
-  transition: opacity 250ms ease;
-}
-
-.modus-home .illustrated-portals .home-portal[data-card-ready] > :is(h2, p, .portal-link) {
+.modus-home .illustrated-portals .home-portal[data-card-reveal] :is(h2, p, .portal-link) {
   color: #fff;
 }
 
-.home-portal[data-card-ready]:is(:focus-visible, [data-card-open])::before,
-.home-portal[data-card-ready]:is(:focus-visible, [data-card-open]) > :is(h2, p, .portal-link) {
+.home-portal[data-card-ready] .portal-description {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.home-portal[data-card-ready] .portal-description > p {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.home-portal[data-card-ready]:is(:focus-visible, [data-card-open]) .portal-description {
+  grid-template-rows: 1fr;
   opacity: 1;
+}
+
+.modus-home .illustrated-portals .home-portal[data-card-ready]:is(:focus-visible, [data-card-open])::before {
+  background: linear-gradient(to top, rgb(0 16 15 / 92%), rgb(0 16 15 / 64%));
 }
 
 .modus-home .illustrated-portals .home-portal[data-card-ready]:hover {
@@ -32,35 +48,43 @@
   transform: none;
 }
 
+.modus-home .illustrated-portals .home-portal[data-card-open] {
+  padding-bottom: 34px !important;
+}
+
 .home-portal[data-card-open] > .portal-link {
   display: block;
   position: absolute;
-  inset-inline-start: 12px;
+  inset-inline: 14px;
   bottom: 12px;
-  font-size: .875rem;
+  font-size: .78rem;
+  line-height: 1.1;
   text-decoration: underline;
 }
 
 @media (any-hover: hover) {
-  .home-portals:not([data-card-touch]) .home-portal[data-card-ready]:hover::before,
-  .home-portals:not([data-card-touch]) .home-portal[data-card-ready]:hover > :is(h2, p, .portal-link) {
+  .home-portals:not([data-card-touch]) .home-portal[data-card-ready]:hover .portal-description {
+    grid-template-rows: 1fr;
     opacity: 1;
+  }
+
+  .modus-home .home-portals.illustrated-portals:not([data-card-touch]) .home-portal[data-card-ready]:hover::before {
+    background: linear-gradient(to top, rgb(0 16 15 / 92%), rgb(0 16 15 / 64%));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-portals[data-card-motion] .home-portal[data-card-ready] .portal-description {
+    transition: opacity 250ms ease, grid-template-rows 250ms ease;
   }
 }
 
 @media (forced-colors: active) {
-  .modus-home .illustrated-portals .home-portal[data-card-ready]::before {
-    background: Canvas;
+  .modus-home .illustrated-portals .home-portal[data-card-reveal]::before {
+    background: Canvas !important;
   }
 
-  .modus-home .illustrated-portals .home-portal[data-card-ready] > :is(h2, p, .portal-link) {
+  .modus-home .illustrated-portals .home-portal[data-card-reveal] :is(h2, p, .portal-link) {
     color: LinkText;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .home-portals[data-card-motion] .home-portal[data-card-ready]::before,
-  .home-portals[data-card-motion] .home-portal[data-card-ready] > :is(h2, p, .portal-link) {
-    transition: none;
   }
 }
