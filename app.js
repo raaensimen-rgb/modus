@@ -45,11 +45,32 @@ function chordAt(d){
 function chordSampleName(){return state.chordInstrument==='acoustic'||state.chordInstrument==='auto'&&state.style==='jazz'?'jazz-piano':'piano';}
 function updateSoundDescription(){$('soundDescription').textContent=(chordSampleName()==='jazz-piano'?'Akustisk flygel':'Elpiano')+(state.style==='jazz'?' · kontrabass · jevn 4/4-puls.':' · elbass · syntetiske trommer.');}
 function update(){updateSoundDescription();notes=spellScale();const m=MODES[state.mode],custom=state.harmony==='custom'&&state.customChords.length;progression=custom?state.customChords.map(ch=>window.ModusProgressions.model(ch,state.key,state.mode)):(state.harmony==='drone'||state.mode===6?[0,0,0,0]:m.degrees).map(chordAt);$('chords').innerHTML=progression.map((c,i)=>`<div class="chord" id="chord${i}"><small>${String(i+1).padStart(2,'0')}</small><strong>${c.name}</strong><span class="roman">${c.roman}</span></div>`).join('');$('scaleTitle').textContent=KEYS[state.key][0]+' '+m.name.toLowerCase();$('modeFormula').textContent=m.intervals.join(' – ');$('scaleNotes').innerHTML=notes.map((n,i)=>`<span title="${m.intervals[i]}">${n}</span>`).join('');$('modePill').textContent=m.focus;$('modeDescription').textContent=m.color;$('loopInfo').textContent=custom?'EGEN REKKE · '+progression.length+' TAKTER':state.harmony==='drone'||state.mode===6?'TONIKADRONE · 4 TAKTER':'4 TAKTER';$('chordType').disabled=Boolean(custom);$('chordTypeHelp').textContent=custom?'Akkordtypene følger den egne rekken. Endre dem i akkordverkstedet.':state.chordType==='triad'?'Tre toner per akkord: dur, moll, forminsket eller forstørret, ut fra valgt skala.':'Fire toner per akkord: maj7, m7, 7 og andre septimakkorder, ut fra valgt skala.';$('customSequenceNote').hidden=!custom;$('harmony').querySelector('option[value="custom"]').disabled=!state.customChords.length;if(custom){const outside=progression.filter(c=>c.outside.length).map(c=>c.name+': '+c.outside.join(', '));$('customScaleInfo').textContent=outside.length?'Toner utenfor valgt skalakart – '+outside.join(' · ')+'. Kartet viser fortsatt '+KEYS[state.key][0]+' '+m.name.toLowerCase()+'.':'Akkordtonene passer i valgt skalakart: '+KEYS[state.key][0]+' '+m.name.toLowerCase()+'.';$('editCustomSequence').href=window.ModusProgressions.link('akkorder.html',{chords:state.customChords,key:state.key,mode:state.mode,tempo:state.tempo,style:state.style});}drawFretboard();save();}
+let guitarChord=null;
+function showGuitarTargets(chord){
+ if(guitarChord===chord)return;
+ guitarChord=chord;
+ if(state.mapInstrument==='guitar')drawGuitar();
+}
 function drawFretboard(){
  jamPiano.releaseManual();
- if(state.mapInstrument==='piano'){drawPiano();return;}
+ if(state.mapInstrument==='piano'){$('guitarTargets').hidden=true;drawPiano();return;}
+ drawGuitar();
+}
+function drawGuitar(){
  $('fretboard').setAttribute('viewBox','0 0 1060 340');$('fretboard').setAttribute('aria-label','Gripebrett med '+KEYS[state.key][0]+' '+MODES[state.mode].name.toLowerCase()+' i standardstemming');$('mapScroll').classList.remove('piano-map');$('mapCaption').textContent='STANDARDSTEMMING · E A D G B E';$('mapRange').textContent='ÅPEN STRENG → 15. BÅND';
  const m=MODES[state.mode],root=KEYS[state.key][1],tuning=[64,59,55,50,45,40],openNames=['E','B','G','D','A','E'];
+ const targets=new Map();
+ if(guitarChord){
+  let outsideIndex=0;
+  for(const interval of guitarChord.ints){
+   const pitchClass=(guitarChord.midi+interval)%12;
+   const scaleIndex=m.steps.indexOf((pitchClass-root+12)%12);
+   targets.set(pitchClass,scaleIndex<0?guitarChord.outside[outsideIndex++]:notes[scaleIndex]);
+  }
+ }
+ const legend=$('guitarTargets');
+ legend.hidden=!guitarChord;
+ legend.textContent=guitarChord?('Akkordtoner i '+guitarChord.name+': '+[...targets.values()].join(', ')):'';
  const nut=110,spacing=62,x=f=>f===0?70:nut+(f-.5)*spacing,y=str=>50+str*43;
  let svg='<rect x="110" y="25" width="930" height="265" rx="8" fill="#11170f"/>';
  for(let f=1;f<=15;f++){
@@ -61,11 +82,16 @@ function drawFretboard(){
  tuning.forEach((open,str)=>{
   svg+=`<text x="18" y="${y(str)+6}" text-anchor="middle" fill="#bdc8b0" font-size="16" font-weight="600">${openNames[str]}</text><line x1="50" x2="1040" y1="${y(str)}" y2="${y(str)}" stroke="#929c86" stroke-width="${1+str*.22}"/>`;
   for(let f=0;f<=15;f++){
-   const idx=m.steps.indexOf((open+f-root+120)%12);if(idx<0)continue;
-   const tonic=idx===0,label=state.intervals?m.intervals[idx]:notes[idx];
-   svg+=`<g><title>${openNames[str]}-streng, ${f===0?'åpen':f+'. bånd'}: ${notes[idx]} (${m.intervals[idx]})</title>`;
+   const pitchClass=(open+f)%12;
+   const idx=m.steps.indexOf((pitchClass-root+12)%12),target=targets.has(pitchClass);
+   if(idx<0&&!target)continue;
+   const tonic=idx===0,name=idx<0?targets.get(pitchClass):notes[idx];
+   const label=state.intervals&&idx>=0?m.intervals[idx]:name;
+   const detail=idx<0?'' : ' ('+m.intervals[idx]+')';
+   svg+=`<g data-pitch-class="${pitchClass}"${target?' data-jam-target':''}><title>${openNames[str]}-streng, ${f===0?'åpen':f+'. bånd'}: ${name}${detail}</title>`;
+   if(target)svg+=`<circle cx="${x(f)}" cy="${y(str)}" r="23" fill="none" stroke="#ffc56d" stroke-width="3"/>`;
    if(tonic)svg+=`<circle cx="${x(f)}" cy="${y(str)}" r="21" fill="none" stroke="#d7f48c" stroke-width="2"/>`;
-   svg+=`<circle cx="${x(f)}" cy="${y(str)}" r="18" fill="${tonic?'#d7f48c':'#465b36'}" stroke="${tonic?'#e9ffc2':'#98b27e'}" stroke-width="1.5"/><text x="${x(f)}" y="${y(str)+.5}" dominant-baseline="middle" text-anchor="middle" fill="${tonic?'#14200c':'#ffffff'}" font-family="sans-serif" font-weight="700" font-size="${label.length>2?14:17}">${label}</text></g>`;
+   svg+=`<circle cx="${x(f)}" cy="${y(str)}" r="18" fill="${tonic?'#d7f48c':idx<0?'#553719':'#465b36'}" stroke="${tonic?'#e9ffc2':'#98b27e'}" stroke-width="1.5"/><text x="${x(f)}" y="${y(str)+.5}" dominant-baseline="middle" text-anchor="middle" fill="${tonic?'#14200c':'#ffffff'}" font-family="sans-serif" font-weight="700" font-size="${label.length>2?14:17}">${label}</text></g>`;
   }
  });
  $('fretboard').innerHTML=svg;
@@ -176,12 +202,12 @@ if(jazz){
  if(!ambient){const kicks=rock?[0,6,8,10]:funk?[0,6,8,14]:cycle%2?[0,7,8,14]:[0,7,8];if(kicks.includes(p))drum('kick',groove);if(p===4||p===12)drum('snare',groove+.006);if(p%2===0||funk)drum('hihat',groove,p%4===0?1:.58);if(!rock&&p===15&&bar%2===1)drum('snare',groove,.2);if(bar===progression.length-1&&cycle%2===1&&[13,15].includes(p))drum('snare',groove,p===15?.6:.35);}
 }
 if(state.click&&p%4===0)tone(p===0?96:89,t,.035,.13);
-if(p%4===0){const id=setTimeout(()=>{if(!playing)return;document.querySelectorAll('.chord').forEach((el,i)=>el.classList.toggle('active',i===bar));document.querySelectorAll('.beatlights i').forEach((el,i)=>el.classList.toggle('active',i===p/4));$('position').textContent=`Takt ${bar+1} / ${progression.length} · Slag ${p/4+1}`;},Math.max(0,(t-audio.currentTime)*1000));visualTimers.push(id);if(visualTimers.length>32)visualTimers.splice(0,16);}}
+if(p%4===0){const id=setTimeout(()=>{if(!playing)return;if(p===0)showGuitarTargets(c);document.querySelectorAll('.chord').forEach((el,i)=>el.classList.toggle('active',i===bar));document.querySelectorAll('.beatlights i').forEach((el,i)=>el.classList.toggle('active',i===p/4));$('position').textContent=`Takt ${bar+1} / ${progression.length} · Slag ${p/4+1}`;},Math.max(0,(t-audio.currentTime)*1000));visualTimers.push(id);if(visualTimers.length>32)visualTimers.splice(0,16);}}
 
 function scheduler(){if(audio.state!=='running'){stop();return;}while(nextTime<audio.currentTime+.12){schedule(step,nextTime);nextTime+=60/state.tempo/4;step=(step+1)%(progression.length*32);}}
 let starting=false,startRun=0;
 async function start(){if(starting)return;starting=true;const run=++startRun;$('play').disabled=true;$('playText').textContent='Laster instrumenter…';try{initAudio();await audio.resume();await loadSamples();if(run!==startRun)return;if(audio.state!=='running')throw Error('blocked');master.gain.cancelScheduledValues(audio.currentTime);master.gain.setValueAtTime(.68,audio.currentTime);playing=true;step=0;previousVoicing=null;nextTime=audio.currentTime+.06;$('playIcon').textContent='■';$('playText').textContent='Stopp jam';$('play').setAttribute('aria-label','Stopp backingtrack');$('error').textContent='';scheduler();timer=setInterval(scheduler,25);}catch{if(run===startRun){$('error').textContent='Kunne ikke laste instrumentene. Sjekk forbindelsen og prøv igjen.';stop();}}finally{if(run===startRun){starting=false;$('play').disabled=false;}}}
-function stop(){jamPiano.clear();startRun++;starting=false;$('play').disabled=false;playing=false;clearInterval(timer);visualTimers.forEach(clearTimeout);visualTimers=[];if(audio){master.gain.cancelScheduledValues(audio.currentTime);master.gain.setTargetAtTime(.0001,audio.currentTime,.012);for(const src of activeSources){try{src.stop(audio.currentTime+.055);}catch{}}}$('playIcon').textContent='▶';$('playText').textContent='Start jam';$('play').setAttribute('aria-label','Start backingtrack');$('position').textContent='Klar når du er';document.querySelectorAll('.chord,.beatlights i').forEach(el=>el.classList.remove('active'));}
+function stop(){jamPiano.clear();startRun++;starting=false;$('play').disabled=false;playing=false;clearInterval(timer);visualTimers.forEach(clearTimeout);visualTimers=[];showGuitarTargets(null);if(audio){master.gain.cancelScheduledValues(audio.currentTime);master.gain.setTargetAtTime(.0001,audio.currentTime,.012);for(const src of activeSources){try{src.stop(audio.currentTime+.055);}catch{}}}$('playIcon').textContent='▶';$('playText').textContent='Start jam';$('play').setAttribute('aria-label','Start backingtrack');$('position').textContent='Klar når du er';document.querySelectorAll('.chord,.beatlights i').forEach(el=>el.classList.remove('active'));}
 window.addEventListener('pagehide',stop);$('play').onclick=()=>playing?stop():start();document.addEventListener('keydown',e=>{if(e.code==='Space'&&!e.defaultPrevented&&!document.activeElement.isContentEditable&&!['INPUT','SELECT','BUTTON','TEXTAREA','A','SUMMARY'].includes(document.activeElement.tagName)){e.preventDefault();playing?stop():start();}});document.addEventListener('visibilitychange',()=>{if(document.hidden&&(playing||starting))stop();});$('reset').onclick=()=>{stop();try{localStorage.removeItem('modus-v1');}catch{}location.reload();};update();
 
 $('downloadMidi').onclick=()=>{
