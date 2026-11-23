@@ -350,3 +350,8 @@ html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home:has(.
 .modus-home .home-lower-landscape:has(.approved-middle) .home-philosophy > picture[data-a06-background] {
   display: none !important;
 }
+
+/* Optional local comparison. The menu wave follows the menu's own positioning. */
+.modus-home > .site-header > .side-menu-toggle {
+  translate: var(--preview-menu-offset, none);
+}

@@ -11,6 +11,13 @@
 
   const px = value => `${value}px`;
 
+  const previewMenu = new URLSearchParams(window.location.search).get('preview') === 'meny-ved-vannet'
+    ? header.querySelector('.side-menu-toggle')
+    : null;
+  const heading = previewMenu ? hero.querySelector('#welcome') : null;
+  let menuOffset = 0;
+
+
   function update() {
     const width = body.clientWidth;
     const heroHeight = hero.getBoundingClientRect().height;
@@ -45,6 +52,13 @@
     body.style.setProperty('--landscape-lower-start', px(lowerBounds.bottom - page.top));
     body.style.setProperty('--landscape-lower-height', px(Math.max(waterHeight, fill / 0.2)));
     body.dataset.landscapeExtension = '';
+
+    if (previewMenu && heading) {
+      const menuBottom = previewMenu.getBoundingClientRect().bottom - menuOffset;
+      menuOffset = Math.max(0, heading.getBoundingClientRect().top - menuBottom - 22);
+      previewMenu.style.setProperty('--preview-menu-offset', `0 ${px(menuOffset)}`);
+    }
+
   }
 
   const observer = new ResizeObserver(update);
