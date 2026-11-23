@@ -350,9 +350,12 @@ html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home:has(.
   inset: 0;
   z-index: -1;
   pointer-events: none;
+  --sky-offset: clamp(16px, 2.3vw, 34px);
   background:
+    linear-gradient(180deg, #061a20 var(--sky-offset), transparent calc(var(--sky-offset) + 50px)),
     linear-gradient(180deg, rgb(5 26 27 / 12%), rgb(5 26 27 / 34%) 40%, rgb(5 26 27 / 45%) 70%, rgb(5 26 27 / 24%)),
-    url("/images/modus-landscape-full-page.jpg") 81% top / cover no-repeat;
+    url("/images/modus-landscape-full-page.jpg") 81% var(--sky-offset) / cover no-repeat,
+    #061a20;
   transform: none;
 }
 
