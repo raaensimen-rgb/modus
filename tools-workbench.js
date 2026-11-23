@@ -210,6 +210,22 @@
   const defaults={tonic:'C',mode:'ionian',bpm:96,chords:[]};
   let state={...defaults}, token=0, timers=[];
   let original=null, variant=null, changedBar=null;
+  const stepsPerBar=16;
+  function normalizeNotes(notes) {
+    return notes.slice(0,64).flatMap(note=>{
+      if(!note || !Number.isInteger(note.pitch) || note.pitch<0 || note.pitch>127 ||
+         !Number.isInteger(note.start) || note.start<0 || note.start>=stepsPerBar ||
+         !Number.isInteger(note.length) || note.length<1) return [];
+      return [{pitch:note.pitch,start:note.start,length:Math.min(note.length,stepsPerBar-note.start)}];
+    });
+  }
+  function trackNotes(item,track) {
+    if(Array.isArray(item[track]))return item[track];
+    if(track==='midiChords'){
+      return model.chord(item.root,item.quality,item.inversion).midi.map(pitch=>({pitch,start:0,length:16}));
+    }
+    return (item.melody||[]).flatMap((pitch,beat)=>pitch==null?[]:[{pitch,start:beat*4,length:4}]);
+  }
   function normalize(raw) {
     if(!raw||!Array.isArray(raw.chords)) return null;
     const bpm=raw.bpm==null?96:Number(raw.bpm);
@@ -221,6 +237,9 @@
           const note=rawChord.melody[i];
           return Number.isInteger(note)&&note>=60&&note<=82?note:null;
         });
+        for(const track of ['midiChords','midiMelody']){
+          if(Array.isArray(rawChord[track]))item[track]=normalizeNotes(rawChord[track]);
+        }
         return [item];
       })};
   }
@@ -322,7 +341,155 @@
       update();
     }
   });
-  $('tool-actions').append(addChord,play,halt,save,load,clear);
+  const exportMidi=button(t('Last ned MIDI','Download MIDI'),downloadMidi);
+  $('tool-actions').append(addChord,play,halt,save,load,clear,exportMidi);
+
+  function downloadMidi(){
+    const ticks=480, step=ticks/4;
+    const text=value=>Array.from(value,char=>char.charCodeAt(0));
+    const number=(value,width)=>Array.from({length:width},(_,i)=>(value>>>((width-i-1)*8))&255);
+    function variable(value){
+      const bytes=[value&127];
+      while((value>>=7)>0)bytes.unshift((value&127)|128);
+      return bytes;
+    }
+    const chunk=(name,data)=>[...text(name),...number(data.length,4),...data];
+    const end=[255,47,0];
+    const tempo=chunk('MTrk',[0,255,81,3,...number(Math.round(60000000/state.bpm),3),0,...end]);
+    function makeTrack(track,channel,name){
+      const intervals=new Map();
+      state.chords.forEach((item,bar)=>{
+        for(const note of trackNotes(item,track)){
+          const start=(bar*stepsPerBar+note.start)*step;
+          const pitch=intervals.get(note.pitch)||[];
+          pitch.push([start,start+note.length*step]);
+          intervals.set(note.pitch,pitch);
+        }
+      });
+      const events=[];
+      for(const [pitch,spans] of intervals){
+        let previous;
+        for(const [start,finish] of spans.sort((a,b)=>a[0]-b[0])){
+          if(previous && start<previous.tick){
+            previous.tick=Math.max(previous.tick,finish);
+            continue;
+          }
+          events.push({tick:start,on:true,pitch});
+          previous={tick:finish,on:false,pitch};
+          events.push(previous);
+        }
+      }
+      events.sort((a,b)=>a.tick-b.tick||Number(a.on)-Number(b.on));
+      const data=[0,255,3,name.length,...text(name)];
+      let cursor=0;
+      for(const event of events){
+        data.push(...variable(event.tick-cursor),(event.on?144:128)+channel,event.pitch,event.on?80:0);
+        cursor=event.tick;
+      }
+      data.push(...variable(state.chords.length*stepsPerBar*step-cursor),...end);
+      return chunk('MTrk',data);
+    }
+    const header=chunk('MThd',[0,1,0,3,...number(ticks,2)]);
+    const midi=new Uint8Array([...header,...tempo,...makeTrack('midiChords',0,'Chords'),...makeTrack('midiMelody',1,'Melody')]);
+    const url=URL.createObjectURL(new Blob([midi],{type:'audio/midi'}));
+    const link=document.createElement('a');
+    link.href=url;
+    link.download='modus-compose.mid';
+    link.click();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }
+
+  function midiEditor(item){
+    const editor=document.createElement('details');
+    editor.className='lab-midi';
+    const summary=document.createElement('summary');
+    summary.textContent=t('Rediger MIDI','Edit MIDI');
+    editor.append(summary);
+    const instructions=document.createElement('p');
+    instructions.textContent=t('Hver takt har 16 steg. Lengde måles i sekstendeler. MIDI-tone 60 er C4. Når du endrer et spor her, bruker avspillingen disse notene.',
+      'Each bar has 16 steps. Length is measured in sixteenth notes. MIDI note 60 is C4. Editing a track here makes playback use these notes.');
+    editor.append(instructions);
+    for(const [track,label,defaultPitch] of [
+      ['midiChords',t('Akkorder','Chords'),48],['midiMelody',t('Melodi','Melody'),60]
+    ]){
+      const section=document.createElement('fieldset');
+      const legend=document.createElement('legend');
+      legend.textContent=label;
+      const list=document.createElement('div');
+      const source=document.createElement('p');
+      const actions=document.createElement('div');
+      actions.className='tool-actions';
+      const add=button(t('Legg til tone','Add note'),()=>{
+        const notes=trackNotes(item,track);
+        item[track]=[...notes,{pitch:defaultPitch,start:0,length:4}];
+        refresh();
+        list.lastElementChild.querySelector('input').focus();
+      });
+      const reset=button(t('Bruk skissens noter','Use sketch notes'),()=>{
+        delete item[track];
+        refresh();
+      });
+      actions.append(add,reset);
+      section.append(legend,source,list,actions);
+      editor.append(section);
+      function updateSource(){
+        const manual=Array.isArray(item[track]);
+        reset.disabled=!manual;
+        source.textContent=manual?t('Spiller MIDI-notene under.','Plays the MIDI notes below.')
+          :t('Følger skissens noter.','Follows the sketch notes.');
+      }
+      function refresh(edited=true){
+        if(edited)stop(false);
+        list.replaceChildren();
+        const notes=trackNotes(item,track);
+        add.disabled=notes.length>=64;
+        updateSource();
+        notes.forEach((note,index)=>{
+          const row=document.createElement('div');
+          row.className='lab-midi-note';
+          function field(label,key,offset,max){
+            const wrapper=document.createElement('label');
+            const input=document.createElement('input');
+            input.type='number';
+            input.min=String(key==='pitch'?0:1);
+            input.max=String(max);
+            input.value=String(note[key]+offset);
+            input.addEventListener('change',()=>{
+              const value=input.valueAsNumber;
+              if(Number.isFinite(value)){
+                const current=trackNotes(item,track).map(event=>({...event}));
+                const edited=current[index];
+                edited[key]=Math.max(Number(input.min),Math.min(Number(input.max),Math.round(value)))-offset;
+                edited.length=Math.min(edited.length,stepsPerBar-edited.start);
+                item[track]=current;
+                note[key]=edited[key];
+                note.length=edited.length;
+                lengthInput.max=String(stepsPerBar-edited.start);
+                lengthInput.value=String(edited.length);
+                updateSource();
+                stop(false);
+              }
+              input.value=String(note[key]+offset);
+            });
+            wrapper.append(label,input);
+            row.append(wrapper);
+            return input;
+          }
+          field(t('MIDI-tone','MIDI note'),'pitch',0,127);
+          field(t('Startsteg','Start step'),'start',1,16);
+          const lengthInput=field(t('Lengde','Length'),'length',0,stepsPerBar-note.start);
+          row.append(button(t('Fjern tone','Remove note'),()=>{
+            item[track]=trackNotes(item,track).filter((_,i)=>i!==index);
+            refresh();
+            (list.children[index]?.querySelector('input')||add).focus();
+          }));
+          list.append(row);
+        });
+      }
+      refresh(false);
+    }
+    return editor;
+  }
   const tonicInput=select(t('Toneart','Key'),roots,state.tonic,v=>{state.tonic=v;update();});
   const modeInput=select(t('Tonesett','Scale'),modes,state.mode,v=>{state.mode=v;update();});
   const tempo=document.createElement('label'), speed=document.createElement('input');
@@ -384,10 +551,13 @@
       const fields=document.createElement('div');fields.className='tool-fields';
       function edit(prop,value) {
         item[prop]=value;
+        if(isVariant)delete item.midiChords;
         if(prop==='quality') item.inversion=Math.min(item.inversion,model.qualities[value][3].length-1);
         if(isVariant){
           const reference=original.chords[index];
-          changedBar=['root','quality','inversion'].some(key=>item[key]!==reference[key])?index:null;
+          const different=['root','quality','inversion'].some(key=>item[key]!==reference[key]);
+          changedBar=different?index:null;
+          if(!different&&Array.isArray(reference.midiChords))item.midiChords=normalizeNotes(reference.midiChords);
         }
         const position=[...fields.querySelectorAll('select')].indexOf(document.activeElement);
         update();
@@ -437,10 +607,11 @@
       editor.append(summary,fields);
       card.append(bar,title,details,melody);
       if(editable)card.append(editor);
-      if(!comparing)card.append(actions);
+      if(!comparing)card.append(actions,midiEditor(item));
       progression.append(card);
     });
     play.disabled=state.chords.length===0; halt.disabled=true;
+    exportMidi.disabled=!state.chords.length;
     addChord.disabled=comparing||state.chords.length>=24;
     save.disabled=load.disabled=clear.disabled=comparing;
   }
@@ -456,17 +627,20 @@
     stop(false);const run=token;play.disabled=true;halt.disabled=false;
     try {
       await audio.start();
-      const items=await Promise.all(state.chords.map(async item=>({
-        harmony:await Promise.all(model.chord(item.root,item.quality,item.inversion).midi.map(audio.sample)),
-        melody:await Promise.all((item.melody||[]).map(note=>note==null?null:audio.sample(note)))
-      })));
+      const items=await Promise.all(state.chords.map(item=>Promise.all(
+        ['midiChords','midiMelody'].flatMap((track,index)=>{
+          const notes=trackNotes(item,track);
+          const volume=index===0?.19/Math.max(1,notes.length):.18;
+          return notes.map(async note=>({...note,sample:await audio.sample(note.pitch),volume}));
+        })
+      )));
       if(run!==token)return;
       const span=240/state.bpm, start=audio.now()+.075;
-      items.forEach(({harmony,melody},i)=>{
-        harmony.forEach(sample=>audio.schedule(sample,start+i*span,span*.9,.19/harmony.length));
-        melody.forEach((sample,beat)=>{
-          if(sample)audio.schedule(sample,start+(i+beat/4)*span,span*.22,.18);
-        });
+      items.forEach((notes,i)=>{
+        for(const note of notes){
+          audio.schedule(note.sample,start+(i+note.start/stepsPerBar)*span,
+            note.length/stepsPerBar*span*.9,note.volume);
+        }
         timers.push(setTimeout(()=>{
           for(const card of progression.children) card.removeAttribute('aria-current');
           progression.children[i]?.setAttribute('aria-current','step');

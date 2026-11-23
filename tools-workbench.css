@@ -290,3 +290,17 @@ html:is([data-theme="readable"],[data-theme="contrast"]) .tool-studio-page .tool
   background:#e5c955;
   color:#132421;
 }
+
+.lab-midi { margin-block-start: .75rem; }
+.lab-midi fieldset { min-width: 0; margin-block: .75rem; }
+.lab-midi-note {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: .5rem;
+  align-items: end;
+  margin-block-end: .5rem;
+}
+.lab-midi-note label { display: grid; gap: .25rem; }
+.lab-midi-note input { box-sizing: border-box; width: 100%; min-width: 0; }
+.lab-midi-note button { grid-column: 1 / -1; justify-self: start; }
+.lab-midi button { min-height: 44px; }
