@@ -1,3 +1,12 @@
+.modus-home[data-nordic-preview] .site-header > .brand {
+  padding-block-start: clamp(40px, 3.2vw, 50px) !important;
+  padding-block-end: clamp(18px, 1.6vw, 30px) !important;
+}
+
+.modus-home[data-nordic-preview] .site-header > .brand .home-subjects {
+  margin: 9px 0 0;
+}
+
 .modus-home main .approved-scene .approved-hero.home-hero {
   align-items: flex-end;
   min-height: clamp(210px, 22vw, 350px) !important;
