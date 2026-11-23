@@ -399,7 +399,7 @@
     setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
 
-  function midiEditor(item){
+  function midiEditor(item,melody,melodyNotice){
     const editor=document.createElement('details');
     editor.className='lab-midi';
     const summary=document.createElement('summary');
@@ -428,6 +428,8 @@
       const reset=button(t('Bruk skissens noter','Use sketch notes'),()=>{
         delete item[track];
         refresh();
+        if(track==='midiMelody')melody.querySelector('select').focus();
+        else add.focus();
       });
       actions.append(add,reset);
       section.append(legend,source,list,actions);
@@ -435,6 +437,10 @@
       function updateSource(){
         const manual=Array.isArray(item[track]);
         reset.disabled=!manual;
+        if(track==='midiMelody'){
+          melody.disabled=manual;
+          melodyNotice.hidden=!manual;
+        }
         source.textContent=manual?t('Spiller MIDI-notene under.','Plays the MIDI notes below.')
           :t('Følger skissens noter.','Follows the sketch notes.');
       }
@@ -487,6 +493,7 @@
         });
       }
       refresh(false);
+      if(track==='midiMelody')melody.addEventListener('change',()=>refresh(false));
     }
     return editor;
   }
@@ -618,7 +625,14 @@
       bar.textContent=t('Takt ','Bar ')+(index+1);
       const melody=document.createElement('fieldset');
       melody.className='lab-melody';
-      melody.disabled=comparing;
+      const manualMelody=Array.isArray(item.midiMelody);
+      melody.disabled=comparing||manualMelody;
+      const melodyNotice=document.createElement('p');
+      melodyNotice.hidden=!manualMelody;
+      melodyNotice.textContent=comparing
+        ?t('Denne takten bruker redigerte MIDI-meloditoner.','This bar uses edited MIDI melody notes.')
+        :t('Denne takten bruker MIDI-melodien. Velg «Bruk skissens noter» under Rediger MIDI for å slå på slagvelgerne.',
+           'This bar uses the MIDI melody. In Edit MIDI, select “Use sketch notes” to enable the beat selectors.');
       const legend=document.createElement('legend');
       legend.textContent=t('Melodi','Melody');
       melody.append(legend);
@@ -639,9 +653,9 @@
       const summary=document.createElement('summary');
       summary.textContent=t('Rediger akkord','Edit chord');
       editor.append(summary,fields);
-      card.append(bar,title,details,melody);
+      card.append(bar,title,details,melody,melodyNotice);
       if(editable)card.append(editor);
-      if(!comparing)card.append(actions,midiEditor(item));
+      if(!comparing)card.append(actions,midiEditor(item,melody,melodyNotice));
       card.tabIndex=-1; progression.append(card);
     });
     drawPhrase(); play.disabled=state.chords.length===0; halt.disabled=true;
