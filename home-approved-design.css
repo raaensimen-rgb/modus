@@ -33,6 +33,23 @@ html .modus-home .approved-hero #welcome {
   justify-content: center;
 }
 
+html body.modus-home #main .approved-scene .approved-hero .hero-actions > a.button {
+  box-sizing: border-box;
+  width: min(100%, 210px) !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  padding: 6px 12px !important;
+  justify-content: center !important;
+  align-items: center;
+}
+
+@media (max-width: 760px) {
+  html body.modus-home #main .approved-scene .approved-hero .hero-actions > a.button {
+    height: 44px !important;
+    min-height: 44px !important;
+  }
+}
+
 .modus-home .approved-hero .landscape {
   display: block !important;
   pointer-events: none;
@@ -287,7 +304,6 @@ html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home .appr
   border-color: #ffe047 !important;
   color: #11231d !important;
   font-weight: 700;
-  min-height: 44px !important;
 }
 
 html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home .approved-scene
