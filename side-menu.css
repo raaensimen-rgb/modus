@@ -276,6 +276,7 @@ body:is(.modus-home, .modus-interior) .home-portals.illustrated-portals {
     width: max-content;
     max-width: none;
     justify-self: center;
+    margin-inline: 0;
     padding-inline: 2px;
     gap: 0;
   }
