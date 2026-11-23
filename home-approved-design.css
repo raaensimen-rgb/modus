@@ -1,7 +1,7 @@
 .modus-home main .approved-scene .approved-hero.home-hero {
-  justify-content: flex-end;
+  align-items: flex-end;
   min-height: clamp(210px, 22vw, 350px) !important;
-  padding: 50px 5% 38px !important;
+  padding: 50px 5% 22px !important;
   isolation: isolate;
 }
 
@@ -44,6 +44,10 @@ html body.modus-home #main .approved-scene .approved-hero .hero-actions > a.butt
 }
 
 @media (max-width: 760px) {
+  .modus-home main .approved-scene .approved-hero.home-hero {
+    min-height: 340px !important;
+  }
+
   html body.modus-home #main .approved-scene .approved-hero .hero-actions > a.button {
     height: 44px !important;
     min-height: 44px !important;
