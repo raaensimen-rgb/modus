@@ -5,6 +5,7 @@
   const header = body.querySelector('.site-header');
   const hero = body.querySelector('.home-hero');
   const landscape = hero?.querySelector('.landscape');
+  const approvedScene = hero?.closest('.approved-scene');
   const lower = body.querySelector('.home-lower-landscape');
   const intro = lower?.querySelector('.home-introduction');
   if (!header || !hero || !landscape || !intro || typeof ResizeObserver !== 'function') return;
@@ -26,6 +27,7 @@
     body.style.setProperty('--scene-x', px((width - imageWidth) * 0.8));
     body.style.setProperty('--scene-top', px(top));
     hero.style.setProperty('--landscape-top-offset', px(top - heroStart));
+    approvedScene?.style.setProperty('--approved-scene-top', px(top - heroStart));
     const landscapeStart = landscape.getBoundingClientRect().top - header.getBoundingClientRect().top;
     hero.style.setProperty('--landscape-image-top', px(top - landscapeStart));
     hero.dataset.landscapeExtension = '';

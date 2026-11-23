@@ -1,6 +1,6 @@
-.modus-home main .approved-hero.home-hero {
+.modus-home main .approved-scene .approved-hero.home-hero {
   justify-content: flex-end;
-  min-height: clamp(250px, 32vw, 460px) !important;
+  min-height: clamp(210px, 22vw, 350px) !important;
   padding: 50px 5% 38px !important;
   isolation: isolate;
 }
@@ -163,8 +163,9 @@ html .modus-home .approved-hero #welcome {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 1;
   object-fit: cover;
+  object-position: center top;
 }
 
 .approved-latest li span {
@@ -173,7 +174,7 @@ html .modus-home .approved-hero #welcome {
 
 .approved-film-philosophy {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: start;
   gap: clamp(16px, 3vw, 40px);
 }
@@ -184,9 +185,9 @@ html .modus-home .approved-hero #welcome {
   width: 100%;
   max-width: none;
   min-width: 0;
-  margin: 0;
+  margin: 0 !important;
   padding: 0 !important;
-  background: transparent;
+  background: transparent !important;
 }
 
 .modus-home .approved-film-philosophy .introduction-copy {
@@ -235,6 +236,8 @@ html .modus-home .approved-hero #welcome {
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .modus-home .approved-film-philosophy .philosophy-heading {
@@ -251,7 +254,41 @@ html .modus-home .approved-hero #welcome {
   display: inline-flex;
 }
 
-html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home[data-shared-landscape] .approved-hero[data-landscape-extension]::after,
-html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home .approved-hero .landscape::after {
-  background: linear-gradient(0deg, var(--nordic-canvas, #001917), #00191788 35%, transparent 90%) !important;
+.modus-home .approved-scene .illustrated-portals {
+  top: auto !important;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home .approved-scene {
+  background:
+    linear-gradient(to bottom, transparent 14%, rgb(0 25 23 / 42%) 44%, transparent 68%, var(--nordic-canvas, #001917)),
+    url("/images/modus-landskap-3d-2026-11-22.webp") var(--scene-x, center) var(--approved-scene-top, center) /
+      var(--scene-width, max(100%, 960px)) auto no-repeat;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home .approved-scene .approved-hero,
+html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home .approved-scene .illustrated-portals {
+  background: transparent !important;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home .approved-scene .approved-hero::before,
+html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home .approved-scene .approved-hero::after {
+  content: none !important;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home .approved-scene .approved-hero .landscape {
+  opacity: 0 !important;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home .approved-scene
+.approved-hero .hero-actions > a[data-start-learning].button {
+  background: #ffe047 !important;
+  border-color: #ffe047 !important;
+  color: #11231d !important;
+  font-weight: 700;
+  min-height: 44px !important;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home .approved-scene
+.approved-hero .hero-actions > a[data-start-learning].button:hover {
+  background: #ffed83 !important;
 }
