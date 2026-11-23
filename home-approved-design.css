@@ -9,7 +9,7 @@
 
 .modus-home main .approved-scene .approved-hero.home-hero {
   align-items: flex-end;
-  min-height: clamp(210px, 22vw, 350px) !important;
+  min-height: max(clamp(210px, 22vw, 350px), clamp(210px, 470px - 33vw, 340px)) !important;
   padding: 50px 5% 22px !important;
   isolation: isolate;
 }
@@ -53,10 +53,6 @@ html body.modus-home #main .approved-scene .approved-hero .hero-actions > a.butt
 }
 
 @media (max-width: 760px) {
-  .modus-home main .approved-scene .approved-hero.home-hero {
-    min-height: 340px !important;
-  }
-
   html body.modus-home #main .approved-scene .approved-hero .hero-actions > a.button {
     height: 44px !important;
     min-height: 44px !important;
@@ -351,10 +347,13 @@ html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home:has(.
   z-index: -1;
   pointer-events: none;
   --sky-offset: clamp(16px, 2.3vw, 34px);
+  --landscape-width: max(100vw, 1440px);
   background:
     linear-gradient(180deg, #061a20 var(--sky-offset), transparent calc(var(--sky-offset) + 50px)),
     linear-gradient(180deg, rgb(5 26 27 / 12%), rgb(5 26 27 / 34%) 40%, rgb(5 26 27 / 45%) 70%, rgb(5 26 27 / 24%)),
-    url("/images/modus-landscape-full-page.jpg") 81% var(--sky-offset) / cover no-repeat,
+    linear-gradient(180deg, transparent 88%, #061a20) center var(--sky-offset) /
+      100% calc(var(--landscape-width) * 1.5) no-repeat,
+    url("/images/modus-landscape-full-page.jpg") 81% var(--sky-offset) / var(--landscape-width) auto no-repeat,
     #061a20;
   transform: none;
 }

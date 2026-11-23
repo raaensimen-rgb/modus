@@ -17,7 +17,6 @@
   const heading = previewMenu ? hero.querySelector('#welcome') : null;
   let menuOffset = 0;
 
-
   function update() {
     const width = body.clientWidth;
     const heroHeight = hero.getBoundingClientRect().height;
@@ -58,10 +57,11 @@
       menuOffset = Math.max(0, heading.getBoundingClientRect().top - menuBottom - 22);
       previewMenu.style.setProperty('--preview-menu-offset', `0 ${px(menuOffset)}`);
     }
-
   }
 
   const observer = new ResizeObserver(update);
-  for (const element of [body, header, hero, lower, intro]) observer.observe(element);
+  for (const element of [body, header, hero, lower, intro, previewMenu, heading]) {
+    if (element) observer.observe(element);
+  }
   update();
 })();
