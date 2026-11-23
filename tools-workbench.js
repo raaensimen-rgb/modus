@@ -209,6 +209,7 @@
   const storageKey='modus.composition-lab.v1';
   const defaults={tonic:'C',mode:'ionian',bpm:96,chords:[]};
   let state={...defaults}, token=0, timers=[];
+  let original=null, variant=null, changedBar=null;
   function normalize(raw) {
     if(!raw||!Array.isArray(raw.chords)) return null;
     const bpm=raw.bpm==null?96:Number(raw.bpm);
@@ -229,6 +230,57 @@
       chords:preset.split(',').map(value=>{const [root,quality,inversion]=value.split(':');return {root:root.replace('#','♯'),quality,inversion};})}):normalize(JSON.parse(localStorage.getItem(storageKey))))||{...defaults};
   } catch {}
   const controls=$('tool-controls'), progression=$('progression'), palette=$('lab-palette');
+  const comparison=document.createElement('section');
+  comparison.className='lab-comparison';
+  comparison.setAttribute('aria-label',t('Sammenlign A og B','Compare A and B'));
+  const comparisonActions=document.createElement('div');
+  comparisonActions.className='tool-actions';
+  const comparisonStatus=document.createElement('p');
+  comparisonStatus.setAttribute('role','status');
+  const prompt=document.createElement('p');
+  prompt.textContent=t('Hva endret seg i klangen eller bassbevegelsen?', 'What changed in the sound or the bass movement?');
+  const compare=button(t('Lag variant B','Create variant B'),()=>{
+    original=state;
+    variant=normalize(state);
+    showVersion(variant, versionB);
+  });
+  const versionA=button(t('A · Original','A · Original'),()=>showVersion(original,versionA));
+  const versionB=button(t('B · Variant','B · Variant'),()=>showVersion(variant,versionB));
+  const endComparison=button(t('Avslutt sammenligning','End comparison'),()=>{
+    state=original;
+    original=variant=changedBar=null;
+    update();
+    status('');
+    compare.focus();
+  });
+  comparisonActions.append(compare,versionA,versionB,endComparison);
+  comparison.append(comparisonActions,comparisonStatus,prompt);
+  $('tool-actions').after(comparison);
+  function showVersion(version,control){
+    if(state!==version){
+      state=version;
+      update();
+      status('');
+    }
+    control.focus();
+  }
+  function renderComparison(){
+    const comparing=original!==null, isVariant=state===variant;
+    compare.hidden=comparing;
+    compare.disabled=!state.chords.length;
+    for(const control of [versionA,versionB,endComparison])control.hidden=!comparing;
+    versionA.setAttribute('aria-pressed',String(comparing&&!isVariant));
+    versionB.setAttribute('aria-pressed',String(isVariant));
+    prompt.hidden=comparisonStatus.hidden=!comparing;
+    comparisonStatus.textContent=!comparing?'':isVariant
+      ? t('B vises. Endre én akkord og spill begge versjonene. Melodi og tempo er de samme.',
+          'Showing B. Change one chord and play both versions. The melody and tempo stay the same.')
+      : t('A vises. Spill originalen eller bytt til B.', 'Showing A. Play the original or switch to B.');
+    play.textContent=comparing
+      ? t('Spill ','Play ')+(isVariant?'B':'A')
+      : t('Spill','Play');
+  }
+
   function scaleChords(tones){
     return tones.flatMap((root,index)=>{
       const intervals=[0,2,4].map(step=>model.mod(tones[(index+step)%7].pc-root.pc));
@@ -248,20 +300,29 @@
   }
   const play=button(t('Spill','Play'),playAll);
   const halt=button(t('Stopp','Stop'),()=>stop(true));
-  $('tool-actions').append(
-    button(t('Legg til akkord','Add chord'),()=>{
-      appendChord(scaleChords(model.scale(state.tonic,state.mode))[0]);
-    }),play,halt,
-    button(t('Lagre','Save'),()=>{try{localStorage.setItem(storageKey,JSON.stringify(state));status(t('Komposisjonen er lagret.','Composition saved.'));}catch{status(t('Lagring er utilgjengelig.','Storage is unavailable.'));}}),
-    button(t('Hent lagret','Load saved'),()=>{
-      try {
-        const saved=normalize(JSON.parse(localStorage.getItem(storageKey)));
-        if(saved){state=saved;update();status(t('Lagret komposisjon hentet.','Saved composition loaded.'));}
-        else status(t('Du har ingen lagret komposisjon.','There is no saved composition.'));
-      } catch {status(t('Komposisjonen kunne ikke hentes.','Could not load the composition.'));}
-    }),
-    button(t('Ny progresjon','New progression'),()=>{if(confirm(t('Vil du tømme denne progresjonen?','Clear this progression?'))){state={...state,chords:[]};update();}})
-  );
+  const addChord=button(t('Legg til akkord','Add chord'),()=>{
+    appendChord(scaleChords(model.scale(state.tonic,state.mode))[0]);
+  });
+  const save=button(t('Lagre','Save'),()=>{
+    try {
+      localStorage.setItem(storageKey,JSON.stringify(state));
+      status(t('Komposisjonen er lagret.','Composition saved.'));
+    } catch {status(t('Lagring er utilgjengelig.','Storage is unavailable.'));}
+  });
+  const load=button(t('Hent lagret','Load saved'),()=>{
+    try {
+      const saved=normalize(JSON.parse(localStorage.getItem(storageKey)));
+      if(saved){state=saved;update();status(t('Lagret komposisjon hentet.','Saved composition loaded.'));}
+      else status(t('Du har ingen lagret komposisjon.','There is no saved composition.'));
+    } catch {status(t('Komposisjonen kunne ikke hentes.','Could not load the composition.'));}
+  });
+  const clear=button(t('Ny progresjon','New progression'),()=>{
+    if(confirm(t('Vil du tømme denne progresjonen?','Clear this progression?'))){
+      state={...state,chords:[]};
+      update();
+    }
+  });
+  $('tool-actions').append(addChord,play,halt,save,load,clear);
   const tonicInput=select(t('Toneart','Key'),roots,state.tonic,v=>{state.tonic=v;update();});
   const modeInput=select(t('Tonesett','Scale'),modes,state.mode,v=>{state.mode=v;update();});
   const tempo=document.createElement('label'), speed=document.createElement('input');
@@ -269,6 +330,9 @@
   speed.onchange=()=>{state.bpm=Math.max(40,Math.min(220,Math.round(Number(speed.value)||96)));update();};
   controls.append(tonicInput,modeInput,tempo);
   function render() {
+    const comparing=original!==null, isVariant=state===variant;
+    renderComparison();
+    for(const field of controls.querySelectorAll('select,input'))field.disabled=comparing;
     tonicInput.querySelector('select').value=state.tonic;
     modeInput.querySelector('select').value=state.mode;
     speed.value=state.bpm;
@@ -290,13 +354,19 @@
           ? progression.lastElementChild?.querySelector('select')
           : palette.querySelectorAll('.lab-chord-options button')[prior])?.focus();
       });
-      add.disabled=state.chords.length>=24;
+      const degree=document.createElement('span');
+      degree.textContent=roman;
+      const name=document.createElement('span');
+      name.textContent=chord.name;
+      add.replaceChildren(degree,name);
+      add.setAttribute('aria-label',t('Legg til ','Add ')+chord.name+' ('+roman+')');
+      add.disabled=comparing||state.chords.length>=24;
       options.append(add);
     }
     palette.append(options);
     const empty=$('lab-empty');
     empty.hidden=state.chords.length>0;
-    empty.replaceChildren(t('Velg en akkord ovenfor for å fylle første takt, eller prøv en firetakters skisse.','Choose a chord above to fill the first bar, or try a four-bar sketch.'),' ',
+    empty.replaceChildren(t('Velg en akkord fra paletten eller prøv en firetakters skisse.','Choose a chord from the palette or try a four-bar sketch.'),' ',
       button(t('Prøv en skisse','Try a sketch'),()=>{
         const chords=scaleChords(tones);
         const base=60+ModusScales.parse(state.tonic).pc;
@@ -315,6 +385,10 @@
       function edit(prop,value) {
         item[prop]=value;
         if(prop==='quality') item.inversion=Math.min(item.inversion,model.qualities[value][3].length-1);
+        if(isVariant){
+          const reference=original.chords[index];
+          changedBar=['root','quality','inversion'].some(key=>item[key]!==reference[key])?index:null;
+        }
         const position=[...fields.querySelectorAll('select')].indexOf(document.activeElement);
         update();
         const editor=progression.children[index]?.querySelector('details');
@@ -325,6 +399,7 @@
         select(t('Akkordtype','Chord quality'),qualities,item.quality,v=>edit('quality',v)),
         select(t('Omvending','Inversion'),chord.tones.map((_,i)=>[String(i),i?String(i):t('Grunnstilling','Root position')]),String(item.inversion),v=>edit('inversion',Number(v)))
       );
+      const editable=!comparing||(isVariant&&(changedBar===null||changedBar===index));
       const actions=document.createElement('div'); actions.className='tool-actions';
       function move(delta) {
         const next=index+delta; if(next<0||next>=state.chords.length)return;
@@ -333,12 +408,13 @@
       }
       const earlier=button(t('Tidligere','Earlier'),()=>move(-1)), later=button(t('Senere','Later'),()=>move(1));
       earlier.disabled=index===0; later.disabled=index===state.chords.length-1;
-      actions.append(earlier,later,button(t('Fjern','Remove'),()=>{state.chords.splice(index,1);update();(progression.children[Math.min(index,state.chords.length-1)]?.querySelector('summary')||$('tool-actions').firstElementChild).focus();}));
+      actions.append(earlier,later,button(t('Fjern','Remove'),()=>{state.chords.splice(index,1);update();(progression.children[Math.min(index,state.chords.length-1)]?.querySelector('summary')||addChord).focus();}));
       const bar=document.createElement('p');
       bar.className='lab-bar-label';
       bar.textContent=t('Takt ','Bar ')+(index+1);
       const melody=document.createElement('fieldset');
       melody.className='lab-melody';
+      melody.disabled=comparing;
       const legend=document.createElement('legend');
       legend.textContent=t('Melodi','Melody');
       melody.append(legend);
@@ -359,10 +435,14 @@
       const summary=document.createElement('summary');
       summary.textContent=t('Rediger akkord','Edit chord');
       editor.append(summary,fields);
-      card.append(bar,title,details,melody,editor,actions); progression.append(card);
+      card.append(bar,title,details,melody);
+      if(editable)card.append(editor);
+      if(!comparing)card.append(actions);
+      progression.append(card);
     });
     play.disabled=state.chords.length===0; halt.disabled=true;
-    $('tool-actions').firstElementChild.disabled=state.chords.length>=24;
+    addChord.disabled=comparing||state.chords.length>=24;
+    save.disabled=load.disabled=clear.disabled=comparing;
   }
   function update(){stop(false);render();}
   function stop(report){

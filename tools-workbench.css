@@ -165,10 +165,10 @@ html:is([data-theme="readable"],[data-theme="contrast"]) .tool-studio-page :is(.
 .lab-chord-options { display:flex; flex-wrap:wrap; gap:.5rem; }
 .tool-studio-page .lab-chord-options button { border-color:var(--accent,#ffe329); }
 .tool-studio-page [data-modus-tool="composition-lab"] #progression {
-  grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:minmax(16rem, 1fr);
-  overflow-x:auto; scroll-snap-type:x proximity; padding:.25rem .3rem .8rem;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));
+  padding:.25rem .3rem .8rem;
 }
-[data-modus-tool="composition-lab"] #progression li { scroll-snap-align:start; min-width:0; }
+[data-modus-tool="composition-lab"] #progression li { min-width:0; }
 .lab-bar-label { color:var(--muted,#bad0c7); margin:0 0 .25rem; font-size:.8rem; }
 .lab-melody { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.35rem; padding:.6rem 0; border:0; margin:.6rem 0; min-width:0; }
 .lab-melody label { display:grid; gap:.3rem; font-size:.8rem; }
@@ -244,4 +244,49 @@ html:is([data-theme="readable"],[data-theme="contrast"]) .tool-studio-page .tool
   width:var(--note-size);
   height:var(--note-size);
   font-size:calc(var(--note-size) * .52);
+}
+
+.lab-comparison { margin-top:1rem; }
+.lab-comparison .tool-actions { align-items:center; }
+.lab-comparison button { min-height:44px; }
+.lab-comparison button[hidden] { display:none; }
+.lab-comparison button[aria-pressed="true"] {
+  background:#ffe329; color:#152015; border-color:#ffe329; font-weight:700;
+}
+.lab-comparison p { margin:.65rem 0 0; }
+
+[data-modus-tool="composition-lab"] #tool-controls {
+  align-items:end;
+}
+[data-modus-tool="composition-lab"] #tool-controls input {
+  width:7ch;
+}
+[data-modus-tool="composition-lab"] #tool-status:empty,
+.lab-comparison p[hidden] {
+  display:none;
+}
+[data-modus-tool="composition-lab"] #progression:empty {
+  display:none;
+}
+[data-modus-tool="composition-lab"] .lab-palette {
+  padding-top:.85rem;
+  border-top:1px solid var(--line,#628275);
+}
+[data-modus-tool="composition-lab"] .lab-chord-options button {
+  display:grid;
+  grid-template-rows:1fr 1fr;
+  gap:0;
+  min-width:3.1rem;
+  padding:0;
+  overflow:hidden;
+  font-weight:650;
+}
+[data-modus-tool="composition-lab"] .lab-chord-options button span {
+  display:grid;
+  place-items:center;
+  padding:.12rem .35rem;
+}
+[data-modus-tool="composition-lab"] .lab-chord-options button span+span {
+  background:#e5c955;
+  color:#132421;
 }
