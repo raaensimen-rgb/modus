@@ -304,3 +304,13 @@ html:is([data-theme="readable"],[data-theme="contrast"]) .tool-studio-page .tool
 .lab-midi-note input { box-sizing: border-box; width: 100%; min-width: 0; }
 .lab-midi-note button { grid-column: 1 / -1; justify-self: start; }
 .lab-midi button { min-height: 44px; }
+
+[data-modus-tool="composition-lab"] .score { padding:1rem 0 }
+[data-modus-tool="composition-lab"] .score h2 { font-size:1.15rem }
+[data-modus-tool="composition-lab"] .score #phrase { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,175px),1fr));gap:.6rem }
+[data-modus-tool="composition-lab"] .score button { text-align:left;display:grid;gap:.35rem;border-radius:12px;padding:12px 16px }
+[data-modus-tool="composition-lab"] .score strong { font-size:1.75rem }
+[data-modus-tool="composition-lab"] .score small, [data-modus-tool="composition-lab"] #bass { color:#a1cdc0 }
+[data-modus-tool="composition-lab"] .roll { position:relative;display:block;height:40px;background:repeating-linear-gradient(90deg,#264943 0 1px,transparent 1px 25%) }
+[data-modus-tool="composition-lab"] .roll i { position:absolute;height:4px;border:1px solid #174c44;background:#82dfc9;border-radius:2px }
+[data-modus-tool="composition-lab"] .score button[aria-current] { outline:2px solid #f5d650 }

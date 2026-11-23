@@ -439,7 +439,7 @@
           :t('Følger skissens noter.','Follows the sketch notes.');
       }
       function refresh(edited=true){
-        if(edited)stop(false);
+        if(edited){stop(false);drawPhrase();}
         list.replaceChildren();
         const notes=trackNotes(item,track);
         add.disabled=notes.length>=64;
@@ -496,6 +496,40 @@
   tempo.append(t('Tempo (BPM)','Tempo (BPM)'),speed); speed.type='number';speed.min=40;speed.max=220;speed.step=1;
   speed.onchange=()=>{state.bpm=Math.max(40,Math.min(220,Math.round(Number(speed.value)||96)));update();};
   controls.append(tonicInput,modeInput,tempo);
+  function drawPhrase(){
+    const phrase=$('phrase');
+    phrase.replaceChildren();
+    const bass=[];
+    for(const [index,item] of state.chords.entries()){
+      const chord=model.chord(item.root,item.quality,item.inversion);
+      const analysis=model.analyze(item,state.tonic,state.mode);
+      const tile=button('',()=>{
+        const card=progression.children[index];
+        const editor=card.querySelector('details');
+        if(editor) editor.open=true;
+        card.scrollIntoView({block:'center'});
+        (editor?.querySelector('select') || card).focus();
+      });
+      const label=document.createElement('small');
+      label.textContent=t('Takt ','Bar ')+(index+1)+'  ·  '+analysis.roman;
+      const name=document.createElement('strong');
+      name.textContent=chord.name;
+      const roll=document.createElement('span');
+      roll.className='roll';
+      for(const note of trackNotes(item,'midiMelody')){
+        const mark=document.createElement('i');
+        mark.style.left=(note.start*6.25)+'%';
+        mark.style.width=(note.length*6.25)+'%';
+        mark.style.bottom=(Math.max(0,Math.min(24,note.pitch-55))*3.6)+'%';
+        roll.append(mark);
+      }
+      tile.append(label,name,roll);
+      phrase.append(tile);
+      bass.push(chord.order[0].name);
+    }
+    if(!state.chords.length)phrase.append(button(t('Åpne firetakters skisse','Open four-bar sketch'),()=>$('lab-empty').querySelector('button').click()));
+    $('bass').textContent=bass.length?t('Akkordenes bassgang  ·  ','Chord bass line  ·  ')+bass.join('  →  '):'';
+  }
   function render() {
     const comparing=original!==null, isVariant=state===variant;
     renderComparison();
@@ -596,7 +630,7 @@
         }
         const field=select(String(beat+1),[['',t('Pause','Rest')],...melodicNotes],saved[beat]==null?'':String(saved[beat]),value=>{
           item.melody=Array.from({length:4},(_,i)=>i===beat?(value===''?null:Number(value)):(item.melody?.[i]??null));
-          stop(false);
+          stop(false);drawPhrase();
         });
         field.querySelector('select').setAttribute('aria-label',t('Melodi, slag ','Melody, beat ')+(beat+1));
         melody.append(field);
@@ -608,16 +642,16 @@
       card.append(bar,title,details,melody);
       if(editable)card.append(editor);
       if(!comparing)card.append(actions,midiEditor(item));
-      progression.append(card);
+      card.tabIndex=-1; progression.append(card);
     });
-    play.disabled=state.chords.length===0; halt.disabled=true;
+    drawPhrase(); play.disabled=state.chords.length===0; halt.disabled=true;
     exportMidi.disabled=!state.chords.length;
     addChord.disabled=comparing||state.chords.length>=24;
     save.disabled=load.disabled=clear.disabled=comparing;
   }
   function update(){stop(false);render();}
   function stop(report){
-    token++;
+    token++; $('phrase').querySelector('[aria-current]')?.removeAttribute('aria-current');
     timers.forEach(clearTimeout);timers=[];audio.stop();
     for(const card of progression.children) card.removeAttribute('aria-current');
     halt.disabled=true;play.disabled=!state.chords.length;
@@ -643,6 +677,8 @@
         }
         timers.push(setTimeout(()=>{
           for(const card of progression.children) card.removeAttribute('aria-current');
+          $('phrase').querySelector('[aria-current]')?.removeAttribute('aria-current');
+          $('phrase').children[i]?.setAttribute('aria-current','step');
           progression.children[i]?.setAttribute('aria-current','step');
         },(i*span+.075)*1000));
       });
