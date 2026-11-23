@@ -5,7 +5,8 @@
 .modus-home .illustrated-portals .home-portal[data-card-reveal]::after {
   content: "→";
   position: absolute;
-  inset: 10px 10px auto auto;
+  inset-block-start: 10px;
+  inset-inline-start: 10px;
   width: 24px;
   height: 24px;
   display: grid;
@@ -15,7 +16,7 @@
   border-radius: 50%;
   background: rgb(0 16 15 / 78%);
   clip-path: none;
-  color: #fff;
+  color: #ffe047;
   font: 16px/1 system-ui, sans-serif;
 }
 
