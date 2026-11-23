@@ -258,11 +258,13 @@ html .modus-home .approved-hero #welcome {
   top: auto !important;
 }
 
-html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home .approved-scene {
-  background:
-    linear-gradient(to bottom, transparent 14%, rgb(0 25 23 / 42%) 44%, transparent 68%, var(--nordic-canvas, #001917)),
-    url("/images/modus-landskap-3d-2026-11-22.webp") var(--scene-x, center) var(--approved-scene-top, center) /
-      var(--scene-width, max(100%, 960px)) auto no-repeat;
+html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home:has(.approved-scene) > .site-header {
+  background: transparent !important;
+  border-bottom-color: transparent !important;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home:has(.approved-scene) > .site-header::before {
+  content: none !important;
 }
 
 html:not([data-theme="readable"], [data-theme="contrast"]) .modus-home .approved-scene .approved-hero,
@@ -307,15 +309,22 @@ html:is([data-theme="readable"], [data-theme="contrast"]) .modus-home .approved-
   background: var(--bg);
 }
 
-/* Continue the original hero with a generated, separately cropped lake foreground. */
-html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home[data-landscape-extension]:has(.approved-middle)::before {
-  inset: var(--approved-continuation-start, 45vh) 0 0;
+/* One proportionally scaled image spans the masthead, content and footer. */
+html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home:has(.approved-scene) {
+  position: relative;
+  isolation: isolate;
+}
+
+html:not([data-theme="readable"], [data-theme="contrast"]) body.modus-home:has(.approved-scene)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background:
-    linear-gradient(180deg, rgb(5 26 27 / 32%), rgb(5 26 27 / 38%) 50%, rgb(5 26 27 / 24%)),
-    url("/images/modus-lake-continuation.jpg") 82% top / cover no-repeat;
-  mask-image: linear-gradient(transparent, #000 150px);
+    linear-gradient(180deg, rgb(5 26 27 / 12%), rgb(5 26 27 / 34%) 40%, rgb(5 26 27 / 45%) 70%, rgb(5 26 27 / 24%)),
+    url("/images/modus-landscape-full-page.jpg") 81% top / cover no-repeat;
   transform: none;
-  filter: blur(4px);
 }
 
 .modus-home .home-lower-landscape:has(.approved-middle) .home-philosophy > picture[data-a06-background] {
