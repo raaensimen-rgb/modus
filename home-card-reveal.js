@@ -49,7 +49,7 @@
     cards.forEach((card) => card.setAttribute('data-card-ready', ''));
     // Paint the initial illustration-only state before arming the fade.
     requestAnimationFrame(() => requestAnimationFrame(() => group.setAttribute('data-card-motion', '')));
-    if (cards.length === 4) setupCardArc(group, [...cards]);
+    if (cards.length === 5) setupCardArc(group, [...cards]);
   }
 }
 
@@ -99,13 +99,15 @@ function setupCardArc(group, cards) {
   group.setAttribute('data-card-arc', '');
 
   const poses = [
-    { turn: -27, depth: -48, drop: -7, roll: 5 },
+    { turn: -29, depth: -58, drop: -9, roll: 6 },
+    { turn: -16, depth: -26, drop: 1, roll: 3 },
     { turn: 0, depth: 34, drop: 14, roll: 0 },
-    { turn: 18, depth: -38, drop: 4, roll: -3 },
-    { turn: 29, depth: -62, drop: -9, roll: -6 },
+    { turn: 16, depth: -26, drop: 1, roll: -3 },
+    { turn: 29, depth: -58, drop: -9, roll: -6 },
   ];
+  const middle = Math.floor(poses.length / 2);
   const wrap = index => (index + cards.length) % cards.length;
-  let active = 1;
+  let active = middle;
   let lastWheelTime = -Infinity;
   let drag;
   let ignoreMouseClick = false;
@@ -115,7 +117,7 @@ function setupCardArc(group, cards) {
 
   function render() {
     slots.forEach((slot, index) => {
-      const position = wrap(index - active + 1);
+      const position = wrap(index - active + middle);
       const { turn, depth, drop, roll } = poses[position];
       slot.style.order = position;
       slot.dataset.arcPosition = position;
@@ -169,7 +171,7 @@ function setupCardArc(group, cards) {
   }
 
   function step(direction, dragOffset = 0) {
-    const wrapSlot = slots.find(slot => Number(slot.style.order) === (direction > 0 ? 0 : 3));
+    const wrapSlot = slots.find(slot => Number(slot.style.order) === (direction > 0 ? 0 : slots.length - 1));
     const previous = active;
     const start = motion.matches ? slots.map(slot => [slot.offsetLeft, slot.offsetTop, slot.offsetWidth, slot.offsetHeight]) : null;
     active = wrap(active + direction);

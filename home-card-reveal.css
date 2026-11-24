@@ -92,7 +92,7 @@
 .modus-home .home-portals.illustrated-portals[data-card-arc] {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1.65fr) repeat(2, minmax(0, 1fr)) !important;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1fr) minmax(0, 1.55fr) minmax(0, 1fr) minmax(0, .9fr) !important;
   gap: clamp(9px, 1.3vw, 20px) !important;
   --arc-smile: 1;
   padding: 24px 4.8% 32px !important;
@@ -111,41 +111,30 @@
   width: 100%;
 }
 
-.home-portals[data-card-arc] > .portal-arc-slot[data-arc-position="0"] {
-  width: 74%;
-  justify-self: center;
-}
+.home-portal[aria-labelledby="portal-courses-title"] > picture > img {
+    object-position: 71% 58%;
+  }
 
 .modus-home .home-portals.illustrated-portals[data-card-arc] .portal-arc-slot > .home-portal[aria-current="true"] {
   border-color: color-mix(in srgb, var(--modus-edge, currentColor), currentColor 30%);
   box-shadow: 0 14px 32px rgb(0 16 15 / 42%);
 }
 
-@media (min-width: 761px) and (forced-colors: none) {
+@media (min-width: 851px) and (forced-colors: none) {
   .home-portals[data-card-arc] .home-portal:not([aria-current]):not(:hover):not(:focus-visible) > picture {
     filter: blur(.65px);
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 850px) {
   .modus-home .home-portals.illustrated-portals[data-card-arc] {
     --arc-smile: 0;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     grid-auto-flow: dense;
   }
 
-  .home-portals[data-card-arc] > .portal-arc-slot[data-arc-position="1"] {
+  .home-portals[data-card-arc] > .portal-arc-slot[data-arc-position="2"] {
     grid-area: 1 / 1 / 2 / -1;
-  }
-
-  .home-portals[data-card-arc] > .portal-arc-slot[data-arc-position="0"] {
-    width: 100%;
-  }
-
-  .home-portals[data-card-arc] > .portal-arc-slot[data-arc-position="3"] {
-    grid-column: 1 / -1;
-    width: calc((100% - clamp(9px, 1.3vw, 20px)) / 2);
-    justify-self: center;
   }
 
   .modus-home .home-portals.illustrated-portals[data-card-arc] .portal-arc-slot > .home-portal {
@@ -154,7 +143,7 @@
   }
 }
 
-@media (min-width: 761px) and (max-width: 1140px) {
+@media (min-width: 851px) and (max-width: 1140px) {
   .modus-home .home-portals.illustrated-portals[data-card-arc] .portal-arc-slot > .home-portal {
     padding-inline: 12px !important;
     overflow-wrap: anywhere;
@@ -190,11 +179,11 @@
     transform: scaleY(-1);
   }
 
-  .portal-arc-slot[data-arc-position="1"] > .portal-arc-reflection {
+  .portal-arc-slot[data-arc-position="2"] > .portal-arc-reflection {
     opacity: .38;
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 850px) {
     .portal-arc-reflection {
       inset-block-end: -22px;
       height: 19px;
@@ -206,7 +195,7 @@
     inset: auto;
   }
 
-  .portal-arc-slot:not([data-arc-position="1"]) > .portal-arc-ripple {
+  .portal-arc-slot:not([data-arc-position="2"]) > .portal-arc-ripple {
     opacity: .4;
   }
 }
