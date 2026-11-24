@@ -89,21 +89,58 @@
   }
 }
 
-@media (min-width: 760px) and (hover: hover) and (pointer: fine)
-       and (prefers-reduced-motion: no-preference) and (forced-colors: none) {
-  .modus-home .home-portals.illustrated-portals > .home-portal[data-card-ready] {
-    transition: transform 180ms ease-out,
-                translate 230ms cubic-bezier(.2, .75, .25, 1),
-                border-color 230ms ease-out;
-  }
+/* Keep snap geometry on the slots while the original links rotate inside them. */
+.modus-home .home-portals.illustrated-portals[data-card-arc] {
+  --arc-card-width: clamp(230px, 58vw, 400px);
+  position: relative;
+  display: flex;
+  gap: clamp(16px, 3vw, 40px);
+  overflow-x: auto;
+  padding: 18px max(12px, calc((100% - var(--arc-card-width)) / 2)) 20px !important;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
 
-  .modus-home .home-portals.illustrated-portals > .home-portal[data-card-ready]:focus-visible {
-    transform: perspective(850px) translateZ(7px) rotateX(3deg);
-  }
+.home-portals[data-card-arc] > .portal-arc-slot {
+  display: flex;
+  flex: 0 0 var(--arc-card-width);
+  min-width: 0;
+  scroll-snap-align: center;
+}
 
-  .modus-home .illustrated-portals:not([data-card-touch]) > .home-portal[data-card-ready][data-card-tilt]:hover {
-    transform: perspective(850px) translateZ(10px)
-               rotateX(var(--portal-tilt-x)) rotateY(var(--portal-tilt-y));
+.modus-home .illustrated-portals[data-card-arc] .portal-arc-slot > .home-portal {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.portal-arc-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.portal-arc-controls button {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--modus-edge);
+  border-radius: 50%;
+  background: var(--modus-surface, #001917);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.portal-arc-controls button[aria-disabled="true"] {
+  opacity: .45;
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+  .modus-home .home-portals.illustrated-portals[data-card-arc] .portal-arc-slot > .home-portal[data-card-ready] {
+    transform: perspective(780px) translate3d(0, var(--arc-drop, 0px), var(--arc-depth, 0px))
+               rotateY(var(--arc-turn, 0deg));
   }
 }
 
