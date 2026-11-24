@@ -89,28 +89,33 @@
   }
 }
 
-/* Keep snap geometry on the slots while the original links rotate inside them. */
 .modus-home .home-portals.illustrated-portals[data-card-arc] {
-  --arc-card-width: clamp(230px, 58vw, 400px);
-  position: relative;
-  display: flex;
-  gap: clamp(16px, 3vw, 40px);
-  overflow-x: auto;
-  padding: 18px max(12px, calc((100% - var(--arc-card-width)) / 2)) 20px !important;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(9px, 1.3vw, 20px) !important;
+  padding: 14px 4.8% 20px !important;
+  touch-action: pan-y pinch-zoom;
 }
 
 .home-portals[data-card-arc] > .portal-arc-slot {
   display: flex;
-  flex: 0 0 var(--arc-card-width);
   min-width: 0;
-  scroll-snap-align: center;
 }
 
 .modus-home .illustrated-portals[data-card-arc] .portal-arc-slot > .home-portal {
   box-sizing: border-box;
   width: 100%;
+}
+
+@media (max-width: 680px) {
+  .modus-home .home-portals.illustrated-portals[data-card-arc] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .modus-home .home-portals.illustrated-portals[data-card-arc] .portal-arc-slot > .home-portal {
+    padding-inline: 12px !important;
+    overflow-wrap: anywhere;
+  }
 }
 
 .portal-arc-controls {
@@ -132,13 +137,11 @@
   cursor: pointer;
 }
 
-.portal-arc-controls button[aria-disabled="true"] {
-  opacity: .45;
-  cursor: default;
-}
-
 @media (prefers-reduced-motion: no-preference) and (forced-colors: none) {
   .modus-home .home-portals.illustrated-portals[data-card-arc] .portal-arc-slot > .home-portal[data-card-ready] {
+    transition: transform 280ms ease,
+                translate 230ms cubic-bezier(.2, .75, .25, 1),
+                border-color 230ms ease-out;
     transform: perspective(780px) translate3d(0, var(--arc-drop, 0px), var(--arc-depth, 0px))
                rotateY(var(--arc-turn, 0deg));
   }

@@ -80,68 +80,97 @@ function setupCardArc(group, cards) {
   group.after(controls);
   group.setAttribute('data-card-arc', '');
 
-  let frame = 0;
-  let active = 0;
+  const poses = [
+    { turn: -21, depth: -36, drop: 9 },
+    { turn: -4, depth: 12, drop: 0 },
+    { turn: 12, depth: -10, drop: 4 },
+    { turn: 24, depth: -40, drop: 10 },
+  ];
+  const wrap = index => (index + cards.length) % cards.length;
+  let active = 1;
   let lastWheelTime = -Infinity;
-
-  function target(slot) {
-    return slot.offsetLeft + slot.offsetWidth / 2 - group.clientWidth / 2;
-  }
+  let touchStart;
+  let ignoreTouchClickUntil = -Infinity;
 
   function render() {
-    frame = 0;
-    const position = group.scrollLeft;
-    const distances = slots.map(slot => target(slot) - position);
-    active = distances.reduce((closest, distance, index) =>
-      Math.abs(distance) < Math.abs(distances[closest]) ? index : closest, 0);
-    const spacing = slots[1].offsetLeft - slots[0].offsetLeft || 1;
     slots.forEach((slot, index) => {
-      const distance = Math.max(-2, Math.min(2, distances[index] / spacing));
-      const depth = Math.abs(distance);
-      cards[index].style.setProperty('--arc-turn', `${distance * 24}deg`);
-      cards[index].style.setProperty('--arc-depth', `${-depth * 46}px`);
-      cards[index].style.setProperty('--arc-drop', `${depth * 8}px`);
+      const position = wrap(index - active + 1);
+      const { turn, depth, drop } = poses[position];
+      slot.style.order = position;
+      cards[index].style.setProperty('--arc-turn', `${turn}deg`);
+      cards[index].style.setProperty('--arc-depth', `${depth}px`);
+      cards[index].style.setProperty('--arc-drop', `${drop}px`);
+      if (index === active) cards[index].setAttribute('aria-current', 'true');
+      else cards[index].removeAttribute('aria-current');
     });
-    buttons[0].setAttribute('aria-disabled', String(active === 0));
-    buttons[1].setAttribute('aria-disabled', String(active === cards.length - 1));
   }
 
-  function queueRender() {
-    if (!frame) frame = requestAnimationFrame(render);
+  function step(direction) {
+    const wrapSlot = slots.find(slot => Number(slot.style.order) === (direction > 0 ? 0 : 3));
+    const start = motion.matches ? slots.map(slot => [slot.offsetLeft, slot.offsetTop]) : null;
+    active = wrap(active + direction);
+    render();
+    if (!start) return;
+
+    const end = slots.map(slot => [slot.offsetLeft, slot.offsetTop]);
+    slots.forEach((slot, index) => {
+      slot.getAnimations().forEach(animation => animation.cancel());
+      const [x, y] = start[index];
+      const [nextX, nextY] = end[index];
+      const frames = slot === wrapSlot
+        ? [{ opacity: .35 }, { opacity: 1 }]
+        : [{ translate: `${x - nextX}px ${y - nextY}px` }, { translate: '0px 0px' }];
+      slot.animate(frames, { duration: 280, easing: 'ease-out' });
+    });
   }
 
-  function select(index, animate = true) {
-    if (!slots[index]) return;
-    group.scrollTo({ left: target(slots[index]), behavior: animate && motion.matches ? 'smooth' : 'instant' });
-  }
-
-  buttons[0].addEventListener('click', () => select(active - 1));
-  buttons[1].addEventListener('click', () => select(active + 1));
+  buttons[0].addEventListener('click', () => step(-1));
+  buttons[1].addEventListener('click', () => step(1));
   cards.forEach((card, index) => {
-    card.addEventListener('focus', () => {
-      if (card.matches(':focus-visible')) select(index, false);
-    });
     card.addEventListener('keydown', event => {
       if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
-      const step = { ArrowLeft: -1, ArrowRight: 1 }[event.key];
-      if (!step) return;
+      const direction = { ArrowLeft: -1, ArrowRight: 1 }[event.key];
+      if (!direction) return;
       event.preventDefault();
-      cards[index + step]?.focus({ preventScroll: true });
+      active = index;
+      render();
+      step(direction);
+      cards[active].focus({ preventScroll: true });
     });
   });
 
   group.addEventListener('wheel', event => {
-    if (event.ctrlKey || event.shiftKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
-    const direction = Math.sign(event.deltaY);
-    if (!slots[active + direction]) return;
+    if (event.ctrlKey || !event.cancelable) return;
+    const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+    if (!delta) return;
     event.preventDefault();
-    const previousWheelTime = lastWheelTime;
+    if (event.timeStamp - lastWheelTime > 180) step(Math.sign(delta));
     lastWheelTime = event.timeStamp;
-    if (event.timeStamp - previousWheelTime > 180) select(active + direction);
   }, { passive: false });
 
-  group.addEventListener('scroll', queueRender, { passive: true });
-  new ResizeObserver(queueRender).observe(group);
-  select(group.clientWidth >= 760 ? 1 : 0, false);
+  group.addEventListener('touchstart', event => {
+    touchStart = event.touches.length === 1 ? event.touches[0] : undefined;
+  }, { passive: true });
+  group.addEventListener('touchcancel', () => { touchStart = undefined; }, { passive: true });
+  group.addEventListener('touchend', event => {
+    if (!touchStart) return;
+    const end = event.changedTouches[0];
+    const x = end.clientX - touchStart.clientX;
+    const y = end.clientY - touchStart.clientY;
+    touchStart = undefined;
+    if (Math.abs(x) < 40 || Math.abs(x) <= Math.abs(y)) return;
+    ignoreTouchClickUntil = event.timeStamp + 350;
+    step(-Math.sign(x));
+  }, { passive: true });
+  group.addEventListener('click', event => {
+    if (event.detail && event.timeStamp < ignoreTouchClickUntil) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }, { capture: true });
+
+  motion.addEventListener('change', () => {
+    if (!motion.matches) slots.forEach(slot => slot.getAnimations().forEach(animation => animation.cancel()));
+  });
   render();
 }
