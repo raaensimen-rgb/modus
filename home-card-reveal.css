@@ -152,14 +152,32 @@
   background: var(--modus-surface, #001917);
 }
 
+[data-arc-dragging] {
+  user-select: none;
+}
+
+[data-arc-dragging], [data-arc-dragging] .home-portal {
+  cursor: grabbing;
+}
+
 @media (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+  [data-arc-dragging] > .portal-arc-slot {
+    transform: translateX(var(--arc-drag-offset, 0px));
+  }
+
   .modus-home .home-portals.illustrated-portals[data-card-arc] .portal-arc-slot > .home-portal[data-card-ready] {
     transition: transform 280ms ease,
                 translate 230ms cubic-bezier(.2, .75, .25, 1),
                 border-color 230ms ease-out;
     transform: perspective(620px)
                translate3d(0, calc(var(--arc-drop, 0px) * var(--arc-smile)), var(--arc-depth, 0px))
-               rotateY(var(--arc-turn, 0deg)) rotateZ(calc(var(--arc-roll, 0deg) * var(--arc-smile)));
+               rotateY(calc(var(--arc-turn, 0deg) + var(--arc-hover, 0deg))) rotateZ(calc(var(--arc-roll, 0deg) * var(--arc-smile)));
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .home-portals[data-card-arc]:not([data-arc-dragging]) .home-portal:hover {
+    --arc-hover: var(--arc-hover-tilt, 0deg);
   }
 }
 

@@ -89,8 +89,8 @@ function setupCardArc(group, cards) {
   const wrap = index => (index + cards.length) % cards.length;
   let active = 1;
   let lastWheelTime = -Infinity;
-  let mouseOrigin;
-  let lastMouseStep = -Infinity;
+  let drag;
+  let ignoreMouseClick = false;
   let touchStart;
   let ignoreTouchClickUntil = -Infinity;
 
@@ -108,7 +108,7 @@ function setupCardArc(group, cards) {
     });
   }
 
-  function step(direction) {
+  function step(direction, dragOffset = 0) {
     const wrapSlot = slots.find(slot => Number(slot.style.order) === (direction > 0 ? 0 : 3));
     const start = motion.matches ? slots.map(slot => [slot.offsetLeft, slot.offsetTop]) : null;
     active = wrap(active + direction);
@@ -120,10 +120,19 @@ function setupCardArc(group, cards) {
       slot.getAnimations().forEach(animation => animation.cancel());
       const [x, y] = start[index];
       const [nextX, nextY] = end[index];
+      const fromX = x - nextX + dragOffset;
+      const fromY = y - nextY;
+      const from = { translate: `${fromX}px ${fromY}px` };
+      const to = { translate: '0px 0px' };
       const frames = slot === wrapSlot
-        ? [{ opacity: .35 }, { opacity: 1 }]
-        : [{ translate: `${x - nextX}px ${y - nextY}px` }, { translate: '0px 0px' }];
-      slot.animate(frames, { duration: 280, easing: 'ease-out' });
+        ? [
+            { ...from, opacity: 1, scale: 1 },
+            { translate: `${fromX * .62}px ${fromY * .62 - 12}px`, opacity: 0, scale: .73, offset: .36 },
+            { translate: `${fromX * .22}px ${fromY * .22 - 12}px`, opacity: 0, scale: .73, offset: .72 },
+            { ...to, opacity: 1, scale: 1 },
+          ]
+        : [from, to];
+      slot.animate(frames, { duration: 360, easing: 'cubic-bezier(.2, .7, .25, 1)' });
     });
   }
 
@@ -142,32 +151,66 @@ function setupCardArc(group, cards) {
     });
   });
 
-  function resetMouse(event) {
-    mouseOrigin = { x: event.clientX, y: event.clientY };
+  group.addEventListener('pointerdown', event => {
+    if (event.pointerType !== 'mouse' || event.button !== 0) return;
+    ignoreMouseClick = false;
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    drag = { id: event.pointerId, x: event.clientX, y: event.clientY, offset: 0, moved: false };
+  });
+
+  group.addEventListener('pointermove', event => {
+    if (event.pointerType !== 'mouse') return;
+    if (!drag || event.pointerId !== drag.id || !event.buttons) {
+      const card = event.target.closest('.home-portal');
+      if (!card || !motion.matches) return;
+      const bounds = card.getBoundingClientRect();
+      const x = 2 * (event.clientX - bounds.left) / bounds.width - 1;
+      card.style.setProperty('--arc-hover-tilt', `${Math.max(-1, Math.min(1, x)) * 4}deg`);
+      return;
+    }
+    const delta = event.clientX - drag.x;
+    if (!drag.moved) {
+      if (Math.abs(delta) < 8 || Math.abs(delta) < Math.abs(event.clientY - drag.y)) return;
+      drag.moved = true;
+      group.setPointerCapture(event.pointerId);
+      group.setAttribute('data-arc-dragging', '');
+    }
+    drag.offset = Math.max(-64, Math.min(64, delta * .55));
+    group.style.setProperty('--arc-drag-offset', `${drag.offset}px`);
+  });
+
+  function finishDrag(event, commit) {
+    if (!drag || event.pointerId !== drag.id) return;
+    const { moved, x, offset } = drag;
+    drag = undefined;
+    group.removeAttribute('data-arc-dragging');
+    group.style.removeProperty('--arc-drag-offset');
+    if (!moved) return;
+    ignoreMouseClick = true;
+    const delta = event.clientX - x;
+    if (commit && Math.abs(delta) >= 48) step(-Math.sign(delta), offset);
+    else if (motion.matches) {
+      slots.forEach(slot => slot.animate([
+        { translate: `${offset}px 0px` }, { translate: '0px 0px' },
+      ], { duration: 160, easing: 'ease-out' }));
+    }
   }
 
-  group.addEventListener('pointerenter', resetMouse);
-  group.addEventListener('pointerdown', resetMouse);
-  group.addEventListener('pointerleave', () => { mouseOrigin = undefined; });
-  group.addEventListener('pointermove', event => {
-    if (event.pointerType !== 'mouse' || event.buttons || !mouseOrigin) return;
-    const x = event.clientX - mouseOrigin.x;
-    const y = event.clientY - mouseOrigin.y;
-    // A predominantly horizontal sweep turns the arc. Vertical approaches leave it still.
-    if (Math.abs(y) > 42 && Math.abs(y) > Math.abs(x)) resetMouse(event);
-    if (Math.abs(x) < 96 || Math.abs(x) < Math.abs(y) * 1.8 ||
-        event.timeStamp - lastMouseStep < 320) return;
-    resetMouse(event);
-    lastMouseStep = event.timeStamp;
-    step(Math.sign(x));
-  }, { passive: true });
+  group.addEventListener('pointerup', event => finishDrag(event, true));
+  group.addEventListener('pointercancel', event => finishDrag(event, false));
+  group.addEventListener('lostpointercapture', event => finishDrag(event, false));
+  group.addEventListener('pointerleave', event => {
+    if (drag && !drag.moved) finishDrag(event, false);
+  });
+  group.addEventListener('dragstart', event => {
+    if (drag) event.preventDefault();
+  });
 
   group.addEventListener('wheel', event => {
-    if (event.ctrlKey || !event.cancelable) return;
+    if (event.ctrlKey || drag?.moved || !event.cancelable) return;
     const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
     if (!delta) return;
     event.preventDefault();
-    resetMouse(event);
     if (event.timeStamp - lastWheelTime > 180) step(Math.sign(delta));
     lastWheelTime = event.timeStamp;
   }, { passive: false });
@@ -187,7 +230,9 @@ function setupCardArc(group, cards) {
     step(-Math.sign(x));
   }, { passive: true });
   group.addEventListener('click', event => {
-    if (event.detail && event.timeStamp < ignoreTouchClickUntil) {
+    if (event.detail && ((event.pointerType !== 'touch' && ignoreMouseClick) ||
+        event.timeStamp < ignoreTouchClickUntil)) {
+      ignoreMouseClick = false;
       event.preventDefault();
       event.stopImmediatePropagation();
     }
