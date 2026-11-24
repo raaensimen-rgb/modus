@@ -81,25 +81,28 @@ function setupCardArc(group, cards) {
   group.setAttribute('data-card-arc', '');
 
   const poses = [
-    { turn: -21, depth: -36, drop: 9 },
-    { turn: -4, depth: 12, drop: 0 },
-    { turn: 12, depth: -10, drop: 4 },
-    { turn: 24, depth: -40, drop: 10 },
+    { turn: -31, depth: -62, drop: -12, roll: 6 },
+    { turn: -10, depth: 22, drop: 15, roll: 2 },
+    { turn: 10, depth: 11, drop: 17, roll: -2 },
+    { turn: 31, depth: -62, drop: -12, roll: -6 },
   ];
   const wrap = index => (index + cards.length) % cards.length;
   let active = 1;
   let lastWheelTime = -Infinity;
+  let mouseOrigin;
+  let lastMouseStep = -Infinity;
   let touchStart;
   let ignoreTouchClickUntil = -Infinity;
 
   function render() {
     slots.forEach((slot, index) => {
       const position = wrap(index - active + 1);
-      const { turn, depth, drop } = poses[position];
+      const { turn, depth, drop, roll } = poses[position];
       slot.style.order = position;
       cards[index].style.setProperty('--arc-turn', `${turn}deg`);
       cards[index].style.setProperty('--arc-depth', `${depth}px`);
       cards[index].style.setProperty('--arc-drop', `${drop}px`);
+      cards[index].style.setProperty('--arc-roll', `${roll}deg`);
       if (index === active) cards[index].setAttribute('aria-current', 'true');
       else cards[index].removeAttribute('aria-current');
     });
@@ -139,11 +142,32 @@ function setupCardArc(group, cards) {
     });
   });
 
+  function resetMouse(event) {
+    mouseOrigin = { x: event.clientX, y: event.clientY };
+  }
+
+  group.addEventListener('pointerenter', resetMouse);
+  group.addEventListener('pointerdown', resetMouse);
+  group.addEventListener('pointerleave', () => { mouseOrigin = undefined; });
+  group.addEventListener('pointermove', event => {
+    if (event.pointerType !== 'mouse' || event.buttons || !mouseOrigin) return;
+    const x = event.clientX - mouseOrigin.x;
+    const y = event.clientY - mouseOrigin.y;
+    // A predominantly horizontal sweep turns the arc. Vertical approaches leave it still.
+    if (Math.abs(y) > 42 && Math.abs(y) > Math.abs(x)) resetMouse(event);
+    if (Math.abs(x) < 96 || Math.abs(x) < Math.abs(y) * 1.8 ||
+        event.timeStamp - lastMouseStep < 320) return;
+    resetMouse(event);
+    lastMouseStep = event.timeStamp;
+    step(Math.sign(x));
+  }, { passive: true });
+
   group.addEventListener('wheel', event => {
     if (event.ctrlKey || !event.cancelable) return;
     const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
     if (!delta) return;
     event.preventDefault();
+    resetMouse(event);
     if (event.timeStamp - lastWheelTime > 180) step(Math.sign(delta));
     lastWheelTime = event.timeStamp;
   }, { passive: false });

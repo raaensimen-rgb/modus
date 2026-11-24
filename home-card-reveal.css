@@ -93,7 +93,8 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(9px, 1.3vw, 20px) !important;
-  padding: 14px 4.8% 20px !important;
+  --arc-smile: 1;
+  padding: 24px 4.8% 32px !important;
   touch-action: pan-y pinch-zoom;
 }
 
@@ -109,6 +110,7 @@
 
 @media (max-width: 680px) {
   .modus-home .home-portals.illustrated-portals[data-card-arc] {
+    --arc-smile: 0;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -121,20 +123,33 @@
 .portal-arc-controls {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 0;
 }
 
 .portal-arc-controls button {
+  position: relative;
+  isolation: isolate;
   display: grid;
   place-items: center;
   min-width: 44px;
   min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+.portal-arc-controls button::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  z-index: -1;
   border: 1px solid var(--modus-edge);
   border-radius: 50%;
   background: var(--modus-surface, #001917);
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
 }
 
 @media (prefers-reduced-motion: no-preference) and (forced-colors: none) {
@@ -142,8 +157,9 @@
     transition: transform 280ms ease,
                 translate 230ms cubic-bezier(.2, .75, .25, 1),
                 border-color 230ms ease-out;
-    transform: perspective(780px) translate3d(0, var(--arc-drop, 0px), var(--arc-depth, 0px))
-               rotateY(var(--arc-turn, 0deg));
+    transform: perspective(620px)
+               translate3d(0, calc(var(--arc-drop, 0px) * var(--arc-smile)), var(--arc-depth, 0px))
+               rotateY(var(--arc-turn, 0deg)) rotateZ(calc(var(--arc-roll, 0deg) * var(--arc-smile)));
   }
 }
 
