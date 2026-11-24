@@ -10,11 +10,13 @@
 .modus-home main .approved-scene .approved-hero.home-hero {
   align-items: flex-end;
   min-height: max(clamp(210px, 22vw, 350px), clamp(210px, 470px - 33vw, 340px)) !important;
-  padding: 50px 5% clamp(6px, 12px - .45vw, 10px) !important;
+  padding: 50px 5% 22px !important;
   isolation: isolate;
 }
 
 .modus-home .approved-hero .hero-content {
+  position: relative;
+  top: clamp(12px, 10px + .45vw, 16px);
   width: min(100%, 72rem);
   margin-inline: auto;
   text-align: center;

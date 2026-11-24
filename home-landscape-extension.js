@@ -13,6 +13,7 @@
 
   const menu = header.querySelector('.side-menu-toggle');
   const heading = menu ? hero.querySelector('#welcome') : null;
+  const copy = heading?.closest('.hero-content');
   let menuOffset = 0;
 
   function update() {
@@ -52,7 +53,8 @@
 
     if (menu && heading) {
       const menuBottom = menu.getBoundingClientRect().bottom - menuOffset;
-      menuOffset = Math.max(0, heading.getBoundingClientRect().top - menuBottom - 22);
+      const copyDrop = copy ? Number.parseFloat(getComputedStyle(copy).top) || 0 : 0;
+      menuOffset = Math.max(0, heading.getBoundingClientRect().top - copyDrop - menuBottom - 22);
       menu.style.setProperty('--home-menu-offset', `0 ${px(menuOffset)}`);
     }
   }
