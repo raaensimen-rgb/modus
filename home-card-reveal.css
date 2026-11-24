@@ -132,9 +132,29 @@
   }
 }
 
-@media (min-width: 851px) and (forced-colors: none) {
-  .home-portals[data-card-arc] .home-portal:not([aria-current]):not(:hover):not(:focus-visible) > picture {
-    filter: blur(.65px);
+@media (forced-colors: none) {
+  .home-portals[data-card-arc] > .portal-arc-slot {
+    --arc-side-blur: 1.05px;
+    --arc-fade-end: 114%;
+  }
+
+  .home-portals[data-card-arc] > .portal-arc-slot:is([data-arc-position="0"], [data-arc-position="4"]) {
+    --arc-side-blur: 2.1px;
+    --arc-fade-end: 98%;
+  }
+
+  .home-portals[data-card-arc] > .portal-arc-slot:is([data-arc-position="0"], [data-arc-position="1"]) {
+    --arc-fade-angle: 225deg;
+  }
+
+  .home-portals[data-card-arc] > .portal-arc-slot:is([data-arc-position="3"], [data-arc-position="4"]) {
+    --arc-fade-angle: 135deg;
+  }
+
+  .home-portals[data-card-arc] .home-portal:not([aria-current], :hover, :focus-visible, [data-card-open]) > picture {
+    filter: blur(var(--arc-side-blur));
+    mask-image: linear-gradient(var(--arc-fade-angle, 180deg),
+      #000 39%, rgb(0 0 0 / 72%) 63%, transparent var(--arc-fade-end));
   }
 }
 
