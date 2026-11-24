@@ -81,10 +81,10 @@ function setupCardArc(group, cards) {
   group.setAttribute('data-card-arc', '');
 
   const poses = [
-    { turn: -31, depth: -62, drop: -12, roll: 6 },
-    { turn: -10, depth: 22, drop: 15, roll: 2 },
-    { turn: 10, depth: 11, drop: 17, roll: -2 },
-    { turn: 31, depth: -62, drop: -12, roll: -6 },
+    { turn: -27, depth: -48, drop: -7, roll: 5 },
+    { turn: 0, depth: 34, drop: 14, roll: 0 },
+    { turn: 18, depth: -38, drop: 4, roll: -3 },
+    { turn: 29, depth: -62, drop: -9, roll: -6 },
   ];
   const wrap = index => (index + cards.length) % cards.length;
   let active = 1;
@@ -92,6 +92,7 @@ function setupCardArc(group, cards) {
   let drag;
   let ignoreMouseClick = false;
   let touchStart;
+  let touchOffset = 0;
   let ignoreTouchClickUntil = -Infinity;
 
   function render() {
@@ -99,6 +100,7 @@ function setupCardArc(group, cards) {
       const position = wrap(index - active + 1);
       const { turn, depth, drop, roll } = poses[position];
       slot.style.order = position;
+      slot.dataset.arcPosition = position;
       cards[index].style.setProperty('--arc-turn', `${turn}deg`);
       cards[index].style.setProperty('--arc-depth', `${depth}px`);
       cards[index].style.setProperty('--arc-drop', `${drop}px`);
@@ -189,11 +191,14 @@ function setupCardArc(group, cards) {
     ignoreMouseClick = true;
     const delta = event.clientX - x;
     if (commit && Math.abs(delta) >= 48) step(-Math.sign(delta), offset);
-    else if (motion.matches) {
-      slots.forEach(slot => slot.animate([
-        { translate: `${offset}px 0px` }, { translate: '0px 0px' },
-      ], { duration: 160, easing: 'ease-out' }));
-    }
+    else settleDrag(offset);
+  }
+
+  function settleDrag(offset) {
+    if (!motion.matches) return;
+    slots.forEach(slot => slot.animate([
+      { translate: `${offset}px 0px` }, { translate: '0px 0px' },
+    ], { duration: 160, easing: 'ease-out' }));
   }
 
   group.addEventListener('pointerup', event => finishDrag(event, true));
@@ -215,19 +220,44 @@ function setupCardArc(group, cards) {
     lastWheelTime = event.timeStamp;
   }, { passive: false });
 
+  function clearTouch() {
+    touchStart = undefined;
+    touchOffset = 0;
+    group.removeAttribute('data-arc-dragging');
+    group.style.removeProperty('--arc-drag-offset');
+  }
+
   group.addEventListener('touchstart', event => {
-    touchStart = event.touches.length === 1 ? event.touches[0] : undefined;
+    if (event.touches.length !== 1) {
+      clearTouch();
+      return;
+    }
+    touchStart = event.touches[0];
   }, { passive: true });
-  group.addEventListener('touchcancel', () => { touchStart = undefined; }, { passive: true });
+  group.addEventListener('touchmove', event => {
+    if (!touchStart) return;
+    const touch = event.touches[0];
+    const x = touch.clientX - touchStart.clientX;
+    const y = touch.clientY - touchStart.clientY;
+    if (!touchOffset && (Math.abs(x) < 8 || Math.abs(x) <= Math.abs(y))) return;
+    touchOffset = Math.max(-42, Math.min(42, x * .5));
+    group.setAttribute('data-arc-dragging', '');
+    group.style.setProperty('--arc-drag-offset', `${touchOffset}px`);
+  }, { passive: true });
+  group.addEventListener('touchcancel', clearTouch, { passive: true });
   group.addEventListener('touchend', event => {
     if (!touchStart) return;
     const end = event.changedTouches[0];
     const x = end.clientX - touchStart.clientX;
     const y = end.clientY - touchStart.clientY;
-    touchStart = undefined;
-    if (Math.abs(x) < 40 || Math.abs(x) <= Math.abs(y)) return;
+    const offset = touchOffset;
+    clearTouch();
+    if (Math.abs(x) < 40 || Math.abs(x) <= Math.abs(y)) {
+      if (offset) settleDrag(offset);
+      return;
+    }
     ignoreTouchClickUntil = event.timeStamp + 350;
-    step(-Math.sign(x));
+    step(-Math.sign(x), offset);
   }, { passive: true });
   group.addEventListener('click', event => {
     if (event.detail && ((event.pointerType !== 'touch' && ignoreMouseClick) ||
