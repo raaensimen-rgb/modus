@@ -99,6 +99,8 @@
 }
 
 .home-portals[data-card-arc] > .portal-arc-slot {
+  position: relative;
+  isolation: isolate;
   display: flex;
   min-width: 0;
 }
@@ -155,6 +157,26 @@
   .modus-home .home-portals.illustrated-portals[data-card-arc] .portal-arc-slot > .home-portal {
     padding-inline: 12px !important;
     overflow-wrap: anywhere;
+  }
+}
+
+@media (forced-colors: none) {
+  .portal-arc-ripple {
+    position: absolute;
+    z-index: -1;
+    inset-inline: 5%;
+    inset-block-end: -10px;
+    height: clamp(14px, 2vw, 23px);
+    opacity: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center,
+      transparent 31%,
+      rgb(146 237 220 / 27%) 33%, transparent 39%,
+      transparent 55%, rgb(132 219 208 / 58%) 59%, transparent 65%);
+  }
+
+  .portal-arc-slot:not([data-arc-position="1"]) > .portal-arc-ripple {
+    opacity: .4;
   }
 }
 

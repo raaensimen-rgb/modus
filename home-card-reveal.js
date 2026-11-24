@@ -70,11 +70,16 @@ function setupCardArc(group, cards) {
       return button;
     });
 
+  const water = [];
   const slots = cards.map(card => {
     const slot = document.createElement('div');
     slot.className = 'portal-arc-slot';
     card.replaceWith(slot);
-    slot.append(card);
+    const ripple = document.createElement('span');
+    ripple.className = 'portal-arc-ripple';
+    ripple.setAttribute('aria-hidden', 'true');
+    water.push(ripple);
+    slot.append(card, ripple);
     return slot;
   });
   group.after(controls);
@@ -112,6 +117,7 @@ function setupCardArc(group, cards) {
 
   function step(direction, dragOffset = 0) {
     const wrapSlot = slots.find(slot => Number(slot.style.order) === (direction > 0 ? 0 : 3));
+    const previous = active;
     const start = motion.matches ? slots.map(slot => [slot.offsetLeft, slot.offsetTop]) : null;
     active = wrap(active + direction);
     render();
@@ -126,15 +132,33 @@ function setupCardArc(group, cards) {
       const fromY = y - nextY;
       const from = { translate: `${fromX}px ${fromY}px` };
       const to = { translate: '0px 0px' };
-      const frames = slot === wrapSlot
-        ? [
-            { ...from, opacity: 1, scale: 1 },
-            { translate: `${fromX * .62}px ${fromY * .62 - 12}px`, opacity: 0, scale: .73, offset: .36 },
-            { translate: `${fromX * .22}px ${fromY * .22 - 12}px`, opacity: 0, scale: .73, offset: .72 },
-            { ...to, opacity: 1, scale: 1 },
-          ]
-        : [from, to];
-      slot.animate(frames, { duration: 360, easing: 'cubic-bezier(.2, .7, .25, 1)' });
+      const isRising = index === active;
+      const isSinking = index === previous;
+      const surface = (progress, dip) => ({
+        translate: `${fromX * (1 - progress)}px ${fromY * (1 - progress) + dip}px`,
+      });
+      let frames = [from, to];
+      if (slot === wrapSlot) {
+        frames = [
+          { ...from, opacity: 1, scale: 1 },
+          { ...surface(.28, 24), opacity: 0, scale: .76, offset: .34 },
+          { ...surface(.86, 22), opacity: 0, scale: .76, offset: .67 },
+          { ...to, opacity: 1, scale: 1 },
+        ];
+      } else if (isRising || isSinking) {
+        frames = [from, { ...surface(.42, isRising ? 13 : 17), offset: .42 }, to];
+      }
+      slot.animate(frames, { duration: 420, easing: 'cubic-bezier(.24, .62, .3, 1)' });
+
+      const ripple = water[index];
+      ripple.getAnimations().forEach(animation => animation.cancel());
+      if (isRising || isSinking || slot === wrapSlot) {
+        ripple.animate([
+          { opacity: 0, scale: .55 },
+          { opacity: .72, scale: .9, offset: .24 },
+          { opacity: 0, scale: 1.22 },
+        ], { duration: 540, delay: slot === wrapSlot ? 155 : 25, easing: 'ease-out' });
+      }
     });
   }
 
@@ -269,7 +293,9 @@ function setupCardArc(group, cards) {
   }, { capture: true });
 
   motion.addEventListener('change', () => {
-    if (!motion.matches) slots.forEach(slot => slot.getAnimations().forEach(animation => animation.cancel()));
+    if (!motion.matches) [...slots, ...water].forEach(element => {
+      element.getAnimations().forEach(animation => animation.cancel());
+    });
   });
   render();
 }
