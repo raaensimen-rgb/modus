@@ -95,6 +95,8 @@
   grid-template-columns: minmax(0, .9fr) minmax(0, 1fr) minmax(0, 1.55fr) minmax(0, 1fr) minmax(0, .9fr) !important;
   gap: clamp(9px, 1.3vw, 20px) !important;
   --arc-smile: 1;
+  --arc-angle-scale: 1;
+  --arc-depth-scale: 1;
   padding: 24px 4.8% 32px !important;
   touch-action: pan-y pinch-zoom;
 }
@@ -120,6 +122,16 @@
   box-shadow: 0 14px 32px rgb(0 16 15 / 42%);
 }
 
+@media (min-width: 851px) {
+  .home-portals[data-card-arc] > .portal-arc-slot[data-arc-position="1"] {
+    inset-inline-start: -14px;
+  }
+
+  .home-portals[data-card-arc] > .portal-arc-slot[data-arc-position="3"] {
+    inset-inline-start: 14px;
+  }
+}
+
 @media (min-width: 851px) and (forced-colors: none) {
   .home-portals[data-card-arc] .home-portal:not([aria-current]):not(:hover):not(:focus-visible) > picture {
     filter: blur(.65px);
@@ -129,6 +141,8 @@
 @media (max-width: 850px) {
   .modus-home .home-portals.illustrated-portals[data-card-arc] {
     --arc-smile: 0;
+    --arc-angle-scale: .55;
+    --arc-depth-scale: .62;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     grid-auto-flow: dense;
   }
@@ -169,7 +183,7 @@
     position: absolute;
     z-index: -1;
     inset-inline: 3%;
-    inset-block-end: -35px;
+    inset-block-end: -48px;
     height: 25px;
     pointer-events: none;
     opacity: 0;
@@ -249,9 +263,11 @@
     transition: transform 280ms ease,
                 translate 230ms cubic-bezier(.2, .75, .25, 1),
                 border-color 230ms ease-out;
-    transform: perspective(620px)
-               translate3d(0, calc(var(--arc-drop, 0px) * var(--arc-smile)), var(--arc-depth, 0px))
-               rotateY(calc(var(--arc-turn, 0deg) + var(--arc-hover, 0deg))) rotateZ(calc(var(--arc-roll, 0deg) * var(--arc-smile)));
+    transform: perspective(505px)
+               translate3d(0, calc(var(--arc-drop, 0px) * var(--arc-smile)),
+                           calc(var(--arc-depth, 0px) * var(--arc-depth-scale)))
+               rotateY(calc(var(--arc-turn, 0deg) * var(--arc-angle-scale) + var(--arc-hover, 0deg)))
+               rotateZ(calc(var(--arc-roll, 0deg) * var(--arc-smile)));
   }
 }
 

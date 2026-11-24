@@ -98,13 +98,16 @@ function setupCardArc(group, cards) {
   group.after(controls);
   group.setAttribute('data-card-arc', '');
 
-  const poses = [
-    { turn: -29, depth: -58, drop: -9, roll: 6 },
-    { turn: -16, depth: -26, drop: 1, roll: 3 },
-    { turn: 0, depth: 34, drop: 14, roll: 0 },
-    { turn: 16, depth: -26, drop: 1, roll: -3 },
-    { turn: 29, depth: -58, drop: -9, roll: -6 },
-  ];
+  // Project five equally spaced points on the visible half of the ring.
+  const poses = [-54, -27, 0, 27, 54].map(angle => {
+    const fromFront = 1 - Math.cos(angle * Math.PI / 180);
+    return {
+      turn: angle * .8,
+      depth: 52 - fromFront * 330,
+      drop: 22 - fromFront * 101,
+      roll: angle * -.13,
+    };
+  });
   const middle = Math.floor(poses.length / 2);
   const wrap = index => (index + cards.length) % cards.length;
   let active = middle;
@@ -150,8 +153,9 @@ function setupCardArc(group, cards) {
       const depth = Math.sin(Math.PI * offset);
       return {
         offset,
-        translate: `${fromX * (1 - progress)}px ${fromY * (1 - progress) + depth * 62}px`,
-        scale: 1 - depth * .23,
+        translate: `${fromX * (1 - progress)}px ${fromY * (1 - progress) + depth * 76}px`,
+        transform: `perspective(760px) translateZ(${-depth * 150}px)`,
+        scale: 1 - depth * .16,
       };
     });
 
