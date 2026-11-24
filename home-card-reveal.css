@@ -225,6 +225,36 @@
     }
   }
 
+  .portal-arc-slot:is([data-arc-position="1"], [data-arc-position="3"])::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset-inline: 8%;
+    inset-block-end: -14px;
+    height: 24px;
+    pointer-events: none;
+    opacity: .3;
+    background: radial-gradient(ellipse at center,
+      transparent 45%, rgb(153 226 217 / 55%) 52%, transparent 58%,
+      transparent 65%, rgb(128 212 203 / 35%) 71%, transparent 77%);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .portal-arc-slot:is([data-arc-position="1"], [data-arc-position="3"])::after {
+      animation: portal-arc-water-wake 4.8s ease-out infinite;
+    }
+
+    .portal-arc-slot[data-arc-position="3"]::after {
+      animation-delay: -2.4s;
+    }
+
+    @keyframes portal-arc-water-wake {
+      0% { opacity: 0; scale: .7 .68; }
+      24% { opacity: .57; }
+      82%, 100% { opacity: 0; scale: 1.24 1.08; }
+    }
+  }
+
   .portal-arc-waterline {
     z-index: 1;
     inset: auto;
