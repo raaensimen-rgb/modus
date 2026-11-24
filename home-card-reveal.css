@@ -90,6 +90,7 @@
 }
 
 .modus-home .home-portals.illustrated-portals[data-card-arc] {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1.65fr) repeat(2, minmax(0, 1fr)) !important;
   gap: clamp(9px, 1.3vw, 20px) !important;
@@ -173,6 +174,36 @@
       transparent 31%,
       rgb(146 237 220 / 27%) 33%, transparent 39%,
       transparent 55%, rgb(132 219 208 / 58%) 59%, transparent 65%);
+  }
+
+  .portal-arc-reflection {
+    position: absolute;
+    z-index: -1;
+    inset-inline: 3%;
+    inset-block-end: -35px;
+    height: 25px;
+    pointer-events: none;
+    opacity: 0;
+    background: var(--arc-reflection-image) center 70% / cover no-repeat;
+    filter: blur(2.5px) saturate(.75);
+    mask-image: linear-gradient(to top, rgb(0 0 0 / 84%), transparent 95%);
+    transform: scaleY(-1);
+  }
+
+  .portal-arc-slot[data-arc-position="1"] > .portal-arc-reflection {
+    opacity: .38;
+  }
+
+  @media (max-width: 760px) {
+    .portal-arc-reflection {
+      inset-block-end: -22px;
+      height: 19px;
+    }
+  }
+
+  .portal-arc-waterline {
+    z-index: 1;
+    inset: auto;
   }
 
   .portal-arc-slot:not([data-arc-position="1"]) > .portal-arc-ripple {

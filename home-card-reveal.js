@@ -79,9 +79,22 @@ function setupCardArc(group, cards) {
     ripple.className = 'portal-arc-ripple';
     ripple.setAttribute('aria-hidden', 'true');
     water.push(ripple);
-    slot.append(card, ripple);
+    const reflection = document.createElement('span');
+    reflection.className = 'portal-arc-reflection';
+    reflection.setAttribute('aria-hidden', 'true');
+    const picture = card.querySelector('picture img');
+    if (picture) reflection.style.setProperty('--arc-reflection-image', `url(${JSON.stringify(picture.src)})`);
+    slot.append(card, ripple, reflection);
     return slot;
   });
+  const waterline = Array.from({ length: 2 }, () => {
+    const ripple = document.createElement('span');
+    ripple.className = 'portal-arc-ripple portal-arc-waterline';
+    ripple.setAttribute('aria-hidden', 'true');
+    group.append(ripple);
+    return ripple;
+  });
+  let diveAnimation;
   group.after(controls);
   group.setAttribute('data-card-arc', '');
 
@@ -115,10 +128,50 @@ function setupCardArc(group, cards) {
     });
   }
 
+  function splash(ripple, x, y, width, delay) {
+    ripple.style.left = `${x - width / 2}px`;
+    ripple.style.top = `${y - 10}px`;
+    ripple.style.width = `${width}px`;
+    ripple.getAnimations().forEach(animation => animation.cancel());
+    ripple.animate([
+      { opacity: 0, scale: .52 },
+      { opacity: .84, scale: .9, offset: .24 },
+      { opacity: 0, scale: 1.3 },
+    ], { duration: 510, delay, easing: 'ease-out' });
+  }
+
+  function dive(slot, card, fromX, fromY) {
+    // Follow the lower half of an ellipse before returning to the visible arc.
+    const path = Array.from({ length: 9 }, (_, index) => {
+      const offset = index / 8;
+      const progress = (1 - Math.cos(Math.PI * offset)) / 2;
+      const depth = Math.sin(Math.PI * offset);
+      return {
+        offset,
+        translate: `${fromX * (1 - progress)}px ${fromY * (1 - progress) + depth * 62}px`,
+        scale: 1 - depth * .23,
+      };
+    });
+
+    const submerged = 'linear-gradient(to bottom, #000 0 44%, transparent 54%)';
+    diveAnimation?.cancel();
+    diveAnimation = card.animate([
+      { maskPosition: '0% 0%', filter: 'none', opacity: 1, offset: 0 },
+      { maskPosition: '0% 34%', filter: 'blur(1.6px)', opacity: .94, offset: .15 },
+      { maskPosition: '0% 100%', filter: 'blur(5px)', opacity: 0, offset: .35 },
+      { maskPosition: '0% 100%', filter: 'blur(5px)', opacity: 0, offset: .65 },
+      { maskPosition: '0% 34%', filter: 'blur(1.6px)', opacity: .94, offset: .85 },
+      { maskPosition: '0% 0%', filter: 'none', opacity: 1, offset: 1 },
+    ].map(frame => ({ ...frame, maskImage: submerged, maskSize: '100% 280%', maskRepeat: 'no-repeat' })),
+    { duration: 660, easing: 'linear' });
+
+    slot.animate(path, { duration: 660, easing: 'linear' });
+  }
+
   function step(direction, dragOffset = 0) {
     const wrapSlot = slots.find(slot => Number(slot.style.order) === (direction > 0 ? 0 : 3));
     const previous = active;
-    const start = motion.matches ? slots.map(slot => [slot.offsetLeft, slot.offsetTop]) : null;
+    const start = motion.matches ? slots.map(slot => [slot.offsetLeft, slot.offsetTop, slot.offsetWidth, slot.offsetHeight]) : null;
     active = wrap(active + direction);
     render();
     if (!start) return;
@@ -137,27 +190,26 @@ function setupCardArc(group, cards) {
       const surface = (progress, dip) => ({
         translate: `${fromX * (1 - progress)}px ${fromY * (1 - progress) + dip}px`,
       });
-      let frames = [from, to];
       if (slot === wrapSlot) {
-        frames = [
-          { ...from, opacity: 1, scale: 1 },
-          { ...surface(.28, 24), opacity: 0, scale: .76, offset: .34 },
-          { ...surface(.86, 22), opacity: 0, scale: .76, offset: .67 },
-          { ...to, opacity: 1, scale: 1 },
-        ];
-      } else if (isRising || isSinking) {
-        frames = [from, { ...surface(.42, isRising ? 13 : 17), offset: .42 }, to];
+        const [, , oldWidth, oldHeight] = start[index];
+        splash(waterline[0], x + oldWidth / 2 + dragOffset, y + oldHeight, oldWidth * .82, 32);
+        splash(waterline[1], nextX + slot.offsetWidth / 2, nextY + slot.offsetHeight, slot.offsetWidth * .82, 395);
+        dive(slot, cards[index], fromX, fromY);
+      } else {
+        const frames = isRising
+          ? [from, { ...surface(.42, 13), offset: .42 }, { ...surface(.93, -4), offset: .82 }, to]
+          : isSinking ? [from, { ...surface(.42, 17), offset: .42 }, to] : [from, to];
+        slot.animate(frames, { duration: 420, easing: 'cubic-bezier(.24, .62, .3, 1)' });
       }
-      slot.animate(frames, { duration: 420, easing: 'cubic-bezier(.24, .62, .3, 1)' });
 
       const ripple = water[index];
       ripple.getAnimations().forEach(animation => animation.cancel());
-      if (isRising || isSinking || slot === wrapSlot) {
+      if (isRising || isSinking) {
         ripple.animate([
           { opacity: 0, scale: .55 },
           { opacity: .72, scale: .9, offset: .24 },
           { opacity: 0, scale: 1.22 },
-        ], { duration: 540, delay: slot === wrapSlot ? 155 : 25, easing: 'ease-out' });
+        ], { duration: 540, delay: 25, easing: 'ease-out' });
       }
     });
   }
@@ -293,7 +345,9 @@ function setupCardArc(group, cards) {
   }, { capture: true });
 
   motion.addEventListener('change', () => {
-    if (!motion.matches) [...slots, ...water].forEach(element => {
+    if (motion.matches) return;
+    diveAnimation?.cancel();
+    [...slots, ...water, ...waterline].forEach(element => {
       element.getAnimations().forEach(animation => animation.cancel());
     });
   });
