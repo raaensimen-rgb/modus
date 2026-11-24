@@ -111,6 +111,7 @@
 .modus-home .illustrated-portals[data-card-arc] .portal-arc-slot > .home-portal {
   box-sizing: border-box;
   width: 100%;
+  min-height: clamp(136px, 11.2vw, 158px);
 }
 
 .home-portal[aria-labelledby="portal-courses-title"] > picture > img {
