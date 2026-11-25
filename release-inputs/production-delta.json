@@ -1,0 +1,22 @@
+{
+  "allowed_changes": [
+    "akkorder.html",
+    "artikler.html",
+    "artikler/bygg-akkorder-i-en-toneart.html",
+    "artikler/kvintsirkelen.html",
+    "artikler/romertall-i-musikk.html",
+    "backingtracks.html",
+    "fretboard.html",
+    "grunnstudier.html",
+    "index.html",
+    "laeringssti.html",
+    "musikkart.js",
+    "search-index.json",
+    "studierute.html",
+    "teori.html"
+  ],
+  "allowed_additions": [
+    "images/editorial-cards/figure-4076d74df46a57b20d5ae3ed2603ad9a9d0658fb0dae09429791f3c9b2003da1.png"
+  ],
+  "allowed_removals": []
+}
